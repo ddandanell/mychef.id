@@ -32,7 +32,9 @@ export default function Footer() {
                 <SiWhatsapp className="w-5 h-5" />
               </button>
               <a
-                href="#"
+                href="https://www.instagram.com/mychefindonesia/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover-elevate active-elevate-2 p-2 rounded-full"
                 data-testid="link-footer-instagram"
                 aria-label="Instagram"
@@ -40,7 +42,9 @@ export default function Footer() {
                 <SiInstagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/mychefindonesia/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover-elevate active-elevate-2 p-2 rounded-full"
                 data-testid="link-footer-facebook"
                 aria-label="Facebook"
@@ -83,12 +87,13 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Service Areas</h4>
             <ul className="space-y-2 text-sm text-foreground/70">
-              <li>Bali (All Areas)</li>
-              <li>Jakarta</li>
-              <li>Surabaya</li>
-              <li>Bandung</li>
-              <li>Yogyakarta</li>
-              <li>Lombok & Gili Islands</li>
+              <li>Seminyak</li>
+              <li>Canggu</li>
+              <li>Ubud</li>
+              <li>Sanur</li>
+              <li>Nusa Dua</li>
+              <li>Uluwatu</li>
+              <li>& All Bali Areas</li>
             </ul>
           </div>
 

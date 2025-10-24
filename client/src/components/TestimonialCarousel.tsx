@@ -551,22 +551,22 @@ export default function TestimonialCarousel() {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-background">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4" data-testid="text-testimonials-headline">
             Real Stories from Real Guests
           </h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto px-2">
             Over 50 authentic reviews from guests who discovered and experienced myCHEF for their special occasions
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative -mx-4 sm:mx-0">
           {showLeftArrow && (
             <button
               onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/90 backdrop-blur-sm hover-elevate active-elevate-2 rounded-full p-3 shadow-lg hidden md:block"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/90 backdrop-blur-sm hover-elevate active-elevate-2 rounded-full p-3 shadow-lg hidden md:block"
               data-testid="button-scroll-left"
               aria-label="Scroll left"
             >
@@ -579,13 +579,13 @@ export default function TestimonialCarousel() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+            className="flex flex-row gap-3 sm:gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4 px-4 sm:px-0"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {TESTIMONIALS.map((testimonial, index) => (
               <Card
                 key={index}
-                className="flex-shrink-0 w-72 sm:w-80 snap-start hover-elevate bg-background/80 backdrop-blur-sm"
+                className="flex-shrink-0 w-[280px] sm:w-80 snap-start hover-elevate bg-background/80 backdrop-blur-sm"
                 data-testid={`card-testimonial-${index}`}
               >
                 <CardContent className="p-6 h-full flex flex-col">
@@ -650,7 +650,7 @@ export default function TestimonialCarousel() {
           {showRightArrow && (
             <button
               onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/90 backdrop-blur-sm hover-elevate active-elevate-2 rounded-full p-3 shadow-lg hidden md:block"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/90 backdrop-blur-sm hover-elevate active-elevate-2 rounded-full p-3 shadow-lg hidden md:block"
               data-testid="button-scroll-right"
               aria-label="Scroll right"
             >
@@ -661,9 +661,9 @@ export default function TestimonialCarousel() {
           )}
         </div>
 
-        <div className="text-center mt-8">
-          <p className="text-sm text-foreground/60">
-            Scroll to read more stories • All reviews verified • Updated December 2024
+        <div className="text-center mt-6 sm:mt-8 px-4">
+          <p className="text-xs sm:text-sm text-foreground/60">
+            Swipe to read more stories • All reviews verified • Updated December 2024
           </p>
         </div>
       </div>

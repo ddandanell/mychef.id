@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Star, Users } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
 import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a96e97.png';
@@ -24,7 +25,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-muted">
       {HERO_IMAGES.map((image, index) => (
         <div
           key={index}
@@ -36,6 +37,8 @@ export default function HeroSection() {
             src={image}
             alt={`myCHEF Indonesia hero ${index + 1}`}
             className="w-full h-full object-cover"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>

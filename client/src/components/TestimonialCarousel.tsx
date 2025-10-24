@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Star, MapPin, CheckCircle } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 interface Testimonial {
   name: string;
@@ -18,7 +18,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Sarah & Michael',
     location: 'Seminyak',
-    date: 'Dec 2024',
+    date: 'Oct 2025',
     rating: 5,
     occasion: 'Anniversary Dinner',
     discovery: 'Found on Google search',
@@ -28,7 +28,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Jennifer L.',
     location: 'Canggu',
-    date: 'Dec 2024',
+    date: 'Oct 2025',
     rating: 5,
     occasion: 'Birthday Party',
     discovery: 'Villa staff recommended',
@@ -38,7 +38,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'David & Emma',
     location: 'Ubud',
-    date: 'Nov 2024',
+    date: 'Sep 2025',
     rating: 5,
     occasion: 'Family Reunion',
     discovery: 'Instagram',
@@ -48,7 +48,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Rachel M.',
     location: 'Seminyak',
-    date: 'Nov 2024',
+    date: 'Sep 2025',
     rating: 5,
     occasion: 'Girls Trip Dinner',
     discovery: 'Friend recommendation',
@@ -58,7 +58,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Mark T.',
     location: 'Nusa Dua',
-    date: 'Nov 2024',
+    date: 'Aug 2025',
     rating: 5,
     occasion: 'Corporate Team Dinner',
     discovery: 'Google search',
@@ -68,7 +68,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Lisa & Tom',
     location: 'Canggu',
-    date: 'Oct 2024',
+    date: 'Aug 2025',
     rating: 5,
     occasion: 'Wedding Anniversary',
     discovery: 'Villa concierge',
@@ -78,7 +78,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Amanda K.',
     location: 'Seminyak',
-    date: 'Oct 2024',
+    date: 'Jul 2025',
     rating: 5,
     occasion: 'Baby Shower',
     discovery: 'Facebook group',
@@ -88,7 +88,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Chris & Jenny',
     location: 'Uluwatu',
-    date: 'Oct 2024',
+    date: 'Jul 2025',
     rating: 5,
     occasion: 'Vow Renewal',
     discovery: 'Instagram',
@@ -98,7 +98,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Patricia S.',
     location: 'Sanur',
-    date: 'Sep 2024',
+    date: 'Jun 2025',
     rating: 5,
     occasion: 'Extended Family Dinner',
     discovery: 'Google search',
@@ -108,7 +108,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Robert & Michelle',
     location: 'Seminyak',
-    date: 'Sep 2024',
+    date: 'Jun 2025',
     rating: 5,
     occasion: 'Pool Party',
     discovery: 'Villa recommendation',

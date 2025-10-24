@@ -80,9 +80,6 @@ export default function HowItWorks() {
             <span className="hidden sm:inline">Start Planning on WhatsApp</span>
             <span className="sm:hidden">Start Planning</span>
           </Button>
-          <p className="text-foreground/60 mt-4 text-sm" data-testid="text-whatsapp-number">
-            {WHATSAPP_NUMBER}
-          </p>
         </div>
       </div>
     </section>

@@ -278,12 +278,6 @@
     }
   }
 
-  /* Optimize image rendering */
-  img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-
   /* GPU acceleration for animations */
   .hover-elevate,
   .active-elevate-2 {

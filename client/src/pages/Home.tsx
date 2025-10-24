@@ -12,6 +12,7 @@ import FAQSection from '@/components/FAQSection';
 import BookingTips from '@/components/BookingTips';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import CookieBanner from '@/components/CookieBanner';
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
       <BookingTips />
       <Footer />
       <WhatsAppButton />
+      <CookieBanner />
     </div>
   );
 }

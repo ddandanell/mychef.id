@@ -1,131 +1,42 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, Star } from 'lucide-react';
-import chef1 from '@assets/generated_images/Asian_male_chef_headshot_c57200a1.png';
-import chef2 from '@assets/generated_images/Female_chef_headshot_09b0d1cc.png';
-import chef3 from '@assets/generated_images/Caucasian_male_chef_headshot_5d9787fa.png';
+import { MessageCircle, ChefHat, Star, Users, Sparkles } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
 
-const CHEFS = [
+const PRICING_EXAMPLES = [
   {
-    name: 'Chef Earn Khng',
-    rating: 4.4,
-    services: 146,
-    image: chef1,
-    bio: 'Bali-based culinary enthusiast specializing in Asian fusion and modern Indonesian cuisine. Known for creative twists on traditional recipes using local Bali ingredients. Can source ingredients from trusted Seminyak suppliers or work with your preferred vendors.',
-    specialties: ['Indonesian', 'Thai', 'Modern Asian', 'Fusion'],
-    rate: 'Rp 800,000/hour',
+    type: 'Intimate Dinner for 2',
+    price: 'From Rp 2,500,000',
+    chefRate: 'Rp 800,000 - 1,200,000',
+    hours: '3 hours',
+    description: 'Perfect for romantic dinners, anniversaries, or proposals',
+    cuisines: ['French', 'Italian', 'Japanese', 'Fusion'],
   },
   {
-    name: 'Chef Idah Gram',
-    rating: 4.5,
-    services: 153,
-    image: chef2,
-    bio: 'Executive Chef specializing in Mediterranean and South American with 15 years at top Seminyak restaurants. Perfect for villa seafood BBQs and sunset dinners. Expert at sourcing the freshest seafood from Jimbaran markets.',
-    specialties: ['Mediterranean', 'Seafood', 'BBQ', 'South American'],
-    rate: 'Rp 900,000/hour',
+    type: 'Family Gathering (4-6 guests)',
+    price: 'From Rp 3,500,000',
+    chefRate: 'Rp 850,000 - 1,000,000',
+    hours: '3-4 hours',
+    description: 'Ideal for family celebrations and casual get-togethers',
+    cuisines: ['Indonesian', 'Mediterranean', 'Asian Fusion', 'BBQ'],
   },
   {
-    name: 'Chef David Low',
-    rating: 4.5,
-    services: 104,
-    image: chef3,
-    bio: "'The World is My Claypot!' - Master of traditional Indonesian cooking methods meets modern techniques. Famous for his rijsttafel and authentic Balinese feasts. Has strong relationships with local ingredient suppliers across Bali.",
-    specialties: ['Indonesian Traditional', 'Balinese Ceremonial', 'Nusantara'],
-    rate: 'Rp 850,000/hour',
+    type: 'Villa Party (8-12 guests)',
+    price: 'From Rp 5,500,000',
+    chefRate: 'Rp 900,000 - 1,100,000',
+    hours: '4-5 hours',
+    description: 'Great for birthdays, reunions, and special occasions',
+    cuisines: ['Seafood BBQ', 'Indonesian Rijsttafel', 'Mixed Cuisine'],
   },
   {
-    name: 'Chef Thila Samy',
-    rating: 4.4,
-    services: 39,
-    image: chef1,
-    bio: 'Chef and Trainer with fusion expertise. Combines Indian, Indonesian, and Western techniques for unique villa dining experiences across Bali and Jakarta. Happy to coordinate ingredient delivery to your location.',
-    specialties: ['Fusion', 'Indian', 'Contemporary Asian'],
-    rate: 'Rp 800,000/hour',
-  },
-  {
-    name: 'Chef Wocholas Liew',
-    rating: 4.9,
-    services: 38,
-    image: chef2,
-    bio: 'Passionate about food and wine pairing. Creates memorable experiences for families and groups in Bali villas with emphasis on local wine and craft cocktail pairings. Can recommend and source wine selections.',
-    specialties: ['Fine Dining', 'Wine Pairing', 'European', 'Contemporary'],
-    rate: 'Rp 1,100,000/hour',
-  },
-  {
-    name: 'Chef Faruq Anwar',
-    rating: 4.2,
-    services: 20,
-    image: chef3,
-    bio: "'Passion displayed through the art of food' - Specialist in modern Indonesian and fusion cuisine. Perfect for contemporary villa dining experiences. Works with organic suppliers in Canggu and Ubud areas.",
-    specialties: ['Indonesian Modern', 'Fusion', 'Plated Fine Dining'],
-    rate: 'Rp 850,000/hour',
-  },
-  {
-    name: 'Chef Simone Fraternali',
-    rating: 4.9,
-    services: 9,
-    image: chef1,
-    bio: 'Modern Italian Chef bringing authentic flavors to Bali. Fresh pasta made in your villa kitchen, risottos with local ingredients, traditional Italian techniques. Can source Italian imports or work with local alternatives.',
-    specialties: ['Italian', 'Pasta', 'Mediterranean'],
-    rate: 'Rp 1,000,000/hour',
-  },
-  {
-    name: 'Chef Nicolas Reynard',
-    rating: null,
-    services: null,
-    newChef: true,
-    image: chef2,
-    bio: 'Learn and cook French cuisine in your own kitchen! Interactive cooking experiences and classic French fine dining for Bali villa guests. Expert at adapting French techniques to Indonesian ingredients.',
-    specialties: ['French Classic', 'Cooking Classes', 'Interactive Dining'],
-    rate: 'Rp 1,200,000/hour',
-  },
-  {
-    name: 'Chef Gaezvin Kaur',
-    rating: 4.2,
-    services: 6,
-    image: chef3,
-    bio: "Thrill-seeker in the kitchen, always chasing the next challenge—whether it's exploring uncharted flavors, perfecting a technique, or creating an adventure on a plate. Loves working with exotic ingredients.",
-    specialties: ['Experimental', 'Molecular', 'Fusion'],
-    rate: 'Rp 900,000/hour',
-  },
-  {
-    name: 'Chef Karyn Aw',
-    rating: 4.7,
-    services: 4,
-    image: chef1,
-    bio: 'Self-taught culinary enthusiast with a deep love for creating unforgettable dining experiences. Specializes in intimate dinners and romantic settings in Bali villas.',
-    specialties: ['Contemporary', 'Romantic Dining', 'Farm-to-Table'],
-    rate: 'Rp 800,000/hour',
-  },
-  {
-    name: 'Chef Anandhu Ambi',
-    rating: 3.9,
-    services: 4,
-    image: chef2,
-    bio: 'Culinary storyteller, crafting dishes that harmoniously balance flavor, textures, and presentation to evoke emotions and spark memories. Every plate tells a story.',
-    specialties: ['Contemporary', 'Multi-Cultural', 'Storytelling Cuisine'],
-    rate: 'Rp 800,000/hour',
-  },
-  {
-    name: 'Chef Mcginn Tan',
-    rating: 5.0,
-    services: 2,
-    image: chef3,
-    bio: 'Trained at a 5-star hotel in Singapore with expertise in French, Italian, Japanese, Chinese and Fusion cuisine. Brings international hotel standards to private villa dining.',
-    specialties: ['Multi-Cuisine', 'French', 'Italian', 'Japanese', 'Chinese'],
-    rate: 'Rp 1,000,000/hour',
-  },
-  {
-    name: 'Chef Lionel Texier',
-    rating: 4.8,
-    services: 2,
-    image: chef1,
-    bio: 'Passionate self-taught chef with experience in private dining, specializing in the refined artistry of classic French and Italian cuisine. Perfectionist approach to every dish.',
-    specialties: ['French Classic', 'Italian', 'Fine Dining'],
-    rate: 'Rp 1,100,000/hour',
+    type: 'Large Event (15-20 guests)',
+    price: 'From Rp 8,000,000',
+    chefRate: 'Rp 1,000,000 - 1,200,000',
+    hours: '5-6 hours',
+    description: 'Perfect for weddings, corporate events, and big celebrations',
+    cuisines: ['Buffet Style', 'Multi-Course', 'Custom Menus'],
   },
 ];
 
@@ -137,72 +48,103 @@ export default function ChefProfiles() {
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-chefs-headline">
-          Indonesia's Finest Private Chefs
-        </h2>
-        <p className="text-lg text-center text-foreground/70 mb-12" data-testid="text-chefs-subheadline">
-          From traditional Indonesian masters to international culinary experts - all based in Bali and ready to cook in your home
-        </p>
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+            <Sparkles className="w-8 h-8 text-primary" />
+          </div>
+          <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4" data-testid="text-chefs-headline">
+            We'll Find Your Perfect Match
+          </h2>
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto" data-testid="text-chefs-subheadline">
+            Tell us what you're celebrating and what you love to eat. We'll match you with the perfect chef from our network of Indonesian and international culinary experts - all based in Bali and ready to cook in your home.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
-          {CHEFS.map((chef, index) => (
-            <Card key={index} className="hover-elevate" data-testid={`card-chef-${index}`}>
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center mb-4">
-                  <img
-                    src={chef.image}
-                    alt={chef.name}
-                    className="w-24 h-24 rounded-full object-cover mb-3"
-                    data-testid={`img-chef-${index}`}
-                  />
-                  {chef.newChef ? (
-                    <Badge variant="secondary" className="text-xs mb-2">New to myCHEF</Badge>
-                  ) : (
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-primary text-primary" />
-                        <span className="text-sm font-semibold" data-testid={`text-chef-${index}-rating`}>{chef.rating}</span>
-                      </div>
-                      <span className="text-sm text-foreground/60">•</span>
-                      <span className="text-sm text-foreground/60" data-testid={`text-chef-${index}-services`}>
-                        {chef.services} services
-                      </span>
-                    </div>
-                  )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <Card className="bg-primary/5 border-primary/20">
+            <CardContent className="p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Star className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-center mb-3" data-testid={`text-chef-${index}-name`}>
-                  {chef.name}
-                </h3>
-                <p className="text-sm text-foreground/80 leading-relaxed mb-4 text-center" data-testid={`text-chef-${index}-bio`}>
-                  {chef.bio}
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  {chef.specialties.map((specialty, i) => (
-                    <Badge key={i} variant="secondary" className="text-xs" data-testid={`badge-chef-${index}-specialty-${i}`}>
-                      {specialty}
-                    </Badge>
-                  ))}
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Expert Matching</h3>
+                  <p className="text-foreground/80 leading-relaxed">
+                    We personally match you with chefs based on your cuisine preference, group size, budget, and occasion. Every chef is vetted with minimum 5 years experience in top restaurants.
+                  </p>
                 </div>
-                <p className="text-lg font-semibold text-center text-primary mb-4" data-testid={`text-chef-${index}-rate`}>
-                  Starting from: {chef.rate}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-primary/5 border-primary/20">
+            <CardContent className="p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Users className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Diverse Specialties</h3>
+                  <p className="text-foreground/80 leading-relaxed">
+                    From Indonesian traditional masters to French fine dining experts, Japanese omakase specialists to Mediterranean BBQ pros - we have the perfect chef for your taste.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <h3 className="text-2xl font-semibold text-center mb-8" data-testid="text-pricing-examples-headline">
+          Pricing Examples by Group Size
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {PRICING_EXAMPLES.map((example, index) => (
+            <Card key={index} className="hover-elevate" data-testid={`card-pricing-${index}`}>
+              <CardHeader>
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <CardTitle className="text-xl" data-testid={`text-pricing-${index}-type`}>
+                    {example.type}
+                  </CardTitle>
+                  <ChefHat className="w-6 h-6 text-primary flex-shrink-0" />
+                </div>
+                <div className="text-2xl font-bold text-primary" data-testid={`text-pricing-${index}-price`}>
+                  {example.price}
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-foreground/70" data-testid={`text-pricing-${index}-description`}>
+                  {example.description}
                 </p>
-                <Button
-                  onClick={handleWhatsAppClick}
-                  className="w-full bg-primary hover:bg-primary text-primary-foreground hover-elevate active-elevate-2"
-                  data-testid={`button-chef-${index}-whatsapp`}
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  Chat on WhatsApp
-                </Button>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-foreground/70">Chef Service:</span>
+                    <span className="font-semibold">{example.chefRate}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-foreground/70">Typical Duration:</span>
+                    <span className="font-semibold">{example.hours}</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs text-foreground/60 mb-2">Popular cuisines:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {example.cuisines.map((cuisine, i) => (
+                      <Badge key={i} variant="secondary" className="text-xs">
+                        {cuisine}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <Card className="bg-accent/30 border-accent mb-8">
+        <Card className="bg-accent/20 border-accent mb-8">
           <CardContent className="p-6 text-center">
             <p className="text-sm text-foreground/80 leading-relaxed" data-testid="text-pricing-disclaimer">
-              <strong>Important note:</strong> Rates shown are starting prices for chef service only and do not include ingredients. Most dinners are 3-4 hours of service. Final pricing depends on menu complexity, number of guests, and service duration. Contact us on WhatsApp for exact quotes.
+              <strong>Note:</strong> Prices shown include estimated chef service fees for indicated duration. Ingredient costs are additional and vary by menu selection. Final pricing depends on menu complexity, number of guests, and service duration. Contact us on WhatsApp for exact quotes tailored to your event.
             </p>
           </CardContent>
         </Card>
@@ -215,7 +157,7 @@ export default function ChefProfiles() {
             data-testid="button-chefs-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            Find Your Perfect Chef - WhatsApp Us Now
+            Get Matched With Your Perfect Chef - WhatsApp Us Now
           </Button>
         </div>
       </div>

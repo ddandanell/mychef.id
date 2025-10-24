@@ -47,7 +47,7 @@ const TIPS = [
 export default function BookingTips() {
   return (
     <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
             <Lightbulb className="w-8 h-8 text-primary" />

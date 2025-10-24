@@ -26,11 +26,11 @@ export default function ExperienceOverview() {
 
   return (
     <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-6" data-testid="text-experience-headline">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-experience-headline">
           Turn Your Villa Into Bali's Best Restaurant
         </h2>
-        <p className="text-base lg:text-lg text-foreground/80 leading-relaxed max-w-4xl mx-auto text-center mb-12" data-testid="text-experience-description">
+        <p className="text-base lg:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12" data-testid="text-experience-description">
           There is no more intimate restaurant than your own home. Whether you're staying in a luxury villa in Seminyak, celebrating in Ubud, or hosting friends at your Canggu beach house, bring the magic of fine dining to your table with talented chefs who create menus tailored to your cravings.
         </p>
 
@@ -54,11 +54,12 @@ export default function ExperienceOverview() {
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
-            className="bg-primary hover:bg-primary text-primary-foreground px-8 py-4 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
             data-testid="button-experience-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            Chat on WhatsApp for Pricing
+            <span className="hidden sm:inline">Chat on WhatsApp for Pricing</span>
+            <span className="sm:hidden">Get Pricing</span>
           </Button>
         </div>
       </div>

@@ -87,7 +87,7 @@ const MENUS = [
 export default function SampleMenus() {
   return (
     <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-menus-headline">
           Sample Menus & Pricing
         </h2>

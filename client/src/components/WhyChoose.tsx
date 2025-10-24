@@ -59,16 +59,16 @@ export default function WhyChoose() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-why-choose-headline">
           Why Choose myCHEF
         </h2>
-        <p className="text-lg text-center text-foreground/70 mb-16 max-w-2xl mx-auto">
+        <p className="text-lg text-center text-foreground/70 mb-12 max-w-3xl mx-auto">
           Every detail perfected for an unforgettable dining experience
         </p>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {STATS.map((stat, index) => {
             const Icon = stat.icon;
             return (

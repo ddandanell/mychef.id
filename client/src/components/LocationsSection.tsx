@@ -17,7 +17,7 @@ export default function LocationsSection() {
 
   return (
     <section className="py-16 lg:py-24 bg-card">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-locations-headline">
           Serving All of Bali
         </h2>
@@ -49,11 +49,12 @@ export default function LocationsSection() {
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
-            className="bg-primary hover:bg-primary text-primary-foreground px-8 py-4 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
             data-testid="button-locations-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            Check Availability in Your Area - WhatsApp {WHATSAPP_NUMBER}
+            <span className="hidden sm:inline">Check Availability - WhatsApp {WHATSAPP_NUMBER}</span>
+            <span className="sm:hidden">Check Availability</span>
           </Button>
         </div>
       </div>

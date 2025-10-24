@@ -56,7 +56,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-16 lg:py-24 bg-card">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-testimonials-headline">
           Over 1,000 Trusted Experiences in Bali
         </h2>
@@ -110,11 +110,12 @@ export default function Testimonials() {
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
-            className="bg-primary hover:bg-primary text-primary-foreground px-8 py-4 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
             data-testid="button-testimonials-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            Read More Reviews & Book on WhatsApp
+            <span className="hidden sm:inline">Read More Reviews & Book on WhatsApp</span>
+            <span className="sm:hidden">Book on WhatsApp</span>
           </Button>
         </div>
       </div>

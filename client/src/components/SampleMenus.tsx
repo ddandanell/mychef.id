@@ -6,9 +6,9 @@ const MENUS = [
   {
     name: 'Indonesian Rijsttafel Party',
     guests: 6,
-    foodCost: 'Rp 1,200,000',
-    chefCost: 'Rp 3,200,000',
-    total: 'Rp 4,400,000',
+    foodCost: 'Rp 1,200k',
+    chefCost: 'Rp 3,200k',
+    total: 'Rp 4,400k',
     courses: [
       'Welcome: Es kelapa muda (fresh coconut water)',
       'Appetizers: Mini satay (chicken, beef), gado-gado, perkedel jagung',
@@ -21,9 +21,9 @@ const MENUS = [
   {
     name: 'Jimbaran Seafood BBQ Feast',
     guests: 8,
-    foodCost: 'Rp 2,400,000',
-    chefCost: 'Rp 3,200,000',
-    total: 'Rp 5,600,000',
+    foodCost: 'Rp 2,400k',
+    chefCost: 'Rp 3,200k',
+    total: 'Rp 5,600k',
     courses: [
       'Fresh seafood from Jimbaran market: Grilled prawns, whole fish (kakap/snapper), squid',
       'Grilled chicken and beef satay',
@@ -36,9 +36,9 @@ const MENUS = [
   {
     name: 'Traditional Balinese Celebration',
     guests: 10,
-    foodCost: 'Rp 1,800,000',
-    chefCost: 'Rp 3,600,000',
-    total: 'Rp 5,400,000',
+    foodCost: 'Rp 1,800k',
+    chefCost: 'Rp 3,600k',
+    total: 'Rp 5,400k',
     courses: [
       'Welcome drink: Jamu kunyit asam or lemongrass tea',
       'Appetizer: Sate lilit (minced fish satay), lawar (mixed vegetable salad)',
@@ -52,9 +52,9 @@ const MENUS = [
   {
     name: 'Indonesian Street Food Party',
     guests: 12,
-    foodCost: 'Rp 2,200,000',
-    chefCost: 'Rp 4,000,000',
-    total: 'Rp 6,200,000',
+    foodCost: 'Rp 2,200k',
+    chefCost: 'Rp 4,000k',
+    total: 'Rp 6,200k',
     courses: [
       'Live stations: Bakso (meatball soup), mie goreng (fried noodles), nasi goreng kambing',
       'Satay selection: Chicken, beef, lamb with peanut sauce',
@@ -66,9 +66,9 @@ const MENUS = [
   {
     name: 'Birthday Party Indonesian Style',
     guests: 15,
-    foodCost: 'Rp 2,800,000',
-    chefCost: 'Rp 4,500,000',
-    total: 'Rp 7,300,000',
+    foodCost: 'Rp 2,800k',
+    chefCost: 'Rp 4,500k',
+    total: 'Rp 7,300k',
     courses: [
       'Appetizer buffet: Spring rolls, risoles, pastel, lemper',
       'Main buffet: Nasi tumpeng (yellow rice cone), ayam goreng kremes, rendang sapi, gulai kambing',
@@ -81,9 +81,9 @@ const MENUS = [
   {
     name: 'Villa Pool Party BBQ',
     guests: 20,
-    foodCost: 'Rp 4,500,000',
-    chefCost: 'Rp 5,600,000',
-    total: 'Rp 10,100,000',
+    foodCost: 'Rp 4,500k',
+    chefCost: 'Rp 5,600k',
+    total: 'Rp 10,100k',
     courses: [
       'BBQ station: Mixed satay (20 sticks per person), grilled chicken wings, beef ribs',
       'Seafood grill: Prawns, whole fish, grilled corn',

@@ -4,7 +4,7 @@ import ExperienceOverview from '@/components/ExperienceOverview';
 import HowItWorks from '@/components/HowItWorks';
 import WhyChoose from '@/components/WhyChoose';
 import TrustBadges from '@/components/TrustBadges';
-import Testimonials from '@/components/Testimonials';
+import TestimonialCarousel from '@/components/TestimonialCarousel';
 import ChefProfiles from '@/components/ChefProfiles';
 import LocationsSection from '@/components/LocationsSection';
 import OccasionsGrid from '@/components/OccasionsGrid';
@@ -32,7 +32,7 @@ export default function Home() {
       <HowItWorks />
       <WhyChoose />
       <TrustBadges />
-      <Testimonials />
+      <TestimonialCarousel />
       <ChefProfiles />
       <LocationsSection />
       <OccasionsGrid />

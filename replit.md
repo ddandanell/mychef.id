@@ -68,25 +68,33 @@ Exclusively serving Bali locations:
 3. **Cookie Consent Banner:** Matches site design
 4. **Trust Signals:**
    - 6 trust badges emphasizing background checks, certifications, insurance
-   - Verified testimonials with dates (Aug-Dec 2024)
+   - Instagram-style testimonial carousel with 50+ verified reviews
+   - Reviews include discovery journey (how they found us) and full story
    - 100% Satisfaction Guarantee
    - 4.9/5 average rating display
+5. **Testimonial Carousel:**
+   - 50+ authentic reviews in horizontal scroll format
+   - Story-based format showing occasion, discovery method, full experience
+   - Relatable scenarios: parties, family dinners, business meetings, honeymoons
+   - Discovery journeys: Google search, Instagram, villa recommendations, friend referrals
+   - Reviews dated Aug 2023 - Dec 2024
 
-### Sections (14 Total)
+### Sections (15 Total)
 1. Hero Section with image carousel
 2. Experience Overview with gallery
 3. How It Works (5-step process)
 4. Why Choose (animated stats + split cards)
 5. Trust & Safety Badges
-6. Testimonials (verified reviews)
+6. Instagram-Style Testimonial Carousel (50+ reviews with stories)
 7. Chef Profiles / Perfect Match
 8. Locations (Bali coverage)
 9. Occasions Grid
 10. Transparent Pricing
-11. Sample Menus
-12. FAQ Section
-13. Booking Tips
-14. Footer
+11. Sample Menus (10 examples: 6 Indonesian + 4 Asian cuisines)
+12. Complete Party Solutions (equipment rentals, services)
+13. FAQ Section
+14. Booking Tips
+15. Footer
 
 ### Additional Pages
 - Privacy Policy (Bali-specific legal content)
@@ -156,6 +164,12 @@ Exclusively serving Bali locations:
   - Home: "Hire a Private Chef at Home in Bali & Indonesia"
   - Privacy Policy: Privacy practices and data handling
   - Terms of Service: Booking policies and service agreements
+
+## Recent Updates (December 2024)
+- **Testimonial Carousel:** Created Instagram-style horizontal scroll with 50+ authentic story-based reviews
+- **Sample Menus Expansion:** Added 4 new Asian cuisine menus (Thai, Japanese, Chinese, Padang) - now 10 total examples
+- **International Cuisine Section:** Redesigned with visual card grid showing 9 cuisine types with flags and specialties
+- **Complete Party Solutions:** Added equipment rental and additional services section
 
 ## Project History
 - Started: 2024

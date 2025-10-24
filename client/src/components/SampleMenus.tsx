@@ -4,83 +4,95 @@ import { Users } from 'lucide-react';
 
 const MENUS = [
   {
-    name: 'Indonesian Rijsttafel',
+    name: 'Indonesian Rijsttafel Party',
     guests: 6,
-    total: 'Rp 3,500,000',
+    foodCost: 'Rp 1,200,000',
+    chefCost: 'Rp 3,200,000',
+    total: 'Rp 4,400,000',
     courses: [
-      'Welcome drink: Es kelapa muda',
-      'Appetizer spread: Mini satay, gado-gado, perkedel',
-      'Main rijsttafel: 8 traditional dishes including rendang, ayam betutu, ikan bakar, sambal varieties',
-      'Dessert: Klepon and pisang goreng',
+      'Welcome: Es kelapa muda (fresh coconut water)',
+      'Appetizers: Mini satay (chicken, beef), gado-gado, perkedel jagung',
+      'Main rijsttafel: Rendang sapi, ayam betutu, ikan bakar sambal matah, sayur urap, tempe goreng, tahu isi, nasi putih, nasi kuning',
+      'Sambal selection: Sambal matah, sambal terasi, sambal kecap',
+      'Dessert: Klepon, pisang goreng, es campur',
     ],
-    breakdown: 'Chef 4 hours (Rp 900k) + Ingredients (Rp 1,100k) + Service (Rp 1,500k)',
+    breakdown: 'Food Rp 1,200k + Chef 4 hours @ Rp 800k/hr = Rp 4,400k total',
   },
   {
-    name: 'Bali Seafood BBQ',
+    name: 'Jimbaran Seafood BBQ Feast',
     guests: 8,
-    total: 'Rp 4,200,000',
+    foodCost: 'Rp 2,400,000',
+    chefCost: 'Rp 3,200,000',
+    total: 'Rp 5,600,000',
     courses: [
-      'Fresh seafood platter: Prawns, lobster, fish from Jimbaran market',
-      'Grilled selections with sambal matah',
-      'Side dishes: Balinese vegetables, coconut rice',
-      'Tropical fruit dessert',
+      'Fresh seafood from Jimbaran market: Grilled prawns, whole fish (kakap/snapper), squid',
+      'Grilled chicken and beef satay',
+      'Sambal matah, sambal kecap, kecap manis',
+      'Sides: Nasi goreng, cap cay vegetables, fresh cucumber & tomato salad',
+      'Fresh tropical fruits: Watermelon, pineapple, papaya',
     ],
-    breakdown: 'Chef 4 hours (Rp 900k) + Fresh seafood (Rp 2,100k) + Service (Rp 1,200k)',
+    breakdown: 'Food Rp 2,400k (fresh seafood) + Chef 4 hours @ Rp 800k/hr = Rp 5,600k total',
   },
   {
-    name: 'Romantic French Dinner',
-    guests: 2,
-    total: 'Rp 2,800,000',
-    courses: [
-      'Amuse-bouche',
-      'Foie gras appetizer',
-      'French onion soup',
-      'Pan-seared duck breast with cherry reduction',
-      'Cheese course',
-      'Crème brûlée',
-    ],
-    breakdown: 'Chef 3 hours (Rp 1,200k) + Premium ingredients (Rp 1,100k) + Service (Rp 500k)',
-  },
-  {
-    name: 'Vegetarian Feast',
-    guests: 4,
-    total: 'Rp 2,400,000',
-    courses: [
-      'Fresh spring rolls with peanut sauce',
-      'Creamy mushroom soup',
-      'Tempeh rendang',
-      'Jackfruit satay',
-      'Organic vegetable curry',
-      'Coconut panna cotta',
-    ],
-    breakdown: 'Chef 3.5 hours (Rp 850k) + Organic ingredients (Rp 800k) + Service (Rp 750k)',
-  },
-  {
-    name: 'Family Italian Night',
+    name: 'Traditional Balinese Celebration',
     guests: 10,
-    total: 'Rp 5,000,000',
+    foodCost: 'Rp 1,800,000',
+    chefCost: 'Rp 3,600,000',
+    total: 'Rp 5,400,000',
     courses: [
-      'Antipasti platter',
-      'Fresh-made pasta course (choice of 3)',
-      'Osso buco or chicken piccata',
-      'Risotto ai funghi',
-      'Tiramisu and gelato',
+      'Welcome drink: Jamu kunyit asam or lemongrass tea',
+      'Appetizer: Sate lilit (minced fish satay), lawar (mixed vegetable salad)',
+      'Main dishes: Ayam betutu (slow-cooked chicken), bebek goreng (crispy duck), ikan pepes (steamed fish in banana leaf)',
+      'Vegetables: Plecing kangkung, urap sayuran, sambal matah',
+      'Rice: Nasi putih, nasi kuning',
+      'Dessert: Dadar gulung (green pancakes), kolak pisang',
     ],
-    breakdown: 'Chef 5 hours (Rp 1,000k) + Ingredients (Rp 1,800k) + Waiter (Rp 600k) + Service (Rp 1,600k)',
+    breakdown: 'Food Rp 1,800k + Chef 4 hours @ Rp 900k/hr = Rp 5,400k total',
   },
   {
-    name: 'Japanese Omakase',
-    guests: 6,
-    total: 'Rp 6,000,000',
+    name: 'Indonesian Street Food Party',
+    guests: 12,
+    foodCost: 'Rp 2,200,000',
+    chefCost: 'Rp 4,000,000',
+    total: 'Rp 6,200,000',
     courses: [
-      'Assorted sashimi (premium cuts)',
-      'Chawanmushi',
-      'Grilled miso black cod',
-      'Wagyu beef tataki',
-      'Nigiri selection (12 pieces)',
-      'Mochi dessert',
+      'Live stations: Bakso (meatball soup), mie goreng (fried noodles), nasi goreng kambing',
+      'Satay selection: Chicken, beef, lamb with peanut sauce',
+      'Street favorites: Martabak telur, lumpia goreng, tahu isi, bakwan jagung',
+      'Sweet treats: Martabak manis (sweet pancake), es teler, es cendol',
     ],
-    breakdown: 'Chef 4 hours (Rp 1,200k) + Premium fish & wagyu (Rp 3,500k) + Service (Rp 1,300k)',
+    breakdown: 'Food Rp 2,200k + Chef 5 hours @ Rp 800k/hr = Rp 6,200k total',
+  },
+  {
+    name: 'Birthday Party Indonesian Style',
+    guests: 15,
+    foodCost: 'Rp 2,800,000',
+    chefCost: 'Rp 4,500,000',
+    total: 'Rp 7,300,000',
+    courses: [
+      'Appetizer buffet: Spring rolls, risoles, pastel, lemper',
+      'Main buffet: Nasi tumpeng (yellow rice cone), ayam goreng kremes, rendang sapi, gulai kambing',
+      'Seafood: Udang saus padang (prawns in Padang sauce), cumi goreng tepung',
+      'Vegetables: Capcay, tumis kangkung, sambal goreng kentang',
+      'Birthday cake: Custom Indonesian or Western style cake',
+    ],
+    breakdown: 'Food Rp 2,800k + Chef 5 hours @ Rp 900k/hr = Rp 7,300k total',
+  },
+  {
+    name: 'Villa Pool Party BBQ',
+    guests: 20,
+    foodCost: 'Rp 4,500,000',
+    chefCost: 'Rp 5,600,000',
+    total: 'Rp 10,100,000',
+    courses: [
+      'BBQ station: Mixed satay (20 sticks per person), grilled chicken wings, beef ribs',
+      'Seafood grill: Prawns, whole fish, grilled corn',
+      'Hot dishes: Nasi goreng, mie goreng, cap cay',
+      'Cold appetizers: Gado-gado salad, fruit platter, Asian slaw',
+      'Drinks: Fresh juice station (orange, watermelon, mixed fruit)',
+      'Dessert: Assorted kue (Indonesian cakes), es campur',
+    ],
+    breakdown: 'Food Rp 4,500k + Chef 4 hours @ Rp 1,000k/hr + Waiter 4 hours @ Rp 150k/hr + Helper 4 hours @ Rp 150k/hr = Rp 10,100k total',
   },
 ];
 
@@ -92,7 +104,7 @@ export default function SampleMenus() {
           Sample Menus & Pricing
         </h2>
         <p className="text-lg text-center text-foreground/70 mb-12">
-          Real examples to help you plan your perfect dining experience
+          Real Indonesian party menus with authentic Bali dishes and transparent pricing
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
@@ -108,8 +120,13 @@ export default function SampleMenus() {
                     {menu.guests}
                   </Badge>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold text-primary break-words" data-testid={`text-menu-${index}-total`}>
-                  {menu.total}
+                <div className="space-y-1">
+                  <div className="text-xl sm:text-2xl font-bold text-primary break-words" data-testid={`text-menu-${index}-total`}>
+                    {menu.total}
+                  </div>
+                  <div className="text-xs text-foreground/60">
+                    Food: {menu.foodCost} + Service: {menu.chefCost}
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -136,7 +153,7 @@ export default function SampleMenus() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-foreground/60">
-            All prices are estimates. Contact us on WhatsApp for exact quotes based on your specific requirements.
+            All prices are estimates. Actual costs depend on market prices and your specific requests. Contact us on WhatsApp for exact quotes.
           </p>
         </div>
       </div>

@@ -730,7 +730,7 @@ export default function JoinOurTeam() {
                       <Input
                         id="salaryExpectations"
                         required
-                        placeholder="e.g., Rp 1,000,000/hour or Rp 4,000,000/event"
+                        placeholder="Enter your desired rate (hourly or per event)"
                         value={formData.salaryExpectations}
                         onChange={(e) => setFormData({ ...formData, salaryExpectations: e.target.value })}
                         className="mt-1"

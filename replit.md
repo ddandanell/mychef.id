@@ -240,7 +240,8 @@ Exclusively serving Bali locations:
   - All nationalities welcome - accepts applicants from any country
   - Minimum 1 year experience requirement, preferring 2+ years
   - Salary expectations field for applicants to provide their rate expectations
-  - NO salary examples or ranges shown (discussed during interview)
+  - NO salary examples or ranges shown anywhere (discussed during interview)
+  - Placeholder text uses generic wording without specific amounts
   - NO social media or portfolio fields (discussed during interview if needed)
   - NO remote work references (focus on in-person positions in Indonesia)
   - FAQ section with 8 questions covering requirements, international applicants, compensation, hiring process

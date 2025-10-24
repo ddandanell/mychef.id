@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, ChefHat, Star, Users, Sparkles } from 'lucide-react';
+import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
 const WHATSAPP_MESSAGE = 'Hi! I would like to get matched with the perfect chef for my event in Bali.';
@@ -56,38 +56,58 @@ export default function ChefProfiles() {
           <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4" data-testid="text-chefs-headline">
             We'll Find Your Perfect Match
           </h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto" data-testid="text-chefs-subheadline">
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto mb-6" data-testid="text-chefs-subheadline">
             Tell us what you're celebrating and what you love to eat. We'll match you with the perfect chef from our network of Indonesian and international culinary experts - all based in Bali and ready to cook in your home.
           </p>
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <Badge variant="outline" className="gap-1.5">
+              <Award className="w-3.5 h-3.5" />
+              5+ Years Experience
+            </Badge>
+            <Badge variant="outline" className="gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              Background Checked
+            </Badge>
+            <Badge variant="outline" className="gap-1.5">
+              <Star className="w-3.5 h-3.5" />
+              HACCP Certified
+            </Badge>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <Card className="bg-primary/5 border-primary/20">
+          <Card className="bg-primary/5 border-primary/20 border-2">
             <CardContent className="p-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Star className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Expert Matching</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-semibold">Expert Matching</h3>
+                    <Badge variant="secondary" className="text-xs">AI-Powered</Badge>
+                  </div>
                   <p className="text-foreground/80 leading-relaxed">
-                    We personally match you with chefs based on your cuisine preference, group size, budget, and occasion. Every chef is vetted with minimum 5 years experience in top restaurants.
+                    We personally match you with chefs based on your cuisine preference, group size, budget, and occasion. Every chef is vetted with minimum 5 years experience in top restaurants and holds professional culinary certifications.
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-primary/5 border-primary/20">
+          <Card className="bg-primary/5 border-primary/20 border-2">
             <CardContent className="p-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Users className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">Diverse Specialties</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-semibold">Diverse Specialties</h3>
+                    <Badge variant="secondary" className="text-xs">50+ Chefs</Badge>
+                  </div>
                   <p className="text-foreground/80 leading-relaxed">
-                    From Indonesian traditional masters to French fine dining experts, Japanese omakase specialists to Mediterranean BBQ pros - we have the perfect chef for your taste.
+                    From Indonesian traditional masters to French fine dining experts, Japanese omakase specialists to Mediterranean BBQ pros - all English-speaking with international training and local expertise.
                   </p>
                 </div>
               </div>

@@ -8,19 +8,19 @@ import {
 const FAQS = [
   {
     question: 'How do I book a private chef?',
-    answer: 'Simply contact us on WhatsApp at +62 822-3756-5997. Share your event details (location, date, number of guests, cuisine preferences) and we\'ll match you with the perfect chef and send menu proposals.',
+    answer: 'Simply contact us on WhatsApp at +62 822-3756-5997. Share your event details (location, date, number of guests, cuisine preferences) and we\'ll match you with the perfect chef and send menu proposals. We typically respond within 10 minutes during business hours (09:00-22:00 WIB daily).',
+  },
+  {
+    question: 'How much does a private chef cost?',
+    answer: 'Chef service fees range from Rp 800,000 - 1,200,000+ per hour, with most dinners requiring 3-4 hours. Example: An intimate dinner for 2 starts from Rp 2,500,000, family gathering (4-6 guests) from Rp 3,500,000, villa party (8-12 guests) from Rp 5,500,000. Ingredients are separate - we can source them for you or provide a shopping list.',
+  },
+  {
+    question: 'Are all chefs background-checked and insured?',
+    answer: 'Yes, absolutely. All our chefs undergo thorough criminal background checks, reference verification, and identity confirmation. They are food safety certified (HACCP), professionally trained, and all services are covered by comprehensive liability insurance. Your safety is our top priority.',
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept online payments (Visa, MasterCard, and all major cards), secure bank transfers, and cash in Indonesian Rupiah (IDR) only. Full payment must be completed before the chef arrives at your villa. A deposit of 30-50% secures your booking initially. All payments are processed securely with clear invoicing. Contact us on WhatsApp for a secure payment link.',
-  },
-  {
-    question: 'What is your cancellation policy?',
-    answer: 'We have a fair and transparent cancellation policy: 7+ days before service = full refund minus 10% admin fee. 3-6 days before = 50% refund. Less than 3 days = no refund. We understand emergencies happen and handle special situations with care.',
-  },
-  {
-    question: 'Can you accommodate dietary restrictions?',
-    answer: 'Absolutely! Our chefs specialize in halal, vegetarian, vegan, gluten-free, and allergy-friendly menus. Just let us know your requirements when booking.',
+    answer: 'We accept secure online payments (Visa, MasterCard, and all major cards), bank transfers, and cash in Indonesian Rupiah (IDR) only. A 30-50% deposit secures your booking. Full payment must be completed before the chef arrives. All transactions are encrypted and processed securely with official invoicing.',
   },
   {
     question: 'Do I need to provide ingredients or will you source them?',
@@ -70,19 +70,24 @@ const FAQS = [
 
 export default function FAQSection() {
   return (
-    <section className="py-16 lg:py-24 bg-card">
+    <section className="py-16 lg:py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-12" data-testid="text-faq-headline">
-          Frequently Asked Questions
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4" data-testid="text-faq-headline">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            Everything you need to know about booking a private chef in Bali. Still have questions? WhatsApp us anytime!
+          </p>
+        </div>
 
-        <Accordion type="single" collapsible className="space-y-4">
+        <Accordion type="single" collapsible className="space-y-3">
           {FAQS.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg px-6" data-testid={`accordion-faq-${index}`}>
-              <AccordionTrigger className="text-left hover:no-underline" data-testid={`button-faq-${index}-trigger`}>
-                <span className="font-semibold">{faq.question}</span>
+            <AccordionItem key={index} value={`item-${index}`} className="border-2 rounded-lg px-6 bg-card hover-elevate" data-testid={`accordion-faq-${index}`}>
+              <AccordionTrigger className="text-left hover:no-underline py-5" data-testid={`button-faq-${index}-trigger`}>
+                <span className="font-semibold text-base pr-4">{faq.question}</span>
               </AccordionTrigger>
-              <AccordionContent className="text-foreground/80" data-testid={`text-faq-${index}-answer`}>
+              <AccordionContent className="text-foreground/80 leading-relaxed pb-5" data-testid={`text-faq-${index}-answer`}>
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

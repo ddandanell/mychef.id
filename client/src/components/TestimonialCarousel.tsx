@@ -1,6 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, CheckCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 interface Testimonial {
@@ -590,24 +590,32 @@ export default function TestimonialCarousel() {
               >
                 <CardContent className="p-6 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h4 className="font-semibold text-base" data-testid={`text-testimonial-${index}-name`}>
-                        {testimonial.name}
-                      </h4>
-                      <div className="flex items-center gap-1 text-xs text-foreground/60 mt-1">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-base" data-testid={`text-testimonial-${index}-name`}>
+                          {testimonial.name}
+                        </h4>
+                        <CheckCircle className="w-4 h-4 text-primary fill-primary/20" />
+                      </div>
+                      <div className="flex items-center gap-1 text-xs text-foreground/60">
                         <MapPin className="w-3 h-3" />
                         {testimonial.location}
                       </div>
                     </div>
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge variant="secondary" className="text-xs flex-shrink-0">
                       {testimonial.date}
                     </Badge>
                   </div>
 
-                  <div className="flex gap-0.5 mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                    ))}
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="flex gap-0.5">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    <Badge variant="outline" className="text-xs border-primary/30 text-primary">
+                      Verified
+                    </Badge>
                   </div>
 
                   <Badge className="mb-3 w-fit text-xs bg-primary/10 text-primary border-primary/20">

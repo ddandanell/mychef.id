@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, Star, Users } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { MessageCircle, Star, Users, ShieldCheck, Clock } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
@@ -45,6 +46,16 @@ export default function HeroSection() {
       ))}
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6" data-testid="badge-rating">
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            ))}
+          </div>
+          <span className="text-white font-semibold">4.9/5</span>
+          <span className="text-white/80 text-sm">• 1000+ Reviews</span>
+        </div>
+
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
           Hire a Private Chef at Home in Bali
         </h1>
@@ -52,22 +63,25 @@ export default function HeroSection() {
           Experience personalized fine dining in your villa, home, or beachfront property. From Seminyak to Ubud, Canggu to Nusa Dua.
         </p>
         
-        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 text-white/90 text-xs sm:text-sm md:text-base flex-wrap">
-          <div className="flex items-center gap-1.5 sm:gap-2" data-testid="badge-serving-since">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>Serving Bali since 2012</span>
+        <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 flex-wrap">
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-experience">
+            <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <span className="text-white text-sm sm:text-base font-medium">1000+ Experiences</span>
           </div>
-          <span className="hidden sm:inline">•</span>
-          <div className="flex items-center gap-1.5 sm:gap-2" data-testid="badge-happy-guests">
-            <Users className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>1000+ Happy Guests</span>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-insured">
+            <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <span className="text-white text-sm sm:text-base font-medium">100% Insured</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-since">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <span className="text-white text-sm sm:text-base font-medium">Since 2012</span>
           </div>
         </div>
 
         <Button
           size="lg"
           onClick={handleWhatsAppClick}
-          className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2"
+          className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl"
           data-testid="button-hero-whatsapp-cta"
         >
           <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
@@ -75,8 +89,13 @@ export default function HeroSection() {
           <span className="sm:hidden">Get Custom Quote</span>
         </Button>
 
-        <p className="text-white/80 mt-4 sm:mt-6 text-xs sm:text-sm md:text-base px-4" data-testid="text-pricing-info">
-          From Rp 800,000/hour • Online payment & cash (IDR) • Background-checked & insured
+        <div className="flex items-center justify-center gap-2 mt-4 text-white/90" data-testid="text-response-time">
+          <Clock className="w-4 h-4" />
+          <span className="text-sm sm:text-base">We reply within 10 minutes • 09:00-22:00 WIB Daily</span>
+        </div>
+
+        <p className="text-white/70 mt-4 text-xs sm:text-sm px-4" data-testid="text-pricing-info">
+          From Rp 800,000/hour • Background-checked chefs • Secure online payment & cash (IDR)
         </p>
       </div>
 

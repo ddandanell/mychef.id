@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 import villaImage from '@assets/generated_images/Villa_terrace_rice_paddy_dining_024d1337.png';
-import grillingImage from '@assets/generated_images/Chef_grilling_seafood_poolside_e160ded9.png';
+import grillingImage from '@assets/ADY04381_1761302981950.jpg';
 import dinnerImage from '@assets/generated_images/Intimate_dinner_party_Sanur_605d729e.png';
 import villaDiningImage from '@assets/ADY04464_1761302865262.jpg';
 import dessertImage from '@assets/generated_images/Fine_dining_plated_dessert_2c0047a1.png';
@@ -12,7 +12,7 @@ const WHATSAPP_MESSAGE = 'Hi! I would like to chat about pricing for a private c
 
 const IMAGES = [
   { src: villaImage, alt: 'Private dining setup on villa terrace overlooking rice paddies' },
-  { src: grillingImage, alt: 'Chef grilling fresh seafood at Bali beach house' },
+  { src: grillingImage, alt: 'Fresh meat grilling on BBQ at private chef villa service' },
   { src: dinnerImage, alt: 'Intimate dinner party in Sanur home' },
   { src: villaDiningImage, alt: 'Group of friends enjoying private chef meal at luxury Bali villa' },
   { src: dessertImage, alt: 'Multi-course plated dessert' },

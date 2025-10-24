@@ -170,6 +170,14 @@ Exclusively serving Bali locations:
 - **Sample Menus Expansion:** Added 4 new Asian cuisine menus (Thai, Japanese, Chinese, Padang) - now 10 total examples
 - **International Cuisine Section:** Redesigned with visual card grid showing 9 cuisine types with flags and specialties
 - **Complete Party Solutions:** Added equipment rental and additional services section
+- **Image Performance Optimization:** Implemented comprehensive image loading optimizations:
+  - Lazy loading for all images except critical above-the-fold hero image
+  - Async decoding on all images for non-blocking rendering
+  - First hero image loads eagerly with high priority
+  - Remaining images (gallery, carousel) load progressively as user scrolls
+  - Optimized font loading with display=swap (reduced to Inter + Playfair Display only)
+  - GPU acceleration for smooth animations
+  - Mobile horizontal scroll fix: Added overflow-x-hidden globally and flex-row to testimonial carousel
 
 ## Project History
 - Started: 2024

@@ -3,7 +3,7 @@ import { MessageCircle } from 'lucide-react';
 import villaImage from '@assets/generated_images/Villa_terrace_rice_paddy_dining_024d1337.png';
 import grillingImage from '@assets/generated_images/Chef_grilling_seafood_poolside_e160ded9.png';
 import dinnerImage from '@assets/generated_images/Intimate_dinner_party_Sanur_605d729e.png';
-import ingredientsImage from '@assets/generated_images/Fresh_Ubud_market_ingredients_f0d3df5e.png';
+import villaDiningImage from '@assets/ADY04464_1761302865262.jpg';
 import dessertImage from '@assets/generated_images/Fine_dining_plated_dessert_2c0047a1.png';
 import toastingImage from '@assets/generated_images/Guests_toasting_celebration_dinner_5570ed38.png';
 
@@ -14,7 +14,7 @@ const IMAGES = [
   { src: villaImage, alt: 'Private dining setup on villa terrace overlooking rice paddies' },
   { src: grillingImage, alt: 'Chef grilling fresh seafood at Bali beach house' },
   { src: dinnerImage, alt: 'Intimate dinner party in Sanur home' },
-  { src: ingredientsImage, alt: 'Fresh local ingredients from Ubud markets' },
+  { src: villaDiningImage, alt: 'Group of friends enjoying private chef meal at luxury Bali villa' },
   { src: dessertImage, alt: 'Multi-course plated dessert' },
   { src: toastingImage, alt: 'Happy Indonesian and international guests toasting' },
 ];

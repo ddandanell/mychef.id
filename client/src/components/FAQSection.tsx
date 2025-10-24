@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept online payments (Visa, MasterCard, and all major cards), secure bank transfers, and cash in Indonesian Rupiah (IDR) only. A deposit of 30-50% secures your booking, with the balance due 48 hours before service. All payments are processed securely with clear invoicing. Contact us on WhatsApp for a secure payment link.',
+    answer: 'We accept online payments (Visa, MasterCard, and all major cards), secure bank transfers, and cash in Indonesian Rupiah (IDR) only. Full payment must be completed before the chef arrives at your villa. A deposit of 30-50% secures your booking initially. All payments are processed securely with clear invoicing. Contact us on WhatsApp for a secure payment link.',
   },
   {
     question: 'What is your cancellation policy?',
@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     question: 'Do I need to provide ingredients or will you source them?',
-    answer: 'You have two options: (1) We can source all ingredients for you at market price plus a 15-20% sourcing fee, or (2) your chef provides a shopping list and you purchase ingredients yourself.',
+    answer: 'You have two options: (1) We can source all ingredients for you and send a separate bill for groceries (market price plus a 15-20% sourcing fee), or (2) your chef provides a shopping list and you purchase ingredients yourself. Either option works perfectly!',
   },
   {
     question: 'What kitchen equipment is required?',

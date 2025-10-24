@@ -38,7 +38,10 @@ Exclusively serving Bali locations:
 - **Chef Service Fees:** Rp 800,000 - 1,200,000+/hour
 - **Minimum Service:** 3-4 hours for most dinners
 - **Deposit:** 30-50% to secure booking
-- **Balance Due:** 48 hours before service
+- **Payment Policy:** Full payment must be completed before chef arrives at villa
+- **Ingredient Sourcing:** 
+  - Option 1: We source ingredients - separate bill for groceries (market price + 15-20% fee)
+  - Option 2: Customer purchases ingredients themselves using chef's shopping list
 
 ### Pricing Examples by Group Size
 1. **Intimate Dinner (2 guests):** From Rp 2,500,000

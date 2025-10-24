@@ -15,7 +15,7 @@ const TRUST_POINTS = [
   {
     icon: Lock,
     title: 'Secure Payments',
-    description: 'Online payment (Visa, MasterCard, all cards) & cash (IDR). Safe processing with clear invoicing and refund policy',
+    description: 'Online payment (Visa, MasterCard, all cards) & cash (IDR). Full payment before service. Safe processing with clear invoicing',
   },
   {
     icon: CheckCircle,

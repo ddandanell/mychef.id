@@ -12,7 +12,7 @@ export default function PricingSection() {
           No hidden fees - know exactly what you're paying for
         </p>
         <p className="text-sm text-center text-foreground/60 mb-12">
-          💳 We accept online payment (Visa, MasterCard, all cards) & cash (IDR only)
+          💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • Full payment before service
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
@@ -55,7 +55,7 @@ export default function PricingSection() {
               <div className="text-sm text-foreground/80 space-y-3">
                 <div>
                   <p className="font-semibold">Option 1: We Source for You</p>
-                  <p className="text-foreground/70">Market price + 15-20% sourcing fee</p>
+                  <p className="text-foreground/70">Separate bill for groceries (market price + 15-20% sourcing fee)</p>
                 </div>
                 <div>
                   <p className="font-semibold">Option 2: You Purchase</p>

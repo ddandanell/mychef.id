@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Users } from 'lucide-react';
+import { Users, Globe2 } from 'lucide-react';
 
 const MENUS = [
   {
@@ -96,6 +96,54 @@ const MENUS = [
   },
 ];
 
+const CUISINES = [
+  {
+    flag: '🇯🇵',
+    name: 'Japanese',
+    specialty: 'Sushi chefs with 8 years training in Japan',
+  },
+  {
+    flag: '🇮🇹',
+    name: 'Italian',
+    specialty: 'Authentic Italian techniques',
+  },
+  {
+    flag: '🇫🇷',
+    name: 'French',
+    specialty: 'Classic & modern gastronomy',
+  },
+  {
+    flag: '🇹🇭',
+    name: 'Thai',
+    specialty: 'Authentic regional flavors',
+  },
+  {
+    flag: '🇮🇳',
+    name: 'Indian',
+    specialty: 'North & South traditions',
+  },
+  {
+    flag: '🇨🇳',
+    name: 'Chinese',
+    specialty: 'Cantonese, Szechuan & regional',
+  },
+  {
+    flag: '🌊',
+    name: 'Mediterranean',
+    specialty: 'Greek, Spanish, Middle Eastern',
+  },
+  {
+    flag: '🌮',
+    name: 'Latin American',
+    specialty: 'Mexican, Peruvian, Brazilian',
+  },
+  {
+    flag: '✨',
+    name: 'Modern Fusion',
+    specialty: 'International meets local',
+  },
+];
+
 export default function SampleMenus() {
   return (
     <section className="py-16 lg:py-24 bg-background">
@@ -157,32 +205,42 @@ export default function SampleMenus() {
           </p>
         </div>
 
-        <Card className="mt-12 bg-accent/20 border-accent">
-          <CardContent className="p-6 sm:p-8">
-            <h3 className="font-serif text-2xl lg:text-3xl font-semibold mb-4 text-center" data-testid="text-international-cuisine-headline">
+        <div className="mt-12 bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 sm:p-8 lg:p-12 border border-primary/20">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Globe2 className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />
+            <h3 className="font-serif text-2xl lg:text-4xl font-semibold text-center" data-testid="text-international-cuisine-headline">
               World-Class Chefs for Every Cuisine
             </h3>
-            <div className="space-y-4 text-foreground/80 leading-relaxed">
-              <p className="text-center text-base lg:text-lg">
-                While the examples above showcase Indonesian cuisine, our chef network includes specialists trained around the world:
-              </p>
-              <ul className="space-y-2 max-w-3xl mx-auto text-sm lg:text-base">
-                <li>• <strong>Japanese cuisine:</strong> Sushi chefs with 8 years of training in Japan</li>
-                <li>• <strong>Italian cuisine:</strong> Chefs trained in authentic Italian cooking techniques</li>
-                <li>• <strong>French cuisine:</strong> Experts in classic French gastronomy and modern techniques</li>
-                <li>• <strong>Thai cuisine:</strong> Specialists in authentic Thai flavors and regional dishes</li>
-                <li>• <strong>Indian cuisine:</strong> Masters of North and South Indian cooking traditions</li>
-                <li>• <strong>Chinese cuisine:</strong> Experts in Cantonese, Szechuan, and regional Chinese cuisines</li>
-                <li>• <strong>Mediterranean cuisine:</strong> Greek, Spanish, Middle Eastern, and North African specialists</li>
-                <li>• <strong>Latin American cuisine:</strong> Mexican, Peruvian, Brazilian, and Argentine cuisine experts</li>
-                <li>• <strong>Modern fusion:</strong> Creative chefs blending international techniques with local ingredients</li>
-              </ul>
-              <p className="text-center text-base lg:text-lg font-semibold pt-4">
-                Whatever cuisine you crave, we have the perfect chef. Just tell us what you want, and we'll match you with a specialist who can bring your vision to life.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <p className="text-center text-base lg:text-lg text-foreground/70 mb-8 max-w-3xl mx-auto">
+            While the examples above showcase Indonesian cuisine, our chef network includes specialists trained around the world
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
+            {CUISINES.map((cuisine, index) => (
+              <Card key={index} className="hover-elevate active-elevate-2 bg-background/80 backdrop-blur-sm" data-testid={`card-cuisine-${index}`}>
+                <CardContent className="p-4 sm:p-5 text-center">
+                  <div className="text-3xl sm:text-4xl mb-2">{cuisine.flag}</div>
+                  <h4 className="font-semibold text-sm sm:text-base mb-1" data-testid={`text-cuisine-${index}-name`}>
+                    {cuisine.name}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-foreground/60 leading-tight" data-testid={`text-cuisine-${index}-specialty`}>
+                    {cuisine.specialty}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-primary/10">
+            <p className="text-base lg:text-lg font-semibold text-foreground/90">
+              Whatever cuisine you crave, we have the perfect chef.
+            </p>
+            <p className="text-sm lg:text-base text-foreground/70 mt-2">
+              Just tell us what you want, and we'll match you with a specialist who can bring your vision to life.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Star } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to book a private chef after reading the reviews.';
 
 const TESTIMONIALS = [
   {
@@ -45,7 +46,7 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

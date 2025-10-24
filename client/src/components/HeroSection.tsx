@@ -7,6 +7,7 @@ import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a9
 
 const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to get a custom quote for a private chef in Bali.';
 
 export default function HeroSection() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -19,7 +20,7 @@ export default function HeroSection() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

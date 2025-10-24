@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText, MessagesSquare, CheckCircle, Sparkles } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to start planning my private chef experience in Bali.';
 
 const STEPS = [
   {
@@ -33,7 +34,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

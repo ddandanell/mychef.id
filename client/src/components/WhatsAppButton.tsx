@@ -2,10 +2,11 @@ import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to inquire about booking a private chef in Bali.';
 
 export default function WhatsAppButton() {
   const handleClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

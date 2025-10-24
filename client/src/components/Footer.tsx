@@ -1,10 +1,15 @@
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to inquire about booking a private chef for my event in Bali.';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const handleWhatsAppClick = () => {
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+  };
 
   return (
     <footer className="bg-card border-t">
@@ -15,19 +20,17 @@ export default function Footer() {
               myCHEF Indonesia
             </h3>
             <p className="text-sm text-foreground/70 leading-relaxed mb-4">
-              Bringing exceptional private dining experiences to villas and homes across Indonesia since 2012.
+              Bringing exceptional private dining experiences to villas and homes across Bali since 2012.
             </p>
             <div className="flex gap-4">
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={handleWhatsAppClick}
                 className="hover-elevate active-elevate-2 p-2 rounded-full"
                 data-testid="link-footer-whatsapp"
                 aria-label="WhatsApp"
               >
                 <SiWhatsapp className="w-5 h-5" />
-              </a>
+              </button>
               <a
                 href="#"
                 className="hover-elevate active-elevate-2 p-2 rounded-full"
@@ -50,25 +53,29 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <div className="space-y-3 text-sm">
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`}
-                className="flex items-center gap-2 text-foreground/70 hover:text-primary"
+              <button
+                onClick={handleWhatsAppClick}
+                className="flex items-center gap-2 text-foreground/70 hover:text-primary text-left"
                 data-testid="link-footer-phone"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 flex-shrink-0" />
                 {WHATSAPP_NUMBER}
-              </a>
+              </button>
               <a
                 href="mailto:indonesia@mychef.com"
                 className="flex items-center gap-2 text-foreground/70 hover:text-primary"
                 data-testid="link-footer-email"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4 flex-shrink-0" />
                 indonesia@mychef.com
               </a>
+              <div className="flex items-start gap-2 text-foreground/60">
+                <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <span>Jl. Sunset Road No. 88<br />Seminyak, Bali 80361</span>
+              </div>
               <p className="text-foreground/60">
                 Business Hours:<br />
-                9 AM - 10 PM WIB (Daily)
+                09:00 - 22:00 WIB (Daily)
               </p>
             </div>
           </div>

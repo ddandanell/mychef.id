@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Star, Users, Sparkles } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to get matched with the perfect chef for my event in Bali.';
 
 const PRICING_EXAMPLES = [
   {
@@ -42,7 +43,7 @@ const PRICING_EXAMPLES = [
 
 export default function ChefProfiles() {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

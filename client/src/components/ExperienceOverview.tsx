@@ -8,6 +8,7 @@ import dessertImage from '@assets/generated_images/Fine_dining_plated_dessert_2c
 import toastingImage from '@assets/generated_images/Guests_toasting_celebration_dinner_5570ed38.png';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to chat about pricing for a private chef experience in Bali.';
 
 const IMAGES = [
   { src: villaImage, alt: 'Private dining setup on villa terrace overlooking rice paddies' },
@@ -20,7 +21,7 @@ const IMAGES = [
 
 export default function ExperienceOverview() {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

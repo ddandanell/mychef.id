@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Utensils, Award, Check, Sparkles, Star, Users2, Globe2, BookOpen, ShieldCheck } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to get a custom quote for my event in Bali.';
 
 const STATS = [
   { number: '2+', label: 'Years Training', icon: BookOpen },
@@ -47,7 +48,7 @@ export default function WhyChoose() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

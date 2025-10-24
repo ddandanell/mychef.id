@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '+6282237565997';
+const WHATSAPP_MESSAGE = 'Hi! I would like to check availability for a private chef in my area of Bali.';
 
 const BALI_LOCATIONS = [
   'Seminyak', 'Canggu', 'Ubud', 'Sanur', 'Nusa Dua', 'Uluwatu', 
@@ -11,7 +12,7 @@ const BALI_LOCATIONS = [
 
 export default function LocationsSection() {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
   };
 
   return (

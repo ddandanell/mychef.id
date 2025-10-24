@@ -73,7 +73,7 @@ export default function HeroSection() {
         </Button>
 
         <p className="text-white/80 mt-4 sm:mt-6 text-xs sm:text-sm md:text-base px-4" data-testid="text-pricing-info">
-          Professional chefs from Rp 800,000/hour - Get instant pricing via WhatsApp
+          Professional chefs from Rp 800,000/hour • All chefs background-checked & insured
         </p>
       </div>
 

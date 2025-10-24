@@ -12,11 +12,11 @@ const FAQS = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept bank transfers, credit cards, and cash. A deposit (typically 30-50%) is required to secure your booking, with the balance due before or after service depending on the arrangement.',
+    answer: 'We accept secure bank transfers, credit cards, and cash (Indonesian Rupiah). A deposit of 30-50% secures your booking, with the balance due 48 hours before service. All payments are processed securely with clear invoicing.',
   },
   {
     question: 'What is your cancellation policy?',
-    answer: 'Cancellations made 7+ days before service receive a full refund. 3-6 days before: 50% refund. Less than 3 days: deposit is non-refundable. Emergency situations are handled case-by-case.',
+    answer: 'We have a fair and transparent cancellation policy: 7+ days before service = full refund minus 10% admin fee. 3-6 days before = 50% refund. Less than 3 days = no refund. We understand emergencies happen and handle special situations with care.',
   },
   {
     question: 'Can you accommodate dietary restrictions?',

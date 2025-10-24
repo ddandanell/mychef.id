@@ -2,6 +2,7 @@ import HeroSection from '@/components/HeroSection';
 import ExperienceOverview from '@/components/ExperienceOverview';
 import HowItWorks from '@/components/HowItWorks';
 import WhyChoose from '@/components/WhyChoose';
+import TrustBadges from '@/components/TrustBadges';
 import Testimonials from '@/components/Testimonials';
 import ChefProfiles from '@/components/ChefProfiles';
 import LocationsSection from '@/components/LocationsSection';
@@ -21,6 +22,7 @@ export default function Home() {
       <ExperienceOverview />
       <HowItWorks />
       <WhyChoose />
+      <TrustBadges />
       <Testimonials />
       <ChefProfiles />
       <LocationsSection />

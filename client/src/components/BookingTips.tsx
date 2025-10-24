@@ -53,10 +53,10 @@ export default function BookingTips() {
             <Lightbulb className="w-8 h-8 text-primary" />
           </div>
           <h2 className="font-serif text-3xl lg:text-5xl font-semibold" data-testid="text-tips-headline">
-            Booking Tips
+            Pro Tips for the Best Experience
           </h2>
           <p className="text-lg text-foreground/70 mt-4">
-            Make the most of your private chef experience
+            Your safety and satisfaction are our priority. Here's how we ensure the best experience.
           </p>
         </div>
 

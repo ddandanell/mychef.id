@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-serif text-2xl font-bold mb-4" data-testid="text-footer-brand">
               myCHEF Indonesia
@@ -85,7 +85,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Service Areas</h4>
+            <h4 className="font-semibold mb-4">Serving Bali</h4>
             <ul className="space-y-2 text-sm text-foreground/70">
               <li>Seminyak</li>
               <li>Canggu</li>
@@ -93,19 +93,7 @@ export default function Footer() {
               <li>Sanur</li>
               <li>Nusa Dua</li>
               <li>Uluwatu</li>
-              <li>& All Bali Areas</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Popular Cuisines</h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
-              <li>Indonesian Traditional</li>
-              <li>Modern Asian Fusion</li>
-              <li>Italian & Mediterranean</li>
-              <li>French Fine Dining</li>
-              <li>Japanese Omakase</li>
-              <li>Seafood BBQ</li>
+              <li>Jimbaran</li>
             </ul>
           </div>
         </div>

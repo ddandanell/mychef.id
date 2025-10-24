@@ -162,47 +162,92 @@ const CUISINES = [
   {
     flag: '🇯🇵',
     name: 'Japanese',
-    specialty: 'Sushi chefs with 8 years training in Japan',
+    specialty: 'Omakase, Wagyu beef, handmade sushi & sashimi, authentic ramen',
   },
   {
     flag: '🇮🇹',
     name: 'Italian',
-    specialty: 'Authentic Italian techniques',
+    specialty: 'Fresh pasta, risotto, osso buco, tiramisu & wood-fired pizza',
   },
   {
     flag: '🇫🇷',
     name: 'French',
-    specialty: 'Classic & modern gastronomy',
+    specialty: 'Coq au vin, bouillabaisse, crème brûlée & classic sauces',
   },
   {
     flag: '🇹🇭',
     name: 'Thai',
-    specialty: 'Authentic regional flavors',
+    specialty: 'Pad Thai, Tom Yum, green curry, mango sticky rice',
   },
   {
     flag: '🇮🇳',
     name: 'Indian',
-    specialty: 'North & South traditions',
+    specialty: 'Tandoori, butter chicken, biryani, curry masala & naan',
   },
   {
     flag: '🇨🇳',
     name: 'Chinese',
-    specialty: 'Cantonese, Szechuan & regional',
+    specialty: 'Peking duck, dim sum, kung pao, mapo tofu & wok dishes',
   },
   {
-    flag: '🌊',
-    name: 'Mediterranean',
-    specialty: 'Greek, Spanish, Middle Eastern',
+    flag: '🇰🇷',
+    name: 'Korean',
+    specialty: 'Korean BBQ, bibimbap, kimchi, bulgogi & tteokbokki',
   },
   {
-    flag: '🌮',
-    name: 'Latin American',
-    specialty: 'Mexican, Peruvian, Brazilian',
+    flag: '🇪🇸',
+    name: 'Spanish',
+    specialty: 'Paella, tapas, jamón ibérico, churros & sangria',
+  },
+  {
+    flag: '🇬🇷',
+    name: 'Greek',
+    specialty: 'Moussaka, souvlaki, Greek salad, tzatziki & baklava',
+  },
+  {
+    flag: '🇻🇳',
+    name: 'Vietnamese',
+    specialty: 'Pho, banh mi, spring rolls, bun cha & fresh herbs',
+  },
+  {
+    flag: '🇱🇧',
+    name: 'Lebanese',
+    specialty: 'Mezze platters, hummus, falafel, shawarma & tabbouleh',
+  },
+  {
+    flag: '🇺🇸',
+    name: 'American BBQ',
+    specialty: 'Smoked brisket, ribs, pulled pork, mac & cheese, cornbread',
+  },
+  {
+    flag: '🇲🇽',
+    name: 'Mexican',
+    specialty: 'Tacos, mole, ceviche, enchiladas & authentic guacamole',
+  },
+  {
+    flag: '🇵🇪',
+    name: 'Peruvian',
+    specialty: 'Ceviche, lomo saltado, anticuchos & pisco sour',
+  },
+  {
+    flag: '🇧🇷',
+    name: 'Brazilian',
+    specialty: 'Churrasco, feijoada, pão de queijo & caipirinha',
+  },
+  {
+    flag: '🇲🇦',
+    name: 'Moroccan',
+    specialty: 'Tagine, couscous, harira, pastilla & mint tea',
+  },
+  {
+    flag: '🇹🇷',
+    name: 'Turkish',
+    specialty: 'Kebabs, manti, börek, baklava & Turkish breakfast',
   },
   {
     flag: '✨',
     name: 'Modern Fusion',
-    specialty: 'International meets local',
+    specialty: 'Creative blends, molecular gastronomy & international twists',
   },
 ];
 
@@ -275,10 +320,10 @@ export default function SampleMenus() {
             </h3>
           </div>
           <p className="text-center text-base lg:text-lg text-foreground/70 mb-8 max-w-3xl mx-auto">
-            While the examples above showcase Indonesian cuisine, our chef network includes specialists trained around the world
+            While the examples above showcase Indonesian cuisine, our chef network includes 50+ specialists trained around the world in 18+ international cuisines
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
             {CUISINES.map((cuisine, index) => (
               <Card key={index} className="hover-elevate active-elevate-2 bg-background/80 backdrop-blur-sm" data-testid={`card-cuisine-${index}`}>
                 <CardContent className="p-4 sm:p-5 text-center">

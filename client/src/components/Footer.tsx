@@ -130,6 +130,9 @@ export default function Footer() {
               <a href="/terms-of-service" className="hover:text-primary" data-testid="link-footer-terms">
                 Terms of Service
               </a>
+              <a href="/join-our-team" className="hover:text-primary" data-testid="link-footer-join-team">
+                Join Our Team
+              </a>
             </div>
           </div>
         </div>

@@ -170,7 +170,16 @@ Exclusively serving Bali locations:
 ### Phase 1: Content & Performance (Early December)
 - **Testimonial Carousel:** Created Instagram-style horizontal scroll with 50+ authentic story-based reviews
 - **Sample Menus Expansion:** Added 4 new Asian cuisine menus (Thai, Japanese, Chinese, Padang) - now 10 total examples
-- **International Cuisine Section:** Redesigned with visual card grid showing 9 cuisine types with flags and specialties
+- **International Cuisine Section:** Expanded from 9 to 18 cuisines with signature dishes:
+  - Japanese: Omakase, Wagyu, sushi & ramen
+  - Italian: Fresh pasta, risotto, tiramisu
+  - French: Coq au vin, crème brûlée
+  - Thai, Indian, Chinese, Korean, Spanish, Greek
+  - Vietnamese, Lebanese, American BBQ
+  - Mexican, Peruvian, Brazilian
+  - Moroccan, Turkish, Modern Fusion
+  - 4-column grid layout on large screens
+  - Each cuisine shows specific signature dishes
 - **Complete Party Solutions:** Added equipment rental and additional services section
 - **Image Performance Optimization:** Implemented comprehensive image loading optimizations:
   - Lazy loading for all images except critical above-the-fold hero image
@@ -207,10 +216,14 @@ Exclusively serving Bali locations:
   - Enhanced Expert Matching and Diverse Specialties cards with mini badges (AI-Powered, 50+ Chefs)
   - Improved border styling for visual hierarchy
 
-- **Testimonial Verification:**
-  - Added checkmark icon next to each reviewer name
-  - Added "Verified" badge next to star ratings
-  - Enhanced trust signals for all 50+ reviews
+- **Testimonial Carousel Redesign (Dual-Row Auto-Scroll):**
+  - Completely redesigned with TWO rows of reviews scrolling in opposite directions
+  - Auto-scrolling animation (top row scrolls left, bottom row scrolls right)
+  - Infinite loop effect showing volume of 1000+ reviews
+  - Verified checkmark icons and badges on every review
+  - More authentic, trustworthy review language
+  - Updated dates to include 2025 reviews
+  - Smooth continuous motion showcasing testimonial volume
 
 - **Visual Hierarchy Improvements:**
   - Implemented alternating section backgrounds for depth

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, CreditCard } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 
 const WHATSAPP_NUMBER = '+6282237565997';
@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="font-serif text-2xl font-bold mb-4" data-testid="text-footer-brand">
               myCHEF Indonesia
@@ -95,6 +95,26 @@ export default function Footer() {
               <li>Uluwatu</li>
               <li>Jimbaran</li>
             </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Payment Methods</h4>
+            <div className="space-y-3 text-sm text-foreground/70">
+              <div className="flex items-start gap-2">
+                <CreditCard className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-foreground">Online Payment</p>
+                  <p className="text-xs">Visa, MasterCard & All Cards</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-lg">💵</span>
+                <div>
+                  <p className="font-medium text-foreground">Cash</p>
+                  <p className="text-xs">Indonesian Rupiah (IDR) Only</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

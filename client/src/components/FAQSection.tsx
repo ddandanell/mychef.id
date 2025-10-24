@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept secure bank transfers, credit cards, and cash (Indonesian Rupiah). A deposit of 30-50% secures your booking, with the balance due 48 hours before service. All payments are processed securely with clear invoicing.',
+    answer: 'We accept online payments (Visa, MasterCard, and all major cards), secure bank transfers, and cash in Indonesian Rupiah (IDR) only. A deposit of 30-50% secures your booking, with the balance due 48 hours before service. All payments are processed securely with clear invoicing. Contact us on WhatsApp for a secure payment link.',
   },
   {
     question: 'What is your cancellation policy?',

@@ -8,8 +8,11 @@ export default function PricingSection() {
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-pricing-headline">
           Transparent Pricing
         </h2>
-        <p className="text-lg text-center text-foreground/70 mb-12">
+        <p className="text-lg text-center text-foreground/70 mb-2">
           No hidden fees - know exactly what you're paying for
+        </p>
+        <p className="text-sm text-center text-foreground/60 mb-12">
+          💳 We accept online payment (Visa, MasterCard, all cards) & cash (IDR only)
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">

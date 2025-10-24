@@ -1,0 +1,137 @@
+# myCHEF Indonesia - Landing Website
+
+## Project Overview
+Single-page landing website for myCHEF Indonesia, a private chef booking service exclusively serving Bali.
+
+**Website Domain:** mychef.id
+
+## Business Information
+
+### Contact Details
+- **WhatsApp:** +62 822-3756-5997
+- **Email:** indonesia@mychef.com
+- **Address:** Jl. Sunset Road No. 88, Seminyak, Bali 80361
+- **Business Hours:** 09:00 - 22:00 WIB (Daily)
+
+### Social Media
+- Instagram: https://www.instagram.com/mychefindonesia/
+- Facebook: https://www.facebook.com/mychefindonesia/
+
+### Payment Methods
+- Online Payment: Visa, MasterCard, and all major credit/debit cards
+- Bank Transfers
+- Cash: Indonesian Rupiah (IDR) only
+
+## Service Details
+
+### Service Area
+Exclusively serving Bali locations:
+- Seminyak
+- Canggu
+- Ubud
+- Sanur
+- Nusa Dua
+- Uluwatu
+- Jimbaran
+
+### Pricing Structure
+- **Chef Service Fees:** Rp 800,000 - 1,200,000+/hour
+- **Minimum Service:** 3-4 hours for most dinners
+- **Deposit:** 30-50% to secure booking
+- **Balance Due:** 48 hours before service
+
+### Pricing Examples by Group Size
+1. **Intimate Dinner (2 guests):** From Rp 2,500,000
+2. **Family Gathering (4-6 guests):** From Rp 3,500,000
+3. **Villa Party (8-12 guests):** From Rp 5,500,000
+4. **Large Event (15-20 guests):** From Rp 8,000,000
+
+### Cancellation Policy
+- 7+ days before service: Full refund minus 10% admin fee
+- 3-6 days before: 50% refund
+- Less than 3 days: No refund
+- Emergency situations handled case-by-case
+
+## Design & Technical Details
+
+### Color Scheme
+- **Primary Color (WhatsApp Green):** HSL 142 76% 36%
+- Mobile-first design approach
+- WhatsApp-green color scheme throughout
+
+### Key Features
+1. **WhatsApp Integration:** Section-specific pre-filled messages for each CTA button
+2. **Floating WhatsApp Chat Button:** Persistent across all pages with official WhatsApp logo
+3. **Cookie Consent Banner:** Matches site design
+4. **Trust Signals:**
+   - 6 trust badges emphasizing background checks, certifications, insurance
+   - Verified testimonials with dates (Aug-Dec 2024)
+   - 100% Satisfaction Guarantee
+   - 4.9/5 average rating display
+
+### Sections (14 Total)
+1. Hero Section with image carousel
+2. Experience Overview with gallery
+3. How It Works (5-step process)
+4. Why Choose (animated stats + split cards)
+5. Trust & Safety Badges
+6. Testimonials (verified reviews)
+7. Chef Profiles / Perfect Match
+8. Locations (Bali coverage)
+9. Occasions Grid
+10. Transparent Pricing
+11. Sample Menus
+12. FAQ Section
+13. Booking Tips
+14. Footer
+
+### Additional Pages
+- Privacy Policy (Bali-specific legal content)
+- Terms of Service (Bali-specific legal content)
+
+### Spacing Standards
+- **Section Padding:** py-16 lg:py-24
+- **Container Padding:** px-4 sm:px-6 lg:px-8
+- **Grid Gaps:** gap-6 lg:gap-8
+- **Headlines with subheadline:** mb-4
+- **Headlines without subheadline:** mb-12
+- **Subheadlines:** mb-12
+- **Content before buttons:** mb-12
+
+### Mobile Optimization
+- Responsive text sizing
+- Touch-friendly buttons with shortened text on mobile
+- Proper spacing for mobile viewports
+- Image optimization for mobile
+
+## User Preferences
+
+### Important Requirements
+- **Location Focus:** Bali ONLY (no Jakarta, Java, or international references)
+- **Time Format:** 24-hour format everywhere (09:00 - 22:00 WIB, no AM/PM)
+- **WhatsApp CTAs:** Every button opens with section-specific pre-filled messages
+- **Mobile-First:** 100% mobile-optimized design
+- **Trustworthiness:** Emphasis on safety, background checks, verified reviews, insurance
+- **Professional Standards:** Clean, professional, transparent communication
+- **Currency:** All pricing in Indonesian Rupiah (IDR)
+
+### Key Messaging
+- "Perfect match" concept for chef selection
+- Emphasis on villa/home dining experiences
+- Background-checked and certified chefs
+- Transparent pricing with no hidden fees
+- Professional service with full cleanup included
+
+## Tech Stack
+- Frontend: React, TypeScript, Vite
+- Backend: Express
+- Styling: Tailwind CSS + Shadcn UI components
+- Icons: Lucide React, React Icons
+- Routing: Wouter
+- Storage: In-memory (MemStorage)
+
+## Project History
+- Started: 2024
+- Business established: 2012
+- Total experiences delivered: 1000+
+- Current status: Active landing page development

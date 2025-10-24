@@ -76,15 +76,15 @@ export default function PricingSection() {
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-waiter-rate">Rp 150,000/hour</div>
+                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-waiter-rate">Rp 300,000/hour</div>
                 <p className="text-sm text-foreground/70">Professional Waiter/Server</p>
               </div>
               <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-bartender-rate">Rp 200,000/hour</div>
+                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-bartender-rate">Rp 400,000/hour</div>
                 <p className="text-sm text-foreground/70">Bartender</p>
               </div>
               <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-sommelier-rate">Rp 250,000/hour</div>
+                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-sommelier-rate">Rp 500,000/hour</div>
                 <p className="text-sm text-foreground/70">Sommelier/Wine Expert</p>
               </div>
             </div>

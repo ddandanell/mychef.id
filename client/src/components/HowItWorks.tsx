@@ -8,7 +8,7 @@ const STEPS = [
   {
     icon: MessageCircle,
     title: 'Contact Us on WhatsApp',
-    description: 'Share your celebration details - villa location, number of guests, preferred date, and cuisine style (Indonesian, Western, Japanese fusion, etc.)',
+    description: "You will always speak with a native English speaker. Our food expert chef will understand exactly what you want and help find your perfect chef match.",
   },
   {
     icon: FileText,
@@ -17,13 +17,13 @@ const STEPS = [
   },
   {
     icon: MessagesSquare,
-    title: 'Chat With Your Chef',
-    description: 'Message back and forth on WhatsApp until your perfect menu is ready. Ask questions, make adjustments, discuss ingredients.',
+    title: 'Plan Together Until Perfect',
+    description: 'We sit down together (virtually on WhatsApp) to design your dinner. Zero communication mistakes - we ensure you get exactly what you need.',
   },
   {
     icon: CheckCircle,
     title: 'Confirm Your Booking',
-    description: "Once you're happy, we send payment details. Secure your date with our simple booking process.",
+    description: "Once you're 100% happy with everything, we send payment details. Secure your date with our simple booking process.",
   },
   {
     icon: Sparkles,

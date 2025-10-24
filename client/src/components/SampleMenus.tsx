@@ -82,8 +82,8 @@ const MENUS = [
     name: 'Villa Pool Party BBQ',
     guests: 20,
     foodCost: 'Rp 4,500,000',
-    chefCost: 'Rp 5,600,000',
-    total: 'Rp 10,100,000',
+    chefCost: 'Rp 6,400,000',
+    total: 'Rp 10,900,000',
     courses: [
       'BBQ station: Mixed satay (20 sticks per person), grilled chicken wings, beef ribs',
       'Seafood grill: Prawns, whole fish, grilled corn',
@@ -92,7 +92,7 @@ const MENUS = [
       'Drinks: Fresh juice station (orange, watermelon, mixed fruit)',
       'Dessert: Assorted kue (Indonesian cakes), es campur',
     ],
-    breakdown: 'Food Rp 4,500,000 + Chef 4 hours @ Rp 1,000,000/hr + Waiter 4 hours @ Rp 150,000/hr + Helper 4 hours @ Rp 150,000/hr = Rp 10,100,000 total',
+    breakdown: 'Food Rp 4,500,000 + Chef 4 hours @ Rp 1,000,000/hr + Waiter 4 hours @ Rp 300,000/hr + Helper 4 hours @ Rp 300,000/hr = Rp 10,900,000 total',
   },
 ];
 

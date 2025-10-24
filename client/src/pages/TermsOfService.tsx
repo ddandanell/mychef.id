@@ -77,7 +77,7 @@ export default function TermsOfService() {
             <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-4">
               <li><strong>Chef Service Fee:</strong> Charged per hour (typically Rp 800,000 - 1,200,000/hour depending on chef expertise and cuisine specialty)</li>
               <li><strong>Ingredient Costs:</strong> Either market price plus 15-20% sourcing fee if we purchase, or your direct costs if you purchase</li>
-              <li><strong>Additional Services:</strong> Optional waitstaff (Rp 150,000/hour), bartenders (Rp 200,000/hour), sommeliers (Rp 250,000/hour)</li>
+              <li><strong>Additional Services:</strong> Optional waitstaff (Rp 300,000/hour), bartenders (Rp 400,000/hour), sommeliers (Rp 500,000/hour)</li>
               <li><strong>Travel Fees:</strong> May apply for locations outside main service areas</li>
             </ul>
 

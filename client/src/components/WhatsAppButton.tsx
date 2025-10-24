@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import { MessageCircle } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 
 const WHATSAPP_NUMBER = '+6282237565997';
 const WHATSAPP_MESSAGE = 'Hi! I would like to inquire about booking a private chef in Bali.';
@@ -10,14 +9,13 @@ export default function WhatsAppButton() {
   };
 
   return (
-    <Button
-      size="lg"
+    <button
       onClick={handleClick}
-      className="fixed bottom-6 right-6 z-50 shadow-xl bg-primary hover:bg-primary text-primary-foreground rounded-full w-14 h-14 p-0 hover-elevate active-elevate-2"
+      className="fixed bottom-6 right-6 z-50 bg-primary text-primary-foreground rounded-full w-16 h-16 flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform duration-200"
       data-testid="button-sticky-whatsapp"
       aria-label="Contact us on WhatsApp"
     >
-      <MessageCircle className="w-7 h-7" />
-    </Button>
+      <SiWhatsapp className="w-9 h-9" />
+    </button>
   );
 }

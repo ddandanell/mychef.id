@@ -11,6 +11,7 @@ import PricingSection from '@/components/PricingSection';
 import SampleMenus from '@/components/SampleMenus';
 import FAQSection from '@/components/FAQSection';
 import BookingTips from '@/components/BookingTips';
+import VillaPartners from '@/components/VillaPartners';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
@@ -31,6 +32,7 @@ export default function Home() {
       <SampleMenus />
       <FAQSection />
       <BookingTips />
+      <VillaPartners />
       <Footer />
       <WhatsAppButton />
       <CookieBanner />

@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import HeroSection from '@/components/HeroSection';
 import ExperienceOverview from '@/components/ExperienceOverview';
 import HowItWorks from '@/components/HowItWorks';
@@ -19,6 +20,12 @@ import CookieBanner from '@/components/CookieBanner';
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia"
+        description="Experience personalized fine dining in your villa with myCHEF Indonesia. Professional private chefs from Rp 800,000/hour serving Bali. Perfect match chef selection. Book on WhatsApp +62 822-3756-5997."
+        canonical="https://mychef.id"
+        ogType="website"
+      />
       <HeroSection />
       <ExperienceOverview />
       <HowItWorks />

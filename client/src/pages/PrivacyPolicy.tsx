@@ -1,10 +1,17 @@
 import { Link } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SEO from '@/components/SEO';
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Privacy Policy | myCHEF Indonesia"
+        description="Learn how myCHEF Indonesia protects your privacy and handles your personal information when booking private chef services in Bali."
+        canonical="https://mychef.id/privacy-policy"
+        ogType="article"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <Link href="/">
           <Button variant="ghost" className="mb-8 hover-elevate" data-testid="button-back-home">

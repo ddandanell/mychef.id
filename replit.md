@@ -99,6 +99,7 @@ Exclusively serving Bali locations:
 ### Additional Pages
 - Privacy Policy (Bali-specific legal content)
 - Terms of Service (Bali-specific legal content)
+- Join Our Team (/join-our-team) - Professional careers/recruitment page
 
 ### Spacing Standards
 - **Section Padding:** py-16 lg:py-24
@@ -229,6 +230,22 @@ Exclusively serving Bali locations:
   - Implemented alternating section backgrounds for depth
   - Improved typography contrast across all sections
   - Enhanced card styling with consistent borders and hover effects
+
+### Phase 3: Careers Page Development (January 2025)
+- **Join Our Team Page Created:**
+  - Professional hero section with AI-generated hospitality team photo
+  - Interactive role selection cards (Chef, Bartender, Server, Event Staff, Multiple Roles)
+  - Dynamic conditional form that shows only relevant fields based on selected role
+  - Comprehensive 4-section numbered application form
+  - All nationalities welcome - accepts applicants from any country
+  - Minimum 1 year experience requirement, preferring 2+ years
+  - Salary expectations field for applicants to provide their rate expectations
+  - NO salary examples or ranges shown (discussed during interview)
+  - NO social media or portfolio fields (discussed during interview if needed)
+  - NO remote work references (focus on in-person positions in Indonesia)
+  - FAQ section with 8 questions covering requirements, international applicants, compensation, hiring process
+  - Link added to footer only (not in main navigation)
+  - Mobile-responsive with smooth animations and professional "big company" feel
 
 ## Project History
 - Started: 2024

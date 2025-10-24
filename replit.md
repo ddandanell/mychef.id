@@ -9,7 +9,7 @@ Single-page landing website for myCHEF Indonesia, a private chef booking service
 
 ### Contact Details
 - **WhatsApp:** +62 822-3756-5997
-- **Email:** indonesia@mychef.com
+- **Email:** indonesia@mychef.id
 - **Address:** Jl. Sunset Road No. 88, Seminyak, Bali 80361
 - **Business Hours:** 09:00 - 22:00 WIB (Daily)
 

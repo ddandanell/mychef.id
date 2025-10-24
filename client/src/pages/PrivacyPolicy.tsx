@@ -119,7 +119,7 @@ export default function PrivacyPolicy() {
               <li>Lodge a complaint with relevant data protection authorities</li>
             </ul>
             <p className="text-foreground/80 leading-relaxed mt-4">
-              To exercise these rights, please contact us at indonesia@mychef.com or via WhatsApp at +62 822-3756-5997.
+              To exercise these rights, please contact us at indonesia@mychef.id or via WhatsApp at +62 822-3756-5997.
             </p>
           </section>
 
@@ -171,7 +171,7 @@ export default function PrivacyPolicy() {
               <p className="text-foreground/80 mb-2">Jl. Sunset Road No. 88</p>
               <p className="text-foreground/80 mb-2">Seminyak, Bali 80361</p>
               <p className="text-foreground/80 mb-2">Indonesia</p>
-              <p className="text-foreground/80 mb-2">Email: indonesia@mychef.com</p>
+              <p className="text-foreground/80 mb-2">Email: indonesia@mychef.id</p>
               <p className="text-foreground/80">WhatsApp: +62 822-3756-5997</p>
             </div>
           </section>

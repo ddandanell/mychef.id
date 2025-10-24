@@ -53,7 +53,7 @@ export default function TermsOfService() {
             
             <h3 className="text-xl font-semibold mb-3 mt-6">3.1 Making a Booking</h3>
             <p className="text-foreground/80 leading-relaxed mb-4">
-              To book our services, you must contact us via WhatsApp at +62 822-3756-5997 or email at indonesia@mychef.com. You will provide details including event date, location, number of guests, cuisine preferences, and any dietary requirements.
+              To book our services, you must contact us via WhatsApp at +62 822-3756-5997 or email at indonesia@mychef.id. You will provide details including event date, location, number of guests, cuisine preferences, and any dietary requirements.
             </p>
 
             <h3 className="text-xl font-semibold mb-3 mt-6">3.2 Confirmation</h3>
@@ -252,7 +252,7 @@ export default function TermsOfService() {
               <p className="text-foreground/80 mb-2">Jl. Sunset Road No. 88</p>
               <p className="text-foreground/80 mb-2">Seminyak, Bali 80361</p>
               <p className="text-foreground/80 mb-2">Indonesia</p>
-              <p className="text-foreground/80 mb-2">Email: indonesia@mychef.com</p>
+              <p className="text-foreground/80 mb-2">Email: indonesia@mychef.id</p>
               <p className="text-foreground/80">WhatsApp: +62 822-3756-5997</p>
             </div>
           </section>

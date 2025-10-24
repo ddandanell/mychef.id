@@ -66,12 +66,12 @@ export default function Footer() {
                 {WHATSAPP_NUMBER}
               </button>
               <a
-                href="mailto:indonesia@mychef.com"
+                href="mailto:indonesia@mychef.id"
                 className="flex items-center gap-2 text-foreground/70 hover:text-primary"
                 data-testid="link-footer-email"
               >
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                indonesia@mychef.com
+                indonesia@mychef.id
               </a>
               <div className="flex items-start gap-2 text-foreground/60">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />

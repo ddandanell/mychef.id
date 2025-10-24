@@ -111,10 +111,10 @@ export default function Footer() {
               © {currentYear} myCHEF Indonesia. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-primary" data-testid="link-footer-privacy">
+              <a href="/privacy-policy" className="hover:text-primary" data-testid="link-footer-privacy">
                 Privacy Policy
               </a>
-              <a href="#" className="hover:text-primary" data-testid="link-footer-terms">
+              <a href="/terms-of-service" className="hover:text-primary" data-testid="link-footer-terms">
                 Terms of Service
               </a>
             </div>

@@ -48,18 +48,18 @@ export default function CookieBanner() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 ml-auto">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto sm:ml-auto">
             <Button
               variant="outline"
               onClick={handleDecline}
-              className="hover-elevate"
+              className="hover-elevate w-full sm:w-auto"
               data-testid="button-cookie-decline"
             >
               Decline
             </Button>
             <Button
               onClick={handleAccept}
-              className="bg-primary hover:bg-primary text-primary-foreground hover-elevate active-elevate-2"
+              className="bg-primary hover:bg-primary text-primary-foreground hover-elevate active-elevate-2 w-full sm:w-auto"
               data-testid="button-cookie-accept"
             >
               Accept All

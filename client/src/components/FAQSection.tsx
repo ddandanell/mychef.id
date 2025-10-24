@@ -36,7 +36,7 @@ const FAQS = [
   },
   {
     question: 'What areas do you serve?',
-    answer: 'We serve all of Bali (Seminyak, Canggu, Ubud, Sanur, Nusa Dua, Uluwatu, etc.), Jakarta and major Java cities, plus Lombok and surrounding islands. International services available through our sister companies.',
+    answer: 'We serve all of Bali including Seminyak, Canggu, Ubud, Sanur, Nusa Dua, Uluwatu, Jimbaran, and all other areas across the island.',
   },
   {
     question: 'What time can the chef start?',

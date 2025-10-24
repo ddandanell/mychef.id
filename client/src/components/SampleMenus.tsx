@@ -95,20 +95,20 @@ export default function SampleMenus() {
           Real examples to help you plan your perfect dining experience
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {MENUS.map((menu, index) => (
             <Card key={index} className="hover-elevate" data-testid={`card-menu-${index}`}>
               <CardHeader>
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <CardTitle className="text-xl" data-testid={`text-menu-${index}-name`}>
+                <div className="flex items-start justify-between gap-3 sm:gap-4 mb-2">
+                  <CardTitle className="text-lg sm:text-xl" data-testid={`text-menu-${index}-name`}>
                     {menu.name}
                   </CardTitle>
-                  <Badge variant="secondary" className="flex items-center gap-1 flex-shrink-0">
+                  <Badge variant="secondary" className="flex items-center gap-1 flex-shrink-0 text-xs">
                     <Users className="w-3 h-3" />
                     {menu.guests}
                   </Badge>
                 </div>
-                <div className="text-2xl font-bold text-primary" data-testid={`text-menu-${index}-total`}>
+                <div className="text-xl sm:text-2xl font-bold text-primary break-words" data-testid={`text-menu-${index}-total`}>
                   {menu.total}
                 </div>
               </CardHeader>

@@ -54,8 +54,6 @@ export default function JoinOurTeam() {
     transport: '',
     salaryExpectations: '',
     whyJoin: '',
-    socialMedia: '',
-    portfolio: '',
     additionalInfo: '',
     agreement: false,
   });
@@ -168,11 +166,11 @@ export default function JoinOurTeam() {
             <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
               <Badge variant="outline" className="gap-2 py-2 px-4 bg-background/50 backdrop-blur-sm">
                 <Globe2 className="w-4 h-4" />
-                All Nationalities • Remote OK
+                All Nationalities Welcome
               </Badge>
               <Badge variant="outline" className="gap-2 py-2 px-4 bg-background/50 backdrop-blur-sm">
                 <TrendingUp className="w-4 h-4" />
-                Competitive Rates
+                Competitive Opportunities
               </Badge>
               <Badge variant="outline" className="gap-2 py-2 px-4 bg-background/50 backdrop-blur-sm">
                 <Users className="w-4 h-4" />
@@ -181,7 +179,7 @@ export default function JoinOurTeam() {
             </div>
 
             <p className="text-sm text-foreground/60 mb-8">
-              Based in Bali • Expanding across Indonesia • International opportunities available
+              Based in Bali • Expanding across Indonesia
             </p>
           </div>
         </div>
@@ -195,7 +193,7 @@ export default function JoinOurTeam() {
               What Role Interests You?
             </h2>
             <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-              Select your area of expertise to see customized application requirements and salary expectations
+              Select your area of expertise to see customized application requirements
             </p>
           </div>
 
@@ -210,8 +208,7 @@ export default function JoinOurTeam() {
                   <ChefHat className="w-8 h-8" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Chef / Cook</h3>
-                <p className="text-sm text-foreground/70 mb-3">All cuisines & specialties</p>
-                <Badge variant="secondary" className="text-xs">Rp 800K - 1.5M+/hour</Badge>
+                <p className="text-sm text-foreground/70">All cuisines & specialties</p>
               </CardContent>
             </Card>
 
@@ -225,8 +222,7 @@ export default function JoinOurTeam() {
                   <Wine className="w-8 h-8" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Bartender</h3>
-                <p className="text-sm text-foreground/70 mb-3">Cocktails & beverages</p>
-                <Badge variant="secondary" className="text-xs">Rp 500K - 1M+/hour</Badge>
+                <p className="text-sm text-foreground/70">Cocktails & beverages</p>
               </CardContent>
             </Card>
 
@@ -240,8 +236,7 @@ export default function JoinOurTeam() {
                   <Users className="w-8 h-8" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Service Staff</h3>
-                <p className="text-sm text-foreground/70 mb-3">Waiters & servers</p>
-                <Badge variant="secondary" className="text-xs">Rp 300K - 600K/hour</Badge>
+                <p className="text-sm text-foreground/70">Waiters & servers</p>
               </CardContent>
             </Card>
 
@@ -255,8 +250,7 @@ export default function JoinOurTeam() {
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Event Staff</h3>
-                <p className="text-sm text-foreground/70 mb-3">Coordinators & support</p>
-                <Badge variant="secondary" className="text-xs">Rp 250K - 500K/hour</Badge>
+                <p className="text-sm text-foreground/70">Coordinators & support</p>
               </CardContent>
             </Card>
 
@@ -270,8 +264,7 @@ export default function JoinOurTeam() {
                   <Globe2 className="w-8 h-8" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Multiple Roles</h3>
-                <p className="text-sm text-foreground/70 mb-3">Multi-talented</p>
-                <Badge variant="secondary" className="text-xs">Flexible rates</Badge>
+                <p className="text-sm text-foreground/70">Multi-talented</p>
               </CardContent>
             </Card>
           </div>
@@ -395,12 +388,12 @@ export default function JoinOurTeam() {
                             <SelectItem value="semarang">Semarang</SelectItem>
                             <SelectItem value="lombok">Lombok</SelectItem>
                             <SelectItem value="other-indonesia">Other Indonesian City</SelectItem>
-                            <SelectItem value="remote-international">Remote / International</SelectItem>
+                            <SelectItem value="other-international">International / Other Country</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
 
-                      {(formData.location === 'other-indonesia' || formData.location === 'remote-international' || formData.location === 'bali-other') && (
+                      {(formData.location === 'other-indonesia' || formData.location === 'other-international' || formData.location === 'bali-other') && (
                         <div>
                           <Label htmlFor="locationOther">Please Specify Location *</Label>
                           <Input
@@ -729,40 +722,6 @@ export default function JoinOurTeam() {
                       <h3 className="text-2xl font-semibold">Compensation Expectations</h3>
                     </div>
 
-                    <div className="bg-muted/30 rounded-xl p-6">
-                      <h4 className="font-semibold mb-3">Typical Rate Ranges for Reference:</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                          <div>
-                            <strong>Chefs:</strong> Rp 800,000 - 1,500,000+/hour
-                            <p className="text-xs text-foreground/60">Based on expertise and cuisine specialty</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                          <div>
-                            <strong>Bartenders:</strong> Rp 500,000 - 1,000,000+/hour
-                            <p className="text-xs text-foreground/60">Based on skills and event type</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                          <div>
-                            <strong>Service Staff:</strong> Rp 300,000 - 600,000/hour
-                            <p className="text-xs text-foreground/60">Based on experience level</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                          <div>
-                            <strong>Event Staff:</strong> Rp 250,000 - 500,000/hour
-                            <p className="text-xs text-foreground/60">Based on role and responsibilities</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                     <div>
                       <Label htmlFor="salaryExpectations">Your Rate Expectations *</Label>
                       <p className="text-sm text-foreground/60 mb-2">
@@ -777,7 +736,7 @@ export default function JoinOurTeam() {
                         className="mt-1"
                       />
                       <p className="text-xs text-foreground/60 mt-1">
-                        Final rates negotiated based on experience, skills, and booking requirements
+                        We'll discuss final rates during the interview process
                       </p>
                     </div>
                   </div>
@@ -803,30 +762,6 @@ export default function JoinOurTeam() {
                         data-testid="textarea-why-join"
                         className="mt-1"
                       />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="socialMedia">Social Media / Instagram</Label>
-                        <Input
-                          id="socialMedia"
-                          placeholder="@yourhandle or profile URL"
-                          value={formData.socialMedia}
-                          onChange={(e) => setFormData({ ...formData, socialMedia: e.target.value })}
-                          className="mt-1"
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="portfolio">Portfolio / Website</Label>
-                        <Input
-                          id="portfolio"
-                          placeholder="Link to your work"
-                          value={formData.portfolio}
-                          onChange={(e) => setFormData({ ...formData, portfolio: e.target.value })}
-                          className="mt-1"
-                        />
-                      </div>
                     </div>
 
                     <div>
@@ -900,15 +835,14 @@ export default function JoinOurTeam() {
 
             <AccordionItem value="foreigners" className="bg-card border-2 rounded-lg px-6 hover-elevate">
               <AccordionTrigger className="hover:no-underline">
-                Do you accept international applicants and remote workers?
+                Do you accept international applicants?
               </AccordionTrigger>
               <AccordionContent className="text-foreground/80">
                 <p className="mb-2">Yes! We welcome applicants from all countries and backgrounds:</p>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>Indonesian nationals</li>
                   <li>Foreign residents already in Indonesia</li>
-                  <li>International professionals willing to relocate</li>
-                  <li>Remote consultants for menu development (some positions)</li>
+                  <li>International professionals willing to relocate to Indonesia</li>
                   <li>You must have or be able to obtain proper work authorization</li>
                 </ul>
               </AccordionContent>

@@ -13,6 +13,7 @@ import SampleMenus from '@/components/SampleMenus';
 import FAQSection from '@/components/FAQSection';
 import BookingTips from '@/components/BookingTips';
 import VillaPartners from '@/components/VillaPartners';
+import PartyAddons from '@/components/PartyAddons';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
@@ -40,6 +41,7 @@ export default function Home() {
       <FAQSection />
       <BookingTips />
       <VillaPartners />
+      <PartyAddons />
       <Footer />
       <WhatsAppButton />
       <CookieBanner />

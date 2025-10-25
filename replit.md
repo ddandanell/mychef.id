@@ -166,7 +166,7 @@ Exclusively serving Bali locations:
   - Privacy Policy: Privacy practices and data handling
   - Terms of Service: Booking policies and service agreements
 
-## Recent Updates (December 2024)
+## Recent Updates (December 2024 - January 2025)
 
 ### Phase 1: Content & Performance (Early December)
 - **Testimonial Carousel:** Created Instagram-style horizontal scroll with 50+ authentic story-based reviews
@@ -232,6 +232,13 @@ Exclusively serving Bali locations:
   - Enhanced card styling with consistent borders and hover effects
 
 ### Phase 3: Careers Page Development & Analytics (January 2025)
+- **Experience Overview Gallery Redesign:**
+  - Replaced static grid with dual-row auto-scrolling gallery
+  - Added 12 authentic client photos showing real dining experiences
+  - Two rows scroll in opposite directions for dynamic visual effect
+  - Uniform image sizing (300x225px) for professional appearance
+  - Showcases happy clients, chef interactions, villa setups, beachfront dining
+  - Infinite loop scrolling creates impression of extensive client portfolio
 - **Google Analytics Integration (GDPR-Compliant):**
   - Integrated Google Analytics (G-W0PQH8ZKTF) tracking across all pages
   - GDPR-compliant implementation: tracking disabled by default

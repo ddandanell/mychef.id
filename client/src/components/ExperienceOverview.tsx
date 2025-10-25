@@ -1,22 +1,117 @@
 import { useLocation } from 'wouter';
+import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
-import OptimizedImage from '@/components/OptimizedImage';
-import villaImage from '@assets/generated_images/Villa_terrace_rice_paddy_dining_024d1337.png';
-import grillingImage from '@assets/ADY04381_1761302981950.jpg';
-import dinnerImage from '@assets/generated_images/Intimate_dinner_party_Sanur_605d729e.png';
-import villaDiningImage from '@assets/ADY04464_1761302865262.jpg';
-import dessertImage from '@assets/generated_images/Fine_dining_plated_dessert_2c0047a1.png';
-import toastingImage from '@assets/generated_images/Guests_toasting_celebration_dinner_5570ed38.png';
 
-const IMAGES = [
-  { src: villaImage, alt: 'Private dining setup on villa terrace overlooking rice paddies' },
-  { src: grillingImage, alt: 'Fresh meat grilling on BBQ at private chef villa service' },
-  { src: dinnerImage, alt: 'Intimate dinner party in Sanur home' },
-  { src: villaDiningImage, alt: 'Group of friends enjoying private chef meal at luxury Bali villa' },
-  { src: dessertImage, alt: 'Multi-course plated dessert' },
-  { src: toastingImage, alt: 'Happy Indonesian and international guests toasting' },
+// Import all the new client photos
+import diningExperience from '@assets/Dining-Experience-Bali-2_1761391000570.jpg';
+import villaBreakfast from '@assets/In-Villa-Breakfast-bvilla-Seminyak-Bali-3_1761391000571.webp';
+import chefPlating from '@assets/PrestigeLuxuryVillas_Vacation-Concierge_Relax_1761391000571.webp';
+import gastronomy from '@assets/Concierge-Gastronomy-2022_1761391000572.jpg';
+import cottonHouse from '@assets/bali-the-cotton-house-dinner_1761391000572.jpg';
+import villaAloui from '@assets/villa-aloui-aloui-dining-01-62e20c82768f3_1761391000572.webp';
+import villaSemara from '@assets/8-Villa-Semara-35_1761391000572.jpg';
+import andariVilla from '@assets/Andari-Bali-Villas-2-3-bedroom-private-villas-Legian-Private-Villa-Dining-1-1030x593_1761391000572.jpg';
+import beachDining from '@assets/group-beachfront-dining-casa-teresa-nighttime-1024x768_1761391000572.webp';
+import romanticBeach from '@assets/ECB33570-B79E-479E-B9AF-C5C14DB52480-768x1024_1761391000572.jpg';
+import grillingImage from '@assets/ADY04381_1761302981950.jpg';
+import villaDiningImage from '@assets/ADY04464_1761302865262.jpg';
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+const IMAGES_ROW1: GalleryImage[] = [
+  { src: diningExperience, alt: 'Elegant villa dining table setup with tropical garden view' },
+  { src: villaBreakfast, alt: 'Happy client enjoying breakfast at luxury villa in Bali' },
+  { src: chefPlating, alt: 'Professional chef plating gourmet dish in villa kitchen' },
+  { src: gastronomy, alt: 'Chef garnishing fine dining plate with precision' },
+  { src: cottonHouse, alt: 'Happy clients with chef in villa kitchen' },
+  { src: villaAloui, alt: 'Tropical villa dining room with breakfast spread' },
 ];
+
+const IMAGES_ROW2: GalleryImage[] = [
+  { src: villaSemara, alt: 'Villa server preparing elegant dinner table' },
+  { src: andariVilla, alt: 'Beautiful Indonesian cuisine spread on villa dining table' },
+  { src: beachDining, alt: 'Large group beachfront dining celebration at night' },
+  { src: romanticBeach, alt: 'Romantic beach cabana dinner setup at sunset' },
+  { src: grillingImage, alt: 'Fresh meat grilling on BBQ at private chef villa service' },
+  { src: villaDiningImage, alt: 'Group of friends enjoying private chef meal at luxury Bali villa' },
+];
+
+interface ScrollingRowProps {
+  images: GalleryImage[];
+  direction: 'left' | 'right';
+}
+
+function ScrollingRow({ images, direction }: ScrollingRowProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let animationFrameId: number;
+    let scrollPosition = 0;
+    const scrollSpeed = direction === 'left' ? 0.5 : -0.5;
+
+    const scroll = () => {
+      scrollPosition += scrollSpeed;
+      
+      if (scrollContainer) {
+        const maxScroll = scrollContainer.scrollWidth / 2;
+        
+        if (direction === 'left' && scrollPosition >= maxScroll) {
+          scrollPosition = 0;
+        } else if (direction === 'right' && scrollPosition <= -maxScroll) {
+          scrollPosition = 0;
+        }
+        
+        scrollContainer.scrollLeft = Math.abs(scrollPosition);
+      }
+      
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    const timer = setTimeout(() => {
+      animationFrameId = requestAnimationFrame(scroll);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [direction]);
+
+  // Duplicate images for infinite scroll effect
+  const duplicatedImages = [...images, ...images];
+
+  return (
+    <div
+      ref={scrollRef}
+      className="flex gap-4 overflow-x-hidden scrollbar-hide"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
+      {duplicatedImages.map((image, index) => (
+        <div
+          key={`${image.alt}-${index}`}
+          className="flex-shrink-0 w-[300px] h-[225px] rounded-xl overflow-hidden"
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function ExperienceOverview() {
   const [, setLocation] = useLocation();
@@ -26,45 +121,35 @@ export default function ExperienceOverview() {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 lg:py-24 bg-background overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-experience-headline">
           Turn Your Villa Into Bali's Best Restaurant
         </h2>
-        <p className="text-base lg:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12" data-testid="text-experience-description">
+        <p className="text-base lg:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-4" data-testid="text-experience-description">
           There is no more intimate restaurant than your own home. Whether you're staying in a luxury villa in Seminyak, celebrating in Ubud, or hosting friends at your Canggu beach house, bring the magic of fine dining to your table with talented chefs who create menus tailored to your cravings.
         </p>
+        <p className="text-sm text-foreground/60 text-center">
+          Real photos from our happy clients across Bali
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          {IMAGES.map((image, index) => (
-            <div
-              key={index}
-              className="relative aspect-[4/3] rounded-xl overflow-hidden group"
-              data-testid={`img-experience-${index}`}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="space-y-6 mb-12">
+        <ScrollingRow images={IMAGES_ROW1} direction="left" />
+        <ScrollingRow images={IMAGES_ROW2} direction="right" />
+      </div>
 
-        <div className="text-center">
-          <Button
-            size="lg"
-            onClick={handleWhatsAppClick}
-            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
-            data-testid="button-experience-whatsapp"
-          >
-            <MessageCircle className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Chat on WhatsApp for Pricing</span>
-            <span className="sm:hidden">Get Pricing</span>
-          </Button>
-        </div>
+      <div className="text-center">
+        <Button
+          size="lg"
+          onClick={handleWhatsAppClick}
+          className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+          data-testid="button-experience-whatsapp"
+        >
+          <MessageCircle className="w-5 h-5 mr-2" />
+          <span className="hidden sm:inline">Chat on WhatsApp for Pricing</span>
+          <span className="sm:hidden">Get Pricing</span>
+        </Button>
       </div>
     </section>
   );

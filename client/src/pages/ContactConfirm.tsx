@@ -46,9 +46,8 @@ export default function ContactConfirm() {
 
     // Auto-redirect after 2 seconds
     const redirectTimer = setTimeout(() => {
-      window.open(url, '_blank');
-      // Return to home after opening WhatsApp
-      setLocation('/');
+      // Use location.href for auto-redirect to avoid popup blockers
+      window.location.href = url;
     }, 2000);
 
     // Cleanup timers on unmount
@@ -59,8 +58,8 @@ export default function ContactConfirm() {
   }, [setLocation]);
 
   const handleContinueNow = () => {
+    // Manual click can use _blank since it's a direct user gesture
     window.open(whatsappURL, '_blank');
-    setLocation('/');
   };
 
   const handleGoBack = () => {

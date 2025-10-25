@@ -457,7 +457,7 @@ function ScrollingRow({ testimonials, direction }: { testimonials: Testimonial[]
 
 export default function TestimonialCarousel() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-background overflow-hidden">
+    <section id="testimonials" className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="text-center">
           <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4" data-testid="text-testimonials-headline">

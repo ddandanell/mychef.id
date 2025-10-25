@@ -25,6 +25,13 @@ export default function HeroSection() {
     setLocation('/contact/confirm?source=hero');
   };
 
+  const handleViewReviews = () => {
+    const testimonialsSection = document.getElementById('testimonials');
+    if (testimonialsSection) {
+      testimonialsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-muted">
       {HERO_IMAGES.map((image, index) => (
@@ -46,7 +53,12 @@ export default function HeroSection() {
       ))}
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6" data-testid="badge-rating">
+        <button 
+          onClick={handleViewReviews}
+          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6 hover-elevate active-elevate-2 transition-all cursor-pointer" 
+          data-testid="badge-rating"
+          aria-label="View customer reviews"
+        >
           <div className="flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -54,7 +66,7 @@ export default function HeroSection() {
           </div>
           <span className="text-white font-semibold">4.9/5</span>
           <span className="text-white/80 text-sm">• 1000+ Reviews</span>
-        </div>
+        </button>
 
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
           Hire a Private Chef at Home in Bali

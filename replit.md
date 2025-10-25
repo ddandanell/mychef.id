@@ -236,6 +236,14 @@ Exclusively serving Bali locations:
   - Integrated Google Analytics (G-W0PQH8ZKTF) tracking across all pages
   - Installed immediately after <head> tag as recommended by Google
   - Tracks all page views, user interactions, and conversions
+
+- **WhatsApp Conversion Tracking System:**
+  - Created interstitial `/contact/confirm` page for conversion tracking
+  - All 12+ WhatsApp contact buttons now route through tracking page
+  - Fires custom GA event (`contact_initiation`) with section-specific labels
+  - Auto-redirects to WhatsApp after 2 seconds with manual "Continue Now" fallback
+  - Centralized CTA metadata map ensures consistent messaging across all sections
+  - Tracks conversions from: Hero, Experience, How It Works, Why Choose, Chef Profiles, Locations, Testimonials, Party Addons, Villa Partners, Footer, Floating Button, Careers
   
 - **Join Our Team Page Created:**
   - Professional hero section with AI-generated hospitality team photo

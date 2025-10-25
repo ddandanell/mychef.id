@@ -15,11 +15,17 @@ export default function CookieBanner() {
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');
     setIsVisible(false);
+    
+    // Enable Google Analytics tracking
+    if ((window as any).enableGoogleAnalytics) {
+      (window as any).enableGoogleAnalytics();
+    }
   };
 
   const handleDecline = () => {
     localStorage.setItem('cookieConsent', 'declined');
     setIsVisible(false);
+    // Google Analytics remains disabled (default state)
   };
 
   if (!isVisible) return null;
@@ -39,8 +45,8 @@ export default function CookieBanner() {
               We Use Cookies
             </h3>
             <p className="text-sm text-foreground/70 leading-relaxed" data-testid="text-cookie-description">
-              We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
-              By clicking "Accept All", you consent to our use of cookies. Read our{' '}
+              We use cookies and Google Analytics to enhance your browsing experience, serve personalized content, and analyze our traffic. 
+              By clicking "Accept All", you consent to our use of cookies and analytics tracking. Read our{' '}
               <a href="/privacy-policy" className="text-primary hover:underline font-medium">
                 Privacy Policy
               </a>{' '}

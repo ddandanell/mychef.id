@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - GDPR Compliant Version -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W0PQH8ZKTF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-W0PQH8ZKTF');
+      
+      // Check if user has already accepted cookies
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      
+      if (cookieConsent === 'accepted') {
+        // User accepted cookies - enable Google Analytics
+        gtag('js', new Date());
+        gtag('config', 'G-W0PQH8ZKTF');
+      } else {
+        // User hasn't decided yet or declined - disable tracking
+        gtag('consent', 'default', {
+          'analytics_storage': 'denied'
+        });
+      }
+      
+      // Function to enable analytics when user accepts
+      window.enableGoogleAnalytics = function() {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+        gtag('js', new Date());
+        gtag('config', 'G-W0PQH8ZKTF');
+      };
     </script>
     
     <meta charset="UTF-8" />

@@ -232,10 +232,12 @@ Exclusively serving Bali locations:
   - Enhanced card styling with consistent borders and hover effects
 
 ### Phase 3: Careers Page Development & Analytics (January 2025)
-- **Google Analytics Integration:**
+- **Google Analytics Integration (GDPR-Compliant):**
   - Integrated Google Analytics (G-W0PQH8ZKTF) tracking across all pages
-  - Installed immediately after <head> tag as recommended by Google
-  - Tracks all page views, user interactions, and conversions
+  - GDPR-compliant implementation: tracking disabled by default
+  - Only activates after user accepts cookie consent banner
+  - Respects user privacy if cookies are declined
+  - Tracks all page views, user interactions, and conversions when enabled
 
 - **WhatsApp Conversion Tracking System:**
   - Created interstitial `/contact/confirm` page for conversion tracking

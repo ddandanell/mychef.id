@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock } from 'lucide-react';
@@ -8,10 +9,9 @@ import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminya
 import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a96e97.png';
 
 const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to get a custom quote for a private chef in Bali.';
 
 export default function HeroSection() {
+  const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function HeroSection() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=hero');
   };
 
   return (

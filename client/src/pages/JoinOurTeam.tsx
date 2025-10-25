@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -22,13 +23,13 @@ import {
 } from '@/components/ui/accordion';
 import { ChefHat, Users, Wine, Sparkles, Globe2, CheckCircle, MessageCircle, Mail, MapPin, DollarSign, TrendingUp, Award } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 import heroImage from '@assets/generated_images/Professional_hospitality_team_photo_ae49b5f5.png';
-
-const WHATSAPP_NUMBER = '+6282237565997';
 
 type RoleType = 'chef' | 'bartender' | 'server' | 'event' | 'multiple' | '';
 
 export default function JoinOurTeam() {
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedRole, setSelectedRole] = useState<RoleType>('');
@@ -126,7 +127,7 @@ export default function JoinOurTeam() {
             </p>
             <Button
               size="lg"
-              onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank')}
+              onClick={() => setLocation('/contact/confirm?source=careers')}
               className="mb-4"
               data-testid="button-whatsapp-contact"
             >
@@ -936,7 +937,7 @@ export default function JoinOurTeam() {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank')}
+                onClick={() => setLocation('/contact/confirm?source=careers')}
                 data-testid="button-whatsapp-footer"
               >
                 <MessageCircle className="w-5 h-5 mr-2" />

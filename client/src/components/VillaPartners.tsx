@@ -1,13 +1,13 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Home, Users } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I am a villa/Airbnb owner interested in partnering with myCHEF to offer private chef services to my guests. I would like to schedule a meeting to discuss how we can work together.';
-
 export default function VillaPartners() {
+  const [, setLocation] = useLocation();
+  
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=villaPartners');
   };
 
   return (

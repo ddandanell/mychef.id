@@ -1,9 +1,7 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Flame, Music, Wine } from 'lucide-react';
-
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to ask about party equipment and add-on services for my event.';
 
 const ADDONS = [
   {
@@ -24,8 +22,10 @@ const ADDONS = [
 ];
 
 export default function PartyAddons() {
+  const [, setLocation] = useLocation();
+  
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=partyAddons');
   };
 
   return (

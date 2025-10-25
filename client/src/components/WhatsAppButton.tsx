@@ -1,11 +1,11 @@
+import { useLocation } from 'wouter';
 import { SiWhatsapp } from 'react-icons/si';
 
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to inquire about booking a private chef in Bali.';
-
 export default function WhatsAppButton() {
+  const [, setLocation] = useLocation();
+  
   const handleClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=floatingButton');
   };
 
   return (

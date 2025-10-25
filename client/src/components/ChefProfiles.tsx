@@ -1,10 +1,8 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck } from 'lucide-react';
-
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to get matched with the perfect chef for my event in Bali.';
 
 const PRICING_EXAMPLES = [
   {
@@ -42,8 +40,10 @@ const PRICING_EXAMPLES = [
 ];
 
 export default function ChefProfiles() {
+  const [, setLocation] = useLocation();
+  
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=chefProfiles');
   };
 
   return (

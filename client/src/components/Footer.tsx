@@ -1,14 +1,14 @@
+import { useLocation } from 'wouter';
 import { Mail, Phone, MapPin, CreditCard } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
-
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to inquire about booking a private chef for my event in Bali.';
+import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 export default function Footer() {
+  const [, setLocation] = useLocation();
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=footer');
   };
 
   return (

@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import JoinOurTeam from "@/pages/JoinOurTeam";
+import ContactConfirm from "@/pages/ContactConfirm";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/join-our-team" component={JoinOurTeam} />
+      <Route path="/contact/confirm" component={ContactConfirm} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,3 +1,4 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -7,9 +8,6 @@ import dinnerImage from '@assets/generated_images/Intimate_dinner_party_Sanur_60
 import villaDiningImage from '@assets/ADY04464_1761302865262.jpg';
 import dessertImage from '@assets/generated_images/Fine_dining_plated_dessert_2c0047a1.png';
 import toastingImage from '@assets/generated_images/Guests_toasting_celebration_dinner_5570ed38.png';
-
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to chat about pricing for a private chef experience in Bali.';
 
 const IMAGES = [
   { src: villaImage, alt: 'Private dining setup on villa terrace overlooking rice paddies' },
@@ -21,8 +19,10 @@ const IMAGES = [
 ];
 
 export default function ExperienceOverview() {
+  const [, setLocation] = useLocation();
+  
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=experience');
   };
 
   return (

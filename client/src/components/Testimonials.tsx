@@ -1,10 +1,8 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, ShieldCheck } from 'lucide-react';
-
-const WHATSAPP_NUMBER = '+6282237565997';
-const WHATSAPP_MESSAGE = 'Hi! I would like to book a private chef after reading the reviews.';
 
 const TESTIMONIALS = [
   {
@@ -50,8 +48,10 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
+  const [, setLocation] = useLocation();
+  
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`, '_blank');
+    setLocation('/contact/confirm?source=testimonials');
   };
 
   return (

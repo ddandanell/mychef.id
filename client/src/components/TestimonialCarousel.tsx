@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, MapPin, CheckCircle } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Star, MapPin, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Testimonial {
   name: string;
@@ -421,8 +421,19 @@ const TESTIMONIALS_ROW2: Testimonial[] = [
 ];
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const PREVIEW_LENGTH = 150;
+  const shouldTruncate = testimonial.review.length > PREVIEW_LENGTH;
+  const displayText = isExpanded || !shouldTruncate 
+    ? testimonial.review 
+    : testimonial.review.slice(0, PREVIEW_LENGTH) + '...';
+
   return (
-    <Card className="flex-shrink-0 w-[320px] bg-background/80 backdrop-blur-sm border-2 hover-elevate" data-testid="card-testimonial">
+    <Card 
+      className="flex-shrink-0 w-[320px] bg-background/80 backdrop-blur-sm border-2 hover-elevate cursor-pointer transition-all" 
+      data-testid="card-testimonial"
+      onClick={() => shouldTruncate && setIsExpanded(!isExpanded)}
+    >
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
@@ -456,8 +467,24 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         </Badge>
 
         <p className="text-sm text-foreground/80 leading-relaxed">
-          {testimonial.review}
+          {displayText}
         </p>
+
+        {shouldTruncate && (
+          <div className="flex items-center gap-1 mt-2 text-xs text-primary font-medium">
+            {isExpanded ? (
+              <>
+                <ChevronUp className="w-3.5 h-3.5" />
+                Show less
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-3.5 h-3.5" />
+                Read full review
+              </>
+            )}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -465,6 +492,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 function ScrollingRow({ testimonials, direction }: { testimonials: Testimonial[]; direction: 'left' | 'right' }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -486,23 +514,27 @@ function ScrollingRow({ testimonials, direction }: { testimonials: Testimonial[]
       const scroll = () => {
         if (!scrollContainer) return;
 
-        const currentMax = scrollContainer.scrollWidth / 2;
+        // Only scroll if not paused
+        if (!isPaused) {
+          const currentMax = scrollContainer.scrollWidth / 2;
 
-        if (direction === 'left') {
-          // Scroll leftward (content moves left, showing right side)
-          scrollPosition += 0.5;
-          if (scrollPosition >= currentMax) {
-            scrollPosition = 0;
+          if (direction === 'left') {
+            // Scroll leftward (content moves left, showing right side)
+            scrollPosition += 0.5;
+            if (scrollPosition >= currentMax) {
+              scrollPosition = 0;
+            }
+          } else {
+            // Scroll rightward (content moves right, showing left side)
+            scrollPosition -= 0.5;
+            if (scrollPosition <= 0) {
+              scrollPosition = currentMax;
+            }
           }
-        } else {
-          // Scroll rightward (content moves right, showing left side)
-          scrollPosition -= 0.5;
-          if (scrollPosition <= 0) {
-            scrollPosition = currentMax;
-          }
+
+          scrollContainer.scrollLeft = scrollPosition;
         }
-
-        scrollContainer.scrollLeft = scrollPosition;
+        
         animationFrameId = requestAnimationFrame(scroll);
       };
 
@@ -519,7 +551,7 @@ function ScrollingRow({ testimonials, direction }: { testimonials: Testimonial[]
       clearTimeout(timer);
       if (cleanup) cleanup();
     };
-  }, [direction]);
+  }, [direction, isPaused]);
 
   // Duplicate testimonials for infinite scroll effect
   const duplicatedTestimonials = [...testimonials, ...testimonials];
@@ -529,6 +561,8 @@ function ScrollingRow({ testimonials, direction }: { testimonials: Testimonial[]
       ref={scrollRef}
       className="flex gap-4 overflow-x-hidden scrollbar-hide"
       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {duplicatedTestimonials.map((testimonial, index) => (
         <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />

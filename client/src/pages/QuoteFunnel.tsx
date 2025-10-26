@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
+type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
 
 interface AddressData {
   street: string;
@@ -14,6 +15,13 @@ interface AddressData {
   region: string;
   postalCode: string;
 }
+
+const guestCountOptions = [
+  { id: '2', label: '2 people' },
+  { id: '3-6', label: '3 to 6 people' },
+  { id: '7-12', label: '7 to 12 people' },
+  { id: '13+', label: '13+ people' },
+] as const;
 
 const occasions = [
   { id: 'birthday', label: 'Birthday', icon: Cake },
@@ -36,6 +44,7 @@ export default function QuoteFunnel() {
     region: '',
     postalCode: '',
   });
+  const [guestCount, setGuestCount] = useState<GuestCountType>(null);
 
   const handleContinue = () => {
     if (currentStep === 1 && serviceType) {
@@ -44,6 +53,8 @@ export default function QuoteFunnel() {
       setCurrentStep(3);
     } else if (currentStep === 3 && isAddressValid()) {
       setCurrentStep(4);
+    } else if (currentStep === 4 && guestCount) {
+      setCurrentStep(5);
       // More steps will be added as user provides screenshots
     }
   };
@@ -64,6 +75,7 @@ export default function QuoteFunnel() {
     if (currentStep === 1) return !!serviceType;
     if (currentStep === 2) return !!occasion;
     if (currentStep === 3) return isAddressValid();
+    if (currentStep === 4) return !!guestCount;
     return false;
   };
 
@@ -356,10 +368,82 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 4: Guest Count */}
           {currentStep === 4 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  For how many guests?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  The chef's fee is fixed, so the price per person varies with group size.
+                </p>
+              </div>
+
+              {/* Guest Count Options */}
+              <div className="max-w-xl mx-auto space-y-4">
+                {guestCountOptions.map((option) => {
+                  const isSelected = guestCount === option.id;
+                  
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setGuestCount(option.id as GuestCountType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setGuestCount(option.id as GuestCountType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-guest-count-${option.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-medium text-lg">{option.label}</span>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                              }
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+
+                {/* Helpful Note */}
+                <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-guest-count-flexible">
+                  <p className="text-sm text-center">
+                    Not sure? You can change it later!
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 5 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 4 will be added next...</p>
+              <p className="text-muted-foreground">Step 5 will be added next...</p>
             </div>
           )}
         </div>

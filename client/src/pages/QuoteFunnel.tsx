@@ -1,19 +1,46 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2 } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 type ServiceType = 'single' | 'multiple' | null;
+type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
+
+const occasions = [
+  { id: 'birthday', label: 'Birthday', icon: Cake },
+  { id: 'family-reunion', label: 'Family reunion', icon: Home },
+  { id: 'bachelor-bachelorette', label: 'Bachelor/Bachelorette', icon: PartyPopper },
+  { id: 'friends-gathering', label: 'Friends gathering', icon: Users },
+  { id: 'romantic-night', label: 'Romantic night', icon: Heart },
+  { id: 'corporate', label: 'Corporate', icon: Briefcase },
+  { id: 'foodie-adventure', label: 'Foodie adventure', icon: ChefHat },
+  { id: 'other', label: 'Other', icon: MoreHorizontal },
+] as const;
 
 export default function QuoteFunnel() {
   const [currentStep, setCurrentStep] = useState(1);
   const [serviceType, setServiceType] = useState<ServiceType>(null);
+  const [occasion, setOccasion] = useState<OccasionType>(null);
 
   const handleContinue = () => {
-    if (serviceType) {
+    if (currentStep === 1 && serviceType) {
       setCurrentStep(2);
-      // We'll add more steps as the user provides screenshots
+    } else if (currentStep === 2 && occasion) {
+      setCurrentStep(3);
+      // More steps will be added as user provides screenshots
     }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const canContinue = () => {
+    if (currentStep === 1) return !!serviceType;
+    if (currentStep === 2) return !!occasion;
+    return false;
   };
 
   return (
@@ -145,23 +172,106 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 2: Occasion */}
           {currentStep === 2 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What's the occasion?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  This helps our chefs set the perfect tone and vibe for your event.
+                </p>
+              </div>
+
+              {/* Occasion Options */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {occasions.map((occ) => {
+                  const Icon = occ.icon;
+                  const isSelected = occasion === occ.id;
+                  
+                  return (
+                    <Card
+                      key={occ.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setOccasion(occ.id as OccasionType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setOccasion(occ.id as OccasionType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-occasion-${occ.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <Icon className="w-5 h-5 flex-shrink-0" />
+                            <span className="font-medium">{occ.label}</span>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                              }
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 3 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 2 will be added next...</p>
+              <p className="text-muted-foreground">Step 3 will be added next...</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Bottom Continue Button */}
+      {/* Bottom Navigation */}
       <div className="border-t bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex justify-end">
+          <div className="flex items-center justify-between gap-4">
+            {currentStep > 1 ? (
+              <Button
+                variant="ghost"
+                size="lg"
+                onClick={handlePrevious}
+                className="gap-2"
+                data-testid="button-previous"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Previous step
+              </Button>
+            ) : (
+              <div />
+            )}
             <Button
               size="lg"
               onClick={handleContinue}
-              disabled={!serviceType}
+              disabled={!canContinue()}
               className="min-w-[140px]"
               data-testid="button-continue"
             >

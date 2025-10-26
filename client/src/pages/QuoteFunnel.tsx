@@ -16,6 +16,7 @@ type DateModeType = 'single' | 'multiple';
 type TimeOfDayType = 'day' | 'night' | null;
 
 interface AddressData {
+  venueName: string;
   street: string;
   city: string;
   region: string;
@@ -72,13 +73,14 @@ export default function QuoteFunnel() {
   const [serviceType, setServiceType] = useState<ServiceType>(null);
   const [occasion, setOccasion] = useState<OccasionType>(null);
   const [address, setAddress] = useState<AddressData>({
+    venueName: '',
     street: '',
     city: '',
     region: '',
     postalCode: '',
   });
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
-  const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only']));
+  const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
   const [cuisine, setCuisine] = useState<CuisineType>(null);
   const [dateMode, setDateMode] = useState<DateModeType>('single');
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
@@ -129,7 +131,8 @@ export default function QuoteFunnel() {
   };
 
   const isAddressValid = () => {
-    return address.street.trim() !== '' && 
+    return address.venueName.trim() !== '' &&
+           address.street.trim() !== '' && 
            address.city.trim() !== '' && 
            address.region.trim() !== '';
   };
@@ -365,6 +368,21 @@ export default function QuoteFunnel() {
               <Card className="overflow-visible">
                 <CardContent className="pt-6">
                   <div className="space-y-6">
+                    {/* Villa/Hotel Name */}
+                    <div className="space-y-2">
+                      <Label htmlFor="venueName" className="text-base font-medium">
+                        Villa name, Hotel or other
+                      </Label>
+                      <Input
+                        id="venueName"
+                        type="text"
+                        placeholder="Villa Seminyak, Grand Hyatt Bali..."
+                        value={address.venueName}
+                        onChange={(e) => updateAddress('venueName', e.target.value)}
+                        data-testid="input-venue-name"
+                      />
+                    </div>
+
                     {/* Street Address */}
                     <div className="space-y-2">
                       <Label htmlFor="street" className="text-base font-medium">
@@ -725,20 +743,29 @@ export default function QuoteFunnel() {
               {/* Calendar */}
               <div className="flex justify-center">
                 <div className="bg-card border rounded-lg p-6">
-                  <Calendar
-                    mode={dateMode === 'single' ? 'single' : 'multiple'}
-                    selected={dateMode === 'single' ? selectedDates[0] : selectedDates}
-                    onSelect={(dates) => {
-                      if (dateMode === 'single') {
-                        setSelectedDates(dates ? [dates as Date] : []);
-                      } else {
-                        setSelectedDates((dates as Date[]) || []);
-                      }
-                    }}
-                    numberOfMonths={3}
-                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                    className="rounded-md"
-                  />
+                  {dateMode === 'single' ? (
+                    <Calendar
+                      mode="single"
+                      selected={selectedDates[0]}
+                      onSelect={(date: Date | undefined) => {
+                        setSelectedDates(date ? [date] : []);
+                      }}
+                      numberOfMonths={3}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      className="rounded-md"
+                    />
+                  ) : (
+                    <Calendar
+                      mode="multiple"
+                      selected={selectedDates}
+                      onSelect={(dates: Date[] | undefined) => {
+                        setSelectedDates(dates || []);
+                      }}
+                      numberOfMonths={3}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      className="rounded-md"
+                    />
+                  )}
                 </div>
               </div>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,7 @@ type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
+type CuisineType = 'indonesian' | 'italian' | 'mediterranean' | 'seafood' | 'french' | 'japanese' | 'asian' | 'thai' | 'chinese' | 'indian' | 'mexican' | 'bbq' | 'fusion' | 'vegan-vegetarian' | 'chef-special' | null;
 
 interface AddressData {
   street: string;
@@ -31,6 +32,24 @@ const additionalServices = [
   { id: 'equipment-rental', label: 'Equipment rental', icon: Package, description: 'Tables, chairs, decorations' },
   { id: 'music-speakers', label: 'Music & Sound system', icon: Music, description: 'DJ or sound equipment' },
   { id: 'wait-staff', label: 'Wait staff & Servers', icon: UserCheck, description: 'Professional service staff' },
+] as const;
+
+const cuisineOptions = [
+  { id: 'indonesian', label: 'Indonesian', icon: Utensils },
+  { id: 'italian', label: 'Italian', icon: Pizza },
+  { id: 'mediterranean', label: 'Mediterranean', icon: Leaf },
+  { id: 'seafood', label: 'Seafood/Fish', icon: Fish },
+  { id: 'french', label: 'French', icon: Croissant },
+  { id: 'japanese', label: 'Japanese', icon: UtensilsCrossed },
+  { id: 'asian', label: 'Asian Fusion', icon: Soup },
+  { id: 'thai', label: 'Thai', icon: Flame },
+  { id: 'chinese', label: 'Chinese', icon: Utensils },
+  { id: 'indian', label: 'Indian', icon: Apple },
+  { id: 'mexican', label: 'Mexican', icon: Egg },
+  { id: 'bbq', label: 'BBQ & Grilling', icon: Flame },
+  { id: 'fusion', label: 'Fusion', icon: ChefHat },
+  { id: 'vegan-vegetarian', label: 'Vegan/Vegetarian', icon: Leaf },
+  { id: 'chef-special', label: "Chef's special", icon: ChefHat },
 ] as const;
 
 const occasions = [
@@ -56,6 +75,7 @@ export default function QuoteFunnel() {
   });
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only']));
+  const [cuisine, setCuisine] = useState<CuisineType>(null);
 
   const toggleService = (serviceId: AdditionalServiceType) => {
     setSelectedServices(prev => {
@@ -83,6 +103,8 @@ export default function QuoteFunnel() {
       setCurrentStep(5);
     } else if (currentStep === 5 && selectedServices.size > 0) {
       setCurrentStep(6);
+    } else if (currentStep === 6 && cuisine) {
+      setCurrentStep(7);
       // More steps will be added as user provides screenshots
     }
   };
@@ -105,6 +127,7 @@ export default function QuoteFunnel() {
     if (currentStep === 3) return isAddressValid();
     if (currentStep === 4) return !!guestCount;
     if (currentStep === 5) return selectedServices.size > 0;
+    if (currentStep === 6) return !!cuisine;
     return false;
   };
 
@@ -555,10 +578,66 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 6: Cuisine Selection */}
           {currentStep === 6 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What are you craving?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  If you need more inspiration, try the Chef's Special.
+                </p>
+              </div>
+
+              {/* Cuisine Options Grid */}
+              <div className="max-w-3xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {cuisineOptions.map((option) => {
+                    const isSelected = cuisine === option.id;
+                    const CuisineIcon = option.icon;
+                    
+                    return (
+                      <Card
+                        key={option.id}
+                        className={`
+                          cursor-pointer transition-all overflow-visible
+                          hover-elevate active-elevate-2
+                          ${isSelected 
+                            ? 'border-2 border-primary bg-primary/5' 
+                            : 'border-2'
+                          }
+                        `}
+                        onClick={() => setCuisine(option.id as CuisineType)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setCuisine(option.id as CuisineType);
+                          }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        data-testid={`option-cuisine-${option.id}`}
+                      >
+                        <CardContent className="py-4">
+                          <div className="flex items-center gap-3">
+                            <CuisineIcon className="w-6 h-6 flex-shrink-0" />
+                            <span className="font-medium text-base">{option.label}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 7 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 6 will be added next...</p>
+              <p className="text-muted-foreground">Step 7 will be added next...</p>
             </div>
           )}
         </div>

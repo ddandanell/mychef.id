@@ -1,10 +1,19 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
+
+interface AddressData {
+  street: string;
+  city: string;
+  region: string;
+  postalCode: string;
+}
 
 const occasions = [
   { id: 'birthday', label: 'Birthday', icon: Cake },
@@ -21,12 +30,20 @@ export default function QuoteFunnel() {
   const [currentStep, setCurrentStep] = useState(1);
   const [serviceType, setServiceType] = useState<ServiceType>(null);
   const [occasion, setOccasion] = useState<OccasionType>(null);
+  const [address, setAddress] = useState<AddressData>({
+    street: '',
+    city: '',
+    region: '',
+    postalCode: '',
+  });
 
   const handleContinue = () => {
     if (currentStep === 1 && serviceType) {
       setCurrentStep(2);
     } else if (currentStep === 2 && occasion) {
       setCurrentStep(3);
+    } else if (currentStep === 3 && isAddressValid()) {
+      setCurrentStep(4);
       // More steps will be added as user provides screenshots
     }
   };
@@ -37,10 +54,21 @@ export default function QuoteFunnel() {
     }
   };
 
+  const isAddressValid = () => {
+    return address.street.trim() !== '' && 
+           address.city.trim() !== '' && 
+           address.region.trim() !== '';
+  };
+
   const canContinue = () => {
     if (currentStep === 1) return !!serviceType;
     if (currentStep === 2) return !!occasion;
+    if (currentStep === 3) return isAddressValid();
     return false;
+  };
+
+  const updateAddress = (field: keyof AddressData, value: string) => {
+    setAddress(prev => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -241,10 +269,97 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 3: Event Location */}
           {currentStep === 3 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Where is your event?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  We need your full address to match you with the perfect chef in your area.
+                </p>
+              </div>
+
+              {/* Address Form */}
+              <Card className="overflow-visible">
+                <CardContent className="pt-6">
+                  <div className="space-y-6">
+                    {/* Street Address */}
+                    <div className="space-y-2">
+                      <Label htmlFor="street" className="text-base font-medium">
+                        Street Address
+                      </Label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                        <Input
+                          id="street"
+                          type="text"
+                          placeholder="123 Villa Street"
+                          value={address.street}
+                          onChange={(e) => updateAddress('street', e.target.value)}
+                          className="pl-10"
+                          data-testid="input-street"
+                        />
+                      </div>
+                    </div>
+
+                    {/* City and Region */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="city" className="text-base font-medium">
+                          City
+                        </Label>
+                        <Input
+                          id="city"
+                          type="text"
+                          placeholder="Seminyak"
+                          value={address.city}
+                          onChange={(e) => updateAddress('city', e.target.value)}
+                          data-testid="input-city"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="region" className="text-base font-medium">
+                          Region
+                        </Label>
+                        <Input
+                          id="region"
+                          type="text"
+                          placeholder="Bali"
+                          value={address.region}
+                          onChange={(e) => updateAddress('region', e.target.value)}
+                          data-testid="input-region"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Postal Code (Optional) */}
+                    <div className="space-y-2">
+                      <Label htmlFor="postalCode" className="text-base font-medium">
+                        Postal Code <span className="text-muted-foreground font-normal">(Optional)</span>
+                      </Label>
+                      <Input
+                        id="postalCode"
+                        type="text"
+                        placeholder="80361"
+                        value={address.postalCode}
+                        onChange={(e) => updateAddress('postalCode', e.target.value)}
+                        data-testid="input-postal-code"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 4 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 3 will be added next...</p>
+              <p className="text-muted-foreground">Step 4 will be added next...</p>
             </div>
           )}
         </div>

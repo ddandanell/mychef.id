@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
+type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
 
 interface AddressData {
   street: string;
@@ -21,6 +22,15 @@ const guestCountOptions = [
   { id: '3-6', label: '3 to 6 people' },
   { id: '7-12', label: '7 to 12 people' },
   { id: '13+', label: '13+ people' },
+] as const;
+
+const additionalServices = [
+  { id: 'food-only', label: 'Food only (Chef service)', icon: ChefHat, description: 'Professional chef prepares your meal' },
+  { id: 'bartender', label: 'Bartender service', icon: Wine, description: 'Professional bartender for drinks' },
+  { id: 'grilling', label: 'BBQ & Grilling', icon: Flame, description: 'Live BBQ grilling experience' },
+  { id: 'equipment-rental', label: 'Equipment rental', icon: Package, description: 'Tables, chairs, decorations' },
+  { id: 'music-speakers', label: 'Music & Sound system', icon: Music, description: 'DJ or sound equipment' },
+  { id: 'wait-staff', label: 'Wait staff & Servers', icon: UserCheck, description: 'Professional service staff' },
 ] as const;
 
 const occasions = [
@@ -45,6 +55,22 @@ export default function QuoteFunnel() {
     postalCode: '',
   });
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
+  const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only']));
+
+  const toggleService = (serviceId: AdditionalServiceType) => {
+    setSelectedServices(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(serviceId)) {
+        // Don't allow deselecting if it's the last item
+        if (newSet.size > 1) {
+          newSet.delete(serviceId);
+        }
+      } else {
+        newSet.add(serviceId);
+      }
+      return newSet;
+    });
+  };
 
   const handleContinue = () => {
     if (currentStep === 1 && serviceType) {
@@ -55,6 +81,8 @@ export default function QuoteFunnel() {
       setCurrentStep(4);
     } else if (currentStep === 4 && guestCount) {
       setCurrentStep(5);
+    } else if (currentStep === 5 && selectedServices.size > 0) {
+      setCurrentStep(6);
       // More steps will be added as user provides screenshots
     }
   };
@@ -76,6 +104,7 @@ export default function QuoteFunnel() {
     if (currentStep === 2) return !!occasion;
     if (currentStep === 3) return isAddressValid();
     if (currentStep === 4) return !!guestCount;
+    if (currentStep === 5) return selectedServices.size > 0;
     return false;
   };
 
@@ -440,10 +469,96 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 5: Additional Services */}
           {currentStep === 5 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What services do you need?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select all the services you need for your event. You can choose multiple options.
+                </p>
+              </div>
+
+              {/* Service Options */}
+              <div className="max-w-2xl mx-auto space-y-3">
+                {additionalServices.map((service) => {
+                  const isSelected = selectedServices.has(service.id as AdditionalServiceType);
+                  const ServiceIcon = service.icon;
+                  
+                  return (
+                    <Card
+                      key={service.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => toggleService(service.id as AdditionalServiceType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          toggleService(service.id as AdditionalServiceType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-service-${service.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center gap-4">
+                          {/* Checkbox */}
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded border-2 transition-all flex items-center justify-center
+                              ${isSelected
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                              }
+                            `}
+                          >
+                            {isSelected && (
+                              <CheckCircle2 className="w-3 h-3 text-primary-foreground" />
+                            )}
+                          </div>
+
+                          {/* Icon */}
+                          <div className="flex-shrink-0">
+                            <ServiceIcon className="w-6 h-6 text-primary" />
+                          </div>
+
+                          {/* Label and Description */}
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-base">{service.label}</div>
+                            <div className="text-sm text-muted-foreground">{service.description}</div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              {/* Helpful Note */}
+              <div className="max-w-2xl mx-auto">
+                <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-services-flexible">
+                  <p className="text-sm text-center">
+                    Select at least one service. We'll help you customize your perfect event!
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 6 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 5 will be added next...</p>
+              <p className="text-muted-foreground">Step 6 will be added next...</p>
             </div>
           )}
         </div>

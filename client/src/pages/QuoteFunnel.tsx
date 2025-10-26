@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
 
 type ServiceType = 'single' | 'multiple' | null;
@@ -12,6 +13,7 @@ type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
 type CuisineType = 'indonesian' | 'italian' | 'mediterranean' | 'seafood' | 'french' | 'japanese' | 'asian' | 'thai' | 'chinese' | 'indian' | 'mexican' | 'bbq' | 'fusion' | 'vegan-vegetarian' | 'chef-special' | null;
 type DateModeType = 'single' | 'multiple';
+type TimeOfDayType = 'day' | 'night' | null;
 
 interface AddressData {
   street: string;
@@ -80,6 +82,9 @@ export default function QuoteFunnel() {
   const [cuisine, setCuisine] = useState<CuisineType>(null);
   const [dateMode, setDateMode] = useState<DateModeType>('single');
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(null);
+  const [foodPreferences, setFoodPreferences] = useState('');
+  const [moodDescription, setMoodDescription] = useState('');
 
   const toggleService = (serviceId: AdditionalServiceType) => {
     setSelectedServices(prev => {
@@ -111,6 +116,8 @@ export default function QuoteFunnel() {
       setCurrentStep(7);
     } else if (currentStep === 7 && selectedDates.length > 0) {
       setCurrentStep(8);
+    } else if (currentStep === 8 && timeOfDay && foodPreferences.trim() && moodDescription.trim()) {
+      setCurrentStep(9);
       // More steps will be added as user provides screenshots
     }
   };
@@ -135,6 +142,7 @@ export default function QuoteFunnel() {
     if (currentStep === 5) return selectedServices.size > 0;
     if (currentStep === 6) return !!cuisine;
     if (currentStep === 7) return selectedDates.length > 0;
+    if (currentStep === 8) return !!timeOfDay && foodPreferences.trim() !== '' && moodDescription.trim() !== '';
     return false;
   };
 
@@ -745,10 +753,129 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 8: Time of Day and Preferences */}
           {currentStep === 8 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Tell us more about your event
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Help us create the perfect experience for you
+                </p>
+              </div>
+
+              <div className="max-w-2xl mx-auto space-y-8">
+                {/* Time of Day Selection */}
+                <div className="space-y-4">
+                  <Label className="text-base font-medium">
+                    What time of day?
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Card
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${timeOfDay === 'day' 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setTimeOfDay('day')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setTimeOfDay('day');
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid="option-time-day"
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-center gap-3">
+                          <Sun className="w-5 h-5 flex-shrink-0" />
+                          <span className="font-medium">Day</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${timeOfDay === 'night' 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setTimeOfDay('night')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setTimeOfDay('night');
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid="option-time-night"
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-center gap-3">
+                          <Moon className="w-5 h-5 flex-shrink-0" />
+                          <span className="font-medium">Night</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
+                {/* Food Preferences */}
+                <div className="space-y-3">
+                  <Label htmlFor="food-preferences" className="text-base font-medium">
+                    What kind of food are you hoping for?
+                  </Label>
+                  <Textarea
+                    id="food-preferences"
+                    placeholder="Tell us about your food preferences, dietary restrictions, favorite dishes, or anything special you'd like..."
+                    value={foodPreferences}
+                    onChange={(e) => setFoodPreferences(e.target.value)}
+                    rows={4}
+                    className="resize-none"
+                    data-testid="input-food-preferences"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Examples: "We love fresh seafood", "Need vegetarian options", "Allergic to peanuts"
+                  </p>
+                </div>
+
+                {/* Mood/Atmosphere Description */}
+                <div className="space-y-3">
+                  <Label htmlFor="mood-description" className="text-base font-medium">
+                    What kind of mood or atmosphere are you looking for?
+                  </Label>
+                  <Textarea
+                    id="mood-description"
+                    placeholder="Describe the vibe you want: romantic dinner, casual workspace lunch, family celebration, elegant party..."
+                    value={moodDescription}
+                    onChange={(e) => setMoodDescription(e.target.value)}
+                    rows={4}
+                    className="resize-none"
+                    data-testid="input-mood-description"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Examples: "Romantic candlelight setting", "Casual and fun atmosphere", "Professional business lunch"
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 9 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 8 will be added next...</p>
+              <p className="text-muted-foreground">Step 9 will be added next...</p>
             </div>
           )}
         </div>

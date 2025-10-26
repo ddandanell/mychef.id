@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Calendar } from '@/components/ui/calendar';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
 type CuisineType = 'indonesian' | 'italian' | 'mediterranean' | 'seafood' | 'french' | 'japanese' | 'asian' | 'thai' | 'chinese' | 'indian' | 'mexican' | 'bbq' | 'fusion' | 'vegan-vegetarian' | 'chef-special' | null;
+type DateModeType = 'single' | 'multiple';
 
 interface AddressData {
   street: string;
@@ -76,6 +78,8 @@ export default function QuoteFunnel() {
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only']));
   const [cuisine, setCuisine] = useState<CuisineType>(null);
+  const [dateMode, setDateMode] = useState<DateModeType>('single');
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
 
   const toggleService = (serviceId: AdditionalServiceType) => {
     setSelectedServices(prev => {
@@ -105,6 +109,8 @@ export default function QuoteFunnel() {
       setCurrentStep(6);
     } else if (currentStep === 6 && cuisine) {
       setCurrentStep(7);
+    } else if (currentStep === 7 && selectedDates.length > 0) {
+      setCurrentStep(8);
       // More steps will be added as user provides screenshots
     }
   };
@@ -128,6 +134,7 @@ export default function QuoteFunnel() {
     if (currentStep === 4) return !!guestCount;
     if (currentStep === 5) return selectedServices.size > 0;
     if (currentStep === 6) return !!cuisine;
+    if (currentStep === 7) return selectedDates.length > 0;
     return false;
   };
 
@@ -634,10 +641,114 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 7: Date Selection */}
           {currentStep === 7 && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  When?
+                </h1>
+              </div>
+
+              {/* Date Mode Toggle */}
+              <div className="max-w-md mx-auto">
+                <div className="grid grid-cols-2 gap-3">
+                  <Card
+                    className={`
+                      cursor-pointer transition-all overflow-visible
+                      hover-elevate active-elevate-2
+                      ${dateMode === 'single' 
+                        ? 'border-2 border-primary bg-primary/5' 
+                        : 'border-2'
+                      }
+                    `}
+                    onClick={() => {
+                      setDateMode('single');
+                      setSelectedDates([]);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setDateMode('single');
+                        setSelectedDates([]);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    data-testid="option-date-mode-single"
+                  >
+                    <CardContent className="py-3">
+                      <div className="text-center font-medium">Single day</div>
+                    </CardContent>
+                  </Card>
+
+                  <Card
+                    className={`
+                      cursor-pointer transition-all overflow-visible
+                      hover-elevate active-elevate-2
+                      ${dateMode === 'multiple' 
+                        ? 'border-2 border-primary bg-primary/5' 
+                        : 'border-2'
+                      }
+                    `}
+                    onClick={() => {
+                      setDateMode('multiple');
+                      setSelectedDates([]);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setDateMode('multiple');
+                        setSelectedDates([]);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    data-testid="option-date-mode-multiple"
+                  >
+                    <CardContent className="py-3">
+                      <div className="text-center font-medium">Multiple days</div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Calendar */}
+              <div className="flex justify-center">
+                <div className="bg-card border rounded-lg p-6">
+                  <Calendar
+                    mode={dateMode === 'single' ? 'single' : 'multiple'}
+                    selected={dateMode === 'single' ? selectedDates[0] : selectedDates}
+                    onSelect={(dates) => {
+                      if (dateMode === 'single') {
+                        setSelectedDates(dates ? [dates as Date] : []);
+                      } else {
+                        setSelectedDates((dates as Date[]) || []);
+                      }
+                    }}
+                    numberOfMonths={3}
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    className="rounded-md"
+                  />
+                </div>
+              </div>
+
+              {/* Helpful Note */}
+              <div className="max-w-2xl mx-auto">
+                <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-dates-flexible">
+                  <p className="text-sm text-center">
+                    Not sure? You can change it later!
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for future steps */}
+          {currentStep === 8 && (
             <div className="text-center">
-              <p className="text-muted-foreground">Step 7 will be added next...</p>
+              <p className="text-muted-foreground">Step 8 will be added next...</p>
             </div>
           )}
         </div>

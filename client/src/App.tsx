@@ -8,6 +8,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import JoinOurTeam from "@/pages/JoinOurTeam";
 import ContactConfirm from "@/pages/ContactConfirm";
+import QuoteFunnel from "@/pages/QuoteFunnel";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/join-our-team" component={JoinOurTeam} />
       <Route path="/contact/confirm" component={ContactConfirm} />
+      <Route path="/quote" component={QuoteFunnel} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -103,7 +103,7 @@ export default function AdminQuotes() {
                         {quote.serviceType === 'single' 
                           ? quote.occasion?.replace(/-/g, ' ') || 'Single Service'
                           : quote.serviceType === 'fulltime'
-                          ? 'Full-time Chef'
+                          ? 'Full-time or Part-time Chef'
                           : quote.recurringServiceType?.replace(/-/g, ' ') || 'Multiple Services'
                         }
                       </CardTitle>

@@ -57,7 +57,7 @@ function formatQuoteForWhatsApp(data: any): string {
       message += `*Start Date:* ${new Date(data.startDate).toLocaleDateString('en-GB')}\n`;
     }
   } else if (data.serviceType === 'fulltime') {
-    message += '*Service Type:* Full-time Chef\n';
+    message += '*Service Type:* Full-time or Part-time Chef\n';
     message += `*Guests per Meal:* ${data.guestsPerMeal} people\n`;
     
     if (data.mealsNeeded && data.mealsNeeded.length > 0) {
@@ -449,7 +449,7 @@ export default function QuoteFunnel() {
                 {[
                   { id: 'single', label: 'Single Event', description: 'One-time chef service for a special occasion', icon: ChefHat },
                   { id: 'multiple', label: 'Recurring Service', description: 'Regular chef service for multiple days', icon: Users },
-                  { id: 'fulltime', label: 'Full-time Chef', description: 'Dedicated personal chef', icon: Home },
+                  { id: 'fulltime', label: 'Full-time or Part-time Chef', description: 'Dedicated personal chef', icon: Home },
                 ].map((service) => {
                   const Icon = service.icon;
                   const isSelected = serviceType === service.id;
@@ -1810,7 +1810,7 @@ export default function QuoteFunnel() {
                       <>
                         <div className="flex justify-between py-2 border-b">
                           <span className="text-muted-foreground">Service Type:</span>
-                          <span className="font-medium">Full-time Chef</span>
+                          <span className="font-medium">Full-time or Part-time Chef</span>
                         </div>
                         <div className="flex justify-between py-2 border-b">
                           <span className="text-muted-foreground">Guests per Meal:</span>

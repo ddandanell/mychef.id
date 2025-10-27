@@ -41,6 +41,16 @@ interface QuoteSubmission {
   budgetRange: string | null;
   startDate: string | null;
   
+  // Full-time chef fields
+  guestsPerMeal: string | null;
+  lunchTime: string | null;
+  dinnerTime: string | null;
+  kitchenSetup: string | null;
+  dietaryRestrictions: string | null;
+  foodStyle: string | null;
+  serviceScope: string[] | null;
+  workDays: string | null;
+  
   status: string;
   createdAt: string;
 }
@@ -103,6 +113,8 @@ export default function AdminQuotes() {
                       <CardTitle className="text-lg capitalize">
                         {quote.serviceType === 'single' 
                           ? quote.occasion?.replace(/-/g, ' ') || 'Single Service'
+                          : quote.serviceType === 'fulltime'
+                          ? 'Full-time Chef'
                           : quote.recurringServiceType?.replace(/-/g, ' ') || 'Multiple Services'
                         }
                       </CardTitle>
@@ -149,6 +161,17 @@ export default function AdminQuotes() {
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <ChefHat className="w-4 h-4" />
                           <span className="capitalize">{quote.cuisine}</span>
+                        </div>
+                      </>
+                    ) : quote.serviceType === 'fulltime' ? (
+                      <>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Users className="w-4 h-4" />
+                          <span>{quote.guestsPerMeal} {parseInt(quote.guestsPerMeal || '0') === 1 ? 'person' : 'people'} per meal</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Clock className="w-4 h-4" />
+                          <span>{quote.workDays?.replace(/-/g, ' ')}</span>
                         </div>
                       </>
                     ) : (
@@ -309,6 +332,94 @@ export default function AdminQuotes() {
                           <p className="text-sm font-medium text-muted-foreground mb-1">Mood & Atmosphere</p>
                           <p className="text-sm bg-muted p-3 rounded-md">
                             {selectedQuoteData.moodDescription}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  ) : selectedQuoteData.serviceType === 'fulltime' ? (
+                    <>
+                      {/* Full-time Chef Details */}
+                      {selectedQuoteData.guestsPerMeal && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Guests per Meal</p>
+                          <p>{selectedQuoteData.guestsPerMeal} {parseInt(selectedQuoteData.guestsPerMeal) === 1 ? 'person' : 'people'}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.lunchTime && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Lunch Time</p>
+                          <p>{selectedQuoteData.lunchTime} WIB</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.dinnerTime && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Dinner Time</p>
+                          <p>{selectedQuoteData.dinnerTime} WIB</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.foodStyle && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Style</p>
+                          <p className="capitalize">{selectedQuoteData.foodStyle.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.workDays && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Work Days</p>
+                          <p className="capitalize">{selectedQuoteData.workDays.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.serviceScope && selectedQuoteData.serviceScope.length > 0 && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Service Scope</p>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedQuoteData.serviceScope.map((scope, i) => (
+                              <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm capitalize">
+                                {scope.replace(/-/g, ' ')}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
+                        {selectedQuoteData.addressSkipped ? (
+                          <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
+                        ) : (
+                          <>
+                            <p className="font-medium">{selectedQuoteData.venueName}</p>
+                            <p className="text-sm">{selectedQuoteData.street}</p>
+                            <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
+                            {selectedQuoteData.postalCode && (
+                              <p className="text-sm">{selectedQuoteData.postalCode}</p>
+                            )}
+                            {selectedQuoteData.country && (
+                              <p className="text-sm font-medium mt-1">{selectedQuoteData.country}</p>
+                            )}
+                          </>
+                        )}
+                      </div>
+
+                      {selectedQuoteData.kitchenSetup && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Kitchen Setup</p>
+                          <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
+                            {selectedQuoteData.kitchenSetup}
+                          </p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.dietaryRestrictions && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Dietary Restrictions</p>
+                          <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
+                            {selectedQuoteData.dietaryRestrictions}
                           </p>
                         </div>
                       )}

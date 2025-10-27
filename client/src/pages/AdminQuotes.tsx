@@ -54,6 +54,17 @@ export default function AdminQuotes() {
 
   const selectedQuoteData = quotes?.find(q => q.id === selectedQuote);
 
+  const formatGuestCount = (guestCount: string | null) => {
+    if (!guestCount) return '';
+    // Only format if the entire string is numeric (custom guest count)
+    if (/^\d+$/.test(guestCount)) {
+      const num = parseInt(guestCount);
+      return `${num} ${num === 1 ? 'person' : 'people'}`;
+    }
+    // Return as-is for predefined options like "3-6", "13+", etc.
+    return guestCount;
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -133,7 +144,7 @@ export default function AdminQuotes() {
                       <>
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <Users className="w-4 h-4" />
-                          <span>{quote.guestCount} guests</span>
+                          <span>{formatGuestCount(quote.guestCount)}</span>
                         </div>
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <ChefHat className="w-4 h-4" />
@@ -218,7 +229,7 @@ export default function AdminQuotes() {
                       {selectedQuoteData.guestCount && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
-                          <p>{selectedQuoteData.guestCount} people</p>
+                          <p>{formatGuestCount(selectedQuoteData.guestCount)}</p>
                         </div>
                       )}
 

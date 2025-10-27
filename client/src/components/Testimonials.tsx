@@ -1,7 +1,8 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, Star, ShieldCheck } from 'lucide-react';
+import { MessageCircle, Star, ShieldCheck, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const TESTIMONIALS = [
@@ -49,9 +50,14 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
     openContactDialog('testimonials');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
   };
 
   return (
@@ -106,7 +112,19 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            variant="outline"
+            className="px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-testimonials-quote"
+          >
+            <FileText className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Get a Quote</span>
+            <span className="sm:hidden">Get Quote</span>
+          </Button>
+          
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
@@ -114,8 +132,8 @@ export default function Testimonials() {
             data-testid="button-testimonials-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Read More Reviews & Book on WhatsApp</span>
-            <span className="sm:hidden">Book on WhatsApp</span>
+            <span className="hidden sm:inline">Chat with Us</span>
+            <span className="sm:hidden">Chat Now</span>
           </Button>
         </div>
       </div>

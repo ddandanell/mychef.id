@@ -1,3 +1,4 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText, MessagesSquare, CheckCircle, Sparkles } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
@@ -32,9 +33,14 @@ const STEPS = [
 
 export default function HowItWorks() {
   const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
     openContactDialog('howItWorks');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
   };
 
   return (
@@ -69,7 +75,19 @@ export default function HowItWorks() {
           })}
         </div>
 
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            variant="outline"
+            className="px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-how-it-works-quote"
+          >
+            <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <span className="hidden sm:inline">Get a Quote</span>
+            <span className="sm:hidden">Get Quote</span>
+          </Button>
+          
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
@@ -77,8 +95,8 @@ export default function HowItWorks() {
             data-testid="button-how-it-works-whatsapp"
           >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Start Planning on WhatsApp</span>
-            <span className="sm:hidden">Start Planning</span>
+            <span className="hidden sm:inline">Chat with Us</span>
+            <span className="sm:hidden">Chat Now</span>
           </Button>
         </div>
       </div>

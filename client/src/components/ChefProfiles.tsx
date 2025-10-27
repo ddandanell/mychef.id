@@ -1,7 +1,8 @@
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck } from 'lucide-react';
+import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const PRICING_EXAMPLES = [
@@ -41,9 +42,14 @@ const PRICING_EXAMPLES = [
 
 export default function ChefProfiles() {
   const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
     openContactDialog('chefProfiles');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
   };
 
   return (
@@ -170,7 +176,19 @@ export default function ChefProfiles() {
           </CardContent>
         </Card>
 
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            variant="outline"
+            className="px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-chefs-quote"
+          >
+            <FileText className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Get a Quote</span>
+            <span className="sm:hidden">Get Quote</span>
+          </Button>
+          
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
@@ -178,7 +196,8 @@ export default function ChefProfiles() {
             data-testid="button-chefs-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            Get Matched With Your Perfect Chef - WhatsApp Us Now
+            <span className="hidden sm:inline">Chat with Us</span>
+            <span className="sm:hidden">Chat Now</span>
           </Button>
         </div>
       </div>

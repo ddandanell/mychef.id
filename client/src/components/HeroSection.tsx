@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, Star, Users, ShieldCheck, Clock } from 'lucide-react';
+import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
 import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
@@ -12,6 +13,7 @@ const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 
 export default function HeroSection() {
   const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -23,6 +25,10 @@ export default function HeroSection() {
 
   const handleWhatsAppClick = () => {
     openContactDialog('hero');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
   };
 
   const handleViewReviews = () => {
@@ -90,16 +96,29 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <Button
-          size="lg"
-          onClick={handleWhatsAppClick}
-          className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl"
-          data-testid="button-hero-whatsapp-cta"
-        >
-          <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-          <span className="hidden sm:inline">Get Your Custom Quote on WhatsApp</span>
-          <span className="sm:hidden">Get Custom Quote</span>
-        </Button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            className="bg-white hover:bg-white text-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border-2 border-white"
+            data-testid="button-hero-quote-cta"
+          >
+            <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <span className="hidden sm:inline">Get a Quote</span>
+            <span className="sm:hidden">Get Quote</span>
+          </Button>
+          
+          <Button
+            size="lg"
+            onClick={handleWhatsAppClick}
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl"
+            data-testid="button-hero-whatsapp-cta"
+          >
+            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <span className="hidden sm:inline">Chat with Us</span>
+            <span className="sm:hidden">Chat Now</span>
+          </Button>
+        </div>
 
         <div className="flex items-center justify-center gap-2 mt-4 text-white/90" data-testid="text-response-time">
           <Clock className="w-4 h-4" />

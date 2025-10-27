@@ -35,6 +35,8 @@ interface QuoteSubmission {
   guestsPerMeal: string | null;
   mealsNeeded: string[] | null;
   mealTimes: { breakfast?: string; lunch?: string; dinner?: string } | null;
+  groceryHandling: string | null;
+  groceryPaymentMethod: string | null;
   dietaryRestrictions: string | null;
   workDays: string | null;
   
@@ -299,6 +301,34 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Work Days</p>
                           <p className="capitalize">{selectedQuoteData.workDays.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.groceryHandling && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Grocery Shopping</p>
+                          <div className="bg-muted p-3 rounded-md space-y-2">
+                            <p className="font-medium">
+                              {selectedQuoteData.groceryHandling === 'mychef-handles' 
+                                ? 'myCHEF handles shopping' 
+                                : 'Client handles shopping'}
+                            </p>
+                            {selectedQuoteData.groceryHandling === 'mychef-handles' && (
+                              <>
+                                <p className="text-sm text-muted-foreground">
+                                  Shopping time (1-2 hours) included in working hours
+                                </p>
+                                {selectedQuoteData.groceryPaymentMethod && (
+                                  <p className="text-sm">
+                                    <span className="font-medium">Payment: </span>
+                                    {selectedQuoteData.groceryPaymentMethod === 'upfront-payment' 
+                                      ? 'Client pays upfront to myCHEF' 
+                                      : 'Daily/regular cash to chef'}
+                                  </p>
+                                )}
+                              </>
+                            )}
+                          </div>
                         </div>
                       )}
 

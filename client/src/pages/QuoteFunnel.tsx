@@ -550,15 +550,15 @@ export default function QuoteFunnel() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Button
-              variant="destructive"
+              variant="outline"
               size="sm"
               onClick={handleBack}
               className="gap-2"
               data-testid="button-exit"
             >
-              <X className="w-4 h-4" />
-              <span className="hidden sm:inline">Exit Sales Funnel</span>
-              <span className="sm:hidden">Exit</span>
+              <Home className="w-4 h-4" />
+              <span className="hidden sm:inline">Back to Homepage</span>
+              <span className="sm:hidden">Back</span>
             </Button>
             
             {currentStep > 1 && (

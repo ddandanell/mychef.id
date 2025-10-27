@@ -47,23 +47,46 @@ const countries = [
 
 // Helper function to format quote data for WhatsApp message
 function formatQuoteForWhatsApp(data: any): string {
+  // Budget mapping
+  const budgetMap: Record<string, string> = {
+    '250k': '250,000 IDR per person',
+    '500k': '500,000 IDR per person',
+    '750k': '750,000 IDR per person',
+    '1m': '1,000,000 IDR per person',
+    '2m': '2,000,000 IDR per person',
+    '3m': '3,000,000 IDR per person',
+  };
+  
+  // Additional services mapping
+  const serviceMap: Record<string, string> = {
+    'food-only': 'Food only',
+    'bartender': 'Bartender service',
+    'grilling': 'Live grilling/BBQ station',
+    'equipment-rental': 'Equipment rental',
+    'music-speakers': 'Music & speakers',
+    'wait-staff': 'Wait staff',
+  };
+  
   let message = '🍽️ *myCHEF Quote Request*\n\n';
   
   if (data.serviceType === 'single') {
     message += '*Service Type:* Single Event\n';
-    message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     message += `*Guest Count:* ${data.guestCount}\n`;
-    message += `*Food Budget Per Person:* ${data.budgetRangeSingle}\n`;
+    message += `*Food Budget:* ${budgetMap[data.budgetRangeSingle] || data.budgetRangeSingle}\n`;
     message += `*Number of Courses:* ${data.numberOfCourses}\n`;
-    message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ') || 'N/A'}\n`;
-    message += `*Additional Services:* ${data.additionalServices?.join(', ') || 'Food only'}\n`;
+    message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    
+    // Map additional services
+    const services = data.additionalServices?.map((s: string) => serviceMap[s] || s).join(', ') || 'Food only';
+    message += `*Additional Services:* ${services}\n`;
     
     if (data.selectedDates && data.selectedDates.length > 0) {
       const dates = data.selectedDates.map((d: string) => new Date(d).toLocaleDateString('en-GB')).join(', ');
       message += `*Date(s):* ${dates}\n`;
     }
     
-    message += `*Time of Day:* ${data.timeOfDay || 'N/A'}\n`;
+    message += `*Time of Day:* ${data.timeOfDay?.replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     
     if (data.foodPreferences) {
       message += `*Food Preferences:* ${data.foodPreferences}\n`;
@@ -74,11 +97,11 @@ function formatQuoteForWhatsApp(data: any): string {
     }
   } else if (data.serviceType === 'multiple') {
     message += '*Service Type:* Recurring Service\n';
-    message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ') || 'N/A'}\n`;
-    message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     message += `*Number of People:* ${data.peopleCount}\n`;
-    message += `*Dietary Focus:* ${data.dietaryFocus?.replace(/-/g, ' ') || 'N/A'}\n`;
-    message += `*Food Budget Per Person:* ${data.budgetRange}\n`;
+    message += `*Dietary Focus:* ${data.dietaryFocus?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    message += `*Food Budget:* ${budgetMap[data.budgetRange] || data.budgetRange}\n`;
     
     if (data.startDate) {
       message += `*Start Date:* ${new Date(data.startDate).toLocaleDateString('en-GB')}\n`;
@@ -249,6 +272,7 @@ export default function QuoteFunnel() {
 
   const submitMutation = useMutation({
     mutationFn: async () => {
+      // Build payload once
       let payload: any = {
         serviceType: serviceType!,
         venueName: addressSkipped ? null : address.venueName,
@@ -301,51 +325,16 @@ export default function QuoteFunnel() {
         throw new Error('Failed to submit quote');
       }
       
-      return await response.json();
+      const result = await response.json();
+      
+      // Return both the API response and the payload for use in onSuccess
+      return { result, payload };
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (data) => {
       setIsSubmitted(true);
       
-      // Get the payload data that was submitted
-      let payload: any = {
-        serviceType: serviceType!,
-        venueName: addressSkipped ? null : address.venueName,
-        street: addressSkipped ? null : address.street,
-        city: addressSkipped ? null : address.city,
-        region: addressSkipped ? null : address.region,
-        postalCode: addressSkipped ? null : (address.postalCode || null),
-        country: addressSkipped ? null : address.country,
-        addressSkipped,
-        additionalNotes: additionalNotes || null,
-      };
-
-      if (serviceType === 'single') {
-        payload = {
-          ...payload,
-          occasion: occasion!,
-          guestCount: guestCount === 'exact' ? customGuestCount : guestCount!,
-          budgetRangeSingle: budgetRangeSingle!,
-          numberOfCourses: numberOfCourses!,
-          additionalServices: Array.from(selectedServices),
-          cuisine: cuisine === 'other' ? otherCuisineText : cuisine!,
-          dateMode,
-          selectedDates: selectedDates.map(d => d.toISOString()),
-          timeOfDay: timeOfDay!,
-          foodPreferences: foodPreferences || null,
-          moodDescription: moodDescription || null,
-        };
-      } else if (serviceType === 'multiple') {
-        payload = {
-          ...payload,
-          recurringServiceType: recurringServiceType === 'other' ? otherRecurringServiceText : recurringServiceType!,
-          serviceDuration: serviceDuration!,
-          peopleCount: peopleCount,
-          dietaryFocus: dietaryFocus === 'other' ? otherDietaryText : dietaryFocus!,
-          chefQualities: chefQualities,
-          budgetRange: budgetRange!,
-          startDate: startDate!.toISOString(),
-        };
-      }
+      // Use the payload that was already built in mutationFn
+      const { payload } = data;
       
       // Format message for WhatsApp
       const message = formatQuoteForWhatsApp(payload);

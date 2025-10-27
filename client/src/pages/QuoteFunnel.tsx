@@ -623,6 +623,26 @@ export default function QuoteFunnel() {
                   );
                 })}
               </div>
+
+              {occasion === 'other' && (
+                <Card className="max-w-xl mx-auto overflow-visible">
+                  <CardContent className="pt-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="occasion-custom" className="text-base font-medium">
+                        Please describe your occasion
+                      </Label>
+                      <Textarea
+                        id="occasion-custom"
+                        placeholder="e.g., Anniversary dinner, graduation party, business meeting..."
+                        value={occasionCustom}
+                        onChange={(e) => setOccasionCustom(e.target.value)}
+                        rows={3}
+                        data-testid="input-occasion-custom"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
 
@@ -774,6 +794,29 @@ export default function QuoteFunnel() {
                   );
                 })}
               </div>
+
+              {cuisine === 'not-sure' && (
+                <Card className="max-w-xl mx-auto overflow-visible">
+                  <CardContent className="pt-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="cuisine-custom" className="text-base font-medium">
+                        Any preferences or ideas? (Optional)
+                      </Label>
+                      <Textarea
+                        id="cuisine-custom"
+                        placeholder="e.g., Mix of Asian cuisines, vegetarian-friendly, spicy food, local Balinese ingredients..."
+                        value={cuisineCustom}
+                        onChange={(e) => setCuisineCustom(e.target.value)}
+                        rows={3}
+                        data-testid="input-cuisine-custom"
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        Your chef will create a personalized menu based on your preferences
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
 
@@ -1068,6 +1111,26 @@ export default function QuoteFunnel() {
                   );
                 })}
               </div>
+
+              {recurringServiceType === 'other' && (
+                <Card className="max-w-xl mx-auto overflow-visible">
+                  <CardContent className="pt-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="recurring-service-custom" className="text-base font-medium">
+                        Please describe your recurring service needs
+                      </Label>
+                      <Textarea
+                        id="recurring-service-custom"
+                        placeholder="e.g., Monthly dinner parties, weekly cooking classes, seasonal meal service..."
+                        value={recurringServiceCustom}
+                        onChange={(e) => setRecurringServiceCustom(e.target.value)}
+                        rows={3}
+                        data-testid="input-recurring-service-custom"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
 
@@ -1542,6 +1605,26 @@ export default function QuoteFunnel() {
                   );
                 })}
               </div>
+
+              {workDays === 'flexible' && (
+                <Card className="max-w-xl mx-auto overflow-visible">
+                  <CardContent className="pt-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="work-days-custom" className="text-base font-medium">
+                        Please describe your schedule preferences
+                      </Label>
+                      <Textarea
+                        id="work-days-custom"
+                        placeholder="e.g., 3 days per week, weekends only, rotating schedule, specific days like Tuesday/Thursday/Saturday..."
+                        value={workDaysCustom}
+                        onChange={(e) => setWorkDaysCustom(e.target.value)}
+                        rows={3}
+                        data-testid="input-work-days-custom"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
 

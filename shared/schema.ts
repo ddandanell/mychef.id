@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, jsonb, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -21,11 +21,13 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   serviceType: text("service_type").notNull(),
   occasion: text("occasion").notNull(),
-  venueName: text("venue_name").notNull(),
-  street: text("street").notNull(),
-  city: text("city").notNull(),
-  region: text("region").notNull(),
+  venueName: text("venue_name"),
+  street: text("street"),
+  city: text("city"),
+  region: text("region"),
   postalCode: text("postal_code"),
+  country: text("country"),
+  addressSkipped: boolean("address_skipped").notNull().default(false),
   guestCount: text("guest_count").notNull(),
   additionalServices: text("additional_services").array().notNull(),
   cuisine: text("cuisine").notNull(),
@@ -42,7 +44,12 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   id: true,
   createdAt: true,
 }).extend({
+  venueName: z.string().nullish(),
+  street: z.string().nullish(),
+  city: z.string().nullish(),
+  region: z.string().nullish(),
   postalCode: z.string().nullish(),
+  country: z.string().nullish(),
   foodPreferences: z.string().nullish(),
   moodDescription: z.string().nullish(),
 });

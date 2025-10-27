@@ -45,7 +45,13 @@ export class MemStorage implements IStorage {
     const quote: QuoteSubmission = {
       ...insertQuote,
       id,
+      venueName: insertQuote.venueName || null,
+      street: insertQuote.street || null,
+      city: insertQuote.city || null,
+      region: insertQuote.region || null,
       postalCode: insertQuote.postalCode || null,
+      country: insertQuote.country || null,
+      addressSkipped: insertQuote.addressSkipped || false,
       foodPreferences: insertQuote.foodPreferences || null,
       moodDescription: insertQuote.moodDescription || null,
       status: insertQuote.status || 'new',

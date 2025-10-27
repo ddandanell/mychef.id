@@ -9,11 +9,13 @@ interface QuoteSubmission {
   id: string;
   serviceType: string;
   occasion: string;
-  venueName: string;
-  street: string;
-  city: string;
-  region: string;
+  venueName: string | null;
+  street: string | null;
+  city: string | null;
+  region: string | null;
   postalCode: string | null;
+  country: string | null;
+  addressSkipped: boolean;
   guestCount: string;
   additionalServices: string[];
   cuisine: string;
@@ -95,7 +97,12 @@ export default function AdminQuotes() {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <MapPin className="w-4 h-4" />
-                      <span>{quote.venueName}, {quote.city}</span>
+                      <span>
+                        {quote.addressSkipped 
+                          ? 'Address TBD' 
+                          : `${quote.venueName || 'No venue'}, ${quote.city || 'No city'}`
+                        }
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <Users className="w-4 h-4" />
@@ -146,11 +153,20 @@ export default function AdminQuotes() {
 
                   <div>
                     <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
-                    <p className="font-medium">{selectedQuoteData.venueName}</p>
-                    <p className="text-sm">{selectedQuoteData.street}</p>
-                    <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
-                    {selectedQuoteData.postalCode && (
-                      <p className="text-sm">{selectedQuoteData.postalCode}</p>
+                    {selectedQuoteData.addressSkipped ? (
+                      <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
+                    ) : (
+                      <>
+                        <p className="font-medium">{selectedQuoteData.venueName}</p>
+                        <p className="text-sm">{selectedQuoteData.street}</p>
+                        <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
+                        {selectedQuoteData.postalCode && (
+                          <p className="text-sm">{selectedQuoteData.postalCode}</p>
+                        )}
+                        {selectedQuoteData.country && (
+                          <p className="text-sm font-medium mt-1">{selectedQuoteData.country}</p>
+                        )}
+                      </>
                     )}
                   </div>
 

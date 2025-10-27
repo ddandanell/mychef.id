@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
+import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
@@ -23,7 +25,11 @@ interface AddressData {
   city: string;
   region: string;
   postalCode: string;
+  country: string;
 }
+
+// Import 195 UN-recognized countries from centralized source
+const countries = UN_RECOGNIZED_COUNTRIES;
 
 const guestCountOptions = [
   { id: '2', label: '2 people' },
@@ -80,7 +86,9 @@ export default function QuoteFunnel() {
     city: '',
     region: '',
     postalCode: '',
+    country: 'Indonesia',
   });
+  const [addressSkipped, setAddressSkipped] = useState(false);
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
   const [cuisine, setCuisine] = useState<CuisineType>(null);
@@ -98,11 +106,13 @@ export default function QuoteFunnel() {
       const payload = {
         serviceType: serviceType!,
         occasion: occasion!,
-        venueName: address.venueName,
-        street: address.street,
-        city: address.city,
-        region: address.region,
-        postalCode: address.postalCode || null,
+        venueName: addressSkipped ? null : address.venueName,
+        street: addressSkipped ? null : address.street,
+        city: addressSkipped ? null : address.city,
+        region: addressSkipped ? null : address.region,
+        postalCode: addressSkipped ? null : (address.postalCode || null),
+        country: addressSkipped ? null : address.country,
+        addressSkipped,
         guestCount: guestCount!,
         additionalServices: Array.from(selectedServices),
         cuisine: cuisine!,
@@ -161,7 +171,7 @@ export default function QuoteFunnel() {
       setCurrentStep(2);
     } else if (currentStep === 2 && occasion) {
       setCurrentStep(3);
-    } else if (currentStep === 3 && isAddressValid()) {
+    } else if (currentStep === 3 && (isAddressValid() || addressSkipped)) {
       setCurrentStep(4);
     } else if (currentStep === 4 && guestCount) {
       setCurrentStep(5);
@@ -192,7 +202,7 @@ export default function QuoteFunnel() {
   const canContinue = () => {
     if (currentStep === 1) return !!serviceType;
     if (currentStep === 2) return !!occasion;
-    if (currentStep === 3) return isAddressValid();
+    if (currentStep === 3) return isAddressValid() || addressSkipped;
     if (currentStep === 4) return !!guestCount;
     if (currentStep === 5) return selectedServices.size > 0;
     if (currentStep === 6) return !!cuisine;
@@ -499,9 +509,52 @@ export default function QuoteFunnel() {
                         data-testid="input-postal-code"
                       />
                     </div>
+
+                    {/* Country */}
+                    <div className="space-y-2">
+                      <Label htmlFor="country" className="text-base font-medium">
+                        Country
+                      </Label>
+                      <Select value={address.country} onValueChange={(value) => updateAddress('country', value)}>
+                        <SelectTrigger id="country" data-testid="select-country">
+                          <div className="flex items-center gap-2">
+                            <Globe className="w-4 h-4 text-muted-foreground" />
+                            <SelectValue placeholder="Select country" />
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                            <SelectItem key={country} value={country}>
+                              {country}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Skip Address Option */}
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-4 w-full max-w-md">
+                  <div className="flex-1 border-t" />
+                  <span className="text-sm text-muted-foreground">OR</span>
+                  <div className="flex-1 border-t" />
+                </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    setAddressSkipped(true);
+                    setCurrentStep(4);
+                  }}
+                  className="gap-2"
+                  data-testid="button-skip-address"
+                >
+                  I don't have the address yet
+                </Button>
+              </div>
             </div>
           )}
 
@@ -999,9 +1052,16 @@ export default function QuoteFunnel() {
 
                         <div>
                           <p className="text-sm text-muted-foreground">Location</p>
-                          <p className="font-medium">{address.venueName}</p>
-                          <p className="text-sm">{address.street}, {address.city}, {address.region}</p>
-                          {address.postalCode && <p className="text-sm">{address.postalCode}</p>}
+                          {addressSkipped ? (
+                            <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
+                          ) : (
+                            <>
+                              <p className="font-medium">{address.venueName}</p>
+                              <p className="text-sm">{address.street}, {address.city}, {address.region}</p>
+                              {address.postalCode && <p className="text-sm">{address.postalCode}</p>}
+                              <p className="text-sm font-medium mt-1">{address.country}</p>
+                            </>
+                          )}
                         </div>
 
                         <div className="grid sm:grid-cols-2 gap-4">

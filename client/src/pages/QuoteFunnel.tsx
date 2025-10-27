@@ -16,7 +16,7 @@ type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
-type CuisineType = 'indonesian' | 'italian' | 'mediterranean' | 'seafood' | 'french' | 'japanese' | 'asian' | 'thai' | 'chinese' | 'indian' | 'mexican' | 'bbq' | 'fusion' | 'vegan-vegetarian' | 'chef-special' | null;
+type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'other' | null;
 type DateModeType = 'single' | 'multiple';
 type TimeOfDayType = 'day' | 'night' | null;
 
@@ -48,22 +48,14 @@ const additionalServices = [
   { id: 'wait-staff', label: 'Wait staff & Servers', icon: UserCheck, description: 'Professional service staff' },
 ] as const;
 
+// Top 6 most important cuisines in Asia
 const cuisineOptions = [
   { id: 'indonesian', label: 'Indonesian', icon: Utensils },
-  { id: 'italian', label: 'Italian', icon: Pizza },
-  { id: 'mediterranean', label: 'Mediterranean', icon: Leaf },
-  { id: 'seafood', label: 'Seafood/Fish', icon: Fish },
-  { id: 'french', label: 'French', icon: Croissant },
-  { id: 'japanese', label: 'Japanese', icon: UtensilsCrossed },
-  { id: 'asian', label: 'Asian Fusion', icon: Soup },
   { id: 'thai', label: 'Thai', icon: Flame },
+  { id: 'japanese', label: 'Japanese', icon: UtensilsCrossed },
   { id: 'chinese', label: 'Chinese', icon: Utensils },
   { id: 'indian', label: 'Indian', icon: Apple },
-  { id: 'mexican', label: 'Mexican', icon: Egg },
-  { id: 'bbq', label: 'BBQ & Grilling', icon: Flame },
-  { id: 'fusion', label: 'Fusion', icon: ChefHat },
-  { id: 'vegan-vegetarian', label: 'Vegan/Vegetarian', icon: Leaf },
-  { id: 'chef-special', label: "Chef's special", icon: ChefHat },
+  { id: 'asian', label: 'Asian Fusion', icon: Soup },
 ] as const;
 
 const occasions = [
@@ -93,6 +85,7 @@ export default function QuoteFunnel() {
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
   const [cuisine, setCuisine] = useState<CuisineType>(null);
+  const [otherCuisineText, setOtherCuisineText] = useState('');
   const [dateMode, setDateMode] = useState<DateModeType>('single');
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(null);
@@ -117,7 +110,7 @@ export default function QuoteFunnel() {
         addressSkipped,
         guestCount: guestCount!,
         additionalServices: Array.from(selectedServices),
-        cuisine: cuisine!,
+        cuisine: cuisine === 'other' ? otherCuisineText : cuisine!,
         dateMode,
         selectedDates: selectedDates.map(d => d.toISOString()),
         timeOfDay: timeOfDay!,
@@ -180,6 +173,7 @@ export default function QuoteFunnel() {
     } else if (currentStep === 5 && selectedServices.size > 0) {
       setCurrentStep(6);
     } else if (currentStep === 6 && cuisine) {
+      if (cuisine === 'other' && otherCuisineText.trim() === '') return;
       setCurrentStep(7);
     } else if (currentStep === 7 && selectedDates.length > 0) {
       setCurrentStep(8);
@@ -207,7 +201,11 @@ export default function QuoteFunnel() {
     if (currentStep === 3) return isAddressValid() || addressSkipped;
     if (currentStep === 4) return !!guestCount;
     if (currentStep === 5) return selectedServices.size > 0;
-    if (currentStep === 6) return !!cuisine;
+    if (currentStep === 6) {
+      if (!cuisine) return false;
+      if (cuisine === 'other') return otherCuisineText.trim() !== '';
+      return true;
+    }
     if (currentStep === 7) return selectedDates.length > 0;
     if (currentStep === 8) return !!timeOfDay;
     return false;
@@ -739,12 +737,13 @@ export default function QuoteFunnel() {
                   What are you craving?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  If you need more inspiration, try the Chef's Special.
+                  Top cuisines in Asia. Choose your favorite or tell us what you'd like!
                 </p>
               </div>
 
               {/* Cuisine Options Grid */}
-              <div className="max-w-3xl mx-auto">
+              <div className="max-w-3xl mx-auto space-y-6">
+                {/* Top 6 Asian Cuisines */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {cuisineOptions.map((option) => {
                     const isSelected = cuisine === option.id;
@@ -761,11 +760,15 @@ export default function QuoteFunnel() {
                             : 'border-2'
                           }
                         `}
-                        onClick={() => setCuisine(option.id as CuisineType)}
+                        onClick={() => {
+                          setCuisine(option.id as CuisineType);
+                          setOtherCuisineText('');
+                        }}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             setCuisine(option.id as CuisineType);
+                            setOtherCuisineText('');
                           }
                         }}
                         role="button"
@@ -781,6 +784,58 @@ export default function QuoteFunnel() {
                       </Card>
                     );
                   })}
+                </div>
+
+                {/* Other Option */}
+                <div className="space-y-3">
+                  <Card
+                    className={`
+                      cursor-pointer transition-all overflow-visible
+                      hover-elevate active-elevate-2
+                      ${cuisine === 'other' 
+                        ? 'border-2 border-primary bg-primary/5' 
+                        : 'border-2'
+                      }
+                    `}
+                    onClick={() => setCuisine('other')}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setCuisine('other');
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    data-testid="option-cuisine-other"
+                  >
+                    <CardContent className="py-4">
+                      <div className="flex items-center gap-3">
+                        <MoreHorizontal className="w-6 h-6 flex-shrink-0" />
+                        <span className="font-medium text-base">Other</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Text input for Other cuisine */}
+                  {cuisine === 'other' && (
+                    <div className="space-y-2">
+                      <Label htmlFor="other-cuisine" className="text-base">
+                        What type of cuisine would you like?
+                      </Label>
+                      <Input
+                        id="other-cuisine"
+                        type="text"
+                        placeholder="e.g., Italian, French, Mediterranean, BBQ, Vegan, Chef's Special..."
+                        value={otherCuisineText}
+                        onChange={(e) => setOtherCuisineText(e.target.value)}
+                        className="text-base"
+                        data-testid="input-other-cuisine"
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        Tell us what you're looking for and we'll match you with the perfect chef!
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -1085,7 +1140,9 @@ export default function QuoteFunnel() {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground">Cuisine</p>
-                            <p className="font-medium capitalize">{cuisineOptions.find(c => c.id === cuisine)?.label}</p>
+                            <p className="font-medium capitalize">
+                              {cuisine === 'other' ? otherCuisineText : cuisineOptions.find(c => c.id === cuisine)?.label}
+                            </p>
                           </div>
                         </div>
 

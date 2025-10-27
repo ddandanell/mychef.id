@@ -133,6 +133,9 @@ export default function Footer() {
               <a href="/join-our-team" className="hover:text-primary" data-testid="link-footer-join-team">
                 Join Our Team
               </a>
+              <a href="/quote" className="hover:text-primary" data-testid="link-footer-quote">
+                Get Quote
+              </a>
             </div>
           </div>
         </div>

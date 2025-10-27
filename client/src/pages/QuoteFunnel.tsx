@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
+import { useMutation } from '@tanstack/react-query';
+import { useToast } from '@/hooks/use-toast';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
@@ -87,6 +89,57 @@ export default function QuoteFunnel() {
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(null);
   const [foodPreferences, setFoodPreferences] = useState('');
   const [moodDescription, setMoodDescription] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const { toast } = useToast();
+
+  const submitMutation = useMutation({
+    mutationFn: async () => {
+      const payload = {
+        serviceType: serviceType!,
+        occasion: occasion!,
+        venueName: address.venueName,
+        street: address.street,
+        city: address.city,
+        region: address.region,
+        postalCode: address.postalCode || null,
+        guestCount: guestCount!,
+        additionalServices: Array.from(selectedServices),
+        cuisine: cuisine!,
+        dateMode,
+        selectedDates: selectedDates.map(d => d.toISOString()),
+        timeOfDay: timeOfDay!,
+        foodPreferences: foodPreferences || null,
+        moodDescription: moodDescription || null,
+      };
+      
+      const response = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to submit quote');
+      }
+      
+      return await response.json();
+    },
+    onSuccess: () => {
+      setIsSubmitted(true);
+      toast({
+        title: "Quote submitted successfully!",
+        description: "We'll get back to you soon with a personalized offer.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Submission failed",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const toggleService = (serviceId: AdditionalServiceType) => {
     setSelectedServices(prev => {
@@ -118,9 +171,8 @@ export default function QuoteFunnel() {
       setCurrentStep(7);
     } else if (currentStep === 7 && selectedDates.length > 0) {
       setCurrentStep(8);
-    } else if (currentStep === 8 && timeOfDay && foodPreferences.trim() && moodDescription.trim()) {
+    } else if (currentStep === 8 && timeOfDay) {
       setCurrentStep(9);
-      // More steps will be added as user provides screenshots
     }
   };
 
@@ -145,7 +197,7 @@ export default function QuoteFunnel() {
     if (currentStep === 5) return selectedServices.size > 0;
     if (currentStep === 6) return !!cuisine;
     if (currentStep === 7) return selectedDates.length > 0;
-    if (currentStep === 8) return !!timeOfDay && foodPreferences.trim() !== '' && moodDescription.trim() !== '';
+    if (currentStep === 8) return !!timeOfDay;
     return false;
   };
 
@@ -861,7 +913,7 @@ export default function QuoteFunnel() {
                 {/* Food Preferences */}
                 <div className="space-y-3">
                   <Label htmlFor="food-preferences" className="text-base font-medium">
-                    What kind of food are you hoping for?
+                    What kind of food are you hoping for? <span className="text-muted-foreground font-normal">(Optional)</span>
                   </Label>
                   <Textarea
                     id="food-preferences"
@@ -880,7 +932,7 @@ export default function QuoteFunnel() {
                 {/* Mood/Atmosphere Description */}
                 <div className="space-y-3">
                   <Label htmlFor="mood-description" className="text-base font-medium">
-                    What kind of mood or atmosphere are you looking for?
+                    What kind of mood or atmosphere are you looking for? <span className="text-muted-foreground font-normal">(Optional)</span>
                   </Label>
                   <Textarea
                     id="mood-description"
@@ -899,45 +951,173 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* Placeholder for future steps */}
+          {/* Step 9: Review and Submit */}
           {currentStep === 9 && (
-            <div className="text-center">
-              <p className="text-muted-foreground">Step 9 will be added next...</p>
+            <div className="space-y-12">
+              {isSubmitted ? (
+                <div className="text-center space-y-6">
+                  <div className="flex justify-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Check className="w-8 h-8 text-primary" />
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                      Thank you!
+                    </h1>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      We've received your request and will contact you soon with a personalized offer from our team.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* Header */}
+                  <div className="text-center space-y-4">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                      Review your details
+                    </h1>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      Please confirm everything looks correct before submitting
+                    </p>
+                  </div>
+
+                  {/* Review Summary */}
+                  <div className="max-w-3xl mx-auto space-y-4">
+                    <Card>
+                      <CardContent className="pt-6 space-y-4">
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground">Service Type</p>
+                            <p className="font-medium capitalize">{serviceType}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Occasion</p>
+                            <p className="font-medium capitalize">{occasion?.replace(/-/g, ' ')}</p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <p className="text-sm text-muted-foreground">Location</p>
+                          <p className="font-medium">{address.venueName}</p>
+                          <p className="text-sm">{address.street}, {address.city}, {address.region}</p>
+                          {address.postalCode && <p className="text-sm">{address.postalCode}</p>}
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground">Guest Count</p>
+                            <p className="font-medium">{guestCountOptions.find(o => o.id === guestCount)?.label}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Cuisine</p>
+                            <p className="font-medium capitalize">{cuisineOptions.find(c => c.id === cuisine)?.label}</p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <p className="text-sm text-muted-foreground">Additional Services</p>
+                          <div className="flex flex-wrap gap-2 mt-1">
+                            {Array.from(selectedServices).map(serviceId => (
+                              <span key={serviceId} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                                {additionalServices.find(s => s.id === serviceId)?.label}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <p className="text-sm text-muted-foreground">Event Date{selectedDates.length > 1 ? 's' : ''}</p>
+                          <div className="flex flex-wrap gap-2 mt-1">
+                            {selectedDates.map((date, idx) => (
+                              <span key={idx} className="text-sm bg-muted px-3 py-1 rounded-md">
+                                {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground">Time of Day</p>
+                            <p className="font-medium capitalize">{timeOfDay}</p>
+                          </div>
+                        </div>
+
+                        {foodPreferences && (
+                          <div>
+                            <p className="text-sm text-muted-foreground">Food Preferences</p>
+                            <p className="text-sm mt-1">{foodPreferences}</p>
+                          </div>
+                        )}
+
+                        {moodDescription && (
+                          <div>
+                            <p className="text-sm text-muted-foreground">Mood & Atmosphere</p>
+                            <p className="text-sm mt-1">{moodDescription}</p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+
+                    <div className="flex justify-center pt-6">
+                      <Button
+                        size="lg"
+                        onClick={() => submitMutation.mutate()}
+                        disabled={submitMutation.isPending}
+                        className="gap-2 min-w-[200px]"
+                        data-testid="button-submit-quote"
+                      >
+                        {submitMutation.isPending ? (
+                          <>Submitting...</>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4" />
+                            Submit Request
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
       </div>
 
       {/* Bottom Navigation */}
-      <div className="border-t bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between gap-4">
-            {currentStep > 1 ? (
+      {currentStep < 9 && (
+        <div className="border-t bg-muted/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex items-center justify-between gap-4">
+              {currentStep > 1 ? (
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={handlePrevious}
+                  className="gap-2"
+                  data-testid="button-previous"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Previous step
+                </Button>
+              ) : (
+                <div />
+              )}
               <Button
-                variant="ghost"
                 size="lg"
-                onClick={handlePrevious}
-                className="gap-2"
-                data-testid="button-previous"
+                onClick={handleContinue}
+                disabled={!canContinue()}
+                className="min-w-[140px]"
+                data-testid="button-continue"
               >
-                <ArrowLeft className="w-4 h-4" />
-                Previous step
+                Continue
               </Button>
-            ) : (
-              <div />
-            )}
-            <Button
-              size="lg"
-              onClick={handleContinue}
-              disabled={!canContinue()}
-              className="min-w-[140px]"
-              data-testid="button-continue"
-            >
-              Continue
-            </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

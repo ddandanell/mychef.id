@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Utensils, Award, Check, Sparkles, Star, Users2, Globe2, BookOpen, ShieldCheck } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const STATS = [
   { number: '2+', label: 'Years Training', icon: BookOpen },
@@ -39,7 +39,7 @@ const SERVICE_FEATURES = [
 ];
 
 export default function WhyChoose() {
-  const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function WhyChoose() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=whyChoose');
+    openContactDialog('whyChoose');
   };
 
   return (

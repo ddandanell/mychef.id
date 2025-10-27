@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield } from 'lucide-react';
+import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 import { useLocation } from 'wouter';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
@@ -270,6 +271,7 @@ export default function QuoteFunnel() {
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
 
   const toggleMeal = (meal: 'breakfast' | 'lunch' | 'dinner') => {
     const newMeals = new Set(mealsNeeded);
@@ -553,6 +555,17 @@ export default function QuoteFunnel() {
             <div className="text-sm text-muted-foreground">
               Step {currentStep} of {getTotalSteps()}
             </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => openContactDialog('quoteFunnel')}
+              className="gap-2"
+              data-testid="button-help"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span className="hidden sm:inline">Need Help?</span>
+            </Button>
           </div>
         </div>
         

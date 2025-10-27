@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
@@ -11,7 +11,7 @@ import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a9
 const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 
 export default function HeroSection() {
-  const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function HeroSection() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=hero');
+    openContactDialog('hero');
   };
 
   const handleViewReviews = () => {

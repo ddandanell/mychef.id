@@ -1,8 +1,8 @@
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, ShieldCheck } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const TESTIMONIALS = [
   {
@@ -48,10 +48,10 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
-  const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=testimonials');
+    openContactDialog('testimonials');
   };
 
   return (

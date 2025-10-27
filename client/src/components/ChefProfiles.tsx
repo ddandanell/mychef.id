@@ -1,8 +1,8 @@
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const PRICING_EXAMPLES = [
   {
@@ -40,10 +40,10 @@ const PRICING_EXAMPLES = [
 ];
 
 export default function ChefProfiles() {
-  const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=chefProfiles');
+    openContactDialog('chefProfiles');
   };
 
   return (

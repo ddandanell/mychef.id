@@ -1,6 +1,6 @@
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 const BALI_LOCATIONS = [
@@ -10,10 +10,10 @@ const BALI_LOCATIONS = [
 ];
 
 export default function LocationsSection() {
-  const [, setLocation] = useLocation();
+  const { openContactDialog } = useContactDialog();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=locations');
+    openContactDialog('locations');
   };
 
   return (

@@ -22,6 +22,8 @@ interface QuoteSubmission {
   // Single service fields
   occasion: string | null;
   guestCount: string | null;
+  budgetRangeSingle: string | null;
+  numberOfCourses: string | null;
   additionalServices: string[] | null;
   cuisine: string | null;
   dateMode: string | null;
@@ -217,6 +219,20 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
                           <p>{selectedQuoteData.guestCount} people</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.budgetRangeSingle && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Budget Range</p>
+                          <p className="capitalize">{selectedQuoteData.budgetRangeSingle.replace(/-/g, ' ')} IDR</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.numberOfCourses && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Number of Courses</p>
+                          <p>{selectedQuoteData.numberOfCourses} course{selectedQuoteData.numberOfCourses !== '1' ? 's' : ''}</p>
                         </div>
                       )}
 

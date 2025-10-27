@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,8 @@ import { useLocation } from 'wouter';
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
+type BudgetRangeSingleType = 'under-1m' | '1m-2m' | '2m-3m' | '3m-5m' | 'above-5m' | null;
+type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
 type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'other' | null;
 type DateModeType = 'single' | 'multiple';
@@ -47,6 +49,24 @@ const guestCountOptions = [
   { id: '3-6', label: '3 to 6 people' },
   { id: '7-12', label: '7 to 12 people' },
   { id: '13+', label: '13+ people' },
+] as const;
+
+const budgetRangeSingleOptions = [
+  { id: 'under-1m', label: 'Under 1 million IDR', description: 'Simple home-style meal' },
+  { id: '1m-2m', label: '1-2 million IDR', description: 'Quality dining experience' },
+  { id: '2m-3m', label: '2-3 million IDR', description: 'Premium chef service' },
+  { id: '3m-5m', label: '3-5 million IDR', description: 'Luxury culinary experience' },
+  { id: 'above-5m', label: 'Above 5 million IDR', description: 'Exclusive fine dining' },
+] as const;
+
+const numberOfCoursesOptions = [
+  { id: '1', label: '1 Course', description: 'Main course only' },
+  { id: '2', label: '2 Courses', description: 'Starter + Main' },
+  { id: '3', label: '3 Courses', description: 'Starter + Main + Dessert' },
+  { id: '4', label: '4 Courses', description: 'Full dining experience' },
+  { id: '5', label: '5 Courses', description: 'Premium multi-course meal' },
+  { id: '6', label: '6 Courses', description: 'Luxury tasting menu' },
+  { id: '7', label: '7 Courses', description: 'Ultimate fine dining' },
 ] as const;
 
 const additionalServices = [
@@ -131,6 +151,8 @@ export default function QuoteFunnel() {
   });
   const [addressSkipped, setAddressSkipped] = useState(false);
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
+  const [budgetRangeSingle, setBudgetRangeSingle] = useState<BudgetRangeSingleType>(null);
+  const [numberOfCourses, setNumberOfCourses] = useState<NumberOfCoursesType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
   const [cuisine, setCuisine] = useState<CuisineType>(null);
   const [otherCuisineText, setOtherCuisineText] = useState('');
@@ -176,6 +198,8 @@ export default function QuoteFunnel() {
           ...payload,
           occasion: occasion!,
           guestCount: guestCount!,
+          budgetRangeSingle: budgetRangeSingle!,
+          numberOfCourses: numberOfCourses!,
           additionalServices: Array.from(selectedServices),
           cuisine: cuisine === 'other' ? otherCuisineText : cuisine!,
           dateMode,
@@ -242,7 +266,7 @@ export default function QuoteFunnel() {
   };
 
   const getTotalSteps = () => {
-    if (serviceType === 'single') return 9;
+    if (serviceType === 'single') return 11; // Added budget and courses steps
     if (serviceType === 'multiple') return 10;
     return 1;
   };
@@ -251,22 +275,26 @@ export default function QuoteFunnel() {
     if (currentStep === 1 && serviceType) {
       setCurrentStep(2);
     } else if (serviceType === 'single') {
-      // Single service flow (original 9-step flow)
+      // Single service flow (11-step flow with budget and courses)
       if (currentStep === 2 && occasion) {
         setCurrentStep(3);
       } else if (currentStep === 3 && (isAddressValid() || addressSkipped)) {
         setCurrentStep(4);
       } else if (currentStep === 4 && guestCount) {
         setCurrentStep(5);
-      } else if (currentStep === 5 && selectedServices.size > 0) {
+      } else if (currentStep === 5 && budgetRangeSingle) {
         setCurrentStep(6);
-      } else if (currentStep === 6 && cuisine) {
-        if (cuisine === 'other' && otherCuisineText.trim() === '') return;
+      } else if (currentStep === 6 && numberOfCourses) {
         setCurrentStep(7);
-      } else if (currentStep === 7 && selectedDates.length > 0) {
+      } else if (currentStep === 7 && selectedServices.size > 0) {
         setCurrentStep(8);
-      } else if (currentStep === 8 && timeOfDay) {
+      } else if (currentStep === 8 && cuisine) {
+        if (cuisine === 'other' && otherCuisineText.trim() === '') return;
         setCurrentStep(9);
+      } else if (currentStep === 9 && selectedDates.length > 0) {
+        setCurrentStep(10);
+      } else if (currentStep === 10 && timeOfDay) {
+        setCurrentStep(11);
       }
     } else if (serviceType === 'multiple') {
       // Multiple service flow (new 10-step flow)
@@ -378,7 +406,7 @@ export default function QuoteFunnel() {
         </div>
 
         {/* Progress Indicator */}
-        {!isSubmitted && (
+        {!isSubmitted && serviceType && (
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
@@ -1301,8 +1329,144 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 5: Additional Services */}
+          {/* SINGLE SERVICE FLOW - Step 5: Budget Range */}
           {currentStep === 5 && serviceType === 'single' && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What's your budget range?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  This helps us match you with the right chef and design the perfect menu
+                </p>
+              </div>
+
+              {/* Budget Options */}
+              <div className="max-w-xl mx-auto space-y-4">
+                {budgetRangeSingleOptions.map((option) => {
+                  const isSelected = budgetRangeSingle === option.id;
+                  
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setBudgetRangeSingle(option.id as BudgetRangeSingleType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setBudgetRangeSingle(option.id as BudgetRangeSingleType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-budget-${option.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="font-semibold text-lg">{option.label}</div>
+                            <div className="text-sm text-muted-foreground mt-1">{option.description}</div>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all mt-1
+                              ${isSelected
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                              }
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 6: Number of Courses */}
+          {currentStep === 6 && serviceType === 'single' && (
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  How many courses?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  From simple main course to an ultimate fine dining experience
+                </p>
+              </div>
+
+              {/* Courses Options */}
+              <div className="max-w-xl mx-auto space-y-4">
+                {numberOfCoursesOptions.map((option) => {
+                  const isSelected = numberOfCourses === option.id;
+                  
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected 
+                          ? 'border-2 border-primary bg-primary/5' 
+                          : 'border-2'
+                        }
+                      `}
+                      onClick={() => setNumberOfCourses(option.id as NumberOfCoursesType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setNumberOfCourses(option.id as NumberOfCoursesType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-courses-${option.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="font-semibold text-lg">{option.label}</div>
+                            <div className="text-sm text-muted-foreground mt-1">{option.description}</div>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all mt-1
+                              ${isSelected
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                              }
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 7: Additional Services */}
+          {currentStep === 7 && serviceType === 'single' && (
             <div className="space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
@@ -1387,8 +1551,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 6: Cuisine Selection */}
-          {currentStep === 6 && serviceType === 'single' && (
+          {/* SINGLE SERVICE FLOW - Step 8: Cuisine Selection */}
+          {currentStep === 8 && serviceType === 'single' && (
             <div className="space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
@@ -1500,8 +1664,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 7: Date Selection */}
-          {currentStep === 7 && serviceType === 'single' && (
+          {/* SINGLE SERVICE FLOW - Step 9: Date Selection */}
+          {currentStep === 9 && serviceType === 'single' && (
             <div className="space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
@@ -1613,8 +1777,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 8: Time of Day and Preferences */}
-          {currentStep === 8 && serviceType === 'single' && (
+          {/* SINGLE SERVICE FLOW - Step 10: Time of Day and Preferences */}
+          {currentStep === 10 && serviceType === 'single' && (
             <div className="space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
@@ -1732,8 +1896,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 9: Review and Submit */}
-          {currentStep === 9 && serviceType === 'single' && (
+          {/* SINGLE SERVICE FLOW - Step 11: Review and Submit */}
+          {currentStep === 11 && serviceType === 'single' && (
             <div className="space-y-12">
               {isSubmitted ? (
                 <div className="text-center space-y-6">
@@ -1791,6 +1955,17 @@ export default function QuoteFunnel() {
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Guest Count</p>
                               <p className="font-medium">{guestCountOptions.find(o => o.id === guestCount)?.label}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Budget Range</p>
+                              <p className="font-medium">{budgetRangeSingleOptions.find(o => o.id === budgetRangeSingle)?.label}</p>
+                            </div>
+                          </div>
+
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Number of Courses</p>
+                              <p className="font-medium">{numberOfCoursesOptions.find(o => o.id === numberOfCourses)?.label}</p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Cuisine</p>

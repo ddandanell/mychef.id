@@ -34,6 +34,8 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   // Single service fields (nullable for multiple service)
   occasion: text("occasion"),
   guestCount: text("guest_count"),
+  budgetRangeSingle: text("budget_range_single"),
+  numberOfCourses: text("number_of_courses"),
   additionalServices: text("additional_services").array(),
   cuisine: text("cuisine"),
   dateMode: text("date_mode"),
@@ -72,6 +74,8 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   // Single service fields (optional for multiple service)
   occasion: z.string().nullish(),
   guestCount: z.string().nullish(),
+  budgetRangeSingle: z.string().nullish(),
+  numberOfCourses: z.string().nullish(),
   additionalServices: z.array(z.string()).nullish(),
   cuisine: z.string().nullish(),
   dateMode: z.string().nullish(),

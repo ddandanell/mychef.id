@@ -235,8 +235,8 @@ export default function AdminQuotes() {
 
                       {selectedQuoteData.budgetRangeSingle && (
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget</p>
-                          <p className="capitalize">{selectedQuoteData.budgetRangeSingle.replace(/-/g, ' ')} IDR</p>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Person</p>
+                          <p className="capitalize">{selectedQuoteData.budgetRangeSingle.replace(/-/g, ' ')}</p>
                         </div>
                       )}
 
@@ -374,7 +374,7 @@ export default function AdminQuotes() {
 
                       {selectedQuoteData.budgetRange && (
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Meal</p>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Person</p>
                           <p>{selectedQuoteData.budgetRange.replace(/-/g, ' ')}</p>
                         </div>
                       )}

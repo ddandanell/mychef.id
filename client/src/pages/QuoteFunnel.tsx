@@ -15,7 +15,7 @@ import { useLocation } from 'wouter';
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type GuestCountType = '2' | '3-6' | '7-12' | '13+' | 'exact' | null;
-type BudgetRangeSingleType = 'under-1m' | '1m-2m' | '2m-3m' | '3m-5m' | 'above-5m' | null;
+type BudgetRangeSingleType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
 type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
 type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'other' | null;
@@ -25,7 +25,7 @@ type TimeOfDayType = 'day' | 'night' | null;
 // Multiple service types
 type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'live-in' | 'other' | null;
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
-type BudgetRangeType = 'under-500k' | '500k-1m' | '1m-2m' | '2m-3m' | 'above-3m' | null;
+type BudgetRangeType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
 type DietaryFocusType = 'fitness' | 'weight-loss' | 'keto' | 'vegan' | 'halal' | 'diabetic' | 'family-meals' | 'other' | null;
 
 interface AddressData {
@@ -53,11 +53,12 @@ const guestCountOptions = [
 ] as const;
 
 const budgetRangeSingleOptions = [
-  { id: 'under-1m', label: 'Under 1 million IDR', description: 'Simple ingredients & dishes' },
-  { id: '1m-2m', label: '1-2 million IDR', description: 'Quality ingredients' },
-  { id: '2m-3m', label: '2-3 million IDR', description: 'Premium ingredients' },
-  { id: '3m-5m', label: '3-5 million IDR', description: 'High-end ingredients' },
-  { id: 'above-5m', label: 'Above 5 million IDR', description: 'Luxury ingredients & specialty items' },
+  { id: '250k', label: '250k IDR per person', description: 'Simple ingredients' },
+  { id: '500k', label: '500k IDR per person', description: 'Quality ingredients' },
+  { id: '750k', label: '750k IDR per person', description: 'Premium ingredients' },
+  { id: '1m', label: '1 million IDR per person', description: 'High-end ingredients' },
+  { id: '2m', label: '2 million IDR per person', description: 'Luxury ingredients' },
+  { id: '3m', label: '3 million IDR per person', description: 'Ultra-premium ingredients' },
 ] as const;
 
 const numberOfCoursesOptions = [
@@ -120,11 +121,12 @@ const serviceDurationOptions = [
 ] as const;
 
 const budgetRangeOptions = [
-  { id: 'under-500k', label: 'Under 500k IDR per meal', description: 'Simple ingredients' },
-  { id: '500k-1m', label: '500k - 1 million IDR per meal', description: 'Quality ingredients' },
-  { id: '1m-2m', label: '1-2 million IDR per meal', description: 'Premium ingredients' },
-  { id: '2m-3m', label: '2-3 million IDR per meal', description: 'High-end ingredients' },
-  { id: 'above-3m', label: 'Above 3 million IDR per meal', description: 'Luxury ingredients' },
+  { id: '250k', label: '250k IDR per person', description: 'Simple ingredients' },
+  { id: '500k', label: '500k IDR per person', description: 'Quality ingredients' },
+  { id: '750k', label: '750k IDR per person', description: 'Premium ingredients' },
+  { id: '1m', label: '1 million IDR per person', description: 'High-end ingredients' },
+  { id: '2m', label: '2 million IDR per person', description: 'Luxury ingredients' },
+  { id: '3m', label: '3 million IDR per person', description: 'Ultra-premium ingredients' },
 ] as const;
 
 const dietaryFocusOptions = [
@@ -1179,10 +1181,10 @@ export default function QuoteFunnel() {
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your food budget per meal?
+                  What's your food budget per person?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Budget for ingredients and groceries for each meal. Chef fees are separate and quoted based on your needs.
+                  Budget for ingredients and groceries per person. Chef fees are separate and quoted based on your needs.
                 </p>
               </div>
 
@@ -1366,10 +1368,10 @@ export default function QuoteFunnel() {
               {/* Header */}
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your food budget?
+                  What's your food budget per person?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Budget for ingredients and groceries only. Chef fees are separate and quoted based on your needs.
+                  Budget for ingredients and groceries per person. Chef fees are separate and quoted based on your needs.
                 </p>
               </div>
 
@@ -1990,7 +1992,7 @@ export default function QuoteFunnel() {
                               </p>
                             </div>
                             <div>
-                              <p className="text-sm text-muted-foreground mb-1">Food Budget</p>
+                              <p className="text-sm text-muted-foreground mb-1">Food Budget Per Person</p>
                               <p className="font-medium">{budgetRangeSingleOptions.find(o => o.id === budgetRangeSingle)?.label}</p>
                             </div>
                           </div>
@@ -2267,7 +2269,7 @@ export default function QuoteFunnel() {
                       <CardContent className="pt-6">
                         <h3 className="font-semibold text-lg mb-4">Budget</h3>
                         <div className="text-sm">
-                          <span className="text-muted-foreground">Food Budget Per Meal:</span>
+                          <span className="text-muted-foreground">Food Budget Per Person:</span>
                           <p className="font-medium mt-1">
                             {budgetRangeOptions.find(b => b.id === budgetRange)?.label}
                           </p>

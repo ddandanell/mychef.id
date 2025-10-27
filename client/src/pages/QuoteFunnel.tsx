@@ -199,7 +199,7 @@ export default function QuoteFunnel() {
         payload = {
           ...payload,
           occasion: occasion!,
-          guestCount: guestCount!,
+          guestCount: guestCount === 'exact' ? customGuestCount : guestCount!,
           budgetRangeSingle: budgetRangeSingle!,
           numberOfCourses: numberOfCourses!,
           additionalServices: Array.from(selectedServices),
@@ -1982,7 +1982,9 @@ export default function QuoteFunnel() {
                           <div className="grid sm:grid-cols-2 gap-4">
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Guest Count</p>
-                              <p className="font-medium">{guestCountOptions.find(o => o.id === guestCount)?.label}</p>
+                              <p className="font-medium">
+                                {guestCount === 'exact' ? `${customGuestCount} ${parseInt(customGuestCount) === 1 ? 'person' : 'people'}` : guestCountOptions.find(o => o.id === guestCount)?.label}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Budget Range</p>

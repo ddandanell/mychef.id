@@ -15,7 +15,7 @@ import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 type ServiceType = 'single' | 'multiple' | 'fulltime' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
-type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'not-sure' | null;
+type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'western' | 'asian' | 'not-sure' | null;
 type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'live-in' | 'other' | null;
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
 type WorkDaysType = 'monday-friday' | 'all-week' | 'flexible' | null;
@@ -161,6 +161,7 @@ const cuisineOptions = [
   { id: 'japanese', label: 'Japanese', icon: UtensilsCrossed },
   { id: 'chinese', label: 'Chinese', icon: Utensils },
   { id: 'indian', label: 'Indian', icon: Apple },
+  { id: 'western', label: 'Western', icon: UtensilsCrossed },
   { id: 'asian', label: 'Asian Fusion', icon: Soup },
   { id: 'not-sure', label: "Not sure yet - Chef's recommendation", icon: ChefHat },
 ] as const;

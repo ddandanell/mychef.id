@@ -15,10 +15,10 @@ import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 type ServiceType = 'single' | 'multiple' | 'fulltime' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
-type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | null;
+type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'not-sure' | null;
 type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'live-in' | 'other' | null;
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
-type WorkDaysType = 'monday-friday' | 'all-week' | null;
+type WorkDaysType = 'monday-friday' | 'all-week' | 'flexible' | null;
 
 interface AddressData {
   venueName: string;
@@ -115,6 +115,7 @@ const cuisineOptions = [
   { id: 'chinese', label: 'Chinese', icon: Utensils },
   { id: 'indian', label: 'Indian', icon: Apple },
   { id: 'asian', label: 'Asian Fusion', icon: Soup },
+  { id: 'not-sure', label: "Not sure yet - Chef's recommendation", icon: ChefHat },
 ] as const;
 
 const occasions = [
@@ -149,6 +150,7 @@ const serviceDurationOptions = [
 const workDaysOptions = [
   { id: 'monday-friday', label: 'Monday to Friday only', description: 'Weekday service' },
   { id: 'all-week', label: 'All seven days', description: 'Every day of the week' },
+  { id: 'flexible', label: 'Flexible / To be discussed', description: 'Custom schedule based on your needs' },
 ] as const;
 
 export default function QuoteFunnel() {
@@ -157,22 +159,38 @@ export default function QuoteFunnel() {
   
   // Single service state
   const [occasion, setOccasion] = useState<OccasionType>(null);
+  const [occasionCustom, setOccasionCustom] = useState('');
   const [guestCount, setGuestCount] = useState<number>(2);
+  const [guestCountUnsure, setGuestCountUnsure] = useState(false);
+  const [guestCountCustom, setGuestCountCustom] = useState('');
   const [cuisine, setCuisine] = useState<CuisineType>(null);
+  const [cuisineCustom, setCuisineCustom] = useState('');
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [datesFlexible, setDatesFlexible] = useState(false);
+  const [datesNote, setDatesNote] = useState('');
   const [preMeetingRequested, setPreMeetingRequested] = useState<boolean | null>(null);
   
   // Multiple service state
   const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
+  const [recurringServiceCustom, setRecurringServiceCustom] = useState('');
   const [serviceDuration, setServiceDuration] = useState<ServiceDurationType>(null);
+  const [durationFlexible, setDurationFlexible] = useState(false);
+  const [durationNote, setDurationNote] = useState('');
   const [peopleCount, setPeopleCount] = useState<number>(2);
+  const [peopleCountUnsure, setPeopleCountUnsure] = useState(false);
+  const [peopleCountCustom, setPeopleCountCustom] = useState('');
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  const [startDateFlexible, setStartDateFlexible] = useState(false);
+  const [startDateNote, setStartDateNote] = useState('');
   
   // Full-time chef state
   const [guestsPerMeal, setGuestsPerMeal] = useState<number>(2);
+  const [guestsPerMealVaries, setGuestsPerMealVaries] = useState(false);
+  const [guestsPerMealCustom, setGuestsPerMealCustom] = useState('');
   const [mealsNeeded, setMealsNeeded] = useState<Set<string>>(new Set());
   const [mealTimes, setMealTimes] = useState<{breakfast?: string, lunch?: string, dinner?: string}>({});
   const [workDays, setWorkDays] = useState<WorkDaysType>(null);
+  const [workDaysCustom, setWorkDaysCustom] = useState('');
   const [groceryHandling, setGroceryHandling] = useState<'mychef-handles' | 'client-handles' | null>(null);
   const [groceryPaymentMethod, setGroceryPaymentMethod] = useState<'upfront-payment' | 'daily-money' | null>(null);
   const [dietaryRestrictions, setDietaryRestrictions] = useState('');
@@ -227,26 +245,39 @@ export default function QuoteFunnel() {
         payload = {
           ...payload,
           occasion: occasion!,
-          guestCount: guestCount.toString(),
+          occasionCustom: occasion === 'other' ? occasionCustom : null,
+          guestCount: guestCountUnsure ? 'not-sure' : guestCount.toString(),
+          guestCountCustom: guestCountUnsure ? guestCountCustom : null,
           cuisine: cuisine!,
-          selectedDates: selectedDates.map(d => d.toISOString()),
+          cuisineCustom: cuisine === 'not-sure' ? cuisineCustom : null,
+          selectedDates: datesFlexible ? [] : selectedDates.map(d => d.toISOString()),
+          datesFlexible,
+          datesNote: datesFlexible ? datesNote : null,
           preMeetingRequested: preMeetingRequested!,
         };
       } else if (serviceType === 'multiple') {
         payload = {
           ...payload,
           recurringServiceType: recurringServiceType!,
-          serviceDuration: serviceDuration!,
-          peopleCount: peopleCount.toString(),
-          startDate: startDate!.toISOString(),
+          recurringServiceCustom: recurringServiceType === 'other' ? recurringServiceCustom : null,
+          serviceDuration: durationFlexible ? 'flexible' : serviceDuration!,
+          durationFlexible,
+          durationNote: durationFlexible ? durationNote : null,
+          peopleCount: peopleCountUnsure ? 'varies' : peopleCount.toString(),
+          peopleCountCustom: peopleCountUnsure ? peopleCountCustom : null,
+          startDate: startDateFlexible ? null : startDate!.toISOString(),
+          startDateFlexible,
+          startDateNote: startDateFlexible ? startDateNote : null,
         };
       } else if (serviceType === 'fulltime') {
         payload = {
           ...payload,
-          guestsPerMeal: guestsPerMeal.toString(),
+          guestsPerMeal: guestsPerMealVaries ? 'varies' : guestsPerMeal.toString(),
+          guestsPerMealCustom: guestsPerMealVaries ? guestsPerMealCustom : null,
           mealsNeeded: Array.from(mealsNeeded),
           mealTimes: mealTimes,
-          workDays: workDays!,
+          workDays: workDays === 'flexible' ? 'flexible' : workDays!,
+          workDaysCustom: workDays === 'flexible' ? workDaysCustom : null,
           groceryHandling: groceryHandling!,
           groceryPaymentMethod: groceryHandling === 'mychef-handles' ? groceryPaymentMethod! : null,
           dietaryRestrictions: dietaryRestrictions || null,
@@ -320,28 +351,58 @@ export default function QuoteFunnel() {
     if (currentStep === 1) return serviceType !== null;
     
     if (serviceType === 'single') {
-      if (currentStep === 2) return occasion !== null;
-      if (currentStep === 3) return guestCount >= 1;
-      if (currentStep === 4) return selectedDates.length > 0;
-      if (currentStep === 5) return cuisine !== null;
+      if (currentStep === 2) {
+        // Occasion is valid if selected, and if "other", custom text must be provided
+        return occasion !== null && (occasion !== 'other' || occasionCustom.trim() !== '');
+      }
+      if (currentStep === 3) {
+        // Guest count is valid if number >= 1, or if unsure and custom text provided
+        return !guestCountUnsure ? guestCount >= 1 : guestCountCustom.trim() !== '';
+      }
+      if (currentStep === 4) {
+        // Dates valid if selected, or if flexible and note provided
+        return !datesFlexible ? selectedDates.length > 0 : datesNote.trim() !== '';
+      }
+      if (currentStep === 5) {
+        // Cuisine valid if selected, and if "not-sure", custom text must be provided
+        return cuisine !== null && (cuisine !== 'not-sure' || cuisineCustom.trim() !== '');
+      }
       if (currentStep === 6) return preMeetingRequested !== null;
       if (currentStep === 7) return isAddressValid() || addressSkipped;
       if (currentStep === 8) return true;
     }
     
     if (serviceType === 'multiple') {
-      if (currentStep === 2) return recurringServiceType !== null;
-      if (currentStep === 3) return serviceDuration !== null;
-      if (currentStep === 4) return peopleCount >= 1;
-      if (currentStep === 5) return startDate !== undefined;
+      if (currentStep === 2) {
+        // Recurring type valid if selected, and if "other", custom text provided
+        return recurringServiceType !== null && (recurringServiceType !== 'other' || recurringServiceCustom.trim() !== '');
+      }
+      if (currentStep === 3) {
+        // Duration valid if selected, or if flexible and note provided
+        return !durationFlexible ? serviceDuration !== null : durationNote.trim() !== '';
+      }
+      if (currentStep === 4) {
+        // People count valid if number >= 1, or if unsure and custom text provided
+        return !peopleCountUnsure ? peopleCount >= 1 : peopleCountCustom.trim() !== '';
+      }
+      if (currentStep === 5) {
+        // Start date valid if selected, or if flexible and note provided
+        return !startDateFlexible ? startDate !== undefined : startDateNote.trim() !== '';
+      }
       if (currentStep === 6) return isAddressValid() || addressSkipped;
       if (currentStep === 7) return true;
     }
     
     if (serviceType === 'fulltime') {
-      if (currentStep === 2) return guestsPerMeal >= 1;
+      if (currentStep === 2) {
+        // Guests per meal valid if number >= 1, or if varies and custom text provided
+        return !guestsPerMealVaries ? guestsPerMeal >= 1 : guestsPerMealCustom.trim() !== '';
+      }
       if (currentStep === 3) return mealsNeeded.size > 0 && Array.from(mealsNeeded).every(meal => mealTimes[meal as 'breakfast' | 'lunch' | 'dinner']?.trim());
-      if (currentStep === 4) return workDays !== null;
+      if (currentStep === 4) {
+        // Work days valid if selected, and if "flexible", custom text provided
+        return workDays !== null && (workDays !== 'flexible' || workDaysCustom.trim() !== '');
+      }
       if (currentStep === 5) return groceryHandling !== null;
       
       // Step 6 is conditional: only shown if groceryHandling === 'mychef-handles'

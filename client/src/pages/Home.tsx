@@ -22,8 +22,8 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia"
-        description="Experience personalized fine dining in your villa with myCHEF Indonesia. Professional private chefs from Rp 800,000/hour serving Bali. Perfect match chef selection. Book on WhatsApp +62 822-3756-5997."
+        title="Private Chef Services in Bali | Professional In-Villa Dining | myCHEF Indonesia"
+        description="Book professional private chefs for in-villa dining across Bali. Background-checked chefs deliver personalized culinary experiences for events, recurring services, and full-time needs. Serving Seminyak, Canggu, Ubud, and all Bali locations."
         canonical="https://mychef.id"
         ogType="website"
       />

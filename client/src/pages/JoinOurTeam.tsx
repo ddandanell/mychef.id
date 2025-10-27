@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation } from 'wouter';
+import SEO from '@/components/SEO';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -142,6 +143,12 @@ export default function JoinOurTeam() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Join Our Team - Chef & Hospitality Careers in Bali | myCHEF Indonesia"
+        description="Join myCHEF Indonesia's professional team in Bali. We're hiring chefs, bartenders, servers, and event professionals from all nationalities. Work with top villas and clients across Bali."
+        canonical="https://mychef.id/join-our-team"
+        ogType="website"
+      />
       {/* Hero Section with Image */}
       <section className="relative bg-gradient-to-br from-muted via-background to-primary/5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/95 z-10"></div>

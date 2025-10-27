@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -537,6 +538,12 @@ export default function QuoteFunnel() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Get a Quote - Book Your Private Chef in Bali | myCHEF Indonesia"
+        description="Get a personalized quote for private chef services in Bali. Book for single events, recurring services, or full-time chef needs. Fast response within 24 hours."
+        canonical="https://mychef.id/quote"
+        ogType="website"
+      />
       {/* Header */}
       <div className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

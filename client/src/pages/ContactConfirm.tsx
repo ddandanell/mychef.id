@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SiWhatsapp } from 'react-icons/si';
@@ -68,6 +69,12 @@ export default function ContactConfirm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 px-4">
+      <SEO 
+        title="Connecting to WhatsApp | myCHEF Indonesia"
+        description="Connecting you to myCHEF Indonesia via WhatsApp for instant support and booking assistance. Get quick responses from our professional team in Bali."
+        canonical="https://mychef.id/contact/confirm"
+        ogType="website"
+      />
       <Card className="max-w-lg w-full p-8 md:p-12 text-center space-y-6">
         {/* Success Icon */}
         <div className="flex justify-center">

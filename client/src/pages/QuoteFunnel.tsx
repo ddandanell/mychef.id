@@ -281,6 +281,13 @@ export default function QuoteFunnel() {
       setMealTimes(newTimes);
     } else {
       newMeals.add(meal);
+      // Set default time when selecting meal
+      const defaultTimes = {
+        breakfast: '08:00',
+        lunch: '12:00',
+        dinner: '19:00',
+      };
+      setMealTimes({...mealTimes, [meal]: defaultTimes[meal]});
     }
     setMealsNeeded(newMeals);
   };

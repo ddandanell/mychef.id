@@ -13,7 +13,7 @@ import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 import { useLocation } from 'wouter';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
-type ServiceType = 'single' | 'multiple' | null;
+type ServiceType = 'single' | 'multiple' | 'fulltime' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
 type BudgetRangeSingleType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
 type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
@@ -27,6 +27,11 @@ type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'l
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
 type BudgetRangeType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
 type DietaryFocusType = 'fitness' | 'weight-loss' | 'keto' | 'vegan' | 'halal' | 'diabetic' | 'family-meals' | 'other' | null;
+
+// Full-time chef types
+type FoodStyleType = 'comfort' | 'healthy-light' | 'luxurious' | 'local-balinese' | 'international' | 'mixed' | null;
+type ServiceScopeType = 'grocery-shopping' | 'serving' | 'cleanup';
+type WorkDaysType = 'monday-friday' | 'all-week' | null;
 
 interface AddressData {
   venueName: string;
@@ -220,6 +225,27 @@ const dietaryFocusOptions = [
   { id: 'other', label: 'Other', icon: MoreHorizontal },
 ] as const;
 
+// For full-time chef service
+const foodStyleOptions = [
+  { id: 'comfort', label: 'Everyday Comfort', description: 'Homestyle cooking, family favorites' },
+  { id: 'healthy-light', label: 'Healthy & Light', description: 'Nutritious, balanced meals' },
+  { id: 'luxurious', label: 'Luxurious', description: 'Fine dining quality at home' },
+  { id: 'local-balinese', label: 'Local Balinese', description: 'Authentic Indonesian cuisine' },
+  { id: 'international', label: 'International', description: 'World cuisines and fusion' },
+  { id: 'mixed', label: 'Mixed Variety', description: 'Different styles throughout the week' },
+] as const;
+
+const workDaysOptions = [
+  { id: 'monday-friday', label: 'Monday to Friday only', description: 'Weekday service' },
+  { id: 'all-week', label: 'All seven days', description: 'Every day of the week' },
+] as const;
+
+const serviceScopeOptions = [
+  { id: 'grocery-shopping', label: 'Grocery Shopping' },
+  { id: 'serving', label: 'Serving Meals' },
+  { id: 'cleanup', label: 'Kitchen Cleanup' },
+] as const;
+
 export default function QuoteFunnel() {
   const [currentStep, setCurrentStep] = useState(1);
   const [serviceType, setServiceType] = useState<ServiceType>(null);
@@ -257,6 +283,16 @@ export default function QuoteFunnel() {
   const [chefQualities, setChefQualities] = useState('');
   const [budgetRange, setBudgetRange] = useState<BudgetRangeType>(null);
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  
+  // Full-time chef state variables
+  const [guestsPerMeal, setGuestsPerMeal] = useState<number>(2);
+  const [lunchTime, setLunchTime] = useState('');
+  const [dinnerTime, setDinnerTime] = useState('');
+  const [kitchenSetup, setKitchenSetup] = useState('');
+  const [dietaryRestrictions, setDietaryRestrictions] = useState('');
+  const [foodStyle, setFoodStyle] = useState<FoodStyleType>(null);
+  const [serviceScopeSet, setServiceScopeSet] = useState<Set<ServiceScopeType>>(new Set(['grocery-shopping', 'serving', 'cleanup'] as ServiceScopeType[]));
+  const [workDays, setWorkDays] = useState<WorkDaysType>(null);
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
@@ -303,6 +339,19 @@ export default function QuoteFunnel() {
           chefQualities: chefQualities,
           budgetRange: budgetRange!,
           startDate: startDate!.toISOString(),
+        };
+      } else if (serviceType === 'fulltime') {
+        // Full-time chef flow data
+        payload = {
+          ...payload,
+          guestsPerMeal: guestsPerMeal.toString(),
+          lunchTime: lunchTime,
+          dinnerTime: dinnerTime,
+          kitchenSetup: kitchenSetup,
+          dietaryRestrictions: dietaryRestrictions,
+          foodStyle: foodStyle!,
+          serviceScope: Array.from(serviceScopeSet),
+          workDays: workDays!,
         };
       }
       
@@ -373,6 +422,7 @@ export default function QuoteFunnel() {
   const getTotalSteps = () => {
     if (serviceType === 'single') return 11; // Added budget and courses steps
     if (serviceType === 'multiple') return 10;
+    if (serviceType === 'fulltime') return 10; // Full-time chef flow
     return 1;
   };
 
@@ -420,6 +470,25 @@ export default function QuoteFunnel() {
       } else if (currentStep === 8 && budgetRange) {
         setCurrentStep(9);
       } else if (currentStep === 9 && startDate) {
+        setCurrentStep(10);
+      }
+    } else if (serviceType === 'fulltime') {
+      // Full-time chef flow (10-step flow)
+      if (currentStep === 2 && guestsPerMeal > 0) {
+        setCurrentStep(3);
+      } else if (currentStep === 3 && lunchTime.trim() !== '' && dinnerTime.trim() !== '') {
+        setCurrentStep(4);
+      } else if (currentStep === 4 && kitchenSetup.trim() !== '') {
+        setCurrentStep(5);
+      } else if (currentStep === 5 && dietaryRestrictions.trim() !== '') {
+        setCurrentStep(6);
+      } else if (currentStep === 6 && foodStyle) {
+        setCurrentStep(7);
+      } else if (currentStep === 7 && serviceScopeSet.size > 0) {
+        setCurrentStep(8);
+      } else if (currentStep === 8 && workDays) {
+        setCurrentStep(9);
+      } else if (currentStep === 9 && (isAddressValid() || addressSkipped)) {
         setCurrentStep(10);
       }
     }
@@ -474,6 +543,16 @@ export default function QuoteFunnel() {
       if (currentStep === 7) return chefQualities.trim() !== '';
       if (currentStep === 8) return !!budgetRange;
       if (currentStep === 9) return !!startDate;
+    } else if (serviceType === 'fulltime') {
+      // Full-time chef flow validation
+      if (currentStep === 2) return guestsPerMeal > 0;
+      if (currentStep === 3) return lunchTime.trim() !== '' && dinnerTime.trim() !== '';
+      if (currentStep === 4) return kitchenSetup.trim() !== '';
+      if (currentStep === 5) return dietaryRestrictions.trim() !== '';
+      if (currentStep === 6) return !!foodStyle;
+      if (currentStep === 7) return serviceScopeSet.size > 0;
+      if (currentStep === 8) return !!workDays;
+      if (currentStep === 9) return isAddressValid() || addressSkipped;
     }
     
     return false;
@@ -548,7 +627,7 @@ export default function QuoteFunnel() {
               </div>
 
               {/* Service Options */}
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* Single Service Option */}
                 <Card
                   className={`
@@ -635,6 +714,51 @@ export default function QuoteFunnel() {
                     <h3 className="text-xl font-semibold mb-2">Multiple services</h3>
                     <p className="text-muted-foreground">
                       Ideal for holidays or several meals.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Full-Time Chef Option */}
+                <Card
+                  className={`
+                    cursor-pointer transition-all overflow-visible
+                    hover-elevate active-elevate-2
+                    ${serviceType === 'fulltime' 
+                      ? 'border-2 border-primary bg-primary/5' 
+                      : 'border-2'
+                    }
+                  `}
+                  onClick={() => setServiceType('fulltime')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setServiceType('fulltime');
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  data-testid="option-fulltime-chef"
+                >
+                  <CardContent className="pt-6">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <ChefHat className="w-8 h-8 flex-shrink-0" />
+                      <div 
+                        className={`
+                          w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
+                          ${serviceType === 'fulltime'
+                            ? 'border-primary bg-primary'
+                            : 'border-muted-foreground/30'
+                          }
+                        `}
+                      >
+                        {serviceType === 'fulltime' && (
+                          <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                        )}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">Full-time chef</h3>
+                    <p className="text-muted-foreground">
+                      Daily chef service for your home.
                     </p>
                   </CardContent>
                 </Card>

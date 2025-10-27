@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle } from 'lucide-react';
+import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -575,6 +575,30 @@ export default function QuoteFunnel() {
             className="h-full bg-primary transition-all duration-300"
             style={{ width: `${(currentStep / getTotalSteps()) * 100}%` }}
           />
+        </div>
+      </div>
+
+      {/* Trust Badges - Always visible */}
+      <div className="border-b bg-card/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">
+            <div className="flex items-center gap-1.5">
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <span className="ml-1 font-medium">4.9/5 Rating</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-primary" />
+              <span>Recommended by Top Bali Villas</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-primary" />
+              <span>1000+ Trusted Experiences</span>
+            </div>
+          </div>
         </div>
       </div>
 

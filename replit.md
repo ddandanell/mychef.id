@@ -34,16 +34,22 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **SEO Optimization:** Comprehensive meta tags (title, description, keywords, author, robots, language), geo tags (Bali-specific), Open Graph, Twitter Cards, JSON-LD Structured Data (LocalBusiness schema), `robots.txt`, `sitemap.xml`, canonical URLs, dynamic SEO component, and descriptive alt text for images.
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading (`display=swap`), and GPU acceleration for animations.
     - **Conversion Tracking:** Custom Google Analytics events fired via an interstitial confirmation page for all WhatsApp CTAs.
-    - **Quote Funnel (Simplified):** Streamlined multi-step quote form at `/quote` with three optimized flows:
-        - **Single Service (7 steps):** Service type → Occasion → Location (with skip option) → Guest count → Cuisine → Date selection → Professional confirmation page
-        - **Multiple Services (7 steps):** Service type → Recurring type → Duration → Location (with skip option) → People count → Start date → Professional confirmation page
+    - **Quote Funnel (Optimized):** Streamlined multi-step quote form at `/quote` with three improved flows designed for maximum clarity:
+        - **Single Event (8 steps):** Service type → Occasion → Guest count → Date selection → Cuisine preference → Pre-meeting option → Location (with skip option) → Professional confirmation page
+            - **Pre-meeting feature:** Clients can request chef arrive 2 hours early to discuss menu and personally shop for fresh ingredients - only hourly rate applies, no extra cost
+            - Improved question order: asks for most important details (guest count, dates) before secondary preferences (cuisine, pre-meeting)
+            - Clear, helpful descriptions prevent users from getting stuck
+        - **Recurring Service (7 steps):** Service type → Recurring type → Duration → People count → Start date → Location (with skip option) → Professional confirmation page
+            - Reordered for logical flow: what → how long → who → when → where
+            - Simplified progression makes it easier to complete
         - **Full-Time or Part-Time Chef (9 or 10 steps):** Service type → Guests per meal → Meal selection (breakfast/lunch/dinner with times) → Work days → Grocery handling (who shops) → Grocery payment method (conditional: only if myCHEF handles) → Location (with skip option) → Dietary restrictions → Professional confirmation page
             - Grocery shopping feature includes professional options for who handles shopping (myCHEF or client)
             - If myCHEF handles shopping, clients choose payment method (upfront or daily cash to chef)
             - Shopping time (1-2 hours) explicitly noted as included in chef's paid working hours
             - Full back/forward navigation with intelligent step skipping for conditional payment step
         - All flows end with a professional confirmation page explaining the WhatsApp submission process, team review, callback, and pricing estimate delivery within 24 hours.
-        - Optimized to collect only essential information needed to create accurate quotes, making it faster for clients and easier for the team to process.
+        - Optimized question ordering across all funnels ensures users never get stuck and can easily understand each step.
+        - Each service type includes specific examples in descriptions (birthdays for single events, meal prep for recurring, daily household chef for full-time).
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.
 - **Additional Pages:** Privacy Policy, Terms of Service (both Bali-specific legal content), professional `Join Our Team` recruitment page with a dynamic conditional application form, and Admin panel at `/admin/quotes` for viewing and managing quote submissions.
 

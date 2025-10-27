@@ -41,12 +41,14 @@ function formatQuoteForWhatsApp(data: any): string {
     message += '*Service Type:* Single Event\n';
     message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     message += `*Guest Count:* ${data.guestCount} guests\n`;
-    message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     
     if (data.selectedDates && data.selectedDates.length > 0) {
       const dates = data.selectedDates.map((d: string) => new Date(d).toLocaleDateString('en-GB')).join(', ');
       message += `*Date(s):* ${dates}\n`;
     }
+    
+    message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    message += `*Pre-Meeting with Chef:* ${data.preMeetingRequested ? 'Yes - Chef arrives 2 hours early for menu planning & grocery shopping' : 'No - Chef arrives at cooking time'}\n`;
   } else if (data.serviceType === 'multiple') {
     message += '*Service Type:* Recurring Service\n';
     message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
@@ -158,6 +160,7 @@ export default function QuoteFunnel() {
   const [guestCount, setGuestCount] = useState<number>(2);
   const [cuisine, setCuisine] = useState<CuisineType>(null);
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [preMeetingRequested, setPreMeetingRequested] = useState<boolean | null>(null);
   
   // Multiple service state
   const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
@@ -227,6 +230,7 @@ export default function QuoteFunnel() {
           guestCount: guestCount.toString(),
           cuisine: cuisine!,
           selectedDates: selectedDates.map(d => d.toISOString()),
+          preMeetingRequested: preMeetingRequested!,
         };
       } else if (serviceType === 'multiple') {
         payload = {
@@ -291,7 +295,7 @@ export default function QuoteFunnel() {
   });
 
   const getTotalSteps = () => {
-    if (serviceType === 'single') return 7;
+    if (serviceType === 'single') return 8;
     if (serviceType === 'multiple') return 7;
     if (serviceType === 'fulltime') {
       // Base steps + conditional grocery payment step
@@ -317,19 +321,20 @@ export default function QuoteFunnel() {
     
     if (serviceType === 'single') {
       if (currentStep === 2) return occasion !== null;
-      if (currentStep === 3) return isAddressValid() || addressSkipped;
-      if (currentStep === 4) return guestCount >= 1;
+      if (currentStep === 3) return guestCount >= 1;
+      if (currentStep === 4) return selectedDates.length > 0;
       if (currentStep === 5) return cuisine !== null;
-      if (currentStep === 6) return selectedDates.length > 0;
-      if (currentStep === 7) return true;
+      if (currentStep === 6) return preMeetingRequested !== null;
+      if (currentStep === 7) return isAddressValid() || addressSkipped;
+      if (currentStep === 8) return true;
     }
     
     if (serviceType === 'multiple') {
       if (currentStep === 2) return recurringServiceType !== null;
       if (currentStep === 3) return serviceDuration !== null;
-      if (currentStep === 4) return isAddressValid() || addressSkipped;
-      if (currentStep === 5) return peopleCount >= 1;
-      if (currentStep === 6) return startDate !== undefined;
+      if (currentStep === 4) return peopleCount >= 1;
+      if (currentStep === 5) return startDate !== undefined;
+      if (currentStep === 6) return isAddressValid() || addressSkipped;
       if (currentStep === 7) return true;
     }
     
@@ -389,7 +394,7 @@ export default function QuoteFunnel() {
   };
 
   const isFinalStep = () => {
-    if (serviceType === 'single') return currentStep === 7;
+    if (serviceType === 'single') return currentStep === 8;
     if (serviceType === 'multiple') return currentStep === 7;
     if (serviceType === 'fulltime') {
       // Final step is 10 if mychef handles groceries, 9 if client handles
@@ -560,15 +565,264 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 3: Location */}
+          {/* SINGLE SERVICE FLOW - Step 3: Guest Count */}
           {currentStep === 3 && serviceType === 'single' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Where is your event?
+                  How many guests will you have?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  We need your address to match you with the perfect chef
+                  Tell us the number of people who will be dining
+                </p>
+              </div>
+
+              <div className="max-w-md mx-auto">
+                <div className="flex flex-col items-center gap-8">
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guest-count">
+                      {guestCount}
+                    </div>
+                    <p className="text-xl text-muted-foreground">
+                      {guestCount === 1 ? 'Guest' : 'Guests'}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                      disabled={guestCount <= 1}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-decrease-guest-count"
+                      aria-label="Decrease guest count"
+                    >
+                      <Minus className="w-6 h-6" />
+                    </Button>
+                    
+                    <Button
+                      size="lg"
+                      onClick={() => setGuestCount(guestCount + 1)}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-increase-guest-count"
+                      aria-label="Increase guest count"
+                    >
+                      <Plus className="w-6 h-6" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 4: Date Selection */}
+          {currentStep === 4 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  When do you need the chef?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select one or multiple dates for your event
+                </p>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="inline-block">
+                  <Calendar
+                    mode="multiple"
+                    selected={selectedDates}
+                    onSelect={(dates) => setSelectedDates(dates || [])}
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    className="rounded-md border"
+                    data-testid="calendar-dates"
+                  />
+                </div>
+              </div>
+
+              {selectedDates.length > 0 && (
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">Selected dates:</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {selectedDates.map((date, idx) => (
+                      <div key={idx} className="px-3 py-1 bg-primary/10 rounded-md text-sm">
+                        {date.toLocaleDateString('en-GB')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 5: Cuisine */}
+          {currentStep === 5 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What type of cuisine would you like?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select your preferred culinary style - you can discuss menu details with your chef later
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {cuisineOptions.map((cuis) => {
+                  const Icon = cuis.icon;
+                  const isSelected = cuisine === cuis.id;
+                  return (
+                    <Card
+                      key={cuis.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setCuisine(cuis.id as CuisineType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setCuisine(cuis.id as CuisineType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-cuisine-${cuis.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <Icon className="w-5 h-5 flex-shrink-0" />
+                            <span className="font-medium">{cuis.label}</span>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 6: Pre-Meeting Option */}
+          {currentStep === 6 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Would you like a pre-meeting with your chef?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Your chef can arrive 2 hours early to discuss the menu and shop for ingredients
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                {[
+                  {
+                    id: true,
+                    label: 'Yes, I want a pre-meeting',
+                    description: 'Chef arrives 2 hours early to plan menu and buy fresh ingredients - only hourly rate applies, no extra cost'
+                  },
+                  {
+                    id: false,
+                    label: 'No pre-meeting needed',
+                    description: 'Chef arrives at the scheduled cooking time with ingredients ready to prepare your meal'
+                  },
+                ].map((option) => {
+                  const isSelected = preMeetingRequested === option.id;
+                  return (
+                    <Card
+                      key={option.id.toString()}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setPreMeetingRequested(option.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setPreMeetingRequested(option.id);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-premeeting-${option.id}`}
+                    >
+                      <CardContent className="py-6">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg mb-2">{option.label}</p>
+                            <p className="text-sm text-muted-foreground">{option.description}</p>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              <div className="max-w-2xl mx-auto">
+                <Card className="border-primary/20 bg-primary/5">
+                  <CardContent className="pt-6">
+                    <div className="space-y-3 text-sm">
+                      <p className="font-medium">What happens during the pre-meeting:</p>
+                      <ul className="space-y-2 ml-4">
+                        <li className="flex gap-2">
+                          <span className="text-primary">•</span>
+                          <span>Discuss your preferences, dietary needs, and finalize the menu together</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-primary">•</span>
+                          <span>Chef personally selects and purchases fresh, high-quality ingredients</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-primary">•</span>
+                          <span>Shopping time (1-2 hours) is included in the chef's paid working hours</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-primary">•</span>
+                          <span>You only pay the chef's hourly rate - no additional fees</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 7: Location */}
+          {currentStep === 7 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Where is your event taking place?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Help us match you with a chef in your area
                 </p>
               </div>
 
@@ -697,157 +951,6 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 4: Guest Count */}
-          {currentStep === 4 && serviceType === 'single' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  How many guests?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Number of people to be served
-                </p>
-              </div>
-
-              <div className="max-w-md mx-auto">
-                <div className="flex flex-col items-center gap-8">
-                  <div className="text-center">
-                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guest-count">
-                      {guestCount}
-                    </div>
-                    <p className="text-xl text-muted-foreground">
-                      {guestCount === 1 ? 'Guest' : 'Guests'}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-6">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                      disabled={guestCount <= 1}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-decrease-guest-count"
-                      aria-label="Decrease guest count"
-                    >
-                      <Minus className="w-6 h-6" />
-                    </Button>
-                    
-                    <Button
-                      size="lg"
-                      onClick={() => setGuestCount(guestCount + 1)}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-increase-guest-count"
-                      aria-label="Increase guest count"
-                    >
-                      <Plus className="w-6 h-6" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 5: Cuisine */}
-          {currentStep === 5 && serviceType === 'single' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What type of cuisine?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Choose your preferred culinary style
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {cuisineOptions.map((cuis) => {
-                  const Icon = cuis.icon;
-                  const isSelected = cuisine === cuis.id;
-                  return (
-                    <Card
-                      key={cuis.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
-                      `}
-                      onClick={() => setCuisine(cuis.id as CuisineType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setCuisine(cuis.id as CuisineType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-cuisine-${cuis.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <Icon className="w-5 h-5 flex-shrink-0" />
-                            <span className="font-medium">{cuis.label}</span>
-                          </div>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 6: Date Selection */}
-          {currentStep === 6 && serviceType === 'single' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  When do you need the chef?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Select one or multiple dates
-                </p>
-              </div>
-
-              <div className="flex justify-center">
-                <div className="inline-block">
-                  <Calendar
-                    mode="multiple"
-                    selected={selectedDates}
-                    onSelect={(dates) => setSelectedDates(dates || [])}
-                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                    className="rounded-md border"
-                    data-testid="calendar-dates"
-                  />
-                </div>
-              </div>
-
-              {selectedDates.length > 0 && (
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-2">Selected dates:</p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {selectedDates.map((date, idx) => (
-                      <div key={idx} className="px-3 py-1 bg-primary/10 rounded-md text-sm">
-                        {date.toLocaleDateString('en-GB')}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
           {/* MULTIPLE SERVICE FLOW - Step 2: Recurring Service Type */}
           {currentStep === 2 && serviceType === 'multiple' && (
             <div className="space-y-12">
@@ -963,15 +1066,102 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* MULTIPLE SERVICE FLOW - Step 4: Location */}
+          {/* MULTIPLE SERVICE FLOW - Step 4: People Count */}
           {currentStep === 4 && serviceType === 'multiple' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  How many people will the chef cook for?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Average number of people per meal
+                </p>
+              </div>
+
+              <div className="max-w-md mx-auto">
+                <div className="flex flex-col items-center gap-8">
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-people-count">
+                      {peopleCount}
+                    </div>
+                    <p className="text-xl text-muted-foreground">
+                      {peopleCount === 1 ? 'Person' : 'People'}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
+                      disabled={peopleCount <= 1}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-decrease-people-count"
+                      aria-label="Decrease people count"
+                    >
+                      <Minus className="w-6 h-6" />
+                    </Button>
+                    
+                    <Button
+                      size="lg"
+                      onClick={() => setPeopleCount(peopleCount + 1)}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-increase-people-count"
+                      aria-label="Increase people count"
+                    >
+                      <Plus className="w-6 h-6" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* MULTIPLE SERVICE FLOW - Step 5: Start Date */}
+          {currentStep === 5 && serviceType === 'multiple' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  When would you like to start?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select your preferred start date
+                </p>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="inline-block">
+                  <Calendar
+                    mode="single"
+                    selected={startDate}
+                    onSelect={setStartDate}
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    className="rounded-md border"
+                    data-testid="calendar-start-date"
+                  />
+                </div>
+              </div>
+
+              {startDate && (
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">Selected start date:</p>
+                  <div className="inline-block px-4 py-2 bg-primary/10 rounded-md">
+                    {startDate.toLocaleDateString('en-GB')}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* MULTIPLE SERVICE FLOW - Step 6: Location */}
+          {currentStep === 6 && serviceType === 'multiple' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
                   Where will the chef work?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  We need your location to match you with the right chef
+                  Help us match you with a chef in your area
                 </p>
               </div>
 
@@ -1099,93 +1289,6 @@ export default function QuoteFunnel() {
                   I don't have the address yet
                 </Button>
               </div>
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 5: People Count */}
-          {currentStep === 5 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  How many people will the chef cook for?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Typical number of people per meal
-                </p>
-              </div>
-
-              <div className="max-w-md mx-auto">
-                <div className="flex flex-col items-center gap-8">
-                  <div className="text-center">
-                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-people-count">
-                      {peopleCount}
-                    </div>
-                    <p className="text-xl text-muted-foreground">
-                      {peopleCount === 1 ? 'Person' : 'People'}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-6">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
-                      disabled={peopleCount <= 1}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-decrease-people-count"
-                      aria-label="Decrease people count"
-                    >
-                      <Minus className="w-6 h-6" />
-                    </Button>
-                    
-                    <Button
-                      size="lg"
-                      onClick={() => setPeopleCount(peopleCount + 1)}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-increase-people-count"
-                      aria-label="Increase people count"
-                    >
-                      <Plus className="w-6 h-6" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 6: Start Date */}
-          {currentStep === 6 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  When would you like to start?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Select your preferred start date
-                </p>
-              </div>
-
-              <div className="flex justify-center">
-                <div className="inline-block">
-                  <Calendar
-                    mode="single"
-                    selected={startDate}
-                    onSelect={setStartDate}
-                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                    className="rounded-md border"
-                    data-testid="calendar-start-date"
-                  />
-                </div>
-              </div>
-
-              {startDate && (
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-2">Selected start date:</p>
-                  <div className="inline-block px-4 py-2 bg-primary/10 rounded-md">
-                    {startDate.toLocaleDateString('en-GB')}
-                  </div>
-                </div>
-              )}
             </div>
           )}
 

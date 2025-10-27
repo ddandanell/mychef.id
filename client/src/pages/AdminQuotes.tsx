@@ -24,6 +24,7 @@ interface QuoteSubmission {
   guestCount: string | null;
   cuisine: string | null;
   selectedDates: string[] | null;
+  preMeetingRequested: boolean | null;
   
   // Multiple service fields
   recurringServiceType: string | null;
@@ -251,6 +252,20 @@ export default function AdminQuotes() {
                           <p className="capitalize">{selectedQuoteData.cuisine}</p>
                         </div>
                       )}
+
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Pre-Meeting with Chef</p>
+                        <div className={`p-3 rounded-md ${selectedQuoteData.preMeetingRequested ? 'bg-primary/10' : 'bg-muted'}`}>
+                          <p className="font-medium">
+                            {selectedQuoteData.preMeetingRequested ? 'Yes - Pre-meeting requested' : 'No pre-meeting'}
+                          </p>
+                          {selectedQuoteData.preMeetingRequested && (
+                            <p className="text-sm text-muted-foreground mt-1">
+                              Chef will arrive 2 hours early for menu planning and grocery shopping (included in hourly rate)
+                            </p>
+                          )}
+                        </div>
+                      </div>
 
                       {selectedQuoteData.selectedDates && selectedQuoteData.selectedDates.length > 0 && (
                         <div>

@@ -36,6 +36,7 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   guestCount: text("guest_count"),
   cuisine: text("cuisine"),
   selectedDates: text("selected_dates").array(),
+  preMeetingRequested: boolean("pre_meeting_requested"),
   
   // Multiple service fields (nullable for single service)
   recurringServiceType: text("recurring_service_type"),
@@ -75,6 +76,7 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   guestCount: z.string().nullish(),
   cuisine: z.string().nullish(),
   selectedDates: z.array(z.string()).nullish(),
+  preMeetingRequested: z.boolean().nullish(),
   
   // Multiple service fields (optional for single service)
   recurringServiceType: z.string().nullish(),

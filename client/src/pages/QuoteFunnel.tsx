@@ -36,7 +36,11 @@ interface AddressData {
 }
 
 // Import 195 UN-recognized countries from centralized source
-const countries = UN_RECOGNIZED_COUNTRIES;
+// Sort countries with Indonesia always at the top
+const countries = [
+  'Indonesia',
+  ...UN_RECOGNIZED_COUNTRIES.filter(country => country !== 'Indonesia')
+];
 
 const guestCountOptions = [
   { id: '2', label: '2 people' },

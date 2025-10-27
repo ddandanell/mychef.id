@@ -53,6 +53,16 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   budgetRange: text("budget_range"),
   startDate: text("start_date"),
   
+  // Full-time chef fields (nullable for other service types)
+  guestsPerMeal: text("guests_per_meal"),
+  lunchTime: text("lunch_time"),
+  dinnerTime: text("dinner_time"),
+  kitchenSetup: text("kitchen_setup"),
+  dietaryRestrictions: text("dietary_restrictions"),
+  foodStyle: text("food_style"),
+  serviceScope: text("service_scope").array(),
+  workDays: text("work_days"),
+  
   status: text("status").notNull().default('new'),
   createdAt: timestamp("created_at").notNull().default(sql`now()`),
 });
@@ -92,6 +102,16 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   chefQualities: z.string().nullish(),
   budgetRange: z.string().nullish(),
   startDate: z.string().nullish(),
+  
+  // Full-time chef fields (optional for other service types)
+  guestsPerMeal: z.string().nullish(),
+  lunchTime: z.string().nullish(),
+  dinnerTime: z.string().nullish(),
+  kitchenSetup: z.string().nullish(),
+  dietaryRestrictions: z.string().nullish(),
+  foodStyle: z.string().nullish(),
+  serviceScope: z.array(z.string()).nullish(),
+  workDays: z.string().nullish(),
 });
 
 export type InsertQuoteSubmission = z.infer<typeof insertQuoteSubmissionSchema>;

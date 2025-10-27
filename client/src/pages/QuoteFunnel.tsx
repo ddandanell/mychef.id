@@ -1021,7 +1021,7 @@ export default function QuoteFunnel() {
                   Would you like a pre-meeting with your chef?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Your chef can arrive 2 hours early to discuss the menu and shop for ingredients
+                  Get the best pricing with total transparency - your chef arrives 2 hours early for a 20-minute planning session, then personally shops for fresh ingredients
                 </p>
               </div>
 
@@ -1085,23 +1085,27 @@ export default function QuoteFunnel() {
                 <Card className="border-primary/20 bg-primary/5">
                   <CardContent className="pt-6">
                     <div className="space-y-3 text-sm">
-                      <p className="font-medium">What happens during the pre-meeting:</p>
+                      <p className="font-medium">Why choose a pre-meeting - Maximum transparency, best pricing:</p>
                       <ul className="space-y-2 ml-4">
                         <li className="flex gap-2">
                           <span className="text-primary">•</span>
-                          <span>Discuss your preferences, dietary needs, and finalize the menu together</span>
+                          <span><strong>20-minute planning session</strong> with your professional chef to discuss preferences, dietary needs, and finalize your menu</span>
                         </li>
                         <li className="flex gap-2">
                           <span className="text-primary">•</span>
-                          <span>Chef personally selects and purchases fresh, high-quality ingredients</span>
+                          <span><strong>Plan additional meals</strong> like breakfast or dinner for the next day - everything organized together</span>
                         </li>
                         <li className="flex gap-2">
                           <span className="text-primary">•</span>
-                          <span>Shopping time (1-2 hours) is included in the chef's paid working hours</span>
+                          <span><strong>You pay for groceries directly</strong> - chef provides receipts for total transparency and control, no markup from myCHEF</span>
                         </li>
                         <li className="flex gap-2">
                           <span className="text-primary">•</span>
-                          <span>You only pay the chef's hourly rate - no additional fees</span>
+                          <span><strong>Best quality ingredients</strong> - chef personally selects fresh, premium ingredients for your meal</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-primary">•</span>
+                          <span><strong>Shopping time included</strong> in chef's hourly rate (1-2 hours) - you only pay the hourly rate, no extra fees</span>
                         </li>
                       </ul>
                     </div>

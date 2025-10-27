@@ -34,6 +34,16 @@ const countries = [
   ...UN_RECOGNIZED_COUNTRIES.filter(country => country !== 'Indonesia')
 ];
 
+// Generate time options in 24-hour format (HH:mm)
+const timeOptions = [
+  '05:00', '05:30', '06:00', '06:30', '07:00', '07:30',
+  '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+  '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
+  '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+  '17:00', '17:30', '18:00', '18:30', '19:00', '19:30',
+  '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00'
+];
+
 function formatQuoteForWhatsApp(data: any): string {
   let message = '🍽️ *myCHEF Quote Request*\n\n';
   
@@ -1705,17 +1715,27 @@ export default function QuoteFunnel() {
                           {isSelected && (
                             <div className="space-y-2 pl-8">
                               <Label htmlFor={`time-${meal.id}`} className="text-sm font-medium">
-                                Approximate time
+                                Approximate time (24-hour format)
                               </Label>
-                              <Input
-                                id={`time-${meal.id}`}
-                                type="time"
-                                placeholder={meal.placeholder}
+                              <Select
                                 value={mealTimes[meal.id as 'breakfast' | 'lunch' | 'dinner'] || ''}
-                                onChange={(e) => updateMealTime(meal.id as 'breakfast' | 'lunch' | 'dinner', e.target.value)}
-                                className="max-w-xs"
-                                data-testid={`input-time-${meal.id}`}
-                              />
+                                onValueChange={(value) => updateMealTime(meal.id as 'breakfast' | 'lunch' | 'dinner', value)}
+                              >
+                                <SelectTrigger 
+                                  id={`time-${meal.id}`}
+                                  className="max-w-xs"
+                                  data-testid={`select-time-${meal.id}`}
+                                >
+                                  <SelectValue placeholder={meal.placeholder} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {timeOptions.map((time) => (
+                                    <SelectItem key={time} value={time}>
+                                      {time}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                             </div>
                           )}
                         </div>

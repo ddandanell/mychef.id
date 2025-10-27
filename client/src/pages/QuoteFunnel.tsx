@@ -447,9 +447,9 @@ export default function QuoteFunnel() {
 
               <div className="grid sm:grid-cols-3 gap-6">
                 {[
-                  { id: 'single', label: 'Single Event', description: 'One-time chef service for a special occasion', icon: ChefHat },
-                  { id: 'multiple', label: 'Recurring Service', description: 'Regular chef service for multiple days', icon: Users },
-                  { id: 'fulltime', label: 'Full-time or Part-time Chef', description: 'Dedicated personal chef', icon: Home },
+                  { id: 'single', label: 'Single Event', description: 'One-time service for birthdays, anniversaries, dinner parties, or special celebrations', icon: ChefHat },
+                  { id: 'multiple', label: 'Recurring Service', description: 'Regular visits over weeks or months - meal prep, weekly shifts, or vacation period chef', icon: Users },
+                  { id: 'fulltime', label: 'Full-time or Part-time Chef', description: 'Daily or regular employment - personal household chef cooking meals every day or several days per week', icon: Home },
                 ].map((service) => {
                   const Icon = service.icon;
                   const isSelected = serviceType === service.id;

@@ -36,6 +36,7 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   timeOfDay: text("time_of_day").notNull(),
   foodPreferences: text("food_preferences"),
   moodDescription: text("mood_description"),
+  additionalNotes: text("additional_notes"),
   status: text("status").notNull().default('new'),
   createdAt: timestamp("created_at").notNull().default(sql`now()`),
 });
@@ -52,6 +53,7 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   country: z.string().nullish(),
   foodPreferences: z.string().nullish(),
   moodDescription: z.string().nullish(),
+  additionalNotes: z.string().nullish(),
 });
 
 export type InsertQuoteSubmission = z.infer<typeof insertQuoteSubmissionSchema>;

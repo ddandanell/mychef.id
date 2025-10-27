@@ -54,6 +54,7 @@ export class MemStorage implements IStorage {
       addressSkipped: insertQuote.addressSkipped || false,
       foodPreferences: insertQuote.foodPreferences || null,
       moodDescription: insertQuote.moodDescription || null,
+      additionalNotes: insertQuote.additionalNotes || null,
       status: insertQuote.status || 'new',
       createdAt: new Date(),
     };

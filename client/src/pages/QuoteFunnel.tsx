@@ -91,6 +91,7 @@ export default function QuoteFunnel() {
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(null);
   const [foodPreferences, setFoodPreferences] = useState('');
   const [moodDescription, setMoodDescription] = useState('');
+  const [additionalNotes, setAdditionalNotes] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const { toast } = useToast();
@@ -116,6 +117,7 @@ export default function QuoteFunnel() {
         timeOfDay: timeOfDay!,
         foodPreferences: foodPreferences || null,
         moodDescription: moodDescription || null,
+        additionalNotes: additionalNotes || null,
       };
       
       const response = await fetch('/api/quotes', {
@@ -217,7 +219,7 @@ export default function QuoteFunnel() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Trust Signals Banner */}
+      {/* Trust Signals Banner with Progress */}
       <div className="border-b bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4">
@@ -243,6 +245,24 @@ export default function QuoteFunnel() {
             </Button>
           </div>
         </div>
+
+        {/* Progress Indicator */}
+        {!isSubmitted && (
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Step {currentStep} of 9</span>
+                <span className="font-medium">{Math.round((currentStep / 9) * 100)}% Complete</span>
+              </div>
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-primary transition-all duration-300 ease-out"
+                  style={{ width: `${(currentStep / 9) * 100}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
@@ -1088,7 +1108,10 @@ export default function QuoteFunnel() {
                       Thank you!
                     </h1>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      We've received your request and will contact you soon with a personalized offer from our team.
+                      We've received your request and are working on it! Our team will get back to you within 20 minutes with a personalized quote and pricing.
+                    </p>
+                    <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+                      Check your WhatsApp or email for updates.
                     </p>
                   </div>
                 </div>
@@ -1097,117 +1120,178 @@ export default function QuoteFunnel() {
                   {/* Header */}
                   <div className="text-center space-y-4">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                      Review your details
+                      Review & Confirm
                     </h1>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Please confirm everything looks correct before submitting
+                      Please review your details. You can go back to edit any information.
                     </p>
                   </div>
 
                   {/* Review Summary */}
-                  <div className="max-w-3xl mx-auto space-y-4">
+                  <div className="max-w-3xl mx-auto space-y-6">
+                    {/* Event Details Card */}
                     <Card>
-                      <CardContent className="pt-6 space-y-4">
-                        <div className="grid sm:grid-cols-2 gap-4">
-                          <div>
-                            <p className="text-sm text-muted-foreground">Service Type</p>
-                            <p className="font-medium capitalize">{serviceType}</p>
+                      <CardContent className="pt-6">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <ChefHat className="w-5 h-5" />
+                          Event Details
+                        </h3>
+                        <div className="space-y-4">
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Service Type</p>
+                              <p className="font-medium capitalize">{serviceType}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Occasion</p>
+                              <p className="font-medium capitalize">{occasion?.replace(/-/g, ' ')}</p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm text-muted-foreground">Occasion</p>
-                            <p className="font-medium capitalize">{occasion?.replace(/-/g, ' ')}</p>
-                          </div>
-                        </div>
 
-                        <div>
-                          <p className="text-sm text-muted-foreground">Location</p>
-                          {addressSkipped ? (
-                            <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
-                          ) : (
-                            <>
-                              <p className="font-medium">{address.venueName}</p>
-                              <p className="text-sm">{address.street}, {address.city}, {address.region}</p>
-                              {address.postalCode && <p className="text-sm">{address.postalCode}</p>}
-                              <p className="text-sm font-medium mt-1">{address.country}</p>
-                            </>
-                          )}
-                        </div>
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Guest Count</p>
+                              <p className="font-medium">{guestCountOptions.find(o => o.id === guestCount)?.label}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Cuisine</p>
+                              <p className="font-medium capitalize">
+                                {cuisine === 'other' ? otherCuisineText : cuisineOptions.find(c => c.id === cuisine)?.label}
+                              </p>
+                            </div>
+                          </div>
 
-                        <div className="grid sm:grid-cols-2 gap-4">
                           <div>
-                            <p className="text-sm text-muted-foreground">Guest Count</p>
-                            <p className="font-medium">{guestCountOptions.find(o => o.id === guestCount)?.label}</p>
+                            <p className="text-sm text-muted-foreground mb-1">Event Date{selectedDates.length > 1 ? 's' : ''}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedDates.map((date, idx) => (
+                                <span key={idx} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-md font-medium">
+                                  {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                </span>
+                              ))}
+                            </div>
                           </div>
+
                           <div>
-                            <p className="text-sm text-muted-foreground">Cuisine</p>
-                            <p className="font-medium capitalize">
-                              {cuisine === 'other' ? otherCuisineText : cuisineOptions.find(c => c.id === cuisine)?.label}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-sm text-muted-foreground">Additional Services</p>
-                          <div className="flex flex-wrap gap-2 mt-1">
-                            {Array.from(selectedServices).map(serviceId => (
-                              <span key={serviceId} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                                {additionalServices.find(s => s.id === serviceId)?.label}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-sm text-muted-foreground">Event Date{selectedDates.length > 1 ? 's' : ''}</p>
-                          <div className="flex flex-wrap gap-2 mt-1">
-                            {selectedDates.map((date, idx) => (
-                              <span key={idx} className="text-sm bg-muted px-3 py-1 rounded-md">
-                                {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="grid sm:grid-cols-2 gap-4">
-                          <div>
-                            <p className="text-sm text-muted-foreground">Time of Day</p>
+                            <p className="text-sm text-muted-foreground mb-1">Time of Day</p>
                             <p className="font-medium capitalize">{timeOfDay}</p>
                           </div>
                         </div>
+                      </CardContent>
+                    </Card>
 
-                        {foodPreferences && (
-                          <div>
-                            <p className="text-sm text-muted-foreground">Food Preferences</p>
-                            <p className="text-sm mt-1">{foodPreferences}</p>
-                          </div>
-                        )}
-
-                        {moodDescription && (
-                          <div>
-                            <p className="text-sm text-muted-foreground">Mood & Atmosphere</p>
-                            <p className="text-sm mt-1">{moodDescription}</p>
+                    {/* Location Card */}
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <MapPin className="w-5 h-5" />
+                          Location
+                        </h3>
+                        {addressSkipped ? (
+                          <p className="text-muted-foreground italic">Address to be provided later</p>
+                        ) : (
+                          <div className="space-y-2">
+                            <p className="font-medium">{address.venueName}</p>
+                            <p className="text-sm text-muted-foreground">{address.street}</p>
+                            <p className="text-sm text-muted-foreground">{address.city}, {address.region} {address.postalCode}</p>
+                            <p className="text-sm font-medium">{address.country}</p>
                           </div>
                         )}
                       </CardContent>
                     </Card>
 
-                    <div className="flex justify-center pt-6">
-                      <Button
-                        size="lg"
-                        onClick={() => submitMutation.mutate()}
-                        disabled={submitMutation.isPending}
-                        className="gap-2 min-w-[200px]"
-                        data-testid="button-submit-quote"
-                      >
-                        {submitMutation.isPending ? (
-                          <>Submitting...</>
-                        ) : (
-                          <>
-                            <Send className="w-4 h-4" />
-                            Submit Request
-                          </>
-                        )}
-                      </Button>
+                    {/* Services Card */}
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <Package className="w-5 h-5" />
+                          Additional Services
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {Array.from(selectedServices).map(serviceId => (
+                            <span key={serviceId} className="text-sm bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium">
+                              {additionalServices.find(s => s.id === serviceId)?.label}
+                            </span>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Preferences Card */}
+                    {(foodPreferences || moodDescription) && (
+                      <Card>
+                        <CardContent className="pt-6">
+                          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                            <Utensils className="w-5 h-5" />
+                            Preferences
+                          </h3>
+                          <div className="space-y-4">
+                            {foodPreferences && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Food Preferences</p>
+                                <p className="text-sm">{foodPreferences}</p>
+                              </div>
+                            )}
+                            {moodDescription && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Mood & Atmosphere</p>
+                                <p className="text-sm">{moodDescription}</p>
+                              </div>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Additional Notes Field */}
+                    <Card>
+                      <CardContent className="pt-6">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <MessageSquare className="w-5 h-5" />
+                          Anything else we should know?
+                        </h3>
+                        <div className="space-y-2">
+                          <Textarea
+                            placeholder="Food allergies, dietary restrictions, special requests, accessibility needs, etc..."
+                            value={additionalNotes}
+                            onChange={(e) => setAdditionalNotes(e.target.value)}
+                            rows={4}
+                            className="resize-none"
+                            data-testid="input-additional-notes"
+                          />
+                          <p className="text-xs text-muted-foreground">
+                            Let us know about any food allergies, special dietary needs, or other important details
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Submit Section */}
+                    <div className="space-y-4 pt-2">
+                      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                        <p className="text-sm text-center font-medium">
+                          By submitting, our team will review your request and get back to you with a personalized quote and pricing within 20 minutes.
+                        </p>
+                      </div>
+
+                      <div className="flex justify-center">
+                        <Button
+                          size="lg"
+                          onClick={() => submitMutation.mutate()}
+                          disabled={submitMutation.isPending}
+                          className="gap-2 min-w-[240px]"
+                          data-testid="button-submit-quote"
+                        >
+                          {submitMutation.isPending ? (
+                            <>Submitting...</>
+                          ) : (
+                            <>
+                              <Send className="w-4 h-4" />
+                              Submit & Get Quote
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </>
@@ -1218,7 +1302,7 @@ export default function QuoteFunnel() {
       </div>
 
       {/* Bottom Navigation */}
-      {currentStep < 9 && (
+      {!isSubmitted && (
         <div className="border-t bg-muted/30">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex items-center justify-between gap-4">

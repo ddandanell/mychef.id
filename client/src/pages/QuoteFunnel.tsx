@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
+import { useLocation } from 'wouter';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
@@ -100,6 +101,7 @@ export default function QuoteFunnel() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
 
   const submitMutation = useMutation({
     mutationFn: async () => {
@@ -220,15 +222,27 @@ export default function QuoteFunnel() {
       {/* Trust Signals Banner */}
       <div className="border-b bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-center gap-8 flex-wrap">
-            <div className="flex items-center gap-2 text-sm font-medium">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span>QUOTES IN 20 MIN</span>
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1 flex items-center justify-center gap-8 flex-wrap">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <CheckCircle2 className="w-5 h-5 text-primary" />
+                <span>QUOTES IN 20 MIN</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <CheckCircle2 className="w-5 h-5 text-primary" />
+                <span>NO COMMITMENT</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm font-medium">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span>NO COMMITMENT</span>
-            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setLocation('/')}
+              className="flex-shrink-0"
+              data-testid="button-exit-quote"
+              aria-label="Exit to home page"
+            >
+              <X className="w-5 h-5" />
+            </Button>
           </div>
         </div>
       </div>

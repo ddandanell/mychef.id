@@ -8,7 +8,8 @@ import { useState } from 'react';
 interface QuoteSubmission {
   id: string;
   serviceType: string;
-  occasion: string;
+  
+  // Common fields
   venueName: string | null;
   street: string | null;
   city: string | null;
@@ -16,14 +17,28 @@ interface QuoteSubmission {
   postalCode: string | null;
   country: string | null;
   addressSkipped: boolean;
-  guestCount: string;
-  additionalServices: string[];
-  cuisine: string;
-  dateMode: string;
-  selectedDates: string[];
-  timeOfDay: string;
+  additionalNotes: string | null;
+  
+  // Single service fields
+  occasion: string | null;
+  guestCount: string | null;
+  additionalServices: string[] | null;
+  cuisine: string | null;
+  dateMode: string | null;
+  selectedDates: string[] | null;
+  timeOfDay: string | null;
   foodPreferences: string | null;
   moodDescription: string | null;
+  
+  // Multiple service fields
+  recurringServiceType: string | null;
+  serviceDuration: string | null;
+  peopleCount: string | null;
+  dietaryFocus: string | null;
+  chefQualities: string | null;
+  budgetRange: string | null;
+  startDate: string | null;
+  
   status: string;
   createdAt: string;
 }
@@ -73,7 +88,10 @@ export default function AdminQuotes() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <CardTitle className="text-lg capitalize">
-                        {quote.occasion.replace(/-/g, ' ')}
+                        {quote.serviceType === 'single' 
+                          ? quote.occasion?.replace(/-/g, ' ') || 'Single Service'
+                          : quote.recurringServiceType?.replace(/-/g, ' ') || 'Multiple Services'
+                        }
                       </CardTitle>
                       <p className="text-sm text-muted-foreground mt-1">
                         {new Date(quote.createdAt).toLocaleDateString('en-US', {
@@ -85,12 +103,17 @@ export default function AdminQuotes() {
                         })}
                       </p>
                     </div>
-                    <Badge
-                      variant={quote.status === 'new' ? 'default' : 'secondary'}
-                      data-testid={`badge-status-${quote.id}`}
-                    >
-                      {quote.status}
-                    </Badge>
+                    <div className="flex flex-col items-end gap-2">
+                      <Badge
+                        variant={quote.status === 'new' ? 'default' : 'secondary'}
+                        data-testid={`badge-status-${quote.id}`}
+                      >
+                        {quote.status}
+                      </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        {quote.serviceType}
+                      </Badge>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -104,14 +127,29 @@ export default function AdminQuotes() {
                         }
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Users className="w-4 h-4" />
-                      <span>{quote.guestCount} guests</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <ChefHat className="w-4 h-4" />
-                      <span className="capitalize">{quote.cuisine}</span>
-                    </div>
+                    {quote.serviceType === 'single' ? (
+                      <>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Users className="w-4 h-4" />
+                          <span>{quote.guestCount} guests</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <ChefHat className="w-4 h-4" />
+                          <span className="capitalize">{quote.cuisine}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Users className="w-4 h-4" />
+                          <span>{quote.peopleCount} people</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Clock className="w-4 h-4" />
+                          <span>{quote.serviceDuration?.replace(/-/g, ' ')}</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -142,93 +180,201 @@ export default function AdminQuotes() {
                   </div>
 
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Occasion</p>
-                    <p className="capitalize">{selectedQuoteData.occasion.replace(/-/g, ' ')}</p>
-                  </div>
-
-                  <div>
                     <p className="text-sm font-medium text-muted-foreground mb-1">Service Type</p>
                     <p className="capitalize">{selectedQuoteData.serviceType}</p>
                   </div>
 
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
-                    {selectedQuoteData.addressSkipped ? (
-                      <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
-                    ) : (
-                      <>
-                        <p className="font-medium">{selectedQuoteData.venueName}</p>
-                        <p className="text-sm">{selectedQuoteData.street}</p>
-                        <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
-                        {selectedQuoteData.postalCode && (
-                          <p className="text-sm">{selectedQuoteData.postalCode}</p>
-                        )}
-                        {selectedQuoteData.country && (
-                          <p className="text-sm font-medium mt-1">{selectedQuoteData.country}</p>
-                        )}
-                      </>
-                    )}
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
-                    <p>{selectedQuoteData.guestCount} people</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">Additional Services</p>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedQuoteData.additionalServices.map((service) => (
-                        <Badge key={service} variant="outline">
-                          {service.replace(/-/g, ' ')}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Cuisine</p>
-                    <p className="capitalize">{selectedQuoteData.cuisine}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">Event Dates</p>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedQuoteData.selectedDates.map((date, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-sm bg-muted px-3 py-1 rounded-md">
-                          <Calendar className="w-3 h-3" />
-                          {new Date(date).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })}
+                  {selectedQuoteData.serviceType === 'single' ? (
+                    <>
+                      {/* Single Service Details */}
+                      {selectedQuoteData.occasion && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Occasion</p>
+                          <p className="capitalize">{selectedQuoteData.occasion.replace(/-/g, ' ')}</p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      )}
 
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Time of Day</p>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span className="capitalize">{selectedQuoteData.timeOfDay}</span>
-                    </div>
-                  </div>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
+                        {selectedQuoteData.addressSkipped ? (
+                          <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
+                        ) : (
+                          <>
+                            <p className="font-medium">{selectedQuoteData.venueName}</p>
+                            <p className="text-sm">{selectedQuoteData.street}</p>
+                            <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
+                            {selectedQuoteData.postalCode && (
+                              <p className="text-sm">{selectedQuoteData.postalCode}</p>
+                            )}
+                            {selectedQuoteData.country && (
+                              <p className="text-sm font-medium mt-1">{selectedQuoteData.country}</p>
+                            )}
+                          </>
+                        )}
+                      </div>
 
-                  {selectedQuoteData.foodPreferences && (
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground mb-1">Food Preferences</p>
-                      <p className="text-sm bg-muted p-3 rounded-md">
-                        {selectedQuoteData.foodPreferences}
-                      </p>
-                    </div>
+                      {selectedQuoteData.guestCount && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
+                          <p>{selectedQuoteData.guestCount} people</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.additionalServices && selectedQuoteData.additionalServices.length > 0 && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-2">Additional Services</p>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedQuoteData.additionalServices.map((service) => (
+                              <Badge key={service} variant="outline">
+                                {service.replace(/-/g, ' ')}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.cuisine && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Cuisine</p>
+                          <p className="capitalize">{selectedQuoteData.cuisine}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.selectedDates && selectedQuoteData.selectedDates.length > 0 && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-2">Event Dates</p>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedQuoteData.selectedDates.map((date, idx) => (
+                              <div key={idx} className="flex items-center gap-2 text-sm bg-muted px-3 py-1 rounded-md">
+                                <Calendar className="w-3 h-3" />
+                                {new Date(date).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric',
+                                })}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.timeOfDay && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Time of Day</p>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            <span className="capitalize">{selectedQuoteData.timeOfDay}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.foodPreferences && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Preferences</p>
+                          <p className="text-sm bg-muted p-3 rounded-md">
+                            {selectedQuoteData.foodPreferences}
+                          </p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.moodDescription && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Mood & Atmosphere</p>
+                          <p className="text-sm bg-muted p-3 rounded-md">
+                            {selectedQuoteData.moodDescription}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {/* Multiple Service Details */}
+                      {selectedQuoteData.recurringServiceType && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Recurring Service</p>
+                          <p className="capitalize">{selectedQuoteData.recurringServiceType.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.serviceDuration && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Duration</p>
+                          <p className="capitalize">{selectedQuoteData.serviceDuration.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
+                        {selectedQuoteData.addressSkipped ? (
+                          <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
+                        ) : (
+                          <>
+                            <p className="font-medium">{selectedQuoteData.venueName}</p>
+                            <p className="text-sm">{selectedQuoteData.street}</p>
+                            <p className="text-sm">{selectedQuoteData.city}, {selectedQuoteData.region}</p>
+                            {selectedQuoteData.postalCode && (
+                              <p className="text-sm">{selectedQuoteData.postalCode}</p>
+                            )}
+                            {selectedQuoteData.country && (
+                              <p className="text-sm font-medium mt-1">{selectedQuoteData.country}</p>
+                            )}
+                          </>
+                        )}
+                      </div>
+
+                      {selectedQuoteData.peopleCount && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">People Count</p>
+                          <p>{selectedQuoteData.peopleCount} people</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.dietaryFocus && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Dietary Focus</p>
+                          <p className="capitalize">{selectedQuoteData.dietaryFocus.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.chefQualities && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Chef Requirements</p>
+                          <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
+                            {selectedQuoteData.chefQualities}
+                          </p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.budgetRange && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Budget Range</p>
+                          <p>{selectedQuoteData.budgetRange.replace(/-/g, ' ')}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.startDate && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Start Date</p>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>
+                              {new Date(selectedQuoteData.startDate).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
 
-                  {selectedQuoteData.moodDescription && (
+                  {selectedQuoteData.additionalNotes && (
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground mb-1">Mood & Atmosphere</p>
-                      <p className="text-sm bg-muted p-3 rounded-md">
-                        {selectedQuoteData.moodDescription}
+                      <p className="text-sm font-medium text-muted-foreground mb-1">Additional Notes</p>
+                      <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
+                        {selectedQuoteData.additionalNotes}
                       </p>
                     </div>
                   )}

@@ -170,6 +170,8 @@ export default function QuoteFunnel() {
   const [mealsNeeded, setMealsNeeded] = useState<Set<string>>(new Set());
   const [mealTimes, setMealTimes] = useState<{breakfast?: string, lunch?: string, dinner?: string}>({});
   const [workDays, setWorkDays] = useState<WorkDaysType>(null);
+  const [groceryHandling, setGroceryHandling] = useState<'mychef-handles' | 'client-handles' | null>(null);
+  const [groceryPaymentMethod, setGroceryPaymentMethod] = useState<'upfront-payment' | 'daily-money' | null>(null);
   const [dietaryRestrictions, setDietaryRestrictions] = useState('');
   
   // Common state
@@ -240,8 +242,10 @@ export default function QuoteFunnel() {
           guestsPerMeal: guestsPerMeal.toString(),
           mealsNeeded: Array.from(mealsNeeded),
           mealTimes: mealTimes,
-          dietaryRestrictions: dietaryRestrictions || null,
           workDays: workDays!,
+          groceryHandling: groceryHandling!,
+          groceryPaymentMethod: groceryHandling === 'mychef-handles' ? groceryPaymentMethod! : null,
+          dietaryRestrictions: dietaryRestrictions || null,
         };
       }
       
@@ -289,7 +293,10 @@ export default function QuoteFunnel() {
   const getTotalSteps = () => {
     if (serviceType === 'single') return 7;
     if (serviceType === 'multiple') return 7;
-    if (serviceType === 'fulltime') return 7;
+    if (serviceType === 'fulltime') {
+      // Base steps + conditional grocery payment step
+      return groceryHandling === 'mychef-handles' ? 10 : 9;
+    }
     return 1;
   };
 
@@ -330,9 +337,22 @@ export default function QuoteFunnel() {
       if (currentStep === 2) return guestsPerMeal >= 1;
       if (currentStep === 3) return mealsNeeded.size > 0 && Array.from(mealsNeeded).every(meal => mealTimes[meal as 'breakfast' | 'lunch' | 'dinner']?.trim());
       if (currentStep === 4) return workDays !== null;
-      if (currentStep === 5) return isAddressValid() || addressSkipped;
-      if (currentStep === 6) return true;
-      if (currentStep === 7) return true;
+      if (currentStep === 5) return groceryHandling !== null;
+      
+      // Step 6 is conditional: only shown if groceryHandling === 'mychef-handles'
+      if (groceryHandling === 'mychef-handles') {
+        if (currentStep === 6) return groceryPaymentMethod !== null;
+        if (currentStep === 7) return isAddressValid() || addressSkipped;
+        if (currentStep === 8) return true; // dietary restrictions
+        if (currentStep === 9) return true; // confirmation page (not shown yet)
+        if (currentStep === 10) return true; // final confirmation
+      } else {
+        // Skip payment step if client handles groceries
+        if (currentStep === 6) return isAddressValid() || addressSkipped;
+        if (currentStep === 7) return true; // dietary restrictions
+        if (currentStep === 8) return true; // confirmation page (not shown yet)
+        if (currentStep === 9) return true; // final confirmation
+      }
     }
     
     return false;
@@ -342,13 +362,23 @@ export default function QuoteFunnel() {
     if (!canContinue()) return;
     
     if (currentStep < getTotalSteps()) {
-      setCurrentStep(currentStep + 1);
+      // Special handling for fulltime flow: skip step 6 (payment) if client handles groceries
+      if (serviceType === 'fulltime' && currentStep === 5 && groceryHandling === 'client-handles') {
+        setCurrentStep(currentStep + 2); // Skip step 6, go to step 7 (location)
+      } else {
+        setCurrentStep(currentStep + 1);
+      }
     }
   };
 
   const handleBack = () => {
     if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+      // Special handling for fulltime flow: skip step 6 (payment) when going back if client handles groceries
+      if (serviceType === 'fulltime' && currentStep === 7 && groceryHandling === 'client-handles') {
+        setCurrentStep(currentStep - 2); // Skip step 6, go back to step 5 (grocery handling)
+      } else {
+        setCurrentStep(currentStep - 1);
+      }
     } else {
       setLocation('/');
     }
@@ -361,7 +391,10 @@ export default function QuoteFunnel() {
   const isFinalStep = () => {
     if (serviceType === 'single') return currentStep === 7;
     if (serviceType === 'multiple') return currentStep === 7;
-    if (serviceType === 'fulltime') return currentStep === 7;
+    if (serviceType === 'fulltime') {
+      // Final step is 10 if mychef handles groceries, 9 if client handles
+      return currentStep === (groceryHandling === 'mychef-handles' ? 10 : 9);
+    }
     return false;
   };
 
@@ -1348,8 +1381,164 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULLTIME CHEF FLOW - Step 5: Location */}
+          {/* FULLTIME CHEF FLOW - Step 5: Grocery Shopping */}
           {currentStep === 5 && serviceType === 'fulltime' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Who handles grocery shopping?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Choose how you would like the grocery shopping to be managed
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {[
+                  { 
+                    id: 'mychef-handles', 
+                    label: 'myCHEF handles shopping', 
+                    description: 'Our chef will do the grocery shopping (1-2 hours included in working hours)' 
+                  },
+                  { 
+                    id: 'client-handles', 
+                    label: 'I handle my own shopping', 
+                    description: 'You will provide all groceries and ingredients yourself' 
+                  },
+                ].map((option) => {
+                  const isSelected = groceryHandling === option.id;
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => {
+                        setGroceryHandling(option.id as 'mychef-handles' | 'client-handles');
+                        if (option.id === 'client-handles') {
+                          setGroceryPaymentMethod(null);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setGroceryHandling(option.id as 'mychef-handles' | 'client-handles');
+                          if (option.id === 'client-handles') {
+                            setGroceryPaymentMethod(null);
+                          }
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-grocery-${option.id}`}
+                    >
+                      <CardContent className="py-6">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg mb-2">{option.label}</p>
+                            <p className="text-sm text-muted-foreground">{option.description}</p>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* FULLTIME CHEF FLOW - Step 6: Grocery Payment Method (Conditional) */}
+          {currentStep === 6 && serviceType === 'fulltime' && groceryHandling === 'mychef-handles' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  How will you handle grocery payments?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Choose your preferred payment method for groceries
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {[
+                  { 
+                    id: 'upfront-payment', 
+                    label: 'I pay upfront', 
+                    description: 'You transfer grocery money to myCHEF, and we handle all purchases' 
+                  },
+                  { 
+                    id: 'daily-money', 
+                    label: 'Daily/regular cash to chef', 
+                    description: 'You provide money to the chef daily or regularly for grocery shopping' 
+                  },
+                ].map((option) => {
+                  const isSelected = groceryPaymentMethod === option.id;
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setGroceryPaymentMethod(option.id as 'upfront-payment' | 'daily-money')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setGroceryPaymentMethod(option.id as 'upfront-payment' | 'daily-money');
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-payment-${option.id}`}
+                    >
+                      <CardContent className="py-6">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg mb-2">{option.label}</p>
+                            <p className="text-sm text-muted-foreground">{option.description}</p>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground">
+                  Shopping time (1-2 hours) is included in the chef's working hours
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* FULLTIME CHEF FLOW - Step 7 (or 6): Location */}
+          {((currentStep === 7 && groceryHandling === 'mychef-handles') || 
+            (currentStep === 6 && groceryHandling === 'client-handles')) && 
+           serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -1487,8 +1676,10 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULLTIME CHEF FLOW - Step 6: Dietary Restrictions */}
-          {currentStep === 6 && serviceType === 'fulltime' && (
+          {/* FULLTIME CHEF FLOW - Step 8 (or 7): Dietary Restrictions */}
+          {((currentStep === 8 && groceryHandling === 'mychef-handles') || 
+            (currentStep === 7 && groceryHandling === 'client-handles')) && 
+           serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">

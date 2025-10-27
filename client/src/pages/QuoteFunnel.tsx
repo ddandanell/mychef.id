@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X, MessageSquare } from 'lucide-react';
+import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X, MessageSquare, Minus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,6 @@ import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
-type GuestCountType = '2' | '3-6' | '7-12' | '13+' | 'exact' | null;
 type BudgetRangeSingleType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
 type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
@@ -132,13 +131,6 @@ function formatQuoteForWhatsApp(data: any): string {
   return message;
 }
 
-const guestCountOptions = [
-  { id: '2', label: '2 people' },
-  { id: '3-6', label: '3 to 6 people' },
-  { id: '7-12', label: '7 to 12 people' },
-  { id: '13+', label: '13+ people' },
-  { id: 'exact', label: 'I know the exact number' },
-] as const;
 
 const budgetRangeSingleOptions = [
   { id: '250k', label: '250k IDR per person', description: 'Simple ingredients' },
@@ -241,8 +233,7 @@ export default function QuoteFunnel() {
     country: 'Indonesia',
   });
   const [addressSkipped, setAddressSkipped] = useState(false);
-  const [guestCount, setGuestCount] = useState<GuestCountType>(null);
-  const [customGuestCount, setCustomGuestCount] = useState('');
+  const [guestCount, setGuestCount] = useState<number>(2);
   const [budgetRangeSingle, setBudgetRangeSingle] = useState<BudgetRangeSingleType>(null);
   const [numberOfCourses, setNumberOfCourses] = useState<NumberOfCoursesType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
@@ -260,7 +251,7 @@ export default function QuoteFunnel() {
   const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
   const [otherRecurringServiceText, setOtherRecurringServiceText] = useState('');
   const [serviceDuration, setServiceDuration] = useState<ServiceDurationType>(null);
-  const [peopleCount, setPeopleCount] = useState('');
+  const [peopleCount, setPeopleCount] = useState<number>(2);
   const [dietaryFocus, setDietaryFocus] = useState<DietaryFocusType>(null);
   const [otherDietaryText, setOtherDietaryText] = useState('');
   const [chefQualities, setChefQualities] = useState('');
@@ -290,7 +281,7 @@ export default function QuoteFunnel() {
         payload = {
           ...payload,
           occasion: occasion!,
-          guestCount: guestCount === 'exact' ? customGuestCount : guestCount!,
+          guestCount: guestCount.toString(),
           budgetRangeSingle: budgetRangeSingle!,
           numberOfCourses: numberOfCourses!,
           additionalServices: Array.from(selectedServices),
@@ -307,7 +298,7 @@ export default function QuoteFunnel() {
           ...payload,
           recurringServiceType: recurringServiceType === 'other' ? otherRecurringServiceText : recurringServiceType!,
           serviceDuration: serviceDuration!,
-          peopleCount: peopleCount,
+          peopleCount: peopleCount.toString(),
           dietaryFocus: dietaryFocus === 'other' ? otherDietaryText : dietaryFocus!,
           chefQualities: chefQualities,
           budgetRange: budgetRange!,
@@ -394,7 +385,7 @@ export default function QuoteFunnel() {
         setCurrentStep(3);
       } else if (currentStep === 3 && (isAddressValid() || addressSkipped)) {
         setCurrentStep(4);
-      } else if (currentStep === 4 && guestCount && (guestCount !== 'exact' || (customGuestCount && parseInt(customGuestCount) > 0))) {
+      } else if (currentStep === 4 && guestCount > 0) {
         setCurrentStep(5);
       } else if (currentStep === 5 && budgetRangeSingle) {
         setCurrentStep(6);
@@ -419,7 +410,7 @@ export default function QuoteFunnel() {
         setCurrentStep(4);
       } else if (currentStep === 4 && (isAddressValid() || addressSkipped)) {
         setCurrentStep(5);
-      } else if (currentStep === 5 && peopleCount.trim() !== '') {
+      } else if (currentStep === 5 && peopleCount > 0) {
         setCurrentStep(6);
       } else if (currentStep === 6 && dietaryFocus) {
         if (dietaryFocus === 'other' && otherDietaryText.trim() === '') return;
@@ -454,11 +445,7 @@ export default function QuoteFunnel() {
       // Single service flow validation (11 steps)
       if (currentStep === 2) return !!occasion;
       if (currentStep === 3) return isAddressValid() || addressSkipped;
-      if (currentStep === 4) {
-        if (!guestCount) return false;
-        if (guestCount === 'exact') return customGuestCount && parseInt(customGuestCount) > 0;
-        return true;
-      }
+      if (currentStep === 4) return guestCount > 0;
       if (currentStep === 5) return !!budgetRangeSingle;
       if (currentStep === 6) return !!numberOfCourses;
       if (currentStep === 7) return selectedServices.size > 0;
@@ -478,7 +465,7 @@ export default function QuoteFunnel() {
       }
       if (currentStep === 3) return !!serviceDuration;
       if (currentStep === 4) return isAddressValid() || addressSkipped;
-      if (currentStep === 5) return peopleCount.trim() !== '';
+      if (currentStep === 5) return peopleCount > 0;
       if (currentStep === 6) {
         if (!dietaryFocus) return false;
         if (dietaryFocus === 'other') return otherDietaryText.trim() !== '';
@@ -1152,24 +1139,50 @@ export default function QuoteFunnel() {
                 </p>
               </div>
 
+              {/* Number Picker */}
               <div className="max-w-md mx-auto">
-                <div className="space-y-2">
-                  <Label htmlFor="people-count" className="text-base font-medium">
-                    Number of people
-                  </Label>
-                  <Input
-                    id="people-count"
-                    type="number"
-                    min="1"
-                    placeholder="e.g., 2, 4, 6..."
-                    value={peopleCount}
-                    onChange={(e) => setPeopleCount(e.target.value)}
-                    className="text-base"
-                    data-testid="input-people-count"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Enter the typical number of people the chef will cook for
-                  </p>
+                <div className="flex flex-col items-center gap-8">
+                  {/* Large Number Display */}
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-people-count">
+                      {peopleCount}
+                    </div>
+                    <p className="text-xl text-muted-foreground">
+                      {peopleCount === 1 ? 'Person' : 'People'}
+                    </p>
+                  </div>
+
+                  {/* Plus/Minus Buttons */}
+                  <div className="flex items-center gap-6">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
+                      disabled={peopleCount <= 1}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-decrease-people-count"
+                      aria-label="Decrease people count"
+                    >
+                      <Minus className="w-6 h-6" />
+                    </Button>
+                    
+                    <Button
+                      size="lg"
+                      onClick={() => setPeopleCount(peopleCount + 1)}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-increase-people-count"
+                      aria-label="Increase people count"
+                    >
+                      <Plus className="w-6 h-6" />
+                    </Button>
+                  </div>
+
+                  {/* Helpful Note */}
+                  <div className="w-full p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                    <p className="text-sm text-center">
+                      Typical number of people the chef will cook for
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1393,80 +1406,50 @@ export default function QuoteFunnel() {
                 </p>
               </div>
 
-              {/* Guest Count Options */}
-              <div className="max-w-xl mx-auto space-y-4">
-                {guestCountOptions.map((option) => {
-                  const isSelected = guestCount === option.id;
-                  
-                  return (
-                    <Card
-                      key={option.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setGuestCount(option.id as GuestCountType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setGuestCount(option.id as GuestCountType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-guest-count-${option.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="font-medium text-lg">{option.label}</span>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-
-                {/* Custom Guest Count Input */}
-                {guestCount === 'exact' && (
-                  <div className="mt-6 max-w-md mx-auto">
-                    <Label htmlFor="custom-guest-count" className="text-base font-medium mb-2 block">
-                      Enter exact number of guests
-                    </Label>
-                    <Input
-                      id="custom-guest-count"
-                      type="number"
-                      min="1"
-                      max="1000"
-                      placeholder="e.g., 8"
-                      value={customGuestCount}
-                      onChange={(e) => setCustomGuestCount(e.target.value)}
-                      className="text-lg"
-                      data-testid="input-custom-guest-count"
-                    />
+              {/* Number Picker */}
+              <div className="max-w-md mx-auto">
+                <div className="flex flex-col items-center gap-8">
+                  {/* Large Number Display */}
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guest-count">
+                      {guestCount}
+                    </div>
+                    <p className="text-xl text-muted-foreground">
+                      {guestCount === 1 ? 'Guest' : 'Guests'}
+                    </p>
                   </div>
-                )}
 
-                {/* Helpful Note */}
-                <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-guest-count-flexible">
-                  <p className="text-sm text-center">
-                    Not sure? You can change it later!
-                  </p>
+                  {/* Plus/Minus Buttons */}
+                  <div className="flex items-center gap-6">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                      disabled={guestCount <= 1}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-decrease-guest-count"
+                      aria-label="Decrease guest count"
+                    >
+                      <Minus className="w-6 h-6" />
+                    </Button>
+                    
+                    <Button
+                      size="lg"
+                      onClick={() => setGuestCount(guestCount + 1)}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-increase-guest-count"
+                      aria-label="Increase guest count"
+                    >
+                      <Plus className="w-6 h-6" />
+                    </Button>
+                  </div>
+
+                  {/* Helpful Note */}
+                  <div className="w-full p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-guest-count-flexible">
+                    <p className="text-sm text-center">
+                      Not sure? You can change it later!
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2098,7 +2081,7 @@ export default function QuoteFunnel() {
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Guest Count</p>
                               <p className="font-medium">
-                                {guestCount === 'exact' ? `${customGuestCount} ${parseInt(customGuestCount) === 1 ? 'person' : 'people'}` : guestCountOptions.find(o => o.id === guestCount)?.label}
+                                {guestCount} {guestCount === 1 ? 'person' : 'people'}
                               </p>
                             </div>
                             <div>
@@ -2319,7 +2302,7 @@ export default function QuoteFunnel() {
                           </div>
                           <div className="flex justify-between gap-4">
                             <span className="text-muted-foreground">People:</span>
-                            <span className="font-medium">{peopleCount} people</span>
+                            <span className="font-medium">{peopleCount} {peopleCount === 1 ? 'person' : 'people'}</span>
                           </div>
                           <div className="flex justify-between gap-4">
                             <span className="text-muted-foreground">Start Date:</span>

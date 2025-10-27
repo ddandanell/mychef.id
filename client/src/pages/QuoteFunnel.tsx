@@ -14,7 +14,7 @@ import { useLocation } from 'wouter';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
-type GuestCountType = '2' | '3-6' | '7-12' | '13+' | null;
+type GuestCountType = '2' | '3-6' | '7-12' | '13+' | 'exact' | null;
 type BudgetRangeSingleType = 'under-1m' | '1m-2m' | '2m-3m' | '3m-5m' | 'above-5m' | null;
 type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
 type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
@@ -49,6 +49,7 @@ const guestCountOptions = [
   { id: '3-6', label: '3 to 6 people' },
   { id: '7-12', label: '7 to 12 people' },
   { id: '13+', label: '13+ people' },
+  { id: 'exact', label: 'I know the exact number' },
 ] as const;
 
 const budgetRangeSingleOptions = [
@@ -151,6 +152,7 @@ export default function QuoteFunnel() {
   });
   const [addressSkipped, setAddressSkipped] = useState(false);
   const [guestCount, setGuestCount] = useState<GuestCountType>(null);
+  const [customGuestCount, setCustomGuestCount] = useState('');
   const [budgetRangeSingle, setBudgetRangeSingle] = useState<BudgetRangeSingleType>(null);
   const [numberOfCourses, setNumberOfCourses] = useState<NumberOfCoursesType>(null);
   const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
@@ -280,7 +282,7 @@ export default function QuoteFunnel() {
         setCurrentStep(3);
       } else if (currentStep === 3 && (isAddressValid() || addressSkipped)) {
         setCurrentStep(4);
-      } else if (currentStep === 4 && guestCount) {
+      } else if (currentStep === 4 && guestCount && (guestCount !== 'exact' || (customGuestCount && parseInt(customGuestCount) > 0))) {
         setCurrentStep(5);
       } else if (currentStep === 5 && budgetRangeSingle) {
         setCurrentStep(6);
@@ -337,18 +339,24 @@ export default function QuoteFunnel() {
     if (currentStep === 1) return !!serviceType;
     
     if (serviceType === 'single') {
-      // Single service flow validation
+      // Single service flow validation (11 steps)
       if (currentStep === 2) return !!occasion;
       if (currentStep === 3) return isAddressValid() || addressSkipped;
-      if (currentStep === 4) return !!guestCount;
-      if (currentStep === 5) return selectedServices.size > 0;
-      if (currentStep === 6) {
+      if (currentStep === 4) {
+        if (!guestCount) return false;
+        if (guestCount === 'exact') return customGuestCount && parseInt(customGuestCount) > 0;
+        return true;
+      }
+      if (currentStep === 5) return !!budgetRangeSingle;
+      if (currentStep === 6) return !!numberOfCourses;
+      if (currentStep === 7) return selectedServices.size > 0;
+      if (currentStep === 8) {
         if (!cuisine) return false;
         if (cuisine === 'other') return otherCuisineText.trim() !== '';
         return true;
       }
-      if (currentStep === 7) return selectedDates.length > 0;
-      if (currentStep === 8) return !!timeOfDay;
+      if (currentStep === 9) return selectedDates.length > 0;
+      if (currentStep === 10) return !!timeOfDay;
     } else if (serviceType === 'multiple') {
       // Multiple service flow validation
       if (currentStep === 2) {
@@ -1318,6 +1326,26 @@ export default function QuoteFunnel() {
                     </Card>
                   );
                 })}
+
+                {/* Custom Guest Count Input */}
+                {guestCount === 'exact' && (
+                  <div className="mt-6 max-w-md mx-auto">
+                    <Label htmlFor="custom-guest-count" className="text-base font-medium mb-2 block">
+                      Enter exact number of guests
+                    </Label>
+                    <Input
+                      id="custom-guest-count"
+                      type="number"
+                      min="1"
+                      max="1000"
+                      placeholder="e.g., 8"
+                      value={customGuestCount}
+                      onChange={(e) => setCustomGuestCount(e.target.value)}
+                      className="text-lg"
+                      data-testid="input-custom-guest-count"
+                    />
+                  </div>
+                )}
 
                 {/* Helpful Note */}
                 <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-guest-count-flexible">

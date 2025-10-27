@@ -2046,7 +2046,7 @@ export default function QuoteFunnel() {
                   Who handles grocery shopping?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Choose how you would like the grocery shopping to be managed
+                  Total transparency with receipts - you're always in control
                 </p>
               </div>
 
@@ -2054,8 +2054,8 @@ export default function QuoteFunnel() {
                 {[
                   { 
                     id: 'mychef-handles', 
-                    label: 'myCHEF handles shopping', 
-                    description: 'Our chef will do the grocery shopping (1-2 hours included in working hours)' 
+                    label: 'Chef handles shopping', 
+                    description: 'Chef shops every 1-2 days, you get all receipts - shopping time included in hourly rate' 
                   },
                   { 
                     id: 'client-handles', 
@@ -2113,6 +2113,36 @@ export default function QuoteFunnel() {
                   );
                 })}
               </div>
+
+              {groceryHandling === 'mychef-handles' && (
+                <div className="max-w-2xl mx-auto">
+                  <Card className="border-primary/20 bg-primary/5">
+                    <CardContent className="pt-6">
+                      <div className="space-y-3 text-sm">
+                        <p className="font-medium">How chef shopping works:</p>
+                        <ul className="space-y-2 ml-4">
+                          <li className="flex gap-2">
+                            <span className="text-primary">•</span>
+                            <span><strong>Plan meals together</strong> - you and your chef decide the menu</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="text-primary">•</span>
+                            <span><strong>Regular shopping trips</strong> - chef shops every 1-2 days (or as you prefer) for fresh ingredients</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="text-primary">•</span>
+                            <span><strong>Full transparency</strong> - chef provides all receipts so you see exactly what was purchased</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="text-primary">•</span>
+                            <span><strong>Shopping time included</strong> - the 1-2 hours for shopping is part of the chef's paid working hours</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </div>
           )}
 

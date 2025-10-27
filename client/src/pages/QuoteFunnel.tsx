@@ -561,9 +561,11 @@ export default function QuoteFunnel() {
               <span className="sm:hidden">Exit</span>
             </Button>
             
-            <div className="text-sm text-muted-foreground font-medium">
-              Step {currentStep} of {getTotalSteps()}
-            </div>
+            {currentStep > 1 && (
+              <div className="text-sm text-muted-foreground font-medium">
+                Step {currentStep} of {getTotalSteps()}
+              </div>
+            )}
 
             <Button
               variant="outline"
@@ -578,13 +580,15 @@ export default function QuoteFunnel() {
           </div>
         </div>
         
-        {/* Progress Bar */}
-        <div className="h-1 bg-muted">
-          <div 
-            className="h-full bg-primary transition-all duration-300"
-            style={{ width: `${(currentStep / getTotalSteps()) * 100}%` }}
-          />
-        </div>
+        {/* Progress Bar - Only show after step 1 */}
+        {currentStep > 1 && (
+          <div className="h-1 bg-muted">
+            <div 
+              className="h-full bg-primary transition-all duration-300"
+              style={{ width: `${(currentStep / getTotalSteps()) * 100}%` }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Trust Badges - Always visible */}

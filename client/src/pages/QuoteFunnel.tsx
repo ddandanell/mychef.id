@@ -25,7 +25,7 @@ type TimeOfDayType = 'day' | 'night' | null;
 // Multiple service types
 type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'live-in' | 'other' | null;
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
-type BudgetRangeType = 'under-5m' | '5m-10m' | '10m-20m' | '20m-30m' | 'above-30m' | null;
+type BudgetRangeType = 'under-500k' | '500k-1m' | '1m-2m' | '2m-3m' | 'above-3m' | null;
 type DietaryFocusType = 'fitness' | 'weight-loss' | 'keto' | 'vegan' | 'halal' | 'diabetic' | 'family-meals' | 'other' | null;
 
 interface AddressData {
@@ -120,11 +120,11 @@ const serviceDurationOptions = [
 ] as const;
 
 const budgetRangeOptions = [
-  { id: 'under-5m', label: 'Under 5 million IDR/month' },
-  { id: '5m-10m', label: '5-10 million IDR/month' },
-  { id: '10m-20m', label: '10-20 million IDR/month' },
-  { id: '20m-30m', label: '20-30 million IDR/month' },
-  { id: 'above-30m', label: 'Above 30 million IDR/month' },
+  { id: 'under-500k', label: 'Under 500k IDR per meal', description: 'Simple ingredients' },
+  { id: '500k-1m', label: '500k - 1 million IDR per meal', description: 'Quality ingredients' },
+  { id: '1m-2m', label: '1-2 million IDR per meal', description: 'Premium ingredients' },
+  { id: '2m-3m', label: '2-3 million IDR per meal', description: 'High-end ingredients' },
+  { id: 'above-3m', label: 'Above 3 million IDR per meal', description: 'Luxury ingredients' },
 ] as const;
 
 const dietaryFocusOptions = [
@@ -1179,10 +1179,10 @@ export default function QuoteFunnel() {
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your monthly budget?
+                  What's your food budget per meal?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  This helps us recommend chefs within your price range
+                  Budget for ingredients and groceries for each meal. Chef fees are separate and quoted based on your needs.
                 </p>
               </div>
 
@@ -1209,8 +1209,11 @@ export default function QuoteFunnel() {
                       data-testid={`option-budget-${budget.id}`}
                     >
                       <CardContent className="py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="font-medium">{budget.label}</span>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg mb-1">{budget.label}</p>
+                            <p className="text-sm text-muted-foreground">{budget.description}</p>
+                          </div>
                           <div 
                             className={`
                               w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
@@ -2264,7 +2267,7 @@ export default function QuoteFunnel() {
                       <CardContent className="pt-6">
                         <h3 className="font-semibold text-lg mb-4">Budget</h3>
                         <div className="text-sm">
-                          <span className="text-muted-foreground">Monthly Budget:</span>
+                          <span className="text-muted-foreground">Food Budget Per Meal:</span>
                           <p className="font-medium mt-1">
                             {budgetRangeOptions.find(b => b.id === budgetRange)?.label}
                           </p>

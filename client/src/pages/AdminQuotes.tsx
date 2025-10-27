@@ -374,7 +374,7 @@ export default function AdminQuotes() {
 
                       {selectedQuoteData.budgetRange && (
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Budget Range</p>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Meal</p>
                           <p>{selectedQuoteData.budgetRange.replace(/-/g, ' ')}</p>
                         </div>
                       )}

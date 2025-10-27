@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus } from 'lucide-react';
+import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -73,6 +73,17 @@ function formatQuoteForWhatsApp(data: any): string {
     }
     
     message += `*Pre-Meeting with Chef:* ${data.preMeetingRequested ? 'Yes - Chef arrives 2 hours early for menu planning & grocery shopping' : 'No - Chef arrives at cooking time'}\n`;
+    
+    if (data.additionalServices && data.additionalServices.length > 0) {
+      message += '\n*Additional Services Requested:*\n';
+      data.additionalServices.forEach((service: string) => {
+        const serviceName = service.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+        message += `  • ${serviceName}\n`;
+      });
+      if (data.additionalServicesOther && data.additionalServicesOther.trim() !== '') {
+        message += `  ↳ _${data.additionalServicesOther}_\n`;
+      }
+    }
   } else if (data.serviceType === 'multiple') {
     message += '*Service Type:* Recurring Service\n';
     message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
@@ -217,6 +228,8 @@ export default function QuoteFunnel() {
   const [datesFlexible, setDatesFlexible] = useState(false);
   const [datesNote, setDatesNote] = useState('');
   const [preMeetingRequested, setPreMeetingRequested] = useState<boolean | null>(null);
+  const [additionalServices, setAdditionalServices] = useState<Set<string>>(new Set());
+  const [additionalServicesOther, setAdditionalServicesOther] = useState('');
   
   // Multiple service state
   const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
@@ -302,6 +315,8 @@ export default function QuoteFunnel() {
           datesFlexible,
           datesNote: datesFlexible ? datesNote : null,
           preMeetingRequested: preMeetingRequested!,
+          additionalServices: Array.from(additionalServices),
+          additionalServicesOther: additionalServices.has('other') ? additionalServicesOther : null,
         };
       } else if (serviceType === 'multiple') {
         payload = {
@@ -374,7 +389,7 @@ export default function QuoteFunnel() {
   });
 
   const getTotalSteps = () => {
-    if (serviceType === 'single') return 8;
+    if (serviceType === 'single') return 9; // Added additional services step
     if (serviceType === 'multiple') return 7;
     if (serviceType === 'fulltime') {
       // Base steps + conditional grocery payment step
@@ -416,8 +431,9 @@ export default function QuoteFunnel() {
         return cuisine !== null && (cuisine !== 'not-sure' || cuisineCustom.trim() !== '');
       }
       if (currentStep === 6) return preMeetingRequested !== null;
-      if (currentStep === 7) return isAddressValid() || addressSkipped;
-      if (currentStep === 8) return true;
+      if (currentStep === 7) return true; // Additional services - optional, always can continue
+      if (currentStep === 8) return isAddressValid() || addressSkipped;
+      if (currentStep === 9) return true; // Final confirmation
     }
     
     if (serviceType === 'multiple') {
@@ -501,7 +517,7 @@ export default function QuoteFunnel() {
   };
 
   const isFinalStep = () => {
-    if (serviceType === 'single') return currentStep === 8;
+    if (serviceType === 'single') return currentStep === 9; // Updated for additional services step
     if (serviceType === 'multiple') return currentStep === 7;
     if (serviceType === 'fulltime') {
       // Final step is 9 if mychef handles groceries, 8 if client handles
@@ -555,13 +571,45 @@ export default function QuoteFunnel() {
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                   Choose the service that best fits your needs
                 </p>
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                    <span>Background-checked chefs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                    <span>Response within 24 hours</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary" />
+                    <span>1000+ successful events</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid sm:grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
                 {[
-                  { id: 'single', label: 'Single Event', description: 'One-time service for birthdays, anniversaries, dinner parties, or special celebrations', icon: ChefHat },
-                  { id: 'multiple', label: 'Recurring Service', description: 'Regular visits over weeks or months - meal prep, weekly shifts, or vacation period chef', icon: Users },
-                  { id: 'fulltime', label: 'Full-time or Part-time Chef', description: 'Daily or regular employment - personal household chef cooking meals every day or several days per week', icon: Home },
+                  { 
+                    id: 'single', 
+                    label: 'Single Event', 
+                    description: 'Perfect for one-time celebrations',
+                    details: ['Birthdays & anniversaries', 'Dinner parties', 'Special occasions', 'Corporate events'],
+                    icon: ChefHat 
+                  },
+                  { 
+                    id: 'multiple', 
+                    label: 'Recurring Service', 
+                    description: 'Regular chef visits over time',
+                    details: ['Weekly meal prep', '2-3 days per week', 'Extended vacation stays', 'Live-in arrangements'],
+                    icon: Users 
+                  },
+                  { 
+                    id: 'fulltime', 
+                    label: 'Full-time/Part-time Chef', 
+                    description: 'Personal household chef employment',
+                    details: ['Daily meal preparation', 'Breakfast, lunch & dinner', 'Custom work schedules', 'Long-term arrangements'],
+                    icon: Home 
+                  },
                 ].map((service) => {
                   const Icon = service.icon;
                   const isSelected = serviceType === service.id;
@@ -601,7 +649,15 @@ export default function QuoteFunnel() {
                           </div>
                           <div>
                             <h3 className="font-semibold text-lg mb-2">{service.label}</h3>
-                            <p className="text-sm text-muted-foreground">{service.description}</p>
+                            <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
+                            <ul className="space-y-1.5">
+                              {service.details.map((detail, idx) => (
+                                <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                                  <span>{detail}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
                       </CardContent>
@@ -1035,8 +1091,117 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 7: Location */}
+          {/* SINGLE SERVICE FLOW - Step 7: Additional Services */}
           {currentStep === 7 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Need any additional services?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  We can help coordinate your entire event (optional)
+                </p>
+              </div>
+
+              <div className="max-w-2xl mx-auto space-y-4">
+                {[
+                  { id: 'dj-music', label: 'DJ / Music Services', description: 'Professional DJ or live music' },
+                  { id: 'decorations', label: 'Event Decorations', description: 'Table settings, flowers, themed decor' },
+                  { id: 'photography', label: 'Photography / Videography', description: 'Capture your special moments' },
+                  { id: 'coordination', label: 'Event Coordination', description: 'Full event planning and management' },
+                  { id: 'other', label: 'Other Services', description: 'Tell us what else you need' },
+                ].map((service) => {
+                  const isSelected = additionalServices.has(service.id);
+                  return (
+                    <Card
+                      key={service.id}
+                      className={`
+                        transition-all overflow-visible
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      data-testid={`card-additional-service-${service.id}`}
+                    >
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          <div 
+                            className="flex items-center justify-between cursor-pointer"
+                            onClick={() => {
+                              const newServices = new Set(additionalServices);
+                              if (newServices.has(service.id)) {
+                                newServices.delete(service.id);
+                                if (service.id === 'other') setAdditionalServicesOther('');
+                              } else {
+                                newServices.add(service.id);
+                              }
+                              setAdditionalServices(newServices);
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                const newServices = new Set(additionalServices);
+                                if (newServices.has(service.id)) {
+                                  newServices.delete(service.id);
+                                  if (service.id === 'other') setAdditionalServicesOther('');
+                                } else {
+                                  newServices.add(service.id);
+                                }
+                                setAdditionalServices(newServices);
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div 
+                                className={`
+                                  w-5 h-5 flex-shrink-0 rounded border-2 transition-all flex items-center justify-center
+                                  ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                                `}
+                              >
+                                {isSelected && (
+                                  <Check className="w-3 h-3 text-primary-foreground" />
+                                )}
+                              </div>
+                              <div>
+                                <p className="font-medium text-lg">{service.label}</p>
+                                <p className="text-sm text-muted-foreground">{service.description}</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {isSelected && service.id === 'other' && (
+                            <div className="space-y-2 pl-8">
+                              <Label htmlFor="additional-services-other" className="text-sm font-medium">
+                                Please specify what you need
+                              </Label>
+                              <Textarea
+                                id="additional-services-other"
+                                placeholder="E.g., bartender, valet parking, security..."
+                                value={additionalServicesOther}
+                                onChange={(e) => setAdditionalServicesOther(e.target.value)}
+                                rows={3}
+                                data-testid="textarea-additional-services-other"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  myCHEF can help coordinate these services with trusted partners in Bali.
+                  We'll include recommendations and pricing in your quote.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 8: Location */}
+          {currentStep === 8 && serviceType === 'single' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -2316,16 +2481,22 @@ export default function QuoteFunnel() {
 
           {/* Continue Button (for non-final steps) */}
           {!isFinalStep() && (
-            <div className="flex justify-center pt-8">
-              <Button
-                size="lg"
-                onClick={handleContinue}
-                disabled={!canContinue()}
-                className="px-8"
-                data-testid="button-continue"
-              >
-                Continue
-              </Button>
+            <div className="space-y-6">
+              <div className="flex justify-center pt-8">
+                <Button
+                  size="lg"
+                  onClick={handleContinue}
+                  disabled={!canContinue()}
+                  className="px-8"
+                  data-testid="button-continue"
+                >
+                  Continue
+                </Button>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground max-w-md mx-auto">
+                <Shield className="w-3.5 h-3.5 flex-shrink-0" />
+                <p>Your information is secure and will only be used to prepare your personalized quote. We never spam or share your data.</p>
+              </div>
             </div>
           )}
         </div>

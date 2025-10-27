@@ -155,7 +155,7 @@ export default function AdminQuotes() {
                       <>
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <Users className="w-4 h-4" />
-                          <span>{quote.peopleCount} people</span>
+                          <span>{quote.peopleCount} {parseInt(quote.peopleCount || '0') === 1 ? 'person' : 'people'}</span>
                         </div>
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <Clock className="w-4 h-4" />
@@ -352,7 +352,7 @@ export default function AdminQuotes() {
                       {selectedQuoteData.peopleCount && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">People Count</p>
-                          <p>{selectedQuoteData.peopleCount} people</p>
+                          <p>{selectedQuoteData.peopleCount} {parseInt(selectedQuoteData.peopleCount) === 1 ? 'person' : 'people'}</p>
                         </div>
                       )}
 

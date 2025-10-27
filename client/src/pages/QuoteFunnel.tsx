@@ -1987,7 +1987,7 @@ export default function QuoteFunnel() {
                               </p>
                             </div>
                             <div>
-                              <p className="text-sm text-muted-foreground mb-1">Budget Range</p>
+                              <p className="text-sm text-muted-foreground mb-1">Food Budget</p>
                               <p className="font-medium">{budgetRangeSingleOptions.find(o => o.id === budgetRangeSingle)?.label}</p>
                             </div>
                           </div>

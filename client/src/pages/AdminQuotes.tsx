@@ -235,7 +235,7 @@ export default function AdminQuotes() {
 
                       {selectedQuoteData.budgetRangeSingle && (
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Budget Range</p>
+                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget</p>
                           <p className="capitalize">{selectedQuoteData.budgetRangeSingle.replace(/-/g, ' ')} IDR</p>
                         </div>
                       )}

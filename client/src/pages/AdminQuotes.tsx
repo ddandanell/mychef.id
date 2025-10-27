@@ -22,33 +22,18 @@ interface QuoteSubmission {
   // Single service fields
   occasion: string | null;
   guestCount: string | null;
-  budgetRangeSingle: string | null;
-  numberOfCourses: string | null;
-  additionalServices: string[] | null;
   cuisine: string | null;
-  dateMode: string | null;
   selectedDates: string[] | null;
-  timeOfDay: string | null;
-  foodPreferences: string | null;
-  moodDescription: string | null;
   
   // Multiple service fields
   recurringServiceType: string | null;
   serviceDuration: string | null;
   peopleCount: string | null;
-  dietaryFocus: string | null;
-  chefQualities: string | null;
-  budgetRange: string | null;
   startDate: string | null;
   
   // Full-time chef fields
   guestsPerMeal: string | null;
-  lunchTime: string | null;
-  dinnerTime: string | null;
-  kitchenSetup: string | null;
   dietaryRestrictions: string | null;
-  foodStyle: string | null;
-  serviceScope: string[] | null;
   workDays: string | null;
   
   status: string;
@@ -256,33 +241,6 @@ export default function AdminQuotes() {
                         </div>
                       )}
 
-                      {selectedQuoteData.budgetRangeSingle && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Person</p>
-                          <p className="capitalize">{selectedQuoteData.budgetRangeSingle.replace(/-/g, ' ')}</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.numberOfCourses && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Number of Courses</p>
-                          <p>{selectedQuoteData.numberOfCourses} course{selectedQuoteData.numberOfCourses !== '1' ? 's' : ''}</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.additionalServices && selectedQuoteData.additionalServices.length > 0 && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-2">Additional Services</p>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedQuoteData.additionalServices.map((service) => (
-                              <Badge key={service} variant="outline">
-                                {service.replace(/-/g, ' ')}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
                       {selectedQuoteData.cuisine && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Cuisine</p>
@@ -307,34 +265,6 @@ export default function AdminQuotes() {
                           </div>
                         </div>
                       )}
-
-                      {selectedQuoteData.timeOfDay && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Time of Day</p>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            <span className="capitalize">{selectedQuoteData.timeOfDay}</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.foodPreferences && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Preferences</p>
-                          <p className="text-sm bg-muted p-3 rounded-md">
-                            {selectedQuoteData.foodPreferences}
-                          </p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.moodDescription && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Mood & Atmosphere</p>
-                          <p className="text-sm bg-muted p-3 rounded-md">
-                            {selectedQuoteData.moodDescription}
-                          </p>
-                        </div>
-                      )}
                     </>
                   ) : selectedQuoteData.serviceType === 'fulltime' ? (
                     <>
@@ -346,44 +276,10 @@ export default function AdminQuotes() {
                         </div>
                       )}
 
-                      {selectedQuoteData.lunchTime && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Lunch Time</p>
-                          <p>{selectedQuoteData.lunchTime} WIB</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.dinnerTime && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Dinner Time</p>
-                          <p>{selectedQuoteData.dinnerTime} WIB</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.foodStyle && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Style</p>
-                          <p className="capitalize">{selectedQuoteData.foodStyle.replace(/-/g, ' ')}</p>
-                        </div>
-                      )}
-
                       {selectedQuoteData.workDays && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Work Days</p>
                           <p className="capitalize">{selectedQuoteData.workDays.replace(/-/g, ' ')}</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.serviceScope && selectedQuoteData.serviceScope.length > 0 && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Service Scope</p>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedQuoteData.serviceScope.map((scope, i) => (
-                              <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm capitalize">
-                                {scope.replace(/-/g, ' ')}
-                              </span>
-                            ))}
-                          </div>
                         </div>
                       )}
 
@@ -405,15 +301,6 @@ export default function AdminQuotes() {
                           </>
                         )}
                       </div>
-
-                      {selectedQuoteData.kitchenSetup && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Kitchen Setup</p>
-                          <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
-                            {selectedQuoteData.kitchenSetup}
-                          </p>
-                        </div>
-                      )}
 
                       {selectedQuoteData.dietaryRestrictions && (
                         <div>
@@ -464,29 +351,6 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">People Count</p>
                           <p>{selectedQuoteData.peopleCount} {parseInt(selectedQuoteData.peopleCount) === 1 ? 'person' : 'people'}</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.dietaryFocus && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Dietary Focus</p>
-                          <p className="capitalize">{selectedQuoteData.dietaryFocus.replace(/-/g, ' ')}</p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.chefQualities && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Chef Requirements</p>
-                          <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
-                            {selectedQuoteData.chefQualities}
-                          </p>
-                        </div>
-                      )}
-
-                      {selectedQuoteData.budgetRange && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Food Budget Per Person</p>
-                          <p>{selectedQuoteData.budgetRange.replace(/-/g, ' ')}</p>
                         </div>
                       )}
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, Umbrella, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Wine, Flame, Package, Music, UserCheck, Utensils, Pizza, Fish, Croissant, Leaf, Apple, UtensilsCrossed, Soup, Egg, Calendar as CalendarIcon, Sun, Moon, Send, Check, Globe, X, MessageSquare, Minus, Plus } from 'lucide-react';
+import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -15,22 +15,9 @@ import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 type ServiceType = 'single' | 'multiple' | 'fulltime' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
-type BudgetRangeSingleType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
-type NumberOfCoursesType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | null;
-type AdditionalServiceType = 'food-only' | 'bartender' | 'grilling' | 'equipment-rental' | 'music-speakers' | 'wait-staff';
-type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | 'other' | null;
-type DateModeType = 'single' | 'multiple';
-type TimeOfDayType = 'day' | 'night' | null;
-
-// Multiple service types
+type CuisineType = 'indonesian' | 'thai' | 'japanese' | 'chinese' | 'indian' | 'asian' | null;
 type RecurringServiceType = 'meal-prep' | 'weekly-shifts' | 'extended-stay' | 'live-in' | 'other' | null;
 type ServiceDurationType = '1-week' | '2-weeks' | '1-month' | '2-3-months' | '6-months' | '1-year' | 'ongoing' | null;
-type BudgetRangeType = '250k' | '500k' | '750k' | '1m' | '2m' | '3m' | null;
-type DietaryFocusType = 'fitness' | 'weight-loss' | 'keto' | 'vegan' | 'halal' | 'diabetic' | 'family-meals' | 'other' | null;
-
-// Full-time chef types
-type FoodStyleType = 'comfort' | 'healthy-light' | 'luxurious' | 'local-balinese' | 'international' | 'mixed' | null;
-type ServiceScopeType = 'grocery-shopping' | 'serving' | 'cleanup';
 type WorkDaysType = 'monday-friday' | 'all-week' | null;
 
 interface AddressData {
@@ -42,150 +29,62 @@ interface AddressData {
   country: string;
 }
 
-// Import 195 UN-recognized countries from centralized source
-// Sort countries with Indonesia always at the top
 const countries = [
   'Indonesia',
   ...UN_RECOGNIZED_COUNTRIES.filter(country => country !== 'Indonesia')
 ];
 
-// Helper function to format quote data for WhatsApp message
 function formatQuoteForWhatsApp(data: any): string {
-  // Budget mapping
-  const budgetMap: Record<string, string> = {
-    '250k': '250,000 IDR per person',
-    '500k': '500,000 IDR per person',
-    '750k': '750,000 IDR per person',
-    '1m': '1,000,000 IDR per person',
-    '2m': '2,000,000 IDR per person',
-    '3m': '3,000,000 IDR per person',
-  };
-  
-  // Additional services mapping
-  const serviceMap: Record<string, string> = {
-    'food-only': 'Food only',
-    'bartender': 'Bartender service',
-    'grilling': 'Live grilling/BBQ station',
-    'equipment-rental': 'Equipment rental',
-    'music-speakers': 'Music & speakers',
-    'wait-staff': 'Wait staff',
-  };
-  
   let message = '🍽️ *myCHEF Quote Request*\n\n';
   
   if (data.serviceType === 'single') {
     message += '*Service Type:* Single Event\n';
     message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Guest Count:* ${data.guestCount}\n`;
-    message += `*Food Budget:* ${budgetMap[data.budgetRangeSingle] || data.budgetRangeSingle}\n`;
-    message += `*Number of Courses:* ${data.numberOfCourses}\n`;
+    message += `*Guest Count:* ${data.guestCount} guests\n`;
     message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    
-    // Map additional services
-    const services = data.additionalServices?.map((s: string) => serviceMap[s] || s).join(', ') || 'Food only';
-    message += `*Additional Services:* ${services}\n`;
     
     if (data.selectedDates && data.selectedDates.length > 0) {
       const dates = data.selectedDates.map((d: string) => new Date(d).toLocaleDateString('en-GB')).join(', ');
       message += `*Date(s):* ${dates}\n`;
     }
-    
-    message += `*Time of Day:* ${data.timeOfDay?.replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    
-    if (data.foodPreferences) {
-      message += `*Food Preferences:* ${data.foodPreferences}\n`;
-    }
-    
-    if (data.moodDescription) {
-      message += `*Mood/Style:* ${data.moodDescription}\n`;
-    }
   } else if (data.serviceType === 'multiple') {
     message += '*Service Type:* Recurring Service\n';
     message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Number of People:* ${data.peopleCount}\n`;
-    message += `*Dietary Focus:* ${data.dietaryFocus?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Food Budget:* ${budgetMap[data.budgetRange] || data.budgetRange}\n`;
+    message += `*Number of People:* ${data.peopleCount} people\n`;
     
     if (data.startDate) {
       message += `*Start Date:* ${new Date(data.startDate).toLocaleDateString('en-GB')}\n`;
     }
-    
-    if (data.chefQualities) {
-      message += `*Chef Qualities Needed:* ${data.chefQualities}\n`;
-    }
   } else if (data.serviceType === 'fulltime') {
     message += '*Service Type:* Full-time Chef\n';
-    message += `*Guests per Meal:* ${data.guestsPerMeal}\n`;
-    message += `*Lunch Time:* ${data.lunchTime} WIB\n`;
-    message += `*Dinner Time:* ${data.dinnerTime} WIB\n`;
-    message += `*Food Style:* ${data.foodStyle?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    message += `*Guests per Meal:* ${data.guestsPerMeal} people\n`;
     message += `*Work Days:* ${data.workDays?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     
-    if (data.serviceScope && data.serviceScope.length > 0) {
-      const scopes = data.serviceScope.map((s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())).join(', ');
-      message += `*Service Scope:* ${scopes}\n`;
-    }
-    
-    if (data.kitchenSetup) {
-      message += `\n*Kitchen Setup:*\n${data.kitchenSetup}\n`;
-    }
-    
-    if (data.dietaryRestrictions) {
-      message += `\n*Dietary Restrictions:*\n${data.dietaryRestrictions}\n`;
+    if (data.dietaryRestrictions && data.dietaryRestrictions.trim() !== '') {
+      message += `*Dietary Restrictions:* ${data.dietaryRestrictions}\n`;
+    } else {
+      message += '*Dietary Restrictions:* None specified\n';
     }
   }
   
-  // Common fields
+  message += '\n*📍 Location:*\n';
   if (!data.addressSkipped && data.venueName) {
-    message += '\n*📍 Location:*\n';
     message += `${data.venueName}\n`;
     if (data.street) message += `${data.street}\n`;
     if (data.city) message += `${data.city}`;
     if (data.region) message += `, ${data.region}`;
     if (data.postalCode) message += ` ${data.postalCode}`;
     message += `\n${data.country}\n`;
+  } else {
+    message += 'Address TBD\n';
   }
   
-  if (data.additionalNotes) {
-    message += `\n*Additional Notes:*\n${data.additionalNotes}\n`;
-  }
-  
-  message += '\n_Please send me a personalized quote!_';
+  message += '\n_Please send me a personalized quote with pricing!_';
   
   return message;
 }
 
-
-const budgetRangeSingleOptions = [
-  { id: '250k', label: '250k IDR per person', description: 'Simple ingredients' },
-  { id: '500k', label: '500k IDR per person', description: 'Quality ingredients' },
-  { id: '750k', label: '750k IDR per person', description: 'Premium ingredients' },
-  { id: '1m', label: '1 million IDR per person', description: 'High-end ingredients' },
-  { id: '2m', label: '2 million IDR per person', description: 'Luxury ingredients' },
-  { id: '3m', label: '3 million IDR per person', description: 'Ultra-premium ingredients' },
-] as const;
-
-const numberOfCoursesOptions = [
-  { id: '1', label: '1 Course', description: 'Main course only' },
-  { id: '2', label: '2 Courses', description: 'Starter + Main' },
-  { id: '3', label: '3 Courses', description: 'Starter + Main + Dessert' },
-  { id: '4', label: '4 Courses', description: 'Full dining experience' },
-  { id: '5', label: '5 Courses', description: 'Premium multi-course meal' },
-  { id: '6', label: '6 Courses', description: 'Luxury tasting menu' },
-  { id: '7', label: '7 Courses', description: 'Ultimate fine dining' },
-] as const;
-
-const additionalServices = [
-  { id: 'food-only', label: 'Food only (Chef service)', icon: ChefHat, description: 'Professional chef prepares your meal' },
-  { id: 'bartender', label: 'Bartender service', icon: Wine, description: 'Professional bartender for drinks' },
-  { id: 'grilling', label: 'BBQ & Grilling', icon: Flame, description: 'Live BBQ grilling experience' },
-  { id: 'equipment-rental', label: 'Equipment rental', icon: Package, description: 'Tables, chairs, decorations' },
-  { id: 'music-speakers', label: 'Music & Sound system', icon: Music, description: 'DJ or sound equipment' },
-  { id: 'wait-staff', label: 'Wait staff & Servers', icon: UserCheck, description: 'Professional service staff' },
-] as const;
-
-// Top 6 most important cuisines in Asia
 const cuisineOptions = [
   { id: 'indonesian', label: 'Indonesian', icon: Utensils },
   { id: 'thai', label: 'Thai', icon: Flame },
@@ -206,7 +105,6 @@ const occasions = [
   { id: 'other', label: 'Other', icon: MoreHorizontal },
 ] as const;
 
-// For multiple/recurring services
 const recurringServiceOptions = [
   { id: 'meal-prep', label: 'Weekly Meal Prep', description: 'Chef prepares healthy meals for the week' },
   { id: 'weekly-shifts', label: 'Regular Chef Shifts', description: '2-3 days per week cooking service' },
@@ -225,51 +123,33 @@ const serviceDurationOptions = [
   { id: 'ongoing', label: 'Ongoing / Long-term' },
 ] as const;
 
-const budgetRangeOptions = [
-  { id: '250k', label: '250k IDR per person', description: 'Simple ingredients' },
-  { id: '500k', label: '500k IDR per person', description: 'Quality ingredients' },
-  { id: '750k', label: '750k IDR per person', description: 'Premium ingredients' },
-  { id: '1m', label: '1 million IDR per person', description: 'High-end ingredients' },
-  { id: '2m', label: '2 million IDR per person', description: 'Luxury ingredients' },
-  { id: '3m', label: '3 million IDR per person', description: 'Ultra-premium ingredients' },
-] as const;
-
-const dietaryFocusOptions = [
-  { id: 'fitness', label: 'Fitness & Sports Nutrition', icon: Users },
-  { id: 'weight-loss', label: 'Weight Loss / Healthy Eating', icon: Apple },
-  { id: 'keto', label: 'Keto / Low-Carb', icon: Utensils },
-  { id: 'vegan', label: 'Vegan / Vegetarian', icon: Leaf },
-  { id: 'halal', label: 'Halal', icon: ChefHat },
-  { id: 'diabetic', label: 'Diabetic-Friendly', icon: Heart },
-  { id: 'family-meals', label: 'Family Meals / Home Cooking', icon: Home },
-  { id: 'other', label: 'Other', icon: MoreHorizontal },
-] as const;
-
-// For full-time chef service
-const foodStyleOptions = [
-  { id: 'comfort', label: 'Everyday Comfort', description: 'Homestyle cooking, family favorites' },
-  { id: 'healthy-light', label: 'Healthy & Light', description: 'Nutritious, balanced meals' },
-  { id: 'luxurious', label: 'Luxurious', description: 'Fine dining quality at home' },
-  { id: 'local-balinese', label: 'Local Balinese', description: 'Authentic Indonesian cuisine' },
-  { id: 'international', label: 'International', description: 'World cuisines and fusion' },
-  { id: 'mixed', label: 'Mixed Variety', description: 'Different styles throughout the week' },
-] as const;
-
 const workDaysOptions = [
   { id: 'monday-friday', label: 'Monday to Friday only', description: 'Weekday service' },
   { id: 'all-week', label: 'All seven days', description: 'Every day of the week' },
 ] as const;
 
-const serviceScopeOptions = [
-  { id: 'grocery-shopping', label: 'Grocery Shopping' },
-  { id: 'serving', label: 'Serving Meals' },
-  { id: 'cleanup', label: 'Kitchen Cleanup' },
-] as const;
-
 export default function QuoteFunnel() {
   const [currentStep, setCurrentStep] = useState(1);
   const [serviceType, setServiceType] = useState<ServiceType>(null);
+  
+  // Single service state
   const [occasion, setOccasion] = useState<OccasionType>(null);
+  const [guestCount, setGuestCount] = useState<number>(2);
+  const [cuisine, setCuisine] = useState<CuisineType>(null);
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  
+  // Multiple service state
+  const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
+  const [serviceDuration, setServiceDuration] = useState<ServiceDurationType>(null);
+  const [peopleCount, setPeopleCount] = useState<number>(2);
+  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  
+  // Full-time chef state
+  const [guestsPerMeal, setGuestsPerMeal] = useState<number>(2);
+  const [workDays, setWorkDays] = useState<WorkDaysType>(null);
+  const [dietaryRestrictions, setDietaryRestrictions] = useState('');
+  
+  // Common state
   const [address, setAddress] = useState<AddressData>({
     venueName: '',
     street: '',
@@ -279,47 +159,13 @@ export default function QuoteFunnel() {
     country: 'Indonesia',
   });
   const [addressSkipped, setAddressSkipped] = useState(false);
-  const [guestCount, setGuestCount] = useState<number>(2);
-  const [budgetRangeSingle, setBudgetRangeSingle] = useState<BudgetRangeSingleType>(null);
-  const [numberOfCourses, setNumberOfCourses] = useState<NumberOfCoursesType>(null);
-  const [selectedServices, setSelectedServices] = useState<Set<AdditionalServiceType>>(new Set(['food-only'] as AdditionalServiceType[]));
-  const [cuisine, setCuisine] = useState<CuisineType>(null);
-  const [otherCuisineText, setOtherCuisineText] = useState('');
-  const [dateMode, setDateMode] = useState<DateModeType>('single');
-  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(null);
-  const [foodPreferences, setFoodPreferences] = useState('');
-  const [moodDescription, setMoodDescription] = useState('');
-  const [additionalNotes, setAdditionalNotes] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
-  // Multiple service state variables
-  const [recurringServiceType, setRecurringServiceType] = useState<RecurringServiceType>(null);
-  const [otherRecurringServiceText, setOtherRecurringServiceText] = useState('');
-  const [serviceDuration, setServiceDuration] = useState<ServiceDurationType>(null);
-  const [peopleCount, setPeopleCount] = useState<number>(2);
-  const [dietaryFocus, setDietaryFocus] = useState<DietaryFocusType>(null);
-  const [otherDietaryText, setOtherDietaryText] = useState('');
-  const [chefQualities, setChefQualities] = useState('');
-  const [budgetRange, setBudgetRange] = useState<BudgetRangeType>(null);
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  
-  // Full-time chef state variables
-  const [guestsPerMeal, setGuestsPerMeal] = useState<number>(2);
-  const [lunchTime, setLunchTime] = useState('');
-  const [dinnerTime, setDinnerTime] = useState('');
-  const [kitchenSetup, setKitchenSetup] = useState('');
-  const [dietaryRestrictions, setDietaryRestrictions] = useState('');
-  const [foodStyle, setFoodStyle] = useState<FoodStyleType>(null);
-  const [serviceScopeSet, setServiceScopeSet] = useState<Set<ServiceScopeType>>(new Set(['grocery-shopping', 'serving', 'cleanup'] as ServiceScopeType[]));
-  const [workDays, setWorkDays] = useState<WorkDaysType>(null);
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
 
   const submitMutation = useMutation({
     mutationFn: async () => {
-      // Build payload once
       let payload: any = {
         serviceType: serviceType!,
         venueName: addressSkipped ? null : address.venueName,
@@ -329,48 +175,29 @@ export default function QuoteFunnel() {
         postalCode: addressSkipped ? null : (address.postalCode || null),
         country: addressSkipped ? null : address.country,
         addressSkipped,
-        additionalNotes: additionalNotes || null,
       };
 
       if (serviceType === 'single') {
-        // Single service flow data
         payload = {
           ...payload,
           occasion: occasion!,
           guestCount: guestCount.toString(),
-          budgetRangeSingle: budgetRangeSingle!,
-          numberOfCourses: numberOfCourses!,
-          additionalServices: Array.from(selectedServices),
-          cuisine: cuisine === 'other' ? otherCuisineText : cuisine!,
-          dateMode,
+          cuisine: cuisine!,
           selectedDates: selectedDates.map(d => d.toISOString()),
-          timeOfDay: timeOfDay!,
-          foodPreferences: foodPreferences || null,
-          moodDescription: moodDescription || null,
         };
       } else if (serviceType === 'multiple') {
-        // Multiple service flow data
         payload = {
           ...payload,
-          recurringServiceType: recurringServiceType === 'other' ? otherRecurringServiceText : recurringServiceType!,
+          recurringServiceType: recurringServiceType!,
           serviceDuration: serviceDuration!,
           peopleCount: peopleCount.toString(),
-          dietaryFocus: dietaryFocus === 'other' ? otherDietaryText : dietaryFocus!,
-          chefQualities: chefQualities,
-          budgetRange: budgetRange!,
           startDate: startDate!.toISOString(),
         };
       } else if (serviceType === 'fulltime') {
-        // Full-time chef flow data
         payload = {
           ...payload,
           guestsPerMeal: guestsPerMeal.toString(),
-          lunchTime: lunchTime,
-          dinnerTime: dinnerTime,
-          kitchenSetup: kitchenSetup,
-          dietaryRestrictions: dietaryRestrictions,
-          foodStyle: foodStyle!,
-          serviceScope: Array.from(serviceScopeSet),
+          dietaryRestrictions: dietaryRestrictions || null,
           workDays: workDays!,
         };
       }
@@ -386,31 +213,23 @@ export default function QuoteFunnel() {
       }
       
       const result = await response.json();
-      
-      // Return both the API response and the payload for use in onSuccess
       return { result, payload };
     },
     onSuccess: (data) => {
       setIsSubmitted(true);
       
-      // Use the payload that was already built in mutationFn
       const { payload } = data;
-      
-      // Format message for WhatsApp
       const message = formatQuoteForWhatsApp(payload);
       const phoneNumber = WHATSAPP_NUMBER.replace(/\+/g, '');
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
       
-      // Open WhatsApp
       window.open(whatsappURL, '_blank');
       
-      // Show success toast
       toast({
         title: "Opening WhatsApp...",
         description: "Your quote details are ready to send!",
       });
       
-      // Redirect to home page after a short delay
       setTimeout(() => {
         setLocation('/');
       }, 2000);
@@ -424,376 +243,182 @@ export default function QuoteFunnel() {
     },
   });
 
-  const toggleService = (serviceId: AdditionalServiceType) => {
-    setSelectedServices(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(serviceId)) {
-        // Don't allow deselecting if it's the last item
-        if (newSet.size > 1) {
-          newSet.delete(serviceId);
-        }
-      } else {
-        newSet.add(serviceId);
-      }
-      return newSet;
-    });
-  };
-
-  const toggleServiceScope = (scopeId: ServiceScopeType) => {
-    setServiceScopeSet(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(scopeId)) {
-        newSet.delete(scopeId);
-      } else {
-        newSet.add(scopeId);
-      }
-      return newSet;
-    });
-  };
-
   const getTotalSteps = () => {
-    if (serviceType === 'single') return 11; // Added budget and courses steps
-    if (serviceType === 'multiple') return 10;
-    if (serviceType === 'fulltime') return 10; // Full-time chef flow
+    if (serviceType === 'single') return 7;
+    if (serviceType === 'multiple') return 7;
+    if (serviceType === 'fulltime') return 6;
     return 1;
   };
 
-  const handleContinue = () => {
-    if (currentStep === 1 && serviceType) {
-      setCurrentStep(2);
-    } else if (serviceType === 'single') {
-      // Single service flow (11-step flow with budget and courses)
-      if (currentStep === 2 && occasion) {
-        setCurrentStep(3);
-      } else if (currentStep === 3 && (isAddressValid() || addressSkipped)) {
-        setCurrentStep(4);
-      } else if (currentStep === 4 && guestCount > 0) {
-        setCurrentStep(5);
-      } else if (currentStep === 5 && budgetRangeSingle) {
-        setCurrentStep(6);
-      } else if (currentStep === 6 && numberOfCourses) {
-        setCurrentStep(7);
-      } else if (currentStep === 7 && selectedServices.size > 0) {
-        setCurrentStep(8);
-      } else if (currentStep === 8 && cuisine) {
-        if (cuisine === 'other' && otherCuisineText.trim() === '') return;
-        setCurrentStep(9);
-      } else if (currentStep === 9 && selectedDates.length > 0) {
-        setCurrentStep(10);
-      } else if (currentStep === 10 && timeOfDay) {
-        setCurrentStep(11);
-      }
-    } else if (serviceType === 'multiple') {
-      // Multiple service flow (new 10-step flow)
-      if (currentStep === 2 && recurringServiceType) {
-        if (recurringServiceType === 'other' && otherRecurringServiceText.trim() === '') return;
-        setCurrentStep(3);
-      } else if (currentStep === 3 && serviceDuration) {
-        setCurrentStep(4);
-      } else if (currentStep === 4 && (isAddressValid() || addressSkipped)) {
-        setCurrentStep(5);
-      } else if (currentStep === 5 && peopleCount > 0) {
-        setCurrentStep(6);
-      } else if (currentStep === 6 && dietaryFocus) {
-        if (dietaryFocus === 'other' && otherDietaryText.trim() === '') return;
-        setCurrentStep(7);
-      } else if (currentStep === 7 && chefQualities.trim() !== '') {
-        setCurrentStep(8);
-      } else if (currentStep === 8 && budgetRange) {
-        setCurrentStep(9);
-      } else if (currentStep === 9 && startDate) {
-        setCurrentStep(10);
-      }
-    } else if (serviceType === 'fulltime') {
-      // Full-time chef flow (10-step flow)
-      if (currentStep === 2 && guestsPerMeal > 0) {
-        setCurrentStep(3);
-      } else if (currentStep === 3 && lunchTime.trim() !== '' && dinnerTime.trim() !== '') {
-        setCurrentStep(4);
-      } else if (currentStep === 4 && kitchenSetup.trim() !== '') {
-        setCurrentStep(5);
-      } else if (currentStep === 5 && dietaryRestrictions.trim() !== '') {
-        setCurrentStep(6);
-      } else if (currentStep === 6 && foodStyle) {
-        setCurrentStep(7);
-      } else if (currentStep === 7 && serviceScopeSet.size > 0) {
-        setCurrentStep(8);
-      } else if (currentStep === 8 && workDays) {
-        setCurrentStep(9);
-      } else if (currentStep === 9 && (isAddressValid() || addressSkipped)) {
-        setCurrentStep(10);
-      }
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
   const isAddressValid = () => {
-    return address.venueName.trim() !== '' &&
+    return address.venueName.trim() !== '' && 
            address.street.trim() !== '' && 
            address.city.trim() !== '' && 
            address.region.trim() !== '';
   };
 
+  const updateAddress = (field: keyof AddressData, value: string) => {
+    setAddress(prev => ({ ...prev, [field]: value }));
+    if (addressSkipped) setAddressSkipped(false);
+  };
+
   const canContinue = () => {
-    if (currentStep === 1) return !!serviceType;
+    if (currentStep === 1) return serviceType !== null;
     
     if (serviceType === 'single') {
-      // Single service flow validation (11 steps)
-      if (currentStep === 2) return !!occasion;
+      if (currentStep === 2) return occasion !== null;
       if (currentStep === 3) return isAddressValid() || addressSkipped;
-      if (currentStep === 4) return guestCount > 0;
-      if (currentStep === 5) return !!budgetRangeSingle;
-      if (currentStep === 6) return !!numberOfCourses;
-      if (currentStep === 7) return selectedServices.size > 0;
-      if (currentStep === 8) {
-        if (!cuisine) return false;
-        if (cuisine === 'other') return otherCuisineText.trim() !== '';
-        return true;
-      }
-      if (currentStep === 9) return selectedDates.length > 0;
-      if (currentStep === 10) return !!timeOfDay;
-    } else if (serviceType === 'multiple') {
-      // Multiple service flow validation
-      if (currentStep === 2) {
-        if (!recurringServiceType) return false;
-        if (recurringServiceType === 'other') return otherRecurringServiceText.trim() !== '';
-        return true;
-      }
-      if (currentStep === 3) return !!serviceDuration;
+      if (currentStep === 4) return guestCount >= 1;
+      if (currentStep === 5) return cuisine !== null;
+      if (currentStep === 6) return selectedDates.length > 0;
+      if (currentStep === 7) return true;
+    }
+    
+    if (serviceType === 'multiple') {
+      if (currentStep === 2) return recurringServiceType !== null;
+      if (currentStep === 3) return serviceDuration !== null;
       if (currentStep === 4) return isAddressValid() || addressSkipped;
-      if (currentStep === 5) return peopleCount > 0;
-      if (currentStep === 6) {
-        if (!dietaryFocus) return false;
-        if (dietaryFocus === 'other') return otherDietaryText.trim() !== '';
-        return true;
-      }
-      if (currentStep === 7) return chefQualities.trim() !== '';
-      if (currentStep === 8) return !!budgetRange;
-      if (currentStep === 9) return !!startDate;
-    } else if (serviceType === 'fulltime') {
-      // Full-time chef flow validation
-      if (currentStep === 2) return guestsPerMeal > 0;
-      if (currentStep === 3) return lunchTime.trim() !== '' && dinnerTime.trim() !== '';
-      if (currentStep === 4) return kitchenSetup.trim() !== '';
-      if (currentStep === 5) return dietaryRestrictions.trim() !== '';
-      if (currentStep === 6) return !!foodStyle;
-      if (currentStep === 7) return serviceScopeSet.size > 0;
-      if (currentStep === 8) return !!workDays;
-      if (currentStep === 9) return isAddressValid() || addressSkipped;
+      if (currentStep === 5) return peopleCount >= 1;
+      if (currentStep === 6) return startDate !== undefined;
+      if (currentStep === 7) return true;
+    }
+    
+    if (serviceType === 'fulltime') {
+      if (currentStep === 2) return guestsPerMeal >= 1;
+      if (currentStep === 3) return workDays !== null;
+      if (currentStep === 4) return isAddressValid() || addressSkipped;
+      if (currentStep === 5) return true;
+      if (currentStep === 6) return true;
     }
     
     return false;
   };
 
-  const updateAddress = (field: keyof AddressData, value: string) => {
-    setAddress(prev => ({ ...prev, [field]: value }));
+  const handleContinue = () => {
+    if (!canContinue()) return;
+    
+    if (currentStep < getTotalSteps()) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      setLocation('/');
+    }
+  };
+
+  const handleSubmit = async () => {
+    submitMutation.mutate();
+  };
+
+  const isFinalStep = () => {
+    if (serviceType === 'single') return currentStep === 7;
+    if (serviceType === 'multiple') return currentStep === 7;
+    if (serviceType === 'fulltime') return currentStep === 6;
+    return false;
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      {/* Trust Signals Banner with Progress */}
-      <div className="border-b bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex-1 flex items-center justify-center gap-8 flex-wrap">
-              <div className="flex items-center gap-2 text-sm font-medium">
-                <CheckCircle2 className="w-5 h-5 text-primary" />
-                <span>QUOTES IN 20 MIN</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium">
-                <CheckCircle2 className="w-5 h-5 text-primary" />
-                <span>NO COMMITMENT</span>
-              </div>
-            </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <Button
               variant="ghost"
-              size="icon"
-              onClick={() => setLocation('/')}
-              className="flex-shrink-0"
-              data-testid="button-exit-quote"
-              aria-label="Exit to home page"
+              size="sm"
+              onClick={handleBack}
+              className="gap-2"
+              data-testid="button-back"
             >
-              <X className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
+              Back
             </Button>
-          </div>
-        </div>
-
-        {/* Progress Indicator */}
-        {!isSubmitted && serviceType && (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Step {currentStep} of {getTotalSteps()}</span>
-                <span className="font-medium">{Math.round((currentStep / getTotalSteps()) * 100)}% Complete</span>
-              </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-primary transition-all duration-300 ease-out"
-                  style={{ width: `${(currentStep / getTotalSteps()) * 100}%` }}
-                />
-              </div>
+            
+            <div className="text-sm text-muted-foreground">
+              Step {currentStep} of {getTotalSteps()}
             </div>
           </div>
-        )}
+        </div>
+        
+        {/* Progress Bar */}
+        <div className="h-1 bg-muted">
+          <div 
+            className="h-full bg-primary transition-all duration-300"
+            style={{ width: `${(currentStep / getTotalSteps()) * 100}%` }}
+          />
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-        <div className="w-full max-w-3xl">
-          {/* Step 1: Service Type */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="space-y-12">
+          {/* Step 1: Service Type Selection */}
           {currentStep === 1 && (
             <div className="space-y-12">
-              {/* Header */}
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What type of chef service do you need?
+                  What type of service do you need?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Define your event to see chefs, menus and prices. This will take less than 2 minutes!
+                  Choose the service that best fits your needs
                 </p>
               </div>
 
-              {/* Service Options */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {/* Single Service Option */}
-                <Card
-                  className={`
-                    cursor-pointer transition-all overflow-visible
-                    hover-elevate active-elevate-2
-                    ${serviceType === 'single' 
-                      ? 'border-2 border-primary bg-primary/5' 
-                      : 'border-2'
-                    }
-                  `}
-                  onClick={() => setServiceType('single')}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setServiceType('single');
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  data-testid="option-single-service"
-                >
-                  <CardContent className="pt-6">
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <Cake className="w-8 h-8 flex-shrink-0" />
-                      <div 
-                        className={`
-                          w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
-                          ${serviceType === 'single'
-                            ? 'border-primary bg-primary'
-                            : 'border-muted-foreground/30'
-                          }
-                        `}
-                      >
-                        {serviceType === 'single' && (
-                          <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                        )}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">Single service</h3>
-                    <p className="text-muted-foreground">
-                      A single experience to always remember.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Multiple Services Option */}
-                <Card
-                  className={`
-                    cursor-pointer transition-all overflow-visible
-                    hover-elevate active-elevate-2
-                    ${serviceType === 'multiple' 
-                      ? 'border-2 border-primary bg-primary/5' 
-                      : 'border-2'
-                    }
-                  `}
-                  onClick={() => setServiceType('multiple')}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setServiceType('multiple');
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  data-testid="option-multiple-services"
-                >
-                  <CardContent className="pt-6">
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <Umbrella className="w-8 h-8 flex-shrink-0" />
-                      <div 
-                        className={`
-                          w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
-                          ${serviceType === 'multiple'
-                            ? 'border-primary bg-primary'
-                            : 'border-muted-foreground/30'
-                          }
-                        `}
-                      >
-                        {serviceType === 'multiple' && (
-                          <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                        )}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">Multiple services</h3>
-                    <p className="text-muted-foreground">
-                      Ideal for holidays or several meals.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Full-Time Chef Option */}
-                <Card
-                  className={`
-                    cursor-pointer transition-all overflow-visible
-                    hover-elevate active-elevate-2
-                    ${serviceType === 'fulltime' 
-                      ? 'border-2 border-primary bg-primary/5' 
-                      : 'border-2'
-                    }
-                  `}
-                  onClick={() => setServiceType('fulltime')}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setServiceType('fulltime');
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  data-testid="option-fulltime-chef"
-                >
-                  <CardContent className="pt-6">
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <ChefHat className="w-8 h-8 flex-shrink-0" />
-                      <div 
-                        className={`
-                          w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
-                          ${serviceType === 'fulltime'
-                            ? 'border-primary bg-primary'
-                            : 'border-muted-foreground/30'
-                          }
-                        `}
-                      >
-                        {serviceType === 'fulltime' && (
-                          <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                        )}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">Full-time chef</h3>
-                    <p className="text-muted-foreground">
-                      Daily chef service for your home.
-                    </p>
-                  </CardContent>
-                </Card>
+              <div className="grid sm:grid-cols-3 gap-6">
+                {[
+                  { id: 'single', label: 'Single Event', description: 'One-time chef service for a special occasion', icon: ChefHat },
+                  { id: 'multiple', label: 'Recurring Service', description: 'Regular chef service for multiple days', icon: Users },
+                  { id: 'fulltime', label: 'Full-time Chef', description: 'Dedicated personal chef', icon: Home },
+                ].map((service) => {
+                  const Icon = service.icon;
+                  const isSelected = serviceType === service.id;
+                  return (
+                    <Card
+                      key={service.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setServiceType(service.id as ServiceType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setServiceType(service.id as ServiceType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-service-${service.id}`}
+                    >
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          <div className="flex justify-between items-start">
+                            <Icon className="w-8 h-8 text-primary" />
+                            <div 
+                              className={`
+                                w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                                ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                              `}
+                            >
+                              {isSelected && (
+                                <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-lg mb-2">{service.label}</h3>
+                            <p className="text-sm text-muted-foreground">{service.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -801,32 +426,26 @@ export default function QuoteFunnel() {
           {/* SINGLE SERVICE FLOW - Step 2: Occasion */}
           {currentStep === 2 && serviceType === 'single' && (
             <div className="space-y-12">
-              {/* Header */}
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
                   What's the occasion?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  This helps our chefs set the perfect tone and vibe for your event.
+                  Tell us what you're celebrating
                 </p>
               </div>
 
-              {/* Occasion Options */}
               <div className="grid sm:grid-cols-2 gap-4">
                 {occasions.map((occ) => {
                   const Icon = occ.icon;
                   const isSelected = occasion === occ.id;
-                  
                   return (
                     <Card
                       key={occ.id}
                       className={`
                         cursor-pointer transition-all overflow-visible
                         hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
                       `}
                       onClick={() => setOccasion(occ.id as OccasionType)}
                       onKeyDown={(e) => {
@@ -848,10 +467,7 @@ export default function QuoteFunnel() {
                           <div 
                             className={`
                               w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
                             `}
                           >
                             {isSelected && (
@@ -867,19 +483,307 @@ export default function QuoteFunnel() {
             </div>
           )}
 
+          {/* SINGLE SERVICE FLOW - Step 3: Location */}
+          {currentStep === 3 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Where is your event?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  We need your address to match you with the perfect chef
+                </p>
+              </div>
+
+              <Card className="overflow-visible">
+                <CardContent className="pt-6">
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="venueName" className="text-base font-medium">
+                        Villa name, Hotel or other
+                      </Label>
+                      <Input
+                        id="venueName"
+                        type="text"
+                        placeholder="Villa Seminyak, Grand Hyatt Bali..."
+                        value={address.venueName}
+                        onChange={(e) => updateAddress('venueName', e.target.value)}
+                        data-testid="input-venue-name"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="street" className="text-base font-medium">
+                        Street Address
+                      </Label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                        <Input
+                          id="street"
+                          type="text"
+                          placeholder="123 Villa Street"
+                          value={address.street}
+                          onChange={(e) => updateAddress('street', e.target.value)}
+                          className="pl-10"
+                          data-testid="input-street"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="city" className="text-base font-medium">
+                          City
+                        </Label>
+                        <Input
+                          id="city"
+                          type="text"
+                          placeholder="Seminyak"
+                          value={address.city}
+                          onChange={(e) => updateAddress('city', e.target.value)}
+                          data-testid="input-city"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="region" className="text-base font-medium">
+                          Region
+                        </Label>
+                        <Input
+                          id="region"
+                          type="text"
+                          placeholder="Bali"
+                          value={address.region}
+                          onChange={(e) => updateAddress('region', e.target.value)}
+                          data-testid="input-region"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="postalCode" className="text-base font-medium">
+                        Postal Code <span className="text-muted-foreground font-normal">(Optional)</span>
+                      </Label>
+                      <Input
+                        id="postalCode"
+                        type="text"
+                        placeholder="80361"
+                        value={address.postalCode}
+                        onChange={(e) => updateAddress('postalCode', e.target.value)}
+                        data-testid="input-postal-code"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="country" className="text-base font-medium">
+                        Country
+                      </Label>
+                      <Select value={address.country} onValueChange={(value) => updateAddress('country', value)}>
+                        <SelectTrigger id="country" data-testid="select-country">
+                          <div className="flex items-center gap-2">
+                            <Globe className="w-4 h-4 text-muted-foreground" />
+                            <SelectValue placeholder="Select country" />
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                            <SelectItem key={country} value={country}>
+                              {country}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-4 w-full max-w-md">
+                  <div className="flex-1 border-t" />
+                  <span className="text-sm text-muted-foreground">OR</span>
+                  <div className="flex-1 border-t" />
+                </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    setAddressSkipped(true);
+                    handleContinue();
+                  }}
+                  className="gap-2"
+                  data-testid="button-skip-address"
+                >
+                  I don't have the address yet
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 4: Guest Count */}
+          {currentStep === 4 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  How many guests?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Number of people to be served
+                </p>
+              </div>
+
+              <div className="max-w-md mx-auto">
+                <div className="flex flex-col items-center gap-8">
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guest-count">
+                      {guestCount}
+                    </div>
+                    <p className="text-xl text-muted-foreground">
+                      {guestCount === 1 ? 'Guest' : 'Guests'}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                      disabled={guestCount <= 1}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-decrease-guest-count"
+                      aria-label="Decrease guest count"
+                    >
+                      <Minus className="w-6 h-6" />
+                    </Button>
+                    
+                    <Button
+                      size="lg"
+                      onClick={() => setGuestCount(guestCount + 1)}
+                      className="h-16 w-16 rounded-full"
+                      data-testid="button-increase-guest-count"
+                      aria-label="Increase guest count"
+                    >
+                      <Plus className="w-6 h-6" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 5: Cuisine */}
+          {currentStep === 5 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  What type of cuisine?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Choose your preferred culinary style
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {cuisineOptions.map((cuis) => {
+                  const Icon = cuis.icon;
+                  const isSelected = cuisine === cuis.id;
+                  return (
+                    <Card
+                      key={cuis.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setCuisine(cuis.id as CuisineType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setCuisine(cuis.id as CuisineType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-cuisine-${cuis.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <Icon className="w-5 h-5 flex-shrink-0" />
+                            <span className="font-medium">{cuis.label}</span>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* SINGLE SERVICE FLOW - Step 6: Date Selection */}
+          {currentStep === 6 && serviceType === 'single' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  When do you need the chef?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select one or multiple dates
+                </p>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="inline-block">
+                  <Calendar
+                    mode="multiple"
+                    selected={selectedDates}
+                    onSelect={(dates) => setSelectedDates(dates || [])}
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    className="rounded-md border"
+                    data-testid="calendar-dates"
+                  />
+                </div>
+              </div>
+
+              {selectedDates.length > 0 && (
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">Selected dates:</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {selectedDates.map((date, idx) => (
+                      <div key={idx} className="px-3 py-1 bg-primary/10 rounded-md text-sm">
+                        {date.toLocaleDateString('en-GB')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* MULTIPLE SERVICE FLOW - Step 2: Recurring Service Type */}
           {currentStep === 2 && serviceType === 'multiple' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What type of service do you need?
+                  What type of recurring service?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Tell us about your recurring chef needs
+                  Choose the arrangement that works for you
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="max-w-2xl mx-auto space-y-4">
                 {recurringServiceOptions.map((service) => {
                   const isSelected = recurringServiceType === service.id;
                   return (
@@ -899,17 +803,17 @@ export default function QuoteFunnel() {
                       }}
                       role="button"
                       tabIndex={0}
-                      data-testid={`option-recurring-service-${service.id}`}
+                      data-testid={`option-recurring-${service.id}`}
                     >
                       <CardContent className="py-4">
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
-                            <h3 className="font-semibold text-lg mb-1">{service.label}</h3>
-                            <p className="text-muted-foreground text-sm">{service.description}</p>
+                            <p className="font-medium text-lg mb-1">{service.label}</p>
+                            <p className="text-sm text-muted-foreground">{service.description}</p>
                           </div>
                           <div 
                             className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all mt-1
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
                               ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
                             `}
                           >
@@ -922,28 +826,11 @@ export default function QuoteFunnel() {
                     </Card>
                   );
                 })}
-
-                {recurringServiceType === 'other' && (
-                  <div className="space-y-2">
-                    <Label htmlFor="other-recurring-service" className="text-base">
-                      Please describe your requirements
-                    </Label>
-                    <Input
-                      id="other-recurring-service"
-                      type="text"
-                      placeholder="Tell us what you need..."
-                      value={otherRecurringServiceText}
-                      onChange={(e) => setOtherRecurringServiceText(e.target.value)}
-                      className="text-base"
-                      data-testid="input-other-recurring-service"
-                    />
-                  </div>
-                )}
               </div>
             </div>
           )}
 
-          {/* MULTIPLE SERVICE FLOW - Step 3: Duration */}
+          {/* MULTIPLE SERVICE FLOW - Step 3: Service Duration */}
           {currentStep === 3 && serviceType === 'multiple' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
@@ -951,11 +838,11 @@ export default function QuoteFunnel() {
                   How long do you need the service?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Choose the duration that works for you
+                  Select the duration
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="max-w-xl mx-auto space-y-4">
                 {serviceDurationOptions.map((duration) => {
                   const isSelected = serviceDuration === duration.id;
                   return (
@@ -995,151 +882,6 @@ export default function QuoteFunnel() {
                     </Card>
                   );
                 })}
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 3: Event Location */}
-          {currentStep === 3 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Where is your event?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  We need your full address to match you with the perfect chef in your area.
-                </p>
-              </div>
-
-              {/* Address Form */}
-              <Card className="overflow-visible">
-                <CardContent className="pt-6">
-                  <div className="space-y-6">
-                    {/* Villa/Hotel Name */}
-                    <div className="space-y-2">
-                      <Label htmlFor="venueName" className="text-base font-medium">
-                        Villa name, Hotel or other
-                      </Label>
-                      <Input
-                        id="venueName"
-                        type="text"
-                        placeholder="Villa Seminyak, Grand Hyatt Bali..."
-                        value={address.venueName}
-                        onChange={(e) => updateAddress('venueName', e.target.value)}
-                        data-testid="input-venue-name"
-                      />
-                    </div>
-
-                    {/* Street Address */}
-                    <div className="space-y-2">
-                      <Label htmlFor="street" className="text-base font-medium">
-                        Street Address
-                      </Label>
-                      <div className="relative">
-                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                        <Input
-                          id="street"
-                          type="text"
-                          placeholder="123 Villa Street"
-                          value={address.street}
-                          onChange={(e) => updateAddress('street', e.target.value)}
-                          className="pl-10"
-                          data-testid="input-street"
-                        />
-                      </div>
-                    </div>
-
-                    {/* City and Region */}
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="city" className="text-base font-medium">
-                          City
-                        </Label>
-                        <Input
-                          id="city"
-                          type="text"
-                          placeholder="Seminyak"
-                          value={address.city}
-                          onChange={(e) => updateAddress('city', e.target.value)}
-                          data-testid="input-city"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="region" className="text-base font-medium">
-                          Region
-                        </Label>
-                        <Input
-                          id="region"
-                          type="text"
-                          placeholder="Bali"
-                          value={address.region}
-                          onChange={(e) => updateAddress('region', e.target.value)}
-                          data-testid="input-region"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Postal Code (Optional) */}
-                    <div className="space-y-2">
-                      <Label htmlFor="postalCode" className="text-base font-medium">
-                        Postal Code <span className="text-muted-foreground font-normal">(Optional)</span>
-                      </Label>
-                      <Input
-                        id="postalCode"
-                        type="text"
-                        placeholder="80361"
-                        value={address.postalCode}
-                        onChange={(e) => updateAddress('postalCode', e.target.value)}
-                        data-testid="input-postal-code"
-                      />
-                    </div>
-
-                    {/* Country */}
-                    <div className="space-y-2">
-                      <Label htmlFor="country" className="text-base font-medium">
-                        Country
-                      </Label>
-                      <Select value={address.country} onValueChange={(value) => updateAddress('country', value)}>
-                        <SelectTrigger id="country" data-testid="select-country">
-                          <div className="flex items-center gap-2">
-                            <Globe className="w-4 h-4 text-muted-foreground" />
-                            <SelectValue placeholder="Select country" />
-                          </div>
-                        </SelectTrigger>
-                        <SelectContent>
-                          {countries.map((country) => (
-                            <SelectItem key={country} value={country}>
-                              {country}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Skip Address Option */}
-              <div className="flex flex-col items-center gap-4">
-                <div className="flex items-center gap-4 w-full max-w-md">
-                  <div className="flex-1 border-t" />
-                  <span className="text-sm text-muted-foreground">OR</span>
-                  <div className="flex-1 border-t" />
-                </div>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => {
-                    setAddressSkipped(true);
-                    setCurrentStep(4);
-                  }}
-                  className="gap-2"
-                  data-testid="button-skip-address"
-                >
-                  I don't have the address yet
-                </Button>
               </div>
             </div>
           )}
@@ -1208,7 +950,7 @@ export default function QuoteFunnel() {
 
                       <div className="space-y-2">
                         <Label htmlFor="region-multiple" className="text-base font-medium">
-                          Region/Province
+                          Region
                         </Label>
                         <Input
                           id="region-multiple"
@@ -1224,7 +966,7 @@ export default function QuoteFunnel() {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="postal-code-multiple" className="text-base font-medium">
-                          Postal Code (optional)
+                          Postal Code <span className="text-muted-foreground font-normal">(Optional)</span>
                         </Label>
                         <Input
                           id="postal-code-multiple"
@@ -1272,10 +1014,10 @@ export default function QuoteFunnel() {
                   size="lg"
                   onClick={() => {
                     setAddressSkipped(true);
-                    setCurrentStep(5);
+                    handleContinue();
                   }}
                   className="gap-2"
-                  data-testid="button-skip-address-multiple"
+                  data-testid="button-skip-address"
                 >
                   I don't have the address yet
                 </Button>
@@ -1288,17 +1030,15 @@ export default function QuoteFunnel() {
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  How many people will you cook for?
+                  How many people will the chef cook for?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  This helps us match you with the right chef
+                  Typical number of people per meal
                 </p>
               </div>
 
-              {/* Number Picker */}
               <div className="max-w-md mx-auto">
                 <div className="flex flex-col items-center gap-8">
-                  {/* Large Number Display */}
                   <div className="text-center">
                     <div className="text-7xl font-bold text-primary mb-2" data-testid="text-people-count">
                       {peopleCount}
@@ -1308,7 +1048,6 @@ export default function QuoteFunnel() {
                     </p>
                   </div>
 
-                  {/* Plus/Minus Buttons */}
                   <div className="flex items-center gap-6">
                     <Button
                       size="lg"
@@ -1332,190 +1071,13 @@ export default function QuoteFunnel() {
                       <Plus className="w-6 h-6" />
                     </Button>
                   </div>
-
-                  {/* Helpful Note */}
-                  <div className="w-full p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                    <p className="text-sm text-center">
-                      Typical number of people the chef will cook for
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* MULTIPLE SERVICE FLOW - Step 6: Dietary Focus */}
+          {/* MULTIPLE SERVICE FLOW - Step 6: Start Date */}
           {currentStep === 6 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your dietary focus?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Tell us about your dietary preferences or requirements
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {dietaryFocusOptions.map((dietary) => {
-                  const Icon = dietary.icon;
-                  const isSelected = dietaryFocus === dietary.id;
-                  return (
-                    <Card
-                      key={dietary.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
-                      `}
-                      onClick={() => setDietaryFocus(dietary.id as DietaryFocusType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setDietaryFocus(dietary.id as DietaryFocusType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-dietary-${dietary.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <Icon className="w-5 h-5 flex-shrink-0" />
-                            <span className="font-medium">{dietary.label}</span>
-                          </div>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              {dietaryFocus === 'other' && (
-                <div className="max-w-md mx-auto space-y-2">
-                  <Label htmlFor="other-dietary" className="text-base">
-                    Please describe your dietary needs
-                  </Label>
-                  <Input
-                    id="other-dietary"
-                    type="text"
-                    placeholder="Tell us about your dietary requirements..."
-                    value={otherDietaryText}
-                    onChange={(e) => setOtherDietaryText(e.target.value)}
-                    className="text-base"
-                    data-testid="input-other-dietary"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 7: Chef Qualities */}
-          {currentStep === 7 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What qualities should your chef have?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Tell us what's important to you in a personal chef
-                </p>
-              </div>
-
-              <div className="max-w-2xl mx-auto">
-                <div className="space-y-2">
-                  <Label htmlFor="chef-qualities" className="text-base font-medium">
-                    Chef requirements & preferences
-                  </Label>
-                  <Textarea
-                    id="chef-qualities"
-                    placeholder="E.g., speaks English fluently, experienced with Asian cuisine, friendly personality, reliable, has own transport, certifications..."
-                    value={chefQualities}
-                    onChange={(e) => setChefQualities(e.target.value)}
-                    rows={6}
-                    className="resize-none text-base"
-                    data-testid="textarea-chef-qualities"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Include language requirements, cooking specialties, personality traits, or any must-haves
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 8: Budget Range */}
-          {currentStep === 8 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your food budget per person?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Budget for ingredients and groceries per person. Chef fees are separate and quoted based on your needs.
-                </p>
-              </div>
-
-              <div className="max-w-xl mx-auto space-y-4">
-                {budgetRangeOptions.map((budget) => {
-                  const isSelected = budgetRange === budget.id;
-                  return (
-                    <Card
-                      key={budget.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
-                      `}
-                      onClick={() => setBudgetRange(budget.id as BudgetRangeType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setBudgetRange(budget.id as BudgetRangeType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-budget-${budget.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <p className="font-medium text-lg mb-1">{budget.label}</p>
-                            <p className="text-sm text-muted-foreground">{budget.description}</p>
-                          </div>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 9: Start Date */}
-          {currentStep === 9 && serviceType === 'multiple' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -1527,13 +1089,13 @@ export default function QuoteFunnel() {
               </div>
 
               <div className="flex justify-center">
-                <div className="bg-card border rounded-lg p-6">
+                <div className="inline-block">
                   <Calendar
                     mode="single"
                     selected={startDate}
                     onSelect={setStartDate}
-                    disabled={(date) => date < new Date()}
-                    className="rounded-md"
+                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    className="rounded-md border"
                     data-testid="calendar-start-date"
                   />
                 </div>
@@ -1541,1071 +1103,39 @@ export default function QuoteFunnel() {
 
               {startDate && (
                 <div className="text-center">
-                  <p className="text-lg">
-                    Start date: <span className="font-semibold">{startDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-2">Selected start date:</p>
+                  <div className="inline-block px-4 py-2 bg-primary/10 rounded-md">
+                    {startDate.toLocaleDateString('en-GB')}
+                  </div>
                 </div>
               )}
             </div>
           )}
 
-          {/* SINGLE SERVICE FLOW - Step 4: Guest Count */}
-          {currentStep === 4 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  For how many guests?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  The chef's fee is fixed, so the price per person varies with group size.
-                </p>
-              </div>
-
-              {/* Number Picker */}
-              <div className="max-w-md mx-auto">
-                <div className="flex flex-col items-center gap-8">
-                  {/* Large Number Display */}
-                  <div className="text-center">
-                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guest-count">
-                      {guestCount}
-                    </div>
-                    <p className="text-xl text-muted-foreground">
-                      {guestCount === 1 ? 'Guest' : 'Guests'}
-                    </p>
-                  </div>
-
-                  {/* Plus/Minus Buttons */}
-                  <div className="flex items-center gap-6">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                      disabled={guestCount <= 1}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-decrease-guest-count"
-                      aria-label="Decrease guest count"
-                    >
-                      <Minus className="w-6 h-6" />
-                    </Button>
-                    
-                    <Button
-                      size="lg"
-                      onClick={() => setGuestCount(guestCount + 1)}
-                      className="h-16 w-16 rounded-full"
-                      data-testid="button-increase-guest-count"
-                      aria-label="Increase guest count"
-                    >
-                      <Plus className="w-6 h-6" />
-                    </Button>
-                  </div>
-
-                  {/* Helpful Note */}
-                  <div className="w-full p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-guest-count-flexible">
-                    <p className="text-sm text-center">
-                      Not sure? You can change it later!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 5: Budget Range */}
-          {currentStep === 5 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your food budget per person?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Budget for ingredients and groceries per person. Chef fees are separate and quoted based on your needs.
-                </p>
-              </div>
-
-              {/* Budget Options */}
-              <div className="max-w-xl mx-auto space-y-4">
-                {budgetRangeSingleOptions.map((option) => {
-                  const isSelected = budgetRangeSingle === option.id;
-                  
-                  return (
-                    <Card
-                      key={option.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setBudgetRangeSingle(option.id as BudgetRangeSingleType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setBudgetRangeSingle(option.id as BudgetRangeSingleType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-budget-${option.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="font-semibold text-lg">{option.label}</div>
-                            <div className="text-sm text-muted-foreground mt-1">{option.description}</div>
-                          </div>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all mt-1
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 6: Number of Courses */}
-          {currentStep === 6 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  How many courses?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  From simple main course to an ultimate fine dining experience
-                </p>
-              </div>
-
-              {/* Courses Options */}
-              <div className="max-w-xl mx-auto space-y-4">
-                {numberOfCoursesOptions.map((option) => {
-                  const isSelected = numberOfCourses === option.id;
-                  
-                  return (
-                    <Card
-                      key={option.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setNumberOfCourses(option.id as NumberOfCoursesType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setNumberOfCourses(option.id as NumberOfCoursesType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-courses-${option.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="font-semibold text-lg">{option.label}</div>
-                            <div className="text-sm text-muted-foreground mt-1">{option.description}</div>
-                          </div>
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all mt-1
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 7: Additional Services */}
-          {currentStep === 7 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What services do you need?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Select all the services you need for your event. You can choose multiple options.
-                </p>
-              </div>
-
-              {/* Service Options */}
-              <div className="max-w-2xl mx-auto space-y-3">
-                {additionalServices.map((service) => {
-                  const isSelected = selectedServices.has(service.id as AdditionalServiceType);
-                  const ServiceIcon = service.icon;
-                  
-                  return (
-                    <Card
-                      key={service.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => toggleService(service.id as AdditionalServiceType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          toggleService(service.id as AdditionalServiceType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-service-${service.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center gap-4">
-                          {/* Checkbox */}
-                          <div 
-                            className={`
-                              w-5 h-5 flex-shrink-0 rounded border-2 transition-all flex items-center justify-center
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <CheckCircle2 className="w-3 h-3 text-primary-foreground" />
-                            )}
-                          </div>
-
-                          {/* Icon */}
-                          <div className="flex-shrink-0">
-                            <ServiceIcon className="w-6 h-6 text-primary" />
-                          </div>
-
-                          {/* Label and Description */}
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-base">{service.label}</div>
-                            <div className="text-sm text-muted-foreground">{service.description}</div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              {/* Helpful Note */}
-              <div className="max-w-2xl mx-auto">
-                <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-services-flexible">
-                  <p className="text-sm text-center">
-                    Select at least one service. We'll help you customize your perfect event!
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 8: Cuisine Selection */}
-          {currentStep === 8 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What are you craving?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Top cuisines in Asia. Choose your favorite or tell us what you'd like!
-                </p>
-              </div>
-
-              {/* Cuisine Options Grid */}
-              <div className="max-w-3xl mx-auto space-y-6">
-                {/* Top 6 Asian Cuisines */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {cuisineOptions.map((option) => {
-                    const isSelected = cuisine === option.id;
-                    const CuisineIcon = option.icon;
-                    
-                    return (
-                      <Card
-                        key={option.id}
-                        className={`
-                          cursor-pointer transition-all overflow-visible
-                          hover-elevate active-elevate-2
-                          ${isSelected 
-                            ? 'border-2 border-primary bg-primary/5' 
-                            : 'border-2'
-                          }
-                        `}
-                        onClick={() => {
-                          setCuisine(option.id as CuisineType);
-                          setOtherCuisineText('');
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            setCuisine(option.id as CuisineType);
-                            setOtherCuisineText('');
-                          }
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        data-testid={`option-cuisine-${option.id}`}
-                      >
-                        <CardContent className="py-4">
-                          <div className="flex items-center gap-3">
-                            <CuisineIcon className="w-6 h-6 flex-shrink-0" />
-                            <span className="font-medium text-base">{option.label}</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-                </div>
-
-                {/* Other Option */}
-                <div className="space-y-3">
-                  <Card
-                    className={`
-                      cursor-pointer transition-all overflow-visible
-                      hover-elevate active-elevate-2
-                      ${cuisine === 'other' 
-                        ? 'border-2 border-primary bg-primary/5' 
-                        : 'border-2'
-                      }
-                    `}
-                    onClick={() => setCuisine('other')}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setCuisine('other');
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    data-testid="option-cuisine-other"
-                  >
-                    <CardContent className="py-4">
-                      <div className="flex items-center gap-3">
-                        <MoreHorizontal className="w-6 h-6 flex-shrink-0" />
-                        <span className="font-medium text-base">Other</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Text input for Other cuisine */}
-                  {cuisine === 'other' && (
-                    <div className="space-y-2">
-                      <Label htmlFor="other-cuisine" className="text-base">
-                        What type of cuisine would you like?
-                      </Label>
-                      <Input
-                        id="other-cuisine"
-                        type="text"
-                        placeholder="e.g., Italian, French, Mediterranean, BBQ, Vegan, Chef's Special..."
-                        value={otherCuisineText}
-                        onChange={(e) => setOtherCuisineText(e.target.value)}
-                        className="text-base"
-                        data-testid="input-other-cuisine"
-                      />
-                      <p className="text-sm text-muted-foreground">
-                        Tell us what you're looking for and we'll match you with the perfect chef!
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 9: Date Selection */}
-          {currentStep === 9 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  When?
-                </h1>
-              </div>
-
-              {/* Date Mode Toggle */}
-              <div className="max-w-md mx-auto">
-                <div className="grid grid-cols-2 gap-3">
-                  <Card
-                    className={`
-                      cursor-pointer transition-all overflow-visible
-                      hover-elevate active-elevate-2
-                      ${dateMode === 'single' 
-                        ? 'border-2 border-primary bg-primary/5' 
-                        : 'border-2'
-                      }
-                    `}
-                    onClick={() => {
-                      setDateMode('single');
-                      setSelectedDates([]);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setDateMode('single');
-                        setSelectedDates([]);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    data-testid="option-date-mode-single"
-                  >
-                    <CardContent className="py-3">
-                      <div className="text-center font-medium">Single day</div>
-                    </CardContent>
-                  </Card>
-
-                  <Card
-                    className={`
-                      cursor-pointer transition-all overflow-visible
-                      hover-elevate active-elevate-2
-                      ${dateMode === 'multiple' 
-                        ? 'border-2 border-primary bg-primary/5' 
-                        : 'border-2'
-                      }
-                    `}
-                    onClick={() => {
-                      setDateMode('multiple');
-                      setSelectedDates([]);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setDateMode('multiple');
-                        setSelectedDates([]);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    data-testid="option-date-mode-multiple"
-                  >
-                    <CardContent className="py-3">
-                      <div className="text-center font-medium">Multiple days</div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-
-              {/* Calendar */}
-              <div className="flex justify-center">
-                <div className="bg-card border rounded-lg p-6">
-                  {dateMode === 'single' ? (
-                    <Calendar
-                      mode="single"
-                      selected={selectedDates[0]}
-                      onSelect={(date: Date | undefined) => {
-                        setSelectedDates(date ? [date] : []);
-                      }}
-                      numberOfMonths={3}
-                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                      className="rounded-md"
-                    />
-                  ) : (
-                    <Calendar
-                      mode="multiple"
-                      selected={selectedDates}
-                      onSelect={(dates: Date[] | undefined) => {
-                        setSelectedDates(dates || []);
-                      }}
-                      numberOfMonths={3}
-                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                      className="rounded-md"
-                    />
-                  )}
-                </div>
-              </div>
-
-              {/* Helpful Note */}
-              <div className="max-w-2xl mx-auto">
-                <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg" data-testid="note-dates-flexible">
-                  <p className="text-sm text-center">
-                    Not sure? You can change it later!
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 10: Time of Day and Preferences */}
-          {currentStep === 10 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Tell us more about your event
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Help us create the perfect experience for you
-                </p>
-              </div>
-
-              <div className="max-w-2xl mx-auto space-y-8">
-                {/* Time of Day Selection */}
-                <div className="space-y-4">
-                  <Label className="text-base font-medium">
-                    What time of day?
-                  </Label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Card
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${timeOfDay === 'day' 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setTimeOfDay('day')}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setTimeOfDay('day');
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid="option-time-day"
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-center gap-3">
-                          <Sun className="w-5 h-5 flex-shrink-0" />
-                          <span className="font-medium">Day</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${timeOfDay === 'night' 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setTimeOfDay('night')}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setTimeOfDay('night');
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid="option-time-night"
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-center gap-3">
-                          <Moon className="w-5 h-5 flex-shrink-0" />
-                          <span className="font-medium">Night</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-
-                {/* Food Preferences */}
-                <div className="space-y-3">
-                  <Label htmlFor="food-preferences" className="text-base font-medium">
-                    What kind of food are you hoping for? <span className="text-muted-foreground font-normal">(Optional)</span>
-                  </Label>
-                  <Textarea
-                    id="food-preferences"
-                    placeholder="Tell us about your food preferences, dietary restrictions, favorite dishes, or anything special you'd like..."
-                    value={foodPreferences}
-                    onChange={(e) => setFoodPreferences(e.target.value)}
-                    rows={4}
-                    className="resize-none"
-                    data-testid="input-food-preferences"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Examples: "We love fresh seafood", "Need vegetarian options", "Allergic to peanuts"
-                  </p>
-                </div>
-
-                {/* Mood/Atmosphere Description */}
-                <div className="space-y-3">
-                  <Label htmlFor="mood-description" className="text-base font-medium">
-                    What kind of mood or atmosphere are you looking for? <span className="text-muted-foreground font-normal">(Optional)</span>
-                  </Label>
-                  <Textarea
-                    id="mood-description"
-                    placeholder="Describe the vibe you want: romantic dinner, casual workspace lunch, family celebration, elegant party..."
-                    value={moodDescription}
-                    onChange={(e) => setMoodDescription(e.target.value)}
-                    rows={4}
-                    className="resize-none"
-                    data-testid="input-mood-description"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Examples: "Romantic candlelight setting", "Casual and fun atmosphere", "Professional business lunch"
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SINGLE SERVICE FLOW - Step 11: Review and Submit */}
-          {currentStep === 11 && serviceType === 'single' && (
-            <div className="space-y-12">
-              {isSubmitted ? (
-                <div className="text-center space-y-6">
-                  <div className="flex justify-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Check className="w-8 h-8 text-primary" />
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                      Thank you!
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      We've received your request and are working on it! Our team will get back to you within 20 minutes with a personalized quote and pricing.
-                    </p>
-                    <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-                      Check your WhatsApp or email for updates.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  {/* Header */}
-                  <div className="text-center space-y-4">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                      Review & Confirm
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Please review your details. You can go back to edit any information.
-                    </p>
-                  </div>
-
-                  {/* Review Summary */}
-                  <div className="max-w-3xl mx-auto space-y-6">
-                    {/* Event Details Card */}
-                    <Card>
-                      <CardContent className="pt-6">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                          <ChefHat className="w-5 h-5" />
-                          Event Details
-                        </h3>
-                        <div className="space-y-4">
-                          <div className="grid sm:grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Service Type</p>
-                              <p className="font-medium capitalize">{serviceType}</p>
-                            </div>
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Occasion</p>
-                              <p className="font-medium capitalize">{occasion?.replace(/-/g, ' ')}</p>
-                            </div>
-                          </div>
-
-                          <div className="grid sm:grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Guest Count</p>
-                              <p className="font-medium">
-                                {guestCount} {guestCount === 1 ? 'person' : 'people'}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Food Budget Per Person</p>
-                              <p className="font-medium">{budgetRangeSingleOptions.find(o => o.id === budgetRangeSingle)?.label}</p>
-                            </div>
-                          </div>
-
-                          <div className="grid sm:grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Number of Courses</p>
-                              <p className="font-medium">{numberOfCoursesOptions.find(o => o.id === numberOfCourses)?.label}</p>
-                            </div>
-                            <div>
-                              <p className="text-sm text-muted-foreground mb-1">Cuisine</p>
-                              <p className="font-medium capitalize">
-                                {cuisine === 'other' ? otherCuisineText : cuisineOptions.find(c => c.id === cuisine)?.label}
-                              </p>
-                            </div>
-                          </div>
-
-                          <div>
-                            <p className="text-sm text-muted-foreground mb-1">Event Date{selectedDates.length > 1 ? 's' : ''}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {selectedDates.map((date, idx) => (
-                                <span key={idx} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-md font-medium">
-                                  {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div>
-                            <p className="text-sm text-muted-foreground mb-1">Time of Day</p>
-                            <p className="font-medium capitalize">{timeOfDay}</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Location Card */}
-                    <Card>
-                      <CardContent className="pt-6">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                          <MapPin className="w-5 h-5" />
-                          Location
-                        </h3>
-                        {addressSkipped ? (
-                          <p className="text-muted-foreground italic">Address to be provided later</p>
-                        ) : (
-                          <div className="space-y-2">
-                            <p className="font-medium">{address.venueName}</p>
-                            <p className="text-sm text-muted-foreground">{address.street}</p>
-                            <p className="text-sm text-muted-foreground">{address.city}, {address.region} {address.postalCode}</p>
-                            <p className="text-sm font-medium">{address.country}</p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-
-                    {/* Services Card */}
-                    <Card>
-                      <CardContent className="pt-6">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                          <Package className="w-5 h-5" />
-                          Additional Services
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {Array.from(selectedServices).map(serviceId => (
-                            <span key={serviceId} className="text-sm bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium">
-                              {additionalServices.find(s => s.id === serviceId)?.label}
-                            </span>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Preferences Card */}
-                    {(foodPreferences || moodDescription) && (
-                      <Card>
-                        <CardContent className="pt-6">
-                          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                            <Utensils className="w-5 h-5" />
-                            Preferences
-                          </h3>
-                          <div className="space-y-4">
-                            {foodPreferences && (
-                              <div>
-                                <p className="text-sm text-muted-foreground mb-1">Food Preferences</p>
-                                <p className="text-sm">{foodPreferences}</p>
-                              </div>
-                            )}
-                            {moodDescription && (
-                              <div>
-                                <p className="text-sm text-muted-foreground mb-1">Mood & Atmosphere</p>
-                                <p className="text-sm">{moodDescription}</p>
-                              </div>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-
-                    {/* Additional Notes Field */}
-                    <Card>
-                      <CardContent className="pt-6">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                          <MessageSquare className="w-5 h-5" />
-                          Anything else we should know?
-                        </h3>
-                        <div className="space-y-2">
-                          <Textarea
-                            placeholder="Food allergies, dietary restrictions, special requests, accessibility needs, etc..."
-                            value={additionalNotes}
-                            onChange={(e) => setAdditionalNotes(e.target.value)}
-                            rows={4}
-                            className="resize-none"
-                            data-testid="input-additional-notes"
-                          />
-                          <p className="text-xs text-muted-foreground">
-                            Let us know about any food allergies, special dietary needs, or other important details
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Submit Section */}
-                    <div className="space-y-4 pt-2">
-                      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                        <p className="text-sm text-center font-medium">
-                          By submitting, our team will review your request and get back to you with a personalized quote and pricing within 20 minutes.
-                        </p>
-                      </div>
-
-                      <div className="flex justify-center">
-                        <Button
-                          size="lg"
-                          onClick={() => submitMutation.mutate()}
-                          disabled={submitMutation.isPending}
-                          className="gap-2 min-w-[240px]"
-                          data-testid="button-submit-quote"
-                        >
-                          {submitMutation.isPending ? (
-                            <>Submitting...</>
-                          ) : (
-                            <>
-                              <Send className="w-4 h-4" />
-                              Submit & Get Quote
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* MULTIPLE SERVICE FLOW - Step 10: Review and Submit */}
-          {currentStep === 10 && serviceType === 'multiple' && (
-            <div className="space-y-12">
-              {isSubmitted ? (
-                <div className="text-center space-y-6">
-                  <div className="flex justify-center">
-                    <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Check className="w-10 h-10 text-primary" />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                      Thank you!
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      We've received your request and are working on it! Our team will get back to you within 20 minutes with a personalized quote and pricing. Check your WhatsApp or email for updates.
-                    </p>
-                  </div>
-                  <Button
-                    size="lg"
-                    onClick={() => setLocation('/')}
-                    className="gap-2"
-                    data-testid="button-return-home"
-                  >
-                    Return to Home
-                  </Button>
-                </div>
-              ) : (
-                <>
-                  <div className="text-center space-y-4">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                      Review & Confirm
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Please review your details. You can go back to edit any information.
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    {/* Service Details Card */}
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Service Details</h3>
-                        <div className="space-y-3 text-sm">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Service Type:</span>
-                            <span className="font-medium text-right">
-                              {recurringServiceType === 'other' 
-                                ? otherRecurringServiceText 
-                                : recurringServiceOptions.find(s => s.id === recurringServiceType)?.label
-                              }
-                            </span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Duration:</span>
-                            <span className="font-medium text-right">
-                              {serviceDurationOptions.find(d => d.id === serviceDuration)?.label}
-                            </span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">People:</span>
-                            <span className="font-medium">{peopleCount} {peopleCount === 1 ? 'person' : 'people'}</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Start Date:</span>
-                            <span className="font-medium">
-                              {startDate?.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-                            </span>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Location Card */}
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Location</h3>
-                        <div className="text-sm space-y-1">
-                          {addressSkipped ? (
-                            <p className="text-muted-foreground italic">Address to be provided later</p>
-                          ) : (
-                            <>
-                              <p className="font-medium">{address.venueName}</p>
-                              <p className="text-muted-foreground">{address.street}</p>
-                              <p className="text-muted-foreground">
-                                {address.city}, {address.region} {address.postalCode}
-                              </p>
-                              <p className="text-muted-foreground">{address.country}</p>
-                            </>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Dietary & Preferences Card */}
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Dietary Preferences & Chef Requirements</h3>
-                        <div className="space-y-3 text-sm">
-                          <div>
-                            <span className="text-muted-foreground">Dietary Focus:</span>
-                            <p className="font-medium mt-1">
-                              {dietaryFocus === 'other' 
-                                ? otherDietaryText 
-                                : dietaryFocusOptions.find(d => d.id === dietaryFocus)?.label
-                              }
-                            </p>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">Chef Qualities:</span>
-                            <p className="font-medium mt-1 whitespace-pre-wrap">{chefQualities}</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Budget Card */}
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Budget</h3>
-                        <div className="text-sm">
-                          <span className="text-muted-foreground">Food Budget Per Person:</span>
-                          <p className="font-medium mt-1">
-                            {budgetRangeOptions.find(b => b.id === budgetRange)?.label}
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Additional Notes Card */}
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <div className="space-y-3">
-                          <Label htmlFor="additional-notes-multiple" className="text-base font-medium">
-                            Anything else we should know? (Optional)
-                          </Label>
-                          <Textarea
-                            id="additional-notes-multiple"
-                            placeholder="Food allergies, special dietary restrictions, accessibility needs, or any other important details..."
-                            value={additionalNotes}
-                            onChange={(e) => setAdditionalNotes(e.target.value)}
-                            rows={4}
-                            className="resize-none"
-                            data-testid="input-additional-notes"
-                          />
-                          <p className="text-xs text-muted-foreground">
-                            Let us know about any food allergies, special dietary needs, or other important details
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Submit Section */}
-                    <div className="space-y-4 pt-2">
-                      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                        <p className="text-sm text-center font-medium">
-                          By submitting, our team will review your request and get back to you with a personalized quote and pricing within 20 minutes.
-                        </p>
-                      </div>
-
-                      <div className="flex justify-center">
-                        <Button
-                          size="lg"
-                          onClick={() => submitMutation.mutate()}
-                          disabled={submitMutation.isPending}
-                          className="gap-2 min-w-[240px]"
-                          data-testid="button-submit-quote-multiple"
-                        >
-                          {submitMutation.isPending ? (
-                            <>Submitting...</>
-                          ) : (
-                            <>
-                              <Send className="w-4 h-4" />
-                              Submit & Get Quote
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 2: Number of Guests */}
+          {/* FULLTIME CHEF FLOW - Step 2: Guests Per Meal */}
           {currentStep === 2 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  How many people will you be serving each meal?
+                  How many guests per meal?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Let us know the typical number of guests per meal
+                  Typical number of people the chef will cook for
                 </p>
               </div>
 
-              <div className="max-w-md mx-auto space-y-8">
-                <div className="text-center space-y-6">
-                  <div className="space-y-2">
-                    <p className="text-6xl font-bold">
+              <div className="max-w-md mx-auto">
+                <div className="flex flex-col items-center gap-8">
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2" data-testid="text-guests-per-meal">
                       {guestsPerMeal}
-                    </p>
+                    </div>
                     <p className="text-xl text-muted-foreground">
                       {guestsPerMeal === 1 ? 'Person' : 'People'}
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-6 justify-center">
+                  <div className="flex items-center gap-6">
                     <Button
                       size="lg"
                       variant="outline"
@@ -2613,7 +1143,7 @@ export default function QuoteFunnel() {
                       disabled={guestsPerMeal <= 1}
                       className="h-16 w-16 rounded-full"
                       data-testid="button-decrease-guests-per-meal"
-                      aria-label="Decrease guests"
+                      aria-label="Decrease guests per meal"
                     >
                       <Minus className="w-6 h-6" />
                     </Button>
@@ -2623,7 +1153,7 @@ export default function QuoteFunnel() {
                       onClick={() => setGuestsPerMeal(guestsPerMeal + 1)}
                       className="h-16 w-16 rounded-full"
                       data-testid="button-increase-guests-per-meal"
-                      aria-label="Increase guests"
+                      aria-label="Increase guests per meal"
                     >
                       <Plus className="w-6 h-6" />
                     </Button>
@@ -2633,377 +1163,137 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULL-TIME CHEF FLOW - Step 3: Serving Times */}
+          {/* FULLTIME CHEF FLOW - Step 3: Work Days */}
           {currentStep === 3 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What are your preferred serving times?
+                  How many days per week?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Let us know when you'd like lunch and dinner served
+                  Choose your chef's work schedule
                 </p>
               </div>
 
-              <div className="max-w-md mx-auto space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="lunch-time" className="text-base font-medium">
-                    Lunch Time (24-hour format, e.g., 12:00)
-                  </Label>
-                  <Input
-                    id="lunch-time"
-                    type="time"
-                    value={lunchTime}
-                    onChange={(e) => setLunchTime(e.target.value)}
-                    data-testid="input-lunch-time"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="dinner-time" className="text-base font-medium">
-                    Dinner Time (24-hour format, e.g., 19:00)
-                  </Label>
-                  <Input
-                    id="dinner-time"
-                    type="time"
-                    value={dinnerTime}
-                    onChange={(e) => setDinnerTime(e.target.value)}
-                    data-testid="input-dinner-time"
-                  />
-                </div>
+              <div className="max-w-xl mx-auto space-y-4">
+                {workDaysOptions.map((option) => {
+                  const isSelected = workDays === option.id;
+                  return (
+                    <Card
+                      key={option.id}
+                      className={`
+                        cursor-pointer transition-all overflow-visible
+                        hover-elevate active-elevate-2
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      onClick={() => setWorkDays(option.id as WorkDaysType)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setWorkDays(option.id as WorkDaysType);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      data-testid={`option-workdays-${option.id}`}
+                    >
+                      <CardContent className="py-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="font-medium text-lg mb-1">{option.label}</p>
+                            <p className="text-sm text-muted-foreground">{option.description}</p>
+                          </div>
+                          <div 
+                            className={`
+                              w-5 h-5 flex-shrink-0 rounded-full border-2 transition-all
+                              ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                            `}
+                          >
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             </div>
           )}
 
-          {/* FULL-TIME CHEF FLOW - Step 4: Kitchen Setup */}
+          {/* FULLTIME CHEF FLOW - Step 4: Location */}
           {currentStep === 4 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Tell us about your kitchen setup
+                  Where will the chef work?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  What appliances and space are available?
+                  We need your location to match you with the right chef
                 </p>
               </div>
 
-              <div className="max-w-2xl mx-auto space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="kitchen-setup" className="text-base font-medium">
-                    Kitchen Details
-                  </Label>
-                  <Textarea
-                    id="kitchen-setup"
-                    placeholder="e.g., Full kitchen with gas stove, oven, refrigerator, blender, food processor..."
-                    value={kitchenSetup}
-                    onChange={(e) => setKitchenSetup(e.target.value)}
-                    rows={6}
-                    className="resize-none"
-                    data-testid="input-kitchen-setup"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Please describe the available equipment, appliances, and kitchen space
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 5: Dietary Restrictions */}
-          {currentStep === 5 && serviceType === 'fulltime' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Any dietary preferences or restrictions?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Vegetarian, halal, gluten-free, allergies, etc.
-                </p>
-              </div>
-
-              <div className="max-w-2xl mx-auto space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="dietary-restrictions" className="text-base font-medium">
-                    Dietary Information
-                  </Label>
-                  <Textarea
-                    id="dietary-restrictions"
-                    placeholder="e.g., Vegetarian, no pork, gluten-free, nut allergies, halal..."
-                    value={dietaryRestrictions}
-                    onChange={(e) => setDietaryRestrictions(e.target.value)}
-                    rows={6}
-                    className="resize-none"
-                    data-testid="input-dietary-restrictions"
-                  />
-                  <p className="text-sm text-muted-foreground">
-                    Please list any dietary restrictions, allergies, or preferences
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 6: Food Style */}
-          {currentStep === 6 && serviceType === 'fulltime' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What style of food do you prefer?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Choose the cooking style that fits your lifestyle
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {foodStyleOptions.map((style) => {
-                  const isSelected = foodStyle === style.id;
-                  return (
-                    <Card
-                      key={style.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setFoodStyle(style.id as FoodStyleType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setFoodStyle(style.id as FoodStyleType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-food-style-${style.id}`}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between gap-4 mb-3">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-lg mb-1">{style.label}</h3>
-                            <p className="text-sm text-muted-foreground">{style.description}</p>
-                          </div>
-                          <div 
-                            className={`
-                              w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 7: Scope of Service */}
-          {currentStep === 7 && serviceType === 'fulltime' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What should be included in the service?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Select all that apply
-                </p>
-              </div>
-
-              <div className="max-w-xl mx-auto space-y-4">
-                {serviceScopeOptions.map((scope) => {
-                  const isSelected = serviceScopeSet.has(scope.id as ServiceScopeType);
-                  return (
-                    <Card
-                      key={scope.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => toggleServiceScope(scope.id as ServiceScopeType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          toggleServiceScope(scope.id as ServiceScopeType);
-                        }
-                      }}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={0}
-                      data-testid={`option-service-scope-${scope.id}`}
-                    >
-                      <CardContent className="py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="font-medium">{scope.label}</span>
-                          <div 
-                            className={`
-                              w-6 h-6 flex-shrink-0 rounded border-2 transition-all flex items-center justify-center
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <Check className="w-4 h-4 text-background" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 8: Work Days */}
-          {currentStep === 8 && serviceType === 'fulltime' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Which days do you need chef service?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Choose your preferred schedule
-                </p>
-              </div>
-
-              <div className="max-w-xl mx-auto space-y-4">
-                {workDaysOptions.map((days) => {
-                  const isSelected = workDays === days.id;
-                  return (
-                    <Card
-                      key={days.id}
-                      className={`
-                        cursor-pointer transition-all overflow-visible
-                        hover-elevate active-elevate-2
-                        ${isSelected 
-                          ? 'border-2 border-primary bg-primary/5' 
-                          : 'border-2'
-                        }
-                      `}
-                      onClick={() => setWorkDays(days.id as WorkDaysType)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setWorkDays(days.id as WorkDaysType);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      data-testid={`option-work-days-${days.id}`}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-lg mb-1">{days.label}</h3>
-                            <p className="text-sm text-muted-foreground">{days.description}</p>
-                          </div>
-                          <div 
-                            className={`
-                              w-6 h-6 flex-shrink-0 rounded-full border-2 transition-all
-                              ${isSelected
-                                ? 'border-primary bg-primary'
-                                : 'border-muted-foreground/30'
-                              }
-                            `}
-                          >
-                            {isSelected && (
-                              <div className="w-full h-full rounded-full bg-background scale-[0.4]" />
-                            )}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* FULL-TIME CHEF FLOW - Step 9: Address - same as other flows, reusing address component */}
-          {currentStep === 9 && serviceType === 'fulltime' && (
-            <div className="space-y-12">
-              <div className="text-center space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  Where will the chef be working?
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Provide your home or venue address
-                </p>
-              </div>
-
-              <div className="max-w-2xl mx-auto space-y-6">
-                <Card className="overflow-visible">
-                  <CardContent className="pt-6 space-y-4">
+              <Card className="overflow-visible">
+                <CardContent className="pt-6">
+                  <div className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="venue-name-fulltime" className="text-base font-medium">
-                        Home / Venue Name *
+                        Villa name, Hotel or other
                       </Label>
                       <Input
                         id="venue-name-fulltime"
-                        placeholder="e.g., My Villa, Apartment Name"
+                        type="text"
+                        placeholder="Villa Seminyak, Grand Hyatt Bali..."
                         value={address.venueName}
                         onChange={(e) => updateAddress('venueName', e.target.value)}
-                        disabled={addressSkipped}
                         data-testid="input-venue-name"
                       />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="street-fulltime" className="text-base font-medium">
-                        Street Address *
+                        Street Address
                       </Label>
-                      <Input
-                        id="street-fulltime"
-                        placeholder="e.g., Jl. Sunset Road No. 123"
-                        value={address.street}
-                        onChange={(e) => updateAddress('street', e.target.value)}
-                        disabled={addressSkipped}
-                        data-testid="input-street"
-                      />
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                        <Input
+                          id="street-fulltime"
+                          type="text"
+                          placeholder="123 Villa Street"
+                          value={address.street}
+                          onChange={(e) => updateAddress('street', e.target.value)}
+                          className="pl-10"
+                          data-testid="input-street"
+                        />
+                      </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="city-fulltime" className="text-base font-medium">
-                          City / Area *
+                          City
                         </Label>
                         <Input
                           id="city-fulltime"
-                          placeholder="e.g., Seminyak, Ubud"
+                          type="text"
+                          placeholder="Seminyak"
                           value={address.city}
                           onChange={(e) => updateAddress('city', e.target.value)}
-                          disabled={addressSkipped}
                           data-testid="input-city"
                         />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="region-fulltime" className="text-base font-medium">
-                          Region / Province *
+                          Region
                         </Label>
                         <Input
                           id="region-fulltime"
-                          placeholder="e.g., Bali"
+                          type="text"
+                          placeholder="Bali"
                           value={address.region}
                           onChange={(e) => updateAddress('region', e.target.value)}
-                          disabled={addressSkipped}
                           data-testid="input-region"
                         />
                       </div>
@@ -3012,32 +1302,31 @@ export default function QuoteFunnel() {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="postal-code-fulltime" className="text-base font-medium">
-                          Postal Code (Optional)
+                          Postal Code <span className="text-muted-foreground font-normal">(Optional)</span>
                         </Label>
                         <Input
                           id="postal-code-fulltime"
-                          placeholder="e.g., 80361"
+                          type="text"
+                          placeholder="80361"
                           value={address.postalCode}
                           onChange={(e) => updateAddress('postalCode', e.target.value)}
-                          disabled={addressSkipped}
                           data-testid="input-postal-code"
                         />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="country-fulltime" className="text-base font-medium">
-                          Country *
+                          Country
                         </Label>
                         <Select
                           value={address.country}
                           onValueChange={(value) => updateAddress('country', value)}
-                          disabled={addressSkipped}
                         >
                           <SelectTrigger id="country-fulltime" data-testid="select-country">
                             <SelectValue placeholder="Select country" />
                           </SelectTrigger>
                           <SelectContent>
-                            {countries.map((country) => (
+                            {countries.map(country => (
                               <SelectItem key={country} value={country}>
                                 {country}
                               </SelectItem>
@@ -3046,220 +1335,230 @@ export default function QuoteFunnel() {
                         </Select>
                       </div>
                     </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-                    <div className="pt-4 border-t">
-                      <label className="flex items-center gap-3 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={addressSkipped}
-                          onChange={(e) => setAddressSkipped(e.target.checked)}
-                          className="w-4 h-4"
-                          data-testid="checkbox-skip-address"
-                        />
-                        <span className="text-sm text-muted-foreground">
-                          I'll provide my address details later
-                        </span>
-                      </label>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-4 w-full max-w-md">
+                  <div className="flex-1 border-t" />
+                  <span className="text-sm text-muted-foreground">OR</span>
+                  <div className="flex-1 border-t" />
+                </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    setAddressSkipped(true);
+                    handleContinue();
+                  }}
+                  className="gap-2"
+                  data-testid="button-skip-address"
+                >
+                  I don't have the address yet
+                </Button>
               </div>
             </div>
           )}
 
-          {/* FULL-TIME CHEF FLOW - Step 10: Review and Submit */}
-          {currentStep === 10 && serviceType === 'fulltime' && (
+          {/* FULLTIME CHEF FLOW - Step 5: Dietary Restrictions */}
+          {currentStep === 5 && serviceType === 'fulltime' && (
             <div className="space-y-12">
-              {isSubmitted ? (
-                <div className="text-center space-y-6">
-                  <div className="flex justify-center">
-                    <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Check className="w-10 h-10 text-primary" />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h1 className="text-3xl font-bold">Opening WhatsApp...</h1>
-                    <p className="text-lg text-muted-foreground max-w-md mx-auto">
-                      Your quote details are ready to send!
-                    </p>
-                  </div>
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Any dietary restrictions?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Tell us about any dietary requirements or preferences (optional)
+                </p>
+              </div>
+
+              <div className="max-w-2xl mx-auto">
+                <div className="space-y-2">
+                  <Label htmlFor="dietary-restrictions" className="text-base font-medium">
+                    Dietary restrictions & preferences
+                  </Label>
+                  <Textarea
+                    id="dietary-restrictions"
+                    placeholder="E.g., vegetarian, gluten-free, nut allergies, halal, kosher, low-carb..."
+                    value={dietaryRestrictions}
+                    onChange={(e) => setDietaryRestrictions(e.target.value)}
+                    rows={6}
+                    className="resize-none text-base"
+                    data-testid="textarea-dietary-restrictions"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Include any allergies, health requirements, or food preferences
+                  </p>
                 </div>
-              ) : (
-                <>
-                  <div className="text-center space-y-4">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                      Review your full-time chef request
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Please review all details before submitting
-                    </p>
-                  </div>
+              </div>
 
-                  <div className="space-y-6">
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Service Details</h3>
-                        <div className="space-y-3 text-sm">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Service Type:</span>
-                            <span className="font-medium">Full-time Chef</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Guests per Meal:</span>
-                            <span className="font-medium">{guestsPerMeal} {guestsPerMeal === 1 ? 'person' : 'people'}</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Lunch Time:</span>
-                            <span className="font-medium">{lunchTime} WIB</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Dinner Time:</span>
-                            <span className="font-medium">{dinnerTime} WIB</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Food Style:</span>
-                            <span className="font-medium">{foodStyleOptions.find(s => s.id === foodStyle)?.label}</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Work Days:</span>
-                            <span className="font-medium">{workDaysOptions.find(d => d.id === workDays)?.label}</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Service Scope</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {Array.from(serviceScopeSet).map((scopeId) => {
-                            const scope = serviceScopeOptions.find(s => s.id === scopeId);
-                            return scope ? (
-                              <span key={scopeId} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                                {scope.label}
-                              </span>
-                            ) : null;
-                          })}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6 space-y-3 text-sm">
-                        <h3 className="font-semibold text-lg mb-4">Kitchen & Dietary</h3>
-                        <div>
-                          <p className="text-muted-foreground mb-1">Kitchen Setup:</p>
-                          <p className="bg-muted p-3 rounded-md whitespace-pre-wrap">{kitchenSetup}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground mb-1">Dietary Restrictions:</p>
-                          <p className="bg-muted p-3 rounded-md whitespace-pre-wrap">{dietaryRestrictions}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <h3 className="font-semibold text-lg mb-4">Location</h3>
-                        {addressSkipped ? (
-                          <p className="text-sm text-muted-foreground italic">Address to be provided later</p>
-                        ) : (
-                          <div className="text-sm space-y-1">
-                            <p className="font-medium">{address.venueName}</p>
-                            <p>{address.street}</p>
-                            <p>{address.city}, {address.region}</p>
-                            {address.postalCode && <p>{address.postalCode}</p>}
-                            <p className="font-medium mt-2">{address.country}</p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-
-                    <Card className="overflow-visible">
-                      <CardContent className="pt-6">
-                        <div className="space-y-3">
-                          <Label htmlFor="additional-notes-fulltime" className="text-base font-medium">
-                            Anything else we should know? (Optional)
-                          </Label>
-                          <Textarea
-                            id="additional-notes-fulltime"
-                            placeholder="Any other preferences, special requirements, or important details..."
-                            value={additionalNotes}
-                            onChange={(e) => setAdditionalNotes(e.target.value)}
-                            rows={4}
-                            className="resize-none"
-                            data-testid="input-additional-notes"
-                          />
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <div className="space-y-4 pt-2">
-                      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                        <p className="text-sm text-center font-medium">
-                          By submitting, our team will review your request and get back to you with a personalized quote and pricing within 20 minutes.
-                        </p>
-                      </div>
-
-                      <div className="flex justify-center">
-                        <Button
-                          size="lg"
-                          onClick={() => submitMutation.mutate()}
-                          disabled={submitMutation.isPending}
-                          className="gap-2 min-w-[240px]"
-                          data-testid="button-submit-quote-fulltime"
-                        >
-                          {submitMutation.isPending ? (
-                            <>Submitting...</>
-                          ) : (
-                            <>
-                              <Send className="w-4 h-4" />
-                              Submit & Get Quote
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={handleContinue}
+                  className="gap-2"
+                  data-testid="button-skip-dietary"
+                >
+                  Skip - No restrictions
+                </Button>
+              </div>
             </div>
           )}
-        </div>
-      </div>
 
-      {/* Bottom Navigation */}
-      {!isSubmitted && (
-        <div className="border-t bg-muted/30">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex items-center justify-between gap-4">
-              {currentStep > 1 ? (
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  onClick={handlePrevious}
-                  className="gap-2"
-                  data-testid="button-previous"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Previous step
-                </Button>
-              ) : (
-                <div />
-              )}
+          {/* FINAL CONFIRMATION PAGE - All service types */}
+          {isFinalStep() && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Submit Your Request
+                </h1>
+                <div className="max-w-3xl mx-auto space-y-4 text-lg text-muted-foreground">
+                  <p>
+                    We've optimized our quote system to make it faster and easier for you.
+                  </p>
+                  <p>
+                    Your request details will be sent securely via WhatsApp.
+                  </p>
+                  <p>
+                    Our team will review your information and call you to confirm all details.
+                  </p>
+                  <p>
+                    Within 24 hours, we'll provide you with a complete price estimate including chef fees, ingredients, and any additional services.
+                  </p>
+                  <p className="font-medium">
+                    All you need to do is confirm, and we'll handle everything else!
+                  </p>
+                </div>
+              </div>
+
+              {/* Summary Card */}
+              <Card className="max-w-2xl mx-auto">
+                <CardContent className="pt-6">
+                  <h2 className="text-2xl font-semibold mb-6">Your Request Summary</h2>
+                  
+                  <div className="space-y-4">
+                    {serviceType === 'single' && (
+                      <>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Service Type:</span>
+                          <span className="font-medium">Single Event</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Occasion:</span>
+                          <span className="font-medium capitalize">{occasion?.replace(/-/g, ' ')}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Guest Count:</span>
+                          <span className="font-medium">{guestCount} {guestCount === 1 ? 'guest' : 'guests'}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Cuisine:</span>
+                          <span className="font-medium capitalize">{cuisine}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Date(s):</span>
+                          <span className="font-medium">{selectedDates.length} {selectedDates.length === 1 ? 'date' : 'dates'} selected</span>
+                        </div>
+                      </>
+                    )}
+
+                    {serviceType === 'multiple' && (
+                      <>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Service Type:</span>
+                          <span className="font-medium">Recurring Service</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Service:</span>
+                          <span className="font-medium capitalize">{recurringServiceType?.replace(/-/g, ' ')}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Duration:</span>
+                          <span className="font-medium capitalize">{serviceDuration?.replace(/-/g, ' ')}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">People Count:</span>
+                          <span className="font-medium">{peopleCount} {peopleCount === 1 ? 'person' : 'people'}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Start Date:</span>
+                          <span className="font-medium">{startDate?.toLocaleDateString('en-GB')}</span>
+                        </div>
+                      </>
+                    )}
+
+                    {serviceType === 'fulltime' && (
+                      <>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Service Type:</span>
+                          <span className="font-medium">Full-time Chef</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Guests per Meal:</span>
+                          <span className="font-medium">{guestsPerMeal} {guestsPerMeal === 1 ? 'person' : 'people'}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Work Days:</span>
+                          <span className="font-medium capitalize">{workDays?.replace(/-/g, ' ')}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-muted-foreground">Dietary Restrictions:</span>
+                          <span className="font-medium">{dietaryRestrictions || 'None specified'}</span>
+                        </div>
+                      </>
+                    )}
+
+                    <div className="flex justify-between py-2">
+                      <span className="text-muted-foreground">Location:</span>
+                      <span className="font-medium text-right">
+                        {addressSkipped ? 'Address TBD' : `${address.city}, ${address.region}`}
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Submit Button */}
+              <div className="flex justify-center">
+                {!isSubmitted ? (
+                  <Button
+                    size="lg"
+                    onClick={handleSubmit}
+                    disabled={submitMutation.isPending}
+                    className="gap-2 px-8 py-6 text-lg"
+                    data-testid="button-submit-whatsapp"
+                  >
+                    <Send className="w-5 h-5" />
+                    {submitMutation.isPending ? 'Sending...' : 'Send Request via WhatsApp'}
+                  </Button>
+                ) : (
+                  <div className="flex items-center gap-3 text-lg text-primary">
+                    <Check className="w-6 h-6" />
+                    <span>Opening WhatsApp...</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Continue Button (for non-final steps) */}
+          {!isFinalStep() && (
+            <div className="flex justify-center pt-8">
               <Button
                 size="lg"
                 onClick={handleContinue}
                 disabled={!canContinue()}
-                className="min-w-[140px]"
+                className="px-8"
                 data-testid="button-continue"
               >
                 Continue
               </Button>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

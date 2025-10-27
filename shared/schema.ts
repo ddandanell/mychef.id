@@ -34,33 +34,18 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   // Single service fields (nullable for multiple service)
   occasion: text("occasion"),
   guestCount: text("guest_count"),
-  budgetRangeSingle: text("budget_range_single"),
-  numberOfCourses: text("number_of_courses"),
-  additionalServices: text("additional_services").array(),
   cuisine: text("cuisine"),
-  dateMode: text("date_mode"),
   selectedDates: text("selected_dates").array(),
-  timeOfDay: text("time_of_day"),
-  foodPreferences: text("food_preferences"),
-  moodDescription: text("mood_description"),
   
   // Multiple service fields (nullable for single service)
   recurringServiceType: text("recurring_service_type"),
   serviceDuration: text("service_duration"),
   peopleCount: text("people_count"),
-  dietaryFocus: text("dietary_focus"),
-  chefQualities: text("chef_qualities"),
-  budgetRange: text("budget_range"),
   startDate: text("start_date"),
   
   // Full-time chef fields (nullable for other service types)
   guestsPerMeal: text("guests_per_meal"),
-  lunchTime: text("lunch_time"),
-  dinnerTime: text("dinner_time"),
-  kitchenSetup: text("kitchen_setup"),
   dietaryRestrictions: text("dietary_restrictions"),
-  foodStyle: text("food_style"),
-  serviceScope: text("service_scope").array(),
   workDays: text("work_days"),
   
   status: text("status").notNull().default('new'),
@@ -84,33 +69,18 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   // Single service fields (optional for multiple service)
   occasion: z.string().nullish(),
   guestCount: z.string().nullish(),
-  budgetRangeSingle: z.string().nullish(),
-  numberOfCourses: z.string().nullish(),
-  additionalServices: z.array(z.string()).nullish(),
   cuisine: z.string().nullish(),
-  dateMode: z.string().nullish(),
   selectedDates: z.array(z.string()).nullish(),
-  timeOfDay: z.string().nullish(),
-  foodPreferences: z.string().nullish(),
-  moodDescription: z.string().nullish(),
   
   // Multiple service fields (optional for single service)
   recurringServiceType: z.string().nullish(),
   serviceDuration: z.string().nullish(),
   peopleCount: z.string().nullish(),
-  dietaryFocus: z.string().nullish(),
-  chefQualities: z.string().nullish(),
-  budgetRange: z.string().nullish(),
   startDate: z.string().nullish(),
   
   // Full-time chef fields (optional for other service types)
   guestsPerMeal: z.string().nullish(),
-  lunchTime: z.string().nullish(),
-  dinnerTime: z.string().nullish(),
-  kitchenSetup: z.string().nullish(),
   dietaryRestrictions: z.string().nullish(),
-  foodStyle: z.string().nullish(),
-  serviceScope: z.array(z.string()).nullish(),
   workDays: z.string().nullish(),
 });
 

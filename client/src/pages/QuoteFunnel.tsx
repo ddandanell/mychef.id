@@ -70,6 +70,18 @@ function formatQuoteForWhatsApp(data: any): string {
     
     message += `*Work Days:* ${data.workDays?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     
+    // Grocery shopping details
+    if (data.groceryHandling === 'mychef-handles') {
+      message += '*Grocery Shopping:* myCHEF handles (included in working hours)\n';
+      if (data.groceryPaymentMethod === 'upfront-payment') {
+        message += '*Grocery Payment:* Client pays upfront, myCHEF handles purchases\n';
+      } else if (data.groceryPaymentMethod === 'daily-money') {
+        message += '*Grocery Payment:* Client provides daily/regular money for chef to purchase\n';
+      }
+    } else if (data.groceryHandling === 'client-handles') {
+      message += '*Grocery Shopping:* Client handles their own grocery shopping\n';
+    }
+    
     if (data.dietaryRestrictions && data.dietaryRestrictions.trim() !== '') {
       message += `*Dietary Restrictions:* ${data.dietaryRestrictions}\n`;
     } else {

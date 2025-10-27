@@ -37,7 +37,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **Quote Funnel (Simplified):** Streamlined multi-step quote form at `/quote` with three optimized flows:
         - **Single Service (7 steps):** Service type → Occasion → Location (with skip option) → Guest count → Cuisine → Date selection → Professional confirmation page
         - **Multiple Services (7 steps):** Service type → Recurring type → Duration → Location (with skip option) → People count → Start date → Professional confirmation page
-        - **Full-Time Chef (6 steps):** Service type → Guests per meal → Work days → Location (with skip option) → Dietary restrictions → Professional confirmation page
+        - **Full-Time Chef (7 steps):** Service type → Guests per meal → Meal selection (breakfast/lunch/dinner with times) → Work days → Location (with skip option) → Dietary restrictions → Professional confirmation page
         - All flows end with a professional confirmation page explaining the WhatsApp submission process, team review, callback, and pricing estimate delivery within 24 hours.
         - Optimized to collect only essential information needed to create accurate quotes, making it faster for clients and easier for the team to process.
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.

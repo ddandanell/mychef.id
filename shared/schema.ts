@@ -45,6 +45,8 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   
   // Full-time chef fields (nullable for other service types)
   guestsPerMeal: text("guests_per_meal"),
+  mealsNeeded: text("meals_needed").array(), // breakfast, lunch, dinner
+  mealTimes: jsonb("meal_times"), // { breakfast?: string, lunch?: string, dinner?: string }
   dietaryRestrictions: text("dietary_restrictions"),
   workDays: text("work_days"),
   
@@ -80,6 +82,8 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   
   // Full-time chef fields (optional for other service types)
   guestsPerMeal: z.string().nullish(),
+  mealsNeeded: z.array(z.string()).nullish(),
+  mealTimes: z.any().nullish(),
   dietaryRestrictions: z.string().nullish(),
   workDays: z.string().nullish(),
 });

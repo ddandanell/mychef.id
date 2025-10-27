@@ -33,6 +33,8 @@ interface QuoteSubmission {
   
   // Full-time chef fields
   guestsPerMeal: string | null;
+  mealsNeeded: string[] | null;
+  mealTimes: { breakfast?: string; lunch?: string; dinner?: string } | null;
   dietaryRestrictions: string | null;
   workDays: string | null;
   
@@ -273,6 +275,23 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Guests per Meal</p>
                           <p>{selectedQuoteData.guestsPerMeal} {parseInt(selectedQuoteData.guestsPerMeal) === 1 ? 'person' : 'people'}</p>
+                        </div>
+                      )}
+
+                      {selectedQuoteData.mealsNeeded && selectedQuoteData.mealsNeeded.length > 0 && (
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground mb-2">Meals Needed</p>
+                          <div className="space-y-2">
+                            {selectedQuoteData.mealsNeeded.map((meal, idx) => {
+                              const time = selectedQuoteData.mealTimes?.[meal as 'breakfast' | 'lunch' | 'dinner'];
+                              return (
+                                <div key={idx} className="flex items-center justify-between bg-muted px-3 py-2 rounded-md">
+                                  <span className="capitalize font-medium">{meal}</span>
+                                  <span className="text-sm text-muted-foreground">{time ? `${time} WIB` : 'Time TBD'}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
                       )}
 

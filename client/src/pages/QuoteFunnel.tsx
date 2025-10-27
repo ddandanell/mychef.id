@@ -59,6 +59,15 @@ function formatQuoteForWhatsApp(data: any): string {
   } else if (data.serviceType === 'fulltime') {
     message += '*Service Type:* Full-time Chef\n';
     message += `*Guests per Meal:* ${data.guestsPerMeal} people\n`;
+    
+    if (data.mealsNeeded && data.mealsNeeded.length > 0) {
+      message += '*Meals Needed:*\n';
+      data.mealsNeeded.forEach((meal: string) => {
+        const time = data.mealTimes?.[meal] || 'Time TBD';
+        message += `  • ${meal.charAt(0).toUpperCase() + meal.slice(1)}: ${time} WIB\n`;
+      });
+    }
+    
     message += `*Work Days:* ${data.workDays?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
     
     if (data.dietaryRestrictions && data.dietaryRestrictions.trim() !== '') {
@@ -146,6 +155,8 @@ export default function QuoteFunnel() {
   
   // Full-time chef state
   const [guestsPerMeal, setGuestsPerMeal] = useState<number>(2);
+  const [mealsNeeded, setMealsNeeded] = useState<Set<string>>(new Set());
+  const [mealTimes, setMealTimes] = useState<{breakfast?: string, lunch?: string, dinner?: string}>({});
   const [workDays, setWorkDays] = useState<WorkDaysType>(null);
   const [dietaryRestrictions, setDietaryRestrictions] = useState('');
   
@@ -163,6 +174,24 @@ export default function QuoteFunnel() {
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+
+  const toggleMeal = (meal: 'breakfast' | 'lunch' | 'dinner') => {
+    const newMeals = new Set(mealsNeeded);
+    if (newMeals.has(meal)) {
+      newMeals.delete(meal);
+      // Remove time when deselecting meal
+      const newTimes = {...mealTimes};
+      delete newTimes[meal];
+      setMealTimes(newTimes);
+    } else {
+      newMeals.add(meal);
+    }
+    setMealsNeeded(newMeals);
+  };
+
+  const updateMealTime = (meal: 'breakfast' | 'lunch' | 'dinner', time: string) => {
+    setMealTimes({...mealTimes, [meal]: time});
+  };
 
   const submitMutation = useMutation({
     mutationFn: async () => {
@@ -197,6 +226,8 @@ export default function QuoteFunnel() {
         payload = {
           ...payload,
           guestsPerMeal: guestsPerMeal.toString(),
+          mealsNeeded: Array.from(mealsNeeded),
+          mealTimes: mealTimes,
           dietaryRestrictions: dietaryRestrictions || null,
           workDays: workDays!,
         };
@@ -246,7 +277,7 @@ export default function QuoteFunnel() {
   const getTotalSteps = () => {
     if (serviceType === 'single') return 7;
     if (serviceType === 'multiple') return 7;
-    if (serviceType === 'fulltime') return 6;
+    if (serviceType === 'fulltime') return 7;
     return 1;
   };
 
@@ -285,10 +316,11 @@ export default function QuoteFunnel() {
     
     if (serviceType === 'fulltime') {
       if (currentStep === 2) return guestsPerMeal >= 1;
-      if (currentStep === 3) return workDays !== null;
-      if (currentStep === 4) return isAddressValid() || addressSkipped;
-      if (currentStep === 5) return true;
+      if (currentStep === 3) return mealsNeeded.size > 0 && Array.from(mealsNeeded).every(meal => mealTimes[meal as 'breakfast' | 'lunch' | 'dinner']?.trim());
+      if (currentStep === 4) return workDays !== null;
+      if (currentStep === 5) return isAddressValid() || addressSkipped;
       if (currentStep === 6) return true;
+      if (currentStep === 7) return true;
     }
     
     return false;
@@ -317,7 +349,7 @@ export default function QuoteFunnel() {
   const isFinalStep = () => {
     if (serviceType === 'single') return currentStep === 7;
     if (serviceType === 'multiple') return currentStep === 7;
-    if (serviceType === 'fulltime') return currentStep === 6;
+    if (serviceType === 'fulltime') return currentStep === 7;
     return false;
   };
 
@@ -1163,8 +1195,90 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULLTIME CHEF FLOW - Step 3: Work Days */}
+          {/* FULLTIME CHEF FLOW - Step 3: Meal Selection */}
           {currentStep === 3 && serviceType === 'fulltime' && (
+            <div className="space-y-12">
+              <div className="text-center space-y-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Which meals do you need prepared?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select all meals you'd like your chef to prepare
+                </p>
+              </div>
+
+              <div className="max-w-2xl mx-auto space-y-4">
+                {[
+                  { id: 'breakfast', label: 'Breakfast', placeholder: '08:00' },
+                  { id: 'lunch', label: 'Lunch', placeholder: '12:00' },
+                  { id: 'dinner', label: 'Dinner', placeholder: '19:00' },
+                ].map((meal) => {
+                  const isSelected = mealsNeeded.has(meal.id);
+                  return (
+                    <Card
+                      key={meal.id}
+                      className={`
+                        transition-all overflow-visible
+                        ${isSelected ? 'border-2 border-primary bg-primary/5' : 'border-2'}
+                      `}
+                      data-testid={`card-meal-${meal.id}`}
+                    >
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          <div 
+                            className="flex items-center justify-between cursor-pointer"
+                            onClick={() => toggleMeal(meal.id as 'breakfast' | 'lunch' | 'dinner')}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                toggleMeal(meal.id as 'breakfast' | 'lunch' | 'dinner');
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div 
+                                className={`
+                                  w-5 h-5 flex-shrink-0 rounded border-2 transition-all flex items-center justify-center
+                                  ${isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'}
+                                `}
+                              >
+                                {isSelected && (
+                                  <Check className="w-3 h-3 text-primary-foreground" />
+                                )}
+                              </div>
+                              <span className="font-medium text-lg">{meal.label}</span>
+                            </div>
+                          </div>
+                          
+                          {isSelected && (
+                            <div className="space-y-2 pl-8">
+                              <Label htmlFor={`time-${meal.id}`} className="text-sm font-medium">
+                                Approximate time
+                              </Label>
+                              <Input
+                                id={`time-${meal.id}`}
+                                type="time"
+                                placeholder={meal.placeholder}
+                                value={mealTimes[meal.id as 'breakfast' | 'lunch' | 'dinner'] || ''}
+                                onChange={(e) => updateMealTime(meal.id as 'breakfast' | 'lunch' | 'dinner', e.target.value)}
+                                className="max-w-xs"
+                                data-testid={`input-time-${meal.id}`}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* FULLTIME CHEF FLOW - Step 4: Work Days */}
+          {currentStep === 4 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -1222,8 +1336,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULLTIME CHEF FLOW - Step 4: Location */}
-          {currentStep === 4 && serviceType === 'fulltime' && (
+          {/* FULLTIME CHEF FLOW - Step 5: Location */}
+          {currentStep === 5 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -1361,8 +1475,8 @@ export default function QuoteFunnel() {
             </div>
           )}
 
-          {/* FULLTIME CHEF FLOW - Step 5: Dietary Restrictions */}
-          {currentStep === 5 && serviceType === 'fulltime' && (
+          {/* FULLTIME CHEF FLOW - Step 6: Dietary Restrictions */}
+          {currentStep === 6 && serviceType === 'fulltime' && (
             <div className="space-y-12">
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
@@ -1499,6 +1613,16 @@ export default function QuoteFunnel() {
                           <span className="text-muted-foreground">Guests per Meal:</span>
                           <span className="font-medium">{guestsPerMeal} {guestsPerMeal === 1 ? 'person' : 'people'}</span>
                         </div>
+                        {mealsNeeded.size > 0 && (
+                          <div className="flex justify-between gap-4 py-2 border-b">
+                            <span className="text-muted-foreground">Meals:</span>
+                            <span className="font-medium text-right">
+                              {Array.from(mealsNeeded).map(meal => 
+                                `${meal.charAt(0).toUpperCase() + meal.slice(1)} (${mealTimes[meal as 'breakfast' | 'lunch' | 'dinner'] || '--:--'})`
+                              ).join(', ')}
+                            </span>
+                          </div>
+                        )}
                         <div className="flex justify-between py-2 border-b">
                           <span className="text-muted-foreground">Work Days:</span>
                           <span className="font-medium capitalize">{workDays?.replace(/-/g, ' ')}</span>

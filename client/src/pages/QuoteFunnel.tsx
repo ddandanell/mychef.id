@@ -11,6 +11,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 import { useLocation } from 'wouter';
+import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 type ServiceType = 'single' | 'multiple' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
@@ -43,6 +44,70 @@ const countries = [
   'Indonesia',
   ...UN_RECOGNIZED_COUNTRIES.filter(country => country !== 'Indonesia')
 ];
+
+// Helper function to format quote data for WhatsApp message
+function formatQuoteForWhatsApp(data: any): string {
+  let message = '🍽️ *myCHEF Quote Request*\n\n';
+  
+  if (data.serviceType === 'single') {
+    message += '*Service Type:* Single Event\n';
+    message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Guest Count:* ${data.guestCount}\n`;
+    message += `*Food Budget Per Person:* ${data.budgetRangeSingle}\n`;
+    message += `*Number of Courses:* ${data.numberOfCourses}\n`;
+    message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Additional Services:* ${data.additionalServices?.join(', ') || 'Food only'}\n`;
+    
+    if (data.selectedDates && data.selectedDates.length > 0) {
+      const dates = data.selectedDates.map((d: string) => new Date(d).toLocaleDateString('en-GB')).join(', ');
+      message += `*Date(s):* ${dates}\n`;
+    }
+    
+    message += `*Time of Day:* ${data.timeOfDay || 'N/A'}\n`;
+    
+    if (data.foodPreferences) {
+      message += `*Food Preferences:* ${data.foodPreferences}\n`;
+    }
+    
+    if (data.moodDescription) {
+      message += `*Mood/Style:* ${data.moodDescription}\n`;
+    }
+  } else if (data.serviceType === 'multiple') {
+    message += '*Service Type:* Recurring Service\n';
+    message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Number of People:* ${data.peopleCount}\n`;
+    message += `*Dietary Focus:* ${data.dietaryFocus?.replace(/-/g, ' ') || 'N/A'}\n`;
+    message += `*Food Budget Per Person:* ${data.budgetRange}\n`;
+    
+    if (data.startDate) {
+      message += `*Start Date:* ${new Date(data.startDate).toLocaleDateString('en-GB')}\n`;
+    }
+    
+    if (data.chefQualities) {
+      message += `*Chef Qualities Needed:* ${data.chefQualities}\n`;
+    }
+  }
+  
+  // Common fields
+  if (!data.addressSkipped && data.venueName) {
+    message += '\n*📍 Location:*\n';
+    message += `${data.venueName}\n`;
+    if (data.street) message += `${data.street}\n`;
+    if (data.city) message += `${data.city}`;
+    if (data.region) message += `, ${data.region}`;
+    if (data.postalCode) message += ` ${data.postalCode}`;
+    message += `\n${data.country}\n`;
+  }
+  
+  if (data.additionalNotes) {
+    message += `\n*Additional Notes:*\n${data.additionalNotes}\n`;
+  }
+  
+  message += '\n_Please send me a personalized quote!_';
+  
+  return message;
+}
 
 const guestCountOptions = [
   { id: '2', label: '2 people' },
@@ -238,12 +303,68 @@ export default function QuoteFunnel() {
       
       return await response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       setIsSubmitted(true);
+      
+      // Get the payload data that was submitted
+      let payload: any = {
+        serviceType: serviceType!,
+        venueName: addressSkipped ? null : address.venueName,
+        street: addressSkipped ? null : address.street,
+        city: addressSkipped ? null : address.city,
+        region: addressSkipped ? null : address.region,
+        postalCode: addressSkipped ? null : (address.postalCode || null),
+        country: addressSkipped ? null : address.country,
+        addressSkipped,
+        additionalNotes: additionalNotes || null,
+      };
+
+      if (serviceType === 'single') {
+        payload = {
+          ...payload,
+          occasion: occasion!,
+          guestCount: guestCount === 'exact' ? customGuestCount : guestCount!,
+          budgetRangeSingle: budgetRangeSingle!,
+          numberOfCourses: numberOfCourses!,
+          additionalServices: Array.from(selectedServices),
+          cuisine: cuisine === 'other' ? otherCuisineText : cuisine!,
+          dateMode,
+          selectedDates: selectedDates.map(d => d.toISOString()),
+          timeOfDay: timeOfDay!,
+          foodPreferences: foodPreferences || null,
+          moodDescription: moodDescription || null,
+        };
+      } else if (serviceType === 'multiple') {
+        payload = {
+          ...payload,
+          recurringServiceType: recurringServiceType === 'other' ? otherRecurringServiceText : recurringServiceType!,
+          serviceDuration: serviceDuration!,
+          peopleCount: peopleCount,
+          dietaryFocus: dietaryFocus === 'other' ? otherDietaryText : dietaryFocus!,
+          chefQualities: chefQualities,
+          budgetRange: budgetRange!,
+          startDate: startDate!.toISOString(),
+        };
+      }
+      
+      // Format message for WhatsApp
+      const message = formatQuoteForWhatsApp(payload);
+      const phoneNumber = WHATSAPP_NUMBER.replace(/\+/g, '');
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+      
+      // Show success toast
       toast({
-        title: "Quote submitted successfully!",
-        description: "We'll get back to you soon with a personalized offer.",
+        title: "Opening WhatsApp...",
+        description: "Your quote details are ready to send!",
       });
+      
+      // Redirect to home page after a short delay
+      setTimeout(() => {
+        setLocation('/');
+      }, 2000);
     },
     onError: (error: any) => {
       toast({

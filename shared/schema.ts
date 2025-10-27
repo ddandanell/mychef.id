@@ -47,6 +47,8 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   guestsPerMeal: text("guests_per_meal"),
   mealsNeeded: text("meals_needed").array(), // breakfast, lunch, dinner
   mealTimes: jsonb("meal_times"), // { breakfast?: string, lunch?: string, dinner?: string }
+  groceryHandling: text("grocery_handling"), // mychef-handles or client-handles
+  groceryPaymentMethod: text("grocery_payment_method"), // upfront-payment or daily-money (only if mychef-handles)
   dietaryRestrictions: text("dietary_restrictions"),
   workDays: text("work_days"),
   
@@ -84,6 +86,8 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   guestsPerMeal: z.string().nullish(),
   mealsNeeded: z.array(z.string()).nullish(),
   mealTimes: z.any().nullish(),
+  groceryHandling: z.string().nullish(),
+  groceryPaymentMethod: z.string().nullish(),
   dietaryRestrictions: z.string().nullish(),
   workDays: z.string().nullish(),
 });

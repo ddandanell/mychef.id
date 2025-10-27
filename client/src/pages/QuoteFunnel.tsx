@@ -53,11 +53,11 @@ const guestCountOptions = [
 ] as const;
 
 const budgetRangeSingleOptions = [
-  { id: 'under-1m', label: 'Under 1 million IDR', description: 'Simple home-style meal' },
-  { id: '1m-2m', label: '1-2 million IDR', description: 'Quality dining experience' },
-  { id: '2m-3m', label: '2-3 million IDR', description: 'Premium chef service' },
-  { id: '3m-5m', label: '3-5 million IDR', description: 'Luxury culinary experience' },
-  { id: 'above-5m', label: 'Above 5 million IDR', description: 'Exclusive fine dining' },
+  { id: 'under-1m', label: 'Under 1 million IDR', description: 'Simple ingredients & dishes' },
+  { id: '1m-2m', label: '1-2 million IDR', description: 'Quality ingredients' },
+  { id: '2m-3m', label: '2-3 million IDR', description: 'Premium ingredients' },
+  { id: '3m-5m', label: '3-5 million IDR', description: 'High-end ingredients' },
+  { id: 'above-5m', label: 'Above 5 million IDR', description: 'Luxury ingredients & specialty items' },
 ] as const;
 
 const numberOfCoursesOptions = [
@@ -1363,10 +1363,10 @@ export default function QuoteFunnel() {
               {/* Header */}
               <div className="text-center space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                  What's your budget range?
+                  What's your food budget?
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  This helps us match you with the right chef and design the perfect menu
+                  Budget for ingredients and groceries only. Chef fees are separate and quoted based on your needs.
                 </p>
               </div>
 

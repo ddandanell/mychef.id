@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
 import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star, X } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -590,6 +591,10 @@ export default function QuoteFunnel() {
       <div className="border-b bg-card/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">
+            <div className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 rounded-full">
+              <SiWhatsapp className="w-4 h-4 text-primary" />
+              <span className="font-medium text-primary">Powered by WhatsApp</span>
+            </div>
             <div className="flex items-center gap-1.5">
               <Star className="w-4 h-4 fill-primary text-primary" />
               <Star className="w-4 h-4 fill-primary text-primary" />
@@ -2542,6 +2547,24 @@ export default function QuoteFunnel() {
                 </CardContent>
               </Card>
 
+              {/* WhatsApp Submission Info */}
+              <Card className="max-w-2xl mx-auto border-primary/20 bg-primary/5">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 rounded-full p-3 flex-shrink-0">
+                      <SiWhatsapp className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-lg">How it works</h3>
+                      <p className="text-sm text-foreground/80">
+                        When you click submit, your complete quote request will be sent directly to our team via WhatsApp. 
+                        You'll receive a personalized quote within 24 hours, with all pricing and details discussed transparently over WhatsApp.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Submit Button */}
               <div className="flex justify-center">
                 {!isSubmitted ? (
@@ -2552,7 +2575,7 @@ export default function QuoteFunnel() {
                     className="gap-2 px-8 py-6 text-lg"
                     data-testid="button-submit-whatsapp"
                   >
-                    <Send className="w-5 h-5" />
+                    <SiWhatsapp className="w-5 h-5" />
                     {submitMutation.isPending ? 'Sending...' : 'Send Request via WhatsApp'}
                   </Button>
                 ) : (

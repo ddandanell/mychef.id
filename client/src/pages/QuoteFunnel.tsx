@@ -378,7 +378,7 @@ export default function QuoteFunnel() {
     if (serviceType === 'multiple') return 7;
     if (serviceType === 'fulltime') {
       // Base steps + conditional grocery payment step
-      return groceryHandling === 'mychef-handles' ? 10 : 9;
+      return groceryHandling === 'mychef-handles' ? 9 : 8;
     }
     return 1;
   };
@@ -458,14 +458,12 @@ export default function QuoteFunnel() {
         if (currentStep === 6) return groceryPaymentMethod !== null;
         if (currentStep === 7) return isAddressValid() || addressSkipped;
         if (currentStep === 8) return true; // dietary restrictions
-        if (currentStep === 9) return true; // confirmation page (not shown yet)
-        if (currentStep === 10) return true; // final confirmation
+        if (currentStep === 9) return true; // final confirmation
       } else {
         // Skip payment step if client handles groceries
         if (currentStep === 6) return isAddressValid() || addressSkipped;
         if (currentStep === 7) return true; // dietary restrictions
-        if (currentStep === 8) return true; // confirmation page (not shown yet)
-        if (currentStep === 9) return true; // final confirmation
+        if (currentStep === 8) return true; // final confirmation
       }
     }
     
@@ -506,8 +504,8 @@ export default function QuoteFunnel() {
     if (serviceType === 'single') return currentStep === 8;
     if (serviceType === 'multiple') return currentStep === 7;
     if (serviceType === 'fulltime') {
-      // Final step is 10 if mychef handles groceries, 9 if client handles
-      return currentStep === (groceryHandling === 'mychef-handles' ? 10 : 9);
+      // Final step is 9 if mychef handles groceries, 8 if client handles
+      return currentStep === (groceryHandling === 'mychef-handles' ? 9 : 8);
     }
     return false;
   };

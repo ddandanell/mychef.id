@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star } from 'lucide-react';
+import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -542,17 +542,18 @@ export default function QuoteFunnel() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Button
-              variant="ghost"
+              variant="destructive"
               size="sm"
               onClick={handleBack}
               className="gap-2"
-              data-testid="button-back"
+              data-testid="button-exit"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Back
+              <X className="w-4 h-4" />
+              <span className="hidden sm:inline">Exit Sales Funnel</span>
+              <span className="sm:hidden">Exit</span>
             </Button>
             
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-muted-foreground font-medium">
               Step {currentStep} of {getTotalSteps()}
             </div>
 

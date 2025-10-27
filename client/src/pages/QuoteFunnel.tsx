@@ -40,27 +40,61 @@ function formatQuoteForWhatsApp(data: any): string {
   if (data.serviceType === 'single') {
     message += '*Service Type:* Single Event\n';
     message += `*Occasion:* ${data.occasion?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Guest Count:* ${data.guestCount} guests\n`;
+    if (data.occasionCustom && data.occasionCustom.trim() !== '') {
+      message += `  ↳ _${data.occasionCustom}_\n`;
+    }
     
-    if (data.selectedDates && data.selectedDates.length > 0) {
+    if (data.guestCountUnsure && data.guestCountCustom) {
+      message += `*Guest Count:* Flexible - ${data.guestCountCustom}\n`;
+    } else {
+      message += `*Guest Count:* ${data.guestCount} guests\n`;
+    }
+    
+    if (data.datesFlexible && data.datesNote) {
+      message += `*Date(s):* Flexible - ${data.datesNote}\n`;
+    } else if (data.selectedDates && data.selectedDates.length > 0) {
       const dates = data.selectedDates.map((d: string) => new Date(d).toLocaleDateString('en-GB')).join(', ');
       message += `*Date(s):* ${dates}\n`;
     }
     
     message += `*Cuisine:* ${data.cuisine?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    if (data.cuisineCustom && data.cuisineCustom.trim() !== '') {
+      message += `  ↳ _${data.cuisineCustom}_\n`;
+    }
+    
     message += `*Pre-Meeting with Chef:* ${data.preMeetingRequested ? 'Yes - Chef arrives 2 hours early for menu planning & grocery shopping' : 'No - Chef arrives at cooking time'}\n`;
   } else if (data.serviceType === 'multiple') {
     message += '*Service Type:* Recurring Service\n';
     message += `*Service:* ${data.recurringServiceType?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
-    message += `*Number of People:* ${data.peopleCount} people\n`;
+    if (data.recurringServiceCustom && data.recurringServiceCustom.trim() !== '') {
+      message += `  ↳ _${data.recurringServiceCustom}_\n`;
+    }
     
-    if (data.startDate) {
+    if (data.durationFlexible && data.durationNote) {
+      message += `*Duration:* Flexible - ${data.durationNote}\n`;
+    } else {
+      message += `*Duration:* ${data.serviceDuration?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    }
+    
+    if (data.peopleCountUnsure && data.peopleCountCustom) {
+      message += `*Number of People:* Flexible - ${data.peopleCountCustom}\n`;
+    } else {
+      message += `*Number of People:* ${data.peopleCount} people\n`;
+    }
+    
+    if (data.startDateFlexible && data.startDateNote) {
+      message += `*Start Date:* Flexible - ${data.startDateNote}\n`;
+    } else if (data.startDate) {
       message += `*Start Date:* ${new Date(data.startDate).toLocaleDateString('en-GB')}\n`;
     }
   } else if (data.serviceType === 'fulltime') {
     message += '*Service Type:* Full-time or Part-time Chef\n';
-    message += `*Guests per Meal:* ${data.guestsPerMeal} people\n`;
+    
+    if (data.guestsPerMealVaries && data.guestsPerMealCustom) {
+      message += `*Guests per Meal:* Varies - ${data.guestsPerMealCustom}\n`;
+    } else {
+      message += `*Guests per Meal:* ${data.guestsPerMeal} people\n`;
+    }
     
     if (data.mealsNeeded && data.mealsNeeded.length > 0) {
       message += '*Meals Needed:*\n';
@@ -71,6 +105,9 @@ function formatQuoteForWhatsApp(data: any): string {
     }
     
     message += `*Work Days:* ${data.workDays?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || 'N/A'}\n`;
+    if (data.workDaysCustom && data.workDaysCustom.trim() !== '') {
+      message += `  ↳ _${data.workDaysCustom}_\n`;
+    }
     
     // Grocery shopping details
     if (data.groceryHandling === 'mychef-handles') {
@@ -693,6 +730,41 @@ export default function QuoteFunnel() {
                     </Button>
                   </div>
                 </div>
+
+                <div className="flex justify-center mt-8">
+                  <Button
+                    variant={guestCountUnsure ? "default" : "outline"}
+                    onClick={() => {
+                      setGuestCountUnsure(!guestCountUnsure);
+                      if (!guestCountUnsure) {
+                        setGuestCountCustom('');
+                      }
+                    }}
+                    data-testid="button-guest-count-unsure"
+                  >
+                    {guestCountUnsure ? 'Number is set' : 'Not sure / Varies'}
+                  </Button>
+                </div>
+
+                {guestCountUnsure && (
+                  <Card className="max-w-xl mx-auto overflow-visible mt-6">
+                    <CardContent className="pt-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="guest-count-custom" className="text-base font-medium">
+                          Please provide details about the guest count
+                        </Label>
+                        <Textarea
+                          id="guest-count-custom"
+                          placeholder="e.g., Between 8-12 people, approximately 20 guests, depends on final RSVPs..."
+                          value={guestCountCustom}
+                          onChange={(e) => setGuestCountCustom(e.target.value)}
+                          rows={3}
+                          data-testid="input-guest-count-custom"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           )}
@@ -733,6 +805,42 @@ export default function QuoteFunnel() {
                     ))}
                   </div>
                 </div>
+              )}
+
+              <div className="flex justify-center">
+                <Button
+                  variant={datesFlexible ? "default" : "outline"}
+                  onClick={() => {
+                    setDatesFlexible(!datesFlexible);
+                    if (!datesFlexible) {
+                      setDatesNote('');
+                      setSelectedDates([]);
+                    }
+                  }}
+                  data-testid="button-dates-flexible"
+                >
+                  {datesFlexible ? 'Specific dates selected' : 'Dates are flexible'}
+                </Button>
+              </div>
+
+              {datesFlexible && (
+                <Card className="max-w-xl mx-auto overflow-visible">
+                  <CardContent className="pt-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="dates-note" className="text-base font-medium">
+                        Please provide details about your preferred timing
+                      </Label>
+                      <Textarea
+                        id="dates-note"
+                        placeholder="e.g., Sometime in March, any weekend in April, flexible within the next 2 weeks..."
+                        value={datesNote}
+                        onChange={(e) => setDatesNote(e.target.value)}
+                        rows={3}
+                        data-testid="input-dates-note"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
               )}
             </div>
           )}
@@ -1237,6 +1345,41 @@ export default function QuoteFunnel() {
                     </Button>
                   </div>
                 </div>
+
+                <div className="flex justify-center mt-8">
+                  <Button
+                    variant={peopleCountUnsure ? "default" : "outline"}
+                    onClick={() => {
+                      setPeopleCountUnsure(!peopleCountUnsure);
+                      if (!peopleCountUnsure) {
+                        setPeopleCountCustom('');
+                      }
+                    }}
+                    data-testid="button-people-count-unsure"
+                  >
+                    {peopleCountUnsure ? 'Number is set' : 'Not sure / Varies'}
+                  </Button>
+                </div>
+
+                {peopleCountUnsure && (
+                  <Card className="max-w-xl mx-auto overflow-visible mt-6">
+                    <CardContent className="pt-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="people-count-custom" className="text-base font-medium">
+                          Please provide details about the people count
+                        </Label>
+                        <Textarea
+                          id="people-count-custom"
+                          placeholder="e.g., Typically 4-6 people, varies by day, depends on household guests..."
+                          value={peopleCountCustom}
+                          onChange={(e) => setPeopleCountCustom(e.target.value)}
+                          rows={3}
+                          data-testid="input-people-count-custom"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           )}
@@ -1463,6 +1606,41 @@ export default function QuoteFunnel() {
                     </Button>
                   </div>
                 </div>
+
+                <div className="flex justify-center mt-8">
+                  <Button
+                    variant={guestsPerMealVaries ? "default" : "outline"}
+                    onClick={() => {
+                      setGuestsPerMealVaries(!guestsPerMealVaries);
+                      if (!guestsPerMealVaries) {
+                        setGuestsPerMealCustom('');
+                      }
+                    }}
+                    data-testid="button-guests-per-meal-varies"
+                  >
+                    {guestsPerMealVaries ? 'Number is set' : 'Number varies'}
+                  </Button>
+                </div>
+
+                {guestsPerMealVaries && (
+                  <Card className="max-w-xl mx-auto overflow-visible mt-6">
+                    <CardContent className="pt-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="guests-per-meal-custom" className="text-base font-medium">
+                          Please provide details about the varying guest count
+                        </Label>
+                        <Textarea
+                          id="guests-per-meal-custom"
+                          placeholder="e.g., Usually 4 people but sometimes 6, varies between 2-8 guests, depends on household visitors..."
+                          value={guestsPerMealCustom}
+                          onChange={(e) => setGuestsPerMealCustom(e.target.value)}
+                          rows={3}
+                          data-testid="input-guests-per-meal-custom"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           )}

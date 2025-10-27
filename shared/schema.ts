@@ -35,6 +35,7 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   occasion: text("occasion"),
   occasionCustom: text("occasion_custom"),
   guestCount: text("guest_count"),
+  guestCountUnsure: boolean("guest_count_unsure"),
   guestCountCustom: text("guest_count_custom"),
   cuisine: text("cuisine"),
   cuisineCustom: text("cuisine_custom"),
@@ -50,6 +51,7 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   durationFlexible: boolean("duration_flexible"),
   durationNote: text("duration_note"),
   peopleCount: text("people_count"),
+  peopleCountUnsure: boolean("people_count_unsure"),
   peopleCountCustom: text("people_count_custom"),
   startDate: text("start_date"),
   startDateFlexible: boolean("start_date_flexible"),
@@ -57,6 +59,7 @@ export const quoteSubmissions = pgTable("quote_submissions", {
   
   // Full-time chef fields (nullable for other service types)
   guestsPerMeal: text("guests_per_meal"),
+  guestsPerMealVaries: boolean("guests_per_meal_varies"),
   guestsPerMealCustom: text("guests_per_meal_custom"),
   mealsNeeded: text("meals_needed").array(), // breakfast, lunch, dinner
   mealTimes: jsonb("meal_times"), // { breakfast?: string, lunch?: string, dinner?: string }
@@ -88,6 +91,7 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   occasion: z.string().nullish(),
   occasionCustom: z.string().nullish(),
   guestCount: z.string().nullish(),
+  guestCountUnsure: z.boolean().nullish(),
   guestCountCustom: z.string().nullish(),
   cuisine: z.string().nullish(),
   cuisineCustom: z.string().nullish(),
@@ -103,6 +107,7 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   durationFlexible: z.boolean().nullish(),
   durationNote: z.string().nullish(),
   peopleCount: z.string().nullish(),
+  peopleCountUnsure: z.boolean().nullish(),
   peopleCountCustom: z.string().nullish(),
   startDate: z.string().nullish(),
   startDateFlexible: z.boolean().nullish(),
@@ -110,6 +115,7 @@ export const insertQuoteSubmissionSchema = createInsertSchema(quoteSubmissions).
   
   // Full-time chef fields (optional for other service types)
   guestsPerMeal: z.string().nullish(),
+  guestsPerMealVaries: z.boolean().nullish(),
   guestsPerMealCustom: z.string().nullish(),
   mealsNeeded: z.array(z.string()).nullish(),
   mealTimes: z.any().nullish(),

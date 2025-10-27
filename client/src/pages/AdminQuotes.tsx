@@ -21,25 +21,41 @@ interface QuoteSubmission {
   
   // Single service fields
   occasion: string | null;
+  occasionCustom: string | null;
   guestCount: string | null;
+  guestCountUnsure: boolean | null;
+  guestCountCustom: string | null;
   cuisine: string | null;
+  cuisineCustom: string | null;
   selectedDates: string[] | null;
+  datesFlexible: boolean | null;
+  datesNote: string | null;
   preMeetingRequested: boolean | null;
   
   // Multiple service fields
   recurringServiceType: string | null;
+  recurringServiceCustom: string | null;
   serviceDuration: string | null;
+  durationFlexible: boolean | null;
+  durationNote: string | null;
   peopleCount: string | null;
+  peopleCountUnsure: boolean | null;
+  peopleCountCustom: string | null;
   startDate: string | null;
+  startDateFlexible: boolean | null;
+  startDateNote: string | null;
   
   // Full-time chef fields
   guestsPerMeal: string | null;
+  guestsPerMealVaries: boolean | null;
+  guestsPerMealCustom: string | null;
   mealsNeeded: string[] | null;
   mealTimes: { breakfast?: string; lunch?: string; dinner?: string } | null;
   groceryHandling: string | null;
   groceryPaymentMethod: string | null;
   dietaryRestrictions: string | null;
   workDays: string | null;
+  workDaysCustom: string | null;
   
   status: string;
   createdAt: string;
@@ -217,6 +233,11 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Occasion</p>
                           <p className="capitalize">{selectedQuoteData.occasion.replace(/-/g, ' ')}</p>
+                          {selectedQuoteData.occasionCustom && (
+                            <p className="text-sm text-muted-foreground italic mt-1 bg-muted p-2 rounded">
+                              {selectedQuoteData.occasionCustom}
+                            </p>
+                          )}
                         </div>
                       )}
 
@@ -239,17 +260,29 @@ export default function AdminQuotes() {
                         )}
                       </div>
 
-                      {selectedQuoteData.guestCount && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Guest Count</p>
+                        {selectedQuoteData.guestCountUnsure && selectedQuoteData.guestCountCustom ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Flexible / Varies</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.guestCountCustom}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.guestCount ? (
                           <p>{formatGuestCount(selectedQuoteData.guestCount)}</p>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
 
                       {selectedQuoteData.cuisine && (
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Cuisine</p>
                           <p className="capitalize">{selectedQuoteData.cuisine}</p>
+                          {selectedQuoteData.cuisineCustom && (
+                            <p className="text-sm text-muted-foreground italic mt-1 bg-muted p-2 rounded">
+                              {selectedQuoteData.cuisineCustom}
+                            </p>
+                          )}
                         </div>
                       )}
 
@@ -267,9 +300,16 @@ export default function AdminQuotes() {
                         </div>
                       </div>
 
-                      {selectedQuoteData.selectedDates && selectedQuoteData.selectedDates.length > 0 && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-2">Event Dates</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-2">Event Dates</p>
+                        {selectedQuoteData.datesFlexible && selectedQuoteData.datesNote ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Flexible Dates</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.datesNote}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.selectedDates && selectedQuoteData.selectedDates.length > 0 ? (
                           <div className="flex flex-wrap gap-2">
                             {selectedQuoteData.selectedDates.map((date, idx) => (
                               <div key={idx} className="flex items-center gap-2 text-sm bg-muted px-3 py-1 rounded-md">
@@ -282,18 +322,25 @@ export default function AdminQuotes() {
                               </div>
                             ))}
                           </div>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
                     </>
                   ) : selectedQuoteData.serviceType === 'fulltime' ? (
                     <>
                       {/* Full-time Chef Details */}
-                      {selectedQuoteData.guestsPerMeal && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Guests per Meal</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Guests per Meal</p>
+                        {selectedQuoteData.guestsPerMealVaries && selectedQuoteData.guestsPerMealCustom ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Number Varies</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.guestsPerMealCustom}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.guestsPerMeal ? (
                           <p>{selectedQuoteData.guestsPerMeal} {parseInt(selectedQuoteData.guestsPerMeal) === 1 ? 'person' : 'people'}</p>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
 
                       {selectedQuoteData.mealsNeeded && selectedQuoteData.mealsNeeded.length > 0 && (
                         <div>
@@ -316,6 +363,11 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Work Days</p>
                           <p className="capitalize">{selectedQuoteData.workDays.replace(/-/g, ' ')}</p>
+                          {selectedQuoteData.workDaysCustom && (
+                            <p className="text-sm text-muted-foreground italic mt-1 bg-muted p-2 rounded">
+                              {selectedQuoteData.workDaysCustom}
+                            </p>
+                          )}
                         </div>
                       )}
 
@@ -382,15 +434,27 @@ export default function AdminQuotes() {
                         <div>
                           <p className="text-sm font-medium text-muted-foreground mb-1">Recurring Service</p>
                           <p className="capitalize">{selectedQuoteData.recurringServiceType.replace(/-/g, ' ')}</p>
+                          {selectedQuoteData.recurringServiceCustom && (
+                            <p className="text-sm text-muted-foreground italic mt-1 bg-muted p-2 rounded">
+                              {selectedQuoteData.recurringServiceCustom}
+                            </p>
+                          )}
                         </div>
                       )}
 
-                      {selectedQuoteData.serviceDuration && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Duration</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Duration</p>
+                        {selectedQuoteData.durationFlexible && selectedQuoteData.durationNote ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Flexible Duration</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.durationNote}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.serviceDuration ? (
                           <p className="capitalize">{selectedQuoteData.serviceDuration.replace(/-/g, ' ')}</p>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
 
                       <div>
                         <p className="text-sm font-medium text-muted-foreground mb-1">Location</p>
@@ -411,16 +475,30 @@ export default function AdminQuotes() {
                         )}
                       </div>
 
-                      {selectedQuoteData.peopleCount && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">People Count</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">People Count</p>
+                        {selectedQuoteData.peopleCountUnsure && selectedQuoteData.peopleCountCustom ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Flexible / Varies</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.peopleCountCustom}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.peopleCount ? (
                           <p>{selectedQuoteData.peopleCount} {parseInt(selectedQuoteData.peopleCount) === 1 ? 'person' : 'people'}</p>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
 
-                      {selectedQuoteData.startDate && (
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Start Date</p>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground mb-1">Start Date</p>
+                        {selectedQuoteData.startDateFlexible && selectedQuoteData.startDateNote ? (
+                          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 p-2 rounded">
+                            <p className="font-medium text-sm">Flexible Start Date</p>
+                            <p className="text-sm text-muted-foreground italic mt-1">
+                              {selectedQuoteData.startDateNote}
+                            </p>
+                          </div>
+                        ) : selectedQuoteData.startDate ? (
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             <span>
@@ -431,8 +509,8 @@ export default function AdminQuotes() {
                               })}
                             </span>
                           </div>
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
                     </>
                   )}
 

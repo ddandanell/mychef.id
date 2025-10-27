@@ -34,8 +34,9 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **SEO Optimization:** Comprehensive meta tags (title, description, keywords, author, robots, language), geo tags (Bali-specific), Open Graph, Twitter Cards, JSON-LD Structured Data (LocalBusiness schema), `robots.txt`, `sitemap.xml`, canonical URLs, dynamic SEO component, and descriptive alt text for images.
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading (`display=swap`), and GPU acceleration for animations.
     - **Conversion Tracking:** Custom Google Analytics events fired via an interstitial confirmation page for all WhatsApp CTAs.
+    - **Quote Funnel (9-step):** Multi-step quote form at `/quote` with service type selection, occasion picker, location input (with villa/hotel name, full address, and country selector showing all 195 UN-recognized countries), skip address option, guest count, additional services, cuisine selection, flexible date picker, time of day, optional food preferences/mood, and comprehensive review/submit.
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.
-- **Additional Pages:** Privacy Policy, Terms of Service (both Bali-specific legal content), and a professional `Join Our Team` recruitment page with a dynamic conditional application form.
+- **Additional Pages:** Privacy Policy, Terms of Service (both Bali-specific legal content), professional `Join Our Team` recruitment page with a dynamic conditional application form, and Admin panel at `/admin/quotes` for viewing and managing quote submissions.
 
 ### System Design Choices
 - **Messaging:** Emphasis on "perfect match" for chef selection, villa/home dining, background-checked chefs, transparent pricing, and professional service with cleanup included.
@@ -49,6 +50,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 - **Icons:** Lucide React, React Icons
 - **Routing:** Wouter
 - **Storage:** In-memory (MemStorage)
+- **Data Standards:** Centralized UN-recognized country list (`shared/countries.ts`) with all 195 official UN short names for consistent global address handling
 
 ## External Dependencies
 - **WhatsApp:** For direct customer communication and booking inquiries.

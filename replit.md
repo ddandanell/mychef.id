@@ -34,7 +34,12 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **SEO Optimization:** Comprehensive meta tags (title, description, keywords, author, robots, language), geo tags (Bali-specific), Open Graph, Twitter Cards, JSON-LD Structured Data (LocalBusiness schema), `robots.txt`, `sitemap.xml`, canonical URLs, dynamic SEO component, and descriptive alt text for images.
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading (`display=swap`), and GPU acceleration for animations.
     - **Conversion Tracking:** Custom Google Analytics events fired via an interstitial confirmation page for all WhatsApp CTAs.
-    - **Quote Funnel (9-step):** Multi-step quote form at `/quote` with service type selection, occasion picker, location input (with villa/hotel name, full address, and country selector showing all 195 UN-recognized countries), skip address option, guest count, additional services, cuisine selection, flexible date picker, time of day, optional food preferences/mood, and comprehensive review/submit.
+    - **Quote Funnel (Simplified):** Streamlined multi-step quote form at `/quote` with three optimized flows:
+        - **Single Service (7 steps):** Service type → Occasion → Location (with skip option) → Guest count → Cuisine → Date selection → Professional confirmation page
+        - **Multiple Services (7 steps):** Service type → Recurring type → Duration → Location (with skip option) → People count → Start date → Professional confirmation page
+        - **Full-Time Chef (6 steps):** Service type → Guests per meal → Work days → Location (with skip option) → Dietary restrictions → Professional confirmation page
+        - All flows end with a professional confirmation page explaining the WhatsApp submission process, team review, callback, and pricing estimate delivery within 24 hours.
+        - Optimized to collect only essential information needed to create accurate quotes, making it faster for clients and easier for the team to process.
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.
 - **Additional Pages:** Privacy Policy, Terms of Service (both Bali-specific legal content), professional `Join Our Team` recruitment page with a dynamic conditional application form, and Admin panel at `/admin/quotes` for viewing and managing quote submissions.
 

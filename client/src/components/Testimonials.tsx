@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, ShieldCheck, FileText } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const TESTIMONIALS = [
   {
@@ -49,15 +48,14 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('testimonials');
+    setLocation('/contact/confirm?source=testimonials');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=testimonials');
   };
 
   return (

@@ -1,7 +1,6 @@
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText, MessagesSquare, CheckCircle, Sparkles } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const STEPS = [
   {
@@ -32,15 +31,14 @@ const STEPS = [
 ];
 
 export default function HowItWorks() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('howItWorks');
+    setLocation('/contact/confirm?source=howItWorks');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=howItWorks');
   };
 
   return (

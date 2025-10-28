@@ -34,6 +34,14 @@ export const WHATSAPP_CTAS: Record<string, WhatsAppCTA> = {
     message: 'Hi! I saw your great reviews and would like to book a private chef in Bali.',
     label: 'Booking After Reviews',
   },
+  pricing: {
+    message: 'Hi! I would like to discuss pricing and get a custom quote for a private chef in Bali.',
+    label: 'Pricing Inquiry',
+  },
+  faq: {
+    message: 'Hi! I have some questions about booking a private chef in Bali.',
+    label: 'FAQ Inquiry',
+  },
   partyAddons: {
     message: 'Hi! I would like to inquire about complete party solutions and additional services in Bali.',
     label: 'Party Solutions',

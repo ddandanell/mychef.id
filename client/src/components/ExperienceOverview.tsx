@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 // Import all the new client photos
 import diningExperience from '@assets/Dining-Experience-Bali-2_1761391000570.jpg';
@@ -115,15 +114,14 @@ function ScrollingRow({ images, direction }: ScrollingRowProps) {
 }
 
 export default function ExperienceOverview() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('experience');
+    setLocation('/contact/confirm?source=experience');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=experience');
   };
 
   return (

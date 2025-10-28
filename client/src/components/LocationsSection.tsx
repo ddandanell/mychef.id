@@ -1,8 +1,6 @@
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin, FileText } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
-import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 const BALI_LOCATIONS = [
   'Seminyak', 'Canggu', 'Ubud', 'Sanur', 'Nusa Dua', 'Uluwatu', 
@@ -11,15 +9,14 @@ const BALI_LOCATIONS = [
 ];
 
 export default function LocationsSection() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('locations');
+    setLocation('/contact/confirm?source=locations');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=locations');
   };
 
   return (

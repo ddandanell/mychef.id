@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck, FileText } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 
 const PRICING_EXAMPLES = [
   {
@@ -41,15 +40,14 @@ const PRICING_EXAMPLES = [
 ];
 
 export default function ChefProfiles() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('chefProfiles');
+    setLocation('/contact/confirm?source=chefProfiles');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=chefProfiles');
   };
 
   return (

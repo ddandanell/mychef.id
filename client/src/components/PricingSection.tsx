@@ -1,19 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChefHat, ShoppingCart, Users, Car, MessageCircle, Calculator } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { useLocation } from 'wouter';
 
 export default function PricingSection() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('pricing');
+    setLocation('/contact/confirm?source=pricing');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=pricing');
   };
 
   return (

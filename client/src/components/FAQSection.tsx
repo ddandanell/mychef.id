@@ -6,7 +6,6 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { useLocation } from 'wouter';
 
 const FAQS = [
@@ -93,15 +92,14 @@ const FAQS = [
 ];
 
 export default function FAQSection() {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    openContactDialog('faq');
+    setLocation('/contact/confirm?source=faq');
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation('/contact/confirm?source=faq');
   };
 
   return (

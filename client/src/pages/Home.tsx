@@ -33,11 +33,11 @@ export default function Home() {
       <HeroSection />
       <ExperienceOverview />
       <HowItWorks />
+      <ChefGallery />
       <WhyChoose />
       <TrustBadges />
       <TestimonialCarousel />
       <ChefProfiles />
-      <ChefGallery />
       <LocationsSection />
       <OccasionsGrid />
       <PricingSection />

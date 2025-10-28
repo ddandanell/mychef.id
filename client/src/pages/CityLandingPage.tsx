@@ -125,7 +125,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
     <div className="min-h-screen">
       <SEO 
         title={`${city.tagline} | myCHEF Indonesia`}
-        description={`${city.description} Chef service fees from Rp 800,000/hour. Book on WhatsApp +62 822-3756-5997.`}
+        description={`${city.description} Professional background-checked private chefs serving ${city.name} since 2012. Book on WhatsApp +62 822-3756-5997.`}
         canonical={`https://mychef.id/${city.slug}`}
         ogType="website"
         keywords={`private chef ${city.name}, personal chef ${city.name}, chef at home ${city.name}, villa chef ${city.name}, private dining ${city.name}, ${city.name} chef services, ${city.areas.join(', ')}`}

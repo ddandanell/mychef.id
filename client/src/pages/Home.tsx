@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import { useGeolocation } from '@/contexts/GeolocationContext';
 import HeroSection from '@/components/HeroSection';
 import ExperienceOverview from '@/components/ExperienceOverview';
 import HowItWorks from '@/components/HowItWorks';
@@ -19,13 +20,16 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
 
 export default function Home() {
+  const { city } = useGeolocation();
+  
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Private Chef Services in Bali | Professional In-Villa Dining | myCHEF Indonesia"
-        description="Book professional private chefs for in-villa dining across Bali. Background-checked chefs deliver personalized culinary experiences for events, recurring services, and full-time needs. Serving Seminyak, Canggu, Ubud, and all Bali locations."
+        title={`Private Chef Services in ${city} | Professional In-Villa Dining | myCHEF Indonesia`}
+        description={`Book professional private chefs for in-villa dining in ${city} and across Bali. Background-checked chefs deliver personalized culinary experiences for events, recurring services, and full-time needs.`}
         canonical="https://mychef.id"
         ogType="website"
+        keywords={`private chef ${city}, personal chef ${city}, chef at home ${city}, villa chef ${city}, private dining ${city}, private chef Bali, chef services Bali`}
       />
       <HeroSection />
       <ExperienceOverview />

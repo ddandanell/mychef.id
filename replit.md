@@ -28,6 +28,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 ### Technical Implementations
 - **Core Features:**
     - **WhatsApp Integration:** Section-specific pre-filled messages for all CTA buttons and a persistent floating WhatsApp button.
+    - **Geolocation & Personalization:** Automatic city detection using ipapi.co that dynamically inserts the visitor's Bali city throughout the homepage (headline, subheadlines, section descriptions). Results cached for 24 hours in localStorage. Falls back to "Bali" for non-Bali visitors or on detection errors.
     - **Trust Signals:** Prominent display of 6 trust badges (background checks, certifications, insurance), 100% Satisfaction Guarantee, and 4.9/5 average rating.
     - **Testimonial System:** 50+ authentic, detailed story-based reviews with click-to-expand functionality and hover-to-pause auto-scrolling.
     - **Cookie Consent:** GDPR-compliant banner matching site design, controlling Google Analytics activation.

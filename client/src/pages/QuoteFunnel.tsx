@@ -11,7 +11,6 @@ import { Calendar } from '@/components/ui/calendar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 import { useLocation } from 'wouter';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
@@ -273,7 +272,6 @@ export default function QuoteFunnel() {
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
-  const { openContactDialog } = useContactDialog();
 
   // Track quote funnel step progression in Google Analytics
   useEffect(() => {
@@ -592,7 +590,7 @@ export default function QuoteFunnel() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => openContactDialog('quoteFunnel')}
+              onClick={() => setLocation('/contact/confirm?source=quoteFunnel')}
               className="gap-2"
               data-testid="button-help"
             >

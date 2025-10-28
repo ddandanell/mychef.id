@@ -1,14 +1,14 @@
 import { Mail, Phone, MapPin, CreditCard } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
+import { useLocation } from 'wouter';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 export default function Footer() {
-  const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
-    openContactDialog('footer');
+    setLocation('/contact/confirm?source=footer');
   };
 
   return (

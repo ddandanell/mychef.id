@@ -1,11 +1,11 @@
 import { SiWhatsapp } from 'react-icons/si';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
+import { useLocation } from 'wouter';
 
 export default function WhatsAppButton() {
-  const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
   
   const handleClick = () => {
-    openContactDialog('floatingButton');
+    setLocation('/contact/confirm?source=floatingButton');
   };
 
   return (

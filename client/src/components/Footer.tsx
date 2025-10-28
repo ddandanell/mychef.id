@@ -165,6 +165,36 @@ export default function Footer() {
               </a>
             </div>
           </div>
+          <div className="flex flex-wrap gap-4 lg:gap-6 justify-center items-center mt-6 text-sm text-foreground/50">
+            <span>Partner Services in Bali:</span>
+            <a 
+              href="https://privatetutoringbali.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors" 
+              data-testid="link-footer-tutoring"
+            >
+              Private Tutoring Bali
+            </a>
+            <a 
+              href="https://bali-tech-education.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors" 
+              data-testid="link-footer-tech-education"
+            >
+              Tech Education Bali
+            </a>
+            <a 
+              href="https://babysitting-nanny-service.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors" 
+              data-testid="link-footer-nanny"
+            >
+              Babysitting & Nanny Services
+            </a>
+          </div>
         </div>
       </div>
     </footer>

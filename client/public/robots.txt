@@ -9,6 +9,5 @@ Sitemap: https://mychef.id/sitemap.xml
 # Crawl-delay (optional, adjust if needed)
 Crawl-delay: 1
 
-# Disallow admin or private paths (if any in the future)
-# Disallow: /admin/
-# Disallow: /private/
+# Disallow admin or private paths
+Disallow: /admin/

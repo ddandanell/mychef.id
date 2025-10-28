@@ -134,12 +134,12 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             {city.heroDescription}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 w-full sm:w-auto px-4 sm:px-0">
             <Button
               size="lg"
               onClick={handleQuoteClick}
               variant="outline"
-              className="px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
               data-testid="button-hero-quote"
             >
               <FileText className="w-6 h-6 mr-2" />
@@ -149,7 +149,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             <Button
               size="lg"
               onClick={handleWhatsAppClick}
-              className="bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
               data-testid="button-hero-whatsapp"
             >
               <MessageCircle className="w-6 h-6 mr-2" />
@@ -177,14 +177,14 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       {/* Areas Served */}
       <section className="py-16 lg:py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-12">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-8 sm:mb-12">
             We Serve All {city.name} Areas
           </h2>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
             {city.areas.map((area, index) => (
               <div 
                 key={index} 
-                className="bg-primary/10 text-primary px-6 py-3 rounded-full font-semibold"
+                className="bg-primary/10 text-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base"
                 data-testid={`badge-area-${index}`}
               >
                 {area}
@@ -193,18 +193,18 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </div>
           <div className="max-w-3xl mx-auto">
             <Card className="bg-background border-2">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold mb-4">About {city.name}</h3>
-                <p className="text-foreground/80 leading-relaxed mb-6">
+              <CardContent className="p-4 sm:p-6 lg:p-8">
+                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">About {city.name}</h3>
+                <p className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-4 sm:mb-6">
                   {city.localInsights}
                 </p>
-                <div className="border-t pt-6">
-                  <h4 className="font-semibold mb-3">Popular Venues We Serve:</h4>
+                <div className="border-t pt-4 sm:pt-6">
+                  <h4 className="font-semibold mb-3 text-sm sm:text-base">Popular Venues We Serve:</h4>
                   <div className="flex flex-wrap gap-2">
                     {city.popularVenues.map((venue, index) => (
                       <span 
                         key={index} 
-                        className="text-sm bg-accent/20 px-3 py-1 rounded-md"
+                        className="text-xs sm:text-sm bg-accent/20 px-2 sm:px-3 py-1 rounded-md"
                       >
                         {venue}
                       </span>
@@ -220,46 +220,46 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       {/* How It Works */}
       <section className="py-16 lg:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-12">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-8 sm:mb-12">
             How to Book in {city.name}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="w-8 h-8 text-primary" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">1. Contact Us</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">1. Contact Us</h3>
               <p className="text-sm text-foreground/70">WhatsApp us your event details and {city.name} location</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-8 h-8 text-primary" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <FileText className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">2. Get Proposals</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">2. Get Proposals</h3>
               <p className="text-sm text-foreground/70">Receive custom menu proposals with pricing</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">3. Confirm Booking</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">3. Confirm Booking</h3>
               <p className="text-sm text-foreground/70">Pay 50% deposit to secure your {city.name} chef</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-primary" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Star className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">4. Enjoy!</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">4. Enjoy!</h3>
               <p className="text-sm text-foreground/70">Chef arrives, plans, shops, and creates your meal</p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-4 sm:px-0">
             <Button
               size="lg"
               onClick={handleQuoteClick}
               variant="outline"
-              className="px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
               data-testid="button-how-it-works-quote"
             >
               <FileText className="w-6 h-6 mr-2" />
@@ -269,7 +269,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             <Button
               size="lg"
               onClick={handleWhatsAppClick}
-              className="bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
               data-testid="button-how-it-works-whatsapp"
             >
               <MessageCircle className="w-6 h-6 mr-2" />
@@ -282,22 +282,22 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       {/* Pricing */}
       <section className="py-16 lg:py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-3 sm:mb-4">
             Transparent Pricing in {city.name}
           </h2>
-          <p className="text-center text-foreground/70 mb-2">No hidden fees - know exactly what you're paying for</p>
-          <p className="text-sm text-center text-foreground/60 mb-12">
+          <p className="text-center text-sm sm:text-base text-foreground/70 mb-2">No hidden fees - know exactly what you're paying for</p>
+          <p className="text-xs sm:text-sm text-center text-foreground/60 mb-8 sm:mb-12 px-4">
             💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • 50% when you book, 50% the day before
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <Card>
-              <CardContent className="p-6">
-                <ChefHat className="w-8 h-8 text-primary mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Chef Service Fees</h3>
-                <div className="text-2xl font-bold text-primary mb-2">Rp 800,000 - 1,200,000+/hour</div>
-                <p className="text-sm text-foreground/70 mb-3">Minimum 3-4 hours for most dinners</p>
-                <ul className="text-sm text-foreground/80 space-y-1">
+              <CardContent className="p-4 sm:p-6">
+                <ChefHat className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Chef Service Fees</h3>
+                <div className="text-xl sm:text-2xl font-bold text-primary mb-2">Rp 800,000 - 1,200,000+/hour</div>
+                <p className="text-xs sm:text-sm text-foreground/70 mb-3">Minimum 3-4 hours for most dinners</p>
+                <ul className="text-xs sm:text-sm text-foreground/80 space-y-1">
                   <li>• All equipment provided</li>
                   <li>• Complete cleanup included</li>
                   <li>• Beautiful presentation</li>
@@ -306,12 +306,12 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             </Card>
 
             <Card>
-              <CardContent className="p-6">
-                <ShoppingCart className="w-8 h-8 text-primary mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Ingredient Shopping</h3>
-                <div className="bg-primary/10 border border-primary/20 rounded-lg p-3 mb-3">
+              <CardContent className="p-4 sm:p-6">
+                <ShoppingCart className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Ingredient Shopping</h3>
+                <div className="bg-primary/10 border border-primary/20 rounded-lg p-2 sm:p-3 mb-2 sm:mb-3">
                   <p className="text-xs font-semibold text-primary mb-1">⭐ Most Popular</p>
-                  <p className="text-sm font-semibold">Chef Arrives Early & Shops</p>
+                  <p className="text-xs sm:text-sm font-semibold">Chef Arrives Early & Shops</p>
                   <p className="text-xs text-foreground/70 mt-1">Chef comes 2 hours before, plans with you, then shops</p>
                 </div>
                 <p className="text-xs text-foreground/70">Other options: We source (+ 15-20% fee) or you shop yourself</p>
@@ -319,10 +319,10 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             </Card>
 
             <Card>
-              <CardContent className="p-6">
-                <Users className="w-8 h-8 text-primary mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Additional Staff</h3>
-                <div className="space-y-2 text-sm">
+              <CardContent className="p-4 sm:p-6">
+                <Users className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Additional Staff</h3>
+                <div className="space-y-2 text-xs sm:text-sm">
                   <div>
                     <div className="font-bold text-primary">Rp 300,000/hour</div>
                     <p className="text-foreground/70">Professional Waiter</p>
@@ -349,11 +349,11 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       {/* City-Specific FAQ */}
       <section className="py-16 lg:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl lg:text-5xl font-semibold mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold mb-3 sm:mb-4">
               Frequently Asked Questions - {city.name}
             </h2>
-            <p className="text-lg text-foreground/70">
+            <p className="text-base sm:text-lg text-foreground/70 px-4">
               Everything you need to know about booking a private chef in {city.name}
             </p>
           </div>
@@ -363,17 +363,17 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`} 
-                className="border-2 rounded-lg px-6 bg-card hover-elevate"
+                className="border-2 rounded-lg px-4 sm:px-6 bg-card hover-elevate"
                 data-testid={`accordion-faq-${index}`}
               >
                 <AccordionTrigger 
-                  className="text-left hover:no-underline py-5"
+                  className="text-left hover:no-underline py-4 sm:py-5"
                   data-testid={`button-faq-${index}-trigger`}
                 >
-                  <span className="font-semibold text-base pr-4">{faq.question}</span>
+                  <span className="font-semibold text-sm sm:text-base pr-4">{faq.question}</span>
                 </AccordionTrigger>
                 <AccordionContent 
-                  className="text-foreground/80 leading-relaxed pb-5"
+                  className="text-sm sm:text-base text-foreground/80 leading-relaxed pb-4 sm:pb-5"
                   data-testid={`text-faq-${index}-answer`}
                 >
                   {faq.answer}
@@ -382,13 +382,13 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             ))}
           </Accordion>
 
-          <div className="mt-12 text-center">
-            <p className="text-foreground/70 mb-6">Still have questions about {city.name} services?</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 sm:mt-12 text-center">
+            <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-6 px-4">Still have questions about {city.name} services?</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0">
               <Button
                 size="lg"
                 onClick={handleWhatsAppClick}
-                className="bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
                 data-testid="button-faq-whatsapp"
               >
                 <MessageCircle className="w-6 h-6 mr-2" />

@@ -28,7 +28,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 ### Technical Implementations
 - **Core Features:**
     - **WhatsApp Integration:** Section-specific pre-filled messages for all CTA buttons and a persistent floating WhatsApp button.
-    - **Geolocation & Personalization:** Automatic city detection using ipapi.co that dynamically inserts the visitor's Bali city throughout the homepage (headline, subheadlines, section descriptions). Results cached for 24 hours in localStorage. Falls back to "Bali" for non-Bali visitors or on detection errors.
+    - **Geolocation & Personalization:** Server-side city detection using the visitor's IP address (via ipapi.co) that dynamically personalizes the entire site with their exact Bali location (Seminyak, Canggu, Ubud, etc.). The server extracts the real client IP from request headers (X-Forwarded-For or socket), calls ipapi.co server-side for maximum accuracy, and returns the city name. Results cached for 24 hours in localStorage. Falls back to "Bali" for non-Bali visitors or on detection errors.
     - **Trust Signals:** Prominent display of 6 trust badges (background checks, certifications, insurance), 100% Satisfaction Guarantee, and 4.9/5 average rating.
     - **Testimonial System:** 50+ authentic, detailed story-based reviews with click-to-expand functionality and hover-to-pause auto-scrolling.
     - **Cookie Consent:** GDPR-compliant banner matching site design, controlling Google Analytics activation.
@@ -120,4 +120,4 @@ The tracking creates a complete sales funnel:
 - **WhatsApp:** For direct customer communication and booking inquiries.
 - **Google Analytics (G-W0PQH8ZKTF):** For website traffic analysis and comprehensive sales funnel tracking (GDPR-compliant).
 - **Payment Gateways:** Visa, MasterCard, and other major credit/debit card processors for online payments.
-- **Geolocation API:** ipapi.co for automatic city detection (free tier, no API key required).
+- **Geolocation API:** ipapi.co for server-side city detection using visitor's real IP address (free tier, no API key required).

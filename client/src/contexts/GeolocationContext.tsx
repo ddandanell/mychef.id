@@ -40,29 +40,16 @@ export function GeolocationProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    // Fetch geolocation data
-    fetch('https://ipapi.co/json/')
+    // Fetch geolocation data from our server endpoint
+    // Server gets the user's real IP and calls ipapi.co for super-personalized location
+    fetch('/api/geolocation')
       .then(response => response.json())
       .then(data => {
-        const detectedCity = data.city || '';
-        const detectedRegion = data.region || '';
+        const detectedCity = data.city || 'Bali';
         
-        // Check if the detected city is in Bali
-        if (BALI_CITIES.some(baliCity => 
-          detectedCity.toLowerCase().includes(baliCity.toLowerCase())
-        )) {
-          setCity(detectedCity);
-          localStorage.setItem('userCity', detectedCity);
-          localStorage.setItem('userCityTimestamp', now.toString());
-        } else if (detectedRegion && detectedRegion.toLowerCase().includes('bali')) {
-          // If region is Bali but city not recognized, use generic "Bali"
-          setCity('Bali');
-          localStorage.setItem('userCity', 'Bali');
-          localStorage.setItem('userCityTimestamp', now.toString());
-        } else {
-          // Default to Bali for non-Bali visitors
-          setCity('Bali');
-        }
+        setCity(detectedCity);
+        localStorage.setItem('userCity', detectedCity);
+        localStorage.setItem('userCityTimestamp', now.toString());
         setIsLoading(false);
       })
       .catch(() => {

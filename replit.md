@@ -68,7 +68,56 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 - **Storage:** In-memory (MemStorage)
 - **Data Standards:** Centralized UN-recognized country list (`shared/countries.ts`) with all 195 official UN short names for consistent global address handling
 
+## Google Analytics Tracking (Sales Funnel)
+Comprehensive event tracking automatically integrated with Google Analytics without requiring any special setup:
+
+### Cookie Consent & GDPR Compliance
+- Cookie banner controls Google Analytics activation
+- Tracking only enabled after user accepts cookies
+- Consent stored in localStorage, respects user choice across sessions
+
+### Tracked Events
+
+#### 1. Contact Initiation (`contact_initiation`)
+- **Triggered:** When user clicks WhatsApp CTA from any section
+- **Event Category:** Contact
+- **Event Label:** Source location (hero, experience, floatingButton, etc.)
+- **Value:** 1
+- **Purpose:** Track which sections generate the most contact interest
+
+#### 2. Quote Funnel Submission (`generate_lead`)
+- **Triggered:** When user successfully submits quote form
+- **Event Category:** Quote Funnel
+- **Event Label:** Service type (single, multiple, fulltime)
+- **Value:** 1
+- **Purpose:** Track lead generation and conversion from quote funnel
+
+#### 3. Quote Funnel Step Progression (`quote_funnel_progress`)
+- **Triggered:** On each step advancement in quote funnel (step 2+)
+- **Event Category:** Quote Funnel
+- **Event Label:** `{service_type}_step_{step_number}`
+- **Parameters:**
+  - `step`: Current step number
+  - `service_type`: Type of service (single, multiple, fulltime)
+- **Purpose:** Identify drop-off points and optimize funnel flow
+
+### Sales Funnel Visualization in Google Analytics
+The tracking creates a complete sales funnel:
+1. **Awareness:** Page views, section scrolls
+2. **Interest:** Contact initiation events from various sections
+3. **Consideration:** Quote funnel entry (step 1)
+4. **Intent:** Quote funnel progression (steps 2-9)
+5. **Conversion:** Quote submission (generate_lead event) → WhatsApp contact
+
+### Performance Optimizations (October 2025)
+- Updated browserslist database to latest version
+- Optimized context providers with useCallback and useMemo
+- All images use lazy loading with proper alt attributes
+- Font loading optimized with display=swap
+- Browser cache warnings eliminated
+
 ## External Dependencies
 - **WhatsApp:** For direct customer communication and booking inquiries.
-- **Google Analytics (G-W0PQH8ZKTF):** For website traffic analysis and user interaction tracking (GDPR-compliant).
+- **Google Analytics (G-W0PQH8ZKTF):** For website traffic analysis and comprehensive sales funnel tracking (GDPR-compliant).
 - **Payment Gateways:** Visa, MasterCard, and other major credit/debit card processors for online payments.
+- **Geolocation API:** ipapi.co for automatic city detection (free tier, no API key required).

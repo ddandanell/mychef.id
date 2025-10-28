@@ -36,7 +36,7 @@ export default function WhatsAppButton() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-primary text-primary-foreground rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform duration-200 animate-pulse"
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-primary text-primary-foreground rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform duration-200"
       data-testid="button-sticky-whatsapp"
       aria-label="Contact us on WhatsApp"
       title={currentMessage}

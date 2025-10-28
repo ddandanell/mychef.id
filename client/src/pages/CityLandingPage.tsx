@@ -7,6 +7,7 @@ import { useLocation } from 'wouter';
 import TrustBadges from '@/components/TrustBadges';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import SampleMenus from '@/components/SampleMenus';
+import ExperienceOverview from '@/components/ExperienceOverview';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import {
@@ -173,6 +174,8 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </div>
         </div>
       </section>
+
+      <ExperienceOverview />
 
       {/* Areas Served */}
       <section className="py-16 lg:py-24 bg-card">

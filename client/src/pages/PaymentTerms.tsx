@@ -115,13 +115,13 @@ export default function PaymentTerms() {
                   
                   <h3 className="text-lg font-semibold mb-2 mt-4">Changing the date, time, or location:</h3>
                   <p className="text-foreground/80 leading-relaxed mb-3">
-                    Must be requested at least 3 days in advance. Later changes cannot be guaranteed and may be treated as a cancellation.
+                    Must be requested at least 72 hours in advance. Later changes cannot be guaranteed and may be treated as a cancellation.
                   </p>
 
                   <h3 className="text-lg font-semibold mb-2 mt-4">Changing the menu:</h3>
                   <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-3">
-                    <li>If MyChef is creating the menu for you (without a pre-meeting), changes must be requested at least <strong>24 hours</strong> in advance.</li>
-                    <li>If you already agreed on a specific menu with the chef, any changes must be requested at least <strong>3 days (72 hours)</strong> before the booking.</li>
+                    <li>If MyChef is creating the menu for you (without a pre-meeting), changes must be requested at least <strong>72 hours</strong> in advance.</li>
+                    <li>If you already agreed on a specific menu with the chef, any changes must be requested at least <strong>72 hours</strong> before the booking.</li>
                   </ul>
 
                   <p className="text-foreground/80 leading-relaxed bg-muted p-4 rounded-lg">

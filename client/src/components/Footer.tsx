@@ -165,13 +165,13 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 lg:gap-6 justify-center items-center mt-6 text-base text-foreground/80">
-            <span className="font-semibold">Partner Services in Bali:</span>
+          <div className="flex flex-wrap gap-4 lg:gap-6 justify-center items-center mt-6 text-base">
+            <span className="font-semibold text-foreground">Partner Services in Bali:</span>
             <a 
               href="https://privatetutoringbali.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors font-medium underline decoration-foreground/30 hover:decoration-primary" 
+              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
               data-testid="link-footer-tutoring"
             >
               Private Tutoring Bali
@@ -180,7 +180,7 @@ export default function Footer() {
               href="https://bali-tech-education.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors font-medium underline decoration-foreground/30 hover:decoration-primary" 
+              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
               data-testid="link-footer-tech-education"
             >
               Tech Education Bali
@@ -189,7 +189,7 @@ export default function Footer() {
               href="https://babysitting-nanny-service.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors font-medium underline decoration-foreground/30 hover:decoration-primary" 
+              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
               data-testid="link-footer-nanny"
             >
               Babysitting & Nanny Services

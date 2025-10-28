@@ -82,14 +82,14 @@ export default function ChefGallery() {
 
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-hidden scrollbar-hide"
+        className="flex gap-8 overflow-x-hidden scrollbar-hide"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         data-testid="chef-gallery-container"
       >
         {triplicatedImages.map((chef, index) => (
           <div
             key={`chef-${index}`}
-            className="flex-shrink-0 w-[200px] h-[200px] rounded-xl overflow-hidden"
+            className="flex-shrink-0 w-[400px] h-[400px] rounded-xl overflow-hidden"
             data-testid={`chef-image-${index % CHEF_IMAGES.length}`}
           >
             <img

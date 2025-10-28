@@ -165,13 +165,13 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 lg:gap-6 justify-center items-center mt-6 text-base">
-            <span className="font-semibold text-foreground">Partner Services in Bali:</span>
+          <div className="flex flex-wrap gap-2 justify-center items-center mt-4 text-[9px] text-foreground/20">
+            <span>Partner Services:</span>
             <a 
               href="https://privatetutoringbali.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
+              className="hover:text-foreground/30 transition-colors" 
               data-testid="link-footer-tutoring"
             >
               Private Tutoring Bali
@@ -180,7 +180,7 @@ export default function Footer() {
               href="https://bali-tech-education.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
+              className="hover:text-foreground/30 transition-colors" 
               data-testid="link-footer-tech-education"
             >
               Tech Education Bali
@@ -189,7 +189,7 @@ export default function Footer() {
               href="https://babysitting-nanny-service.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors font-semibold underline decoration-primary/50 hover:decoration-primary" 
+              className="hover:text-foreground/30 transition-colors" 
               data-testid="link-footer-nanny"
             >
               Babysitting & Nanny Services

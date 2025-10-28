@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +18,11 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import type { CityData } from '@shared/cityData';
+import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
+import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
+import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a96e97.png';
+
+const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 
 interface CityLandingPageProps {
   city: CityData;
@@ -25,6 +31,14 @@ interface CityLandingPageProps {
 export default function CityLandingPage({ city }: CityLandingPageProps) {
   const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleWhatsAppClick = () => {
     openContactDialog(`city-${city.slug}`);
@@ -119,19 +133,36 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10">
-        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-5"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            <MapPin className="w-4 h-4" />
-            {city.name}, Bali
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-muted">
+        {HERO_IMAGES.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImage ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={image}
+              alt={`myCHEF ${city.name} hero ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+          </div>
+        ))}
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-semibold mb-6">
+            <MapPin className="w-4 h-4 text-white" />
+            <span className="text-white">{city.name}, Bali</span>
           </div>
           
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold mb-6" data-testid="text-hero-headline">
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6" data-testid="text-hero-headline">
             Private Chef Services<br />in {city.name}
           </h1>
           
-          <p className="text-xl lg:text-2xl text-foreground/70 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl lg:text-2xl text-white/95 mb-8 max-w-3xl mx-auto">
             {city.heroDescription}
           </p>
 
@@ -139,8 +170,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             <Button
               size="lg"
               onClick={handleQuoteClick}
-              variant="outline"
-              className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto bg-white hover:bg-white text-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border-2 border-white"
               data-testid="button-hero-quote"
             >
               <FileText className="w-6 h-6 mr-2" />
@@ -150,7 +180,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             <Button
               size="lg"
               onClick={handleWhatsAppClick}
-              className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+              className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2 shadow-xl"
               data-testid="button-hero-whatsapp"
             >
               <MessageCircle className="w-6 h-6 mr-2" />
@@ -158,20 +188,34 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             </Button>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-foreground/70">
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-              <span className="font-semibold">4.9/5 Rating</span>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              <span className="font-semibold text-white">4.9/5 Rating</span>
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span className="font-semibold">1000+ Events</span>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+              <CheckCircle2 className="w-5 h-5 text-white" />
+              <span className="font-semibold text-white">1000+ Events</span>
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Background Checked</span>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+              <CheckCircle2 className="w-5 h-5 text-white" />
+              <span className="font-semibold text-white">Background Checked</span>
             </div>
           </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {HERO_IMAGES.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImage(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentImage ? 'bg-white w-8' : 'bg-white/50'
+              }`}
+              data-testid={`button-carousel-dot-${index}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 

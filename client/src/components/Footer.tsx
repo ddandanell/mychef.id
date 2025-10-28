@@ -150,17 +150,20 @@ export default function Footer() {
             <p data-testid="text-footer-copyright">
               © {currentYear} myCHEF Indonesia. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              <a href="/privacy-policy" className="hover:text-primary" data-testid="link-footer-privacy">
+            <div className="flex flex-wrap gap-4 lg:gap-6 justify-center md:justify-end">
+              <a href="/privacy-policy" className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
                 Privacy Policy
               </a>
-              <a href="/terms-of-service" className="hover:text-primary" data-testid="link-footer-terms">
+              <a href="/terms-of-service" className="hover:text-primary transition-colors" data-testid="link-footer-terms">
                 Terms of Service
               </a>
-              <a href="/join-our-team" className="hover:text-primary" data-testid="link-footer-join-team">
+              <a href="/payment-terms" className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
+                Payment Terms
+              </a>
+              <a href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-join-team">
                 Join Our Team
               </a>
-              <a href="/quote" className="hover:text-primary" data-testid="link-footer-quote">
+              <a href="/quote" className="hover:text-primary transition-colors" data-testid="link-footer-quote">
                 Get Quote
               </a>
             </div>

@@ -8,6 +8,7 @@ import { GeolocationProvider } from "@/contexts/GeolocationContext";
 import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
+import PaymentTerms from "@/pages/PaymentTerms";
 import JoinOurTeam from "@/pages/JoinOurTeam";
 import ContactConfirm from "@/pages/ContactConfirm";
 import QuoteFunnel from "@/pages/QuoteFunnel";
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/jimbaran" component={JimbaranPage} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
+      <Route path="/payment-terms" component={PaymentTerms} />
       <Route path="/join-our-team" component={JoinOurTeam} />
       <Route path="/contact/confirm" component={ContactConfirm} />
       <Route path="/quote" component={QuoteFunnel} />

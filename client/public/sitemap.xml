@@ -44,6 +44,14 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- Payment Terms -->
+  <url>
+    <loc>https://mychef.id/payment-terms</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- City Landing Pages -->
   <url>
     <loc>https://mychef.id/seminyak</loc>

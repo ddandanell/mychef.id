@@ -25,7 +25,7 @@ export default function PaymentTerms() {
         <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-6">Payment & Booking Terms</h1>
         <p className="text-foreground/70 mb-2">Effective: January 2025</p>
         <p className="text-foreground/70 mb-8">
-          <strong>Company:</strong> PT MyChef<br />
+          <strong>Company:</strong> MyChef<br />
           <strong>NPWP:</strong> 1000000005064323<br />
           Registered and operating in Indonesia
         </p>
@@ -46,7 +46,7 @@ export default function PaymentTerms() {
                   <ul className="list-disc pl-6 space-y-2 text-foreground/80">
                     <li>You have <strong>7 calendar days</strong> to pay the deposit in order to confirm and secure your booking.</li>
                     <li>If your booking is scheduled for the same week, payment must be made <strong>immediately</strong>, and proof of payment must be sent to us before we lock the chef to your booking.</li>
-                    <li>If payment is not received within the stated time, PT MyChef reserves the right to cancel or reassign the chef without further notice.</li>
+                    <li>If payment is not received within the stated time, MyChef reserves the right to cancel or reassign the chef without further notice.</li>
                   </ul>
                 </div>
               </div>
@@ -65,10 +65,10 @@ export default function PaymentTerms() {
                   <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-3">
                     <li><strong>Deposit:</strong> 50% of the total amount is required to confirm and hold the booking.</li>
                     <li><strong>Final Payment:</strong> The remaining 50% must be paid no later than 3 days (72 hours) before the start of the booking.</li>
-                    <li>Payment is considered valid only once PT MyChef confirms receipt.</li>
+                    <li>Payment is considered valid only once MyChef confirms receipt.</li>
                   </ul>
                   <p className="text-foreground/80 leading-relaxed">
-                    If the balance is not received by the deadline, PT MyChef may cancel the booking and apply the cancellation policy below.
+                    If the balance is not received by the deadline, MyChef may cancel the booking and apply the cancellation policy below.
                   </p>
                 </div>
               </div>
@@ -88,9 +88,8 @@ export default function PaymentTerms() {
                     Payments can be made through:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-3">
-                    <li>Online payment link (sent directly by PT MyChef)</li>
+                    <li>Online payment link (sent directly by MyChef)</li>
                     <li>Bank transfer</li>
-                    <li>Cash (Indonesian Rupiah only)</li>
                     <li>Credit/Debit cards (Visa, MasterCard, and all major cards)</li>
                   </ul>
                   <p className="text-foreground/80 leading-relaxed bg-muted p-4 rounded-lg">
@@ -111,7 +110,7 @@ export default function PaymentTerms() {
                 <div>
                   <h2 className="font-serif text-2xl font-semibold mb-3">4. Changes to Bookings</h2>
                   <p className="text-foreground/80 leading-relaxed mb-3">
-                    All change requests must be made directly to PT MyChef, and no later than <strong>3 days (72 hours)</strong> before the shift or booking starts.
+                    All change requests must be made directly to MyChef, and no later than <strong>3 days (72 hours)</strong> before the shift or booking starts.
                   </p>
                   
                   <h3 className="text-lg font-semibold mb-2 mt-4">Changing the date, time, or location:</h3>
@@ -126,7 +125,7 @@ export default function PaymentTerms() {
                   </ul>
 
                   <p className="text-foreground/80 leading-relaxed bg-muted p-4 rounded-lg">
-                    All changes are subject to chef availability and must be confirmed in writing by PT MyChef.
+                    All changes are subject to chef availability and must be confirmed in writing by MyChef.
                   </p>
                 </div>
               </div>
@@ -184,7 +183,7 @@ export default function PaymentTerms() {
                 <div>
                   <h2 className="font-serif text-2xl font-semibold mb-3">6. Cancellations and Refunds (MyChef or Chef)</h2>
                   <p className="text-foreground/80 leading-relaxed mb-3">
-                    If PT MyChef or the assigned chef cancels or fails to deliver the service as agreed, you will receive a <strong>full refund</strong> of all payments made.
+                    If MyChef or the assigned chef cancels or fails to deliver the service as agreed, you will receive a <strong>full refund</strong> of all payments made.
                   </p>
                   <p className="text-foreground/80 leading-relaxed">
                     If the service begins but cannot be completed for reasons caused by MyChef or the chef, a fair refund will be issued based on time worked and service delivered.
@@ -223,7 +222,7 @@ export default function PaymentTerms() {
                 <div>
                   <h2 className="font-serif text-2xl font-semibold mb-3">8. Invoices and Proof of Payment</h2>
                   <p className="text-foreground/80 leading-relaxed mb-3">
-                    PT MyChef issues all official invoices and receipts for your payments.
+                    MyChef issues all official invoices and receipts for your payments.
                   </p>
                   <p className="text-foreground/80 leading-relaxed">
                     If ingredients or groceries are purchased separately, MyChef or the chef will provide receipts for those items.
@@ -248,7 +247,7 @@ export default function PaymentTerms() {
                   <div className="bg-muted p-4 rounded-lg">
                     <p className="text-foreground/80 leading-relaxed">
                       <strong>Company Details:</strong><br />
-                      PT MyChef<br />
+                      MyChef<br />
                       NPWP: 1000000005064323<br />
                       Registered and operating in Indonesia
                     </p>

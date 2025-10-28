@@ -7,6 +7,7 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   keywords?: string;
+  structuredData?: object;
 }
 
 export default function SEO({
@@ -16,6 +17,7 @@ export default function SEO({
   ogImage = 'https://mychef.id/og-image.jpg',
   ogType = 'website',
   keywords = 'private chef Bali, personal chef Indonesia, chef at home Bali, villa chef Seminyak, private dining Bali, cook for hire Bali, Airbnb chef Bali',
+  structuredData,
 }: SEOProps) {
   useEffect(() => {
     // Update title
@@ -62,7 +64,24 @@ export default function SEO({
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.setAttribute('href', canonical);
-  }, [title, description, canonical, ogImage, ogType, keywords]);
+
+    // Handle structured data (JSON-LD)
+    const STRUCTURED_DATA_ID = 'seo-structured-data';
+    let structuredDataScript = document.getElementById(STRUCTURED_DATA_ID) as HTMLScriptElement | null;
+    
+    if (structuredData) {
+      if (!structuredDataScript) {
+        structuredDataScript = document.createElement('script') as HTMLScriptElement;
+        structuredDataScript.id = STRUCTURED_DATA_ID;
+        structuredDataScript.type = 'application/ld+json';
+        document.head.appendChild(structuredDataScript);
+      }
+      structuredDataScript.textContent = JSON.stringify(structuredData);
+    } else if (structuredDataScript) {
+      // Remove structured data if none provided
+      structuredDataScript.remove();
+    }
+  }, [title, description, canonical, ogImage, ogType, keywords, structuredData]);
 
   return null;
 }

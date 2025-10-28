@@ -87,16 +87,43 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Serving Bali</h4>
             <ul className="space-y-2 text-sm text-foreground/70">
-              <li>Seminyak</li>
-              <li>Canggu</li>
-              <li>Ubud</li>
-              <li>Sanur</li>
-              <li>Nusa Dua</li>
-              <li>Uluwatu</li>
-              <li>Jimbaran</li>
+              <li>
+                <a href="/seminyak" className="hover:text-primary transition-colors" data-testid="link-footer-seminyak">
+                  Seminyak
+                </a>
+              </li>
+              <li>
+                <a href="/canggu" className="hover:text-primary transition-colors" data-testid="link-footer-canggu">
+                  Canggu
+                </a>
+              </li>
+              <li>
+                <a href="/ubud" className="hover:text-primary transition-colors" data-testid="link-footer-ubud">
+                  Ubud
+                </a>
+              </li>
+              <li>
+                <a href="/sanur" className="hover:text-primary transition-colors" data-testid="link-footer-sanur">
+                  Sanur
+                </a>
+              </li>
+              <li>
+                <a href="/nusa-dua" className="hover:text-primary transition-colors" data-testid="link-footer-nusadua">
+                  Nusa Dua
+                </a>
+              </li>
+              <li>
+                <a href="/uluwatu" className="hover:text-primary transition-colors" data-testid="link-footer-uluwatu">
+                  Uluwatu
+                </a>
+              </li>
+              <li>
+                <a href="/jimbaran" className="hover:text-primary transition-colors" data-testid="link-footer-jimbaran">
+                  Jimbaran
+                </a>
+              </li>
             </ul>
           </div>
-
           <div>
             <h4 className="font-semibold mb-4">Payment Methods</h4>
             <div className="space-y-3 text-sm text-foreground/70">

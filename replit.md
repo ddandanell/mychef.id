@@ -27,15 +27,14 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 
 ### Technical Implementations
 - **Core Features:**
-    - **WhatsApp Integration:** Section-specific pre-filled messages for all CTA buttons and a persistent floating WhatsApp button.
+    - **WhatsApp Integration & Conversion Tracking (Unified System):** All CTAs route through `/contact/confirm?source=X` conversion tracking page before opening WhatsApp. This includes all 9 main sections (hero, experience, pricing, faq, howItWorks, testimonials, locations, chefProfiles, whyChoose), 7 city landing pages, floating WhatsApp button, footer button, and quote funnel help button. Each source triggers a Google Analytics `contact_initiation` event with section-specific labels. The confirmation page displays for 2 seconds with the topic, tracks the conversion, then auto-redirects to WhatsApp with pre-filled messages.
     - **Geolocation & Personalization:** Server-side city detection using the visitor's IP address (via ipapi.co) that dynamically personalizes the entire site with their exact Bali location (Seminyak, Canggu, Ubud, etc.). The server extracts the real client IP from request headers (X-Forwarded-For or socket), calls ipapi.co server-side for maximum accuracy, and returns the city name. Results cached for 24 hours in localStorage. Falls back to "Bali" for non-Bali visitors or on detection errors.
     - **Trust Signals:** Prominent display of 6 trust badges (background checks, certifications, insurance), 100% Satisfaction Guarantee, and 4.9/5 average rating.
     - **Testimonial System:** 50+ authentic, detailed story-based reviews with click-to-expand functionality and hover-to-pause auto-scrolling.
     - **Cookie Consent:** GDPR-compliant banner matching site design, controlling Google Analytics activation.
     - **SEO Optimization:** Comprehensive meta tags (title, description, keywords, author, robots, language), geo tags (Bali-specific), Open Graph, Twitter Cards, JSON-LD Structured Data (LocalBusiness schema), `robots.txt`, `sitemap.xml`, canonical URLs, dynamic SEO component, and descriptive alt text for images.
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading (`display=swap`), and GPU acceleration for animations.
-    - **Conversion Tracking:** Custom Google Analytics events fired via an interstitial confirmation page for all WhatsApp CTAs.
-    - **Quote Funnel (Optimized):** Streamlined multi-step quote form at `/quote` with three improved flows designed for maximum clarity:
+    - **Quote Funnel (Optimized):** Accessible via footer link for post-consultation use. Streamlined multi-step quote form at `/quote` with three improved flows designed for maximum clarity:
         - **Single Event (8 steps):** Service type → Occasion → Guest count → Date selection → Cuisine preference → Pre-meeting option → Location (with skip option) → Professional confirmation page
             - **Pre-meeting feature:** Clients can request chef arrive 2 hours early to discuss menu and personally shop for fresh ingredients - only hourly rate applies, no extra cost
             - Improved question order: asks for most important details (guest count, dates) before secondary preferences (cuisine, pre-meeting)
@@ -80,11 +79,12 @@ Comprehensive event tracking automatically integrated with Google Analytics with
 ### Tracked Events
 
 #### 1. Contact Initiation (`contact_initiation`)
-- **Triggered:** When user clicks WhatsApp CTA from any section
+- **Triggered:** When user visits `/contact/confirm` conversion tracking page from any CTA
 - **Event Category:** Contact
-- **Event Label:** Source location (hero, experience, floatingButton, etc.)
+- **Event Label:** Source location with 18 distinct identifiers: `hero`, `experience`, `pricing`, `faq`, `howItWorks`, `testimonials`, `locations`, `chefProfiles`, `whyChoose`, `floatingButton`, `footer`, `quoteFunnel`, `city-seminyak`, `city-canggu`, `city-ubud`, `city-sanur`, `city-nusa-dua`, `city-uluwatu`, `city-jimbaran`
 - **Value:** 1
-- **Purpose:** Track which sections generate the most contact interest
+- **Purpose:** Track which sections and pages generate the most contact interest
+- **Flow:** User clicks CTA → Redirects to `/contact/confirm?source=X` → GA event fires → Shows confirmation page for 2 seconds → Auto-redirects to WhatsApp with pre-filled message
 
 #### 2. Quote Funnel Submission (`generate_lead`)
 - **Triggered:** When user successfully submits quote form
@@ -110,12 +110,13 @@ The tracking creates a complete sales funnel:
 4. **Intent:** Quote funnel progression (steps 2-9)
 5. **Conversion:** Quote submission (generate_lead event) → WhatsApp contact
 
-### Performance Optimizations (October 2025)
+### Performance Optimizations & Architecture Changes (October 2025)
 - Updated browserslist database to latest version
 - Optimized context providers with useCallback and useMemo
 - All images use lazy loading with proper alt attributes
 - Font loading optimized with display=swap
 - Browser cache warnings eliminated
+- **Unified Conversion Tracking (October 28, 2025):** Removed ContactChoiceDialog and ContactDialogContext in favor of single `/contact/confirm` conversion page. All CTAs (18+ sources) now route through unified tracking system for cleaner analytics and improved conversion measurement. Quote funnel remains accessible via footer for manual use after consultation.
 
 ## External Dependencies
 - **WhatsApp:** For direct customer communication and booking inquiries.

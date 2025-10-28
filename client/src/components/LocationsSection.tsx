@@ -61,8 +61,8 @@ export default function LocationsSection() {
             data-testid="button-locations-quote"
           >
             <FileText className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Get a Quote</span>
-            <span className="sm:hidden">Get Quote</span>
+            <span className="hidden sm:inline">Book Your Area</span>
+            <span className="sm:hidden">Book Area</span>
           </Button>
           
           <Button
@@ -72,8 +72,8 @@ export default function LocationsSection() {
             data-testid="button-locations-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Chat with Us</span>
-            <span className="sm:hidden">Chat Now</span>
+            <span className="hidden sm:inline">Find My Chef</span>
+            <span className="sm:hidden">Find Chef</span>
           </Button>
         </div>
       </div>

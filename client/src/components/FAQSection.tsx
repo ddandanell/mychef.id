@@ -4,71 +4,106 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { MessageCircle, FileText } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
+import { useLocation } from 'wouter';
 
 const FAQS = [
   {
-    question: 'How do I book a private chef?',
-    answer: 'Simply contact us on WhatsApp at +62 822-3756-5997. Share your event details (location, date, number of guests, cuisine preferences) and we\'ll match you with the perfect chef and send menu proposals. We typically respond within 10 minutes during business hours (09:00-22:00 WIB daily).',
+    question: 'How do I book a private chef in Bali?',
+    answer: 'Simply contact us on WhatsApp at +62 822-3756-5997. Share your event details (location, date, number of guests, cuisine preferences) and we\'ll match you with the perfect chef and send menu proposals within 10 minutes. You can also use our quick quote form for instant pricing estimates.',
   },
   {
-    question: 'How much does a private chef cost?',
-    answer: 'Chef service fees range from Rp 800,000 - 1,200,000+ per hour, with most dinners requiring 3-4 hours. Example: An intimate dinner for 2 starts from Rp 2,500,000, family gathering (4-6 guests) from Rp 3,500,000, villa party (8-12 guests) from Rp 5,500,000. Ingredients are separate - we can source them for you or provide a shopping list.',
+    question: 'How much does a private chef cost in Bali?',
+    answer: 'Chef service fees range from Rp 800,000 - 1,200,000+ per hour, with most dinners requiring 3-4 hours minimum. Example pricing: Intimate dinner for 2 starts from Rp 2,500,000, family gathering (4-6 guests) from Rp 3,500,000, villa party (8-12 guests) from Rp 5,500,000. Ingredients are billed separately. No hidden fees - you know exactly what you\'re paying before you book.',
   },
   {
     question: 'Are all chefs background-checked and insured?',
-    answer: 'Yes, absolutely. All our chefs undergo thorough criminal background checks, reference verification, and identity confirmation. They are food safety certified (HACCP), professionally trained, and all services are covered by comprehensive liability insurance. Your safety is our top priority.',
+    answer: 'Yes, 100%. All our chefs undergo thorough criminal background checks, reference verification, and identity confirmation. They are food safety certified (HACCP), professionally trained, and all services are covered by comprehensive liability insurance. Your safety and peace of mind are our top priorities.',
   },
   {
-    question: 'What payment methods do you accept?',
-    answer: 'We accept secure online payments (Visa, MasterCard, and all major cards), bank transfers, and cash in Indonesian Rupiah (IDR) only. Payment is simple: Pay 50% when you book to secure your chef, then pay the remaining 50% on the day before your event starts (or the day work begins for recurring services). All transactions are encrypted and processed securely with official invoicing.',
+    question: 'Can your chefs accommodate dietary restrictions and food allergies?',
+    answer: 'Absolutely! Our chefs are experienced with all dietary needs including vegan, vegetarian, gluten-free, dairy-free, nut allergies, halal, kosher, keto, paleo, and medical diets (diabetes, Celiac, etc.). We take allergies very seriously and ensure zero cross-contamination. Just tell us your requirements during booking and we\'ll match you with a specialist chef.',
+  },
+  {
+    question: 'What cuisines and dishes can your chefs prepare?',
+    answer: 'Our 100+ chefs specialize in diverse cuisines: Indonesian (satay, nasi goreng, rendang), Italian (pasta, risotto, pizza), French, Japanese (sushi, teppanyaki), Thai, Mediterranean, BBQ, seafood, vegan, and fusion. Each chef has their specialties - we match you with the perfect chef based on your menu preferences.',
+  },
+  {
+    question: 'What\'s included in the chef service?',
+    answer: 'Everything you need for stress-free dining: Custom menu creation, professional cooking on-site using your kitchen, beautiful plating and presentation, table service during the meal, and complete kitchen cleanup. Your chef brings specialized tools and equipment. You only need to provide basic kitchen facilities and enjoy the experience!',
   },
   {
     question: 'How does ingredient shopping work?',
-    answer: 'We offer three flexible options:\n\n**Most Popular (Recommended):** Your chef arrives 2 hours before your event. You spend 30 minutes together discussing the menu, quality preferences, portions, and any adjustments. You give the chef cash, and they go out to buy exactly what you need from the best markets. This gives you complete control over quality and budget, lets you plan for multiple meals, and ensures you only pay for what\'s actually purchased. This is how most of our customers prefer to work!\n\n**Option 2:** We source all ingredients beforehand and provide a separate bill (market price plus 15-20% sourcing fee).\n\n**Option 3:** We provide a detailed shopping list and you purchase ingredients yourself before the chef arrives.',
+    answer: '**Most Popular (95% of clients choose this):** Your chef arrives 2 hours early, spends 30 minutes planning the exact menu with you, receives cash, then shops at the best local markets for peak freshness. You get complete transparency and only pay for what\'s bought. Perfect for quality control!\n\n**Option 2:** We source ingredients beforehand (market price + 15-20% service fee).\n\n**Option 3:** We provide a shopping list and you buy ingredients yourself.',
   },
   {
-    question: 'What kitchen equipment is required?',
-    answer: 'Most villa kitchens in Bali are well-equipped. Your chef will bring specialized tools. We\'ll discuss your kitchen setup during booking to ensure everything needed is available.',
+    question: 'How far in advance should I book my private chef?',
+    answer: 'For best chef selection, book 1-2 weeks ahead. During peak seasons (June-September, December-January, holidays like Christmas and New Year), book 3-4 weeks early as top chefs fill up fast. Need last-minute help? Contact us anyway - we often accommodate same-day or next-day requests based on availability!',
   },
   {
-    question: 'How far in advance should I book?',
-    answer: 'We recommend booking 1-2 weeks in advance, especially during peak season (June-September, December-January). However, we often accommodate last-minute requests - contact us to check availability.',
+    question: 'What are your payment terms and accepted methods?',
+    answer: 'We accept secure online payments (Visa, MasterCard, all major credit/debit cards), bank transfers, and cash (IDR only). Simple payment schedule: 50% deposit when booking to secure your chef, remaining 50% paid 72 hours (3 days) before your event. All transactions are encrypted with official invoicing. No payment processing fees.',
   },
   {
-    question: 'What areas do you serve?',
-    answer: 'We serve all of Bali including Seminyak, Canggu, Ubud, Sanur, Nusa Dua, Uluwatu, Jimbaran, and all other areas across the island.',
+    question: 'What is your cancellation and rescheduling policy?',
+    answer: 'We understand plans change! Cancellation/change terms based on timing:\n\n• 14+ days before: 100% refund\n• 7-13 days before: 50% refund\n• Less than 7 days: No refund (deposit retained)\n\nMenu changes, date/time adjustments, or location changes must be requested at least 72 hours (3 days) in advance at no charge. Changes within 72 hours may incur additional fees.',
   },
   {
-    question: 'What time can the chef start?',
-    answer: 'Chefs are available from morning until late evening. Most dinner services start between 4-6 PM for a 7-8 PM dinner. Breakfast, lunch, and late-night services available upon request.',
+    question: 'Can I request a trial or tasting before committing?',
+    answer: 'Yes! While most clients book directly after reviewing our chef profiles and sample menus, we offer trial tastings for recurring services (weekly meal prep, full-time chefs) or large events. Contact us to arrange a paid tasting session where you can meet your chef and sample their cooking style before your main booking.',
   },
   {
-    question: 'Is cleanup included?',
-    answer: 'Yes! Complete kitchen cleanup is included in all chef services. Your kitchen will be left spotless.',
+    question: 'What areas of Bali do you serve?',
+    answer: 'We serve ALL of Bali! Popular areas include Seminyak, Canggu, Ubud, Sanur, Nusa Dua, Uluwatu, Jimbaran, Pererenan, Berawa, Kerobokan, Denpasar, Tanah Lot, and beyond. Whether you\'re in a beachfront villa, jungle retreat, or cliff-top resort, we\'ll bring exceptional dining to your location. No additional travel fees within Bali.',
   },
   {
-    question: 'Should I tip the chef?',
-    answer: 'Tipping is not required but always appreciated. 10-15% is customary for exceptional service.',
+    question: 'What is the minimum and maximum number of guests you can serve?',
+    answer: 'We cater to all group sizes: Intimate dinners for 2, family meals (4-8), villa parties (10-20), weddings and events (20-50+). For groups over 15, we may assign multiple chefs or additional service staff to ensure perfect execution. Different chefs specialize in different scales - we match accordingly.',
   },
   {
-    question: 'What is the minimum/maximum number of guests?',
-    answer: 'We cater from intimate dinners for 2 to large events for 50+ guests. Different chefs specialize in different group sizes - we\'ll match you accordingly.',
+    question: 'What time can the chef start? Are breakfast and lunch available?',
+    answer: 'Our chefs are available 7 days a week from early morning to late night! Breakfast service (starting 6-8 AM), lunch (11 AM-2 PM), afternoon events, dinner (most start 4-6 PM for 7-8 PM dining), and late-night cooking all available. Tell us your preferred timing and we\'ll accommodate your schedule.',
   },
   {
-    question: 'Can you help with special occasions (birthdays, proposals)?',
-    answer: 'Absolutely! We love making celebrations special. Inform us of your occasion and we can arrange special touches like custom cakes, romantic setups, or surprise presentations.',
+    question: 'What kitchen equipment is required? What if my villa kitchen is basic?',
+    answer: 'Most Bali villas have adequate kitchens (stove, oven, basic cookware). Your chef brings specialized tools, knives, and equipment. For villas with limited facilities, we assess during booking and can arrange equipment rentals if needed (small additional cost). Even basic kitchens work fine - we\'ve successfully served in hundreds of different villas!',
   },
   {
-    question: 'Do your chefs speak English?',
-    answer: 'Yes, all our chefs communicate in English. Many also speak Indonesian, and some speak additional languages like French, Italian, or Japanese.',
+    question: 'Is kitchen cleanup included in the service?',
+    answer: 'Yes, 100%! Complete kitchen cleanup is included in every booking. Your chef washes all dishes, cookware, utensils, wipes counters, sweeps floors, and leaves your kitchen spotless. You can relax and enjoy your evening without worrying about the mess. Many clients tell us this is their favorite part!',
   },
   {
-    question: 'What if my villa doesn\'t have certain equipment?',
-    answer: 'Your chef will bring essential tools. For specialized equipment, we can arrange rentals at a small additional cost. We\'ll discuss this during booking.',
+    question: 'Do your chefs speak English? What about other languages?',
+    answer: 'All our chefs communicate fluently in English and Indonesian. Many also speak additional languages including French, Italian, Japanese, Mandarin, or Spanish. If language is important for your event, let us know your preference and we\'ll match you with a chef who can communicate perfectly in your language.',
+  },
+  {
+    question: 'Can you help with special occasions like birthdays, anniversaries, or proposals?',
+    answer: 'We LOVE making celebrations unforgettable! Tell us about your special occasion and we\'ll add magical touches: custom birthday cakes, romantic table setups, surprise dessert presentations, coordinated timing for proposals, themed decorations, or special menu touches. We\'ve helped with hundreds of celebrations - your success is our specialty!',
+  },
+  {
+    question: 'Should I tip my chef? What\'s customary in Bali?',
+    answer: 'Tipping is not required or expected, but always appreciated for exceptional service. If you choose to tip, 10-15% of the chef service fee is customary in Bali. Many clients also tip additional service staff (waiters, bartenders) separately. Tips can be given in cash (IDR) directly to your chef at the end of service.',
+  },
+  {
+    question: 'How do you match me with the right chef?',
+    answer: 'Our expert team considers your cuisine preferences, dietary needs, group size, event style, budget, and location to match you with the perfect chef from our network of 100+ professionals. We send you chef profiles and sample menus for approval before confirming. You can request a different chef if the match isn\'t perfect - your satisfaction is guaranteed!',
   },
 ];
 
 export default function FAQSection() {
+  const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
+  
+  const handleWhatsAppClick = () => {
+    openContactDialog('faq');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,7 +116,7 @@ export default function FAQSection() {
           </p>
         </div>
 
-        <Accordion type="single" collapsible className="space-y-3">
+        <Accordion type="single" collapsible className="space-y-3 mb-12">
           {FAQS.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`} className="border-2 rounded-lg px-6 bg-card hover-elevate" data-testid={`accordion-faq-${index}`}>
               <AccordionTrigger className="text-left hover:no-underline py-5" data-testid={`button-faq-${index}-trigger`}>
@@ -93,6 +128,31 @@ export default function FAQSection() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button
+            size="lg"
+            onClick={handleWhatsAppClick}
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-faq-whatsapp"
+          >
+            <MessageCircle className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Ask a Question</span>
+            <span className="sm:hidden">Ask Now</span>
+          </Button>
+          
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            variant="outline"
+            className="px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-faq-quote"
+          >
+            <FileText className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Schedule Free Consultation</span>
+            <span className="sm:hidden">Get Consultation</span>
+          </Button>
+        </div>
       </div>
     </section>
   );

@@ -104,8 +104,8 @@ export default function HeroSection() {
             data-testid="button-hero-quote-cta"
           >
             <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Get a Quote</span>
-            <span className="sm:hidden">Get Quote</span>
+            <span className="hidden sm:inline">Reserve Your Private Chef</span>
+            <span className="sm:hidden">Reserve Chef</span>
           </Button>
           
           <Button
@@ -115,8 +115,8 @@ export default function HeroSection() {
             data-testid="button-hero-whatsapp-cta"
           >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Chat with Us</span>
-            <span className="sm:hidden">Chat Now</span>
+            <span className="hidden sm:inline">Start Planning Today</span>
+            <span className="sm:hidden">Plan Event</span>
           </Button>
         </div>
 

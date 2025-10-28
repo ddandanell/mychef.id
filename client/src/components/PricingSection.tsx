@@ -1,7 +1,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChefHat, ShoppingCart, Users, Car } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ChefHat, ShoppingCart, Users, Car, MessageCircle, Calculator } from 'lucide-react';
+import { useContactDialog } from '@/contexts/ContactDialogContext';
+import { useLocation } from 'wouter';
 
 export default function PricingSection() {
+  const { openContactDialog } = useContactDialog();
+  const [, setLocation] = useLocation();
+  
+  const handleWhatsAppClick = () => {
+    openContactDialog('pricing');
+  };
+
+  const handleQuoteClick = () => {
+    setLocation('/quote');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,6 +117,31 @@ export default function PricingSection() {
             </div>
           </CardContent>
         </Card>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          <Button
+            size="lg"
+            onClick={handleQuoteClick}
+            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-pricing-quote"
+          >
+            <Calculator className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Get Your Custom Quote</span>
+            <span className="sm:hidden">Get Quote</span>
+          </Button>
+          
+          <Button
+            size="lg"
+            onClick={handleWhatsAppClick}
+            variant="outline"
+            className="px-6 md:px-8 py-5 md:py-6 text-base lg:text-lg font-semibold hover-elevate active-elevate-2"
+            data-testid="button-pricing-whatsapp"
+          >
+            <MessageCircle className="w-5 h-5 mr-2" />
+            <span className="hidden sm:inline">Discuss My Budget</span>
+            <span className="sm:hidden">Chat Now</span>
+          </Button>
+        </div>
       </div>
     </section>
   );

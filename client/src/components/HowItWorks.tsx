@@ -84,8 +84,8 @@ export default function HowItWorks() {
             data-testid="button-how-it-works-quote"
           >
             <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Get a Quote</span>
-            <span className="sm:hidden">Get Quote</span>
+            <span className="hidden sm:inline">Start My Booking</span>
+            <span className="sm:hidden">Book Now</span>
           </Button>
           
           <Button
@@ -95,8 +95,8 @@ export default function HowItWorks() {
             data-testid="button-how-it-works-whatsapp"
           >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Chat with Us</span>
-            <span className="sm:hidden">Chat Now</span>
+            <span className="hidden sm:inline">Talk to Our Team</span>
+            <span className="sm:hidden">Contact Us</span>
           </Button>
         </div>
       </div>

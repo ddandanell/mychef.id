@@ -185,8 +185,8 @@ export default function ChefProfiles() {
             data-testid="button-chefs-quote"
           >
             <FileText className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Get a Quote</span>
-            <span className="sm:hidden">Get Quote</span>
+            <span className="hidden sm:inline">See Chef Options</span>
+            <span className="sm:hidden">See Chefs</span>
           </Button>
           
           <Button
@@ -196,8 +196,8 @@ export default function ChefProfiles() {
             data-testid="button-chefs-whatsapp"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
-            <span className="hidden sm:inline">Chat with Us</span>
-            <span className="sm:hidden">Chat Now</span>
+            <span className="hidden sm:inline">Find My Perfect Chef</span>
+            <span className="sm:hidden">Find Chef</span>
           </Button>
         </div>
       </div>

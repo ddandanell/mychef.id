@@ -3,7 +3,6 @@ import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ShoppingCart, ChefHat, Users } from 'lucide-react';
-import { useContactDialog } from '@/contexts/ContactDialogContext';
 import { useLocation } from 'wouter';
 import TrustBadges from '@/components/TrustBadges';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
@@ -30,7 +29,6 @@ interface CityLandingPageProps {
 }
 
 export default function CityLandingPage({ city }: CityLandingPageProps) {
-  const { openContactDialog } = useContactDialog();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -42,11 +40,11 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
   }, []);
 
   const handleWhatsAppClick = () => {
-    openContactDialog(`city-${city.slug}`);
+    setLocation(`/contact/confirm?source=city-${city.slug}`);
   };
 
   const handleQuoteClick = () => {
-    setLocation('/quote');
+    setLocation(`/contact/confirm?source=city-${city.slug}`);
   };
 
   // Generate city-specific structured data

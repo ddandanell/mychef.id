@@ -40,7 +40,7 @@ const TIPS = [
   },
   {
     title: 'Payment Terms',
-    description: 'Ask about deposit and final payment timing. Most chefs require 30-50% deposit to secure the booking.',
+    description: 'Simple payment: Pay 50% when you book to secure your chef, then pay the remaining 50% the day before your event starts.',
   },
 ];
 

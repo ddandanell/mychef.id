@@ -83,8 +83,8 @@ export default function TermsOfService() {
 
             <h3 className="text-xl font-semibold mb-3 mt-6">4.2 Payment Terms</h3>
             <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-4">
-              <li>A deposit of 30-50% is required to secure your booking</li>
-              <li>Full payment is due 48 hours before the service date, unless otherwise agreed</li>
+              <li>Pay 50% deposit when you book to secure your chef and confirm your reservation</li>
+              <li>Pay the remaining 50% on the day before your event starts (or the day work begins for recurring services)</li>
               <li>We accept bank transfers, credit cards, and cash (Indonesian Rupiah)</li>
               <li>All prices are quoted in Indonesian Rupiah (IDR)</li>
             </ul>
@@ -100,9 +100,9 @@ export default function TermsOfService() {
             
             <h3 className="text-xl font-semibold mb-3 mt-6">5.1 Client Cancellations</h3>
             <ul className="list-disc pl-6 space-y-2 text-foreground/80 mb-4">
-              <li><strong>7+ days before service:</strong> Full refund of deposit minus 10% administrative fee</li>
+              <li><strong>7+ days before service:</strong> Full refund of your 50% deposit minus 10% administrative fee</li>
               <li><strong>3-6 days before service:</strong> 50% refund of total amount paid</li>
-              <li><strong>Less than 3 days before service:</strong> No refund; full payment required</li>
+              <li><strong>Less than 3 days before service:</strong> No refund; full payment (100%) required</li>
             </ul>
 
             <h3 className="text-xl font-semibold mb-3 mt-6">5.2 myCHEF Cancellations</h3>

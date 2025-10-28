@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept secure online payments (Visa, MasterCard, and all major cards), bank transfers, and cash in Indonesian Rupiah (IDR) only. A 30-50% deposit secures your booking. Full payment must be completed before the chef arrives. All transactions are encrypted and processed securely with official invoicing.',
+    answer: 'We accept secure online payments (Visa, MasterCard, and all major cards), bank transfers, and cash in Indonesian Rupiah (IDR) only. Payment is simple: Pay 50% when you book to secure your chef, then pay the remaining 50% on the day before your event starts (or the day work begins for recurring services). All transactions are encrypted and processed securely with official invoicing.',
   },
   {
     question: 'Do I need to provide ingredients or will you source them?',

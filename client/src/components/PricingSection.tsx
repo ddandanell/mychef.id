@@ -12,7 +12,7 @@ export default function PricingSection() {
           No hidden fees - know exactly what you're paying for
         </p>
         <p className="text-sm text-center text-foreground/60 mb-12">
-          💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • Full payment before service
+          💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • 50% when you book, 50% the day before
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">

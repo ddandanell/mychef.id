@@ -160,9 +160,6 @@ export default function Footer() {
               <a href="/payment-terms" className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
                 Payment Terms
               </a>
-              <a href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-join-team">
-                Join Our Team
-              </a>
               <a href="/quote" className="hover:text-primary transition-colors" data-testid="link-footer-quote">
                 Get Quote
               </a>

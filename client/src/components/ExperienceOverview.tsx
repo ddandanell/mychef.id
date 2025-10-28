@@ -3,7 +3,6 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
-import { useGeolocation } from '@/contexts/GeolocationContext';
 
 // Import all the new client photos
 import diningExperience from '@assets/Dining-Experience-Bali-2_1761391000570.jpg';
@@ -117,7 +116,6 @@ function ScrollingRow({ images, direction }: ScrollingRowProps) {
 
 export default function ExperienceOverview() {
   const { openContactDialog } = useContactDialog();
-  const { city } = useGeolocation();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
@@ -132,10 +130,10 @@ export default function ExperienceOverview() {
     <section className="py-16 lg:py-24 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-experience-headline">
-          Turn Your {city} Villa Into Bali's Best Restaurant
+          Turn Your Bali Villa Into Bali's Best Restaurant
         </h2>
         <p className="text-base lg:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-4" data-testid="text-experience-description">
-          There is no more intimate restaurant than your own home in {city}. Whether you're staying in a luxury villa, celebrating with family, or hosting friends, bring the magic of fine dining to your table with talented chefs who create menus tailored to your cravings.
+          There is no more intimate restaurant than your own home in Bali. Whether you're staying in a luxury villa, celebrating with family, or hosting friends, bring the magic of fine dining to your table with talented chefs who create menus tailored to your cravings.
         </p>
         <p className="text-sm text-foreground/60 text-center">
           Real photos from our happy clients across Bali

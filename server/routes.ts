@@ -4,48 +4,6 @@ import { storage } from "./storage";
 import { insertQuoteSubmissionSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Geolocation endpoint - gets user's city from their IP
-  app.get("/api/geolocation", async (req, res) => {
-    try {
-      // Get the client's IP address - check X-Forwarded-For first (for proxies/load balancers)
-      const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() 
-                 || req.socket.remoteAddress 
-                 || '8.8.8.8'; // fallback for development
-      
-      // Call ipapi.co with the client's IP
-      const response = await fetch(`https://ipapi.co/${ip}/json/`);
-      const data = await response.json();
-      
-      // Valid Bali cities we serve
-      const BALI_CITIES = [
-        'Seminyak', 'Canggu', 'Ubud', 'Sanur', 'Nusa Dua', 'Uluwatu',
-        'Jimbaran', 'Pererenan', 'Berawa', 'Umalas', 'Kerobokan',
-        'Tanah Lot', 'Candidasa', 'Amed', 'Lovina', 'Denpasar',
-        'Kuta', 'Legian', 'Tabanan', 'Gianyar', 'Klungkung'
-      ];
-      
-      const detectedCity = data.city || '';
-      const detectedRegion = data.region || '';
-      
-      let city = 'Bali'; // default
-      
-      // Check if the detected city is in Bali
-      if (BALI_CITIES.some(baliCity => 
-        detectedCity.toLowerCase().includes(baliCity.toLowerCase())
-      )) {
-        city = detectedCity;
-      } else if (detectedRegion && detectedRegion.toLowerCase().includes('bali')) {
-        // If region is Bali but city not recognized, use generic "Bali"
-        city = 'Bali';
-      }
-      
-      res.json({ city });
-    } catch (error: any) {
-      // On error, return default
-      res.json({ city: 'Bali' });
-    }
-  });
-
   // Quote submission routes
   app.post("/api/quotes", async (req, res) => {
     try {

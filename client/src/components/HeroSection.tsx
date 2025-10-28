@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
-import { useGeolocation } from '@/contexts/GeolocationContext';
 import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
@@ -14,7 +13,6 @@ const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 
 export default function HeroSection() {
   const { openContactDialog } = useContactDialog();
-  const { city } = useGeolocation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -77,10 +75,10 @@ export default function HeroSection() {
         </button>
 
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
-          Hire a Private Chef at Home in {city}
+          Hire a Private Chef at Home in Bali
         </h1>
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
-          Experience personalized fine dining in your villa, home, or beachfront property in {city}. Serving all of Bali from Seminyak to Ubud, Canggu to Nusa Dua.
+          Experience personalized fine dining in your villa, home, or beachfront property. Serving all of Bali from Seminyak to Ubud, Canggu to Nusa Dua.
         </p>
         
         <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 flex-wrap">

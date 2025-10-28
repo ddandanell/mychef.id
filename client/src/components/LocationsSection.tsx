@@ -2,7 +2,6 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin, FileText } from 'lucide-react';
 import { useContactDialog } from '@/contexts/ContactDialogContext';
-import { useGeolocation } from '@/contexts/GeolocationContext';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 
 const BALI_LOCATIONS = [
@@ -13,7 +12,6 @@ const BALI_LOCATIONS = [
 
 export default function LocationsSection() {
   const { openContactDialog } = useContactDialog();
-  const { city } = useGeolocation();
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
@@ -28,10 +26,10 @@ export default function LocationsSection() {
     <section className="py-16 lg:py-24 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-locations-headline">
-          Private Chef Service in {city} & All of Bali
+          Private Chef Service Across All of Bali
         </h2>
         <p className="text-lg text-center text-foreground/70 mb-12 max-w-4xl mx-auto" data-testid="text-locations-description">
-          Whether you're in {city} or anywhere across Bali - from beachfront villas in Seminyak to jungle retreats in Ubud - myCHEF brings exceptional private dining to your location.
+          Whether you're anywhere across Bali - from beachfront villas in Seminyak to jungle retreats in Ubud - myCHEF brings exceptional private dining to your location.
         </p>
 
         <div className="max-w-4xl mx-auto mb-12">

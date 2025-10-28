@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SEO from '@/components/SEO';
 import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star, X } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
@@ -275,6 +275,18 @@ export default function QuoteFunnel() {
   const [, setLocation] = useLocation();
   const { openContactDialog } = useContactDialog();
 
+  // Track quote funnel step progression in Google Analytics
+  useEffect(() => {
+    if (currentStep > 1 && serviceType && typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'quote_funnel_progress', {
+        event_category: 'Quote Funnel',
+        event_label: `${serviceType}_step_${currentStep}`,
+        step: currentStep,
+        service_type: serviceType
+      });
+    }
+  }, [currentStep, serviceType]);
+
   const toggleMeal = (meal: 'breakfast' | 'lunch' | 'dinner') => {
     const newMeals = new Set(mealsNeeded);
     if (newMeals.has(meal)) {
@@ -375,6 +387,16 @@ export default function QuoteFunnel() {
       setIsSubmitted(true);
       
       const { payload } = data;
+      
+      // Track quote submission in Google Analytics
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'generate_lead', {
+          event_category: 'Quote Funnel',
+          event_label: payload.serviceType,
+          value: 1
+        });
+      }
+      
       const message = formatQuoteForWhatsApp(payload);
       const phoneNumber = WHATSAPP_NUMBER.replace(/\+/g, '');
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;

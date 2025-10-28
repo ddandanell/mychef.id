@@ -51,12 +51,13 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
         - All flows end with a professional confirmation page explaining the WhatsApp submission process, team review, callback, and pricing estimate delivery within 24 hours.
         - Optimized question ordering across all funnels ensures users never get stuck and can easily understand each step.
         - Each service type includes specific examples in descriptions (birthdays for single events, meal prep for recurring, daily household chef for full-time).
-- **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.
+- **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Ingredient Shopping (dedicated section), Sample Menus (Indonesian & Asian), Complete Party Solutions, FAQ, Booking Tips, Footer.
 - **Additional Pages:** Privacy Policy, Terms of Service (both Bali-specific legal content), professional `Join Our Team` recruitment page with a dynamic conditional application form, and Admin panel at `/admin/quotes` for viewing and managing quote submissions.
 
 ### System Design Choices
 - **Messaging:** Emphasis on "perfect match" for chef selection, villa/home dining, background-checked chefs, transparent pricing, and professional service with cleanup included.
-- **Payment & Cancellation:** Clear policies for deposits, full payment before arrival, and a tiered refund system for cancellations.
+- **Ingredient Shopping (Preferred Method):** Most customers prefer the transparent shopping model where the chef arrives 2 hours before the event, spends 30 minutes planning the menu with the client, receives cash, then shops at the best local markets for exactly what's needed. This provides complete quality control, budget transparency, and flexibility for multiple meals.
+- **Payment & Cancellation:** Clear policies: 50% deposit when booking, 50% the day before event starts, with tiered refund system for cancellations.
 - **Service Area:** Strictly Bali locations.
 - **Recruitment:** Careers page accepting all nationalities, minimum 1 year experience, no salary examples displayed.
 

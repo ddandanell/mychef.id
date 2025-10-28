@@ -23,8 +23,8 @@ const FAQS = [
     answer: 'We accept secure online payments (Visa, MasterCard, and all major cards), bank transfers, and cash in Indonesian Rupiah (IDR) only. Payment is simple: Pay 50% when you book to secure your chef, then pay the remaining 50% on the day before your event starts (or the day work begins for recurring services). All transactions are encrypted and processed securely with official invoicing.',
   },
   {
-    question: 'Do I need to provide ingredients or will you source them?',
-    answer: 'You have two options: (1) We can source all ingredients for you and send a separate bill for groceries (market price plus a 15-20% sourcing fee), or (2) your chef provides a shopping list and you purchase ingredients yourself. Either option works perfectly!',
+    question: 'How does ingredient shopping work?',
+    answer: 'We offer three flexible options:\n\n**Most Popular (Recommended):** Your chef arrives 2 hours before your event. You spend 30 minutes together discussing the menu, quality preferences, portions, and any adjustments. You give the chef cash, and they go out to buy exactly what you need from the best markets. This gives you complete control over quality and budget, lets you plan for multiple meals, and ensures you only pay for what\'s actually purchased. This is how most of our customers prefer to work!\n\n**Option 2:** We source all ingredients beforehand and provide a separate bill (market price plus 15-20% sourcing fee).\n\n**Option 3:** We provide a detailed shopping list and you purchase ingredients yourself before the chef arrives.',
   },
   {
     question: 'What kitchen equipment is required?',

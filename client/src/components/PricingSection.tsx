@@ -45,21 +45,20 @@ export default function PricingSection() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                Ingredient Costs
+                Ingredient Shopping
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <div className="text-lg font-semibold mb-2">Two Options:</div>
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
+                <p className="text-xs font-semibold text-primary mb-1">⭐ Most Popular</p>
+                <p className="font-semibold text-sm">Chef Arrives Early & Shops</p>
+                <p className="text-xs text-foreground/70 mt-1">Chef comes 2 hours before, you discuss menu together, give them cash, and they buy exactly what you need from the best markets</p>
               </div>
-              <div className="text-sm text-foreground/80 space-y-3">
+              <div className="text-sm text-foreground/80 space-y-2">
                 <div>
-                  <p className="font-semibold">Option 1: We Source for You</p>
-                  <p className="text-foreground/70">Separate bill for groceries (market price + 15-20% sourcing fee)</p>
-                </div>
-                <div>
-                  <p className="font-semibold">Option 2: You Purchase</p>
-                  <p className="text-foreground/70">Chef provides shopping list, you buy ingredients</p>
+                  <p className="font-semibold text-xs">Other Options:</p>
+                  <p className="text-xs text-foreground/70">• We source beforehand (market price + 15-20% fee)</p>
+                  <p className="text-xs text-foreground/70">• You shop yourself using our list</p>
                 </div>
               </div>
             </CardContent>

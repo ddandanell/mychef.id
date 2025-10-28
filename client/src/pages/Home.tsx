@@ -10,6 +10,7 @@ import ChefProfiles from '@/components/ChefProfiles';
 import LocationsSection from '@/components/LocationsSection';
 import OccasionsGrid from '@/components/OccasionsGrid';
 import PricingSection from '@/components/PricingSection';
+import IngredientShoppingSection from '@/components/IngredientShoppingSection';
 import SampleMenus from '@/components/SampleMenus';
 import FAQSection from '@/components/FAQSection';
 import BookingTips from '@/components/BookingTips';
@@ -41,6 +42,7 @@ export default function Home() {
       <LocationsSection />
       <OccasionsGrid />
       <PricingSection />
+      <IngredientShoppingSection />
       <SampleMenus />
       <FAQSection />
       <BookingTips />

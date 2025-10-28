@@ -27,7 +27,7 @@ const STEPS = [
   {
     icon: Sparkles,
     title: 'Enjoy Your Experience!',
-    description: 'Your chef arrives at your villa with fresh ingredients (we can help source them!) and creates an unforgettable dining experience.',
+    description: 'Most customers prefer: Chef arrives 2 hours early, you plan together, give them cash, they shop at best markets, then cook your perfect meal!',
   },
 ];
 

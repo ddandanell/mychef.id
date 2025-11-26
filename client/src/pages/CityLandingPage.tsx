@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -29,6 +30,7 @@ interface CityLandingPageProps {
 }
 
 export default function CityLandingPage({ city }: CityLandingPageProps) {
+  const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -158,7 +160,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </div>
           
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6" data-testid="text-hero-headline">
-            Private Chef Services<br />in {city.name}
+            {t('cityPages.privateChefServices')}<br />{t('cityPages.in')} {city.name}
           </h1>
           
           <p className="text-xl lg:text-2xl text-white/95 mb-8 max-w-3xl mx-auto">
@@ -173,7 +175,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
               data-testid="button-hero-quote"
             >
               <FileText className="w-6 h-6 mr-2" />
-              Get a Quote
+              {t('cta.getQuote')}
             </Button>
             
             <Button
@@ -183,22 +185,22 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
               data-testid="button-hero-whatsapp"
             >
               <MessageCircle className="w-6 h-6 mr-2" />
-              Chat on WhatsApp
+              {t('cta.whatsapp')}
             </Button>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
               <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-              <span className="font-semibold text-white">4.9/5 Rating</span>
+              <span className="font-semibold text-white">{t('hero.rating')}</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
               <CheckCircle2 className="w-5 h-5 text-white" />
-              <span className="font-semibold text-white">1000+ Events</span>
+              <span className="font-semibold text-white">{t('servicePage.eventsCount')}</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
               <CheckCircle2 className="w-5 h-5 text-white" />
-              <span className="font-semibold text-white">Background Checked</span>
+              <span className="font-semibold text-white">{t('cityPages.backgroundChecked')}</span>
             </div>
           </div>
         </div>
@@ -225,7 +227,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       <section className="py-16 lg:py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-8 sm:mb-12">
-            We Serve All {city.name} Areas
+            {t('cityPages.weServeAllAreas', { city: city.name })}
           </h2>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
             {city.areas.map((area, index) => (
@@ -241,12 +243,12 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           <div className="max-w-3xl mx-auto">
             <Card className="bg-background border-2">
               <CardContent className="p-4 sm:p-6 lg:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">About {city.name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">{t('cityPages.about')} {city.name}</h3>
                 <p className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-4 sm:mb-6">
                   {city.localInsights}
                 </p>
                 <div className="border-t pt-4 sm:pt-6">
-                  <h4 className="font-semibold mb-3 text-sm sm:text-base">Popular Venues We Serve:</h4>
+                  <h4 className="font-semibold mb-3 text-sm sm:text-base">{t('cityPages.popularVenuesWeServe')}</h4>
                   <div className="flex flex-wrap gap-2">
                     {city.popularVenues.map((venue, index) => (
                       <span 
@@ -268,36 +270,36 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       <section className="py-16 lg:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-8 sm:mb-12">
-            How to Book in {city.name}
+            {t('cityPages.howToBookIn', { city: city.name })}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="text-center">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">1. Contact Us</h3>
-              <p className="text-sm text-foreground/70">WhatsApp us your event details and {city.name} location</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{t('cityPages.step1.title')}</h3>
+              <p className="text-sm text-foreground/70">{t('cityPages.step1.description', { city: city.name })}</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <FileText className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">2. Get Proposals</h3>
-              <p className="text-sm text-foreground/70">Receive custom menu proposals with pricing</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{t('cityPages.step2.title')}</h3>
+              <p className="text-sm text-foreground/70">{t('cityPages.step2.description')}</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">3. Confirm Booking</h3>
-              <p className="text-sm text-foreground/70">Pay 50% deposit to secure your {city.name} chef</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{t('cityPages.step3.title')}</h3>
+              <p className="text-sm text-foreground/70">{t('cityPages.step3.description', { city: city.name })}</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Star className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">4. Enjoy!</h3>
-              <p className="text-sm text-foreground/70">Chef arrives, plans, shops, and creates your meal</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{t('cityPages.step4.title')}</h3>
+              <p className="text-sm text-foreground/70">{t('cityPages.step4.description')}</p>
             </div>
           </div>
 
@@ -310,7 +312,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
               data-testid="button-how-it-works-quote"
             >
               <FileText className="w-6 h-6 mr-2" />
-              Get a Quote
+              {t('cta.getQuote')}
             </Button>
             
             <Button
@@ -320,7 +322,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
               data-testid="button-how-it-works-whatsapp"
             >
               <MessageCircle className="w-6 h-6 mr-2" />
-              Chat with Us
+              {t('cta.whatsapp')}
             </Button>
           </div>
         </div>
@@ -330,24 +332,24 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       <section className="py-16 lg:py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold text-center mb-3 sm:mb-4">
-            Transparent Pricing in {city.name}
+            {t('cityPages.transparentPricingIn', { city: city.name })}
           </h2>
-          <p className="text-center text-sm sm:text-base text-foreground/70 mb-2">No hidden fees - know exactly what you're paying for</p>
+          <p className="text-center text-sm sm:text-base text-foreground/70 mb-2">{t('cityPages.noHiddenFees')}</p>
           <p className="text-xs sm:text-sm text-center text-foreground/60 mb-8 sm:mb-12 px-4">
-            💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • 50% when you book, 50% the day before
+            {t('cityPages.paymentInfo')}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <Card>
               <CardContent className="p-4 sm:p-6">
                 <ChefHat className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Chef Service Fees</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">{t('pricing.chefServiceFees')}</h3>
                 <div className="text-xl sm:text-2xl font-bold text-primary mb-2">Rp 800,000 - 1,200,000+/hour</div>
-                <p className="text-xs sm:text-sm text-foreground/70 mb-3">Minimum 3-4 hours for most dinners</p>
+                <p className="text-xs sm:text-sm text-foreground/70 mb-3">{t('pricing.minimumHours')}</p>
                 <ul className="text-xs sm:text-sm text-foreground/80 space-y-1">
-                  <li>• All equipment provided</li>
-                  <li>• Complete cleanup included</li>
-                  <li>• Beautiful presentation</li>
+                  <li>• {t('pricing.equipmentProvided')}</li>
+                  <li>• {t('pricing.cleanupIncluded')}</li>
+                  <li>• {t('pricing.beautifulPresentation')}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -355,32 +357,32 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
             <Card>
               <CardContent className="p-4 sm:p-6">
                 <ShoppingCart className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Ingredient Shopping</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">{t('pricing.ingredientShopping')}</h3>
                 <div className="bg-primary/10 border border-primary/20 rounded-lg p-2 sm:p-3 mb-2 sm:mb-3">
-                  <p className="text-xs font-semibold text-primary mb-1">⭐ Most Popular</p>
-                  <p className="text-xs sm:text-sm font-semibold">Chef Arrives Early & Shops</p>
-                  <p className="text-xs text-foreground/70 mt-1">Chef comes 2 hours before, plans with you, then shops</p>
+                  <p className="text-xs font-semibold text-primary mb-1">{t('pricing.mostPopular')}</p>
+                  <p className="text-xs sm:text-sm font-semibold">{t('pricing.chefArrivesEarly')}</p>
+                  <p className="text-xs text-foreground/70 mt-1">{t('pricing.chefArrivesEarlyDesc')}</p>
                 </div>
-                <p className="text-xs text-foreground/70">Other options: We source (+ 15-20% fee) or you shop yourself</p>
+                <p className="text-xs text-foreground/70">{t('pricing.otherOptions')}</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-4 sm:p-6">
                 <Users className="w-7 h-7 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4" />
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Additional Staff</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">{t('pricing.additionalStaff')}</h3>
                 <div className="space-y-2 text-xs sm:text-sm">
                   <div>
                     <div className="font-bold text-primary">Rp 300,000/hour</div>
-                    <p className="text-foreground/70">Professional Waiter</p>
+                    <p className="text-foreground/70">{t('pricing.waiter')}</p>
                   </div>
                   <div>
                     <div className="font-bold text-primary">Rp 400,000/hour</div>
-                    <p className="text-foreground/70">Bartender</p>
+                    <p className="text-foreground/70">{t('pricing.bartender')}</p>
                   </div>
                   <div>
                     <div className="font-bold text-primary">Rp 500,000/hour</div>
-                    <p className="text-foreground/70">Sommelier</p>
+                    <p className="text-foreground/70">{t('pricing.sommelier')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -398,10 +400,10 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-5xl font-semibold mb-3 sm:mb-4">
-              Frequently Asked Questions - {city.name}
+              {t('cityPages.faqHeadline', { city: city.name })}
             </h2>
             <p className="text-base sm:text-lg text-foreground/70 px-4">
-              Everything you need to know about booking a private chef in {city.name}
+              {t('cityPages.faqSubheadline', { city: city.name })}
             </p>
           </div>
 
@@ -430,7 +432,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </Accordion>
 
           <div className="mt-8 sm:mt-12 text-center">
-            <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-6 px-4">Still have questions about {city.name} services?</p>
+            <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-6 px-4">{t('cityPages.stillHaveQuestions', { city: city.name })}</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0">
               <Button
                 size="lg"
@@ -439,7 +441,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
                 data-testid="button-faq-whatsapp"
               >
                 <MessageCircle className="w-6 h-6 mr-2" />
-                Chat on WhatsApp
+                {t('cta.whatsapp')}
               </Button>
             </div>
           </div>

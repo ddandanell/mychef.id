@@ -100,7 +100,21 @@
       "title": "Jadwal Pembayaran",
       "booking": "50% saat pemesanan",
       "remaining": "50% sehari sebelum acara"
-    }
+    },
+    "chefServiceFees": "Biaya Layanan Chef",
+    "minimumHours": "Minimum 3-4 jam untuk sebagian besar makan malam",
+    "equipmentProvided": "Semua peralatan disediakan",
+    "cleanupIncluded": "Pembersihan lengkap termasuk",
+    "beautifulPresentation": "Presentasi yang indah",
+    "ingredientShopping": "Belanja Bahan",
+    "mostPopular": "Paling Populer",
+    "chefArrivesEarly": "Chef Datang Lebih Awal & Belanja",
+    "chefArrivesEarlyDesc": "Chef datang 2 jam sebelumnya, merencanakan dengan Anda, lalu belanja",
+    "otherOptions": "Opsi lain: Kami sumber (+ biaya 15-20%) atau Anda belanja sendiri",
+    "additionalStaff": "Staf Tambahan",
+    "waiter": "Pelayan Profesional",
+    "bartender": "Bartender",
+    "sommelier": "Sommelier"
   },
   "testimonials": {
     "headline": "Apa Kata Klien Kami",
@@ -347,7 +361,36 @@
     "popularVenues": "Venue Populer",
     "nearbyAttractions": "Atraksi Terdekat",
     "localCuisine": "Masakan Lokal",
-    "chefAvailability": "Ketersediaan Chef"
+    "chefAvailability": "Ketersediaan Chef",
+    "privateChefServices": "Layanan Chef Pribadi",
+    "in": "di",
+    "backgroundChecked": "Latar Belakang Terverifikasi",
+    "weServeAllAreas": "Kami Melayani Semua Area {{city}}",
+    "about": "Tentang",
+    "popularVenuesWeServe": "Venue Populer yang Kami Layani:",
+    "howToBookIn": "Cara Memesan di {{city}}",
+    "step1": {
+      "title": "1. Hubungi Kami",
+      "description": "WhatsApp kami dengan detail acara dan lokasi {{city}} Anda"
+    },
+    "step2": {
+      "title": "2. Dapatkan Proposal",
+      "description": "Terima proposal menu khusus dengan harga"
+    },
+    "step3": {
+      "title": "3. Konfirmasi Pemesanan",
+      "description": "Bayar deposit 50% untuk mengamankan chef {{city}} Anda"
+    },
+    "step4": {
+      "title": "4. Nikmati!",
+      "description": "Chef tiba, merencanakan, berbelanja, dan membuat hidangan Anda"
+    },
+    "transparentPricingIn": "Harga Transparan di {{city}}",
+    "noHiddenFees": "Tanpa biaya tersembunyi - ketahui persis apa yang Anda bayar",
+    "paymentInfo": "Pembayaran online (Visa, MasterCard, semua kartu) & tunai (IDR) - 50% saat memesan, 50% sehari sebelumnya",
+    "faqHeadline": "Pertanyaan yang Sering Diajukan - {{city}}",
+    "faqSubheadline": "Semua yang perlu Anda ketahui tentang memesan chef pribadi di {{city}}",
+    "stillHaveQuestions": "Masih punya pertanyaan tentang layanan {{city}}?"
   },
   "servicePage": {
     "backToHome": "Kembali ke Beranda",
@@ -386,5 +429,9 @@
     "accept": "Terima",
     "decline": "Tolak",
     "learnMore": "Pelajari Lebih Lanjut"
+  },
+  "languages": {
+    "en": "English",
+    "id": "Bahasa Indonesia"
   }
 }

@@ -112,10 +112,70 @@
   },
   "languages": {
     "en": "English",
-    "zh": "中文",
-    "hi": "हिन्दी",
-    "es": "Español",
-    "ar": "العربية",
-    "fr": "Français"
+    "id": "Bahasa Indonesia"
+  },
+  "cityPages": {
+    "privateChefServices": "Private Chef Services",
+    "in": "in",
+    "backgroundChecked": "Background Checked",
+    "weServeAllAreas": "We Serve All {{city}} Areas",
+    "about": "About",
+    "popularVenuesWeServe": "Popular Venues We Serve:",
+    "howToBookIn": "How to Book in {{city}}",
+    "step1": {
+      "title": "1. Contact Us",
+      "description": "WhatsApp us your event details and {{city}} location"
+    },
+    "step2": {
+      "title": "2. Get Proposals",
+      "description": "Receive custom menu proposals with pricing"
+    },
+    "step3": {
+      "title": "3. Confirm Booking",
+      "description": "Pay 50% deposit to secure your {{city}} chef"
+    },
+    "step4": {
+      "title": "4. Enjoy!",
+      "description": "Chef arrives, plans, shops, and creates your meal"
+    },
+    "transparentPricingIn": "Transparent Pricing in {{city}}",
+    "noHiddenFees": "No hidden fees - know exactly what you're paying for",
+    "paymentInfo": "Online payment (Visa, MasterCard, all cards) & cash (IDR) - 50% when you book, 50% the day before",
+    "faqHeadline": "Frequently Asked Questions - {{city}}",
+    "faqSubheadline": "Everything you need to know about booking a private chef in {{city}}",
+    "stillHaveQuestions": "Still have questions about {{city}} services?"
+  },
+  "pricing": {
+    "headline": "Transparent Pricing",
+    "subheadline": "No hidden fees - you agree to all costs upfront",
+    "chefService": {
+      "title": "Chef Service Fees",
+      "hourly": "per hour",
+      "includes": "Includes cooking, serving, and cleanup"
+    },
+    "ingredients": {
+      "title": "Ingredient Costs",
+      "description": "Paid directly to the chef at market prices",
+      "note": "Chef shops for fresh ingredients on the day of service"
+    },
+    "deposit": {
+      "title": "Payment Schedule",
+      "booking": "50% when booking",
+      "remaining": "50% the day before the event"
+    },
+    "chefServiceFees": "Chef Service Fees",
+    "minimumHours": "Minimum 3-4 hours for most dinners",
+    "equipmentProvided": "All equipment provided",
+    "cleanupIncluded": "Complete cleanup included",
+    "beautifulPresentation": "Beautiful presentation",
+    "ingredientShopping": "Ingredient Shopping",
+    "mostPopular": "Most Popular",
+    "chefArrivesEarly": "Chef Arrives Early & Shops",
+    "chefArrivesEarlyDesc": "Chef comes 2 hours before, plans with you, then shops",
+    "otherOptions": "Other options: We source (+ 15-20% fee) or you shop yourself",
+    "additionalStaff": "Additional Staff",
+    "waiter": "Professional Waiter",
+    "bartender": "Bartender",
+    "sommelier": "Sommelier"
   }
 }

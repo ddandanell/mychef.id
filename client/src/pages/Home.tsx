@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ExperienceOverview from '@/components/ExperienceOverview';
 import HowItWorks from '@/components/HowItWorks';
@@ -30,6 +31,7 @@ export default function Home() {
         ogType="website"
         keywords="private chef Bali, personal chef Bali, villa chef, in-home dining Bali, professional chef services, gourmet meals Bali, private dining Seminyak, chef hire Ubud, Canggu chef services, restaurant-quality home dining, background-checked chefs"
       />
+      <Header />
       <HeroSection />
       <ExperienceOverview />
       <HowItWorks />

@@ -2,6 +2,7 @@ import { Link } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 
 export default function PrivacyPolicy() {
   return (
@@ -12,7 +13,8 @@ export default function PrivacyPolicy() {
         canonical="https://mychef.id/privacy-policy"
         ogType="article"
       />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <Header />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pt-24 lg:pb-16">
         <Link href="/">
           <Button variant="ghost" className="mb-8 hover-elevate" data-testid="button-back-home">
             <ArrowLeft className="w-4 h-4 mr-2" />

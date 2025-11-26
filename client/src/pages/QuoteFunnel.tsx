@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import SEO from '@/components/SEO';
+import LanguageSelector from '@/components/LanguageSelector';
 import { Cake, CheckCircle2, Home, PartyPopper, Users, Heart, Briefcase, ChefHat, MoreHorizontal, ArrowLeft, MapPin, Utensils, Flame, UtensilsCrossed, Apple, Soup, Calendar as CalendarIcon, Send, Check, Globe, Minus, Plus, Shield, MessageCircle, Star, X } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
@@ -587,16 +588,19 @@ export default function QuoteFunnel() {
               </div>
             )}
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setLocation('/contact/confirm?source=quoteFunnel')}
-              className="gap-2"
-              data-testid="button-help"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">Need Help?</span>
-            </Button>
+            <div className="flex items-center gap-2">
+              <LanguageSelector />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setLocation('/contact/confirm?source=quoteFunnel')}
+                className="gap-2"
+                data-testid="button-help"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span className="hidden sm:inline">Need Help?</span>
+              </Button>
+            </div>
           </div>
         </div>
         

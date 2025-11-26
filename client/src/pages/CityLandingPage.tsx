@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ShoppingCart, ChefHat, Users } from 'lucide-react';
@@ -132,6 +133,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
         keywords={`private chef ${city.name}, personal chef ${city.name}, chef at home ${city.name}, villa chef ${city.name}, private dining ${city.name}, ${city.name} chef services, ${city.areas.join(', ')}`}
         structuredData={structuredData}
       />
+      <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-muted">

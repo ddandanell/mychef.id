@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'wouter';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -89,7 +90,8 @@ export default function JoinOurTeam() {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary/5 to-background">
-        <div className="max-w-3xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <Header />
+        <div className="max-w-3xl mx-auto px-4 pt-20 pb-16 sm:px-6 lg:px-8">
           <Card className="text-center p-8 border-2 border-primary/20 hover-elevate">
             <div className="flex justify-center mb-6">
               <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center animate-in fade-in zoom-in duration-500">
@@ -149,6 +151,7 @@ export default function JoinOurTeam() {
         canonical="https://mychef.id/join-our-team"
         ogType="website"
       />
+      <Header />
       {/* Hero Section with Image */}
       <section className="relative bg-gradient-to-br from-muted via-background to-primary/5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/95 z-10"></div>

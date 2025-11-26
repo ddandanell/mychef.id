@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { MessageCircle, Star, Users, ShieldCheck, CheckCircle, Clock, ArrowLeft, PartyPopper, Heart, Cake, Briefcase, Church, ChefHat, Calendar } from 'lucide-react';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import type { ServiceData } from '@shared/serviceData';
@@ -84,6 +85,7 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
         keywords={`${service.name.toLowerCase()} Bali, private chef ${service.name.toLowerCase()}, ${service.slug} catering, Bali villa ${service.name.toLowerCase()}`}
         structuredData={structuredData}
       />
+      <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">

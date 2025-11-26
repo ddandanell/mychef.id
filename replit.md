@@ -22,6 +22,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 
 ### Technical Implementations
 - **Core Features:**
+    - **Global Header with Language Selector:** Fixed/sticky header on all pages with myCHEF logo and language selector (English/Indonesian). Users can switch languages from both the header (top) and footer (bottom) of every page.
     - **WhatsApp Integration & Conversion Tracking:** All CTAs route through a `/contact/confirm` tracking page for Google Analytics event `contact_initiation` before redirecting to WhatsApp.
     - **Geolocation & Personalization:** Server-side city detection using IP address (via ipapi.co) to dynamically personalize the site for Bali locations.
     - **Trust Signals:** Prominent display of 6 trust badges, a 100% Satisfaction Guarantee, and 4.9/5 average rating.
@@ -31,8 +32,8 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading, and GPU acceleration.
     - **Quote Funnel:** Streamlined multi-step form at `/quote` with three flows: Single Event (8 steps), Recurring Service (7 steps), and Full-Time/Part-Time Chef (9-10 steps), including features like pre-meeting options and grocery handling.
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Ingredient Shopping, Sample Menus, Complete Party Solutions, FAQ, Booking Tips, Footer.
-- **Additional Pages:** Privacy Policy, Terms of Service, `Join Our Team` recruitment page, and Admin panel at `/admin/quotes`.
-- **Multi-Language Support:** `react-i18next` integration for English (en) and Indonesian (id) with automatic detection and manual selector.
+- **Additional Pages:** Privacy Policy, Terms of Service, Payment Terms, `Join Our Team` recruitment page, and Admin panel at `/admin/quotes`.
+- **Multi-Language Support:** `react-i18next` integration for English (en) and Indonesian (id) with automatic detection and manual selector. Language can be changed from the header or footer on any page.
 - **City Landing Pages:** SEO-optimized landing pages for 25 major Bali areas (e.g., `/seminyak`, `/kuta`) with dynamic content.
 - **Service Landing Pages:** Professional SEO-optimized service pages for 8 key services (e.g., `/services/villa-parties`), each with 1000+ word content.
 

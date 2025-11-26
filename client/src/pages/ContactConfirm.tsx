@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
 import SEO from '@/components/SEO';
+import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SiWhatsapp } from 'react-icons/si';
@@ -75,6 +76,7 @@ export default function ContactConfirm() {
         canonical="https://mychef.id/contact/confirm"
         ogType="website"
       />
+      <Header />
       <Card className="max-w-lg w-full p-8 md:p-12 text-center space-y-6">
         {/* Success Icon */}
         <div className="flex justify-center">

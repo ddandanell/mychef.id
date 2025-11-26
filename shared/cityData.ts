@@ -389,6 +389,673 @@ export const CITY_DATA: Record<string, CityData> = {
         answer: 'Absolutely! Jimbaran is perfect for seafood feast parties. We regularly serve 10-30+ guests with massive seafood spreads - multiple fish, lobster platters, prawn mountains, grilled selections, Indonesian sides. For large events, we provide additional cooking staff and waiters. It\'s spectacular!'
       }
     ]
+  },
+  // Additional 18 Bali areas for comprehensive coverage
+  kuta: {
+    name: 'Kuta',
+    slug: 'kuta',
+    tagline: 'Private Chef Services in Kuta - Beach Resort Dining',
+    description: 'Book professional private chefs for in-villa dining in Kuta. Background-checked chefs deliver personalized culinary experiences in your beach resort accommodation.',
+    heroDescription: 'Experience delicious home dining in your Kuta villa with expert private chefs serving authentic cuisines',
+    areas: ['Kuta Beach', 'Tuban', 'Kartika Plaza', 'Legian Street', 'Discovery Mall area'],
+    popularVenues: ['Hard Rock Hotel Bali', 'Sheraton Bali Kuta Resort', 'The Anvaya Beach Resort', 'Discovery Kartika Plaza', 'Holiday Inn Express'],
+    localInsights: 'Kuta is Bali\'s iconic beach destination known for its famous surf break, vibrant nightlife, and convenient location near the airport. Our chefs specialize in crowd-pleasing international cuisine, fresh seafood, Indonesian favorites, and casual beach-style dining perfect for groups and families.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.718206",
+      "longitude": "115.169506"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Kuta?',
+        answer: 'Yes! We serve all Kuta areas including Kuta Beach, Tuban (near airport), Kartika Plaza, and the main Kuta-Legian strip. Our chefs are familiar with all major hotels, resorts, and private accommodations. We can reach most locations within 10-15 minutes.'
+      },
+      {
+        question: 'What cuisines are most popular in Kuta?',
+        answer: 'Kuta attracts diverse international visitors! Popular requests include Indonesian classics (satay, nasi goreng), fresh grilled seafood, Australian BBQ, American comfort food, Italian pasta, and Asian fusion. We excel at crowd-pleasing menus that satisfy varied tastes.'
+      },
+      {
+        question: 'Can you serve groups staying in Kuta hotels?',
+        answer: 'Absolutely! While some hotels have kitchen restrictions, we work with many Kuta properties with villa-style accommodations, serviced apartments, and kitchenette suites. We\'ll coordinate with your hotel staff and use portable equipment when needed.'
+      },
+      {
+        question: 'Is Kuta convenient for airport arrivals?',
+        answer: 'Yes! Kuta is just 10 minutes from Ngurah Rai Airport. We can arrange welcome dinners for late arrivals or farewell meals before departure. Perfect for jet-lagged travelers who want quality home dining without going out.'
+      },
+      {
+        question: 'What\'s the typical vibe for Kuta dining?',
+        answer: 'Kuta is casual and fun! Clients love relaxed beach-style meals, surf group gatherings, birthday celebrations, and farewell parties. We match the laid-back atmosphere while delivering restaurant-quality food in your accommodation.'
+      }
+    ]
+  },
+  legian: {
+    name: 'Legian',
+    slug: 'legian',
+    tagline: 'Private Chef Services in Legian - Beachfront Villa Dining',
+    description: 'Book professional private chefs for in-villa dining in Legian. Background-checked chefs deliver personalized culinary experiences in your beachfront accommodation.',
+    heroDescription: 'Enjoy exceptional private dining in your Legian villa with professionally trained chefs',
+    areas: ['Legian Beach', 'Padma', 'Double Six', 'Werkudara', 'Nakula'],
+    popularVenues: ['Padma Resort Legian', 'The Jayakarta Bali', 'Double-Six Luxury Hotel', 'Pullman Bali Legian Beach', 'All Seasons Legian'],
+    localInsights: 'Legian bridges the gap between Kuta\'s energy and Seminyak\'s sophistication. Known for its beautiful beach, sunset cocktail bars, and accessible luxury. Our chefs specialize in fresh beach cuisine, international favorites, and upscale casual dining.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.699389",
+      "longitude": "115.168167"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Legian?',
+        answer: 'Yes! We cover all Legian from the beach to the main road - Padma area, Double Six, Werkudara, Nakula, and surrounding neighborhoods. We\'re familiar with all hotels, villas, and private accommodations in the area.'
+      },
+      {
+        question: 'What makes Legian different from Kuta or Seminyak?',
+        answer: 'Legian offers the best of both worlds - Kuta\'s accessibility with more relaxed sophistication. Clients here often want upscale casual dining, beach sunset meals, and quality without pretension. We tailor our service to match this vibe.'
+      },
+      {
+        question: 'Can you do sunset beach-view dinners in Legian?',
+        answer: 'Absolutely! Legian has stunning sunset views. We time our service so appetizers arrive during golden hour, main courses as the sun sets. Many accommodations have ocean-view terraces or rooftops perfect for memorable sunset dining.'
+      },
+      {
+        question: 'What cuisines work best for Legian\'s atmosphere?',
+        answer: 'Fresh Mediterranean, grilled seafood, contemporary Indonesian, Thai, and casual Italian are very popular. Legian clients appreciate quality ingredients with relaxed presentation. We focus on flavor-forward, shareable dishes perfect for the beach holiday vibe.'
+      },
+      {
+        question: 'How do you handle large groups in Legian?',
+        answer: 'Legian is great for group celebrations! We regularly serve surf groups, friends reunions, and birthday parties for 10-25 guests. We provide family-style service, multiple courses, and can accommodate diverse dietary needs within the same group.'
+      }
+    ]
+  },
+  kerobokan: {
+    name: 'Kerobokan',
+    slug: 'kerobokan',
+    tagline: 'Private Chef Services in Kerobokan - Hidden Villa Dining',
+    description: 'Book professional private chefs for in-villa dining in Kerobokan. Background-checked chefs deliver personalized culinary experiences in your private Bali villa.',
+    heroDescription: 'Discover exceptional private dining in your Kerobokan villa with expert chefs creating custom menus',
+    areas: ['Kerobokan Kelod', 'Kerobokan Kaja', 'Umalas', 'Banjar Anyar', 'Semer'],
+    popularVenues: ['The Samaya Seminyak (Kerobokan border)', 'Villa Air Bali', 'Private luxury villas', 'Boutique accommodations', 'Long-term rental villas'],
+    localInsights: 'Kerobokan is Bali\'s residential expat hub with beautiful private villas hidden among rice fields and quiet lanes. Popular with long-stay visitors and expats. Our chefs specialize in varied international cuisines, healthy meal prep, and regular recurring services.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.667333",
+      "longitude": "115.167639"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Kerobokan?',
+        answer: 'Yes! We serve all Kerobokan including Kerobokan Kelod, Kerobokan Kaja, Umalas, Banjar Anyar, and Semer areas. Our chefs know the winding gang (lanes) and hidden villas throughout this residential area.'
+      },
+      {
+        question: 'Is Kerobokan good for long-stay chef services?',
+        answer: 'Absolutely! Kerobokan is popular with expats and long-stay visitors. We offer recurring services - weekly meal prep, regular chef shifts, and ongoing arrangements. Many Kerobokan clients book us on a weekly or monthly basis.'
+      },
+      {
+        question: 'What cuisines are popular with Kerobokan residents?',
+        answer: 'Kerobokan has a diverse expat community! We serve everything from Australian home cooking, European favorites, healthy meal prep bowls, Asian cuisines, and Indonesian comfort food. Variety and consistency are key for regular clients.'
+      },
+      {
+        question: 'Can you provide ongoing meal prep services in Kerobokan?',
+        answer: 'Yes! This is very popular here. We prepare 3-5 days of healthy meals in a single session - portioned, labeled, and ready to heat. Perfect for busy professionals, families, and health-conscious residents. Customized to your macros and preferences.'
+      },
+      {
+        question: 'How does Kerobokan compare to Seminyak for private dining?',
+        answer: 'Kerobokan is quieter and more residential - perfect for those who prefer peaceful villa stays over tourist buzz. Villas here are often larger with better kitchens. Our service is the same high quality, with a more relaxed, home-like atmosphere.'
+      }
+    ]
+  },
+  petitenget: {
+    name: 'Petitenget',
+    slug: 'petitenget',
+    tagline: 'Private Chef Services in Petitenget - Boutique Villa Dining',
+    description: 'Book professional private chefs for in-villa dining in Petitenget. Background-checked chefs deliver personalized culinary experiences in your boutique Bali villa.',
+    heroDescription: 'Experience refined private dining in your Petitenget villa with award-worthy chef expertise',
+    areas: ['Jalan Petitenget', 'Petitenget Temple area', 'Batubelig Beach', 'Kayu Aya', 'Oberoi area'],
+    popularVenues: ['Katamama Hotel', 'Luna2 Private Hotel', 'Potato Head Suites', 'The Legian Seminyak', 'Boutique design villas'],
+    localInsights: 'Petitenget is Bali\'s most sophisticated dining and lifestyle district with world-class restaurants, beach clubs, and designer boutiques. Our chefs bring restaurant-quality excellence to your villa - creative menus, premium ingredients, and Instagram-perfect presentations.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.678222",
+      "longitude": "115.157083"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Petitenget?',
+        answer: 'Yes! We serve the entire Petitenget strip from Seminyak Square to Batubelig Beach, including Kayu Aya, the temple area, and surrounding boutique villa neighborhoods. This is our most-requested area for upscale private dining.'
+      },
+      {
+        question: 'What level of cuisine can you provide in Petitenget?',
+        answer: 'Petitenget clients expect restaurant-level excellence - and we deliver. Our top chefs have worked in Petitenget\'s acclaimed restaurants (Sarong, Merah Putih, Métis). We bring the same creativity, quality, and presentation to your private villa.'
+      },
+      {
+        question: 'Can you compete with Petitenget\'s famous restaurants?',
+        answer: 'Absolutely! Many clients prefer private dining to the area\'s busy restaurants. You get the same caliber chef, personalized menus, premium ingredients - plus complete privacy, no noise, no waiting, and customization to your exact preferences.'
+      },
+      {
+        question: 'What are the most requested cuisines in Petitenget?',
+        answer: 'Creative Asian fusion, contemporary Indonesian (think Locavore or Merah Putih style), Japanese omakase, Mediterranean, French-inspired, and multi-course tasting menus. Petitenget clients appreciate culinary creativity and sophisticated presentation.'
+      },
+      {
+        question: 'Do Petitenget villa kitchens support fine dining preparation?',
+        answer: 'Most Petitenget villas have excellent, well-equipped kitchens - they\'re built for the design-conscious luxury market. We assess during booking and bring any specialty equipment needed. Even basic kitchens work with the right chef skills!'
+      }
+    ]
+  },
+  berawa: {
+    name: 'Berawa',
+    slug: 'berawa',
+    tagline: 'Private Chef Services in Berawa - Modern Villa Dining',
+    description: 'Book professional private chefs for in-villa dining in Berawa. Background-checked chefs deliver personalized culinary experiences in your trendy Bali villa.',
+    heroDescription: 'Enjoy trendy, delicious cuisine in your Berawa villa with expert private chefs',
+    areas: ['Berawa Beach', 'Pantai Berawa', 'Finns Beach Club area', 'Nelayan', 'Tibubeneng'],
+    popularVenues: ['Finns Beach Club villas', 'Como Uma Canggu', 'The Slow', 'Theanna Eco Villa', 'Modern design villas'],
+    localInsights: 'Berawa is Canggu\'s most happening neighborhood with Finns Beach Club, trendy cafes, and Instagram-worthy spots. Our chefs specialize in contemporary healthy cuisine, brunch culture, creative bowls, and casual sophistication matching the area\'s modern vibe.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.658500",
+      "longitude": "115.146222"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Berawa?',
+        answer: 'Yes! We cover all Berawa from the beach to Tibubeneng, including the Finns Beach Club area, Nelayan, and all modern villa complexes. Our chefs know every trendy corner of this rapidly developing neighborhood.'
+      },
+      {
+        question: 'What makes Berawa dining special?',
+        answer: 'Berawa is Bali\'s trendiest neighborhood! Clients want Instagram-worthy presentations, creative healthy food, modern brunch experiences, and the same quality they\'d find at Finns or other famous spots - all in their private villa.'
+      },
+      {
+        question: 'Can you do brunch service in Berawa?',
+        answer: 'Absolutely! Brunch is huge in Berawa. We serve beautiful brunch spreads - smoothie bowls, avocado toast variations, eggs Benedict, fresh juices, healthy pancakes, and Mediterranean-style grazing boards. Perfect for late morning villa gatherings.'
+      },
+      {
+        question: 'What healthy cuisine options do you offer in Berawa?',
+        answer: 'Berawa attracts the health-conscious crowd. We excel at plant-based bowls, protein-rich meals, low-carb options, superfood-packed dishes, organic ingredients, and creative vegan/vegetarian cuisine. Healthy never means boring with our chefs!'
+      },
+      {
+        question: 'How close is Berawa to Canggu center?',
+        answer: 'Berawa is essentially part of greater Canggu - just south of Batu Bolong and Echo Beach. Same wellness-focused, trendy atmosphere. We serve seamlessly across the Canggu-Berawa area with consistent quality and style.'
+      }
+    ]
+  },
+  pererenan: {
+    name: 'Pererenan',
+    slug: 'pererenan',
+    tagline: 'Private Chef Services in Pererenan - Tranquil Rice Field Dining',
+    description: 'Book professional private chefs for in-villa dining in Pererenan. Background-checked chefs deliver personalized culinary experiences in your peaceful rice field villa.',
+    heroDescription: 'Savor peaceful, organic cuisine in your Pererenan villa surrounded by rice fields',
+    areas: ['Pererenan Beach', 'Rice field villas', 'Cemagi border', 'Munggu area', 'Black sand beaches'],
+    popularVenues: ['Desa Seni', 'Theanna Eco Villa', 'Escape Ritual', 'Traditional rice field villas', 'Wellness retreat centers'],
+    localInsights: 'Pererenan offers the authentic Bali rice field experience with a growing wellness community. Quieter than central Canggu with stunning rural landscapes. Our chefs specialize in organic farm-to-table cuisine, traditional Balinese dishes, and wellness-focused menus.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.635444",
+      "longitude": "115.118861"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Pererenan?',
+        answer: 'Yes! We serve all Pererenan including the beach area, rice field villas, the border with Cemagi and Munggu. Our chefs know the small gang (lanes) and hidden villa retreats throughout this peaceful area.'
+      },
+      {
+        question: 'What makes Pererenan dining unique?',
+        answer: 'Pererenan offers the authentic Bali experience - dining among rice paddies with genuine tranquility. Clients here appreciate organic ingredients, traditional Balinese cooking, farm-to-table philosophy, and the slower pace of villa dining.'
+      },
+      {
+        question: 'Can you source organic and local ingredients in Pererenan?',
+        answer: 'Absolutely! Pererenan is surrounded by farms and organic gardens. Our chefs work with local farmers for fresh vegetables, herbs, and traditional ingredients. Some villas even have their own gardens we can harvest from!'
+      },
+      {
+        question: 'Do you serve wellness retreats in Pererenan?',
+        answer: 'Yes! Pererenan has many yoga and wellness retreats. We provide multi-day meal services, detox menus, ayurvedic-inspired dishes, and group dining for retreat participants. We understand wellness nutrition and can coordinate with retreat programs.'
+      },
+      {
+        question: 'Is Pererenan too remote for chef services?',
+        answer: 'Not at all! We have chefs based in the greater Canggu area who serve Pererenan regularly. We factor in travel time for shopping and arrival. Many clients specifically choose Pererenan for its peaceful atmosphere - and our service makes it even better.'
+      }
+    ]
+  },
+  tanahlot: {
+    name: 'Tanah Lot',
+    slug: 'tanah-lot',
+    tagline: 'Private Chef Services in Tanah Lot - Temple View Dining',
+    description: 'Book professional private chefs for in-villa dining near Tanah Lot. Background-checked chefs deliver personalized culinary experiences with stunning temple views.',
+    heroDescription: 'Experience spiritual dining near Tanah Lot Temple with expert private chefs',
+    areas: ['Tanah Lot Temple area', 'Kediri', 'Pan Pacific Resort area', 'Batu Bolong Temple', 'Nirwana Golf area'],
+    popularVenues: ['Pan Pacific Nirwana Bali', 'Alila Villas Soori', 'Tanah Lot area villas', 'Golf resort accommodations', 'Cliffside private villas'],
+    localInsights: 'Tanah Lot is home to Bali\'s most iconic sea temple with spectacular sunset views. The area offers a spiritual, culturally-rich atmosphere. Our chefs create memorable dining experiences that complement the temple\'s majesty with traditional Balinese and refined international cuisine.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.621139",
+      "longitude": "115.086500"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Tanah Lot area?',
+        answer: 'Yes! We serve all Tanah Lot area including the temple vicinity, Pan Pacific Nirwana resort, Kediri, and surrounding villa communities. This area offers unique dining opportunities with incredible sunset temple views.'
+      },
+      {
+        question: 'Can you time dinner with Tanah Lot sunset?',
+        answer: 'Absolutely! Sunset timing is everything at Tanah Lot. We coordinate service so appetizers arrive during golden hour, main courses as the sun sets behind the temple. It\'s one of Bali\'s most spectacular dining experiences - and we\'ve perfected the timing.'
+      },
+      {
+        question: 'What cuisines complement the Tanah Lot experience?',
+        answer: 'Traditional Balinese cuisine feels most authentic here - we celebrate local culture with dishes like bebek betutu, lawar, satay, and regional specialties. We also offer refined international options for those who prefer, always respecting the spiritual setting.'
+      },
+      {
+        question: 'Is Tanah Lot far from main tourist areas?',
+        answer: 'Tanah Lot is about 45-60 minutes from Seminyak/Canggu. Our chefs factor in travel time and often shop closer to the area. The journey is part of the authentic Bali experience - and the temple sunset makes it worthwhile!'
+      },
+      {
+        question: 'Do you serve the Pan Pacific and Alila resorts?',
+        answer: 'Yes! We work with villas at Pan Pacific Nirwana and the stunning Alila Villas Soori nearby. Our chefs meet the luxury standards these properties demand. We coordinate with resort staff for seamless, sophisticated service.'
+      }
+    ]
+  },
+  tabanan: {
+    name: 'Tabanan',
+    slug: 'tabanan',
+    tagline: 'Private Chef Services in Tabanan - Rice Terrace Dining',
+    description: 'Book professional private chefs for in-villa dining in Tabanan. Background-checked chefs deliver personalized culinary experiences amid stunning rice terrace landscapes.',
+    heroDescription: 'Enjoy authentic Balinese dining in your Tabanan villa surrounded by UNESCO rice terraces',
+    areas: ['Jatiluwih UNESCO Rice Terraces', 'Batukaru Temple area', 'Penebel', 'Kerambitan', 'Antosari'],
+    popularVenues: ['Alila Villas Soori', 'The Royal Pita Maha (Tabanan)', 'Rice terrace eco lodges', 'Traditional Balinese compounds', 'Mountain retreat villas'],
+    localInsights: 'Tabanan is Bali\'s agricultural heartland with UNESCO World Heritage rice terraces at Jatiluwih. This region offers authentic rural Bali with stunning mountain and rice field landscapes. Our chefs specialize in traditional Balinese village cuisine and farm-to-table organic dishes.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.540667",
+      "longitude": "115.122444"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Tabanan regency?',
+        answer: 'Yes! We serve all Tabanan including the famous Jatiluwih rice terraces, Batukaru temple area, Penebel, Kerambitan, and mountain retreats. This is authentic rural Bali at its finest.'
+      },
+      {
+        question: 'What makes Tabanan dining special?',
+        answer: 'Tabanan offers the most authentic Balinese culinary experience. Traditional village cooking, fresh farm ingredients, rice paddies as your backdrop. We celebrate local food culture with dishes rarely found in tourist areas - authentic village recipes passed down generations.'
+      },
+      {
+        question: 'Can you source ingredients from Jatiluwih farms?',
+        answer: 'Absolutely! Jatiluwih produces Bali\'s finest organic rice and vegetables. Our chefs work directly with local farmers for the freshest ingredients - heritage rice varieties, organic vegetables, local chicken, and traditional spices. True farm-to-table dining.'
+      },
+      {
+        question: 'Is Tabanan too remote for chef services?',
+        answer: 'Tabanan requires more travel time (1-2 hours from south Bali), but we serve the area regularly. We arrange ingredient shopping efficiently and factor in travel time. For remote mountain locations, we may request accommodation for overnight multi-day bookings.'
+      },
+      {
+        question: 'What traditional Balinese dishes can you prepare in Tabanan?',
+        answer: 'Tabanan is perfect for authentic village cuisine! We prepare bebek betutu (slow-cooked duck), lawar (traditional salad), sate lilit (fish satay), nasi campur village-style, traditional sambals, and ceremonial dishes usually only found in Balinese homes. A true cultural experience.'
+      }
+    ]
+  },
+  denpasar: {
+    name: 'Denpasar',
+    slug: 'denpasar',
+    tagline: 'Private Chef Services in Denpasar - Capital City Dining',
+    description: 'Book professional private chefs for in-home dining in Denpasar. Background-checked chefs deliver personalized culinary experiences in Bali\'s vibrant capital city.',
+    heroDescription: 'Experience authentic Indonesian cuisine in your Denpasar home with professional private chefs',
+    areas: ['Renon', 'Sanglah', 'Panjer', 'Sesetan', 'Tohpati', 'Denpasar Barat'],
+    popularVenues: ['Private homes', 'Serviced apartments', 'Business accommodations', 'Long-term expat residences', 'Government area housing'],
+    localInsights: 'Denpasar is Bali\'s bustling capital with authentic local life, traditional markets, and excellent street food culture. Away from tourist areas, this is real Bali. Our chefs excel at authentic Indonesian home cooking, local market ingredients, and casual family-style dining.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.650000",
+      "longitude": "115.216667"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Denpasar?',
+        answer: 'Yes! We serve all Denpasar districts including Renon, Sanglah, Panjer, Sesetan, Tohpati, and surrounding areas. We\'re familiar with the city\'s neighborhoods and can navigate Denpasar traffic efficiently.'
+      },
+      {
+        question: 'What makes Denpasar different from tourist areas?',
+        answer: 'Denpasar is real, working Bali! No tourist markup, authentic local markets (Pasar Badung is legendary), and genuine Indonesian home cooking culture. Our chefs source from the best local suppliers and prepare dishes rarely found in tourist restaurants.'
+      },
+      {
+        question: 'Can you source ingredients from Denpasar\'s famous markets?',
+        answer: 'Absolutely! Pasar Badung is Bali\'s largest traditional market with unbeatable prices and variety. Our chefs shop here for the freshest produce, meats, spices, and specialty ingredients. Denpasar offers ingredient access unavailable elsewhere in Bali.'
+      },
+      {
+        question: 'Do you serve expats and long-term residents in Denpasar?',
+        answer: 'Yes! Many expats and long-term residents live in Denpasar for lower costs and authentic Bali life. We provide regular chef services - weekly cooking, meal prep, and ongoing arrangements perfect for residents who want quality home dining.'
+      },
+      {
+        question: 'What authentic Indonesian dishes can you prepare?',
+        answer: 'Denpasar is perfect for mastering Indonesian cuisine! We prepare authentic nasi campur, rawon (black beef soup), soto ayam, gado-gado, rendang, and regional specialties from across Indonesia. This is where you experience real Indonesian home cooking at its finest.'
+      }
+    ]
+  },
+  gianyar: {
+    name: 'Gianyar',
+    slug: 'gianyar',
+    tagline: 'Private Chef Services in Gianyar - Cultural Heritage Dining',
+    description: 'Book professional private chefs for in-villa dining in Gianyar. Background-checked chefs deliver personalized culinary experiences in Bali\'s cultural heartland.',
+    heroDescription: 'Taste authentic Balinese heritage cuisine in your Gianyar villa with expert private chefs',
+    areas: ['Gianyar Town', 'Mas Village', 'Batuan', 'Sukawati', 'Celuk'],
+    popularVenues: ['Artisan village villas', 'Cultural heritage accommodations', 'Traditional Balinese compounds', 'Art gallery guesthouses', 'Rice terrace retreats'],
+    localInsights: 'Gianyar is Bali\'s cultural heartland famous for traditional arts, crafts, and the legendary babi guling (roast suckling pig). This regency preserves authentic Balinese traditions. Our chefs specialize in traditional ceremonial dishes, local specialties, and cultural dining experiences.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.534444",
+      "longitude": "115.322500"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Gianyar?',
+        answer: 'Yes! We serve Gianyar town, the famous artisan villages (Mas, Batuan, Celuk, Sukawati), and surrounding areas. This region is between Ubud and Denpasar, easily accessible with rich cultural experiences.'
+      },
+      {
+        question: 'What is Gianyar famous for in terms of food?',
+        answer: 'Gianyar is legendary for babi guling (roast suckling pig) - considered Bali\'s best! Also famous for traditional market food, ceremonial dishes, and authentic village cooking. Our chefs can prepare babi guling and other local specialties that made this region famous.'
+      },
+      {
+        question: 'Can you prepare traditional babi guling in Gianyar?',
+        answer: 'Yes! Gianyar\'s babi guling is Bali\'s most famous dish. We can prepare authentic roast suckling pig with all traditional accompaniments - lawar, sate, crackling skin, and special spice blends. This requires advance booking due to preparation time.'
+      },
+      {
+        question: 'What cultural experiences can you combine with dining?',
+        answer: 'Gianyar is perfect for cultural dining experiences! We can incorporate visits to art villages (woodcarving in Mas, silver in Celuk), market tours, cooking lessons featuring traditional techniques, and ceremonial dish preparation. Food here is deeply connected to Balinese culture.'
+      },
+      {
+        question: 'Is Gianyar convenient for day trips from other areas?',
+        answer: 'Yes! Gianyar is centrally located - 20 minutes from Ubud, 30 minutes from Sanur, 45 minutes from Seminyak. Many clients visit art villages and book our service for lunch or dinner during their cultural exploration day.'
+      }
+    ]
+  },
+  tegallalang: {
+    name: 'Tegallalang',
+    slug: 'tegallalang',
+    tagline: 'Private Chef Services in Tegallalang - Famous Rice Terrace Dining',
+    description: 'Book professional private chefs for in-villa dining in Tegallalang. Background-checked chefs deliver personalized culinary experiences with iconic rice terrace views.',
+    heroDescription: 'Dine with spectacular rice terrace views in your Tegallalang villa with expert private chefs',
+    areas: ['Tegallalang Rice Terraces', 'Ceking', 'Pakudui', 'Kenderan', 'Pejeng'],
+    popularVenues: ['Rice terrace view villas', 'Jungle lodges', 'Ubud outskirts accommodations', 'Instagram-famous properties', 'Eco-resort villas'],
+    localInsights: 'Tegallalang is home to Bali\'s most photographed rice terraces, just north of Ubud. This area offers spectacular views, cooler mountain climate, and authentic village life. Our chefs create dining experiences as memorable as the iconic terraced landscape.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.431944",
+      "longitude": "115.278889"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Tegallalang area?',
+        answer: 'Yes! We serve all Tegallalang including the famous rice terraces, Ceking, Pakudui, Kenderan, and surrounding villages. Many villas here have stunning terrace views that we enhance with equally beautiful dining experiences.'
+      },
+      {
+        question: 'Can you arrange dining with rice terrace views?',
+        answer: 'Absolutely! Tegallalang villas often have spectacular terrace-view dining areas. We time service to maximize the views - morning mist, golden afternoon light, or magical sunset hours. The setting is Instagram-perfect; our food matches it.'
+      },
+      {
+        question: 'What cuisine suits the Tegallalang atmosphere?',
+        answer: 'Organic, farm-fresh, and authentically Balinese cuisine feels most natural here. We emphasize local ingredients, traditional cooking methods, and dishes that connect you to the agricultural landscape you\'re dining within. Modern healthy options also popular.'
+      },
+      {
+        question: 'Is Tegallalang far from central Ubud?',
+        answer: 'Tegallalang is just 15-20 minutes north of Ubud center - close enough for easy chef access, far enough for peaceful rice terrace seclusion. We serve both areas seamlessly and can shop in Ubud markets before arriving at your villa.'
+      },
+      {
+        question: 'Do you work with the famous terrace-view accommodations?',
+        answer: 'Yes! We serve villas along the famous terrace viewpoints, jungle lodges, and the many stunning properties in this area. We\'re experienced with Tegallalang\'s access roads, villa locations, and creating dining experiences that match these spectacular settings.'
+      }
+    ]
+  },
+  amed: {
+    name: 'Amed',
+    slug: 'amed',
+    tagline: 'Private Chef Services in Amed - Coastal Paradise Dining',
+    description: 'Book professional private chefs for in-villa dining in Amed. Background-checked chefs deliver personalized culinary experiences in Bali\'s peaceful diving paradise.',
+    heroDescription: 'Experience fresh seafood and coastal cuisine in your Amed villa with expert private chefs',
+    areas: ['Amed Beach', 'Jemeluk Bay', 'Lipah Beach', 'Bunutan', 'Selang'],
+    popularVenues: ['Amed beachfront villas', 'Dive resort accommodations', 'Traditional bungalows', 'Oceanview guesthouses', 'Eco beach lodges'],
+    localInsights: 'Amed is East Bali\'s peaceful diving and snorkeling paradise with black sand beaches and traditional fishing villages. Far from tourist crowds, this area offers authentic coastal life. Our chefs specialize in ultra-fresh seafood, local village cooking, and simple, delicious seaside dining.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.349722",
+      "longitude": "115.652778"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Amed area?',
+        answer: 'Yes! We serve all Amed including the main beach, Jemeluk Bay (famous for diving), Lipah Beach, Bunutan, and Selang. We have chefs familiar with East Bali who serve this beautiful coastal region regularly.'
+      },
+      {
+        question: 'How fresh is the seafood in Amed?',
+        answer: 'Incredibly fresh! Amed is a traditional fishing village. Local fishermen bring catches directly to shore each morning. Our chefs select fish, squid, prawns, and seasonal catches just hours old. This is possibly Bali\'s freshest seafood source!'
+      },
+      {
+        question: 'What is Amed best known for food-wise?',
+        answer: 'Ultra-fresh grilled seafood, traditional East Balinese cooking, and simple beachside dining. Think whole grilled fish with sambal, fresh prawns, squid satay, and catches you literally watched fishermen land. Authentic coastal Indonesian cuisine.'
+      },
+      {
+        question: 'Is Amed too remote for chef services?',
+        answer: 'Amed is remote (2-2.5 hours from south Bali), but we serve it regularly. We arrange local ingredient sourcing and work with chefs familiar with the area. For multi-day stays, we can provide ongoing service. The peaceful location makes private dining even more special!'
+      },
+      {
+        question: 'Can you arrange beachside BBQ in Amed?',
+        answer: 'Absolutely! Amed is perfect for beach BBQ experiences. We can set up grills on villa beachfronts, serve fresh-caught seafood as the sun sets over Mount Agung, and create memorable coastal dining experiences. Simple, authentic, unforgettable.'
+      }
+    ]
+  },
+  lovina: {
+    name: 'Lovina',
+    slug: 'lovina',
+    tagline: 'Private Chef Services in Lovina - North Bali Dining',
+    description: 'Book professional private chefs for in-villa dining in Lovina. Background-checked chefs deliver personalized culinary experiences on Bali\'s peaceful northern coast.',
+    heroDescription: 'Enjoy relaxed coastal dining in your Lovina villa with expert private chefs',
+    areas: ['Lovina Beach', 'Kalibukbuk', 'Anturan', 'Temukus', 'Singaraja area'],
+    popularVenues: ['The Lovina Bali', 'Damai Resort', 'Puri Bagus Lovina', 'Beachfront villas', 'Traditional guesthouses'],
+    localInsights: 'Lovina is North Bali\'s calm beach resort area, famous for dolphin watching and volcanic hot springs. Far from southern crowds with a relaxed atmosphere. Our chefs specialize in fresh seafood, Balinese village cooking, and leisurely dining perfect for Lovina\'s peaceful pace.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.152778",
+      "longitude": "115.025833"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Lovina area?',
+        answer: 'Yes! We serve all Lovina including the beach area, Kalibukbuk, Anturan, Temukus, and the nearby Singaraja region. North Bali has a unique character and we have chefs who specialize in this peaceful area.'
+      },
+      {
+        question: 'What makes Lovina dining different?',
+        answer: 'Lovina is relaxed, authentic, and uncrowded. Dining here is about peaceful enjoyment - calm seas, dolphin sunrises, volcanic scenery. Our service matches this atmosphere: unhurried, personal, and focused on genuine flavors over flashy presentation.'
+      },
+      {
+        question: 'Can you source local seafood in Lovina?',
+        answer: 'Absolutely! Lovina\'s fishing boats return each morning with fresh catches. We source directly from local fishermen for the freshest seafood - mahi-mahi, snapper, prawns, and seasonal fish. North Bali offers excellent variety at reasonable prices.'
+      },
+      {
+        question: 'Is Lovina too far for chef services?',
+        answer: 'Lovina is about 2-2.5 hours from south Bali, but we serve the area regularly. We work with chefs familiar with North Bali and arrange local ingredient sourcing. For multi-day villa stays, we provide recurring service at competitive rates.'
+      },
+      {
+        question: 'What unique North Bali dishes can you prepare?',
+        answer: 'North Bali has distinctive regional cuisine! We prepare authentic Buleleng-style dishes, North Balinese satay variations, local vegetable preparations using volcanic soil produce, and fresh seafood with regional sambal recipes. It\'s different from south Bali - equally delicious!'
+      }
+    ]
+  },
+  candidasa: {
+    name: 'Candidasa',
+    slug: 'candidasa',
+    tagline: 'Private Chef Services in Candidasa - East Bali Coastal Dining',
+    description: 'Book professional private chefs for in-villa dining in Candidasa. Background-checked chefs deliver personalized culinary experiences on Bali\'s serene eastern coast.',
+    heroDescription: 'Experience authentic East Bali cuisine in your Candidasa villa with expert private chefs',
+    areas: ['Candidasa Beach', 'Mendira', 'Bugbug', 'Padang Bai border', 'Tenganan village area'],
+    popularVenues: ['Amankila', 'Alila Manggis', 'The Watergarden', 'Candi Beach Resort', 'Traditional beachfront villas'],
+    localInsights: 'Candidasa is East Bali\'s tranquil resort area near ancient temples and traditional Tenganan village. Known for coral beaches, diving, and authentic Balinese culture. Our chefs specialize in fresh seafood, regional East Balinese cuisine, and refined dining in this peaceful setting.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.509167",
+      "longitude": "115.561111"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve the Candidasa area?',
+        answer: 'Yes! We serve all Candidasa including the main beach, Mendira, Bugbug, and surrounding areas. We also serve the nearby luxury resorts Amankila and Alila Manggis. East Bali is our area of expertise for authentic regional cuisine.'
+      },
+      {
+        question: 'What makes Candidasa cuisine special?',
+        answer: 'Candidasa offers authentic East Balinese flavors often different from south Bali tourist cuisine. Regional specialties, fresher seafood, vegetables from volcanic soil, and traditional village cooking methods. It\'s genuine Bali cuisine without tourist adaptation.'
+      },
+      {
+        question: 'Do you work with Amankila and Alila Manggis?',
+        answer: 'Yes! We serve private villas and guests at both these world-class resorts. Our chefs meet the exceptional standards these properties demand. We coordinate with resort staff for seamless, sophisticated service that matches the setting.'
+      },
+      {
+        question: 'Can you incorporate cultural experiences into dining?',
+        answer: 'Absolutely! Candidasa is near Tenganan (ancient Bali Aga village), Tirta Gangga water palace, and important temples. We can create culturally-themed dining experiences, visit traditional markets together, or prepare ceremonial dishes with historical significance.'
+      },
+      {
+        question: 'Is Candidasa accessible for chef services?',
+        answer: 'Candidasa is about 1.5-2 hours from south Bali - a beautiful scenic drive. We serve the area regularly with chefs who know East Bali intimately. For multi-day stays, we provide ongoing service and local ingredient sourcing.'
+      }
+    ]
+  },
+  padangbai: {
+    name: 'Padang Bai',
+    slug: 'padang-bai',
+    tagline: 'Private Chef Services in Padang Bai - Harbor Town Dining',
+    description: 'Book professional private chefs for in-villa dining in Padang Bai. Background-checked chefs deliver personalized culinary experiences in this charming harbor town.',
+    heroDescription: 'Savor fresh harbor seafood in your Padang Bai accommodation with expert private chefs',
+    areas: ['Padang Bai harbor', 'Blue Lagoon Beach', 'Bias Tugel Beach', 'Manggis', 'Kusamba area'],
+    popularVenues: ['Harbor-view guesthouses', 'Diving accommodations', 'Alila Manggis (nearby)', 'Traditional bungalows', 'Beachside villas'],
+    localInsights: 'Padang Bai is Bali\'s main ferry port to the Gili Islands with excellent diving at Blue Lagoon Beach. This authentic harbor town offers the freshest seafood and genuine local atmosphere. Our chefs create memorable seafood experiences using just-landed catches.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.536111",
+      "longitude": "115.504722"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve Padang Bai?',
+        answer: 'Yes! We serve Padang Bai harbor town, Blue Lagoon Beach area, Bias Tugel Beach, and nearby Manggis. This is a wonderful area for authentic local dining and ultra-fresh seafood experiences.'
+      },
+      {
+        question: 'How fresh is seafood in Padang Bai?',
+        answer: 'As fresh as it gets! Padang Bai is an active fishing harbor with boats returning throughout the day. Our chefs can literally select fish that was swimming hours ago. The variety and freshness rival anywhere in Indonesia.'
+      },
+      {
+        question: 'Can you prepare seafood from the morning catch?',
+        answer: 'Absolutely! We can arrange for our chef to select the morning\'s best catches right at the harbor, then prepare them for lunch or dinner. You\'ll know exactly where your fish came from - possibly even which boat caught it!'
+      },
+      {
+        question: 'Is Padang Bai good for divers\' dining needs?',
+        answer: 'Perfect! Many clients are divers staying in Padang Bai. We provide hearty pre-dive breakfasts, packed lunches for boat trips, and celebratory dinners after diving. We understand divers\' nutritional needs and timing requirements.'
+      },
+      {
+        question: 'What local specialties are unique to Padang Bai?',
+        answer: 'Harbor-style grilled fish, traditional fisherman\'s dishes, fresh squid satay, and regional East Balinese cooking. We also prepare excellent seafood BBQs and local market-style meals. It\'s authentic Indonesian coastal cuisine at its freshest.'
+      }
+    ]
+  },
+  bukit: {
+    name: 'Bukit Peninsula',
+    slug: 'bukit',
+    tagline: 'Private Chef Services in Bukit - Clifftop Luxury Dining',
+    description: 'Book professional private chefs for in-villa dining on the Bukit Peninsula. Background-checked chefs deliver personalized culinary experiences in Bali\'s most dramatic settings.',
+    heroDescription: 'Experience luxury clifftop dining on the Bukit Peninsula with expert private chefs',
+    areas: ['Bukit cliffs', 'Balangan', 'Dreamland', 'Bingin', 'Impossibles area'],
+    popularVenues: ['Six Senses Uluwatu', 'Bulgari Resort', 'Anantara Uluwatu', 'Private cliff villas', 'Surf accommodation villas'],
+    localInsights: 'The Bukit Peninsula is Bali\'s dramatic limestone plateau with world-class surf breaks, clifftop resorts, and stunning ocean views. This area offers the most spectacular settings in Bali. Our chefs create dining experiences that match the breathtaking landscapes.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.800000",
+      "longitude": "115.150000"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of the Bukit Peninsula?',
+        answer: 'Yes! We serve the entire Bukit from Balangan to Bingin, Dreamland, Impossibles, Padang Padang, and beyond. Our chefs are experts with clifftop access, surf villa locations, and the Peninsula\'s unique terrain.'
+      },
+      {
+        question: 'What makes Bukit dining unique?',
+        answer: 'The settings are unmatched - dramatic cliffs, infinite ocean views, spectacular sunsets. We create dining experiences that complement these natural wonders. Romantic proposals, anniversary celebrations, and milestone moments find their perfect backdrop here.'
+      },
+      {
+        question: 'Can you serve surf villas on the Bukit?',
+        answer: 'Absolutely! We serve many surf villas near Balangan, Bingin, Impossibles, and Dreamland. Post-surf feasts are our specialty - hearty, satisfying meals for hungry surfers. We also do early breakfasts for dawn patrol and recovery smoothies.'
+      },
+      {
+        question: 'How do you handle Bukit access challenges?',
+        answer: 'Many Bukit villas have steep, winding access. Our chefs know the terrain, appropriate vehicles, and logistics. We coordinate with villa staff, factor extra travel time, and ensure we have everything needed before navigating access roads.'
+      },
+      {
+        question: 'Do you work with Bukit luxury resorts like Six Senses?',
+        answer: 'Yes! We serve private villas at Six Senses, Bulgari, Anantara, and other ultra-luxury Bukit properties. Our chefs meet the exceptional standards these properties demand. We coordinate with resort concierge for seamless, sophisticated service.'
+      }
+    ]
+  },
+  ungasan: {
+    name: 'Ungasan',
+    slug: 'ungasan',
+    tagline: 'Private Chef Services in Ungasan - Exclusive Estate Dining',
+    description: 'Book professional private chefs for in-villa dining in Ungasan. Background-checked chefs deliver personalized culinary experiences in Bali\'s most exclusive estate villas.',
+    heroDescription: 'Indulge in world-class private dining in your Ungasan estate with expert private chefs',
+    areas: ['Ungasan cliffs', 'Karma Kandara area', 'Pandawa Beach', 'Gunung Payung', 'Southern cliffs'],
+    popularVenues: ['Karma Kandara', 'Jumana Bali Ungasan', 'AYANA Segara', 'Private cliff estates', 'Luxury mega-villas'],
+    localInsights: 'Ungasan is home to Bali\'s most exclusive cliff-edge estates and private mega-villas. This ultra-luxury enclave attracts discerning guests seeking complete privacy and world-class amenities. Our chefs provide five-star private dining matching the area\'s exceptional standards.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.835000",
+      "longitude": "115.167500"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve Ungasan\'s exclusive estates?',
+        answer: 'Yes! We specialize in Ungasan\'s luxury villa sector - mega-estates, cliff-edge properties, and exclusive compounds. Our top chefs are experienced with high-net-worth clients, exceptional standards, and complete discretion.'
+      },
+      {
+        question: 'What level of service do you provide in Ungasan?',
+        answer: 'Five-star excellence. Ungasan clients expect impeccable service - premium ingredients (wagyu, seafood towers, truffles), sophisticated presentations, wine pairings, professional front-of-house staff. We meet and exceed luxury resort dining standards.'
+      },
+      {
+        question: 'Can you handle VIP and celebrity clients?',
+        answer: 'Absolutely. Our Ungasan team is experienced with high-profile guests. We sign NDAs, coordinate with security, maintain complete confidentiality, and provide seamless service that respects privacy. Your identity and event details remain completely protected.'
+      },
+      {
+        question: 'Do you work with Karma Kandara and AYANA?',
+        answer: 'Yes! We regularly serve private villas at Karma Kandara, AYANA Segara, Jumana, and other luxury properties. We\'re familiar with their standards, access procedures, and coordination requirements. Service is effortlessly professional.'
+      },
+      {
+        question: 'Can you provide full event staffing in Ungasan?',
+        answer: 'Yes! For Ungasan events, we provide complete teams - executive chefs, sous chefs, waitstaff, bartenders, sommeliers. We coordinate table design, florals, lighting, and all elements for flawless private events worthy of Ungasan\'s exceptional settings.'
+      }
+    ]
+  },
+  pecatu: {
+    name: 'Pecatu',
+    slug: 'pecatu',
+    tagline: 'Private Chef Services in Pecatu - Surf & Sunset Dining',
+    description: 'Book professional private chefs for in-villa dining in Pecatu. Background-checked chefs deliver personalized culinary experiences in this stunning surf and sunset destination.',
+    heroDescription: 'Enjoy epic sunset dining in your Pecatu villa with expert private chefs',
+    areas: ['Pecatu Indah', 'Single Fin area', 'Suluban Beach', 'Padang Padang area', 'New Kuta Golf area'],
+    popularVenues: ['Six Senses Uluwatu', 'Renaissance Bali Uluwatu', 'Single Fin beach club area villas', 'Surf villas', 'New Kuta Golf estates'],
+    localInsights: 'Pecatu is the heart of Bali\'s famous surf coast with world-class breaks at Padang Padang and Uluwatu. Known for the legendary Single Fin cliff bar, dramatic sunsets, and laid-back surf culture. Our chefs create memorable dining from casual beach feasts to romantic clifftop experiences.',
+    coordinates: {
+      "@type": "GeoCoordinates",
+      "latitude": "-8.815278",
+      "longitude": "115.105278"
+    },
+    faqItems: [
+      {
+        question: 'Do you serve all areas of Pecatu?',
+        answer: 'Yes! We serve all Pecatu including Pecatu Indah residential area, Single Fin surrounds, Suluban Beach area, Padang Padang, and the golf course estates. We know every villa complex and surf accommodation in the area.'
+      },
+      {
+        question: 'Can you cater to surfers in Pecatu?',
+        answer: 'Absolutely! Pecatu is surf central. We serve surf villas with pre-dawn breakfasts (before paddling out at Uluwatu!), post-surf recovery meals, hearty group dinners, and meal prep for multi-day surf trips. We understand the surf lifestyle and fuel accordingly.'
+      },
+      {
+        question: 'What\'s the food vibe in Pecatu?',
+        answer: 'Pecatu is casual-cool. Think sunset BBQs, fresh seafood platters, healthy bowls, and shareable feasts for villa groups. We also do romantic fine dining for couples enjoying the cliff views. The food matches the laid-back but spectacular setting.'
+      },
+      {
+        question: 'Can you time dinner with Pecatu sunsets?',
+        answer: 'Essential! Pecatu sunsets are legendary. We time appetizers for golden hour, main course as the sun dips, and dessert under the stars. Whether you\'re at a cliff villa or near Single Fin, we create unforgettable sunset dining moments.'
+      },
+      {
+        question: 'Do you work with surf camps and group accommodations?',
+        answer: 'Yes! We serve many surf camps and group villas in Pecatu. We handle 10-20+ guests with family-style service, diverse menus (vegetarian surfers to hungry big wave riders), and flexible timing around surf schedules. We\'ve fed countless surf trip groups!'
+      }
+    ]
   }
 };
 

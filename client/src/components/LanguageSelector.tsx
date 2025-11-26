@@ -10,11 +10,7 @@ import { Button } from '@/components/ui/button';
 
 const LANGUAGES = [
   { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'zh', name: 'Chinese', nativeName: '中文' },
-  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी' },
-  { code: 'es', name: 'Spanish', nativeName: 'Español' },
-  { code: 'ar', name: 'Arabic', nativeName: 'العربية' },
-  { code: 'fr', name: 'French', nativeName: 'Français' }
+  { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia' }
 ];
 
 export default function LanguageSelector() {

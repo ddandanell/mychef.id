@@ -1,0 +1,390 @@
+{
+  "seo": {
+    "home": {
+      "title": "Chef Pribadi Bali | Layanan Makan Malam Profesional di Villa | myCHEF Indonesia",
+      "description": "Rasakan keunggulan kuliner dengan layanan chef pribadi myCHEF Indonesia di Bali. Chef ahli, menu personal, dan bahan premium diantarkan ke villa Anda. Melayani Seminyak, Ubud, Canggu & lebih banyak sejak 2012.",
+      "keywords": "chef pribadi Bali, chef personal Bali, chef villa, makan malam di rumah Bali, layanan chef profesional, makanan gourmet Bali, makan malam pribadi Seminyak, sewa chef Ubud"
+    }
+  },
+  "nav": {
+    "home": "Beranda",
+    "services": "Layanan",
+    "locations": "Lokasi",
+    "testimonials": "Testimoni",
+    "faq": "FAQ",
+    "contact": "Hubungi Kami"
+  },
+  "hero": {
+    "headline": "Rasakan Keunggulan Kuliner",
+    "subheadline": "Masuki dunia cita rasa dan kecanggihan tak tertandingi dengan chef pribadi Anda sendiri",
+    "description": "Bayangkan menikmati hidangan gourmet yang dibuat khusus sesuai selera Anda, tanpa harus meninggalkan kenyamanan rumah. Sebagai pecinta kuliner sejati, Anda memahami peran penting makanan dalam gaya hidup Anda. Nikmati kemewahan memiliki ahli kuliner yang menciptakan pengalaman tak terlupakan, menambahkan sentuhan elegan dan kesenangan di setiap hidangan.",
+    "cta": "Pesan Chef Pribadi Anda",
+    "rating": "Rating 4.9/5",
+    "reviews": "dari 1000+ pengalaman",
+    "trusted": "Dipercaya sejak 2012"
+  },
+  "experience": {
+    "headline": "Pengalaman Bersantap Premium",
+    "subheadline": "Dari makan malam romantis untuk dua orang hingga pesta villa untuk 50+ tamu",
+    "items": {
+      "intimate": "Makan malam intim",
+      "family": "Pertemuan keluarga",
+      "celebrations": "Perayaan khusus",
+      "parties": "Pesta villa",
+      "corporate": "Acara perusahaan",
+      "cooking": "Kelas memasak"
+    }
+  },
+  "whyChoose": {
+    "headline": "Mengapa Memilih Chef Pribadi",
+    "subheadline": "Ubah makan sehari-hari menjadi kenangan luar biasa dengan layanan chef profesional kami",
+    "benefits": {
+      "personalized": {
+        "title": "Menu personal untuk setiap acara",
+        "description": "Setiap hidangan adalah penghormatan terhadap kreativitas dan keahlian, bukti dedikasi chef untuk kesempurnaan"
+      },
+      "quality": {
+        "title": "Bahan segar berkualitas tinggi",
+        "description": "Bahan berkualitas superior, dipilih dengan cermat dari pasar lokal terpercaya"
+      },
+      "expertise": {
+        "title": "Hidangan tingkat restoran yang dibuat ahli",
+        "description": "Setiap makanan adalah mahakarya, dibuat dengan teliti untuk memenuhi setiap keinginan Anda"
+      },
+      "flexible": {
+        "title": "Fleksibel untuk berbagai ukuran acara",
+        "description": "Baik itu makan malam intim atau pertemuan meriah, kami memastikan setiap acara menjadi pertunjukan cita rasa"
+      },
+      "service": {
+        "title": "Pengalaman layanan lengkap tanpa repot",
+        "description": "Berdedikasi untuk memberikan layanan sempurna dari perencanaan hingga pembersihan"
+      }
+    }
+  },
+  "howItWorks": {
+    "headline": "Cara Kerjanya",
+    "subheadline": "Memesan chef pribadi Anda semudah mengirim pesan WhatsApp",
+    "steps": {
+      "contact": {
+        "title": "Hubungi Kami",
+        "description": "Kirim pesan WhatsApp dengan tanggal, jumlah tamu, dan preferensi Anda"
+      },
+      "match": {
+        "title": "Cocokkan dengan Chef",
+        "description": "Kami cocokkan Anda dengan chef sempurna berdasarkan kebutuhan Anda"
+      },
+      "menu": {
+        "title": "Sesuaikan Menu",
+        "description": "Bekerja sama dengan chef untuk membuat menu impian Anda"
+      },
+      "enjoy": {
+        "title": "Nikmati",
+        "description": "Bersantai sementara chef kami menangani semuanya dari memasak hingga membersihkan"
+      }
+    }
+  },
+  "pricing": {
+    "headline": "Harga Transparan",
+    "subheadline": "Tidak ada biaya tersembunyi - Anda menyetujui semua biaya di muka",
+    "chefService": {
+      "title": "Biaya Layanan Chef",
+      "hourly": "per jam",
+      "includes": "Termasuk memasak, penyajian, dan pembersihan"
+    },
+    "ingredients": {
+      "title": "Biaya Bahan",
+      "description": "Dibayar langsung ke chef dengan harga pasar",
+      "note": "Chef berbelanja bahan segar di hari layanan"
+    },
+    "deposit": {
+      "title": "Jadwal Pembayaran",
+      "booking": "50% saat pemesanan",
+      "remaining": "50% sehari sebelum acara"
+    }
+  },
+  "testimonials": {
+    "headline": "Apa Kata Klien Kami",
+    "subheadline": "Pengalaman nyata dari tamu yang puas di seluruh Bali",
+    "viewMore": "Lihat Lebih Banyak Ulasan"
+  },
+  "locations": {
+    "headline": "Melayani Seluruh Bali",
+    "subheadline": "Layanan chef pribadi profesional di lokasi favorit Anda",
+    "areas": {
+      "seminyak": "Seminyak",
+      "canggu": "Canggu",
+      "ubud": "Ubud",
+      "sanur": "Sanur",
+      "nusaDua": "Nusa Dua",
+      "uluwatu": "Uluwatu",
+      "jimbaran": "Jimbaran",
+      "kuta": "Kuta",
+      "legian": "Legian",
+      "kerobokan": "Kerobokan",
+      "petitenget": "Petitenget",
+      "berawa": "Berawa",
+      "pererenan": "Pererenan",
+      "tanahLot": "Tanah Lot",
+      "tabanan": "Tabanan",
+      "denpasar": "Denpasar",
+      "gianyar": "Gianyar",
+      "tegallalang": "Tegallalang",
+      "amed": "Amed",
+      "lovina": "Lovina",
+      "candidasa": "Candidasa",
+      "padangBai": "Padang Bai",
+      "bukit": "Bukit",
+      "ungasan": "Ungasan",
+      "pecatu": "Pecatu"
+    }
+  },
+  "chefs": {
+    "headline": "Temui Chef Berbakat Kami",
+    "subheadline": "Chef profesional terlatih dengan keahlian masak internasional",
+    "specialties": "Spesialisasi",
+    "experience": "Pengalaman",
+    "years": "tahun"
+  },
+  "trust": {
+    "headline": "Keamanan & Keselamatan",
+    "subheadline": "Ketenangan pikiran Anda adalah prioritas kami",
+    "badges": {
+      "background": "Pemeriksaan Latar Belakang",
+      "certified": "Tersertifikasi Keamanan Pangan",
+      "insured": "Diasuransikan Penuh",
+      "verified": "Ulasan Terverifikasi",
+      "trained": "Terlatih Profesional",
+      "guarantee": "Jaminan Kepuasan"
+    }
+  },
+  "faq": {
+    "headline": "Pertanyaan yang Sering Diajukan",
+    "subheadline": "Pertanyaan Anda tentang menyewa chef pribadi, dijawab dengan jelas dan ahli",
+    "questions": {
+      "whatDoes": {
+        "question": "Apa yang dilakukan chef pribadi?",
+        "answer": "Chef pribadi membuat menu personal, mencari bahan premium, dan menyiapkan hidangan gourmet yang disesuaikan dengan selera dan kebutuhan diet Anda. Mereka menangani semuanya dari perencanaan menu dan berbelanja bahan hingga memasak, menyajikan, dan membersihkan dapur sepenuhnya. Baik untuk makan malam intim atau acara khusus, chef pribadi memastikan setiap hidangan adalah pengalaman berkualitas restoran yang tak terlupakan di kenyamanan rumah atau villa Anda."
+      },
+      "cost": {
+        "question": "Berapa biaya chef pribadi?",
+        "answer": "Biaya menyewa chef pribadi bervariasi tergantung pada beberapa faktor seperti menu yang dipilih, kompleksitas hidangan, dan jumlah tamu. Harga biasanya fleksibel dan dapat disesuaikan dengan anggaran Anda, memastikan Anda menerima kualitas luar biasa tanpa kompromi. Sebagian besar layanan menawarkan penawaran transparan yang mencakup biaya chef dan biaya bahan, memastikan Anda tahu persis apa yang diharapkan sebelum memesan."
+      },
+      "where": {
+        "question": "Di mana Anda bisa menyewa chef pribadi?",
+        "answer": "Anda dapat menyewa chef pribadi untuk berbagai lokasi, termasuk villa pribadi, rumah, properti tepi pantai, dan bahkan kapal pesiar. Di Bali, layanan chef pribadi tersedia di area populer seperti Seminyak, Ubud, Canggu, Nusa Dua, Sanur, Uluwatu, dan Jimbaran. Baik Anda mengadakan perayaan, merencanakan makan malam romantis, atau hanya ingin meningkatkan makan sehari-hari, chef pribadi dapat membawa pengalaman kuliner kelas dunia langsung ke tempat pilihan Anda."
+      },
+      "dietary": {
+        "question": "Bisakah chef pribadi mengakomodasi preferensi diet?",
+        "answer": "Ya, chef pribadi sangat terlatih untuk menyesuaikan menu sesuai kebutuhan diet tertentu, termasuk vegetarian, vegan, bebas gluten, halal, dan lainnya. Dengan mengomunikasikan kebutuhan Anda, Anda dapat menikmati pengalaman kuliner personal yang memuaskan selera Anda sambil mendukung kesehatan dan gaya hidup Anda."
+      },
+      "smallEvents": {
+        "question": "Apakah pengalaman ini hanya untuk acara besar?",
+        "answer": "Tidak, pengalaman chef pribadi tidak terbatas pada acara besar. Bahkan untuk makan malam intim atau perayaan kecil, chef pribadi dapat menambahkan sentuhan khusus yang membuat momen Anda benar-benar berkesan. Fleksibilitas ini membuat layanan ini ideal untuk setiap pertemuan, dari acara besar hingga makanan pribadi yang nyaman."
+      },
+      "quality": {
+        "question": "Bagaimana kualitas bahan dijamin?",
+        "answer": "Chef pribadi berkomitmen untuk hanya menggunakan bahan berkualitas tertinggi, sering memilih produk segar yang bersumber lokal. Mereka mendapatkan bahan dari pasar dan pemasok terpercaya, memastikan bahwa setiap elemen makanan Anda memenuhi standar tertinggi. Dedikasi ini menjamin bahwa setiap hidangan tidak hanya lezat tetapi juga sehat dan berkualitas premium."
+      },
+      "whoBenefits": {
+        "question": "Siapa yang diuntungkan dari menyewa chef pribadi?",
+        "answer": "Keluarga yang mencari pertemuan berkesan dengan orang tercinta berkembang dengan layanan ini. Profesional sibuk menemukan kesenangan dalam makan mewah di rumah di tengah jadwal yang padat. Keluarga dengan kebutuhan atau preferensi diet seperti vegan, halal, atau bebas gluten menemukan kenyamanan dalam menu personal yang penuh perhatian. Menjamu teman menjadi perjalanan kuliner yang menginspirasi daripada tugas yang menakutkan. Bagi ekspatriat dan wisatawan yang menikmati keindahan Bali, chef pribadi menawarkan cita rasa otentik pulau ini, menciptakan kenangan di luar yang biasa."
+      }
+    }
+  },
+  "occasions": {
+    "headline": "Sempurna untuk Setiap Acara",
+    "subheadline": "Dari makan malam intim hingga perayaan besar",
+    "items": {
+      "romantic": "Makan Malam Romantis",
+      "birthday": "Perayaan Ulang Tahun",
+      "anniversary": "Peringatan Pernikahan",
+      "family": "Reuni Keluarga",
+      "corporate": "Acara Perusahaan",
+      "wedding": "Perayaan Pernikahan",
+      "bachelorette": "Pesta Bachelorette",
+      "holiday": "Makan Malam Liburan"
+    }
+  },
+  "cuisines": {
+    "headline": "Masakan dari Seluruh Dunia",
+    "subheadline": "Chef kami mengkhususkan diri dalam berbagai tradisi kuliner",
+    "items": {
+      "indonesian": "Indonesia",
+      "western": "Barat",
+      "asian": "Asia",
+      "fusion": "Fusion",
+      "mediterranean": "Mediterania",
+      "bbq": "BBQ & Grill"
+    }
+  },
+  "cta": {
+    "book": "Pesan Chef Anda",
+    "getQuote": "Dapatkan Penawaran",
+    "contact": "Hubungi Kami",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "whatsapp": "Chat di WhatsApp",
+    "call": "Telepon Kami",
+    "email": "Email Kami"
+  },
+  "contact": {
+    "headline": "Siap untuk Memulai?",
+    "subheadline": "Hubungi kami hari ini untuk penawaran gratis. Kami membalas dalam 10 menit.",
+    "form": {
+      "name": "Nama Anda",
+      "email": "Alamat Email",
+      "phone": "Nomor Telepon",
+      "date": "Tanggal Acara",
+      "guests": "Jumlah Tamu",
+      "message": "Pesan Anda",
+      "submit": "Kirim Permintaan"
+    },
+    "info": {
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "hours": "Jam Operasional"
+    }
+  },
+  "footer": {
+    "tagline": "Menghadirkan pengalaman makan malam pribadi luar biasa ke villa dan rumah di seluruh Bali sejak 2012",
+    "partnerServices": "Layanan Mitra:",
+    "businessHours": "Jam Kerja:",
+    "dailyHours": "09:00 - 22:00 WIB (Setiap Hari)",
+    "copyright": "© {{year}} myCHEF Indonesia. Hak cipta dilindungi.",
+    "quickLinks": "Tautan Cepat",
+    "services": "Layanan",
+    "legal": "Legal",
+    "links": {
+      "privacy": "Kebijakan Privasi",
+      "terms": "Syarat Layanan",
+      "payment": "Syarat Pembayaran",
+      "quote": "Dapatkan Penawaran",
+      "careers": "Karir",
+      "about": "Tentang Kami"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "id": "Bahasa Indonesia"
+  },
+  "common": {
+    "from": "mulai dari",
+    "perHour": "per jam",
+    "perPerson": "per orang",
+    "guests": "tamu",
+    "hours": "jam",
+    "days": "hari",
+    "weeks": "minggu",
+    "months": "bulan",
+    "year": "tahun",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "success": "Berhasil",
+    "cancel": "Batal",
+    "confirm": "Konfirmasi",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "search": "Cari",
+    "filter": "Filter",
+    "sort": "Urutkan",
+    "all": "Semua",
+    "none": "Tidak ada",
+    "yes": "Ya",
+    "no": "Tidak",
+    "readMore": "Baca Selengkapnya",
+    "showLess": "Tampilkan Lebih Sedikit"
+  },
+  "services": {
+    "villaParties": {
+      "name": "Pesta Villa",
+      "tagline": "Katering pesta villa epik di Bali",
+      "description": "Ubah villa Bali Anda menjadi venue pesta terbaik dengan layanan chef pribadi profesional"
+    },
+    "romanticDinners": {
+      "name": "Makan Malam Romantis",
+      "tagline": "Makan malam chef pribadi intim di Bali",
+      "description": "Ciptakan momen romantis tak terlupakan dengan pengalaman chef pribadi untuk berdua"
+    },
+    "birthdayCelebrations": {
+      "name": "Perayaan Ulang Tahun",
+      "tagline": "Makan malam ulang tahun berkesan di Bali",
+      "description": "Jadikan hari spesial mereka luar biasa dengan pengalaman ulang tahun chef pribadi"
+    },
+    "familyReunions": {
+      "name": "Reuni Keluarga",
+      "tagline": "Makan malam chef pribadi untuk keluarga multi-generasi",
+      "description": "Satukan generasi dengan hidangan keluarga berkesan di villa Bali Anda"
+    },
+    "corporateEvents": {
+      "name": "Acara Perusahaan",
+      "tagline": "Katering profesional untuk bisnis di Bali",
+      "description": "Impress klien dan tim dengan makan malam chef pribadi yang canggih"
+    },
+    "weddingCelebrations": {
+      "name": "Perayaan Pernikahan",
+      "tagline": "Katering pernikahan di Bali",
+      "description": "Ciptakan momen makan pernikahan magis dengan layanan chef pribadi profesional"
+    },
+    "cookingClasses": {
+      "name": "Kelas Memasak",
+      "tagline": "Pengalaman memasak interaktif di Bali",
+      "description": "Kuasai masakan baru dengan instruksi langsung dari chef profesional di villa Anda"
+    },
+    "weeklyMealPrep": {
+      "name": "Persiapan Makanan Mingguan",
+      "tagline": "Layanan chef pribadi reguler di Bali",
+      "description": "Nikmati makanan sehat dan teratur dengan layanan chef pribadi berulang"
+    }
+  },
+  "cityPages": {
+    "backToHome": "Kembali ke Beranda",
+    "bookNow": "Pesan Sekarang",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "servingArea": "Melayani Area",
+    "popularVenues": "Venue Populer",
+    "nearbyAttractions": "Atraksi Terdekat",
+    "localCuisine": "Masakan Lokal",
+    "chefAvailability": "Ketersediaan Chef"
+  },
+  "servicePage": {
+    "backToHome": "Kembali ke Beranda",
+    "getQuote": "Dapatkan Penawaran Gratis",
+    "eventsCount": "1000+ Acara",
+    "insured": "100% Diasuransikan",
+    "replyTime": "Kami membalas dalam 10 menit • 09:00-22:00 WIB Setiap Hari",
+    "about": "Tentang",
+    "whatWeOffer": "Apa yang Kami Tawarkan",
+    "howItWorks": "Cara Kerjanya",
+    "step": "Langkah",
+    "ourExperiences": "Pengalaman",
+    "whyChooseUs": "Mengapa Memilih myCHEF untuk",
+    "pricing": "Harga Transparan",
+    "faq": "Pertanyaan yang Sering Diajukan",
+    "readyToPlan": "Siap Merencanakan",
+    "contactToday": "Hubungi kami hari ini untuk penawaran personal. Kami membalas dalam 10 menit selama jam operasional."
+  },
+  "quote": {
+    "headline": "Dapatkan Penawaran Gratis",
+    "subheadline": "Beritahu kami tentang acara Anda dan kami akan menghubungi Anda dengan penawaran khusus",
+    "steps": {
+      "serviceType": "Jenis Layanan",
+      "eventDetails": "Detail Acara",
+      "preferences": "Preferensi",
+      "contact": "Informasi Kontak"
+    },
+    "serviceTypes": {
+      "single": "Acara Tunggal",
+      "recurring": "Layanan Berulang",
+      "fulltime": "Chef Penuh Waktu"
+    }
+  },
+  "cookies": {
+    "message": "Kami menggunakan cookies untuk meningkatkan pengalaman Anda. Dengan melanjutkan mengunjungi situs ini, Anda menyetujui penggunaan cookies kami.",
+    "accept": "Terima",
+    "decline": "Tolak",
+    "learnMore": "Pelajari Lebih Lanjut"
+  }
+}

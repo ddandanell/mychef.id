@@ -10,7 +10,25 @@
     "headline": "Experience Culinary Excellence",
     "subheadline": "Step into a world of unparalleled taste and sophistication with your very own private chef",
     "description": "Imagine indulging in gourmet meals tailored specifically to your preferences, without ever leaving the comfort of your home. As an aficionado of fine dining, you understand the critical role that food plays in your lifestyle. Embrace the luxury of having a culinary expert curate unforgettable experiences, adding a touch of elegance and delight to every meal.",
-    "cta": "Book Your Private Chef"
+    "cta": "Book Your Private Chef",
+    "rating": "4.9/5 Rating"
+  },
+  "servicePage": {
+    "backToHome": "Back to Home",
+    "getQuote": "Get a Free Quote",
+    "eventsCount": "1000+ Events",
+    "insured": "100% Insured",
+    "replyTime": "We reply within 10 minutes • 09:00-22:00 WIB Daily",
+    "about": "About",
+    "whatWeOffer": "What We Offer",
+    "howItWorks": "How It Works",
+    "step": "Step",
+    "ourExperiences": "Our",
+    "whyChooseUs": "Why Choose myCHEF for",
+    "pricing": "Transparent Pricing",
+    "faq": "Frequently Asked Questions",
+    "readyToPlan": "Ready to Plan Your",
+    "contactToday": "Contact us today for a personalized quote. We reply within 10 minutes during operating hours."
   },
   "whyChoose": {
     "headline": "Why Choose a Private Chef",
@@ -76,7 +94,8 @@
     "book": "Book Your Chef",
     "getQuote": "Get Quote",
     "contact": "Contact Us",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "whatsapp": "Chat on WhatsApp"
   },
   "footer": {
     "tagline": "Bringing exceptional private dining experiences to villas and homes across Bali since 2012",

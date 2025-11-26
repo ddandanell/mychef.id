@@ -24,11 +24,11 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Private Chef Services in Bali | Professional In-Villa Dining | myCHEF Indonesia"
-        description="Book professional private chefs for in-villa dining across Bali. Background-checked chefs deliver personalized culinary experiences for events, recurring services, and full-time needs."
+        title="Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia"
+        description="Experience culinary excellence with myCHEF Indonesia's private chef services in Bali. Expert chefs, personalized menus, and premium ingredients delivered to your villa. Serving Seminyak, Ubud, Canggu & more since 2012. From Rp 800,000/hour."
         canonical="https://mychef.id"
         ogType="website"
-        keywords="private chef Bali, personal chef Bali, chef at home Bali, villa chef Bali, private dining Bali, chef services Bali, Seminyak, Canggu, Ubud"
+        keywords="private chef Bali, personal chef Bali, villa chef, in-home dining Bali, professional chef services, gourmet meals Bali, private dining Seminyak, chef hire Ubud, Canggu chef services, restaurant-quality home dining, background-checked chefs"
       />
       <HeroSection />
       <ExperienceOverview />

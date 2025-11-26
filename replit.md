@@ -118,8 +118,26 @@ The tracking creates a complete sales funnel:
 - Browser cache warnings eliminated
 - **Unified Conversion Tracking (October 28, 2025):** Removed ContactChoiceDialog and ContactDialogContext in favor of single `/contact/confirm` conversion page. All CTAs (18+ sources) now route through unified tracking system for cleaner analytics and improved conversion measurement. Quote funnel remains accessible via footer for manual use after consultation.
 
+## Multi-Language Support (November 2025)
+- **react-i18next Integration:** Installed and configured with automatic browser language detection
+- **Supported Languages:** English (en), Mandarin Chinese (zh), Hindi (hi), Spanish (es), Arabic (ar), French (fr)
+- **Language Detection:** Automatic detection from browser settings, URL parameters (?lng=en), localStorage, and cookies
+- **Language Selector:** Globe icon in footer allows manual language switching
+- **Current Status:** Infrastructure complete with English content. Other languages ready for professional translation services.
+- **Detection Priority:** URL query → Cookie → LocalStorage → Browser settings
+- **Persistence:** User's language choice cached in localStorage and cookies for 7 days
+
+## SEO Enhancements (November 2025)
+- **Hero Section:** Updated with "Experience Culinary Excellence" headline and enhanced descriptions emphasizing unparalleled taste, sophistication, and gourmet experiences
+- **Meta Tags:** Improved title tags, descriptions, and keywords for better search engine rankings
+  - Title: "Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia"
+  - Enhanced description with pricing, location coverage, and establishment date (since 2012)
+  - Expanded keywords targeting restaurant-quality home dining and background-checked chefs
+- **Content Quality:** Enhanced copy throughout with SEO-optimized language focusing on culinary excellence, personalized service, and premium quality
+
 ## External Dependencies
 - **WhatsApp:** For direct customer communication and booking inquiries.
 - **Google Analytics (G-W0PQH8ZKTF):** For website traffic analysis and comprehensive sales funnel tracking (GDPR-compliant).
 - **Payment Gateways:** Visa, MasterCard, and other major credit/debit card processors for online payments.
 - **Geolocation API:** ipapi.co for server-side city detection using visitor's real IP address (free tier, no API key required).
+- **i18next:** Multi-language support with automatic browser detection (react-i18next, i18next-browser-languagedetector).

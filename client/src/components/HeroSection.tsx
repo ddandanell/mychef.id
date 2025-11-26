@@ -73,10 +73,10 @@ export default function HeroSection() {
         </button>
 
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
-          Hire a Private Chef at Home in Bali
+          Experience Culinary Excellence
         </h1>
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
-          Experience personalized fine dining in your villa, home, or beachfront property. Serving all of Bali from Seminyak to Ubud, Canggu to Nusa Dua.
+          Step into a world of unparalleled taste and sophistication with your very own private chef. Indulge in gourmet meals tailored specifically to your preferences in your Bali villa, home, or beachfront property.
         </p>
         
         <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 flex-wrap">

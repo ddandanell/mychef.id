@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, CreditCard } from 'lucide-react';
+import { Mail, Phone, MapPin, CreditCard, Banknote } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
@@ -139,7 +139,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-lg">💵</span>
+                <Banknote className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium text-foreground">Cash</p>
                   <p className="text-xs">Indonesian Rupiah (IDR) Only</p>

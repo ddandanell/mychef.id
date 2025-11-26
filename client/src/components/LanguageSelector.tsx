@@ -11,23 +11,44 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
+const FlagGB = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-8 h-5">
+    <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g clipPath="url(#s)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#t)" stroke="#C8102E" strokeWidth="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6"/>
+    </g>
+  </svg>
+);
+
+const FlagID = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-8 h-5">
+    <rect width="3" height="1" fill="#CE1126"/>
+    <rect width="3" height="1" y="1" fill="#fff"/>
+  </svg>
+);
+
 const LANGUAGES = [
   { 
     code: 'en', 
     name: 'English', 
     nativeName: 'English',
-    flag: '🇬🇧'
+    Flag: FlagGB
   },
   { 
     code: 'id', 
     name: 'Indonesian', 
     nativeName: 'Bahasa Indonesia',
-    flag: '🇮🇩'
+    Flag: FlagID
   }
 ];
 
 export default function LanguageSelector() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const currentLanguage = LANGUAGES.find(lang => lang.code === i18n.language) || LANGUAGES[0];
@@ -53,10 +74,10 @@ export default function LanguageSelector() {
       <DialogContent className="sm:max-w-md" data-testid="dialog-language-selector">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-serif">
-            Choose Your Language
+            {t('language.title', 'Choose Your Language')}
           </DialogTitle>
           <DialogDescription className="text-center text-foreground/60 text-sm">
-            Pilih Bahasa Anda
+            {t('language.subtitle', 'Select your preferred language')}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 py-4">
@@ -72,9 +93,9 @@ export default function LanguageSelector() {
               data-testid={`button-language-${language.code}`}
             >
               <div className="flex items-center gap-4">
-                <span className="text-3xl" role="img" aria-label={language.name}>
-                  {language.flag}
-                </span>
+                <div className="w-10 h-6 rounded overflow-hidden shadow-sm border border-border/30 flex items-center justify-center">
+                  <language.Flag />
+                </div>
                 <div className="text-left">
                   <div className="font-semibold text-lg">{language.nativeName}</div>
                   <div className="text-foreground/60 text-sm">{language.name}</div>

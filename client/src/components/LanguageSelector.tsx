@@ -1,6 +1,6 @@
 import { Globe, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -11,14 +11,16 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-const FlagGB = () => (
+const FlagGB = ({ uid }: { uid: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-8 h-5">
-    <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-    <clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
-    <g clipPath="url(#s)">
+    <defs>
+      <clipPath id={`s-${uid}`}><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+      <clipPath id={`t-${uid}`}><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    </defs>
+    <g clipPath={`url(#s-${uid})`}>
       <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
       <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6"/>
-      <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#t)" stroke="#C8102E" strokeWidth="4"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clipPath={`url(#t-${uid})`} stroke="#C8102E" strokeWidth="4"/>
       <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
       <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6"/>
     </g>
@@ -37,21 +39,30 @@ const LANGUAGES = [
     code: 'en', 
     name: 'English', 
     nativeName: 'English',
-    Flag: FlagGB
+    flagType: 'gb' as const
   },
   { 
     code: 'id', 
     name: 'Indonesian', 
     nativeName: 'Bahasa Indonesia',
-    Flag: FlagID
+    flagType: 'id' as const
   }
 ];
 
 export default function LanguageSelector() {
   const { i18n, t } = useTranslation();
   const [open, setOpen] = useState(false);
+  const uid = useId();
 
-  const currentLanguage = LANGUAGES.find(lang => lang.code === i18n.language) || LANGUAGES[0];
+  const langCode = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0];
+  const currentLanguage = LANGUAGES.find(lang => lang.code === langCode) || LANGUAGES[0];
+
+  const renderFlag = (flagType: 'gb' | 'id', index: number) => {
+    if (flagType === 'gb') {
+      return <FlagGB uid={`${uid}-${index}`} />;
+    }
+    return <FlagID />;
+  };
 
   const handleLanguageChange = (languageCode: string) => {
     i18n.changeLanguage(languageCode);
@@ -81,7 +92,7 @@ export default function LanguageSelector() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 py-4">
-          {LANGUAGES.map((language) => (
+          {LANGUAGES.map((language, index) => (
             <button
               key={language.code}
               onClick={() => handleLanguageChange(language.code)}
@@ -94,7 +105,7 @@ export default function LanguageSelector() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-6 rounded overflow-hidden shadow-sm border border-border/30 flex items-center justify-center">
-                  <language.Flag />
+                  {renderFlag(language.flagType, index)}
                 </div>
                 <div className="text-left">
                   <div className="font-semibold text-lg">{language.nativeName}</div>

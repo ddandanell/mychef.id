@@ -3,6 +3,9 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import LanguageSplash from "@/components/LanguageSplash";
 import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
@@ -96,11 +99,27 @@ function Router() {
 }
 
 function App() {
+  const [showLanguageSplash, setShowLanguageSplash] = useState(() => {
+    return !localStorage.getItem('languageSelected');
+  });
+
+  const handleLanguageSelect = () => {
+    setShowLanguageSplash(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Router />
+        <AnimatePresence mode="wait">
+          {showLanguageSplash ? (
+            <LanguageSplash key="splash" onLanguageSelect={handleLanguageSelect} />
+          ) : (
+            <>
+              <Toaster />
+              <Router />
+            </>
+          )}
+        </AnimatePresence>
       </TooltipProvider>
     </QueryClientProvider>
   );

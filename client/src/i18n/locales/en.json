@@ -1,0 +1,102 @@
+{
+  "seo": {
+    "home": {
+      "title": "Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia",
+      "description": "Experience culinary excellence with myCHEF Indonesia's private chef services in Bali. Expert chefs, personalized menus, and premium ingredients delivered to your villa. Serving Seminyak, Ubud, Canggu & more since 2012.",
+      "keywords": "private chef Bali, personal chef Bali, villa chef, in-home dining Bali, professional chef services, gourmet meals Bali, private dining Seminyak, chef hire Ubud"
+    }
+  },
+  "hero": {
+    "headline": "Experience Culinary Excellence",
+    "subheadline": "Step into a world of unparalleled taste and sophistication with your very own private chef",
+    "description": "Imagine indulging in gourmet meals tailored specifically to your preferences, without ever leaving the comfort of your home. As an aficionado of fine dining, you understand the critical role that food plays in your lifestyle. Embrace the luxury of having a culinary expert curate unforgettable experiences, adding a touch of elegance and delight to every meal.",
+    "cta": "Book Your Private Chef"
+  },
+  "whyChoose": {
+    "headline": "Why Choose a Private Chef",
+    "subheadline": "Transform everyday dining into extraordinary memories with our professional chef services",
+    "benefits": {
+      "personalized": {
+        "title": "Personalized menus for every occasion",
+        "description": "Every dish is an ode to creativity and skill, a testament to the chef's dedication to perfection"
+      },
+      "quality": {
+        "title": "Fresh, high-quality ingredients",
+        "description": "Superior quality ingredients, thoughtfully sourced from trusted local markets"
+      },
+      "expertise": {
+        "title": "Expertly crafted, restaurant-level dishes",
+        "description": "Every meal an artisan masterpiece, meticulously crafted to suit your every wish"
+      },
+      "flexible": {
+        "title": "Flexible for any event size",
+        "description": "Whether it's an intimate dinner or a festive gathering, we ensure every occasion is a spectacle of flavors"
+      },
+      "service": {
+        "title": "Hassle-free, full-service experience",
+        "description": "Dedicated to providing impeccable service from planning to cleanup"
+      }
+    }
+  },
+  "faq": {
+    "headline": "Frequently Asked Questions",
+    "subheadline": "Your questions about engaging a private chef, answered with clarity and expertise",
+    "questions": {
+      "whatDoes": {
+        "question": "What does a private chef do?",
+        "answer": "A private chef creates personalized menus, sources premium ingredients, and prepares gourmet meals tailored to your tastes and dietary needs. They handle everything from menu planning and ingredient shopping to cooking, plating, and full kitchen cleanup. Whether for intimate dinners or special events, a private chef ensures every meal is a memorable, restaurant-quality experience in the comfort of your home or villa."
+      },
+      "cost": {
+        "question": "How much does a private chef cost?",
+        "answer": "The cost of hiring a private chef varies depending on several factors such as the chosen menu, the complexity of the dishes, and the number of guests. Pricing is typically flexible and can be tailored to your budget, ensuring you receive exceptional quality without compromise. Most services offer transparent quotes that include chef fees and ingredient costs, ensuring you know exactly what to expect before booking."
+      },
+      "where": {
+        "question": "Where can you hire a private chef?",
+        "answer": "You can hire a private chef for a wide range of locations, including private villas, homes, beachfront properties, and even yachts. In Bali, private chef services are available across popular areas such as Seminyak, Ubud, Canggu, Nusa Dua, Sanur, Uluwatu, and Jimbaran. Whether you're hosting a celebration, planning a romantic dinner, or simply want to elevate your everyday dining, a private chef can bring a world-class culinary experience directly to your chosen setting."
+      },
+      "dietary": {
+        "question": "Can a private chef accommodate dietary preferences?",
+        "answer": "Yes, private chefs are highly trained to customize menus according to specific dietary needs, including vegetarian, vegan, gluten-free, halal, and more. By communicating your requirements, you can enjoy a personalized culinary experience that satisfies your tastes while supporting your health and lifestyle."
+      },
+      "smallEvents": {
+        "question": "Is this experience only for large events?",
+        "answer": "No, the private chef experience is not limited to large events. Even for intimate dinners or small celebrations, a private chef can add a special touch that makes your moments truly memorable. This flexibility makes the service ideal for any gathering, from grand occasions to private, cozy meals."
+      },
+      "quality": {
+        "question": "How is the quality of ingredients ensured?",
+        "answer": "Private chefs are committed to using only the highest quality ingredients, often selecting fresh, locally sourced products. They procure ingredients from trusted markets and suppliers, ensuring that every element of your meal meets the highest standards. This dedication guarantees that each dish is not only delicious but also healthy and of premium quality."
+      },
+      "whoBenefits": {
+        "question": "Who benefits from hiring a private chef?",
+        "answer": "Families seeking memorable gatherings with cherished ones thrive with this service. Busy professionals find joy in exquisite dining at home amid hectic schedules. Families with dietary needs or preferences such as vegan, halal, or gluten-free find comfort in personalized, care-filled menus. Hosting friends becomes an inspiring culinary journey rather than a daunting task. For expatriates and travelers experiencing Bali's beauty, a private chef offers an authentic taste of the island's flavors, creating memories beyond the ordinary."
+      }
+    }
+  },
+  "cta": {
+    "book": "Book Your Chef",
+    "getQuote": "Get Quote",
+    "contact": "Contact Us",
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "tagline": "Bringing exceptional private dining experiences to villas and homes across Bali since 2012",
+    "partnerServices": "Partner Services:",
+    "businessHours": "Business Hours:",
+    "dailyHours": "09:00 - 22:00 WIB (Daily)",
+    "copyright": "© {{year}} myCHEF Indonesia. All rights reserved.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "payment": "Payment Terms",
+      "quote": "Get Quote"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "zh": "中文",
+    "hi": "हिन्दी",
+    "es": "Español",
+    "ar": "العربية",
+    "fr": "Français"
+  }
+}

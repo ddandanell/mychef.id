@@ -1,10 +1,13 @@
 import { Mail, Phone, MapPin, CreditCard } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import { useLocation } from 'wouter';
+import { useTranslation } from 'react-i18next';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
+import LanguageSelector from './LanguageSelector';
 
 export default function Footer() {
   const [, setLocation] = useLocation();
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
@@ -20,9 +23,9 @@ export default function Footer() {
               myCHEF Indonesia
             </h3>
             <p className="text-sm text-foreground/70 leading-relaxed mb-4">
-              Bringing exceptional private dining experiences to villas and homes across Bali since 2012.
+              {t('footer.tagline')}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <button
                 onClick={handleWhatsAppClick}
                 className="hover-elevate active-elevate-2 p-2 rounded-full"
@@ -51,6 +54,7 @@ export default function Footer() {
               >
                 <SiFacebook className="w-5 h-5" />
               </a>
+              <LanguageSelector />
             </div>
           </div>
 

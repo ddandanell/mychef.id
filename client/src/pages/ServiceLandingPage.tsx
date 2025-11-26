@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -33,7 +34,15 @@ interface ServiceLandingPageProps {
 export default function ServiceLandingPage({ service }: ServiceLandingPageProps) {
   const [, setLocation] = useLocation();
   const { t } = useTranslation();
+  const [currentImage, setCurrentImage] = useState(0);
   const IconComponent = iconMap[service.icon] || ChefHat;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleWhatsAppClick = () => {
     setLocation(`/contact/confirm?source=service-${service.slug}`);
@@ -78,15 +87,23 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={HERO_IMAGES[0]}
-            alt={service.name}
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        </div>
+        {HERO_IMAGES.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImage ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={image}
+              alt={`${service.name} - myCHEF Indonesia ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+          </div>
+        ))}
         
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Button
@@ -139,6 +156,20 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
             <Clock className="w-4 h-4" />
             <span className="text-sm">{t('servicePage.replyTime')}</span>
           </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {HERO_IMAGES.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImage(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentImage ? 'bg-white w-8' : 'bg-white/50'
+              }`}
+              data-testid={`button-carousel-dot-${index}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 

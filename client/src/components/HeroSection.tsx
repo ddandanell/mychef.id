@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
@@ -11,6 +12,7 @@ import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a9
 const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -68,29 +70,29 @@ export default function HeroSection() {
               <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
             ))}
           </div>
-          <span className="text-white font-semibold">4.9/5</span>
-          <span className="text-white/80 text-sm">• 1000+ Reviews</span>
+          <span className="text-white font-semibold">{t('hero.rating')}</span>
+          <span className="text-white/80 text-sm">• {t('hero.reviews', '1000+ Reviews')}</span>
         </button>
 
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
-          Experience Culinary Excellence
+          {t('hero.headline')}
         </h1>
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
-          Step into a world of unparalleled taste and sophistication with your very own private chef. Indulge in gourmet meals tailored specifically to your preferences in your Bali villa, home, or beachfront property.
+          {t('hero.subheadline')}
         </p>
         
         <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 flex-wrap">
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-experience">
             <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            <span className="text-white text-sm sm:text-base font-medium">1000+ Experiences</span>
+            <span className="text-white text-sm sm:text-base font-medium">{t('hero.experiences', '1000+ Experiences')}</span>
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-insured">
             <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            <span className="text-white text-sm sm:text-base font-medium">100% Insured</span>
+            <span className="text-white text-sm sm:text-base font-medium">{t('hero.insured', '100% Insured')}</span>
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-since">
             <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            <span className="text-white text-sm sm:text-base font-medium">Since 2012</span>
+            <span className="text-white text-sm sm:text-base font-medium">{t('hero.since', 'Since 2012')}</span>
           </div>
         </div>
 
@@ -102,8 +104,8 @@ export default function HeroSection() {
             data-testid="button-hero-quote-cta"
           >
             <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Reserve Your Private Chef</span>
-            <span className="sm:hidden">Reserve Chef</span>
+            <span className="hidden sm:inline">{t('hero.reserveChef', 'Reserve Your Private Chef')}</span>
+            <span className="sm:hidden">{t('hero.reserveChefShort', 'Reserve Chef')}</span>
           </Button>
           
           <Button
@@ -113,18 +115,18 @@ export default function HeroSection() {
             data-testid="button-hero-whatsapp-cta"
           >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">Start Planning Today</span>
-            <span className="sm:hidden">Plan Event</span>
+            <span className="hidden sm:inline">{t('hero.startPlanning', 'Start Planning Today')}</span>
+            <span className="sm:hidden">{t('hero.planEvent', 'Plan Event')}</span>
           </Button>
         </div>
 
         <div className="flex items-center justify-center gap-2 mt-4 text-white/90" data-testid="text-response-time">
           <Clock className="w-4 h-4" />
-          <span className="text-sm sm:text-base">We reply within 10 minutes • 09:00-22:00 WIB Daily</span>
+          <span className="text-sm sm:text-base">{t('hero.replyTime', 'We reply within 10 minutes • 09:00-22:00 WIB Daily')}</span>
         </div>
 
         <p className="text-white/70 mt-4 text-xs sm:text-sm px-4" data-testid="text-pricing-info">
-          From Rp 800,000/hour • Background-checked chefs • Secure online payment & cash (IDR)
+          {t('hero.pricingInfo', 'From Rp 800,000/hour • Background-checked chefs • Secure online payment & cash (IDR)')}
         </p>
       </div>
 

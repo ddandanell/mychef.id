@@ -11,7 +11,17 @@
     "subheadline": "Step into a world of unparalleled taste and sophistication with your very own private chef",
     "description": "Imagine indulging in gourmet meals tailored specifically to your preferences, without ever leaving the comfort of your home. As an aficionado of fine dining, you understand the critical role that food plays in your lifestyle. Embrace the luxury of having a culinary expert curate unforgettable experiences, adding a touch of elegance and delight to every meal.",
     "cta": "Book Your Private Chef",
-    "rating": "4.9/5 Rating"
+    "rating": "4.9/5",
+    "reviews": "1000+ Reviews",
+    "experiences": "1000+ Experiences",
+    "insured": "100% Insured",
+    "since": "Since 2012",
+    "reserveChef": "Reserve Your Private Chef",
+    "reserveChefShort": "Reserve Chef",
+    "startPlanning": "Start Planning Today",
+    "planEvent": "Plan Event",
+    "replyTime": "We reply within 10 minutes • 09:00-22:00 WIB Daily",
+    "pricingInfo": "From Rp 800,000/hour • Background-checked chefs • Secure online payment & cash (IDR)"
   },
   "servicePage": {
     "backToHome": "Back to Home",

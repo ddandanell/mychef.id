@@ -105,10 +105,10 @@ Rate Type:          ${tier}
 
 💳 PAYMENT TERMS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-50% Deposit:        ${formatIDR(totalPrice / 2)}
+50% Deposit:        ${formatPrice(totalPrice / 2)}
   (When you confirm booking)
 
-50% Balance:        ${formatIDR(totalPrice / 2)}
+50% Balance:        ${formatPrice(totalPrice / 2)}
   (On the day chef arrives)
 
 🛒 FOOD COST
@@ -618,7 +618,7 @@ This offer is valid once you confirm with 50% deposit.`;
               className="text-xs md:text-sm text-primary hover:underline flex items-center gap-1"
               data-testid="link-full-terms"
             >
-              Full Terms <ArrowRight className="w-3 h-3" />
+              Full Terms →
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">

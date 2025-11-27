@@ -746,6 +746,31 @@ Pricing Tier: ${result.tierLabel}
                             <span>Rate per hour</span>
                             <span>{formatPrice(result.chefHourly)}/hr</span>
                           </div>
+                          
+                          {result.pricingTier === 'daily' && (
+                            <div className="mt-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+                              <p className="text-xs text-blue-800 dark:text-blue-200 flex items-center gap-1">
+                                <TrendingDown className="w-3 h-3" />
+                                <span><strong>Tip:</strong> Book 7+ days to unlock <strong>350,000 IDR/hr</strong> weekly rate!</span>
+                              </p>
+                            </div>
+                          )}
+                          {result.pricingTier === 'weekly' && (
+                            <div className="mt-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+                              <p className="text-xs text-blue-800 dark:text-blue-200 flex items-center gap-1">
+                                <TrendingDown className="w-3 h-3" />
+                                <span><strong>Tip:</strong> Book 30+ days to unlock <strong>250,000 IDR/hr</strong> monthly rate!</span>
+                              </p>
+                            </div>
+                          )}
+                          {result.pricingTier === 'monthly' && (
+                            <div className="mt-2 p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
+                              <p className="text-xs text-emerald-800 dark:text-emerald-200 flex items-center gap-1">
+                                <Star className="w-3 h-3" />
+                                <span><strong>Best Value!</strong> You're getting our lowest rate at <strong>250,000 IDR/hr</strong></span>
+                              </p>
+                            </div>
+                          )}
                         </div>
 
                         <div className="space-y-4 pt-2 border-t border-primary/10">

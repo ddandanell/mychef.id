@@ -26,12 +26,14 @@ import { SideAccents } from '@/components/AnimatedDecorations';
 import MotivationalPopup from '@/components/MotivationalPopup';
 import TrustBadgesCompact from '@/components/TrustBadgesCompact';
 import TrustpilotSection from '@/components/TrustpilotSection';
+import PricingPopup from '@/components/PricingPopup';
 
 export default function Home() {
   return (
     <div className="min-h-screen relative">
       <SideAccents />
       <MotivationalPopup />
+      <PricingPopup />
       <SEO 
         title="Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia"
         description="Experience culinary excellence with myCHEF Indonesia's private chef services in Bali. Expert chefs, personalized menus, and premium ingredients delivered to your villa. Serving Seminyak, Ubud, Canggu & more since 2012. From Rp 800,000/hour."

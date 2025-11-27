@@ -150,8 +150,8 @@ export default function WhyChoose() {
           <Card className="hover-elevate transition-all duration-500 overflow-hidden">
             <CardContent className="p-0">
               <div className="grid md:grid-cols-5 gap-0">
-                <div className="md:col-span-2 bg-gradient-to-br from-primary to-primary/80 p-8 lg:p-10 text-primary-foreground flex flex-col justify-center">
-                  <ChefHat className="w-16 h-16 mb-4 opacity-90" />
+                <div className="md:col-span-2 bg-gradient-to-br from-primary/15 to-primary/8 p-8 lg:p-10 text-primary flex flex-col justify-center">
+                  <ChefHat className="w-16 h-16 mb-4 opacity-60" />
                   <h3 className="text-2xl lg:text-3xl font-semibold mb-2" data-testid="text-pillar-0-title">
                     Skilled Indonesian & International Chefs
                   </h3>
@@ -221,8 +221,8 @@ export default function WhyChoose() {
                     })}
                   </div>
                 </div>
-                <div className="md:col-span-2 bg-gradient-to-br from-primary to-primary/80 p-8 lg:p-10 text-primary-foreground flex flex-col justify-center order-1 md:order-2">
-                  <Utensils className="w-16 h-16 mb-4 opacity-90" />
+                <div className="md:col-span-2 bg-gradient-to-br from-primary/15 to-primary/8 p-8 lg:p-10 text-primary flex flex-col justify-center order-1 md:order-2">
+                  <Utensils className="w-16 h-16 mb-4 opacity-60" />
                   <h3 className="text-2xl lg:text-3xl font-semibold" data-testid="text-pillar-1-title">
                     Completely Customizable Menus
                   </h3>
@@ -235,12 +235,12 @@ export default function WhyChoose() {
           <Card className="hover-elevate transition-all duration-500 overflow-hidden">
             <CardContent className="p-0">
               <div className="grid md:grid-cols-5 gap-0">
-                <div className="md:col-span-2 bg-gradient-to-br from-primary to-primary/80 p-8 lg:p-10 text-primary-foreground flex flex-col justify-center">
-                  <Award className="w-16 h-16 mb-4 opacity-90" />
+                <div className="md:col-span-2 bg-gradient-to-br from-primary/15 to-primary/8 p-8 lg:p-10 text-primary flex flex-col justify-center">
+                  <Award className="w-16 h-16 mb-4 opacity-60" />
                   <h3 className="text-2xl lg:text-3xl font-semibold mb-2" data-testid="text-pillar-2-title">
                     Professional Service Standards
                   </h3>
-                  <p className="text-lg opacity-90" data-testid="text-pillar-2-subtitle">
+                  <p className="text-lg opacity-80" data-testid="text-pillar-2-subtitle">
                     Every detail handled perfectly
                   </p>
                 </div>

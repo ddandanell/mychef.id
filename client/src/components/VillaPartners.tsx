@@ -1,7 +1,7 @@
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageCircle, Home, Users, Award } from 'lucide-react';
+import { MessageCircle, Building2, Users, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import villaImage from '@assets/generated_images/luxury_villa_dinner_experience.png';
 
@@ -57,13 +57,13 @@ export default function VillaPartners() {
                       viewport={{ once: true }}
                       className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-4"
                     >
-                      <Home className="w-7 h-7 text-primary" />
+                      <Building2 className="w-7 h-7 text-primary" />
                     </motion.div>
                     <h2 className="font-serif text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent mb-4">
                       For Villa & Airbnb Owners
                     </h2>
                     <p className="text-base lg:text-lg text-foreground/80 leading-relaxed">
-                      Elevate your guests' experience by partnering with myCHEF. We currently work with <span className="font-semibold text-primary">200+ villa owners</span> across Bali to deliver unforgettable private dining moments.
+                      Elevate your guests' experience by partnering with myCHEF. We currently work with <span className="font-semibold text-primary">560+ luxury villas</span> across Bali. Whatever your guests need, we lift everything we touch with excellence.
                     </p>
                   </div>
 
@@ -117,7 +117,7 @@ export default function VillaPartners() {
                       Partner With myCHEF Today
                     </Button>
                     <p className="text-xs text-foreground/60 mt-3 text-center">
-                      Join 200+ successful villa partners
+                      Join 560+ successful villa partners across Bali
                     </p>
                   </motion.div>
                 </motion.div>

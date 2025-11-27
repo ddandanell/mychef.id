@@ -146,19 +146,24 @@ Alternative if you prefer:
   };
 
   const formatPrice = (value: number) => {
-    const convertedValue = value * (CURRENCIES.find(c => c.code === currency)?.rate || 1);
-    
     if (currency === 'IDR') {
+      // Indonesian Rupiah - uses periods for thousands, no decimals
       return new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: 'IDR',
         minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
       }).format(value);
     } else {
+      // USD, EUR, AUD, SGD - uses commas for thousands
+      const currencyRate = CURRENCIES.find(c => c.code === currency)?.rate || 1;
+      const convertedValue = value * currencyRate;
+      
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: currency,
         minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
       }).format(convertedValue);
     }
   };

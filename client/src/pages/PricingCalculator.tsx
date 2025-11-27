@@ -7,7 +7,7 @@ import {
   MessageCircle, ArrowLeft, Calendar, Users, Clock, 
   Sun, Utensils, Moon, ShoppingCart, ChefHat,
   TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2,
-  ShoppingBag, Flame, Wine, Zap
+  ShoppingBag, Flame, Wine, Zap, Copy, Send, HelpCircle, X, Star
 } from 'lucide-react';
 
 const CURRENCIES = [
@@ -16,6 +16,28 @@ const CURRENCIES = [
   { code: 'EUR', symbol: '€', rate: 0.000060 },
   { code: 'AUD', symbol: 'A$', rate: 0.000098 },
   { code: 'SGD', symbol: 'S$', rate: 0.000084 },
+];
+
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: 'Romaldo',
+    review: 'Some of the best experiences I ever had. The food was incredible, and the service was outstanding. Worth every rupiah!',
+    rating: 5
+  },
+  {
+    id: 2,
+    name: 'Siti',
+    country: 'Indonesia',
+    review: 'This was the best investment for our villa vacation. Everything was handled perfectly. Already booked them twice!',
+    rating: 5
+  },
+  {
+    id: 3,
+    name: 'Guest',
+    review: 'The private chef experience exceeded all expectations. Professional, delicious, and unforgettable.',
+    rating: 5
+  }
 ];
 
 const MASTER_CHEFS = [
@@ -182,6 +204,9 @@ export default function PricingCalculator() {
   const [currency, setCurrency] = useState('IDR');
   const [showRules, setShowRules] = useState(false);
   const [selectedChef, setSelectedChef] = useState(MASTER_CHEFS[0]);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [questionText, setQuestionText] = useState('');
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const result = useMemo(() => {
     return calculateBooking(startDate, endDate, guestCount, breakfast, lunch, dinner);
@@ -209,6 +234,34 @@ export default function PricingCalculator() {
 
   const handleWhatsAppClick = () => {
     setLocation('/contact/confirm?source=calculator');
+  };
+
+  const handleCopyQuote = () => {
+    if (!result) return;
+    const quoteText = `
+myCHEF Indonesia Quote
+Chef: ${selectedChef.name} from ${selectedChef.country}
+Duration: ${result.numDays} days (${startDate} to ${endDate})
+Guests: ${result.guestCount}
+Meals: ${breakfast ? 'Breakfast (2h) ' : ''}${lunch ? 'Lunch (3h) ' : ''}${dinner ? 'Dinner (3h) ' : ''}
+Total Hours: ${result.totalChefHours}h
+Hourly Rate: ${formatPrice(result.chefHourly)}/hr
+Total Cost: ${formatPrice(result.totalCost)}
+Pricing Tier: ${result.tierLabel}
+    `.trim();
+    navigator.clipboard.writeText(quoteText);
+  };
+
+  const handleAskQuestion = () => {
+    if (!questionText.trim() || !result) return;
+    const message = `Question about quote:\n\nChef: ${selectedChef.name}\nTotal: ${formatPrice(result.totalCost)}\n\nQuestion: ${questionText}`;
+    window.location.href = `https://wa.me/+62?text=${encodeURIComponent(message)}`;
+  };
+
+  const handleSendQuote = () => {
+    if (!result) return;
+    const quoteMessage = `Hello, I'm interested in booking ${selectedChef.name} from ${selectedChef.country}.\n\nQuote Details:\nDuration: ${result.numDays} days\nGuests: ${result.guestCount}\nTotal Hours: ${result.totalChefHours}h\nTotal Cost: ${formatPrice(result.totalCost)}\n\nPlease confirm availability.`;
+    setLocation('/contact/confirm?source=calculator&quote=' + encodeURIComponent(quoteMessage));
   };
 
   const getMealDescription = () => {
@@ -251,6 +304,40 @@ export default function PricingCalculator() {
             <p className="text-sm md:text-base text-foreground/60">
               Get your personalized quote in seconds
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8 max-w-2xl mx-auto"
+          >
+            <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-4 border border-primary/20">
+              <div className="flex items-start gap-3">
+                <Star className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-semibold text-sm text-foreground mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
+                  <p className="text-xs text-foreground/70 italic">{TESTIMONIALS[currentTestimonial].review}</p>
+                  <div className="flex items-center gap-1 mt-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-primary text-primary" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center gap-1 mt-3">
+                {TESTIMONIALS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentTestimonial(idx)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      idx === currentTestimonial ? 'w-4 bg-primary' : 'w-2 bg-primary/30'
+                    }`}
+                    data-testid={`button-testimonial-${idx}`}
+                  />
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -664,19 +751,53 @@ export default function PricingCalculator() {
                             </div>
                           </div>
 
-                          <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                          >
-                            <Button
-                              onClick={handleWhatsAppClick}
-                              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-                              data-testid="button-book-whatsapp"
+                          <div className="space-y-2">
+                            <motion.div
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
                             >
-                              <MessageCircle className="w-4 h-4 mr-2" />
-                              Book {selectedChef.name} via WhatsApp
-                            </Button>
-                          </motion.div>
+                              <Button
+                                onClick={handleSendQuote}
+                                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+                                data-testid="button-book-whatsapp"
+                              >
+                                <MessageCircle className="w-4 h-4 mr-2" />
+                                Book {selectedChef.name} via WhatsApp
+                              </Button>
+                            </motion.div>
+                            <div className="grid grid-cols-3 gap-2">
+                              <Button
+                                onClick={handleCopyQuote}
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                                data-testid="button-copy-quote"
+                              >
+                                <Copy className="w-3 h-3 mr-1" />
+                                Copy
+                              </Button>
+                              <Button
+                                onClick={() => setShowQuestion(true)}
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                                data-testid="button-ask-question"
+                              >
+                                <HelpCircle className="w-3 h-3 mr-1" />
+                                Question
+                              </Button>
+                              <Button
+                                onClick={handleSendQuote}
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                                data-testid="button-send-quote"
+                              >
+                                <Send className="w-3 h-3 mr-1" />
+                                Send
+                              </Button>
+                            </div>
+                          </div>
                           <p className="text-[10px] text-center text-foreground/50">
                             Final price confirmed after consultation
                           </p>
@@ -786,6 +907,62 @@ export default function PricingCalculator() {
           )}
         </span>
       </motion.button>
+
+      {showQuestion && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowQuestion(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-background rounded-lg p-6 max-w-md w-full"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Ask a Question</h3>
+              <button
+                onClick={() => setShowQuestion(false)}
+                className="p-1 hover:bg-foreground/10 rounded transition-colors"
+                data-testid="button-close-question"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <p className="text-sm text-foreground/70 mb-4">
+              About {selectedChef.name} or this quote?
+            </p>
+            <textarea
+              value={questionText}
+              onChange={(e) => setQuestionText(e.target.value)}
+              placeholder="Type your question here..."
+              className="w-full p-3 border border-primary/20 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary/30 outline-none text-sm resize-none h-24 bg-background"
+              data-testid="input-question"
+            />
+            <div className="flex gap-2 mt-4">
+              <Button
+                onClick={() => setShowQuestion(false)}
+                variant="outline"
+                className="flex-1"
+                data-testid="button-cancel-question"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleAskQuestion}
+                className="flex-1 bg-primary"
+                data-testid="button-send-question"
+              >
+                <Send className="w-4 h-4 mr-2" />
+                Send via WhatsApp
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

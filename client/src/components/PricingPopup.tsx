@@ -67,22 +67,25 @@ export default function PricingPopup() {
             {/* Daily */}
             <div className="bg-primary/5 rounded-lg p-3 text-center border border-primary/10">
               <p className="text-xs text-foreground/60 font-semibold mb-1">Daily</p>
-              <p className="text-lg md:text-xl font-bold text-primary">Rp 4M</p>
-              <p className="text-xs text-foreground/50 mt-1">per day</p>
+              <p className="text-xs text-foreground/70">Standard rate:</p>
+              <p className="text-base md:text-lg font-bold text-primary">800,000</p>
+              <p className="text-xs text-foreground/50">IDR/hr</p>
             </div>
 
             {/* Weekly */}
             <div className="bg-primary/10 rounded-lg p-3 text-center border border-primary/20 ring-2 ring-primary/30">
               <p className="text-xs text-foreground/70 font-semibold mb-1">Weekly</p>
-              <p className="text-lg md:text-xl font-bold text-primary">Rp 8M</p>
-              <p className="text-xs text-foreground/50 mt-1">7+ days</p>
+              <p className="text-xs text-foreground/70">Hour rate:</p>
+              <p className="text-base md:text-lg font-bold text-primary">350,000</p>
+              <p className="text-xs text-foreground/50">IDR • 7+ days</p>
             </div>
 
             {/* Monthly */}
             <div className="bg-primary/5 rounded-lg p-3 text-center border border-primary/10">
               <p className="text-xs text-foreground/60 font-semibold mb-1">Monthly</p>
-              <p className="text-lg md:text-xl font-bold text-primary">Rp 29M</p>
-              <p className="text-xs text-foreground/50 mt-1">30+ days</p>
+              <p className="text-xs text-foreground/70">Hour rate:</p>
+              <p className="text-base md:text-lg font-bold text-primary">250,000</p>
+              <p className="text-xs text-foreground/50">IDR</p>
             </div>
           </div>
 

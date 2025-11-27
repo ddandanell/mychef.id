@@ -24,6 +24,7 @@ import CookieBanner from '@/components/CookieBanner';
 import { FloatingOrbs, SideAccents } from '@/components/AnimatedDecorations';
 import MotivationalPopup from '@/components/MotivationalPopup';
 import TrustBadgesCompact from '@/components/TrustBadgesCompact';
+import TrustpilotSection from '@/components/TrustpilotSection';
 
 export default function Home() {
   return (
@@ -47,6 +48,7 @@ export default function Home() {
       <DishGallery />
       <WhyChoose />
       <TrustBadges />
+      <TrustpilotSection />
       <TestimonialCarousel />
       <ChefProfiles />
       <LocationsSection />

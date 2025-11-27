@@ -62,6 +62,9 @@ export default function PricingCalculator() {
     const summary = `╔════════════════════════════════════════╗
 ║        MYCHEF INDONESIA BOOKING        ║
 ║           PRICE QUOTATION              ║
+║                                        ║
+║    ✨ HERE IS YOUR OFFER ✨             ║
+║  Valid after 50% deposit is paid       ║
 ╚════════════════════════════════════════╝
 
 📋 BOOKING DETAILS
@@ -112,10 +115,12 @@ for actual ingredients purchased.
 • Chef arrives with all equipment
 • Complete cleanup included
 • No hidden fees
+• Offer valid ONLY after 50% deposit paid
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Ready to book? Contact us on WhatsApp!
-We'll confirm availability and send payment details.`;
+We'll confirm availability and send payment details.
+This offer is valid once you confirm with 50% deposit.`;
     return summary;
   };
 

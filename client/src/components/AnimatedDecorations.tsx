@@ -6,7 +6,7 @@ export function FloatingOrbs() {
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-64 h-64 rounded-full mix-blend-multiply opacity-20"
+          className="absolute w-64 h-64 rounded-full mix-blend-multiply opacity-5"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],

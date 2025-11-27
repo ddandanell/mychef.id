@@ -921,6 +921,26 @@ Pricing Tier: ${result.tierLabel}
                     </div>
                   </div>
                 </div>
+
+                <div className="mt-3 p-3 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+                  <div className="flex items-start gap-2">
+                    <Calendar className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                    <div className="text-xs text-amber-900 dark:text-amber-100">
+                      <p className="font-semibold mb-2">Weekly Food Planning - Your Advantage</p>
+                      <div className="space-y-2">
+                        <p>
+                          <strong>Why It's So Much Cheaper:</strong> You work directly with your chef to plan the menu each week. There's no middleman, no restaurant markup, no inflated prices. <strong>You only pay for the chef's time</strong> — not bloated food costs.
+                        </p>
+                        <p>
+                          <strong>You Have Complete Control:</strong> Choose premium ingredients for the best quality, or select budget-friendly options — it's entirely your decision. Your private chef adapts to your preferences and budget.
+                        </p>
+                        <p className="text-amber-900 dark:text-amber-100 font-semibold">
+                          That's the real value of having a private chef — customized, transparent, and always working for you.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

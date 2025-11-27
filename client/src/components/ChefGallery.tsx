@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Import chef photos
 import chef1 from '@assets/253095.jpg,w_540,h_540,c_1,q_100,fd_1,e__1761644205751.webp';
@@ -87,10 +88,12 @@ export default function ChefGallery() {
         data-testid="chef-gallery-container"
       >
         {triplicatedImages.map((chef, index) => (
-          <div
+          <motion.div
             key={`chef-${index}`}
-            className="flex-shrink-0 w-[400px] h-[400px] rounded-xl overflow-hidden"
+            className="flex-shrink-0 w-[400px] h-[400px] rounded-xl overflow-hidden shadow-lg"
             data-testid={`chef-image-${index % CHEF_IMAGES.length}`}
+            whileHover={{ scale: 1.08, y: -15 }}
+            transition={{ duration: 0.3 }}
           >
             <img
               src={chef.src}
@@ -99,7 +102,7 @@ export default function ChefGallery() {
               loading="lazy"
               decoding="async"
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

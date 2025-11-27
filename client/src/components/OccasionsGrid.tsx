@@ -71,7 +71,7 @@ export default function OccasionsGrid() {
                 className="block"
                 data-testid={`link-occasion-${occasion.slug}`}
               >
-                <Card className="hover-elevate transition-all cursor-pointer h-full" data-testid={`card-occasion-${index}`}>
+                <Card className="hover-elevate transition-all cursor-pointer h-full border-2 border-primary/20 hover:border-primary" data-testid={`card-occasion-${index}`}>
                   <CardContent className="p-6 text-center">
                     <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <Icon className="w-8 h-8 text-primary" />

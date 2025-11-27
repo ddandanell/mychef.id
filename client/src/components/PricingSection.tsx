@@ -28,7 +28,7 @@ export default function PricingSection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
-          <Card>
+          <Card className="border-2 border-primary/20 hover:border-primary transition-colors">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <ChefHat className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
@@ -53,7 +53,7 @@ export default function PricingSection() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-2 border-primary/20 hover:border-primary transition-colors">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />

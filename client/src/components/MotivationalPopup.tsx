@@ -68,22 +68,13 @@ export default function MotivationalPopup() {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 pointer-events-none">
-      <AnimatePresence>
-        {displayedText && (
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 40, scale: 0.9 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="pointer-events-auto flex items-end gap-2"
-          >
-            <div className="bg-primary text-primary-foreground rounded-2xl rounded-br-none shadow-lg px-4 py-3 max-w-xs">
-              <p className="text-sm font-medium leading-relaxed">{displayedText}{isTyping && <span className="animate-pulse">|</span>}</p>
-            </div>
-            <MessageCircle className="w-7 h-7 text-primary flex-shrink-0" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        animate={{ scale: [1, 1.15, 1] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        className="pointer-events-auto"
+      >
+        <MessageCircle className="w-12 h-12 text-primary" />
+      </motion.div>
     </div>
   );
 }

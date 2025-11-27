@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, CreditCard, Banknote, ChefHat, Star } from 'lucide-react';
+import { Mail, Phone, MapPin, CreditCard, Banknote, ChefHat, Star, ArrowRight, Clock, Sparkles, Shield, TrendingUp } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import { useLocation, Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
@@ -64,34 +64,68 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-card border-t">
+    <footer className="bg-gradient-to-b from-card via-card to-primary/5 border-t border-primary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Stars Section at Top */}
-        <div className="py-8 lg:py-10 border-b flex items-center justify-center gap-4">
-          <div className="flex items-center gap-2">
-            {[1, 2, 3, 4, 5, 6].map((star) => (
-              <Star
-                key={star}
-                className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                data-testid={`icon-footer-star-${star}`}
-              />
-            ))}
+        {/* Service Area & Stars Section at Top */}
+        <div className="py-8 lg:py-12 border-b border-primary/10">
+          <div className="flex flex-col items-center gap-6">
+            {/* South Bali Premium Badge */}
+            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <MapPin className="w-4 h-4" />
+                South Bali Premium Service Area
+                <Sparkles className="w-4 h-4" />
+              </div>
+            </div>
+            
+            {/* Stars Section */}
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex items-center gap-2 justify-center">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                    data-testid={`icon-footer-star-${star}`}
+                  />
+                ))}
+                <span className="text-yellow-600 font-bold ml-1">4.9/5</span>
+              </div>
+              <span className="text-sm sm:text-base font-semibold text-foreground text-center" data-testid="text-footer-stars">
+                Trusted by 1000+ families • 13+ Years of Excellence
+              </span>
+            </div>
           </div>
-          <span className="text-sm sm:text-base font-semibold text-foreground" data-testid="text-footer-stars">
-            Our guests have been talking...
-          </span>
         </div>
 
         <div className="py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 mb-12">
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-2 mb-4" data-testid="link-footer-logo">
-              <ChefHat className="w-6 h-6 text-primary" />
-              <h3 className="font-serif text-2xl font-bold">myCHEF Indonesia</h3>
+              <div className="p-2 rounded-lg bg-primary/10">
+                <ChefHat className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-bold">myCHEF</h3>
+                <p className="text-xs text-primary font-semibold">Indonesia</p>
+              </div>
             </Link>
-            <p className="text-sm text-foreground/70 leading-relaxed mb-4">
-              {t('footer.tagline')}
+            <p className="text-sm text-foreground/70 leading-relaxed mb-6">
+              Premium private chef service for South Bali. Professional, transparent, & trusted by families worldwide.
             </p>
+            <div className="space-y-2 text-xs text-foreground/60 mb-6">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Background Checked Chefs</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>13+ Years Experience</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>100% Transparent Pricing</span>
+              </div>
+            </div>
             <div className="flex gap-4 items-center mb-6">
               <button
                 onClick={handleWhatsAppClick}

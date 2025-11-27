@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb, Flame, Leaf, Wine, Utensils } from 'lucide-react';
+import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb, Flame, Leaf, Wine, Utensils, Clock, TrendingUp, Home, Utensils as UtensilsIcon, Shield, DollarSign, MapPin } from 'lucide-react';
 import { useState as useStateHook } from 'react';
 
 const CHEF_TYPES = [
@@ -155,10 +155,20 @@ This offer is valid once you confirm with 50% deposit.`;
           Back to Home
         </button>
 
-        {/* Header */}
+        {/* Header with Service Area Badge */}
         <div className="text-center mb-8">
+          <div className="inline-block mb-4 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+            <div className="flex items-center gap-2 text-xs font-semibold text-primary">
+              <MapPin className="w-4 h-4" />
+              South Bali Premium Service Area
+            </div>
+          </div>
           <h1 className="text-4xl font-bold mb-2">Price Calculator</h1>
-          <p className="text-foreground/60">Short-term & Long-term Private Chef Pricing</p>
+          <p className="text-foreground/60 flex items-center justify-center gap-2">
+            <Clock className="w-4 h-4" />
+            Short-term & Long-term Private Chef Pricing
+            <TrendingUp className="w-4 h-4" />
+          </p>
           <p className="text-sm text-foreground/50 mt-2">Get your instant quote for Bali</p>
         </div>
 
@@ -450,28 +460,40 @@ This offer is valid once you confirm with 50% deposit.`;
           </div>
         </div>
 
-        {/* Pricing Tiers Reference */}
-        <div className="grid grid-cols-3 gap-4 mb-12">
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
-            <p className="font-semibold text-sm text-primary">Daily</p>
-            <p className="text-lg font-bold mt-2">{formatIDR(DAILY_RATE)}</p>
-            <p className="text-xs text-foreground/60 mt-1">per day</p>
-          </div>
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
-            <p className="font-semibold text-sm text-primary">Weekly</p>
-            <p className="text-lg font-bold mt-2">{formatIDR(WEEKLY_RATE)}</p>
-            <p className="text-xs text-foreground/60 mt-1">7+ days</p>
-          </div>
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
-            <p className="font-semibold text-sm text-primary">Monthly</p>
-            <p className="text-lg font-bold mt-2">{formatIDR(MONTHLY_RATE)}</p>
-            <p className="text-xs text-foreground/60 mt-1">30+ days</p>
+        {/* Pricing Tiers Reference with Icons */}
+        <div className="mb-12">
+          <h3 className="text-lg font-semibold mb-4 text-center">Flexible Pricing Options</h3>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
+              <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Short-Term</p>
+              <p className="text-xs text-foreground/60 mt-1">Daily Booking</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(DAILY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">per day</p>
+            </div>
+            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
+              <Home className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Mid-Term</p>
+              <p className="text-xs text-foreground/60 mt-1">Weekly Booking</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(WEEKLY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">7+ days</p>
+            </div>
+            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
+              <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Long-Term</p>
+              <p className="text-xs text-foreground/60 mt-1">Monthly Booking</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(MONTHLY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">30+ days</p>
+            </div>
           </div>
         </div>
 
         {/* Food & Shopping Explanation */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">How Food Costs Work</h2>
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <UtensilsIcon className="w-6 h-6 text-primary" />
+            How Food Costs Work
+          </h2>
           <Card className="border border-primary/20">
             <CardContent className="p-6 space-y-4">
               <div>
@@ -505,11 +527,17 @@ This offer is valid once you confirm with 50% deposit.`;
 
         {/* Terms & Conditions */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Terms & Conditions</h2>
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <Shield className="w-6 h-6 text-primary" />
+            Terms & Conditions
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border border-primary/20">
               <CardContent className="p-6">
-                <h4 className="font-semibold mb-3">Payment</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-primary" />
+                  Payment
+                </h4>
                 <ul className="text-sm text-foreground/70 space-y-2">
                   <li>• 50% deposit to confirm booking</li>
                   <li>• 50% balance on day chef arrives</li>
@@ -520,7 +548,10 @@ This offer is valid once you confirm with 50% deposit.`;
             </Card>
             <Card className="border border-primary/20">
               <CardContent className="p-6">
-                <h4 className="font-semibold mb-3">Cancellation</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-primary" />
+                  Cancellation
+                </h4>
                 <ul className="text-sm text-foreground/70 space-y-2">
                   <li>• 48+ hours notice = full refund</li>
                   <li>• Chef gets sick = free replacement</li>
@@ -531,7 +562,10 @@ This offer is valid once you confirm with 50% deposit.`;
             </Card>
             <Card className="border border-primary/20">
               <CardContent className="p-6">
-                <h4 className="font-semibold mb-3">Chef Service</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <ChefHat className="w-4 h-4 text-primary" />
+                  Chef Service
+                </h4>
                 <ul className="text-sm text-foreground/70 space-y-2">
                   <li>• Background checked & verified</li>
                   <li>• 48-hour minimum booking</li>
@@ -542,7 +576,10 @@ This offer is valid once you confirm with 50% deposit.`;
             </Card>
             <Card className="border border-primary/20">
               <CardContent className="p-6">
-                <h4 className="font-semibold mb-3">Our Commitment</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-primary" />
+                  Our Commitment
+                </h4>
                 <ul className="text-sm text-foreground/70 space-y-2">
                   <li>• 100% transparent pricing</li>
                   <li>• No hidden fees ever</li>

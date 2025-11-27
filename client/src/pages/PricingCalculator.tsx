@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon } from 'lucide-react';
+import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb } from 'lucide-react';
 import { useState as useStateHook } from 'react';
 
 const CHEF_TYPES = [
@@ -139,10 +139,65 @@ We'll confirm availability and send payment details.`;
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/3 via-background to-primary/3 py-8 px-4">
       <div className="max-w-5xl mx-auto">
+        {/* Back Button */}
+        <button
+          onClick={() => setLocation('/')}
+          className="mb-8 flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors"
+          data-testid="button-back-home"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Home
+        </button>
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">Private Chef Pricing</h1>
           <p className="text-foreground/60">Get your instant quote for Bali</p>
+        </div>
+
+        {/* Trust Banner */}
+        <Card className="mb-8 border-primary/30 bg-gradient-to-r from-primary/10 to-primary/5">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex gap-3">
+                <Award className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold">13+ Years Experience</p>
+                  <p className="text-xs text-foreground/70">Trusted by 1000+ families in Bali</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold">Background Checked Chefs</p>
+                  <p className="text-xs text-foreground/70">Professional & verified</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Sparkles className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold">100% Transparent Pricing</p>
+                  <p className="text-xs text-foreground/70">No hidden fees, ever</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Introduction Section */}
+        <div className="mb-12 bg-primary/5 border border-primary/20 rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">Why Choose myCHEF?</h2>
+          <div className="space-y-3 text-foreground/80">
+            <p>
+              We provide the <strong>most professional private chef service in Bali</strong>. Every chef is carefully selected, background-checked, and trained in fine dining restaurants worldwide.
+            </p>
+            <p>
+              <strong>Complete transparency</strong> is our promise. You pay for the chef's service above. Food costs are separate and you only pay for ingredients actually purchased at local markets - with receipts.
+            </p>
+            <p>
+              Your chef arrives with <strong>all equipment</strong>, handles everything from shopping to cooking to complete cleanup, and leaves your kitchen spotless. You only need to relax and enjoy amazing food.
+            </p>
+          </div>
         </div>
 
         {/* How It Works Section - TOP */}
@@ -370,7 +425,7 @@ We'll confirm availability and send payment details.`;
         </div>
 
         {/* Pricing Tiers Reference */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 mb-12">
           <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
             <p className="font-semibold text-sm text-primary">Daily</p>
             <p className="text-lg font-bold mt-2">{formatIDR(DAILY_RATE)}</p>
@@ -386,6 +441,100 @@ We'll confirm availability and send payment details.`;
             <p className="text-lg font-bold mt-2">{formatIDR(MONTHLY_RATE)}</p>
             <p className="text-xs text-foreground/60 mt-1">30+ days</p>
           </div>
+        </div>
+
+        {/* Food & Shopping Explanation */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">How Food Costs Work</h2>
+          <Card className="border border-primary/20">
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <p className="font-semibold mb-2 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5 text-primary" />
+                  Complete Transparency
+                </p>
+                <p className="text-sm text-foreground/70">
+                  Your chef price is completely separate from food costs. The chef service price above covers all their professional time, preparation, cooking, and cleanup.
+                </p>
+              </div>
+              <div className="border-t border-primary/10 pt-4">
+                <p className="font-semibold mb-2">How Food Shopping Works:</p>
+                <ul className="text-sm text-foreground/70 space-y-2">
+                  <li>✓ Your chef shops at the best local markets in Bali</li>
+                  <li>✓ They know which markets have quality ingredients at fair prices</li>
+                  <li>✓ You provide cash or they keep receipts for reimbursement</li>
+                  <li>✓ Complete transparency - you see exactly what was bought</li>
+                  <li>✓ Chef has freedom to find the best ingredients for your menu</li>
+                </ul>
+              </div>
+              <div className="border-t border-primary/10 pt-4">
+                <p className="font-semibold mb-2">Example:</p>
+                <p className="text-sm text-foreground/70">
+                  If you book for Rp 8M (weekly), that's what you pay for the chef. Food might cost Rp 2-3M depending on your menu, which you pay separately. No surprises, no hidden fees.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Terms & Conditions */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Terms & Conditions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-3">Payment</h4>
+                <ul className="text-sm text-foreground/70 space-y-2">
+                  <li>• 50% deposit to confirm booking</li>
+                  <li>• 50% balance on day chef arrives</li>
+                  <li>• Food costs paid separately</li>
+                  <li>• No payment until confirmed</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-3">Cancellation</h4>
+                <ul className="text-sm text-foreground/70 space-y-2">
+                  <li>• 48+ hours notice = full refund</li>
+                  <li>• Chef gets sick = free replacement</li>
+                  <li>• Emergencies accepted</li>
+                  <li>• Flexible rescheduling available</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-3">Chef Service</h4>
+                <ul className="text-sm text-foreground/70 space-y-2">
+                  <li>• Background checked & verified</li>
+                  <li>• 48-hour minimum booking</li>
+                  <li>• All equipment included</li>
+                  <li>• Professional cleanup included</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-3">Our Commitment</h4>
+                <ul className="text-sm text-foreground/70 space-y-2">
+                  <li>• 100% transparent pricing</li>
+                  <li>• No hidden fees ever</li>
+                  <li>• Professional service always</li>
+                  <li>• Your satisfaction guaranteed</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="text-center py-8">
+          <p className="text-foreground/70">
+            Have questions? <Button variant="link" onClick={handleWhatsAppClick} className="text-primary">
+              Message us on WhatsApp
+            </Button>
+          </p>
         </div>
       </div>
     </div>

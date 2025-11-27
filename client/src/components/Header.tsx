@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { ChefHat } from 'lucide-react';
+import { ChefHat, Star } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 
 export default function Header() {
@@ -11,6 +11,21 @@ export default function Header() {
             <ChefHat className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
             <span className="font-serif font-bold text-lg sm:text-xl">myCHEF</span>
           </Link>
+          
+          <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="flex items-center gap-1">
+              {[1, 2, 3, 4, 5, 6].map((star) => (
+                <Star
+                  key={star}
+                  className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                  data-testid={`icon-star-${star}`}
+                />
+              ))}
+            </div>
+            <span className="text-xs sm:text-sm font-medium text-foreground/80" data-testid="text-header-stars">
+              Our guests have been talking...
+            </span>
+          </div>
           
           <div className="flex items-center gap-2">
             <LanguageSelector />

@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChefHat } from 'lucide-react';
+import { ChefHat, Calculator } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useLocation } from 'wouter';
 
 const SHOWCASE_CHEFS = [
   { name: 'Professional Sushi Chef', specialty: '🍣 Japanese', hours: '4-8 hours' },
@@ -13,6 +15,12 @@ const SHOWCASE_CHEFS = [
 ];
 
 export default function ChefShowcase() {
+  const [, setLocation] = useLocation();
+
+  const handleCalculator = () => {
+    setLocation('/calculator');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,35 +57,25 @@ export default function ChefShowcase() {
         </div>
 
         <div className="mt-12 text-center mb-8">
-          <p className="text-foreground/70 max-w-2xl mx-auto mb-4">
-            All our chefs are experienced professionals with 5+ years in fine dining restaurants. 
-            They arrive with all equipment, complete your kitchen cleanup, and handle food shopping. 
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-6">
+            All our chefs are experienced professionals with <strong className="text-primary">5+ years minimum experience</strong> in fine dining restaurants and luxury resorts. 
+            They arrive with all equipment, complete your kitchen cleanup, handle food shopping, and deliver restaurant-quality meals. 
             <strong className="text-primary"> Ready to cook anywhere in Bali.</strong>
           </p>
-          <div className="max-w-2xl mx-auto bg-primary/10 border-2 border-primary/20 rounded-lg p-4">
-            <p className="text-sm font-semibold text-foreground mb-3">📊 Transparent Pricing Structure:</p>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span>1-2 Days:</span>
-                <span className="font-bold text-primary">Rp 3,000,000/day</span>
-              </div>
-              <div className="flex justify-between">
-                <span>3-6 Days:</span>
-                <span className="font-bold text-primary">Rp 2,300,000/day</span>
-              </div>
-              <div className="flex justify-between">
-                <span>7-20 Days:</span>
-                <span className="font-bold text-primary">Rp 1,700,000/day</span>
-              </div>
-              <div className="flex justify-between">
-                <span>21+ Days:</span>
-                <span className="font-bold text-primary">Rp 1,200,000/day</span>
-              </div>
-              <div className="border-t border-primary/20 pt-2 mt-2 flex justify-between font-bold">
-                <span>Full Month (30+ days):</span>
-                <span className="text-primary">Rp 29,000,000</span>
-              </div>
-            </div>
+          <div className="max-w-2xl mx-auto bg-gradient-to-br from-primary/15 to-primary/8 border-2 border-primary/20 rounded-lg p-8">
+            <h3 className="text-lg font-bold text-foreground mb-4">💰 Transparent Pricing Calculator</h3>
+            <p className="text-foreground/70 text-sm mb-6">
+              Every chef, occasion, and party size is unique. Use our pricing calculator to see exactly how much your private chef experience costs based on your specific dates, meal preferences, and chef selection.
+            </p>
+            <Button
+              size="lg"
+              onClick={handleCalculator}
+              className="bg-primary hover:bg-primary text-primary-foreground px-8 py-3 font-semibold hover-elevate active-elevate-2 inline-flex items-center gap-2"
+              data-testid="button-chef-showcase-calculator"
+            >
+              <Calculator className="w-5 h-5" />
+              Use Price Calculator
+            </Button>
           </div>
         </div>
       </div>

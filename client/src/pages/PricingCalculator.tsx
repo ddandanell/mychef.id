@@ -200,12 +200,9 @@ export default function PricingCalculator() {
                       {days}
                     </span>
                   </div>
-                  {serviceType === 'week' && (
-                    <p className="text-xs text-primary font-semibold">✓ Weekly service - 20% discount applied</p>
-                  )}
-                  {serviceType === 'month' && (
-                    <p className="text-xs text-primary font-semibold">✓ Monthly service - 40% discount applied</p>
-                  )}
+                  <p className="text-xs text-foreground/60">
+                    7+ days: 20% discount | 30+ days: 40% discount
+                  </p>
                 </div>
 
                 {/* Add Helper */}
@@ -269,11 +266,6 @@ export default function PricingCalculator() {
               <CardContent className="space-y-4 pt-6">
                 {showResults && (
                   <>
-                    {/* Service Type Badge */}
-                    <div className="text-center mb-4">
-                      <Badge className="bg-primary/20 text-primary">{serviceLabel} Service</Badge>
-                    </div>
-
                     {/* Working Hours */}
                     <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
                       <p className="text-xs text-foreground/70 mb-1">Working Hours</p>
@@ -296,13 +288,17 @@ export default function PricingCalculator() {
                       </div>
                     )}
 
-                    {/* Discount Badge */}
-                    {discountRate > 0 && (
+                    {/* Discount Info */}
+                    {days >= 30 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
-                        <p className="text-xs text-foreground/70 mb-1">Service Discount</p>
-                        <p className="text-sm font-semibold text-green-700">
-                          -{Math.round(discountRate * 100)}% off {serviceLabel.toLowerCase()} service
-                        </p>
+                        <p className="text-xs text-foreground/70 mb-1">Monthly Discount</p>
+                        <p className="text-sm font-semibold text-green-700">40% off labor</p>
+                      </div>
+                    )}
+                    {days >= 7 && days < 30 && (
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                        <p className="text-xs text-foreground/70 mb-1">Weekly Discount</p>
+                        <p className="text-sm font-semibold text-green-700">20% off labor</p>
                       </div>
                     )}
 

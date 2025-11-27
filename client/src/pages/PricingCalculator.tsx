@@ -157,8 +157,9 @@ This offer is valid once you confirm with 50% deposit.`;
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Private Chef Pricing</h1>
-          <p className="text-foreground/60">Get your instant quote for Bali</p>
+          <h1 className="text-4xl font-bold mb-2">Price Calculator</h1>
+          <p className="text-foreground/60">Short-term & Long-term Private Chef Pricing</p>
+          <p className="text-sm text-foreground/50 mt-2">Get your instant quote for Bali</p>
         </div>
 
         {/* Trust Banner */}

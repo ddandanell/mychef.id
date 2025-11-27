@@ -272,25 +272,32 @@ Alternative if you prefer:
           {/* Trust Banner with Background */}
           <Card className="mb-8 border-primary/30 bg-gradient-to-r from-primary/15 to-primary/5 backdrop-blur-sm">
             <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="flex gap-3">
                   <Award className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold">13+ Years Experience</p>
-                    <p className="text-xs text-foreground/70">Trusted by 1000+ families in Bali</p>
+                    <p className="font-semibold text-sm">13+ Years Experience</p>
+                    <p className="text-xs text-foreground/70">1000+ families served</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold">Background Checked Chefs</p>
-                    <p className="text-xs text-foreground/70">Professional & verified</p>
+                    <p className="font-semibold text-sm">200+ Expert Chefs</p>
+                    <p className="text-xs text-foreground/70">Local & international</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <Sparkles className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold">100% Transparent Pricing</p>
+                    <p className="font-semibold text-sm">Background Checked</p>
+                    <p className="text-xs text-foreground/70">Verified professionals</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Award className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-sm">Transparent Pricing</p>
                     <p className="text-xs text-foreground/70">No hidden fees, ever</p>
                   </div>
                 </div>

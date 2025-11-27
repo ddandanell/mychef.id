@@ -23,8 +23,9 @@ export default function ChefShowcase() {
           <h2 className="font-serif text-3xl lg:text-5xl font-bold mb-4" data-testid="text-chef-showcase-headline">
             Our Specialist Chefs
           </h2>
+          <p className="text-sm font-semibold text-primary mb-3">🌟 200+ Chefs | Bali's Largest Database</p>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Choose from our expert chefs trained in world-class restaurants. All available for your private dining experience in Bali.
+            Choose from our expert chefs trained in world-class restaurants. With 200+ local and foreign chefs, we match you with the perfect culinary match. All available for your private dining experience in Bali.
           </p>
         </div>
 

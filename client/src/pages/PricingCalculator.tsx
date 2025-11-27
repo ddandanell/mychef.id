@@ -123,7 +123,7 @@ export default function PricingCalculator() {
     } else {
       const currencyRate = CURRENCIES.find(c => c.code === currency)?.rate || 1;
       const convertedValue = value * currencyRate;
-      return new Intl.NumberFormat('en-US', {
+      return new Intl.NumberFormat('de-DE', {
         style: 'currency',
         currency: currency,
         minimumFractionDigits: 0,
@@ -469,7 +469,7 @@ export default function PricingCalculator() {
                         <div className="bg-gradient-to-br from-primary/15 to-primary/5 rounded-xl p-4 text-center border border-primary/20">
                           <p className="text-xs text-foreground/60 mb-1">Chef Service Total</p>
                           <motion.p 
-                            className="text-3xl font-bold text-primary"
+                            className="text-2xl md:text-3xl font-bold text-primary"
                             key={result.totalCost}
                             initial={{ scale: 0.9 }}
                             animate={{ scale: 1 }}

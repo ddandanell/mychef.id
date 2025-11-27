@@ -143,12 +143,22 @@ This offer is valid once you confirm with 50% deposit.`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/3 via-background to-primary/3 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-primary/3 via-background to-primary/3 py-6 md:py-8 px-3 md:px-4 pb-24">
       <div className="max-w-5xl mx-auto">
+        {/* Floating WhatsApp Help Button */}
+        <button
+          onClick={handleWhatsAppClick}
+          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 p-4 rounded-full bg-primary text-primary-foreground shadow-lg hover-elevate z-40 flex items-center gap-2 group"
+          data-testid="button-floating-whatsapp"
+          title="Need help? Message us!"
+        >
+          <MessageCircle className="w-5 h-5" />
+          <span className="hidden sm:inline text-sm font-semibold">Help</span>
+        </button>
         {/* Back Button */}
         <button
           onClick={() => setLocation('/')}
-          className="mb-8 flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors"
+          className="mb-6 md:mb-8 flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors text-sm md:text-base"
           data-testid="button-back-home"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -156,20 +166,21 @@ This offer is valid once you confirm with 50% deposit.`;
         </button>
 
         {/* Header with Service Area Badge */}
-        <div className="text-center mb-8">
-          <div className="inline-block mb-4 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-            <div className="flex items-center gap-2 text-xs font-semibold text-primary">
-              <MapPin className="w-4 h-4" />
-              South Bali Premium Service Area
+        <div className="text-center mb-6 md:mb-8">
+          <div className="inline-block mb-3 md:mb-4 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+            <div className="flex items-center gap-2 text-xs font-semibold text-primary whitespace-nowrap overflow-x-auto">
+              <MapPin className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+              <span>South Bali Premium Area</span>
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold mb-2">Price Calculator</h1>
-          <p className="text-foreground/60 flex items-center justify-center gap-2">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Price Calculator</h1>
+          <p className="text-sm md:text-base text-foreground/60 flex items-center justify-center gap-1 md:gap-2 flex-wrap">
             <Clock className="w-4 h-4" />
-            Short-term & Long-term Private Chef Pricing
+            <span>Short & Long-term Pricing</span>
             <TrendingUp className="w-4 h-4" />
           </p>
-          <p className="text-sm text-foreground/50 mt-2">Get your instant quote for Bali</p>
+          <p className="text-xs md:text-sm text-foreground/50 mt-2">Instant quote for Bali</p>
         </div>
 
         {/* Trust Banner */}
@@ -245,19 +256,19 @@ This offer is valid once you confirm with 50% deposit.`;
         </div>
 
         {/* Calculator */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
           {/* Input Section */}
           <Card className="border border-primary/20 shadow-sm">
-            <CardContent className="p-6 space-y-5">
+            <CardContent className="p-4 md:p-6 space-y-4 md:space-y-5">
               <h3 className="font-semibold text-lg">Your Details</h3>
 
               {/* Change Chef */}
               <div>
-                <label className="block text-sm font-semibold mb-3 flex items-center gap-2">
+                <label className="block text-sm font-semibold mb-2 md:mb-3 flex items-center gap-2">
                   <ChefHat className="w-4 h-4 text-primary" />
-                  Select Chef Type
+                  Chef Type
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 md:grid-cols-3 gap-2">
                   {CHEF_TYPES.map((chef) => (
                     <div key={chef.id} className="group relative">
                       <button
@@ -293,7 +304,7 @@ This offer is valid once you confirm with 50% deposit.`;
 
               {/* Number of Guests */}
               <div>
-                <label className="block text-sm font-semibold mb-3">Number of Guests</label>
+                <label className="block text-sm font-semibold mb-2 md:mb-3">👥 Guests</label>
                 <input
                   type="number"
                   min="1"
@@ -306,9 +317,9 @@ This offer is valid once you confirm with 50% deposit.`;
               </div>
 
               {/* Date Range */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div>
-                  <label className="block text-sm font-semibold mb-2">From</label>
+                  <label className="block text-sm font-semibold mb-2">📅 From</label>
                   <input
                     type="date"
                     value={dateFrom}
@@ -318,7 +329,7 @@ This offer is valid once you confirm with 50% deposit.`;
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-2">To</label>
+                  <label className="block text-sm font-semibold mb-2">📅 To</label>
                   <input
                     type="date"
                     value={dateTo}
@@ -360,9 +371,9 @@ This offer is valid once you confirm with 50% deposit.`;
           </Card>
 
           {/* Price & Quote Section */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:space-y-4">
             <Card className="border border-primary/20 shadow-sm">
-              <CardContent className="p-6">
+              <CardContent className="p-4 md:p-6">
                 <p className="text-xs font-semibold text-foreground/60 mb-6">YOUR QUOTE</p>
 
                 {/* Chef Price */}
@@ -435,7 +446,7 @@ This offer is valid once you confirm with 50% deposit.`;
 
             {/* What's Included Card */}
             <Card className="border border-primary/20 shadow-sm">
-              <CardContent className="p-4">
+              <CardContent className="p-3 md:p-4">
                 <p className="text-xs font-semibold text-foreground/70 mb-3">WHAT'S INCLUDED</p>
                 <div className="space-y-2 text-xs text-foreground/70">
                   <div className="flex items-start gap-2">
@@ -461,9 +472,9 @@ This offer is valid once you confirm with 50% deposit.`;
         </div>
 
         {/* Pricing Tiers Reference with Icons */}
-        <div className="mb-12">
-          <h3 className="text-lg font-semibold mb-4 text-center">Flexible Pricing Options</h3>
-          <div className="grid grid-cols-3 gap-4">
+        <div className="mb-8 md:mb-12">
+          <h3 className="text-lg font-semibold mb-4 text-center">Pricing Tiers</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
               <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
               <p className="font-semibold text-sm text-primary">Short-Term</p>
@@ -489,10 +500,10 @@ This offer is valid once you confirm with 50% deposit.`;
         </div>
 
         {/* Food & Shopping Explanation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <UtensilsIcon className="w-6 h-6 text-primary" />
-            How Food Costs Work
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+            <UtensilsIcon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            Food Costs
           </h2>
           <Card className="border border-primary/20">
             <CardContent className="p-6 space-y-4">
@@ -526,19 +537,28 @@ This offer is valid once you confirm with 50% deposit.`;
         </div>
 
         {/* Terms & Conditions */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <Shield className="w-6 h-6 text-primary" />
-            Terms & Conditions
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mb-8 md:mb-12">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <Shield className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+              Terms
+            </h2>
+            <a
+              href="/terms-of-service"
+              className="text-xs md:text-sm text-primary hover:underline flex items-center gap-1"
+              data-testid="link-full-terms"
+            >
+              Full Terms <ArrowRight className="w-3 h-3" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
             <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <CardContent className="p-4 md:p-6">
+                <h4 className="font-semibold mb-3 flex items-center gap-2 text-sm md:text-base">
                   <DollarSign className="w-4 h-4 text-primary" />
                   Payment
                 </h4>
-                <ul className="text-sm text-foreground/70 space-y-2">
+                <ul className="text-xs md:text-sm text-foreground/70 space-y-1 md:space-y-2">
                   <li>• 50% deposit to confirm booking</li>
                   <li>• 50% balance on day chef arrives</li>
                   <li>• Food costs paid separately</li>
@@ -547,12 +567,12 @@ This offer is valid once you confirm with 50% deposit.`;
               </CardContent>
             </Card>
             <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <CardContent className="p-4 md:p-6">
+                <h4 className="font-semibold mb-3 flex items-center gap-2 text-sm md:text-base">
                   <Clock className="w-4 h-4 text-primary" />
                   Cancellation
                 </h4>
-                <ul className="text-sm text-foreground/70 space-y-2">
+                <ul className="text-xs md:text-sm text-foreground/70 space-y-1 md:space-y-2">
                   <li>• 48+ hours notice = full refund</li>
                   <li>• Chef gets sick = free replacement</li>
                   <li>• Emergencies accepted</li>
@@ -561,12 +581,12 @@ This offer is valid once you confirm with 50% deposit.`;
               </CardContent>
             </Card>
             <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <CardContent className="p-4 md:p-6">
+                <h4 className="font-semibold mb-3 flex items-center gap-2 text-sm md:text-base">
                   <ChefHat className="w-4 h-4 text-primary" />
                   Chef Service
                 </h4>
-                <ul className="text-sm text-foreground/70 space-y-2">
+                <ul className="text-xs md:text-sm text-foreground/70 space-y-1 md:space-y-2">
                   <li>• Background checked & verified</li>
                   <li>• 48-hour minimum booking</li>
                   <li>• All equipment included</li>
@@ -575,12 +595,12 @@ This offer is valid once you confirm with 50% deposit.`;
               </CardContent>
             </Card>
             <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <CardContent className="p-4 md:p-6">
+                <h4 className="font-semibold mb-3 flex items-center gap-2 text-sm md:text-base">
                   <Award className="w-4 h-4 text-primary" />
-                  Our Commitment
+                  Commitment
                 </h4>
-                <ul className="text-sm text-foreground/70 space-y-2">
+                <ul className="text-xs md:text-sm text-foreground/70 space-y-1 md:space-y-2">
                   <li>• 100% transparent pricing</li>
                   <li>• No hidden fees ever</li>
                   <li>• Professional service always</li>
@@ -591,13 +611,23 @@ This offer is valid once you confirm with 50% deposit.`;
           </div>
         </div>
 
-        {/* Footer CTA */}
-        <div className="text-center py-8">
-          <p className="text-foreground/70">
-            Have questions? <Button variant="link" onClick={handleWhatsAppClick} className="text-primary">
+        {/* Footer CTA & Links */}
+        <div className="text-center py-6 md:py-8 space-y-4">
+          <p className="text-sm md:text-base text-foreground/70">
+            Have questions? 
+            <Button variant="link" onClick={handleWhatsAppClick} className="text-primary ml-1 h-auto p-0">
               Message us on WhatsApp
             </Button>
           </p>
+          <div className="flex flex-wrap gap-3 md:gap-4 justify-center text-xs md:text-sm">
+            <a href="/terms-of-service" className="text-primary hover:underline" data-testid="link-footer-terms">Terms</a>
+            <span className="text-foreground/30">•</span>
+            <a href="/privacy-policy" className="text-primary hover:underline" data-testid="link-footer-privacy">Privacy</a>
+            <span className="text-foreground/30">•</span>
+            <a href="/payment-terms" className="text-primary hover:underline" data-testid="link-footer-payment">Payment Info</a>
+            <span className="text-foreground/30">•</span>
+            <button onClick={() => setLocation('/')} className="text-primary hover:underline" data-testid="link-footer-home">Home</button>
+          </div>
         </div>
       </div>
     </div>

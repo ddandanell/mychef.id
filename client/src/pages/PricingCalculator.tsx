@@ -18,6 +18,14 @@ const CHEF_TYPES = [
   { id: 'indian', name: 'Indian Chef', icon: '🍛', description: 'Spiced perfection', hint: 'Rich curries, tandoori & breads' },
 ];
 
+const CURRENCIES = [
+  { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'Rp', rate: 1 },
+  { code: 'USD', name: 'US Dollar', symbol: '$', rate: 0.000063 },
+  { code: 'EUR', name: 'Euro', symbol: '€', rate: 0.000060 },
+  { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', rate: 0.000098 },
+  { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$', rate: 0.000084 },
+];
+
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
   const [guests, setGuests] = useState(4);
@@ -26,6 +34,7 @@ export default function PricingCalculator() {
   const [chefType, setChefType] = useState('indonesian');
   const [includeHelper, setIncludeHelper] = useState(false);
   const [copied, setCopied] = useStateHook(false);
+  const [currency, setCurrency] = useState('IDR');
 
   const fromDate = new Date(dateFrom);
   const toDate = new Date(dateTo);
@@ -87,9 +96,9 @@ ${includeHelper ? '✓ Professional Helper Service\n' : ''}
 
 💰 PRICING BREAKDOWN
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Chef Service:       ${formatIDR(chefPrice)}
-${includeHelper ? `Helper Service:     ${formatIDR(helperPrice)}\n` : ''}
-TOTAL PRICE:        ${formatIDR(totalPrice)}
+Chef Service:       ${formatPrice(chefPrice)}
+${includeHelper ? `Helper Service:     ${formatPrice(helperPrice)}\n` : ''}
+TOTAL PRICE:        ${formatPrice(totalPrice)}
 
 Rate Type:          ${tier}
 
@@ -134,12 +143,23 @@ This offer is valid once you confirm with 50% deposit.`;
     }
   };
 
-  const formatIDR = (value: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(value);
+  const formatPrice = (value: number) => {
+    const currencyData = CURRENCIES.find(c => c.code === currency);
+    const convertedValue = value * currencyData!.rate;
+    
+    if (currency === 'IDR') {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      }).format(value);
+    } else {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 0,
+      }).format(convertedValue);
+    }
   };
 
   return (
@@ -376,11 +396,30 @@ This offer is valid once you confirm with 50% deposit.`;
               <CardContent className="p-4 md:p-6">
                 <p className="text-xs font-semibold text-foreground/60 mb-6">YOUR QUOTE</p>
 
+                {/* Currency Selector */}
+                <div className="mb-4 flex gap-2 flex-wrap">
+                  {CURRENCIES.map((curr) => (
+                    <button
+                      key={curr.code}
+                      onClick={() => setCurrency(curr.code)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                        currency === curr.code
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-primary/10 text-primary hover:bg-primary/20'
+                      }`}
+                      data-testid={`button-currency-${curr.code}`}
+                      title={curr.name}
+                    >
+                      {curr.code}
+                    </button>
+                  ))}
+                </div>
+
                 {/* Chef Price */}
                 <div className="mb-6">
                   <p className="text-xs text-foreground/60 mb-2">Chef Service</p>
                   <p className="text-3xl font-bold text-primary" data-testid="text-chef-price">
-                    {formatIDR(chefPrice)}
+                    {formatPrice(chefPrice)}
                   </p>
                   <p className="text-xs text-foreground/60 mt-2">{tier}</p>
                 </div>
@@ -389,7 +428,7 @@ This offer is valid once you confirm with 50% deposit.`;
                 {includeHelper && (
                   <div className="mb-6 pb-6 border-b border-primary/10">
                     <p className="text-xs text-foreground/60 mb-2">Helper Service</p>
-                    <p className="text-lg font-semibold text-primary">{formatIDR(helperPrice)}</p>
+                    <p className="text-lg font-semibold text-primary">{formatPrice(helperPrice)}</p>
                   </div>
                 )}
 
@@ -397,7 +436,7 @@ This offer is valid once you confirm with 50% deposit.`;
                 <div className="bg-primary/15 rounded-lg p-4 mb-6">
                   <p className="text-xs text-foreground/70 mb-2">TOTAL PRICE</p>
                   <p className="text-4xl font-bold text-primary" data-testid="text-total-estimate">
-                    {formatIDR(totalPrice)}
+                    {formatPrice(totalPrice)}
                   </p>
                 </div>
 
@@ -479,21 +518,21 @@ This offer is valid once you confirm with 50% deposit.`;
               <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
               <p className="font-semibold text-sm text-primary">Short-Term</p>
               <p className="text-xs text-foreground/60 mt-1">Daily Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(DAILY_RATE)}</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(DAILY_RATE)}</p>
               <p className="text-xs text-foreground/60 mt-1">per day</p>
             </div>
             <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
               <Home className="w-8 h-8 text-primary mx-auto mb-3" />
               <p className="font-semibold text-sm text-primary">Mid-Term</p>
               <p className="text-xs text-foreground/60 mt-1">Weekly Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(WEEKLY_RATE)}</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(WEEKLY_RATE)}</p>
               <p className="text-xs text-foreground/60 mt-1">7+ days</p>
             </div>
             <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
               <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
               <p className="font-semibold text-sm text-primary">Long-Term</p>
               <p className="text-xs text-foreground/60 mt-1">Monthly Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatIDR(MONTHLY_RATE)}</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(MONTHLY_RATE)}</p>
               <p className="text-xs text-foreground/60 mt-1">30+ days</p>
             </div>
           </div>

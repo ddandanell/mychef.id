@@ -117,7 +117,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-2 sm:px-0">
+        <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0">
           <motion.div
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -126,7 +126,7 @@ export default function HeroSection() {
             <Button
               size="sm"
               onClick={handleWhatsAppClick}
-              className="bg-white hover:bg-white text-foreground px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white w-full sm:w-auto"
+              className="bg-white hover:bg-white text-foreground px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white whitespace-nowrap"
               data-testid="button-hero-whatsapp-cta"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
@@ -143,7 +143,7 @@ export default function HeroSection() {
             <Button
               size="sm"
               onClick={handleQuoteClick}
-              className="bg-primary/90 hover:bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary w-full sm:w-auto"
+              className="bg-primary/90 hover:bg-primary text-primary-foreground px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary whitespace-nowrap"
               data-testid="button-hero-quote-cta"
             >
               <FileText className="w-4 h-4 mr-2" />

@@ -7,6 +7,7 @@ import WhyChoose from '@/components/WhyChoose';
 import TrustBadges from '@/components/TrustBadges';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import ChefProfiles from '@/components/ChefProfiles';
+import ChefShowcase from '@/components/ChefShowcase';
 import ChefGallery from '@/components/ChefGallery';
 import DishGallery from '@/components/DishGallery';
 import LocationsSection from '@/components/LocationsSection';
@@ -49,6 +50,7 @@ export default function Home() {
       <TrustBadges />
       <TrustpilotSection />
       <TestimonialCarousel />
+      <ChefShowcase />
       <ChefProfiles />
       <LocationsSection />
       <OccasionsGrid />

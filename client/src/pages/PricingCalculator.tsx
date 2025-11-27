@@ -338,12 +338,17 @@ Contact us on WhatsApp to confirm your booking!
               <CardContent className="space-y-4 pt-6">
                 {showResults && (
                   <>
-                    {/* Chef Selection */}
-                    <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
-                      <p className="text-xs text-foreground/70 mb-1">Your Chef</p>
-                      <p className="text-sm font-semibold">
-                        {CHEF_TYPES.find(c => c.id === chefType)?.name}
-                      </p>
+                    {/* Chef Selection Display */}
+                    <div className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20">
+                      <p className="text-xs text-foreground/70 mb-3 font-semibold">📋 Your Selected Chef</p>
+                      <div className="bg-background rounded p-3 border border-primary/10">
+                        <p className="text-sm font-bold text-primary mb-1">
+                          {CHEF_TYPES.find(c => c.id === chefType)?.name}
+                        </p>
+                        <p className="text-xs text-foreground/70">
+                          {CHEF_TYPES.find(c => c.id === chefType)?.specialty}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Working Hours */}

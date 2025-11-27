@@ -47,12 +47,20 @@ export default function ChefShowcase() {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-foreground/70 max-w-2xl mx-auto">
+        <div className="mt-12 text-center mb-8">
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-4">
             All our chefs are experienced professionals with 5+ years in fine dining restaurants. 
             They arrive with all equipment, complete your kitchen cleanup, and handle food shopping. 
             <strong className="text-primary"> Ready to cook anywhere in Bali.</strong>
           </p>
+          <div className="max-w-2xl mx-auto bg-primary/10 border-2 border-primary/20 rounded-lg p-4">
+            <p className="text-sm font-semibold text-foreground mb-2">Special Pricing for Extended Bookings:</p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <div>3+ days: <span className="font-bold text-primary">25% off</span></div>
+              <div>7+ days: <span className="font-bold text-primary">40% off</span></div>
+              <div>30+ days: <span className="font-bold text-primary">60% off</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

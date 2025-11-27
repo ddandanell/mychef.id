@@ -63,10 +63,11 @@ export default function PricingCalculator() {
   // Labor total
   const laborTotal = chefLabor + helperLabor;
 
-  // Discount based on service type
+  // Discount based on days
   let discountRate = 0;
-  if (serviceType === 'week') discountRate = 0.2;
-  else if (serviceType === 'month') discountRate = 0.4;
+  if (days >= 30) discountRate = 0.6;
+  else if (days >= 7) discountRate = 0.4;
+  else if (days >= 3) discountRate = 0.25;
 
   const laborAfterDiscount = laborTotal * (1 - discountRate);
 
@@ -273,7 +274,7 @@ Contact us on WhatsApp to confirm your booking!
                     </span>
                   </div>
                   <p className="text-xs text-foreground/60">
-                    7+ days: 20% discount | 30+ days: 40% discount
+                    3+ days: 25% discount | 7+ days: 40% discount | 30+ days: 60% discount
                   </p>
                 </div>
 
@@ -377,13 +378,19 @@ Contact us on WhatsApp to confirm your booking!
                     {days >= 30 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
                         <p className="text-xs text-foreground/70 mb-1">Monthly Discount</p>
-                        <p className="text-sm font-semibold text-green-700">40% off labor</p>
+                        <p className="text-sm font-semibold text-green-700">60% off total price</p>
                       </div>
                     )}
                     {days >= 7 && days < 30 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
                         <p className="text-xs text-foreground/70 mb-1">Weekly Discount</p>
-                        <p className="text-sm font-semibold text-green-700">20% off labor</p>
+                        <p className="text-sm font-semibold text-green-700">40% off total price</p>
+                      </div>
+                    )}
+                    {days >= 3 && days < 7 && (
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                        <p className="text-xs text-foreground/70 mb-1">Multi-Day Discount</p>
+                        <p className="text-sm font-semibold text-green-700">25% off total price</p>
                       </div>
                     )}
 

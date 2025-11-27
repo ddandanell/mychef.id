@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -22,20 +22,20 @@ const TESTIMONIALS = [
   {
     id: 1,
     name: 'Romaldo',
-    review: 'Some of the best experiences I ever had. The food was incredible, and the service was outstanding. Worth every rupiah!',
+    review: 'Some of the best experiences I ever had. The food was incredible, the service was outstanding, and everything was handled perfectly. I felt like royalty in my own villa. Worth every rupiah and then some!',
     rating: 5
   },
   {
     id: 2,
     name: 'Siti',
     country: 'Indonesia',
-    review: 'This was the best investment for our villa vacation. Everything was handled perfectly. Already booked them twice!',
+    review: 'This was the best investment for our villa vacation. Everything was handled perfectly from start to finish. The customized menu, the fresh ingredients from the market, the presentation — absolutely flawless. We already booked them twice!',
     rating: 5
   },
   {
     id: 3,
     name: 'Guest',
-    review: 'The private chef experience exceeded all expectations. Professional, delicious, and unforgettable.',
+    review: 'The private chef experience exceeded all expectations. Professional, delicious, and completely unforgettable. We got to choose exactly what we wanted, and they made it happen. This is how vacation should be!',
     rating: 5
   }
 ];
@@ -208,6 +208,14 @@ export default function PricingCalculator() {
   const [questionText, setQuestionText] = useState('');
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+  // Auto-rotate testimonials every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   const result = useMemo(() => {
     return calculateBooking(startDate, endDate, guestCount, breakfast, lunch, dinner);
   }, [startDate, endDate, guestCount, breakfast, lunch, dinner]);
@@ -333,14 +341,21 @@ Pricing Tier: ${result.tierLabel}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-8 max-w-2xl mx-auto"
+            className="mb-8"
           >
             <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-4 border border-primary/20">
               <div className="flex items-start gap-3">
                 <Star className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="font-semibold text-sm text-foreground mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
-                  <p className="text-xs text-foreground/70 italic">{TESTIMONIALS[currentTestimonial].review}</p>
+                  <motion.div
+                    key={currentTestimonial}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <p className="font-semibold text-sm text-foreground mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
+                    <p className="text-xs text-foreground/70 italic">{TESTIMONIALS[currentTestimonial].review}</p>
+                  </motion.div>
                   <div className="flex items-center gap-1 mt-2">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 fill-primary text-primary" />
@@ -859,11 +874,12 @@ Pricing Tier: ${result.tierLabel}
                   <div className="flex items-start gap-2">
                     <Leaf className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <div className="text-xs text-foreground/70">
-                      <p className="font-semibold text-foreground mb-1">Fresh & Transparent</p>
+                      <p className="font-semibold text-foreground mb-1">Fresh & Transparent - Custom Menu Planning</p>
+                      <p className="mb-1.5">
+                        <strong>Weekly planning with your chef:</strong> Together, you create a custom menu that fits your taste and budget. No boring pre-set menus — your chef adapts to your preferences every week.
+                      </p>
                       <p>
-                        Your chef shops weekly at local Bali markets with your budget. 
-                        You get the freshest ingredients, choose what you want, and pay 
-                        only what the groceries cost. <strong>No markup, no extra fees.</strong>
+                        <strong>Grocery bill is on your account:</strong> Your chef shops at local Bali markets with cash you provide. You only pay for the groceries and the chef's time — no hidden taxes, no restaurant markup, no extra fees. Just transparent pricing like everywhere else.
                       </p>
                     </div>
                   </div>

@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, CreditCard, Banknote, ChefHat, Star, ArrowRight, Clock, Sparkles, Shield, TrendingUp } from 'lucide-react';
-import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
+import { SiInstagram, SiFacebook, SiWhatsapp, SiAirbnb } from 'react-icons/si';
 import { useLocation, Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
@@ -326,6 +326,11 @@ export default function Footer() {
                 {t('footer.paymentTerms', 'Payment Terms')}
               </Link>
             </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3 justify-center items-center mt-6 text-[9px] text-foreground/30">
+            <span className="font-semibold">Villa Partnerships:</span>
+            <SiAirbnb className="w-4 h-4 text-red-500" title="Airbnb Partner" />
           </div>
 
           <div className="flex flex-wrap gap-2 justify-center items-center mt-4 text-[9px] text-foreground/20">

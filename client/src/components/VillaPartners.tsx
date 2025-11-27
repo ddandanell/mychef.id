@@ -2,6 +2,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Building2, Users, Award } from 'lucide-react';
+import { SiAirbnb } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import villaImage from '@assets/generated_images/luxury_villa_dinner_experience.png';
 
@@ -50,6 +51,16 @@ export default function VillaPartners() {
                   className="p-8 lg:p-12 flex flex-col justify-center"
                 >
                   <div className="mb-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2, duration: 0.5 }}
+                      viewport={{ once: true }}
+                      className="flex items-center gap-3 mb-4"
+                    >
+                      <div className="text-2xl text-foreground/60">Villa Partners</div>
+                      <SiAirbnb className="w-6 h-6 text-red-500" />
+                    </motion.div>
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}

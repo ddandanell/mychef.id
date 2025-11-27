@@ -103,8 +103,12 @@ export default function HowItWorks() {
                     {/* Gradient glow background */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300`} />
 
-                    {/* Card */}
-                    <div className="relative bg-white dark:bg-slate-950 border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center">
+                    {/* Card - Alternating backgrounds */}
+                    <div className={`relative border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
+                      index % 2 === 0 
+                        ? `bg-gradient-to-r ${step.color} bg-opacity-10 dark:bg-opacity-20` 
+                        : 'bg-white dark:bg-slate-950'
+                    }`}>
                       {/* Step number */}
                       <div className={`absolute -top-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg`}>
                         {index + 1}
@@ -148,8 +152,12 @@ export default function HowItWorks() {
                     {/* Gradient glow background */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300`} />
 
-                    {/* Card */}
-                    <div className="relative bg-white dark:bg-slate-950 border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center">
+                    {/* Card - Alternating backgrounds */}
+                    <div className={`relative border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
+                      index % 2 === 0 
+                        ? `bg-gradient-to-r ${step.color} bg-opacity-10 dark:bg-opacity-20` 
+                        : 'bg-white dark:bg-slate-950'
+                    }`}>
                       {/* Step number */}
                       <div className={`absolute -top-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg`}>
                         {index + 4}

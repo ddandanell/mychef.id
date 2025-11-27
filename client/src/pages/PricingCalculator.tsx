@@ -6,11 +6,23 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MessageCircle, Calculator, CheckCircle2, Sparkles } from 'lucide-react';
 
+const CHEF_TYPES = [
+  { id: 'sushi', name: 'Professional Sushi Chef', specialty: '🍣 Japanese' },
+  { id: 'french', name: 'French Culinary Master', specialty: '🇫🇷 French' },
+  { id: 'italian', name: 'Italian Chef', specialty: '🇮🇹 Italian' },
+  { id: 'indonesian', name: 'Master Chef Indonesian', specialty: '🇮🇩 Indonesian' },
+  { id: 'thai', name: 'Thai Culinary Expert', specialty: '🇹🇭 Thai' },
+  { id: 'spanish', name: 'Spanish Chef', specialty: '🇪🇸 Spanish' },
+  { id: 'mediterranean', name: 'Mediterranean Chef', specialty: '🌊 Mediterranean' },
+  { id: 'fusion', name: 'Fusion Master Chef', specialty: '🍽️ Asian Fusion' },
+];
+
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
   const [guests, setGuests] = useState(4);
   const [mealsPerDay, setMealsPerDay] = useState(1);
   const [days, setDays] = useState(1);
+  const [chefType, setChefType] = useState('indonesian');
   const [includeHelper, setIncludeHelper] = useState(false);
   const [estimateFood, setEstimateFood] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -183,6 +195,28 @@ export default function PricingCalculator() {
                   </div>
                 </div>
 
+                {/* Add a Chef */}
+                <div>
+                  <label className="font-semibold mb-3 block">Add a Chef</label>
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                    {CHEF_TYPES.map((chef) => (
+                      <button
+                        key={chef.id}
+                        onClick={() => setChefType(chef.id)}
+                        className={`p-3 rounded-lg border-2 transition-all text-left ${
+                          chefType === chef.id
+                            ? 'border-primary bg-primary/10 font-semibold'
+                            : 'border-primary/20 hover:border-primary/40'
+                        }`}
+                        data-testid={`button-chef-${chef.id}`}
+                      >
+                        <div className="font-semibold text-sm">{chef.name}</div>
+                        <div className="text-xs text-foreground/60">{chef.specialty}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Number of Days */}
                 <div>
                   <label className="font-semibold mb-3 block">Number of Days</label>
@@ -266,6 +300,14 @@ export default function PricingCalculator() {
               <CardContent className="space-y-4 pt-6">
                 {showResults && (
                   <>
+                    {/* Chef Selection */}
+                    <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
+                      <p className="text-xs text-foreground/70 mb-1">Your Chef</p>
+                      <p className="text-sm font-semibold">
+                        {CHEF_TYPES.find(c => c.id === chefType)?.name}
+                      </p>
+                    </div>
+
                     {/* Working Hours */}
                     <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
                       <p className="text-xs text-foreground/70 mb-1">Working Hours</p>

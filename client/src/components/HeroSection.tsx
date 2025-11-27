@@ -94,15 +94,15 @@ export default function HeroSection() {
         </div>
       ))}
       
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16 lg:py-20">
-        <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-6 leading-tight" data-testid="text-hero-headline">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-32">
+        <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-8 leading-tight" data-testid="text-hero-headline">
           {t('hero.headline')}
         </h1>
-        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
+        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/95 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
           {t('hero.subheadline')}
         </p>
         
-        <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 flex-wrap">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 lg:gap-6 mb-10 sm:mb-14 flex-wrap">
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 sm:px-4 py-2" data-testid="badge-experience">
             <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             <span className="text-white text-sm sm:text-base font-medium">{t('hero.experiences', '1000+ Experiences')}</span>

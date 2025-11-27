@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Star } from 'lucide-react';
+import trustpilotLogo from '@assets/generated_images/trustpilot_logo_&_badge_design.png';
 
 const TRUSTPILOT_REVIEWS = [
   {
@@ -47,7 +48,7 @@ export default function TrustpilotSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="flex flex-col justify-center">
             <div className="bg-white dark:bg-slate-950 border border-muted rounded-xl p-8 text-center">
-              <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="flex items-center justify-center gap-2 mb-6">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
@@ -56,24 +57,18 @@ export default function TrustpilotSection() {
                 ))}
               </div>
               <p className="text-4xl font-bold text-foreground mb-2">4.9/5</p>
-              <p className="text-foreground/70 mb-4">Based on 487 reviews</p>
-              <div className="flex items-center justify-center">
-                <svg
-                  className="w-32 h-auto"
-                  viewBox="0 0 120 40"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <text
-                    x="60"
-                    y="20"
-                    textAnchor="middle"
-                    className="fill-foreground font-semibold text-lg"
-                  >
-                    Trustpilot
-                  </text>
-                </svg>
+              <p className="text-foreground/70 mb-8">Based on 487 verified reviews</p>
+              
+              <div className="flex items-center justify-center mb-6 h-32">
+                <img 
+                  src={trustpilotLogo} 
+                  alt="Trustpilot Logo" 
+                  className="max-w-full h-auto object-contain"
+                  data-testid="img-trustpilot-logo"
+                />
               </div>
-              <p className="text-sm text-foreground/60 mt-4">
+              
+              <p className="text-sm text-foreground/60">
                 Verified reviews from real customers
               </p>
             </div>

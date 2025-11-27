@@ -3,13 +3,14 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, ChefHat, Utensils, Award, Check, Sparkles, Star, Users2, Globe2, BookOpen, ShieldCheck } from 'lucide-react';
+import { MessageCircle, ChefHat, Utensils, Award, Check, Sparkles, Star, Users2, Globe2, BookOpen, ShieldCheck, Crown } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const STATS = [
-  { number: '2+', label: 'Years Training', icon: BookOpen },
-  { number: '5+', label: 'Years Experience', icon: Star },
-  { number: '10+', label: 'Chef Specialties', icon: ChefHat },
-  { number: '25+', label: 'Cuisine Types', icon: Globe2 },
+  { number: '5+', label: 'Years Experience', icon: Crown, size: 'large', highlight: true },
+  { number: '10+', label: 'Chef Specialties', icon: ChefHat, size: 'medium' },
+  { number: '25+', label: 'Cuisine Types', icon: Globe2, size: 'medium' },
+  { number: '2+', label: 'Years Training', icon: BookOpen, size: 'small' },
 ];
 
 const CHEF_FEATURES = [
@@ -59,33 +60,88 @@ export default function WhyChoose() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-why-choose-headline">
-          Why Choose myCHEF
-        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="font-serif text-3xl lg:text-5xl font-semibold text-center mb-4" data-testid="text-why-choose-headline">
+            Why Choose myCHEF
+          </h2>
+        </motion.div>
         <p className="text-lg text-center text-foreground/70 mb-12 max-w-3xl mx-auto">
           Every detail perfected for an unforgettable dining experience
         </p>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {STATS.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <Card
-                key={index}
-                className={`hover-elevate transition-all duration-500 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6 text-center">
-                  <Icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                  <div className="text-3xl lg:text-4xl font-bold text-primary mb-1">{stat.number}</div>
-                  <div className="text-sm text-foreground/70">{stat.label}</div>
-                </CardContent>
-              </Card>
-            );
-          })}
+        {/* Stats Grid - Credential Display */}
+        <div className="mb-16 perspective">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
+            {STATS.map((stat, index) => {
+              const Icon = stat.icon;
+              const isLarge = stat.size === 'large';
+              const isMedium = stat.size === 'medium';
+              const isSmall = stat.size === 'small';
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={isLarge ? 'md:col-span-1 md:row-span-2' : ''}
+                >
+                  <Card
+                    className={`hover-elevate transition-all duration-500 overflow-hidden h-full ${
+                      isLarge
+                        ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-primary/40 shadow-lg'
+                        : isMedium
+                        ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20'
+                        : 'bg-gradient-to-br from-primary/5 to-background border-primary/10'
+                    }`}
+                  >
+                    <CardContent className={`text-center flex flex-col items-center justify-center ${isLarge ? 'p-10' : isMedium ? 'p-8' : 'p-6'} h-full`}>
+                      {/* Decorative top accent */}
+                      {isLarge && (
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-30" />
+                      )}
+                      
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                        className={`${isLarge ? 'w-20 h-20' : isMedium ? 'w-12 h-12' : 'w-10 h-10'} rounded-full ${
+                          isLarge
+                            ? 'bg-white/20 backdrop-blur'
+                            : 'bg-primary/15'
+                        } flex items-center justify-center mb-4 flex-shrink-0`}
+                      >
+                        <Icon className={`${isLarge ? 'w-10 h-10' : isMedium ? 'w-6 h-6' : 'w-5 h-5'} ${isLarge ? 'text-white' : 'text-primary'}`} />
+                      </motion.div>
+                      
+                      <div className={`font-bold mb-2 ${isLarge ? 'text-6xl leading-tight' : isMedium ? 'text-4xl' : 'text-3xl'}`}>
+                        {stat.number}
+                      </div>
+                      <div className={`${isLarge ? 'text-lg font-semibold tracking-wide' : isMedium ? 'text-base font-medium' : 'text-sm'} ${isLarge ? 'text-white/90 uppercase' : 'text-foreground/70'}`}>
+                        {stat.label}
+                      </div>
+
+                      {isLarge && (
+                        <div className="mt-4 pt-4 border-t border-white/20 text-xs text-white/70 font-medium tracking-wider">
+                          CERTIFIED EXCELLENCE
+                        </div>
+                      )}
+
+                      {/* Decorative bottom accent */}
+                      {isLarge && (
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-30" />
+                      )}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Main Features */}

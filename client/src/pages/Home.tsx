@@ -21,7 +21,7 @@ import PartyAddons from '@/components/PartyAddons';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
-import { FloatingOrbs, SideAccents } from '@/components/AnimatedDecorations';
+import { SideAccents } from '@/components/AnimatedDecorations';
 import MotivationalPopup from '@/components/MotivationalPopup';
 import TrustBadgesCompact from '@/components/TrustBadgesCompact';
 import TrustpilotSection from '@/components/TrustpilotSection';
@@ -29,7 +29,6 @@ import TrustpilotSection from '@/components/TrustpilotSection';
 export default function Home() {
   return (
     <div className="min-h-screen relative">
-      <FloatingOrbs />
       <SideAccents />
       <MotivationalPopup />
       <SEO 

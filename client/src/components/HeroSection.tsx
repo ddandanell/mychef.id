@@ -40,7 +40,6 @@ export default function HeroSection() {
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
     const rotateImage = () => {
@@ -59,12 +58,6 @@ export default function HeroSection() {
     return () => clearTimeout(initialTimeout);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleWhatsAppClick = () => {
     setLocation('/contact/confirm?source=hero');
@@ -102,40 +95,6 @@ export default function HeroSection() {
       ))}
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16 lg:py-20">
-        <div className="bg-gradient-to-r from-white/10 to-white/5 rounded-lg p-4 border border-white/20 backdrop-blur-sm mb-6 sm:mb-8 max-w-2xl mx-auto">
-          <div className="flex items-start gap-3">
-            <Star className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5 fill-yellow-400" />
-            <div className="flex-1">
-              <motion.div
-                key={currentTestimonial}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <p className="font-semibold text-sm text-white mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
-                <p className="text-xs text-white/80 italic">{TESTIMONIALS[currentTestimonial].review}</p>
-              </motion.div>
-              <div className="flex items-center gap-1 mt-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center gap-1 mt-3">
-            {TESTIMONIALS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentTestimonial(idx)}
-                className={`h-1.5 rounded-full transition-all ${
-                  idx === currentTestimonial ? 'w-4 bg-white' : 'w-2 bg-white/30'
-                }`}
-                data-testid={`button-hero-testimonial-${idx}`}
-              />
-            ))}
-          </div>
-        </div>
-
         <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-6 leading-tight" data-testid="text-hero-headline">
           {t('hero.headline')}
         </h1>

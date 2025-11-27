@@ -23,9 +23,21 @@ export default function PricingSection() {
         <p className="text-lg text-center text-foreground/70 mb-2">
           No hidden fees - know exactly what you're paying for
         </p>
-        <p className="text-sm text-center text-foreground/60 mb-12">
-          💳 Online payment (Visa, MasterCard, all cards) & cash (IDR) • 50% when you book, 50% the day before
-        </p>
+        <div className="text-center mb-12">
+          <p className="text-sm text-center text-foreground/60 mb-3">
+            Online payment & cash (IDR) • 50% when you book, 50% the day before
+          </p>
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <span className="text-xs font-semibold text-foreground/70">Accepted:</span>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded">VISA</span>
+              <span className="px-2 py-1 bg-red-600 text-white text-xs font-bold rounded">MC</span>
+              <span className="px-2 py-1 bg-yellow-500 text-black text-xs font-bold rounded">AMEX</span>
+              <span className="px-2 py-1 bg-purple-600 text-white text-xs font-bold rounded">DISCOVER</span>
+              <span className="px-2 py-1 bg-gray-700 text-white text-xs font-bold rounded">IDR</span>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
           <Card className="border-2 border-primary/20 hover:border-primary transition-colors">

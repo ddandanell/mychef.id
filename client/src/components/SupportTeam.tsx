@@ -1,5 +1,6 @@
 import { MessageCircle, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import sitiImage from '@assets/generated_images/balinese_woman_with_headset_in_kitchen.png';
 
 export default function SupportTeam() {
   const handleWhatsApp = () => {
@@ -13,8 +14,12 @@ export default function SupportTeam() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Support Person Card */}
         <div className="flex flex-col items-center text-center">
-          <div className="w-24 h-24 md:w-32 md:h-32 bg-primary/20 rounded-full flex items-center justify-center mb-4 border-4 border-primary/30">
-            <span className="text-5xl md:text-6xl">👩‍💼</span>
+          <div className="w-32 h-40 md:w-40 md:h-52 rounded-xl overflow-hidden mb-4 border-4 border-primary/30 shadow-lg">
+            <img 
+              src={sitiImage} 
+              alt="Siti Nurhaliza - Support Team Leader" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <h4 className="text-lg md:text-xl font-bold mb-1">Siti Nurhaliza</h4>
           <p className="text-sm text-primary font-semibold mb-3">Support Team Leader</p>

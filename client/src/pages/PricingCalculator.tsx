@@ -775,7 +775,16 @@ export default function PricingCalculator() {
         whileTap={{ scale: 0.95 }}
       >
         <MessageCircle className="w-5 h-5" />
-        <span className="hidden sm:inline text-sm font-semibold">Help</span>
+        <span className="hidden sm:inline text-sm font-semibold">
+          {result ? (
+            <div className="text-left">
+              <div className="text-xs opacity-90">{selectedChef.name}</div>
+              <div className="font-bold">{formatPrice(result.chefHourly)}/hr</div>
+            </div>
+          ) : (
+            'Help'
+          )}
+        </span>
       </motion.button>
     </div>
   );

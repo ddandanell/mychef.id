@@ -5,7 +5,7 @@ import { MessageCircle, Building2, Users, Award } from 'lucide-react';
 import { SiAirbnb } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import type { MotionDiv } from 'framer-motion';
-import villaImage from '@assets/generated_images/luxury_villa_dinner_experience.png';
+import villaImage from '@assets/villa-airbnb-dinner.jpg';
 
 export default function VillaPartners() {
   const [, setLocation] = useLocation();

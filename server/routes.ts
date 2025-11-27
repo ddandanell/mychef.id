@@ -2,8 +2,34 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertQuoteSubmissionSchema } from "@shared/schema";
+import fs from "fs";
+import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve sitemap.xml for SEO
+  app.get("/sitemap.xml", (req, res) => {
+    const sitemapPath = path.join(process.cwd(), "client", "public", "sitemap.xml");
+    if (fs.existsSync(sitemapPath)) {
+      res.setHeader("Content-Type", "application/xml");
+      res.sendFile(sitemapPath);
+    } else {
+      res.status(404).send("Sitemap not found");
+    }
+  });
+
+  // Serve robots.txt for SEO crawling
+  app.get("/robots.txt", (req, res) => {
+    res.setHeader("Content-Type", "text/plain");
+    res.send(`User-agent: *
+Allow: /
+
+Sitemap: https://mychef.id/sitemap.xml
+
+# myCHEF Indonesia - Private Chef Services in Bali
+# Contact: indonesia@mychef.id
+# Phone: +62 822-3756-5997
+`);
+  });
   // Quote submission routes
   app.post("/api/quotes", async (req, res) => {
     try {

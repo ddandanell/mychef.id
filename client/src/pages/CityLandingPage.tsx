@@ -13,6 +13,7 @@ import ExperienceOverview from '@/components/ExperienceOverview';
 import ChefGallery from '@/components/ChefGallery';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import InternalLinks from '@/components/InternalLinks';
 import {
   Accordion,
   AccordionContent,
@@ -449,6 +450,8 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </div>
         </div>
       </section>
+
+      <InternalLinks currentSlug={city.slug} />
 
       <Footer />
       <WhatsAppButton />

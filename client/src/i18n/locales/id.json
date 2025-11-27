@@ -273,11 +273,23 @@
   "footer": {
     "tagline": "Menghadirkan pengalaman makan malam pribadi luar biasa ke villa dan rumah di seluruh Bali sejak 2012",
     "partnerServices": "Layanan Mitra:",
-    "businessHours": "Jam Kerja:",
+    "businessHours": "Jam Kerja",
+    "daily": "Setiap Hari",
     "dailyHours": "09:00 - 22:00 WIB (Setiap Hari)",
     "copyright": "© {{year}} myCHEF Indonesia. Hak cipta dilindungi.",
+    "allRightsReserved": "Hak cipta dilindungi.",
     "quickLinks": "Tautan Cepat",
-    "services": "Layanan",
+    "services": "Layanan Kami",
+    "premiumAreas": "Area Premium",
+    "southBali": "Bali Selatan",
+    "bukitPeninsula": "Semenanjung Bukit",
+    "moreAreas": "Area Lainnya",
+    "paymentMethods": "Metode Pembayaran",
+    "getQuote": "Dapatkan Penawaran",
+    "careers": "Karir",
+    "privacyPolicy": "Kebijakan Privasi",
+    "termsOfService": "Syarat Layanan",
+    "paymentTerms": "Syarat Pembayaran",
     "legal": "Legal",
     "links": {
       "privacy": "Kebijakan Privasi",
@@ -287,6 +299,14 @@
       "careers": "Karir",
       "about": "Tentang Kami"
     }
+  },
+  "internalLinks": {
+    "exploreMore": "Jelajahi Lebih Banyak Layanan myCHEF",
+    "subtitle": "Temukan pengalaman chef pribadi di seluruh Bali",
+    "ourServices": "Layanan Kami",
+    "servingBali": "Melayani Seluruh Bali",
+    "cantFind": "Tidak menemukan area Anda? Kami melayani seluruh Bali!",
+    "backToHome": "Kembali ke Beranda"
   },
   "languages": {
     "en": "English",

@@ -114,15 +114,37 @@
   "footer": {
     "tagline": "Bringing exceptional private dining experiences to villas and homes across Bali since 2012",
     "partnerServices": "Partner Services:",
-    "businessHours": "Business Hours:",
+    "businessHours": "Business Hours",
+    "daily": "Daily",
     "dailyHours": "09:00 - 22:00 WIB (Daily)",
     "copyright": "© {{year}} myCHEF Indonesia. All rights reserved.",
+    "allRightsReserved": "All rights reserved.",
+    "services": "Our Services",
+    "premiumAreas": "Premium Areas",
+    "southBali": "South Bali",
+    "bukitPeninsula": "Bukit Peninsula",
+    "moreAreas": "More Areas",
+    "paymentMethods": "Payment Methods",
+    "quickLinks": "Quick Links",
+    "getQuote": "Get Quote",
+    "careers": "Careers",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "paymentTerms": "Payment Terms",
     "links": {
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
       "payment": "Payment Terms",
       "quote": "Get Quote"
     }
+  },
+  "internalLinks": {
+    "exploreMore": "Explore More myCHEF Services",
+    "subtitle": "Discover private chef experiences across all of Bali",
+    "ourServices": "Our Services",
+    "servingBali": "Serving All of Bali",
+    "cantFind": "Can't find your area? We serve all of Bali!",
+    "backToHome": "Back to Homepage"
   },
   "languages": {
     "en": "English",

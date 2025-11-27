@@ -9,6 +9,7 @@ import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import InternalLinks from '@/components/InternalLinks';
 import type { ServiceData } from '@shared/serviceData';
 
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
@@ -339,6 +340,8 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
           </Button>
         </div>
       </section>
+
+      <InternalLinks currentSlug={service.slug} />
 
       <Footer />
       <WhatsAppButton />

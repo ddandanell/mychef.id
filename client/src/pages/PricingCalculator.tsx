@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MessageCircle, Calculator, CheckCircle2, Sparkles } from 'lucide-react';
+import { MessageCircle, Calculator, CheckCircle2, Sparkles, Copy, Check } from 'lucide-react';
+import { useState as useStateHook } from 'react';
 
 const CHEF_TYPES = [
   { id: 'sushi', name: 'Professional Sushi Chef', specialty: '🍣 Japanese' },
@@ -26,6 +27,7 @@ export default function PricingCalculator() {
   const [includeHelper, setIncludeHelper] = useState(false);
   const [estimateFood, setEstimateFood] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [copied, setCopied] = useStateHook(false);
 
   const chefRate = 800000;
   const helperRate = 400000;
@@ -74,6 +76,42 @@ export default function PricingCalculator() {
 
   const handleWhatsAppClick = () => {
     setLocation('/contact/confirm?source=calculator');
+  };
+
+  const getSummaryText = () => {
+    const chefName = CHEF_TYPES.find(c => c.id === chefType)?.name || 'Chef';
+    const mealsLabel = mealsPerDay === 1 ? '1 Meal' : mealsPerDay === 2 ? '2 Meals' : '3 Meals';
+    const summary = `
+📋 MYCHEF PRICE QUOTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👨‍🍳 Chef: ${chefName}
+👥 Guests: ${guests}
+🍽️ Meals per Day: ${mealsLabel}
+📅 Days: ${days}
+⏰ Total Hours: ${chefHoursTotal}h
+${includeHelper ? `🤝 Helper: Yes (+Rp ${formatIDR(helperLabor)})\n` : ''}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 Chef Service: ${formatIDR(chefLabor)}
+${includeHelper ? `💼 Helper Service: ${formatIDR(helperLabor)}\n` : ''}${days >= 30 ? `✅ Discount: -40% (Monthly)\n` : days >= 7 ? `✅ Discount: -20% (Weekly)\n` : ''}${estimateFood ? `🛒 Food Estimate: ${formatIDR(foodEstimate)}\n` : ''}
+
+💵 TOTAL ESTIMATE: ${formatIDR(totalEstimate)}
+
+Note: This is an estimate. Final pricing depends on menu and ingredients.
+Contact us on WhatsApp to confirm your booking!
+    `.trim();
+    return summary;
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(getSummaryText());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   const formatIDR = (value: number) => {
@@ -363,18 +401,51 @@ export default function PricingCalculator() {
                       )}
 
                       {/* Total Estimate */}
-                      <div className="p-4 rounded-lg bg-primary/10 border-2 border-primary">
+                      <div className="p-4 rounded-lg bg-primary/10 border-2 border-primary mb-4">
                         <p className="text-xs text-foreground/70 mb-2">Total Estimated Cost</p>
                         <p className="text-3xl font-bold text-primary mb-3" data-testid="text-total-estimate">
                           {formatIDR(totalEstimate)}
                         </p>
+                      </div>
+
+                      {/* Summary Section */}
+                      <div className="p-4 rounded-lg bg-background border-2 border-primary/20 mb-4">
+                        <p className="text-xs text-foreground/70 mb-3 font-semibold">Your Quote Summary</p>
+                        <div className="bg-primary/5 p-3 rounded text-xs font-mono text-foreground/80 mb-3 whitespace-pre-wrap break-words max-h-48 overflow-y-auto">
+                          {getSummaryText()}
+                        </div>
+                        <button
+                          onClick={handleCopy}
+                          className={`w-full py-2 px-3 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
+                            copied
+                              ? 'bg-green-100 text-green-700 border border-green-300'
+                              : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20'
+                          }`}
+                          data-testid="button-copy-summary"
+                        >
+                          {copied ? (
+                            <>
+                              <Check className="w-4 h-4" />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" />
+                              Copy Quote
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="space-y-2">
                         <Button
                           onClick={handleWhatsAppClick}
                           className="w-full bg-primary hover:bg-primary text-primary-foreground font-semibold hover-elevate active-elevate-2"
                           data-testid="button-whatsapp-calculator"
                         >
                           <MessageCircle className="w-4 h-4 mr-2" />
-                          Get Exact Quote
+                          Send Quote on WhatsApp
                         </Button>
                       </div>
                     </div>

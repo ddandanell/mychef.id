@@ -726,7 +726,7 @@ Pricing Tier: ${result.tierLabel}
                           </motion.p>
                           <div className="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary/20 text-xs font-semibold text-primary">
                             <TrendingDown className="w-3 h-3" />
-                            {result.tierLabel}
+                            {formatPrice(result.chefHourly)} per hour
                           </div>
                         </div>
 

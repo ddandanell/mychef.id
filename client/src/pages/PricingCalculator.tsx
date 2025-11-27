@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,6 +8,7 @@ import { useState as useStateHook } from 'react';
 import SupportTeam from '@/components/SupportTeam';
 import GuestTestimonials from '@/components/GuestTestimonials';
 import LiveOrders from '@/components/LiveOrders';
+import OrderNotification from '@/components/OrderNotification';
 import kitchenChefImage from '@assets/generated_images/chef_cooking_in_luxury_kitchen.png';
 
 const CHEF_TYPES = [
@@ -30,6 +31,29 @@ const CURRENCIES = [
   { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$', rate: 0.000084 },
 ];
 
+const CHEFS_MAP: Record<string, string> = {
+  sushi: 'Sushi',
+  french: 'French',
+  italian: 'Italian',
+  indonesian: 'Indonesian',
+  thai: 'Thai',
+  spanish: 'Spanish',
+  mediterranean: 'Mediterranean',
+  fusion: 'Fusion',
+  indian: 'Indian',
+};
+
+const FAMILIES_LOCATIONS: Record<string, string> = {
+  '1': { family: 'Ubud Family', location: 'Ubud', chef: 'Italian' },
+  '2': { family: 'Seminyak Guests', location: 'Seminyak', chef: 'French' },
+  '3': { family: 'Canggu Celebration', location: 'Canggu', chef: 'Fusion' },
+  '4': { family: 'Sanur Visitors', location: 'Sanur', chef: 'Indonesian' },
+  '5': { family: 'Jimbaran Group', location: 'Jimbaran', chef: 'Spanish' },
+  '6': { family: 'Kuta Party', location: 'Kuta', chef: 'Thai' },
+  '7': { family: 'Legian Friends', location: 'Legian', chef: 'Mediterranean' },
+  '8': { family: 'Uluwatu Gathering', location: 'Uluwatu', chef: 'Sushi' },
+};
+
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
   const [guests, setGuests] = useState(0);
@@ -39,6 +63,8 @@ export default function PricingCalculator() {
   const [includeHelper, setIncludeHelper] = useState(false);
   const [copied, setCopied] = useStateHook(false);
   const [currency, setCurrency] = useState('IDR');
+  const [currentNotification, setCurrentNotification] = useState<any>(null);
+  const [lastOrderId, setLastOrderId] = useState<string>('');
 
   const fromDate = dateFrom ? new Date(dateFrom) : null;
   const toDate = dateTo ? new Date(dateTo) : null;
@@ -168,8 +194,31 @@ Alternative if you prefer:
     }
   };
 
+  // Listen for new orders from LiveOrders and show notification
+  useEffect(() => {
+    const handleOrderUpdate = (event: CustomEvent) => {
+      const order = event.detail;
+      if (order && order.id !== lastOrderId) {
+        setLastOrderId(order.id);
+        setCurrentNotification({
+          id: order.id,
+          family: order.family,
+          location: order.location,
+          chef: order.chef || 'Italian',
+          timestamp: Date.now(),
+        });
+      }
+    };
+
+    window.addEventListener('orderUpdate', handleOrderUpdate as EventListener);
+    return () => window.removeEventListener('orderUpdate', handleOrderUpdate as EventListener);
+  }, [lastOrderId]);
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Order Notification */}
+      <OrderNotification order={currentNotification} />
+
       {/* Hero Background with Chef Image */}
       <div
         className="absolute inset-0 h-96 md:h-[500px] bg-cover bg-center opacity-15 pointer-events-none"

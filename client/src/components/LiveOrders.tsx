@@ -43,6 +43,19 @@ export default function LiveOrders() {
           timestamp: Date.now(),
         };
         
+        // Dispatch custom event for notification
+        const chefs = ['Sushi', 'French', 'Italian', 'Indonesian', 'Thai', 'Spanish', 'Mediterranean', 'Fusion', 'Indian'];
+        const randomChef = chefs[Math.floor(Math.random() * chefs.length)];
+        
+        window.dispatchEvent(new CustomEvent('orderUpdate', {
+          detail: {
+            id: newOrder.id,
+            family: newOrder.family,
+            location: newOrder.location,
+            chef: randomChef,
+          }
+        }));
+        
         // Keep only last 3 orders
         return [newOrder, ...prev.slice(0, 2)];
       });

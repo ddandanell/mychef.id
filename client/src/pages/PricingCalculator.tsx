@@ -3,11 +3,10 @@ import { useLocation } from 'wouter';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { 
   MessageCircle, ArrowLeft, Calendar, Users, Clock, 
-  Sun, Utensils, Moon, ShoppingCart, ChefHat, UserPlus,
-  TrendingDown, Info, Calculator, Sparkles
+  Sun, Utensils, Moon, ShoppingCart, ChefHat,
+  TrendingDown, Info, Calculator, Sparkles, Leaf
 } from 'lucide-react';
 
 const CURRENCIES = [
@@ -26,17 +25,12 @@ function getNumDaysFromDates(startDateStr: string, endDateStr: string): number {
   return Math.max(1, Math.ceil(diffMs / MS_PER_DAY) + 1);
 }
 
-function getDailyServiceHours(morning: boolean, midday: boolean, night: boolean): number {
-  const count = [morning, midday, night].filter(Boolean).length;
-  if (night) {
-    return 8;
-  } else if (morning && midday) {
-    return 5;
-  } else if (count === 1) {
-    return 3;
-  } else {
-    return 0;
-  }
+function getDailyServiceHours(breakfast: boolean, lunch: boolean, dinner: boolean): number {
+  let hours = 0;
+  if (breakfast) hours += 2;
+  if (lunch) hours += 3;
+  if (dinner) hours += 3;
+  return hours;
 }
 
 function getChefRateByHours(totalHours: number): { hourly: number; tier: string; tierLabel: string } {
@@ -57,31 +51,26 @@ interface BookingResult {
   shoppingBlocks: number;
   shoppingHours: number;
   totalChefHours: number;
-  helperHours: number;
   pricingTier: string;
   tierLabel: string;
   chefHourly: number;
-  helperHourly: number;
-  chefCost: number;
-  helperCost: number;
   totalCost: number;
-  needsHelper: boolean;
 }
 
 function calculateBooking(
   startDate: string,
   endDate: string,
   guestCount: number,
-  morning: boolean,
-  midday: boolean,
-  night: boolean
+  breakfast: boolean,
+  lunch: boolean,
+  dinner: boolean
 ): BookingResult | null {
   if (!startDate || !endDate) return null;
 
   const numDays = getNumDaysFromDates(startDate, endDate);
   if (numDays <= 0) return null;
 
-  const dailyServiceHours = getDailyServiceHours(morning, midday, night);
+  const dailyServiceHours = getDailyServiceHours(breakfast, lunch, dinner);
   if (dailyServiceHours === 0) return null;
 
   const serviceHours = dailyServiceHours * numDays;
@@ -91,13 +80,7 @@ function calculateBooking(
 
   const { hourly: chefHourly, tier: pricingTier, tierLabel } = getChefRateByHours(totalChefHours);
 
-  const helperHourly = 400000;
-  const needsHelper = guestCount > 10;
-  const helperHours = needsHelper ? totalChefHours : 0;
-
-  const chefCost = totalChefHours * chefHourly;
-  const helperCost = helperHours * helperHourly;
-  const totalCost = chefCost + helperCost;
+  const totalCost = totalChefHours * chefHourly;
 
   return {
     numDays,
@@ -107,15 +90,10 @@ function calculateBooking(
     shoppingBlocks,
     shoppingHours,
     totalChefHours,
-    helperHours,
     pricingTier,
     tierLabel,
     chefHourly,
-    helperHourly,
-    chefCost,
-    helperCost,
     totalCost,
-    needsHelper,
   };
 }
 
@@ -124,15 +102,15 @@ export default function PricingCalculator() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [guestCount, setGuestCount] = useState(4);
-  const [morning, setMorning] = useState(false);
-  const [midday, setMidday] = useState(false);
-  const [night, setNight] = useState(true);
+  const [breakfast, setBreakfast] = useState(false);
+  const [lunch, setLunch] = useState(false);
+  const [dinner, setDinner] = useState(true);
   const [currency, setCurrency] = useState('IDR');
   const [showRules, setShowRules] = useState(false);
 
   const result = useMemo(() => {
-    return calculateBooking(startDate, endDate, guestCount, morning, midday, night);
-  }, [startDate, endDate, guestCount, morning, midday, night]);
+    return calculateBooking(startDate, endDate, guestCount, breakfast, lunch, dinner);
+  }, [startDate, endDate, guestCount, breakfast, lunch, dinner]);
 
   const formatPrice = (value: number) => {
     if (currency === 'IDR') {
@@ -159,11 +137,15 @@ export default function PricingCalculator() {
   };
 
   const getMealDescription = () => {
-    if (night) return "Full day service (includes dinner)";
-    if (morning && midday) return "Morning + Lunch service";
-    if (morning) return "Breakfast service only";
-    if (midday) return "Lunch service only";
-    return "Select at least one meal";
+    const selected = [];
+    if (breakfast) selected.push('Breakfast (2h)');
+    if (lunch) selected.push('Lunch (3h)');
+    if (dinner) selected.push('Dinner (3h)');
+    
+    if (selected.length === 0) return "Select at least one meal";
+    
+    const totalHours = (breakfast ? 2 : 0) + (lunch ? 3 : 0) + (dinner ? 3 : 0);
+    return `${selected.join(' + ')} = ${totalHours} hours/day`;
   };
 
   return (
@@ -257,45 +239,51 @@ export default function PricingCalculator() {
                       <h3 className="font-semibold">Which meals do you need?</h3>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
-                      <button
-                        onClick={() => setMorning(!morning)}
+                      <motion.button
+                        onClick={() => setBreakfast(!breakfast)}
                         className={`p-3 md:p-4 rounded-lg border-2 transition-all ${
-                          morning 
+                          breakfast 
                             ? 'border-primary bg-primary/10' 
                             : 'border-primary/20 hover:border-primary/40'
                         }`}
-                        data-testid="button-morning"
+                        data-testid="button-breakfast"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <Sun className={`w-5 h-5 mx-auto mb-1.5 ${morning ? 'text-primary' : 'text-foreground/50'}`} />
-                        <p className={`text-xs font-semibold ${morning ? 'text-primary' : 'text-foreground/70'}`}>Breakfast</p>
-                        <p className="text-[10px] text-foreground/50 mt-0.5">3 hrs</p>
-                      </button>
-                      <button
-                        onClick={() => setMidday(!midday)}
+                        <Sun className={`w-5 h-5 mx-auto mb-1.5 ${breakfast ? 'text-primary' : 'text-foreground/50'}`} />
+                        <p className={`text-xs font-semibold ${breakfast ? 'text-primary' : 'text-foreground/70'}`}>Breakfast</p>
+                        <p className="text-[10px] text-foreground/50 mt-0.5">2 hours</p>
+                      </motion.button>
+                      <motion.button
+                        onClick={() => setLunch(!lunch)}
                         className={`p-3 md:p-4 rounded-lg border-2 transition-all ${
-                          midday 
+                          lunch 
                             ? 'border-primary bg-primary/10' 
                             : 'border-primary/20 hover:border-primary/40'
                         }`}
-                        data-testid="button-midday"
+                        data-testid="button-lunch"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <Utensils className={`w-5 h-5 mx-auto mb-1.5 ${midday ? 'text-primary' : 'text-foreground/50'}`} />
-                        <p className={`text-xs font-semibold ${midday ? 'text-primary' : 'text-foreground/70'}`}>Lunch</p>
-                        <p className="text-[10px] text-foreground/50 mt-0.5">3 hrs</p>
-                      </button>
-                      <button
-                        onClick={() => setNight(!night)}
+                        <Utensils className={`w-5 h-5 mx-auto mb-1.5 ${lunch ? 'text-primary' : 'text-foreground/50'}`} />
+                        <p className={`text-xs font-semibold ${lunch ? 'text-primary' : 'text-foreground/70'}`}>Lunch</p>
+                        <p className="text-[10px] text-foreground/50 mt-0.5">3 hours</p>
+                      </motion.button>
+                      <motion.button
+                        onClick={() => setDinner(!dinner)}
                         className={`p-3 md:p-4 rounded-lg border-2 transition-all ${
-                          night 
+                          dinner 
                             ? 'border-primary bg-primary/10' 
                             : 'border-primary/20 hover:border-primary/40'
                         }`}
-                        data-testid="button-night"
+                        data-testid="button-dinner"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <Moon className={`w-5 h-5 mx-auto mb-1.5 ${night ? 'text-primary' : 'text-foreground/50'}`} />
-                        <p className={`text-xs font-semibold ${night ? 'text-primary' : 'text-foreground/70'}`}>Dinner</p>
-                        <p className="text-[10px] text-foreground/50 mt-0.5">8 hrs</p>
-                      </button>
+                        <Moon className={`w-5 h-5 mx-auto mb-1.5 ${dinner ? 'text-primary' : 'text-foreground/50'}`} />
+                        <p className={`text-xs font-semibold ${dinner ? 'text-primary' : 'text-foreground/70'}`}>Dinner</p>
+                        <p className="text-[10px] text-foreground/50 mt-0.5">3 hours</p>
+                      </motion.button>
                     </div>
                     <p className="text-xs text-foreground/60 mt-3 text-center">{getMealDescription()}</p>
                   </CardContent>
@@ -314,13 +302,15 @@ export default function PricingCalculator() {
                       <h3 className="font-semibold">How many guests?</h3>
                     </div>
                     <div className="flex items-center gap-3">
-                      <button
+                      <motion.button
                         onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
                         className="w-10 h-10 rounded-lg border border-primary/20 flex items-center justify-center text-lg font-bold hover:bg-primary/10 transition-colors"
                         data-testid="button-guests-minus"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         −
-                      </button>
+                      </motion.button>
                       <input
                         type="number"
                         min="1"
@@ -330,23 +320,24 @@ export default function PricingCalculator() {
                         className="flex-1 text-center px-3 py-2.5 rounded-lg border border-primary/20 focus:border-primary outline-none font-bold text-lg"
                         data-testid="input-guests"
                       />
-                      <button
+                      <motion.button
                         onClick={() => setGuestCount(Math.min(100, guestCount + 1))}
                         className="w-10 h-10 rounded-lg border border-primary/20 flex items-center justify-center text-lg font-bold hover:bg-primary/10 transition-colors"
                         data-testid="button-guests-plus"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         +
-                      </button>
+                      </motion.button>
                     </div>
                     {guestCount > 10 && (
-                      <motion.div 
-                        className="mt-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center gap-2"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
+                      <motion.p 
+                        className="mt-3 text-xs text-foreground/60 text-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                       >
-                        <UserPlus className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                        <p className="text-xs text-amber-700">Helper automatically added for 10+ guests</p>
-                      </motion.div>
+                        Helper available at Rp 190,000/hour for larger groups
+                      </motion.p>
                     )}
                   </CardContent>
                 </Card>
@@ -380,43 +371,54 @@ export default function PricingCalculator() {
                         <div>
                           <h4 className="font-semibold flex items-center gap-2 mb-2">
                             <ChefHat className="w-4 h-4 text-primary" />
-                            Chef & Helper Rates
+                            Chef Hourly Rates
                           </h4>
                           <ul className="space-y-1 text-foreground/70 text-xs">
-                            <li>• <strong>Standard:</strong> Rp 800,000/hour (≤24 total hours)</li>
-                            <li>• <strong>Weekly:</strong> Rp 350,000/hour (25-140 hours)</li>
+                            <li>• <strong>Standard:</strong> Rp 800,000/hour (up to 24 hours)</li>
+                            <li>• <strong>Weekly:</strong> Rp 350,000/hour (25+ hours)</li>
                             <li>• <strong>Monthly:</strong> Rp 250,000/hour (140+ hours)</li>
-                            <li>• <strong>Helper:</strong> Rp 400,000/hour (auto-added for 10+ guests)</li>
                           </ul>
+                          <p className="text-xs text-foreground/50 mt-2 italic">
+                            Once you reach weekly or monthly tier, ALL hours are charged at the lower rate!
+                          </p>
                         </div>
                         <div>
                           <h4 className="font-semibold flex items-center gap-2 mb-2">
                             <Clock className="w-4 h-4 text-primary" />
-                            Hours Per Day
+                            Hours Per Meal
                           </h4>
                           <ul className="space-y-1 text-foreground/70 text-xs">
-                            <li>• <strong>1 meal</strong> (breakfast/lunch only): 3 hours</li>
-                            <li>• <strong>Breakfast + Lunch:</strong> 5 hours</li>
-                            <li>• <strong>Any option with dinner:</strong> 8 hours (full day)</li>
+                            <li>• <strong>Breakfast:</strong> 2 hours</li>
+                            <li>• <strong>Lunch:</strong> 3 hours</li>
+                            <li>• <strong>Dinner:</strong> 3 hours</li>
+                            <li className="text-foreground/50 italic">Hours add up when you select multiple meals</li>
                           </ul>
                         </div>
                         <div>
                           <h4 className="font-semibold flex items-center gap-2 mb-2">
                             <ShoppingCart className="w-4 h-4 text-primary" />
-                            Shopping Time
+                            Weekly Shopping (FREE Service)
                           </h4>
                           <ul className="space-y-1 text-foreground/70 text-xs">
-                            <li>• 2 hours shopping per started week</li>
-                            <li>• Billed at same hourly rate</li>
+                            <li>• Chef visits your villa once per week</li>
+                            <li>• Plans the menu together with you</li>
+                            <li>• You provide cash for groceries</li>
+                            <li>• Chef shops at local Bali markets</li>
+                            <li>• Fresh ingredients, your choice</li>
+                            <li>• <strong>No markup, no extra fees</strong></li>
                           </ul>
+                          <p className="text-xs text-foreground/50 mt-2 italic">
+                            2 hours shopping time per week (included in total hours)
+                          </p>
                         </div>
                         <div>
                           <h4 className="font-semibold flex items-center gap-2 mb-2">
-                            <TrendingDown className="w-4 h-4 text-primary" />
-                            Volume Discounts
+                            <Users className="w-4 h-4 text-primary" />
+                            Helper (Optional)
                           </h4>
                           <p className="text-foreground/70 text-xs">
-                            Once weekly or monthly tier is reached, <strong>all hours</strong> in your booking use the lower rate!
+                            For groups of 10+ guests, a helper is available at <strong>Rp 190,000/hour</strong>. 
+                            Contact us to add this to your booking.
                           </p>
                         </div>
                       </CardContent>
@@ -465,7 +467,7 @@ export default function PricingCalculator() {
                         className="space-y-4"
                       >
                         <div className="bg-gradient-to-br from-primary/15 to-primary/5 rounded-xl p-4 text-center border border-primary/20">
-                          <p className="text-xs text-foreground/60 mb-1">Total Estimate</p>
+                          <p className="text-xs text-foreground/60 mb-1">Chef Service Total</p>
                           <motion.p 
                             className="text-3xl font-bold text-primary"
                             key={result.totalCost}
@@ -485,6 +487,13 @@ export default function PricingCalculator() {
                           <div className="flex justify-between items-center py-2 border-b border-primary/10">
                             <span className="text-foreground/70 flex items-center gap-2">
                               <Clock className="w-4 h-4" />
+                              Daily Service
+                            </span>
+                            <span className="font-semibold">{result.dailyServiceHours}h/day</span>
+                          </div>
+                          <div className="flex justify-between items-center py-2 border-b border-primary/10">
+                            <span className="text-foreground/70 flex items-center gap-2">
+                              <Calendar className="w-4 h-4" />
                               Service Hours
                             </span>
                             <span className="font-semibold">{result.serviceHours}h</span>
@@ -499,23 +508,10 @@ export default function PricingCalculator() {
                           <div className="flex justify-between items-center py-2 border-b border-primary/10">
                             <span className="text-foreground/70 flex items-center gap-2">
                               <ChefHat className="w-4 h-4" />
-                              Total Chef Hours
+                              Total Hours
                             </span>
                             <span className="font-bold text-primary">{result.totalChefHours}h</span>
                           </div>
-                          <div className="flex justify-between items-center py-2 border-b border-primary/10">
-                            <span className="text-foreground/70">Chef Cost</span>
-                            <span className="font-semibold">{formatPrice(result.chefCost)}</span>
-                          </div>
-                          {result.needsHelper && (
-                            <div className="flex justify-between items-center py-2 border-b border-primary/10">
-                              <span className="text-foreground/70 flex items-center gap-2">
-                                <UserPlus className="w-4 h-4" />
-                                Helper Cost
-                              </span>
-                              <span className="font-semibold">{formatPrice(result.helperCost)}</span>
-                            </div>
-                          )}
                           <div className="flex justify-between items-center py-2 text-xs text-foreground/50">
                             <span>Rate per hour</span>
                             <span>{formatPrice(result.chefHourly)}/hr</span>
@@ -528,9 +524,8 @@ export default function PricingCalculator() {
                             whileTap={{ scale: 0.98 }}
                           >
                             <Button
-                              size="sm"
                               onClick={handleWhatsAppClick}
-                              className="w-full bg-primary hover:bg-primary text-primary-foreground font-semibold hover-elevate active-elevate-2"
+                              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
                               data-testid="button-book-whatsapp"
                             >
                               <MessageCircle className="w-4 h-4 mr-2" />
@@ -557,14 +552,29 @@ export default function PricingCalculator() {
 
                 <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
                   <div className="flex items-start gap-2">
+                    <Leaf className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <div className="text-xs text-foreground/70">
+                      <p className="font-semibold text-foreground mb-1">Fresh & Transparent</p>
+                      <p>
+                        Your chef shops weekly at local Bali markets with your budget. 
+                        You get the freshest ingredients, choose what you want, and pay 
+                        only what the groceries cost. <strong>No markup, no extra fees.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3 p-3 rounded-lg bg-background border border-primary/10">
+                  <div className="flex items-start gap-2">
                     <Sparkles className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <div className="text-xs text-foreground/70">
                       <p className="font-semibold text-foreground mb-1">What's included:</p>
                       <ul className="space-y-0.5">
-                        <li>✓ Professional private chef</li>
-                        <li>✓ Market shopping & ingredients</li>
-                        <li>✓ Cooking & beautiful plating</li>
-                        <li>✓ Full kitchen cleanup</li>
+                        <li>Professional private chef</li>
+                        <li>Weekly menu planning with you</li>
+                        <li>Market shopping (you provide cash)</li>
+                        <li>Cooking & beautiful plating</li>
+                        <li>Full kitchen cleanup</li>
                       </ul>
                     </div>
                   </div>

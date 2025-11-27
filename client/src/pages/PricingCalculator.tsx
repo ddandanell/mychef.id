@@ -307,6 +307,14 @@ Pricing Tier: ${result.tierLabel}
   const dateValidation = getDateValidation();
   const isDateValid = dateValidation.valid;
 
+  const roundToNearest = (value: number) => {
+    // Round up to nearest 100 for cleaner numbers
+    return Math.ceil(value / 100) * 100;
+  };
+
+  const diningOutCost = result ? roundToNearest(result.totalCost * 1.25) : 0;
+  const savingsAmount = result ? Math.max(0, diningOutCost - result.totalCost) : 0;
+
   return (
     <div className="min-h-screen bg-background">
       <div className="py-6 md:py-8 px-3 md:px-4 pb-24">
@@ -782,16 +790,16 @@ Pricing Tier: ${result.tierLabel}
 
                         <div className="space-y-4 pt-2 border-t border-primary/10">
                           <div className="bg-emerald-50 dark:bg-emerald-950/30 p-4 rounded-lg border border-emerald-200 dark:border-emerald-800">
-                            <h4 className="text-sm font-bold text-emerald-900 dark:text-emerald-100 mb-3">ROI Comparison</h4>
+                            <h4 className="text-sm font-bold text-emerald-900 dark:text-emerald-100 mb-3">Dining Out vs Private Chef</h4>
                             <div className="space-y-2 text-xs">
                               <div className="flex justify-between items-center">
-                                <span className="text-emerald-800 dark:text-emerald-200">Dining Out Cost</span>
+                                <span className="text-emerald-800 dark:text-emerald-200">If eating out instead</span>
                                 <span className="font-bold text-emerald-900 dark:text-emerald-100">
-                                  {formatPrice(1500000 * guestCount)} (Rp 1.5M × {guestCount} {guestCount === 1 ? 'person' : 'people'})
+                                  {formatPrice(diningOutCost)}
                                 </span>
                               </div>
                               <div className="flex justify-between items-center">
-                                <span className="text-emerald-800 dark:text-emerald-200">Private Chef Cost</span>
+                                <span className="text-emerald-800 dark:text-emerald-200">Your Private Chef Cost</span>
                                 <span className="font-bold text-emerald-900 dark:text-emerald-100">
                                   {formatPrice(result.totalCost)}
                                 </span>
@@ -799,7 +807,7 @@ Pricing Tier: ${result.tierLabel}
                               <div className="border-t border-emerald-200 dark:border-emerald-800 pt-2 mt-2 flex justify-between items-center">
                                 <span className="font-semibold text-emerald-900 dark:text-emerald-100">You Save</span>
                                 <span className="font-bold text-lg text-emerald-900 dark:text-emerald-100">
-                                  {formatPrice(Math.max(0, (1500000 * guestCount) - result.totalCost))}
+                                  {formatPrice(savingsAmount)}
                                 </span>
                               </div>
                             </div>

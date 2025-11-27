@@ -308,6 +308,128 @@ Contact us on WhatsApp to confirm your booking!`;
             <p className="text-xs text-foreground/60 mt-1">30+ days</p>
           </div>
         </div>
+
+        {/* Payment & Terms */}
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold mb-6">How It Works</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Payment Terms */}
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  <span className="text-xl">💳</span>
+                  Payment Terms
+                </h4>
+                <div className="space-y-3 text-sm text-foreground/70">
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">50% Deposit</p>
+                    <p className="text-xs">When you confirm your booking</p>
+                  </div>
+                  <div className="border-t border-primary/10 pt-3">
+                    <p className="font-semibold text-foreground mb-1">50% Balance</p>
+                    <p className="text-xs">On the day your chef arrives - no surprises!</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Cancellation Policy */}
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  <span className="text-xl">📋</span>
+                  Cancellation Policy
+                </h4>
+                <div className="space-y-3 text-sm text-foreground/70">
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">48 Hours Notice</p>
+                    <p className="text-xs">Full refund if you cancel 48+ hours before</p>
+                  </div>
+                  <div className="border-t border-primary/10 pt-3">
+                    <p className="font-semibold text-foreground mb-1">Illness & Emergencies</p>
+                    <p className="text-xs">If your chef gets sick, we send a replacement at no extra cost</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* What's Included */}
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  <span className="text-xl">✓</span>
+                  What's Included
+                </h4>
+                <div className="space-y-2 text-sm text-foreground/70">
+                  <p>✓ Professional chef (any cuisine)</p>
+                  <p>✓ All food shopping & market work</p>
+                  <p>✓ Complete kitchen preparation</p>
+                  <p>✓ Professional cooking</p>
+                  <p>✓ Full cleanup & presentation</p>
+                  <p>✓ All equipment & tools</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Food Cost */}
+            <Card className="border border-primary/20">
+              <CardContent className="p-6">
+                <h4 className="font-semibold mb-4 flex items-center gap-2">
+                  <span className="text-xl">🛒</span>
+                  Food Cost
+                </h4>
+                <div className="space-y-3 text-sm text-foreground/70">
+                  <p className="font-semibold text-foreground">You only pay for ingredients</p>
+                  <p className="text-xs">Your chef does all shopping at local markets. You provide cash or reimburse based on receipts - complete transparency.</p>
+                  <p className="text-xs mt-2">Our chefs know the best markets in Bali to get quality ingredients at fair prices.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Our Chefs Section */}
+        <div className="mt-12 bg-primary/10 border border-primary/20 rounded-lg p-8">
+          <h3 className="text-2xl font-bold mb-4">Professional Chef Network</h3>
+          <p className="text-foreground/70 mb-6">
+            myCHEF Indonesia brings you the best culinary professionals from around the world, right here in Bali. We maintain the highest standards of service and professionalism.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div>
+              <p className="font-semibold mb-2">🌍 International Chefs</p>
+              <p className="text-foreground/70">Award-winning chefs from France, Italy, Japan, Spain, and more - bringing world-class cuisine to your villa.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">🇮🇩 Local Expertise</p>
+              <p className="text-foreground/70">Authentic Indonesian specialists who know traditional recipes, local ingredients, and regional flavors.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">✨ Professional Standards</p>
+              <p className="text-foreground/70">All chefs are background-checked, experienced, and trained in fine dining. Your safety and satisfaction guaranteed.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Features */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="border border-primary/20">
+            <CardContent className="p-6">
+              <h4 className="font-semibold mb-4">Complete Service</h4>
+              <p className="text-sm text-foreground/70">
+                From menu planning to table service to complete cleanup - we handle everything. Your chef arrives with all equipment and leaves your kitchen spotless.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border border-primary/20">
+            <CardContent className="p-6">
+              <h4 className="font-semibold mb-4">Transparent Pricing</h4>
+              <p className="text-sm text-foreground/70">
+                No hidden fees. You pay for the chef service above. Food costs are separate - you reimburse only for ingredients actually purchased with receipts.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

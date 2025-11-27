@@ -5,6 +5,28 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
+
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: 'Romaldo',
+    review: 'Some of the best experiences I ever had. The food was incredible, the service was outstanding, and everything was handled perfectly. I felt like royalty in my own villa. Worth every rupiah and then some!',
+    rating: 5
+  },
+  {
+    id: 2,
+    name: 'Siti',
+    country: 'Indonesia',
+    review: 'This was the best investment for our villa vacation. Everything was handled perfectly from start to finish. The customized menu, the fresh ingredients from the market, the presentation — absolutely flawless. We already booked them twice!',
+    rating: 5
+  },
+  {
+    id: 3,
+    name: 'Guest',
+    review: 'The private chef experience exceeded all expectations. Professional, delicious, and completely unforgettable. We got to choose exactly what we wanted, and they made it happen. This is how vacation should be!',
+    rating: 5
+  }
+];
 import OptimizedImage from '@/components/OptimizedImage';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
@@ -16,11 +38,19 @@ export default function HeroSection() {
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length);
     }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -60,20 +90,39 @@ export default function HeroSection() {
       ))}
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16 lg:py-20">
-        <button 
-          onClick={handleViewReviews}
-          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6 hover-elevate active-elevate-2 transition-all cursor-pointer min-h-10" 
-          data-testid="badge-rating"
-          aria-label="View customer reviews"
-        >
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+        <div className="bg-gradient-to-r from-white/10 to-white/5 rounded-lg p-4 border border-white/20 backdrop-blur-sm mb-6 sm:mb-8 max-w-2xl mx-auto">
+          <div className="flex items-start gap-3">
+            <Star className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5 fill-yellow-400" />
+            <div className="flex-1">
+              <motion.div
+                key={currentTestimonial}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <p className="font-semibold text-sm text-white mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
+                <p className="text-xs text-white/80 italic">{TESTIMONIALS[currentTestimonial].review}</p>
+              </motion.div>
+              <div className="flex items-center gap-1 mt-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center gap-1 mt-3">
+            {TESTIMONIALS.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentTestimonial(idx)}
+                className={`h-1.5 rounded-full transition-all ${
+                  idx === currentTestimonial ? 'w-4 bg-white' : 'w-2 bg-white/30'
+                }`}
+                data-testid={`button-hero-testimonial-${idx}`}
+              />
             ))}
           </div>
-          <span className="text-white font-semibold">{t('hero.rating')}</span>
-          <span className="text-white/80 text-sm">• {t('hero.reviews', '1000+ Reviews')}</span>
-        </button>
+        </div>
 
         <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-6 leading-tight" data-testid="text-hero-headline">
           {t('hero.headline')}

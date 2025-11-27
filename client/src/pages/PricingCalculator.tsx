@@ -345,46 +345,6 @@ Pricing Tier: ${result.tierLabel}
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-8"
-          >
-            <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-4 border border-primary/20">
-              <div className="flex items-start gap-3">
-                <Star className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <motion.div
-                    key={currentTestimonial}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <p className="font-semibold text-sm text-foreground mb-1">{TESTIMONIALS[currentTestimonial].name}</p>
-                    <p className="text-xs text-foreground/70 italic">{TESTIMONIALS[currentTestimonial].review}</p>
-                  </motion.div>
-                  <div className="flex items-center gap-1 mt-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-primary text-primary" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-center gap-1 mt-3">
-                {TESTIMONIALS.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentTestimonial(idx)}
-                    className={`h-1.5 rounded-full transition-all ${
-                      idx === currentTestimonial ? 'w-4 bg-primary' : 'w-2 bg-primary/30'
-                    }`}
-                    data-testid={`button-testimonial-${idx}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div className="lg:col-span-3 space-y-4">

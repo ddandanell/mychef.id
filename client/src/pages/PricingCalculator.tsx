@@ -3,18 +3,19 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb } from 'lucide-react';
+import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb, Flame, Leaf, Wine, Utensils } from 'lucide-react';
 import { useState as useStateHook } from 'react';
 
 const CHEF_TYPES = [
-  { id: 'sushi', name: 'Sushi Chef' },
-  { id: 'french', name: 'French Chef' },
-  { id: 'italian', name: 'Italian Chef' },
-  { id: 'indonesian', name: 'Indonesian Chef' },
-  { id: 'thai', name: 'Thai Chef' },
-  { id: 'spanish', name: 'Spanish Chef' },
-  { id: 'mediterranean', name: 'Mediterranean Chef' },
-  { id: 'fusion', name: 'Fusion Chef' },
+  { id: 'sushi', name: 'Sushi Chef', icon: '🍣', description: 'Japanese precision & artistry', hint: 'Fresh seafood, authentic techniques' },
+  { id: 'french', name: 'French Chef', icon: '🇫🇷', description: 'Fine dining classics', hint: 'Refined sauces & elegant plating' },
+  { id: 'italian', name: 'Italian Chef', icon: '🍝', description: 'Authentic & passionate', hint: 'Fresh pasta, heritage recipes' },
+  { id: 'indonesian', name: 'Indonesian Chef', icon: '🌶️', description: 'Local Bali expertise', hint: 'Spices, tradition & island flavors' },
+  { id: 'thai', name: 'Thai Chef', icon: '🌴', description: 'Balance of flavors', hint: 'Sweet, sour, salty, spicy harmony' },
+  { id: 'spanish', name: 'Spanish Chef', icon: '🥘', description: 'Mediterranean passion', hint: 'Tapas, paella & seafood' },
+  { id: 'mediterranean', name: 'Mediterranean Chef', icon: '🫒', description: 'Healthy & vibrant', hint: 'Olive oil, fresh herbs & vegetables' },
+  { id: 'fusion', name: 'Fusion Chef', icon: '⚡', description: 'Creative innovation', hint: 'Best of multiple cuisines' },
+  { id: 'indian', name: 'Indian Chef', icon: '🍛', description: 'Spiced perfection', hint: 'Rich curries, tandoori & breads' },
 ];
 
 export default function PricingCalculator() {
@@ -236,22 +237,41 @@ We'll confirm availability and send payment details.`;
 
               {/* Change Chef */}
               <div>
-                <label className="block text-sm font-semibold mb-3">Chef Type</label>
-                <div className="grid grid-cols-2 gap-2">
+                <label className="block text-sm font-semibold mb-3 flex items-center gap-2">
+                  <ChefHat className="w-4 h-4 text-primary" />
+                  Select Chef Type
+                </label>
+                <div className="grid grid-cols-3 gap-2">
                   {CHEF_TYPES.map((chef) => (
-                    <button
-                      key={chef.id}
-                      onClick={() => setChefType(chef.id)}
-                      className={`p-2 rounded-lg border text-xs transition-all ${
-                        chefType === chef.id
-                          ? 'border-primary bg-primary/10 font-semibold'
-                          : 'border-primary/20 hover:border-primary/40'
-                      }`}
-                      data-testid={`button-chef-${chef.id}`}
-                    >
-                      {chef.name}
-                    </button>
+                    <div key={chef.id} className="group relative">
+                      <button
+                        onClick={() => setChefType(chef.id)}
+                        className={`w-full p-3 rounded-lg border transition-all duration-200 hover-elevate ${
+                          chefType === chef.id
+                            ? 'border-primary bg-primary/15 font-semibold shadow-sm'
+                            : 'border-primary/20 hover:border-primary/50 bg-background'
+                        }`}
+                        data-testid={`button-chef-${chef.id}`}
+                        title={chef.hint}
+                      >
+                        <div className="text-2xl mb-1">{chef.icon}</div>
+                        <p className="text-xs font-semibold line-clamp-1">{chef.name}</p>
+                      </button>
+                      {/* Hover Tooltip */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-foreground text-background text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 font-medium">
+                        {chef.hint}
+                      </div>
+                    </div>
                   ))}
+                </div>
+                {/* Chef Description */}
+                <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                  <p className="text-xs font-semibold text-primary mb-1">
+                    {CHEF_TYPES.find(c => c.id === chefType)?.icon} {CHEF_TYPES.find(c => c.id === chefType)?.name}
+                  </p>
+                  <p className="text-xs text-foreground/70">
+                    {CHEF_TYPES.find(c => c.id === chefType)?.description}
+                  </p>
                 </div>
               </div>
 

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Private Chef Price Calculator</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .calculator {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .field {
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .inline-options {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .inline-options label {
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .btn-primary {
+      background: #111827;
+      color: #ffffff;
+    }
+    .results {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #ddd;
+    }
+    .results p {
+      margin: 4px 0;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Private Chef Price Calculator</h1>
+  <div class="calculator">
+    <div class="field">
+      <label for="guests">Number of guests</label>
+      <input type="number" id="guests" min="1" value="4" />
+    </div>
+
+    <div class="field">
+      <label>Meals per day</label>
+      <div class="inline-options">
+        <label><input type="radio" name="mealsPerDay" value="1" checked /> 1 meal</label>
+        <label><input type="radio" name="mealsPerDay" value="2" /> 2 meals</label>
+        <label><input type="radio" name="mealsPerDay" value="3" /> 3 meals</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="days">Number of days</label>
+      <input type="number" id="days" min="1" value="1" />
+    </div>
+
+    <div class="field">
+      <label>Service type</label>
+      <div class="inline-options">
+        <label><input type="radio" name="serviceType" value="day" checked /> Day</label>
+        <label><input type="radio" name="serviceType" value="week" /> Week (20% off labor)</label>
+        <label><input type="radio" name="serviceType" value="month" /> Month (40% off labor)</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="cuisineType">Cuisine type (for food cost estimate)</label>
+      <select id="cuisineType">
+        <option value="indonesian">Indonesian (budget)</option>
+        <option value="greek">Greek</option>
+        <option value="italian">Italian</option>
+        <option value="american">American</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" onclick="handleCalculate()">Calculate</button>
+
+    <div class="results" id="results" style="display:none;">
+      <h2>Result</h2>
+      <p id="hoursInfo"></p>
+      <p id="chefLabor"></p>
+      <p id="helperLabor"></p>
+      <p id="laborTotal"></p>
+      <p id="discountInfo"></p>
+      <p id="finalServicePrice"></p>
+      <p id="shoppingEstimate"></p>
+      <p id="totalEstimate"></p>
+      <p class="note">
+        Note: Food cost is only an estimate. The actual food bill is the real supermarket receipt.
+        You only earn on labor, not ingredients.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function formatIDR(value) {
+      return "IDR " + value.toLocaleString("id-ID");
+    }
+
+    function calculateChefPricing({ guests, mealsPerDay, days, serviceType, cuisineType }) {
+      const chefRate = 800000;
+      const helperRate = 400000;
+
+      const cuisinePercentage = {
+        indonesian: 0.15,
+        greek: 0.30,
+        italian: 0.35,
+        american: 0.40
+      };
+
+      // Hours per day based on meals
+      let hoursPerDay;
+      if (mealsPerDay === 1) hoursPerDay = 4;
+      else if (mealsPerDay === 2) hoursPerDay = 6;
+      else hoursPerDay = 8;
+
+      // Monthly = always 8h/day
+      const effectiveHoursPerDay = serviceType === "month" ? 8 : hoursPerDay;
+
+      // Chef
+      const chefHoursTotal = effectiveHoursPerDay * days;
+      const chefLabor = chefHoursTotal * chefRate;
+
+      // Helper (>10 guests, 50% of chef hours)
+      const helperHoursTotal = guests > 10 ? effectiveHoursPerDay * 0.5 * days : 0;
+      const helperLabor = helperHoursTotal * helperRate;
+
+      // Labor total
+      const laborTotal = chefLabor + helperLabor;
+
+      // Discount
+      let discountRate = 0;
+      if (serviceType === "week") discountRate = 0.2;
+      else if (serviceType === "month") discountRate = 0.4;
+
+      const laborAfterDiscount = laborTotal * (1 - discountRate);
+
+      // Shopping suggestion (food cost estimate)
+      const shoppingPercentage =
+        cuisinePercentage[cuisineType] ?? cuisinePercentage.indonesian;
+      const suggestedShopping = laborAfterDiscount * shoppingPercentage;
+
+      // Final outputs
+      const finalServicePrice = laborAfterDiscount;
+      const totalEstimatedCost = finalServicePrice + suggestedShopping;
+
+      return {
+        chefLabor,
+        helperLabor,
+        laborTotal,
+        discountRate,
+        finalServicePrice,
+        suggestedShopping,
+        totalEstimatedCost,
+        effectiveHoursPerDay,
+        chefHoursTotal,
+        helperHoursTotal
+      };
+    }
+
+    function handleCalculate() {
+      const guests = parseInt(document.getElementById("guests").value || "0", 10);
+      const days = parseInt(document.getElementById("days").value || "0", 10);
+      const cuisineType = document.getElementById("cuisineType").value;
+
+      const mealsPerDay = parseInt(
+        document.querySelector('input[name="mealsPerDay"]:checked').value,
+        10
+      );
+      const serviceType = document.querySelector('input[name="serviceType"]:checked').value;
+
+      if (!guests || !days) {
+        alert("Please enter valid number of guests and days.");
+        return;
+      }
+
+      const result = calculateChefPricing({
+        guests,
+        mealsPerDay,
+        days,
+        serviceType,
+        cuisineType
+      });
+
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.style.display = "block";
+
+      document.getElementById("hoursInfo").textContent =
+        `Effective working hours per day: ${result.effectiveHoursPerDay} hours`;
+
+      document.getElementById("chefLabor").textContent =
+        `Chef labor: ${formatIDR(result.chefLabor)} (total for ${result.chefHoursTotal} hours)`;
+
+      document.getElementById("helperLabor").textContent =
+        result.helperLabor > 0
+          ? `Helper labor: ${formatIDR(result.helperLabor)} (total for ${result.helperHoursTotal} hours)`
+          : "Helper labor: none (10 guests or fewer)";
+
+      document.getElementById("laborTotal").textContent =
+        `Labor total before discount: ${formatIDR(result.laborTotal)}`;
+
+      const discountPercent = result.discountRate * 100;
+      document.getElementById("discountInfo").textContent =
+        `Discount on labor: ${discountPercent}%`;
+
+      document.getElementById("finalServicePrice").textContent =
+        `Final service price (labor after discount): ${formatIDR(result.finalServicePrice)}`;
+
+      document.getElementById("shoppingEstimate").textContent =
+        `Estimated food budget (groceries): ${formatIDR(result.suggestedShopping)} (paid according to actual receipt)`;
+
+      document.getElementById("totalEstimate").textContent =
+        `Total estimated cost (labor + estimated food): ${formatIDR(result.totalEstimatedCost)}`;
+    }
+  </script>
+</body>
+</html>

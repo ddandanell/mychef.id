@@ -982,7 +982,11 @@ Pricing Tier: ${result.tierLabel}
         <span className="hidden sm:inline text-sm font-semibold">
           {result ? (
             <div className="text-left">
-              <div className="text-xs opacity-90">{selectedChef.name}</div>
+              <div className="text-xs opacity-90">
+                {result.pricingTier === 'daily' && 'Daily'}
+                {result.pricingTier === 'weekly' && 'Weekly'}
+                {result.pricingTier === 'monthly' && 'Monthly'}
+              </div>
               <div className="font-bold">{formatPrice(result.chefHourly)}/hr</div>
             </div>
           ) : (

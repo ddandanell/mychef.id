@@ -2,7 +2,6 @@ import { Card } from '@/components/ui/card';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import trustpilotLogo from '@assets/generated_images/trustpilot_logo_&_badge_design.png';
-import medalImage from '@assets/generated_images/man_with_gold_medal_victory.png';
 
 const TRUSTPILOT_REVIEWS = [
   {
@@ -48,43 +47,6 @@ export default function TrustpilotSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {/* Medal Image with Animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-center"
-          >
-            <div className="relative overflow-hidden rounded-xl h-96 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-              <motion.img 
-                src={medalImage} 
-                alt="Excellence and Awards" 
-                className="w-full h-full object-cover"
-                data-testid="img-trustpilot-medal"
-                initial={{ scale: 1.1 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                viewport={{ once: true }}
-              />
-              {/* Overlay gradient for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              
-              {/* Floating certification badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="absolute top-6 right-6 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg flex items-center gap-2"
-              >
-                <Star className="w-4 h-4 fill-yellow-900" />
-                Award Winning
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Stats and Trustpilot Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

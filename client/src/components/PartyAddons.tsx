@@ -1,23 +1,50 @@
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageCircle, Flame, Music, Wine } from 'lucide-react';
+import { MessageCircle, Flame, Music, Wine, Utensils, Zap, BookOpen } from 'lucide-react';
+import bbqImage from '@assets/generated_images/professional_barbecue_grill_setup.png';
+import djImage from '@assets/generated_images/dj_sound_system_party.png';
+import wineImage from '@assets/generated_images/wine_tasting_experience.png';
+import sushiImage from '@assets/generated_images/premium_sushi_bar_service.png';
+import teppanyakiImage from '@assets/generated_images/live_teppanyaki_cooking_show.png';
+import balineseImage from '@assets/generated_images/balinese_cooking_class.png';
 
 const ADDONS = [
   {
     icon: Flame,
     title: 'Professional BBQ Grills',
     description: 'Large professional grills available for rent. Perfect for villa parties and BBQ feasts. We handle delivery, setup, and pickup.',
+    image: bbqImage,
   },
   {
     icon: Music,
     title: 'DJ & Sound System',
     description: 'Complete sound system with speakers, or book a professional DJ to keep your party going. Full party entertainment solutions.',
+    image: djImage,
   },
   {
     icon: Wine,
     title: 'Wine Tasting Experience',
     description: 'Partner with local Bali wineries for an elegant wine tasting paired with your dinner. Each course matched with the perfect wine selection.',
+    image: wineImage,
+  },
+  {
+    icon: Utensils,
+    title: 'Premium Sushi Bar',
+    description: 'Master sushi chef creates fresh sashimi and rolls right at your villa. Premium seafood and authentic Japanese techniques for an unforgettable experience.',
+    image: sushiImage,
+  },
+  {
+    icon: Zap,
+    title: 'Teppanyaki Cooking Show',
+    description: 'Watch our chef cook your dinner with theatrical flair and precision. Interactive dining experience with flames, skill, and showmanship at your table.',
+    image: teppanyakiImage,
+  },
+  {
+    icon: BookOpen,
+    title: 'Balinese Cooking Class',
+    description: 'Learn authentic Indonesian cuisine from a professional chef. Interactive cooking class where you prepare dishes and enjoy the meal together.',
+    image: balineseImage,
   },
 ];
 
@@ -38,16 +65,25 @@ export default function PartyAddons() {
           We don't just provide incredible chefs. We can arrange everything needed for the perfect party experience at your villa - from equipment to entertainment to wine experiences.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {ADDONS.map((addon, index) => {
             const Icon = addon.icon;
             return (
-              <Card key={index} className="hover-elevate" data-testid={`card-addon-${index}`}>
+              <Card key={index} className="hover-elevate overflow-hidden" data-testid={`card-addon-${index}`}>
+                <div className="relative w-full h-48 overflow-hidden bg-muted">
+                  <img 
+                    src={addon.image} 
+                    alt={addon.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    data-testid={`img-addon-${index}`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                </div>
                 <CardContent className="p-6 lg:p-8">
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <Icon className="w-8 h-8 text-primary" />
-                    </div>
                     <h3 className="font-serif text-xl lg:text-2xl font-semibold mb-3" data-testid={`text-addon-title-${index}`}>
                       {addon.title}
                     </h3>

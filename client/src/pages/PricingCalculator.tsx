@@ -43,7 +43,7 @@ const CHEFS_MAP: Record<string, string> = {
   indian: 'Indian',
 };
 
-const FAMILIES_LOCATIONS: Record<string, string> = {
+const FAMILIES_LOCATIONS: Record<string, { family: string; location: string; chef: string }> = {
   '1': { family: 'Ubud Family', location: 'Ubud', chef: 'Italian' },
   '2': { family: 'Seminyak Guests', location: 'Seminyak', chef: 'French' },
   '3': { family: 'Canggu Celebration', location: 'Canggu', chef: 'Fusion' },
@@ -529,29 +529,29 @@ Alternative if you prefer:
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6 text-center">How the Process Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">1</div>
+              <div className="bg-primary/3 border border-primary/10 rounded-lg p-6 text-center relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/40 text-primary rounded-full flex items-center justify-center font-bold text-sm">1</div>
                 <div className="mt-4">
                   <p className="font-semibold mb-2">Fill Details</p>
                   <p className="text-xs text-foreground/70">Select chef type, guests, and dates</p>
                 </div>
               </div>
-              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">2</div>
+              <div className="bg-primary/3 border border-primary/10 rounded-lg p-6 text-center relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/40 text-primary rounded-full flex items-center justify-center font-bold text-sm">2</div>
                 <div className="mt-4">
                   <p className="font-semibold mb-2">Get Price</p>
                   <p className="text-xs text-foreground/70">Instant calculation</p>
                 </div>
               </div>
-              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">3</div>
+              <div className="bg-primary/3 border border-primary/10 rounded-lg p-6 text-center relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/40 text-primary rounded-full flex items-center justify-center font-bold text-sm">3</div>
                 <div className="mt-4">
                   <p className="font-semibold mb-2">Copy Quote</p>
                   <p className="text-xs text-foreground/70">Professional format</p>
                 </div>
               </div>
-              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">4</div>
+              <div className="bg-primary/3 border border-primary/10 rounded-lg p-6 text-center relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/40 text-primary rounded-full flex items-center justify-center font-bold text-sm">4</div>
                 <div className="mt-4">
                   <p className="font-semibold mb-2">Book Now</p>
                   <p className="text-xs text-foreground/70">Confirm on WhatsApp</p>

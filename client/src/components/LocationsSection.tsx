@@ -1,11 +1,24 @@
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin, FileText } from 'lucide-react';
 
 const BALI_LOCATIONS = [
-  'Seminyak', 'Canggu', 'Ubud', 'Sanur', 'Nusa Dua', 'Uluwatu', 
-  'Jimbaran', 'Pererenan', 'Berawa', 'Canggu Beach', 'Umalas', 
-  'Kerobokan', 'Tanah Lot', 'Candidasa', 'Amed', 'Lovina'
+  { name: 'Seminyak', slug: 'seminyak' },
+  { name: 'Canggu', slug: 'canggu' },
+  { name: 'Ubud', slug: 'ubud' },
+  { name: 'Sanur', slug: 'sanur' },
+  { name: 'Nusa Dua', slug: 'nusa-dua' },
+  { name: 'Uluwatu', slug: 'uluwatu' },
+  { name: 'Jimbaran', slug: 'jimbaran' },
+  { name: 'Kerobokan', slug: 'kerobokan' },
+  { name: 'Denpasar', slug: 'denpasar' },
+  { name: 'Gianyar', slug: 'gianyar' },
+  { name: 'Tegallalang', slug: 'tegallalang' },
+  { name: 'Berawa', slug: 'berawa' },
+  { name: 'Pererenan', slug: 'pererenan' },
+  { name: 'Tabanan', slug: 'tabanan' },
+  { name: 'Tanah Lot', slug: 'tanah-lot' },
+  { name: 'Petitenget', slug: 'petitenget' },
 ];
 
 export default function LocationsSection() {
@@ -38,13 +51,14 @@ export default function LocationsSection() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {BALI_LOCATIONS.map((location, index) => (
-              <div 
-                key={index} 
-                className="text-center py-3 px-4 rounded-lg bg-background hover-elevate transition-all" 
-                data-testid={`text-location-bali-${index}`}
+              <Link 
+                key={index}
+                href={`/${location.slug}`}
+                className="text-center py-3 px-4 rounded-lg bg-background hover-elevate transition-all cursor-pointer"
+                data-testid={`link-location-${location.slug}`}
               >
-                <span className="text-foreground/80">{location}</span>
-              </div>
+                <span className="text-foreground/80 font-medium">{location.name}</span>
+              </Link>
             ))}
           </div>
         </div>

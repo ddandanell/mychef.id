@@ -109,13 +109,13 @@ export default function PricingSection() {
           >
             <Button
               size="sm"
-              onClick={handleQuoteClick}
+              onClick={() => window.location.href = '/calculator'}
               className="bg-primary hover:bg-primary text-primary-foreground px-4 md:px-6 py-2 md:py-3 text-sm lg:text-base font-semibold hover-elevate active-elevate-2"
               data-testid="button-pricing-quote"
             >
               <Calculator className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Get Quote</span>
-              <span className="sm:hidden">Quote</span>
+              <span className="hidden sm:inline">Use Calculator</span>
+              <span className="sm:hidden">Calculate</span>
             </Button>
           </motion.div>
           

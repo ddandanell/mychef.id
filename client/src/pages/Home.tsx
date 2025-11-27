@@ -27,6 +27,7 @@ import MotivationalPopup from '@/components/MotivationalPopup';
 import TrustBadgesCompact from '@/components/TrustBadgesCompact';
 import TrustpilotSection from '@/components/TrustpilotSection';
 import PricingPopup from '@/components/PricingPopup';
+import CalculatorCTA from '@/components/CalculatorCTA';
 
 export default function Home() {
   return (
@@ -56,6 +57,7 @@ export default function Home() {
       <ChefProfiles />
       <LocationsSection />
       <OccasionsGrid />
+      <CalculatorCTA />
       <PricingSection />
       <IngredientShoppingSection />
       <SampleMenus />

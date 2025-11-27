@@ -234,68 +234,51 @@ This offer is valid once you confirm with 50% deposit.`;
           </CardContent>
         </Card>
 
-        {/* Introduction Section */}
-        <div className="mb-12 bg-primary/5 border border-primary/20 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Why Choose myCHEF?</h2>
-          <div className="space-y-3 text-foreground/80">
-            <p>
-              We provide the <strong>most professional private chef service in Bali</strong>. Every chef is carefully selected, background-checked, and trained in fine dining restaurants worldwide.
-            </p>
-            <p>
-              <strong>Complete transparency</strong> is our promise. You pay for the chef's service above. Food costs are separate and you only pay for ingredients actually purchased at local markets - with receipts.
-            </p>
-            <p>
-              Your chef arrives with <strong>all equipment</strong>, handles everything from shopping to cooking to complete cleanup, and leaves your kitchen spotless. You only need to relax and enjoy amazing food.
-            </p>
-          </div>
-        </div>
-
-        {/* How It Works Section - TOP */}
+        {/* Pricing Tiers Reference - MOVED TO TOP with Guidance */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
-              <div className="text-3xl mb-3">1️⃣</div>
-              <p className="font-semibold mb-2">Fill Details</p>
-              <p className="text-xs text-foreground/70">Chef type, guests, dates</p>
+          <h2 className="text-2xl font-bold mb-2 text-center">Our Pricing</h2>
+          <p className="text-sm text-foreground/60 text-center mb-6">Choose your booking period below, then customize your quote in the calculator</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-8">
+            <div className="p-6 rounded-lg bg-primary/5 border-2 border-primary/10 text-center hover-elevate transition-all">
+              <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Daily</p>
+              <p className="text-xs text-foreground/60 mt-1">1-6 days</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(DAILY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">per day</p>
             </div>
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
-              <div className="text-3xl mb-3">2️⃣</div>
-              <p className="font-semibold mb-2">See Price</p>
-              <p className="text-xs text-foreground/70">Instant calculation</p>
+            <div className="p-6 rounded-lg bg-primary/10 border-2 border-primary/30 text-center hover-elevate transition-all ring-2 ring-primary/30">
+              <Home className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Weekly</p>
+              <p className="text-xs text-foreground/60 mt-1">7+ days</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(WEEKLY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">per week</p>
             </div>
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
-              <div className="text-3xl mb-3">3️⃣</div>
-              <p className="font-semibold mb-2">Copy Quote</p>
-              <p className="text-xs text-foreground/70">Professional format</p>
-            </div>
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
-              <div className="text-3xl mb-3">4️⃣</div>
-              <p className="font-semibold mb-2">Send WhatsApp</p>
-              <p className="text-xs text-foreground/70">We'll confirm & book</p>
+            <div className="p-6 rounded-lg bg-primary/5 border-2 border-primary/10 text-center hover-elevate transition-all">
+              <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
+              <p className="font-semibold text-sm text-primary">Monthly</p>
+              <p className="text-xs text-foreground/60 mt-1">30+ days</p>
+              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(MONTHLY_RATE)}</p>
+              <p className="text-xs text-foreground/60 mt-1">per month</p>
             </div>
           </div>
         </div>
 
-        {/* Calculator */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
-          {/* Input Section */}
-          <Card className="border border-primary/20 shadow-sm">
-            <CardContent className="p-4 md:p-6 space-y-4 md:space-y-5">
-              <h3 className="font-semibold text-lg">Your Details</h3>
-
-              {/* Change Chef */}
-              <div>
-                <label className="block text-sm font-semibold mb-2 md:mb-3 flex items-center gap-2">
-                  <ChefHat className="w-4 h-4 text-primary" />
-                  Chef Type
-                </label>
-                <div className="grid grid-cols-3 md:grid-cols-3 gap-2">
-                  {CHEF_TYPES.map((chef) => (
-                    <div key={chef.id} className="group relative">
+        {/* Step-by-Step Calculator Flow */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-8 text-center">Fill in Your Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
+            {/* Step 1 - Chef Type */}
+            <Card className="border border-primary/20 shadow-sm relative">
+              <div className="absolute -top-3 -left-3 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+              <CardContent className="p-4 md:p-6 space-y-4 md:space-y-5">
+                <h3 className="font-semibold text-lg">Pick Your Chef</h3>
+                <div>
+                  <div className="grid grid-cols-3 md:grid-cols-3 gap-2">
+                    {CHEF_TYPES.map((chef) => (
                       <button
+                        key={chef.id}
                         onClick={() => setChefType(chef.id)}
-                        className={`w-full p-3 rounded-lg border transition-all duration-200 hover-elevate ${
+                        className={`p-3 rounded-lg border transition-all duration-200 hover-elevate ${
                           chefType === chef.id
                             ? 'border-primary bg-primary/15 font-semibold shadow-sm'
                             : 'border-primary/20 hover:border-primary/50 bg-background'
@@ -306,155 +289,108 @@ This offer is valid once you confirm with 50% deposit.`;
                         <div className="text-2xl mb-1">{chef.icon}</div>
                         <p className="text-xs font-semibold line-clamp-1">{chef.name}</p>
                       </button>
-                      {/* Hover Tooltip */}
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-foreground text-background text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 font-medium">
-                        {chef.hint}
-                      </div>
+                    ))}
+                  </div>
+                  {chefType && (
+                    <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                      <p className="text-xs font-semibold text-primary mb-1">
+                        {CHEF_TYPES.find(c => c.id === chefType)?.icon} {CHEF_TYPES.find(c => c.id === chefType)?.name}
+                      </p>
+                      <p className="text-xs text-foreground/70">
+                        {CHEF_TYPES.find(c => c.id === chefType)?.description}
+                      </p>
                     </div>
-                  ))}
+                  )}
                 </div>
-                {/* Chef Description */}
-                <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
-                  <p className="text-xs font-semibold text-primary mb-1">
-                    {CHEF_TYPES.find(c => c.id === chefType)?.icon} {CHEF_TYPES.find(c => c.id === chefType)?.name}
-                  </p>
-                  <p className="text-xs text-foreground/70">
-                    {CHEF_TYPES.find(c => c.id === chefType)?.description}
-                  </p>
-                </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Number of Guests */}
-              <div>
-                <label className="block text-sm font-semibold mb-2 md:mb-3">👥 Guests</label>
-                <input
-                  type="number"
-                  min="1"
-                  max="50"
-                  value={guests}
-                  onChange={(e) => setGuests(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-lg font-semibold"
-                  data-testid="input-guests"
-                />
-              </div>
-
-              {/* Date Range */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
+            {/* Step 2 - Guests & Dates */}
+            <Card className="border border-primary/20 shadow-sm relative">
+              <div className="absolute -top-3 -left-3 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+              <CardContent className="p-4 md:p-6 space-y-4 md:space-y-5">
+                <h3 className="font-semibold text-lg">Guests & Dates</h3>
                 <div>
-                  <label className="block text-sm font-semibold mb-2">📅 From</label>
+                  <label className="block text-sm font-semibold mb-2">👥 Number of Guests</label>
                   <input
-                    type="date"
-                    value={dateFrom}
-                    onChange={(e) => setDateFrom(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-sm"
-                    data-testid="input-date-from"
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={guests}
+                    onChange={(e) => setGuests(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-lg font-semibold"
+                    data-testid="input-guests"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">📅 To</label>
-                  <input
-                    type="date"
-                    value={dateTo}
-                    onChange={(e) => setDateTo(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-sm"
-                    data-testid="input-date-to"
-                  />
-                </div>
-              </div>
-
-              <div className="bg-primary/5 p-3 rounded-lg text-center">
-                <p className="text-sm font-semibold text-primary">{days} day{days !== 1 ? 's' : ''}</p>
-              </div>
-
-              {/* Helper Option */}
-              {guests >= 10 && (
-                <div className="border-t border-primary/10 pt-5">
-                  <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-primary/5 transition-colors">
-                    <Checkbox
-                      checked={includeHelper}
-                      onCheckedChange={(checked) => setIncludeHelper(checked as boolean)}
-                      className="mt-1"
-                      data-testid="checkbox-helper"
+                <div className="grid grid-cols-2 gap-2 md:gap-3">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">From</label>
+                    <input
+                      type="date"
+                      value={dateFrom}
+                      onChange={(e) => setDateFrom(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-sm"
+                      data-testid="input-date-from"
                     />
-                    <div className="flex-1">
-                      <p className="font-semibold text-sm">Add Professional Helper</p>
-                      <p className="text-xs text-foreground/60 mt-1">Half the chef rate • Enhances service</p>
-                    </div>
-                  </label>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">To</label>
+                    <input
+                      type="date"
+                      value={dateTo}
+                      onChange={(e) => setDateTo(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary outline-none transition-colors text-sm"
+                      data-testid="input-date-to"
+                    />
+                  </div>
                 </div>
-              )}
+                {days > 0 && (
+                  <div className="bg-primary/5 p-3 rounded-lg text-center">
+                    <p className="text-sm font-semibold text-primary">{days} day{days !== 1 ? 's' : ''}</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
-              {guests < 10 && (
-                <p className="text-xs text-foreground/50 p-3 bg-primary/5 rounded-lg">
-                  Professional helper available for groups 10+
-                </p>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Price & Quote Section */}
-          <div className="space-y-4 md:space-y-4">
-            <Card className="border border-primary/20 shadow-sm">
-              <CardContent className="p-4 md:p-6">
-                <p className="text-xs font-semibold text-foreground/60 mb-6">YOUR QUOTE</p>
-
-                {/* Currency Selector */}
-                <div className="mb-4 flex gap-2 flex-wrap">
+            {/* Step 3 - Price */}
+            <Card className="border border-primary/20 shadow-sm relative md:col-span-1">
+              <div className="absolute -top-3 -left-3 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+              <CardContent className="p-4 md:p-6 space-y-4">
+                <h3 className="font-semibold text-lg">Your Price</h3>
+                <div className="bg-primary/10 rounded-lg p-4 text-center border border-primary/20">
+                  <p className="text-xs text-foreground/60 mb-2">Total Price</p>
+                  <p className="text-3xl font-bold text-primary" data-testid="text-total-estimate">
+                    {days > 0 ? formatPrice(totalPrice) : '—'}
+                  </p>
+                  {days > 0 && <p className="text-xs text-foreground/60 mt-2">{tier}</p>}
+                </div>
+                <div className="space-y-2">
                   {CURRENCIES.map((curr) => (
                     <button
                       key={curr.code}
                       onClick={() => setCurrency(curr.code)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                      className={`w-full px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
                         currency === curr.code
                           ? 'bg-primary text-primary-foreground'
                           : 'bg-primary/10 text-primary hover:bg-primary/20'
                       }`}
                       data-testid={`button-currency-${curr.code}`}
-                      title={curr.name}
                     >
                       {curr.code}
                     </button>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
 
-                {/* Chef Price */}
-                <div className="mb-6">
-                  <p className="text-xs text-foreground/60 mb-2">Chef Service</p>
-                  <p className="text-3xl font-bold text-primary" data-testid="text-chef-price">
-                    {formatPrice(chefPrice)}
-                  </p>
-                  <p className="text-xs text-foreground/60 mt-2">{tier}</p>
-                </div>
-
-                {/* Helper Price */}
-                {includeHelper && (
-                  <div className="mb-6 pb-6 border-b border-primary/10">
-                    <p className="text-xs text-foreground/60 mb-2">Helper Service</p>
-                    <p className="text-lg font-semibold text-primary">{formatPrice(helperPrice)}</p>
-                  </div>
-                )}
-
-                {/* Total */}
-                <div className="bg-primary/15 rounded-lg p-4 mb-6">
-                  <p className="text-xs text-foreground/70 mb-2">TOTAL PRICE</p>
-                  <p className="text-4xl font-bold text-primary" data-testid="text-total-estimate">
-                    {formatPrice(totalPrice)}
-                  </p>
-                </div>
-
-                {/* Action Options */}
-                <div className="bg-primary/5 p-3 rounded-lg mb-4 text-xs text-foreground/70">
-                  <p className="font-semibold text-foreground mb-2">What would you like to do?</p>
-                  <ul className="space-y-1">
-                    <li>📋 <span className="font-semibold">Copy Quote</span> - Share with friends or colleagues</li>
-                    <li>💬 <span className="font-semibold">Send WhatsApp</span> - Book directly or ask questions</li>
-                  </ul>
-                </div>
-
-                {/* Copy & Send */}
+            {/* Step 4 - Actions */}
+            <Card className="border border-primary/20 shadow-sm relative md:col-span-1">
+              <div className="absolute -top-3 -left-3 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">4</div>
+              <CardContent className="p-4 md:p-6 space-y-4">
+                <h3 className="font-semibold text-lg">Next Steps</h3>
                 <button
                   onClick={handleCopy}
-                  className={`w-full py-2 px-3 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 mb-3 ${
+                  className={`w-full py-3 px-3 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
                     copied
                       ? 'bg-green-100 text-green-700 border border-green-300'
                       : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20'
@@ -464,81 +400,28 @@ This offer is valid once you confirm with 50% deposit.`;
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied to Clipboard!
+                      Copied!
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4" />
-                      Copy Full Quote
+                      Copy Quote
                     </>
                   )}
                 </button>
-
                 <Button
                   onClick={handleWhatsAppClick}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold hover-elevate active-elevate-2"
                   data-testid="button-whatsapp-calculator"
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
-                  Send on WhatsApp
+                  Book on WhatsApp
                 </Button>
               </CardContent>
             </Card>
-
-            {/* What's Included Card */}
-            <Card className="border border-primary/20 shadow-sm">
-              <CardContent className="p-3 md:p-4">
-                <p className="text-xs font-semibold text-foreground/70 mb-3">WHAT'S INCLUDED</p>
-                <div className="space-y-2 text-xs text-foreground/70">
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span>Professional cooking</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span>All food shopping</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span>Complete cleanup</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span>All equipment</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
 
-        {/* Pricing Tiers Reference with Icons */}
-        <div className="mb-8 md:mb-12">
-          <h3 className="text-lg font-semibold mb-4 text-center">Pricing Tiers</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
-              <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-              <p className="font-semibold text-sm text-primary">Short-Term</p>
-              <p className="text-xs text-foreground/60 mt-1">Daily Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(DAILY_RATE)}</p>
-              <p className="text-xs text-foreground/60 mt-1">per day</p>
-            </div>
-            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
-              <Home className="w-8 h-8 text-primary mx-auto mb-3" />
-              <p className="font-semibold text-sm text-primary">Mid-Term</p>
-              <p className="text-xs text-foreground/60 mt-1">Weekly Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(WEEKLY_RATE)}</p>
-              <p className="text-xs text-foreground/60 mt-1">7+ days</p>
-            </div>
-            <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 text-center hover-elevate transition-all">
-              <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
-              <p className="font-semibold text-sm text-primary">Long-Term</p>
-              <p className="text-xs text-foreground/60 mt-1">Monthly Booking</p>
-              <p className="text-2xl font-bold mt-3 text-primary">{formatPrice(MONTHLY_RATE)}</p>
-              <p className="text-xs text-foreground/60 mt-1">30+ days</p>
-            </div>
-          </div>
-        </div>
 
         {/* Food & Shopping Explanation */}
         <div className="mb-8 md:mb-12">
@@ -575,6 +458,61 @@ This offer is valid once you confirm with 50% deposit.`;
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Helper Option - Optional */}
+        {guests >= 10 && (
+          <Card className="mb-8 md:mb-12 border border-primary/20">
+            <CardContent className="p-4 md:p-6">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <Checkbox
+                  checked={includeHelper}
+                  onCheckedChange={(checked) => setIncludeHelper(checked as boolean)}
+                  className="mt-1"
+                  data-testid="checkbox-helper"
+                />
+                <div className="flex-1">
+                  <p className="font-semibold">Add Professional Helper (Optional)</p>
+                  <p className="text-xs text-foreground/60 mt-1">Half the chef rate • Perfect for groups 10+</p>
+                </div>
+              </label>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* How It Works - MOVED TO BOTTOM */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">How the Process Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">1</div>
+              <div className="mt-4">
+                <p className="font-semibold mb-2">Fill Details</p>
+                <p className="text-xs text-foreground/70">Select chef type, number of guests, and booking dates</p>
+              </div>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">2</div>
+              <div className="mt-4">
+                <p className="font-semibold mb-2">Get Price</p>
+                <p className="text-xs text-foreground/70">Instant calculation with your custom quote</p>
+              </div>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">3</div>
+              <div className="mt-4">
+                <p className="font-semibold mb-2">Copy Quote</p>
+                <p className="text-xs text-foreground/70">Professional format ready to share</p>
+              </div>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">4</div>
+              <div className="mt-4">
+                <p className="font-semibold mb-2">Book Now</p>
+                <p className="text-xs text-foreground/70">We'll confirm & arrange your chef</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Terms & Conditions */}

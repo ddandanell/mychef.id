@@ -71,23 +71,16 @@ export default function MotivationalPopup() {
       <AnimatePresence>
         {displayedText && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            initial={{ opacity: 0, y: 40, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.8 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="pointer-events-auto"
+            exit={{ opacity: 0, y: 40, scale: 0.9 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="pointer-events-auto flex flex-col items-end"
           >
-            <div className="relative max-w-xs">
-              <div className="absolute -top-6 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap max-w-[200px] truncate">
-                {displayedText || currentMessage}
-              </div>
-              <div className="bg-gradient-to-r from-primary to-primary/80 text-white rounded-lg shadow-xl p-3 sm:p-4 border border-primary/50 flex items-start gap-2 mt-2">
-                <MessageCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-primary-foreground/90" />
-                <div className="flex-1">
-                  <p className="text-xs sm:text-sm font-medium leading-relaxed min-h-6">{displayedText}{isTyping && <span className="animate-pulse">|</span>}</p>
-                </div>
-              </div>
+            <div className="bg-primary text-primary-foreground rounded-2xl rounded-tr-none shadow-lg px-4 py-3 max-w-xs mb-2">
+              <p className="text-sm font-medium leading-relaxed">{displayedText}{isTyping && <span className="animate-pulse">|</span>}</p>
             </div>
+            <MessageCircle className="w-6 h-6 text-primary flex-shrink-0" />
           </motion.div>
         )}
       </AnimatePresence>

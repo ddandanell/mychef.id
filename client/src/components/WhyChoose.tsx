@@ -8,9 +8,9 @@ import { motion } from 'framer-motion';
 
 const STATS = [
   { number: '5+', label: 'Years Experience', icon: Crown, size: 'large', highlight: true },
-  { number: '10+', label: 'Chef Specialties', icon: ChefHat, size: 'medium' },
-  { number: '25+', label: 'Cuisine Types', icon: Globe2, size: 'medium' },
-  { number: '2+', label: 'Years Training', icon: BookOpen, size: 'small' },
+  { number: '10+', label: 'Chef Specialties', icon: ChefHat, size: 'large', highlight: true },
+  { number: '25+', label: 'Cuisine Types', icon: Globe2, size: 'large', highlight: true },
+  { number: '2+', label: 'Years Training', icon: Award, size: 'large', highlight: true },
 ];
 
 const CHEF_FEATURES = [
@@ -76,7 +76,7 @@ export default function WhyChoose() {
 
         {/* Stats Grid - Credential Display */}
         <div className="mb-16 perspective">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {STATS.map((stat, index) => {
               const Icon = stat.icon;
               const isLarge = stat.size === 'large';
@@ -90,7 +90,7 @@ export default function WhyChoose() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={isLarge ? 'md:col-span-1 md:row-span-2' : ''}
+                  className={'md:col-span-1'}
                 >
                   <Card
                     className={`hover-elevate transition-all duration-500 overflow-hidden h-full ${

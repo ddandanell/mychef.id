@@ -59,15 +59,15 @@ export default function LanguageSelector() {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       {LANGUAGES.map((language, index) => (
         <button
           key={language.code}
           onClick={() => handleLanguageChange(language.code)}
-          className={`p-2 rounded-md transition-all hover-elevate active-elevate-2 border border-transparent ${
+          className={`px-3 py-2 rounded-lg transition-all hover-elevate active-elevate-2 border font-semibold text-sm flex items-center gap-2 ${
             currentLanguage.code === language.code 
-              ? 'bg-primary/10 border-primary/30' 
-              : 'hover:bg-foreground/5'
+              ? 'bg-primary text-primary-foreground border-primary shadow-lg' 
+              : 'border-muted hover:border-primary/50 text-foreground hover:bg-foreground/5'
           }`}
           title={language.name}
           data-testid={`button-language-${language.code}`}
@@ -75,8 +75,9 @@ export default function LanguageSelector() {
         >
           <div className="flex items-center gap-1.5">
             {renderFlag(language.flagType, index)}
+            <span className="hidden sm:inline">{language.code.toUpperCase()}</span>
             {currentLanguage.code === language.code && (
-              <Check className="w-3 h-3 text-primary" strokeWidth={3} />
+              <Check className="w-4 h-4 stroke-2" />
             )}
           </div>
         </button>

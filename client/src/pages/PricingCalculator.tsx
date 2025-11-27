@@ -6,7 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { 
   MessageCircle, ArrowLeft, Calendar, Users, Clock, 
   Sun, Utensils, Moon, ShoppingCart, ChefHat,
-  TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2
+  TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2,
+  ShoppingBag, Flame, Wine, Zap
 } from 'lucide-react';
 
 const CURRENCIES = [
@@ -712,14 +713,38 @@ export default function PricingCalculator() {
                   <div className="flex items-start gap-2">
                     <Sparkles className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <div className="text-xs text-foreground/70">
-                      <p className="font-semibold text-foreground mb-1">What's included:</p>
-                      <ul className="space-y-0.5">
-                        <li>Professional private chef</li>
-                        <li>Weekly menu planning with you</li>
-                        <li>Market shopping (you provide cash)</li>
-                        <li>Cooking & beautiful plating</li>
-                        <li>Full kitchen cleanup</li>
-                      </ul>
+                      <p className="font-semibold text-foreground mb-3">Complete Done-For-You Service</p>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <ShoppingBag className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium text-foreground">Buys All Groceries</p>
+                            <p className="text-foreground/60">Shops local Bali markets for freshest ingredients with your budget</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Flame className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium text-foreground">Prepares All Food</p>
+                            <p className="text-foreground/60">Plans menu, cooks every meal, handles all meal prep & cooking</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Wine className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium text-foreground">Serves & Presents</p>
+                            <p className="text-foreground/60">Beautiful plating and professional food service at your table</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Zap className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium text-foreground">Complete Cleanup</p>
+                            <p className="text-foreground/60">Full kitchen cleanup, dishes, and all tidying after every service</p>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-xs text-primary font-semibold mt-3 pt-2 border-t border-primary/10">You enjoy vacation — we handle everything.</p>
                     </div>
                   </div>
                 </div>

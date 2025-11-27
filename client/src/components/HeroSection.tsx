@@ -121,13 +121,9 @@ export default function HeroSection() {
         </div>
 
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-white text-sm">
-          <div className="flex items-center gap-2 bg-green-500/20 border border-green-500/50 rounded-full px-4 py-2">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="font-medium">Available Today & Tomorrow</span>
-          </div>
           <div className="flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/50 rounded-full px-4 py-2">
             <Star className="w-4 h-4 fill-yellow-300 text-yellow-300" />
-            <span className="font-medium">Limited slots - Book now</span>
+            <span className="font-medium">Limited slots - Book 48+ hours in advance</span>
           </div>
         </div>
 

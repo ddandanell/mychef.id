@@ -15,7 +15,7 @@ const MOTIVATIONAL_MESSAGES = [
   "Concerned about quality and trust? All our chefs are background-checked, certified, and fully insured.",
   "Your villa deserves the best. Let us bring fine dining to your home with personalized service and premium ingredients.",
   "Planning an event? Our chefs handle everything - menu planning, shopping, cooking, and cleanup.",
-  "Looking for same-day availability? We often have openings today and tomorrow - let's create something amazing together.",
+  "Book at least 48 hours in advance and let us create something amazing for your special occasion.",
 ];
 
 export default function MotivationalPopup() {

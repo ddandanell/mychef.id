@@ -2,7 +2,39 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck, FileText } from 'lucide-react';
+import { MessageCircle, ChefHat, Star, Users, Sparkles, Award, ShieldCheck, FileText, Globe } from 'lucide-react';
+
+const CHEF_SPECIALISTS = [
+  {
+    cuisine: 'Indonesian',
+    count: '50+',
+    icon: '🇮🇩',
+    chefs: [
+      { name: 'Chef Ketut', specialty: 'Balinese Traditional', exp: '12 years' },
+      { name: 'Chef Wayan', specialty: 'Rijsttafel & Rendang', exp: '8 years' },
+      { name: 'Chef Putu', specialty: 'Street Food & Fusion', exp: '7 years' },
+      { name: 'Chef Made', specialty: 'Seafood Specialties', exp: '10 years' },
+      { name: 'Chef Dewi', specialty: 'Vegan Indonesian', exp: '6 years' },
+    ]
+  },
+  {
+    cuisine: 'Japanese',
+    count: '2',
+    icon: '🇯🇵',
+    chefs: [
+      { name: 'Chef Hiroshi', specialty: 'Sushi & Omakase', exp: '15 years' },
+      { name: 'Chef Yuki', specialty: 'Teppanyaki & Yakitori', exp: '11 years' },
+    ]
+  },
+  {
+    cuisine: 'Italian',
+    count: '1',
+    icon: '🇮🇹',
+    chefs: [
+      { name: 'Chef Marco', specialty: 'Pasta & Fine Dining', exp: '13 years' },
+    ]
+  },
+];
 
 const PRICING_EXAMPLES = [
   {
@@ -173,6 +205,37 @@ export default function ChefProfiles() {
             </p>
           </CardContent>
         </Card>
+
+        <h3 className="text-2xl font-semibold text-center mb-8 mt-12" data-testid="text-chef-specialties-headline">
+          Our Specialist Chefs by Cuisine
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {CHEF_SPECIALISTS.map((specialty, idx) => (
+            <Card key={idx} className="border-2 border-primary/20 hover:border-primary transition-colors" data-testid={`card-chef-specialty-${idx}`}>
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-4xl">{specialty.icon}</div>
+                  <div>
+                    <CardTitle className="text-xl">{specialty.cuisine}</CardTitle>
+                    <p className="text-sm text-primary font-bold">{specialty.count} Chefs Available</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-3">
+                  {specialty.chefs.map((chef, i) => (
+                    <div key={i} className="p-3 rounded-lg bg-primary/5 border border-primary/10">
+                      <p className="font-semibold text-foreground">{chef.name}</p>
+                      <p className="text-xs text-primary font-medium">{chef.specialty}</p>
+                      <p className="text-xs text-foreground/60 mt-1">{chef.exp} experience</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button

@@ -29,6 +29,7 @@ import TrustpilotSection from '@/components/TrustpilotSection';
 import PricingPopup from '@/components/PricingPopup';
 import CalculatorCTA from '@/components/CalculatorCTA';
 import ReviewPlatforms from '@/components/ReviewPlatforms';
+import TrustedByCompanies from '@/components/TrustedByCompanies';
 
 export default function Home() {
   return (
@@ -55,6 +56,7 @@ export default function Home() {
       <TrustpilotSection />
       <TestimonialCarousel />
       <ReviewPlatforms />
+      <TrustedByCompanies />
       <ChefShowcase />
       <ChefProfiles />
       <LocationsSection />

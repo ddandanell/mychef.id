@@ -1,7 +1,15 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { ShoppingCart, Clock, DollarSign, Star, CheckCircle2 } from 'lucide-react';
+import { ShoppingCart, Clock, DollarSign, Star, CheckCircle2, MessageCircle, FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useLocation } from 'wouter';
 
 export default function IngredientShoppingSection() {
+  const [, setLocation] = useLocation();
+  
+  const handleQuoteClick = () => {
+    setLocation('/contact/confirm?source=ingredientShopping');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

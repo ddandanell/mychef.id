@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { AnimatePresence } from "framer-motion";
 import LanguageSplash from "@/components/LanguageSplash";
 import Home from "@/pages/Home";
@@ -14,40 +14,44 @@ import JoinOurTeam from "@/pages/JoinOurTeam";
 import ContactConfirm from "@/pages/ContactConfirm";
 import QuoteFunnel from "@/pages/QuoteFunnel";
 import AdminQuotes from "@/pages/AdminQuotes";
-import SeminyakPage from "@/pages/SeminyakPage";
-import CangguPage from "@/pages/CangguPage";
-import UbudPage from "@/pages/UbudPage";
-import SanurPage from "@/pages/SanurPage";
-import NusaDuaPage from "@/pages/NusaDuaPage";
-import UluwatuPage from "@/pages/UluwatuPage";
-import JimbaranPage from "@/pages/JimbaranPage";
-import KutaPage from "@/pages/KutaPage";
-import LegianPage from "@/pages/LegianPage";
-import KerobokanPage from "@/pages/KerobokanPage";
-import PetitengetPage from "@/pages/PetitengetPage";
-import BerawaPage from "@/pages/BerawaPage";
-import PererenanPage from "@/pages/PererenanPage";
-import TanahLotPage from "@/pages/TanahLotPage";
-import TabananPage from "@/pages/TabananPage";
-import DenpasarPage from "@/pages/DenpasarPage";
-import GianyarPage from "@/pages/GianyarPage";
-import TegallalangPage from "@/pages/TegallalangPage";
-import AmedPage from "@/pages/AmedPage";
-import LovinaPage from "@/pages/LovinaPage";
-import CandidasaPage from "@/pages/CandidasaPage";
-import PadangBaiPage from "@/pages/PadangBaiPage";
-import BukitPage from "@/pages/BukitPage";
-import UngasanPage from "@/pages/UngasanPage";
-import PecatuPage from "@/pages/PecatuPage";
-import VillaPartiesPage from "@/pages/services/VillaPartiesPage";
-import RomanticDinnersPage from "@/pages/services/RomanticDinnersPage";
-import BirthdayCelebrationsPage from "@/pages/services/BirthdayCelebrationsPage";
-import FamilyReunionsPage from "@/pages/services/FamilyReunionsPage";
-import CorporateEventsPage from "@/pages/services/CorporateEventsPage";
-import WeddingCelebrationsPage from "@/pages/services/WeddingCelebrationsPage";
-import CookingClassesPage from "@/pages/services/CookingClassesPage";
-import WeeklyMealPrepPage from "@/pages/services/WeeklyMealPrepPage";
 import NotFound from "@/pages/not-found";
+
+// Lazy load all city pages
+const SeminyakPage = lazy(() => import("@/pages/SeminyakPage"));
+const CangguPage = lazy(() => import("@/pages/CangguPage"));
+const UbudPage = lazy(() => import("@/pages/UbudPage"));
+const SanurPage = lazy(() => import("@/pages/SanurPage"));
+const NusaDuaPage = lazy(() => import("@/pages/NusaDuaPage"));
+const UluwatuPage = lazy(() => import("@/pages/UluwatuPage"));
+const JimbaranPage = lazy(() => import("@/pages/JimbaranPage"));
+const KutaPage = lazy(() => import("@/pages/KutaPage"));
+const LegianPage = lazy(() => import("@/pages/LegianPage"));
+const KerobokanPage = lazy(() => import("@/pages/KerobokanPage"));
+const PetitengetPage = lazy(() => import("@/pages/PetitengetPage"));
+const BerawaPage = lazy(() => import("@/pages/BerawaPage"));
+const PererenanPage = lazy(() => import("@/pages/PererenanPage"));
+const TanahLotPage = lazy(() => import("@/pages/TanahLotPage"));
+const TabananPage = lazy(() => import("@/pages/TabananPage"));
+const DenpasarPage = lazy(() => import("@/pages/DenpasarPage"));
+const GianyarPage = lazy(() => import("@/pages/GianyarPage"));
+const TegallalangPage = lazy(() => import("@/pages/TegallalangPage"));
+const AmedPage = lazy(() => import("@/pages/AmedPage"));
+const LovinaPage = lazy(() => import("@/pages/LovinaPage"));
+const CandidasaPage = lazy(() => import("@/pages/CandidasaPage"));
+const PadangBaiPage = lazy(() => import("@/pages/PadangBaiPage"));
+const BukitPage = lazy(() => import("@/pages/BukitPage"));
+const UngasanPage = lazy(() => import("@/pages/UngasanPage"));
+const PecatuPage = lazy(() => import("@/pages/PecatuPage"));
+
+// Lazy load all service pages
+const VillaPartiesPage = lazy(() => import("@/pages/services/VillaPartiesPage"));
+const RomanticDinnersPage = lazy(() => import("@/pages/services/RomanticDinnersPage"));
+const BirthdayCelebrationsPage = lazy(() => import("@/pages/services/BirthdayCelebrationsPage"));
+const FamilyReunionsPage = lazy(() => import("@/pages/services/FamilyReunionsPage"));
+const CorporateEventsPage = lazy(() => import("@/pages/services/CorporateEventsPage"));
+const WeddingCelebrationsPage = lazy(() => import("@/pages/services/WeddingCelebrationsPage"));
+const CookingClassesPage = lazy(() => import("@/pages/services/CookingClassesPage"));
+const WeeklyMealPrepPage = lazy(() => import("@/pages/services/WeeklyMealPrepPage"));
 
 function Router() {
   return (
@@ -116,7 +120,9 @@ function App() {
           ) : (
             <>
               <Toaster />
-              <Router />
+              <Suspense fallback={<div className="w-full h-screen flex items-center justify-center"><p>Loading...</p></div>}>
+                <Router />
+              </Suspense>
             </>
           )}
         </AnimatePresence>

@@ -22,12 +22,14 @@ import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
 import { FloatingOrbs, SideAccents } from '@/components/AnimatedDecorations';
+import MotivationalPopup from '@/components/MotivationalPopup';
 
 export default function Home() {
   return (
     <div className="min-h-screen relative">
       <FloatingOrbs />
       <SideAccents />
+      <MotivationalPopup />
       <SEO 
         title="Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia"
         description="Experience culinary excellence with myCHEF Indonesia's private chef services in Bali. Expert chefs, personalized menus, and premium ingredients delivered to your villa. Serving Seminyak, Ubud, Canggu & more since 2012. From Rp 800,000/hour."

@@ -129,10 +129,11 @@ export default function VillaPartners() {
                         onClick={handleWhatsAppClick}
                         className="w-full bg-primary hover:bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold hover-elevate active-elevate-2"
                         data-testid="button-villa-partners-whatsapp"
-                    >
-                      <MessageCircle className="w-5 h-5 mr-2" />
-                      Partner With myCHEF Today
-                    </Button>
+                      >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Partner With myCHEF
+                      </Button>
+                    </motion.div>
                     <p className="text-xs text-foreground/60 mt-3 text-center">
                       Join 560+ successful villa partners across Bali
                     </p>

@@ -276,6 +276,29 @@ Pricing Tier: ${result.tierLabel}
     return `${selected.join(' + ')} = ${totalHours} hours/day`;
   };
 
+  const getDateValidation = () => {
+    if (!startDate) return { valid: true, message: '' };
+    
+    const now = new Date();
+    const start = new Date(startDate);
+    const hoursUntilStart = (start.getTime() - now.getTime()) / (1000 * 60 * 60);
+    
+    // Check if date is in the past
+    if (hoursUntilStart < 0) {
+      return { valid: false, message: '❌ Cannot select past dates', type: 'error' };
+    }
+    
+    // Check if at least 48 hours in future
+    if (hoursUntilStart < 48) {
+      return { valid: false, message: '⏰ Booking must be at least 48 hours in advance', type: 'warning' };
+    }
+    
+    return { valid: true, message: '✓ Date is valid', type: 'success' };
+  };
+
+  const dateValidation = getDateValidation();
+  const isDateValid = dateValidation.valid;
+
   return (
     <div className="min-h-screen bg-background">
       <div className="py-6 md:py-8 px-3 md:px-4 pb-24">
@@ -406,7 +429,9 @@ Pricing Tier: ${result.tierLabel}
                           type="date"
                           value={startDate}
                           onChange={(e) => setStartDate(e.target.value)}
-                          className="w-full px-3 py-2.5 rounded-lg border border-primary/20 focus:border-primary focus:ring-1 focus:ring-primary/30 outline-none transition-all text-sm bg-background"
+                          className={`w-full px-3 py-2.5 rounded-lg border focus:ring-1 outline-none transition-all text-sm bg-background ${
+                            !isDateValid ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-primary/20 focus:border-primary focus:ring-primary/30'
+                          }`}
                           data-testid="input-start-date"
                         />
                       </div>
@@ -422,7 +447,21 @@ Pricing Tier: ${result.tierLabel}
                         />
                       </div>
                     </div>
-                    {result && (
+                    {startDate && (
+                      <motion.div 
+                        className={`mt-3 p-2.5 rounded-lg text-center text-xs font-medium border ${
+                          isDateValid 
+                            ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-200' 
+                            : 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800 text-red-700 dark:text-red-200'
+                        }`}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        data-testid="text-date-validation"
+                      >
+                        {dateValidation.message}
+                      </motion.div>
+                    )}
+                    {result && isDateValid && (
                       <motion.div 
                         className="mt-3 p-2 rounded-lg bg-primary/5 border border-primary/10 text-center"
                         initial={{ opacity: 0, scale: 0.95 }}

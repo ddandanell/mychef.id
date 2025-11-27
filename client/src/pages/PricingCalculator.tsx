@@ -25,7 +25,6 @@ export default function PricingCalculator() {
   const [days, setDays] = useState(1);
   const [chefType, setChefType] = useState('indonesian');
   const [includeHelper, setIncludeHelper] = useState(false);
-  const [estimateFood, setEstimateFood] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [copied, setCopied] = useStateHook(false);
 
@@ -50,11 +49,7 @@ export default function PricingCalculator() {
   
   // For display purposes
   const chefHoursTotal = 8 * days;
-  const laborAfterDiscount = laborTotal;
-
-  // Food estimate (optional)
-  const foodEstimate = estimateFood ? laborAfterDiscount * 0.2 : 0;
-  const totalEstimate = laborAfterDiscount + foodEstimate;
+  const totalEstimate = laborTotal;
 
   const handleWhatsAppClick = () => {
     setLocation('/contact/confirm?source=calculator');
@@ -84,10 +79,10 @@ ${includeHelper ? `🤝 Helper: Yes (+Rp ${formatIDR(helperLabor)})\n` : ''}
 
 💰 Chef Service: ${formatIDR(chefLabor)}
 ${includeHelper ? `💼 Helper Service: ${formatIDR(helperLabor)}\n` : ''}${pricingNote}
-${estimateFood ? `🛒 Food Estimate: ${formatIDR(foodEstimate)}\n` : ''}
+
 💵 TOTAL ESTIMATE: ${formatIDR(totalEstimate)}
 
-Note: This is an estimate. Final pricing depends on menu and ingredients.
+Note: Final pricing includes all services (cooking, cleanup, shopping).
 Contact us on WhatsApp to confirm your booking!
     `.trim();
     return summary;
@@ -284,24 +279,6 @@ Contact us on WhatsApp to confirm your booking!
                   </label>
                 </div>
 
-                {/* Include Food Estimate */}
-                <div className="p-4 rounded-lg border-2 border-primary/20 bg-primary/5">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <Checkbox
-                      checked={estimateFood}
-                      onCheckedChange={(checked) => setEstimateFood(checked as boolean)}
-                      className="mt-1"
-                      data-testid="checkbox-food"
-                    />
-                    <div className="flex-1">
-                      <p className="font-semibold">Include Food Cost Estimate</p>
-                      <p className="text-xs text-foreground/70 mt-1">
-                        Rough estimate only - Final cost based on actual menu & market prices
-                      </p>
-                    </div>
-                  </label>
-                </div>
-
                 {/* Calculate Button */}
                 <button
                   onClick={() => setShowResults(true)}
@@ -344,7 +321,7 @@ Contact us on WhatsApp to confirm your booking!
                     <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
                       <p className="text-xs text-foreground/70 mb-1">Working Hours</p>
                       <p className="text-sm font-semibold">
-                        {effectiveHoursPerDay}h/day × {days} day{days !== 1 ? 's' : ''} = {chefHoursTotal}h
+                        8h/day × {days} day{days !== 1 ? 's' : ''} = {chefHoursTotal}h
                       </p>
                     </div>
 
@@ -396,21 +373,6 @@ Contact us on WhatsApp to confirm your booking!
 
                     {/* Divider */}
                     <div className="border-t-2 border-primary/10 pt-4">
-                      
-                      {/* Labor Total */}
-                      <div className="mb-4">
-                        <p className="text-xs text-foreground/70 mb-1">Labor (after discount)</p>
-                        <p className="text-2xl font-bold text-primary">{formatIDR(laborAfterDiscount)}</p>
-                      </div>
-
-                      {/* Food Estimate */}
-                      {estimateFood && (
-                        <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 mb-4">
-                          <p className="text-xs text-foreground/70 mb-1">Food Cost Estimate</p>
-                          <p className="text-sm font-semibold text-amber-900">{formatIDR(foodEstimate)}</p>
-                          <p className="text-xs text-amber-700 mt-1">Rough estimate - actual will vary</p>
-                        </div>
-                      )}
 
                       {/* Total Estimate */}
                       <div className="p-4 rounded-lg bg-primary/10 border-2 border-primary mb-4">

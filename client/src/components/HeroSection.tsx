@@ -99,25 +99,36 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             size="lg"
-            onClick={handleQuoteClick}
-            className="bg-white hover:bg-white text-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border-2 border-white"
-            data-testid="button-hero-quote-cta"
+            onClick={handleWhatsAppClick}
+            className="bg-white hover:bg-white text-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white"
+            data-testid="button-hero-whatsapp-cta"
           >
-            <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">{t('hero.reserveChef', 'Reserve Your Private Chef')}</span>
-            <span className="sm:hidden">{t('hero.reserveChefShort', 'Reserve Chef')}</span>
+            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <span className="hidden sm:inline">Chat on WhatsApp Now</span>
+            <span className="sm:hidden">WhatsApp Now</span>
           </Button>
           
           <Button
             size="lg"
-            onClick={handleWhatsAppClick}
-            className="bg-primary hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl"
-            data-testid="button-hero-whatsapp-cta"
+            onClick={handleQuoteClick}
+            className="bg-primary/90 hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary"
+            data-testid="button-hero-quote-cta"
           >
-            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-            <span className="hidden sm:inline">{t('hero.startPlanning', 'Start Planning Today')}</span>
-            <span className="sm:hidden">{t('hero.planEvent', 'Plan Event')}</span>
+            <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <span className="hidden sm:inline">Get Free Quote</span>
+            <span className="sm:hidden">Get Quote</span>
           </Button>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-white text-sm">
+          <div className="flex items-center gap-2 bg-green-500/20 border border-green-500/50 rounded-full px-4 py-2">
+            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="font-medium">Available Today & Tomorrow</span>
+          </div>
+          <div className="flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/50 rounded-full px-4 py-2">
+            <Star className="w-4 h-4 fill-yellow-300 text-yellow-300" />
+            <span className="font-medium">Limited slots - Book now</span>
+          </div>
         </div>
 
         <div className="flex items-center justify-center gap-2 mt-4 text-white/90" data-testid="text-response-time">
@@ -125,9 +136,12 @@ export default function HeroSection() {
           <span className="text-sm sm:text-base">{t('hero.replyTime', 'We reply within 10 minutes • 09:00-22:00 WIB Daily')}</span>
         </div>
 
-        <p className="text-white/70 mt-4 text-xs sm:text-sm px-4" data-testid="text-pricing-info">
-          {t('hero.pricingInfo', 'From Rp 800,000/hour • Background-checked chefs • Secure online payment & cash (IDR)')}
-        </p>
+        <div className="mt-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3 max-w-2xl mx-auto">
+          <p className="text-white/90 text-xs sm:text-sm font-medium mb-1">
+            ✓ 100% Money-Back Guarantee if not satisfied • 10-minute response time • {t('hero.pricingInfo', 'From Rp 800,000/hour')}
+          </p>
+          <p className="text-white/70 text-xs">Background-checked • Food-certified • 100% Insured • Trusted by 1000+ guests since 2012</p>
+        </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">

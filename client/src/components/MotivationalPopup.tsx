@@ -3,21 +3,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
 
 const MOTIVATIONAL_MESSAGES = [
-  "We have Chef just waiting to come home to you 👨‍🍳",
-  "Your perfect culinary experience is just one WhatsApp away ✨",
-  "Expert chefs ready to transform your dinner into a masterpiece 🍽️",
-  "Villa dining just got a whole lot easier - let us handle the cooking 🏝️",
-  "From your kitchen to restaurant-quality meals, we've got you covered 🌟",
-  "Every meal tells a story - let our chefs write yours 📖",
-  "No stress, no mess, just incredible food delivered to your villa 🎉",
-  "Your guests will think you hired a 5-star restaurant 💎",
-  "Personalized menus, premium ingredients, pure magic ✨",
-  "Background-checked chefs, transparent pricing, unforgettable experiences 🙌",
-  "From intimate dinners to grand celebrations - we do it all 🎊",
-  "Fresh ingredients, expertly prepared, served with passion 🔥",
-  "Stop cooking, start celebrating - let our chefs do the work 🥂",
-  "Bali's most trusted private chef service since 2012 🏆",
-  "Your villa deserves a chef - and we know just the one 👨‍🍳",
+  "We have Chef just waiting to come home to you",
+  "Your perfect culinary experience is just one WhatsApp away",
+  "Expert chefs ready to transform your dinner into a masterpiece",
+  "Villa dining just got a whole lot easier - let us handle the cooking",
+  "From your kitchen to restaurant-quality meals, we've got you covered",
+  "Every meal tells a story - let our chefs write yours",
+  "No stress, no mess, just incredible food delivered to your villa",
+  "Your guests will think you hired a 5-star restaurant",
+  "Personalized menus, premium ingredients, pure magic",
+  "Background-checked chefs, transparent pricing, unforgettable experiences",
+  "From intimate dinners to grand celebrations - we do it all",
+  "Fresh ingredients, expertly prepared, served with passion",
+  "Stop cooking, start celebrating - let our chefs do the work",
+  "Bali's most trusted private chef service since 2012",
+  "Your villa deserves a chef - and we know just the one",
 ];
 
 export default function MotivationalPopup() {

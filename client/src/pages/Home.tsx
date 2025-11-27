@@ -23,6 +23,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieBanner from '@/components/CookieBanner';
 import { FloatingOrbs, SideAccents } from '@/components/AnimatedDecorations';
 import MotivationalPopup from '@/components/MotivationalPopup';
+import TrustBadgesCompact from '@/components/TrustBadgesCompact';
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
       />
       <Header />
       <HeroSection />
+      <TrustBadgesCompact />
       <ExperienceOverview />
       <HowItWorks />
       <ChefGallery />

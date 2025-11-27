@@ -8,31 +8,31 @@ const STEPS = [
     icon: MessageCircle,
     title: 'Contact Us on WhatsApp',
     description: "You will always speak with a native English speaker. Our food expert chef will understand exactly what you want and help find your perfect chef match.",
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-green-500 to-green-600',
   },
   {
     icon: FileText,
     title: 'Receive Custom Menu Proposals',
     description: 'Our chefs design personalized menus with transparent pricing in Indonesian Rupiah. Chef service fees and ingredient costs quoted separately.',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-green-600 to-green-700',
   },
   {
     icon: MessagesSquare,
     title: 'Plan Together Until Perfect',
     description: 'We sit down together (virtually on WhatsApp) to design your dinner. Zero communication mistakes - we ensure you get exactly what you need.',
-    color: 'from-orange-500 to-amber-500',
+    color: 'from-green-500 to-green-600',
   },
   {
     icon: CheckCircle,
     title: 'Confirm Your Booking',
     description: "Once you're 100% happy with everything, we send payment details. Secure your date with our simple booking process.",
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-green-600 to-green-700',
   },
   {
     icon: Sparkles,
     title: 'Enjoy Your Experience!',
     description: 'Most customers prefer: Chef arrives 2 hours early, you plan together, give them cash, they shop at best markets, then cook your perfect meal!',
-    color: 'from-red-500 to-rose-500',
+    color: 'from-green-500 to-green-600',
   },
 ];
 

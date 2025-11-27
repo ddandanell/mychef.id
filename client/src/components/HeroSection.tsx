@@ -28,11 +28,13 @@ const TESTIMONIALS = [
   }
 ];
 import OptimizedImage from '@/components/OptimizedImage';
+import forbesImage from '@assets/Forbes-Private-Satff-Private-Chef-Best_1764237669528.webp';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
 import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a96e97.png';
 
-const HERO_IMAGES = [heroImage1, heroImage2, heroImage3];
+const HERO_IMAGES = [forbesImage, heroImage1, heroImage2, heroImage3];
+const IMAGE_DURATIONS = [20000, 5000, 5000, 5000]; // First image: 20 seconds, others: 5 seconds
 
 export default function HeroSection() {
   const { t } = useTranslation();
@@ -41,10 +43,20 @@ export default function HeroSection() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const rotateImage = () => {
+      setCurrentImage((prev) => {
+        const nextIndex = (prev + 1) % HERO_IMAGES.length;
+        // Schedule next rotation based on the next image's duration
+        const nextDuration = IMAGE_DURATIONS[nextIndex];
+        setTimeout(rotateImage, nextDuration);
+        return nextIndex;
+      });
+    };
+    
+    // Start with the first image's duration
+    const initialTimeout = setTimeout(rotateImage, IMAGE_DURATIONS[0]);
+    
+    return () => clearTimeout(initialTimeout);
   }, []);
 
   useEffect(() => {

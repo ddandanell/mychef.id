@@ -78,8 +78,8 @@ export default function MotivationalPopup() {
             className="pointer-events-auto"
           >
             <div className="relative max-w-xs">
-              <div className="absolute -top-6 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">
-                myCHEF Message
+              <div className="absolute -top-6 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap max-w-[200px] truncate">
+                {displayedText || currentMessage}
               </div>
               <div className="bg-gradient-to-r from-primary to-primary/80 text-white rounded-lg shadow-xl p-3 sm:p-4 border border-primary/50 flex items-start gap-2 mt-2">
                 <MessageCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-primary-foreground/90" />

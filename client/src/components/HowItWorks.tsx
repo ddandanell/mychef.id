@@ -8,31 +8,31 @@ const STEPS = [
     icon: MessageCircle,
     title: 'Contact Us on WhatsApp',
     description: "You will always speak with a native English speaker. Our food expert chef will understand exactly what you want and help find your perfect chef match.",
-    color: 'from-green-500 to-green-600',
+    color: 'from-green-400 to-green-500',
   },
   {
     icon: FileText,
     title: 'Receive Custom Menu Proposals',
     description: 'Our chefs design personalized menus with transparent pricing in Indonesian Rupiah. Chef service fees and ingredient costs quoted separately.',
-    color: 'from-green-600 to-green-700',
+    color: 'from-green-500 to-green-600',
   },
   {
     icon: MessagesSquare,
     title: 'Plan Together Until Perfect',
     description: 'We sit down together (virtually on WhatsApp) to design your dinner. Zero communication mistakes - we ensure you get exactly what you need.',
-    color: 'from-green-500 to-green-600',
+    color: 'from-green-400 to-green-500',
   },
   {
     icon: CheckCircle,
     title: 'Confirm Your Booking',
     description: "Once you're 100% happy with everything, we send payment details. Secure your date with our simple booking process.",
-    color: 'from-green-600 to-green-700',
+    color: 'from-green-500 to-green-600',
   },
   {
     icon: Sparkles,
     title: 'Enjoy Your Experience!',
     description: 'Most customers prefer: Chef arrives 2 hours early, you plan together, give them cash, they shop at best markets, then cook your perfect meal!',
-    color: 'from-green-500 to-green-600',
+    color: 'from-green-400 to-green-500',
   },
 ];
 
@@ -101,12 +101,12 @@ export default function HowItWorks() {
                 >
                   <div className="relative h-full group">
                     {/* Gradient glow background */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-10 blur-xl transition-all duration-300`} />
 
                     {/* Card - Alternating backgrounds */}
-                    <div className={`relative border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
+                    <div className={`relative border-2 border-muted group-hover:border-primary/30 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
                       index % 2 === 0 
-                        ? `bg-gradient-to-r ${step.color} bg-opacity-10 dark:bg-opacity-20` 
+                        ? `bg-gradient-to-r ${step.color} bg-opacity-5 dark:bg-opacity-8` 
                         : 'bg-white dark:bg-slate-950'
                     }`}>
                       {/* Step number */}
@@ -150,12 +150,12 @@ export default function HowItWorks() {
                 >
                   <div className="relative h-full group">
                     {/* Gradient glow background */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-2xl opacity-0 group-hover:opacity-10 blur-xl transition-all duration-300`} />
 
                     {/* Card - Alternating backgrounds */}
-                    <div className={`relative border-2 border-muted group-hover:border-primary/50 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
+                    <div className={`relative border-2 border-muted group-hover:border-primary/30 rounded-2xl p-6 sm:p-8 h-full transition-all duration-300 flex flex-col items-center text-center ${
                       index % 2 === 0 
-                        ? `bg-gradient-to-r ${step.color} bg-opacity-10 dark:bg-opacity-20` 
+                        ? `bg-gradient-to-r ${step.color} bg-opacity-5 dark:bg-opacity-8` 
                         : 'bg-white dark:bg-slate-950'
                     }`}>
                       {/* Step number */}

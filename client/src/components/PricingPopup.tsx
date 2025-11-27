@@ -73,7 +73,7 @@ export default function PricingPopup() {
             </div>
 
             {/* Weekly */}
-            <div className="rounded-lg p-3 text-center border-2 ring-2" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))', ringColor: 'hsl(var(--primary-light))' }}>
+            <div className="rounded-lg p-3 text-center border-2" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
               <p className="text-xs text-foreground/70 font-semibold mb-1">Weekly</p>
               <p className="text-xs text-foreground/70">Hour rate:</p>
               <p className="text-base md:text-lg font-bold text-primary">350,000</p>

@@ -40,29 +40,19 @@ export default function PricingSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
           <Card className="border-2 border-primary/20 hover:border-primary transition-colors">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <ChefHat className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                Chef Service Fees
+                Daily Rate
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <div className="text-xl sm:text-2xl font-bold text-primary mb-2 break-words" data-testid="text-chef-fees-range">
-                  Rp 800,000 - 1,200,000+/hour
-                </div>
-                <p className="text-sm text-foreground/70">
-                  Varies by chef expertise and cuisine specialty
-                </p>
+            <CardContent className="space-y-2">
+              <div className="text-3xl font-bold text-primary" data-testid="text-daily-rate">
+                800,000 IDR
               </div>
-              <div className="text-sm text-foreground/80 space-y-2">
-                <p>• Minimum 3-4 hours of service for most dinners</p>
-                <p>• All cooking equipment and tools provided</p>
-                <p>• Complete kitchen cleanup included</p>
-                <p>• Beautiful plating and presentation</p>
-              </div>
+              <p className="text-sm text-foreground/70">per hour</p>
             </CardContent>
           </Card>
 
@@ -70,50 +60,32 @@ export default function PricingSection() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                Ingredient Shopping
+                Weekly Rate
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
-                <p className="text-xs font-semibold text-primary mb-1">⭐ Most Popular</p>
-                <p className="font-semibold text-sm">Chef Arrives Early & Shops</p>
-                <p className="text-xs text-foreground/70 mt-1">Chef comes 2 hours before, you discuss menu together, give them cash, and they buy exactly what you need from the best markets</p>
+            <CardContent className="space-y-2">
+              <div className="text-3xl font-bold text-primary" data-testid="text-weekly-rate">
+                350,000 IDR
               </div>
-              <div className="text-sm text-foreground/80 space-y-2">
-                <div>
-                  <p className="font-semibold text-xs">Other Options:</p>
-                  <p className="text-xs text-foreground/70">• We source beforehand (market price + 15-20% fee)</p>
-                  <p className="text-xs text-foreground/70">• You shop yourself using our list</p>
-                </div>
+              <p className="text-sm text-foreground/70">per hour (7+ days)</p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-primary/20 hover:border-primary transition-colors">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                Monthly Rate
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="text-3xl font-bold text-primary" data-testid="text-monthly-rate">
+                250,000 IDR
               </div>
+              <p className="text-sm text-foreground/70">per hour (30+ days)</p>
             </CardContent>
           </Card>
         </div>
-
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-              Additional Services
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-waiter-rate">Rp 300,000/hour</div>
-                <p className="text-sm text-foreground/70">Professional Waiter/Server</p>
-              </div>
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-bartender-rate">Rp 400,000/hour</div>
-                <p className="text-sm text-foreground/70">Bartender</p>
-              </div>
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-primary" data-testid="text-sommelier-rate">Rp 500,000/hour</div>
-                <p className="text-sm text-foreground/70">Sommelier/Wine Expert</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         <Card className="bg-accent/20 border-accent">
           <CardContent className="p-6">

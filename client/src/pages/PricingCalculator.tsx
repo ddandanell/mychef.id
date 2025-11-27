@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon, ArrowLeft, Award, ShieldCheck, Lightbulb, Flame, Leaf, Wine, Utensils, Clock, TrendingUp, Home, Utensils as UtensilsIcon, Shield, DollarSign, MapPin } from 'lucide-react';
 import { useState as useStateHook } from 'react';
+import SupportTeam from '@/components/SupportTeam';
 
 const CHEF_TYPES = [
   { id: 'sushi', name: 'Sushi Chef', icon: '🍣', description: 'Japanese precision & artistry', hint: 'Fresh seafood, authentic techniques' },
@@ -479,6 +480,11 @@ This offer is valid once you confirm with 50% deposit.`;
             </CardContent>
           </Card>
         )}
+
+        {/* Support Team Section */}
+        <div className="mb-12 md:mb-16">
+          <SupportTeam />
+        </div>
 
         {/* How It Works - MOVED TO BOTTOM */}
         <div className="mb-12">

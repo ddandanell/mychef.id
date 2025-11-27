@@ -12,7 +12,7 @@ export default function Header() {
             <span className="font-serif font-bold text-lg sm:text-xl">myCHEF</span>
           </Link>
           
-          <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-primary/5 rounded-lg border border-primary/10">
+          <div className="hidden md:flex items-center gap-3 px-4 py-2 rounded-lg border" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star

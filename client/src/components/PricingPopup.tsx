@@ -44,7 +44,7 @@ export default function PricingPopup() {
     <div className="fixed bottom-24 right-6 md:bottom-32 md:right-8 z-50 animate-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white dark:bg-card rounded-xl shadow-2xl border border-primary/20 overflow-hidden max-w-sm">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary/15 to-primary/8 p-4 md:p-5 flex items-start justify-between gap-3">
+        <div className="p-4 md:p-5 flex items-start justify-between gap-3" style={{ backgroundColor: 'hsl(var(--primary-light))' }}>
           <div className="flex items-center gap-2">
             <Globe className="w-5 h-5 text-primary" />
             <div>
@@ -65,7 +65,7 @@ export default function PricingPopup() {
         <div className="p-4 md:p-5 space-y-4">
           <div className="grid grid-cols-3 gap-2">
             {/* Daily */}
-            <div className="bg-primary/5 rounded-lg p-3 text-center border border-primary/10">
+            <div className="rounded-lg p-3 text-center border" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
               <p className="text-xs text-foreground/60 font-semibold mb-1">Daily</p>
               <p className="text-xs text-foreground/70">Standard rate:</p>
               <p className="text-base md:text-lg font-bold text-primary">800,000</p>
@@ -73,7 +73,7 @@ export default function PricingPopup() {
             </div>
 
             {/* Weekly */}
-            <div className="bg-primary/10 rounded-lg p-3 text-center border border-primary/20 ring-2 ring-primary/30">
+            <div className="rounded-lg p-3 text-center border-2 ring-2" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))', ringColor: 'hsl(var(--primary-light))' }}>
               <p className="text-xs text-foreground/70 font-semibold mb-1">Weekly</p>
               <p className="text-xs text-foreground/70">Hour rate:</p>
               <p className="text-base md:text-lg font-bold text-primary">350,000</p>
@@ -81,7 +81,7 @@ export default function PricingPopup() {
             </div>
 
             {/* Monthly */}
-            <div className="bg-primary/5 rounded-lg p-3 text-center border border-primary/10">
+            <div className="rounded-lg p-3 text-center border" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
               <p className="text-xs text-foreground/60 font-semibold mb-1">Monthly</p>
               <p className="text-xs text-foreground/70">Hour rate:</p>
               <p className="text-base md:text-lg font-bold text-primary">250,000</p>

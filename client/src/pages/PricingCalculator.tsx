@@ -681,8 +681,9 @@ Pricing Tier: ${result.tierLabel}
                           className={`flex-1 px-2 py-1.5 rounded text-xs font-semibold transition-all ${
                             currency === curr.code
                               ? 'bg-primary text-primary-foreground'
-                              : 'bg-primary/10 text-primary hover:bg-primary/20'
+                              : 'text-primary hover:opacity-80'
                           }`}
+                          style={currency !== curr.code ? { backgroundColor: 'hsl(var(--primary-light))' } : {}}
                           data-testid={`button-currency-${curr.code}`}
                         >
                           {curr.code}
@@ -696,7 +697,7 @@ Pricing Tier: ${result.tierLabel}
                         animate={{ opacity: 1 }}
                         className="space-y-4"
                       >
-                        <div className="bg-gradient-to-br from-primary/15 to-primary/5 rounded-xl p-4 text-center border border-primary/20">
+                        <div className="rounded-xl p-4 text-center border" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
                           <p className="text-xs text-foreground/60 mb-1">Chef Service Total</p>
                           <motion.p 
                             className="text-2xl md:text-3xl font-bold text-primary"

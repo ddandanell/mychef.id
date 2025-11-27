@@ -64,7 +64,7 @@ export default function TrustBadges() {
               <Card key={index} className="border-2 hover-elevate bg-background" data-testid={`card-trust-${index}`}>
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'hsl(var(--primary-light))' }}>
                       <Icon className="w-6 h-6 text-primary" />
                     </div>
                     <div className="flex-1">
@@ -87,7 +87,7 @@ export default function TrustBadges() {
           })}
         </div>
 
-        <div className="mt-12 p-8 bg-primary/10 border-2 border-primary/30 rounded-xl">
+        <div className="mt-12 p-8 rounded-xl border-2" style={{ backgroundColor: 'hsl(var(--primary-light))', borderColor: 'hsl(var(--primary-light-border))' }}>
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
               <div className="flex items-center gap-2">

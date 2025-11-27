@@ -267,6 +267,9 @@ export default function Footer() {
                 <Link href="/quote" className="hover:text-primary transition-colors" data-testid="link-footer-quote">
                   {t('footer.getQuote', 'Get Quote')}
                 </Link>
+                <Link href="/calculator" className="hover:text-primary transition-colors" data-testid="link-footer-calculator">
+                  Price Calculator
+                </Link>
                 <Link href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-careers">
                   {t('footer.careers', 'Careers')}
                 </Link>

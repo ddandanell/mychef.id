@@ -39,7 +39,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-muted">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-muted">
       {HERO_IMAGES.map((image, index) => (
         <div
           key={index}
@@ -58,7 +58,7 @@ export default function HeroSection() {
         </div>
       ))}
       
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 sm:pt-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16 lg:py-20">
         <button 
           onClick={handleViewReviews}
           className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6 hover-elevate active-elevate-2 transition-all cursor-pointer min-h-10" 

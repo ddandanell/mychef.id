@@ -54,11 +54,28 @@ export default function ChefShowcase() {
             <strong className="text-primary"> Ready to cook anywhere in Bali.</strong>
           </p>
           <div className="max-w-2xl mx-auto bg-primary/10 border-2 border-primary/20 rounded-lg p-4">
-            <p className="text-sm font-semibold text-foreground mb-2">Special Pricing for Extended Bookings:</p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div>3+ days: <span className="font-bold text-primary">25% off</span></div>
-              <div>7+ days: <span className="font-bold text-primary">40% off</span></div>
-              <div>30+ days: <span className="font-bold text-primary">60% off</span></div>
+            <p className="text-sm font-semibold text-foreground mb-3">📊 Transparent Pricing Structure:</p>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span>1-2 Days:</span>
+                <span className="font-bold text-primary">Rp 3,000,000/day</span>
+              </div>
+              <div className="flex justify-between">
+                <span>3-6 Days:</span>
+                <span className="font-bold text-primary">Rp 2,300,000/day</span>
+              </div>
+              <div className="flex justify-between">
+                <span>7-20 Days:</span>
+                <span className="font-bold text-primary">Rp 1,700,000/day</span>
+              </div>
+              <div className="flex justify-between">
+                <span>21+ Days:</span>
+                <span className="font-bold text-primary">Rp 1,200,000/day</span>
+              </div>
+              <div className="border-t border-primary/20 pt-2 mt-2 flex justify-between font-bold">
+                <span>Full Month (30+ days):</span>
+                <span className="text-primary">Rp 29,000,000</span>
+              </div>
             </div>
           </div>
         </div>

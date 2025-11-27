@@ -29,47 +29,28 @@ export default function PricingCalculator() {
   const [showResults, setShowResults] = useState(false);
   const [copied, setCopied] = useStateHook(false);
 
-  const chefRate = 800000;
   const helperRate = 400000;
 
-  // Determine service type based on days
-  const getServiceType = () => {
-    if (days >= 30) return 'month';
-    if (days >= 7) return 'week';
-    return 'day';
-  };
+  // Calculate chef labor based on tiered pricing (scales to 29M for 30 days full-time)
+  let chefDailyRate = 3000000; // 1-2 days: 3M/day
+  if (days >= 21) chefDailyRate = 1200000; // 21+ days: 1.2M/day
+  else if (days >= 7) chefDailyRate = 1700000; // 7-20 days: 1.7M/day
+  else if (days >= 3) chefDailyRate = 2300000; // 3-6 days: 2.3M/day
 
-  const serviceType = getServiceType();
-  const serviceLabel = serviceType === 'month' ? 'Monthly' : serviceType === 'week' ? 'Weekly' : 'Daily';
+  // Cap at 29M for 30+ days
+  let chefLabor = chefDailyRate * days;
+  if (days >= 30) chefLabor = 29000000;
 
-  // Calculate hours per day based on meals
-  const getHoursPerDay = () => {
-    if (mealsPerDay === 1) return 4;
-    if (mealsPerDay === 2) return 6;
-    return 8;
-  };
-
-  const hoursPerDay = getHoursPerDay();
-  const effectiveHoursPerDay = serviceType === 'month' ? 8 : hoursPerDay;
-
-  // Chef labor
-  const chefHoursTotal = effectiveHoursPerDay * days;
-  const chefLabor = chefHoursTotal * chefRate;
-
-  // Helper labor (optional)
-  const helperHoursTotal = includeHelper ? effectiveHoursPerDay * days : 0;
+  // Helper labor (optional) - always at 400k/hour, 8 hours/day for full-time
+  const helperHoursTotal = includeHelper ? 8 * days : 0;
   const helperLabor = helperHoursTotal * helperRate;
 
   // Labor total
   const laborTotal = chefLabor + helperLabor;
-
-  // Discount based on days
-  let discountRate = 0;
-  if (days >= 30) discountRate = 0.6;
-  else if (days >= 7) discountRate = 0.4;
-  else if (days >= 3) discountRate = 0.25;
-
-  const laborAfterDiscount = laborTotal * (1 - discountRate);
+  
+  // For display purposes
+  const chefHoursTotal = 8 * days;
+  const laborAfterDiscount = laborTotal;
 
   // Food estimate (optional)
   const foodEstimate = estimateFood ? laborAfterDiscount * 0.2 : 0;
@@ -82,6 +63,13 @@ export default function PricingCalculator() {
   const getSummaryText = () => {
     const chefName = CHEF_TYPES.find(c => c.id === chefType)?.name || 'Chef';
     const mealsLabel = mealsPerDay === 1 ? '1 Meal' : mealsPerDay === 2 ? '2 Meals' : '3 Meals';
+    let pricingNote = '';
+    if (days >= 30) pricingNote = '✅ Full-Time Monthly Rate';
+    else if (days >= 21) pricingNote = '✅ Extended Stay Rate (1.2M/day)';
+    else if (days >= 7) pricingNote = '✅ Weekly Rate (1.7M/day)';
+    else if (days >= 3) pricingNote = '✅ Multi-Day Rate (2.3M/day)';
+    else pricingNote = '✅ Daily Rate (3M/day)';
+
     const summary = `
 📋 MYCHEF PRICE QUOTE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -95,8 +83,8 @@ ${includeHelper ? `🤝 Helper: Yes (+Rp ${formatIDR(helperLabor)})\n` : ''}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💰 Chef Service: ${formatIDR(chefLabor)}
-${includeHelper ? `💼 Helper Service: ${formatIDR(helperLabor)}\n` : ''}${days >= 30 ? `✅ Discount: -40% (Monthly)\n` : days >= 7 ? `✅ Discount: -20% (Weekly)\n` : ''}${estimateFood ? `🛒 Food Estimate: ${formatIDR(foodEstimate)}\n` : ''}
-
+${includeHelper ? `💼 Helper Service: ${formatIDR(helperLabor)}\n` : ''}${pricingNote}
+${estimateFood ? `🛒 Food Estimate: ${formatIDR(foodEstimate)}\n` : ''}
 💵 TOTAL ESTIMATE: ${formatIDR(totalEstimate)}
 
 Note: This is an estimate. Final pricing depends on menu and ingredients.
@@ -274,7 +262,7 @@ Contact us on WhatsApp to confirm your booking!
                     </span>
                   </div>
                   <p className="text-xs text-foreground/60">
-                    3+ days: 25% discount | 7+ days: 40% discount | 30+ days: 60% discount
+                    1-2 days: Rp 3M/day | 3-6 days: Rp 2.3M/day | 7-20 days: Rp 1.7M/day | 21+ days: Rp 1.2M/day
                   </p>
                 </div>
 
@@ -374,23 +362,35 @@ Contact us on WhatsApp to confirm your booking!
                       </div>
                     )}
 
-                    {/* Discount Info */}
+                    {/* Pricing Tier Info */}
                     {days >= 30 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
-                        <p className="text-xs text-foreground/70 mb-1">Monthly Discount</p>
-                        <p className="text-sm font-semibold text-green-700">60% off total price</p>
+                        <p className="text-xs text-foreground/70 mb-1">Full-Time Monthly Rate</p>
+                        <p className="text-sm font-semibold text-green-700">Rp 29,000,000 (Full-Time)</p>
                       </div>
                     )}
-                    {days >= 7 && days < 30 && (
+                    {days >= 21 && days < 30 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
-                        <p className="text-xs text-foreground/70 mb-1">Weekly Discount</p>
-                        <p className="text-sm font-semibold text-green-700">40% off total price</p>
+                        <p className="text-xs text-foreground/70 mb-1">Extended Stay Rate</p>
+                        <p className="text-sm font-semibold text-green-700">Rp 1,200,000/day</p>
+                      </div>
+                    )}
+                    {days >= 7 && days < 21 && (
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                        <p className="text-xs text-foreground/70 mb-1">Weekly Rate</p>
+                        <p className="text-sm font-semibold text-green-700">Rp 1,700,000/day</p>
                       </div>
                     )}
                     {days >= 3 && days < 7 && (
                       <div className="p-3 rounded-lg bg-green-50 border border-green-200">
-                        <p className="text-xs text-foreground/70 mb-1">Multi-Day Discount</p>
-                        <p className="text-sm font-semibold text-green-700">25% off total price</p>
+                        <p className="text-xs text-foreground/70 mb-1">Multi-Day Rate</p>
+                        <p className="text-sm font-semibold text-green-700">Rp 2,300,000/day</p>
+                      </div>
+                    )}
+                    {days < 3 && (
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                        <p className="text-xs text-foreground/70 mb-1">Daily Rate</p>
+                        <p className="text-sm font-semibold text-green-700">Rp 3,000,000/day</p>
                       </div>
                     )}
 

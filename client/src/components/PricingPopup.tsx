@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, TrendingUp } from 'lucide-react';
+import { X, TrendingUp, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLocation } from 'wouter';
 
@@ -22,16 +22,24 @@ export default function PricingPopup() {
 
   if (!showPopup || !isHomePage) return null;
 
+  const handleCalculator = () => {
+    window.location.href = '/calculator';
+  };
+
+  const handleWhatsApp = () => {
+    window.location.href = '/contact/confirm?source=popup';
+  };
+
   return (
     <div className="fixed bottom-24 right-6 md:bottom-32 md:right-8 z-50 animate-in slide-in-from-bottom-4 duration-500">
       <div className="bg-white dark:bg-card rounded-xl shadow-2xl border border-primary/20 overflow-hidden max-w-sm">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary to-primary/80 p-4 md:p-5 flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-primary-foreground" />
+            <Globe className="w-5 h-5 text-primary-foreground" />
             <div>
-              <p className="font-bold text-sm text-primary-foreground">Special Pricing</p>
-              <p className="text-xs text-primary-foreground/90">Limited Time Offer</p>
+              <p className="font-bold text-sm text-primary-foreground">Award-Winning Chefs</p>
+              <p className="text-xs text-primary-foreground/90">6+ years, Chefs from around the world</p>
             </div>
           </div>
           <button
@@ -44,7 +52,7 @@ export default function PricingPopup() {
         </div>
 
         {/* Content */}
-        <div className="p-4 md:p-5 space-y-3">
+        <div className="p-4 md:p-5 space-y-4">
           <div className="grid grid-cols-3 gap-2">
             {/* Daily */}
             <div className="bg-primary/5 rounded-lg p-3 text-center border border-primary/10">
@@ -68,21 +76,31 @@ export default function PricingPopup() {
             </div>
           </div>
 
-          <p className="text-xs text-foreground/70 text-center">
-            ✓ All chef services included
+          <p className="text-xs text-foreground/70 text-center leading-relaxed">
+            ✓ Professional chefs from 20+ countries
             <br />
-            ✓ Professional cooking & cleanup
+            ✓ All services included & full cleanup
             <br />
-            ✓ South Bali premium area
+            ✓ South Bali premium service area
           </p>
 
-          <Button
-            onClick={() => window.location.href = '/calculator'}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold hover-elevate active-elevate-2"
-            data-testid="button-popup-calculator"
-          >
-            Get Instant Quote →
-          </Button>
+          {/* Two Action Buttons */}
+          <div className="space-y-2">
+            <Button
+              onClick={handleCalculator}
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold hover-elevate active-elevate-2"
+              data-testid="button-popup-calculator"
+            >
+              Calculate Your Price
+            </Button>
+            <Button
+              onClick={handleWhatsApp}
+              className="w-full bg-primary/20 hover:bg-primary/30 text-primary font-semibold hover-elevate active-elevate-2 border border-primary/30"
+              data-testid="button-popup-booking"
+            >
+              Get Booking Now
+            </Button>
+          </div>
         </div>
       </div>
     </div>

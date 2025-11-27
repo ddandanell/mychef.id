@@ -167,36 +167,6 @@ This offer is valid once you confirm with 50% deposit.`;
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/3 via-background to-primary/3 py-6 md:py-8 px-3 md:px-4 pb-24">
       <div className="max-w-5xl mx-auto">
-        {/* Chat Bubble Popup */}
-        {showChatBubble && (
-          <div className="fixed bottom-28 right-6 md:bottom-32 md:right-8 z-50 animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <div className="bg-white dark:bg-card shadow-xl rounded-2xl p-4 md:p-5 max-w-xs md:max-w-sm border border-primary/20">
-              <div className="flex justify-between items-start gap-2 mb-3">
-                <p className="text-sm md:text-base font-semibold text-primary">💡 Pro Tip</p>
-                <button
-                  onClick={() => setShowChatBubble(false)}
-                  className="text-foreground/50 hover:text-foreground text-lg leading-none"
-                  data-testid="button-close-bubble"
-                >
-                  ✕
-                </button>
-              </div>
-              <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
-                Hey! Did you know we have a <strong>Price Calculator</strong>? You can get your instant quote right here. We're here to help you! 🎯
-              </p>
-              <button
-                onClick={() => setLocation('/calculator')}
-                className="w-full px-4 py-2 bg-primary text-primary-foreground font-semibold rounded-lg hover-elevate text-sm transition-all"
-                data-testid="button-bubble-calculator"
-              >
-                Open Calculator →
-              </button>
-            </div>
-            {/* Chat Bubble Tail */}
-            <div className="absolute -bottom-2 right-4 md:right-6 w-4 h-4 bg-white dark:bg-card border-r border-b border-primary/20 transform rotate-45"></div>
-          </div>
-        )}
-
         {/* Floating WhatsApp Help Button */}
         <button
           onClick={handleWhatsAppClick}

@@ -1,7 +1,7 @@
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageCircle, Flame, Music, Wine, Utensils, Zap, BookOpen, Phone, Mail } from 'lucide-react';
+import { MessageCircle, Flame, Music, Wine, Utensils, Zap, BookOpen, Phone, Mail, Clock } from 'lucide-react';
 import bbqImage from '@assets/generated_images/professional_barbecue_grill_setup.png';
 import djImage from '@assets/generated_images/dj_sound_system_party.png';
 import wineImage from '@assets/generated_images/wine_tasting_experience.png';
@@ -98,63 +98,62 @@ export default function PartyAddons() {
           })}
         </div>
 
-        <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6 lg:p-8">
-          <h3 className="font-serif text-2xl lg:text-3xl font-semibold mb-8 text-center" data-testid="text-addons-cta-headline">
-            Need Something Special?
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-center">
-            {/* Siti Image & Name - Tighter */}
-            <div className="flex flex-col items-center text-center">
-              <div className="w-32 h-40 md:w-40 md:h-52 rounded-lg overflow-hidden mb-3 border-4 border-primary/30 shadow-lg">
-                <img 
-                  src={sitiImage} 
-                  alt="Siti Nurhaliza - Support Team Leader" 
-                  className="w-full h-full object-cover"
-                />
+        <Card className="border-2 border-primary/40 shadow-lg hover-elevate overflow-hidden bg-gradient-to-br from-primary/8 via-background to-primary/5">
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+              {/* Siti Image Side */}
+              <div className="p-6 md:p-8 flex flex-col items-center justify-center border-r-0 md:border-r-2 md:border-primary/20">
+                <div className="w-36 h-44 md:w-40 md:h-52 rounded-xl overflow-hidden mb-4 border-3 border-primary/40 shadow-xl hover-elevate">
+                  <img 
+                    src={sitiImage} 
+                    alt="Siti Nurhaliza - Support Team Leader" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-lg md:text-xl font-bold mb-1 text-center">Siti Nurhaliza</h4>
+                <p className="text-sm text-primary font-semibold mb-3 text-center">Support Team Leader</p>
+                <div className="space-y-2 w-full text-center bg-primary/8 rounded-lg p-3 border border-primary/15">
+                  <a
+                    href="tel:+62"
+                    className="flex items-center justify-center gap-2 text-xs md:text-sm text-primary hover:text-primary/70 transition-colors font-medium"
+                  >
+                    <Clock className="w-4 h-4" />
+                    09:00 - 22:00 WIB
+                  </a>
+                  <a
+                    href="mailto:support@mychef.id"
+                    className="flex items-center justify-center gap-2 text-xs md:text-sm text-primary hover:text-primary/70 transition-colors font-medium"
+                  >
+                    <Mail className="w-4 h-4" />
+                    support@mychef.id
+                  </a>
+                </div>
               </div>
-              <h4 className="text-base md:text-lg font-bold mb-1">Siti Nurhaliza</h4>
-              <p className="text-xs md:text-sm text-primary font-semibold mb-2">Support Team Leader</p>
-              <div className="space-y-1 w-full text-center">
-                <a
-                  href="tel:+62"
-                  className="flex items-center justify-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
+
+              {/* Content Side */}
+              <div className="p-6 md:p-8 flex flex-col justify-center">
+                <h3 className="font-serif text-2xl md:text-3xl font-semibold mb-4 text-center md:text-left" data-testid="text-addons-cta-headline">
+                  Need Something Special?
+                </h3>
+                <p className="text-sm md:text-base text-foreground/75 leading-relaxed mb-3" data-testid="text-addons-cta-description">
+                  Music speakers, decorations, special equipment - whatever you need for your villa party, we arrange it!
+                </p>
+                <p className="text-xs md:text-sm text-foreground/65 mb-6 leading-relaxed">
+                  One-day experience or month-long service? We've got you covered either way!
+                </p>
+                <Button
+                  size="lg"
+                  onClick={handleWhatsAppClick}
+                  className="bg-primary hover:bg-primary text-primary-foreground px-6 py-3 text-base font-semibold hover-elevate active-elevate-2 w-full"
+                  data-testid="button-addons-whatsapp"
                 >
-                  <Phone className="w-3 h-3" />
-                  09:00 - 22:00 WIB
-                </a>
-                <a
-                  href="mailto:support@mychef.id"
-                  className="flex items-center justify-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
-                >
-                  <Mail className="w-3 h-3" />
-                  support@mychef.id
-                </a>
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Chat with Siti on WhatsApp
+                </Button>
               </div>
             </div>
-
-            {/* Divider/spacer */}
-            <div className="hidden md:block h-32 border-l border-primary/20" />
-
-            {/* Help Content */}
-            <div className="flex flex-col justify-center">
-              <p className="text-sm text-foreground/70 leading-relaxed mb-3" data-testid="text-addons-cta-description">
-                Music speakers, decorations, special equipment - whatever you need for your villa party, we arrange it!
-              </p>
-              <p className="text-xs text-foreground/80 mb-4">
-                One-day experience or month-long service? We've got you covered either way!
-              </p>
-              <Button
-                size="sm"
-                onClick={handleWhatsAppClick}
-                className="bg-primary hover:bg-primary text-primary-foreground px-4 py-3 text-sm font-semibold hover-elevate active-elevate-2 w-full md:w-auto"
-                data-testid="button-addons-whatsapp"
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Chat with Siti
-              </Button>
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

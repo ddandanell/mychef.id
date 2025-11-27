@@ -110,6 +110,146 @@ const MASTER_CHEFS = [
     country: 'Korea',
     flag: '🇰🇷',
     specialties: ['Korean Cuisine', 'BBQ Mastery', 'Fermentation']
+  },
+  {
+    id: 11,
+    name: 'Chef David',
+    country: 'Israel',
+    flag: '🇮🇱',
+    specialties: ['Mediterranean Cuisine', 'Middle Eastern', 'Fresh Herbs & Spices']
+  },
+  {
+    id: 12,
+    name: 'Chef Einar',
+    country: 'Iceland',
+    flag: '🇮🇸',
+    specialties: ['Nordic Cuisine', 'Fresh Seafood', 'Modern Techniques']
+  },
+  {
+    id: 13,
+    name: 'Chef Nikos',
+    country: 'Greece',
+    flag: '🇬🇷',
+    specialties: ['Greek Cuisine', 'Olive Oil & Feta', 'Mediterranean Traditions']
+  },
+  {
+    id: 14,
+    name: 'Chef João',
+    country: 'Portugal',
+    flag: '🇵🇹',
+    specialties: ['Portuguese Cuisine', 'Seafood Mastery', 'Wine Pairings']
+  },
+  {
+    id: 15,
+    name: 'Chef Linh',
+    country: 'Vietnam',
+    flag: '🇻🇳',
+    specialties: ['Vietnamese Cuisine', 'Pho & Noodles', 'Fresh Herbs']
+  },
+  {
+    id: 16,
+    name: 'Chef Diego',
+    country: 'Argentina',
+    flag: '🇦🇷',
+    specialties: ['Argentine Cuisine', 'Grilling Mastery', 'Empanadas']
+  },
+  {
+    id: 17,
+    name: 'Chef Fernando',
+    country: 'Brazil',
+    flag: '🇧🇷',
+    specialties: ['Brazilian Cuisine', 'Churrascaria', 'Tropical Flavors']
+  },
+  {
+    id: 18,
+    name: 'Chef Murat',
+    country: 'Turkey',
+    flag: '🇹🇷',
+    specialties: ['Turkish Cuisine', 'Kebab Excellence', 'Mezze']
+  },
+  {
+    id: 19,
+    name: 'Chef Rashid',
+    country: 'Morocco',
+    flag: '🇲🇦',
+    specialties: ['Moroccan Cuisine', 'Tagines', 'Exotic Spices']
+  },
+  {
+    id: 20,
+    name: 'Chef Karim',
+    country: 'Egypt',
+    flag: '🇪🇬',
+    specialties: ['Egyptian Cuisine', 'Ancient Recipes', 'Street Food']
+  },
+  {
+    id: 21,
+    name: 'Chef Klaus',
+    country: 'Germany',
+    flag: '🇩🇪',
+    specialties: ['German Cuisine', 'Precision Cooking', 'Sausage Mastery']
+  },
+  {
+    id: 22,
+    name: 'Chef Anna',
+    country: 'Austria',
+    flag: '🇦🇹',
+    specialties: ['Austrian Cuisine', 'Pastry Expertise', 'Schnitzel']
+  },
+  {
+    id: 23,
+    name: 'Chef Lucas',
+    country: 'Netherlands',
+    flag: '🇳🇱',
+    specialties: ['Dutch Cuisine', 'Cheese Expertise', 'Modern European']
+  },
+  {
+    id: 24,
+    name: 'Chef Soren',
+    country: 'Sweden',
+    flag: '🇸🇪',
+    specialties: ['Swedish Cuisine', 'Seafood', 'Scandinavian Design']
+  },
+  {
+    id: 25,
+    name: 'Chef Erik',
+    country: 'Norway',
+    flag: '🇳🇴',
+    specialties: ['Norwegian Cuisine', 'Salmon & Seafood', 'Nordic Traditions']
+  },
+  {
+    id: 26,
+    name: 'Chef Dimitri',
+    country: 'Russia',
+    flag: '🇷🇺',
+    specialties: ['Russian Cuisine', 'Caviar', 'Hearty Dishes']
+  },
+  {
+    id: 27,
+    name: 'Chef Wei',
+    country: 'China',
+    flag: '🇨🇳',
+    specialties: ['Chinese Cuisine', 'Wok Mastery', 'Dim Sum']
+  },
+  {
+    id: 28,
+    name: 'Chef Priya',
+    country: 'Singapore',
+    flag: '🇸🇬',
+    specialties: ['Asian Fusion', 'Hawker Style', 'Cross-Cultural']
+  },
+  {
+    id: 29,
+    name: 'Chef Adrien',
+    country: 'Switzerland',
+    flag: '🇨🇭',
+    specialties: ['Swiss Cuisine', 'Fondue & Raclette', 'Alpine Traditions']
+  },
+  {
+    id: 30,
+    name: 'Chef Isabella',
+    country: 'Australia',
+    flag: '🇦🇺',
+    specialties: ['Modern Australian', 'Fresh Produce', 'Contemporary Plating']
   }
 ];
 

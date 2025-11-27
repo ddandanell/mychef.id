@@ -28,18 +28,19 @@ const CURRENCIES = [
 
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
-  const [guests, setGuests] = useState(4);
-  const [dateFrom, setDateFrom] = useState('2024-12-20');
-  const [dateTo, setDateTo] = useState('2024-12-21');
-  const [chefType, setChefType] = useState('indonesian');
+  const [guests, setGuests] = useState(0);
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [chefType, setChefType] = useState('');
   const [includeHelper, setIncludeHelper] = useState(false);
   const [copied, setCopied] = useStateHook(false);
   const [currency, setCurrency] = useState('IDR');
   const [showChatBubble, setShowChatBubble] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-  const fromDate = new Date(dateFrom);
-  const toDate = new Date(dateTo);
-  const days = Math.max(1, Math.floor((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+  const fromDate = dateFrom ? new Date(dateFrom) : null;
+  const toDate = dateTo ? new Date(dateTo) : null;
+  const days = fromDate && toDate ? Math.max(1, Math.floor((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1) : 0;
 
   const DAILY_RATE = 4000000;
   const WEEKLY_RATE = 8000000;

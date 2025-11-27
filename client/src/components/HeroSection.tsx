@@ -58,10 +58,10 @@ export default function HeroSection() {
         </div>
       ))}
       
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 sm:pt-24">
         <button 
           onClick={handleViewReviews}
-          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6 hover-elevate active-elevate-2 transition-all cursor-pointer" 
+          className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-4 sm:mb-6 hover-elevate active-elevate-2 transition-all cursor-pointer min-h-10" 
           data-testid="badge-rating"
           aria-label="View customer reviews"
         >
@@ -74,10 +74,10 @@ export default function HeroSection() {
           <span className="text-white/80 text-sm">• {t('hero.reviews', '1000+ Reviews')}</span>
         </button>
 
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight" data-testid="text-hero-headline">
+        <h1 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-3 sm:mb-6 leading-tight" data-testid="text-hero-headline">
           {t('hero.headline')}
         </h1>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
+        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/95 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2" data-testid="text-hero-subheadline">
           {t('hero.subheadline')}
         </p>
         
@@ -96,25 +96,25 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-2 sm:px-0">
           <Button
             size="lg"
             onClick={handleWhatsAppClick}
-            className="bg-white hover:bg-white text-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white"
+            className="bg-white hover:bg-white text-foreground px-5 sm:px-8 py-3 sm:py-6 text-sm sm:text-lg font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white w-full sm:w-auto min-h-12"
             data-testid="button-hero-whatsapp-cta"
           >
-            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
             <span className="hidden sm:inline">Chat on WhatsApp Now</span>
-            <span className="sm:hidden">WhatsApp Now</span>
+            <span className="sm:hidden">WhatsApp</span>
           </Button>
           
           <Button
             size="lg"
             onClick={handleQuoteClick}
-            className="bg-primary/90 hover:bg-primary text-primary-foreground px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary"
+            className="bg-primary/90 hover:bg-primary text-primary-foreground px-5 sm:px-8 py-3 sm:py-6 text-sm sm:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary w-full sm:w-auto min-h-12"
             data-testid="button-hero-quote-cta"
           >
-            <FileText className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            <FileText className="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
             <span className="hidden sm:inline">Get Free Quote</span>
             <span className="sm:hidden">Get Quote</span>
           </Button>

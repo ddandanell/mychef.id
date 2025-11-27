@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MessageCircle, Sparkles, Copy, Check, ChefHat } from 'lucide-react';
+import { MessageCircle, Sparkles, Copy, Check, ChefHat, Calendar, Users, Check as CheckIcon } from 'lucide-react';
 import { useState as useStateHook } from 'react';
 
 const CHEF_TYPES = [
@@ -26,17 +26,14 @@ export default function PricingCalculator() {
   const [includeHelper, setIncludeHelper] = useState(false);
   const [copied, setCopied] = useStateHook(false);
 
-  // Calculate days
   const fromDate = new Date(dateFrom);
   const toDate = new Date(dateTo);
   const days = Math.max(1, Math.floor((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1);
 
-  // Pricing tiers
   const DAILY_RATE = 4000000;
   const WEEKLY_RATE = 8000000;
   const MONTHLY_RATE = 29000000;
 
-  // Calculate chef price
   let chefPrice = 0;
   let tier = '';
   
@@ -51,7 +48,6 @@ export default function PricingCalculator() {
     tier = `Daily (${days} day${days !== 1 ? 's' : ''})`;
   }
 
-  // Helper price (half of chef)
   const helperPrice = includeHelper ? chefPrice / 2 : 0;
   const totalPrice = chefPrice + helperPrice;
 
@@ -62,29 +58,63 @@ export default function PricingCalculator() {
   };
 
   const getSummaryText = () => {
-    const summary = `myCHEF BOOKING QUOTE
+    const summary = `╔════════════════════════════════════════╗
+║        MYCHEF INDONESIA BOOKING        ║
+║           PRICE QUOTATION              ║
+╚════════════════════════════════════════╝
 
-CHEF: ${chefName}
-GUESTS: ${guests}
-DATES: ${dateFrom} to ${dateTo}
-DURATION: ${days} day${days !== 1 ? 's' : ''}
-${includeHelper ? `HELPER: Yes\n` : ''}
-━━━━━━━━━━━━━━━━━━━━━━━━
-PRICING BREAKDOWN:
+📋 BOOKING DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chef Type:          ${chefName}
+Number of Guests:   ${guests} guests
+Check-in Date:      ${dateFrom}
+Check-out Date:     ${dateTo}
+Duration:           ${days} day${days !== 1 ? 's' : ''}
 
-Chef Service: ${formatIDR(chefPrice)}
-${includeHelper ? `Helper Service: ${formatIDR(helperPrice)}\n` : ''}
-TOTAL: ${formatIDR(totalPrice)}
-
-Rate: ${tier}
-
-━━━━━━━━━━━━━━━━━━━━━━━━
+💼 SERVICES INCLUDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✓ Professional Cooking
-✓ Complete Cleanup
-✓ Food Shopping
-✓ All Inclusive
+✓ All Food Shopping at Local Markets
+✓ Complete Kitchen Preparation
+✓ Beautiful Presentation
+✓ Full Cleanup (Kitchen Spotless)
+✓ All Equipment & Tools
+${includeHelper ? '✓ Professional Helper Service\n' : ''}
 
-Contact us on WhatsApp to confirm your booking!`;
+💰 PRICING BREAKDOWN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chef Service:       ${formatIDR(chefPrice)}
+${includeHelper ? `Helper Service:     ${formatIDR(helperPrice)}\n` : ''}
+TOTAL PRICE:        ${formatIDR(totalPrice)}
+
+Rate Type:          ${tier}
+
+💳 PAYMENT TERMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+50% Deposit:        ${formatIDR(totalPrice / 2)}
+  (When you confirm booking)
+
+50% Balance:        ${formatIDR(totalPrice / 2)}
+  (On the day chef arrives)
+
+🛒 FOOD COST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Separate & Transparent:
+Your chef shops at the best local markets
+in Bali. You reimburse based on receipts
+for actual ingredients purchased.
+
+📌 IMPORTANT INFO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• 48-hour cancellation notice for refunds
+• If chef gets sick = free replacement
+• Chef arrives with all equipment
+• Complete cleanup included
+• No hidden fees
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Ready to book? Contact us on WhatsApp!
+We'll confirm availability and send payment details.`;
     return summary;
   };
 
@@ -109,19 +139,45 @@ Contact us on WhatsApp to confirm your booking!`;
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/3 via-background to-primary/3 py-8 px-4">
       <div className="max-w-5xl mx-auto">
-        {/* Selected Chef Display */}
-        <div className="mb-6 text-center">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">
-            <ChefHat className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-primary">{chefName}</span>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-2">Private Chef Pricing</h1>
+          <p className="text-foreground/60">Get your instant quote for Bali</p>
+        </div>
+
+        {/* How It Works Section - TOP */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-center">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
+              <div className="text-3xl mb-3">1️⃣</div>
+              <p className="font-semibold mb-2">Fill Details</p>
+              <p className="text-xs text-foreground/70">Chef type, guests, dates</p>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
+              <div className="text-3xl mb-3">2️⃣</div>
+              <p className="font-semibold mb-2">See Price</p>
+              <p className="text-xs text-foreground/70">Instant calculation</p>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
+              <div className="text-3xl mb-3">3️⃣</div>
+              <p className="font-semibold mb-2">Copy Quote</p>
+              <p className="text-xs text-foreground/70">Professional format</p>
+            </div>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 text-center">
+              <div className="text-3xl mb-3">4️⃣</div>
+              <p className="font-semibold mb-2">Send WhatsApp</p>
+              <p className="text-xs text-foreground/70">We'll confirm & book</p>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Calculator */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
           {/* Input Section */}
           <Card className="border border-primary/20 shadow-sm">
             <CardContent className="p-6 space-y-5">
-              <h2 className="font-semibold text-lg">Your Details</h2>
+              <h3 className="font-semibold text-lg">Your Details</h3>
 
               {/* Change Chef */}
               <div>
@@ -256,12 +312,12 @@ Contact us on WhatsApp to confirm your booking!`;
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied!
+                      Copied to Clipboard!
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4" />
-                      Copy Quote
+                      Copy Full Quote
                     </>
                   )}
                 </button>
@@ -277,21 +333,35 @@ Contact us on WhatsApp to confirm your booking!`;
               </CardContent>
             </Card>
 
-            {/* Info Card */}
-            <Card className="border border-primary/20 shadow-sm bg-primary/5">
+            {/* What's Included Card */}
+            <Card className="border border-primary/20 shadow-sm">
               <CardContent className="p-4">
-                <p className="text-xs text-foreground/70 space-y-1">
-                  <span className="block">✓ All-inclusive pricing</span>
-                  <span className="block">✓ Cooking, cleanup, shopping</span>
-                  <span className="block">✓ No hidden fees</span>
-                </p>
+                <p className="text-xs font-semibold text-foreground/70 mb-3">WHAT'S INCLUDED</p>
+                <div className="space-y-2 text-xs text-foreground/70">
+                  <div className="flex items-start gap-2">
+                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                    <span>Professional cooking</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                    <span>All food shopping</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                    <span>Complete cleanup</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckIcon className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                    <span>All equipment</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
         </div>
 
         {/* Pricing Tiers Reference */}
-        <div className="mt-8 grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
             <p className="font-semibold text-sm text-primary">Daily</p>
             <p className="text-lg font-bold mt-2">{formatIDR(DAILY_RATE)}</p>
@@ -307,128 +377,6 @@ Contact us on WhatsApp to confirm your booking!`;
             <p className="text-lg font-bold mt-2">{formatIDR(MONTHLY_RATE)}</p>
             <p className="text-xs text-foreground/60 mt-1">30+ days</p>
           </div>
-        </div>
-
-        {/* Payment & Terms */}
-        <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6">How It Works</h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Payment Terms */}
-            <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-4 flex items-center gap-2">
-                  <span className="text-xl">💳</span>
-                  Payment Terms
-                </h4>
-                <div className="space-y-3 text-sm text-foreground/70">
-                  <div>
-                    <p className="font-semibold text-foreground mb-1">50% Deposit</p>
-                    <p className="text-xs">When you confirm your booking</p>
-                  </div>
-                  <div className="border-t border-primary/10 pt-3">
-                    <p className="font-semibold text-foreground mb-1">50% Balance</p>
-                    <p className="text-xs">On the day your chef arrives - no surprises!</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Cancellation Policy */}
-            <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-4 flex items-center gap-2">
-                  <span className="text-xl">📋</span>
-                  Cancellation Policy
-                </h4>
-                <div className="space-y-3 text-sm text-foreground/70">
-                  <div>
-                    <p className="font-semibold text-foreground mb-1">48 Hours Notice</p>
-                    <p className="text-xs">Full refund if you cancel 48+ hours before</p>
-                  </div>
-                  <div className="border-t border-primary/10 pt-3">
-                    <p className="font-semibold text-foreground mb-1">Illness & Emergencies</p>
-                    <p className="text-xs">If your chef gets sick, we send a replacement at no extra cost</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* What's Included */}
-            <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-4 flex items-center gap-2">
-                  <span className="text-xl">✓</span>
-                  What's Included
-                </h4>
-                <div className="space-y-2 text-sm text-foreground/70">
-                  <p>✓ Professional chef (any cuisine)</p>
-                  <p>✓ All food shopping & market work</p>
-                  <p>✓ Complete kitchen preparation</p>
-                  <p>✓ Professional cooking</p>
-                  <p>✓ Full cleanup & presentation</p>
-                  <p>✓ All equipment & tools</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Food Cost */}
-            <Card className="border border-primary/20">
-              <CardContent className="p-6">
-                <h4 className="font-semibold mb-4 flex items-center gap-2">
-                  <span className="text-xl">🛒</span>
-                  Food Cost
-                </h4>
-                <div className="space-y-3 text-sm text-foreground/70">
-                  <p className="font-semibold text-foreground">You only pay for ingredients</p>
-                  <p className="text-xs">Your chef does all shopping at local markets. You provide cash or reimburse based on receipts - complete transparency.</p>
-                  <p className="text-xs mt-2">Our chefs know the best markets in Bali to get quality ingredients at fair prices.</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Our Chefs Section */}
-        <div className="mt-12 bg-primary/10 border border-primary/20 rounded-lg p-8">
-          <h3 className="text-2xl font-bold mb-4">Professional Chef Network</h3>
-          <p className="text-foreground/70 mb-6">
-            myCHEF Indonesia brings you the best culinary professionals from around the world, right here in Bali. We maintain the highest standards of service and professionalism.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-            <div>
-              <p className="font-semibold mb-2">🌍 International Chefs</p>
-              <p className="text-foreground/70">Award-winning chefs from France, Italy, Japan, Spain, and more - bringing world-class cuisine to your villa.</p>
-            </div>
-            <div>
-              <p className="font-semibold mb-2">🇮🇩 Local Expertise</p>
-              <p className="text-foreground/70">Authentic Indonesian specialists who know traditional recipes, local ingredients, and regional flavors.</p>
-            </div>
-            <div>
-              <p className="font-semibold mb-2">✨ Professional Standards</p>
-              <p className="text-foreground/70">All chefs are background-checked, experienced, and trained in fine dining. Your safety and satisfaction guaranteed.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Key Features */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="border border-primary/20">
-            <CardContent className="p-6">
-              <h4 className="font-semibold mb-4">Complete Service</h4>
-              <p className="text-sm text-foreground/70">
-                From menu planning to table service to complete cleanup - we handle everything. Your chef arrives with all equipment and leaves your kitchen spotless.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="border border-primary/20">
-            <CardContent className="p-6">
-              <h4 className="font-semibold mb-4">Transparent Pricing</h4>
-              <p className="text-sm text-foreground/70">
-                No hidden fees. You pay for the chef service above. Food costs are separate - you reimburse only for ingredients actually purchased with receipts.
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

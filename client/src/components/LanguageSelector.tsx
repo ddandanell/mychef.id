@@ -1,18 +1,10 @@
-import { Globe, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useState, useId } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { useId } from 'react';
 import { Button } from '@/components/ui/button';
 
 const FlagGB = ({ uid }: { uid: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-8 h-5">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-6 h-4">
     <defs>
       <clipPath id={`s-${uid}`}><path d="M0,0 v30 h60 v-30 z"/></clipPath>
       <clipPath id={`t-${uid}`}><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
@@ -28,7 +20,7 @@ const FlagGB = ({ uid }: { uid: string }) => (
 );
 
 const FlagID = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-8 h-5">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-6 h-4">
     <rect width="3" height="1" fill="#CE1126"/>
     <rect width="3" height="1" y="1" fill="#fff"/>
   </svg>
@@ -37,21 +29,18 @@ const FlagID = () => (
 const LANGUAGES = [
   { 
     code: 'en', 
-    name: 'English', 
-    nativeName: 'English',
+    name: 'English',
     flagType: 'gb' as const
   },
   { 
     code: 'id', 
-    name: 'Indonesian', 
-    nativeName: 'Bahasa Indonesia',
+    name: 'Bahasa Indonesia',
     flagType: 'id' as const
   }
 ];
 
 export default function LanguageSelector() {
-  const { i18n, t } = useTranslation();
-  const [open, setOpen] = useState(false);
+  const { i18n } = useTranslation();
   const uid = useId();
 
   const langCode = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0];
@@ -67,60 +56,31 @@ export default function LanguageSelector() {
   const handleLanguageChange = (languageCode: string) => {
     i18n.changeLanguage(languageCode);
     localStorage.setItem('i18nextLng', languageCode);
-    setOpen(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="icon"
-          data-testid="button-language-selector"
-          aria-label="Select language"
+    <div className="flex items-center gap-1">
+      {LANGUAGES.map((language, index) => (
+        <button
+          key={language.code}
+          onClick={() => handleLanguageChange(language.code)}
+          className={`p-2 rounded-md transition-all hover-elevate active-elevate-2 border border-transparent ${
+            currentLanguage.code === language.code 
+              ? 'bg-primary/10 border-primary/30' 
+              : 'hover:bg-foreground/5'
+          }`}
+          title={language.name}
+          data-testid={`button-language-${language.code}`}
+          aria-label={`Switch to ${language.name}`}
         >
-          <Globe className="h-5 w-5" />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md" data-testid="dialog-language-selector">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl font-serif">
-            {t('language.title', 'Choose Your Language')}
-          </DialogTitle>
-          <DialogDescription className="text-center text-foreground/60 text-sm">
-            {t('language.subtitle', 'Select your preferred language')}
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-3 py-4">
-          {LANGUAGES.map((language, index) => (
-            <button
-              key={language.code}
-              onClick={() => handleLanguageChange(language.code)}
-              className={`flex items-center justify-between w-full p-4 rounded-lg border-2 transition-all hover-elevate active-elevate-2 ${
-                currentLanguage.code === language.code 
-                  ? 'border-primary bg-primary/5' 
-                  : 'border-border hover:border-primary/50'
-              }`}
-              data-testid={`button-language-${language.code}`}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-6 rounded overflow-hidden shadow-sm border border-border/30 flex items-center justify-center">
-                  {renderFlag(language.flagType, index)}
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-lg">{language.nativeName}</div>
-                  <div className="text-foreground/60 text-sm">{language.name}</div>
-                </div>
-              </div>
-              {currentLanguage.code === language.code && (
-                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                  <Check className="w-4 h-4 text-primary-foreground" />
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
-      </DialogContent>
-    </Dialog>
+          <div className="flex items-center gap-1.5">
+            {renderFlag(language.flagType, index)}
+            {currentLanguage.code === language.code && (
+              <Check className="w-3 h-3 text-primary" strokeWidth={3} />
+            )}
+          </div>
+        </button>
+      ))}
+    </div>
   );
 }

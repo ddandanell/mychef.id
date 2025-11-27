@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { 
   MessageCircle, ArrowLeft, Calendar, Users, Clock, 
   Sun, Utensils, Moon, ShoppingCart, ChefHat,
-  TrendingDown, Info, Calculator, Sparkles, Leaf
+  TrendingDown, Info, Calculator, Sparkles, Leaf, Shield
 } from 'lucide-react';
 
 const CURRENCIES = [
@@ -575,6 +575,19 @@ export default function PricingCalculator() {
                         <li>Market shopping (you provide cash)</li>
                         <li>Cooking & beautiful plating</li>
                         <li>Full kitchen cleanup</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-start gap-2">
+                    <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <div className="text-xs text-blue-900 dark:text-blue-100">
+                      <p className="font-semibold mb-1">Chef Insurance</p>
+                      <ul className="space-y-0.5">
+                        <li>• If chef gets sick → reschedule to another day</li>
+                        <li>• If anything happens on our side → full refund or replacement chef</li>
                       </ul>
                     </div>
                   </div>

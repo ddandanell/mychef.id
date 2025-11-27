@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Building2, Users, Award } from 'lucide-react';
 import { SiAirbnb } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import type { MotionDiv } from 'framer-motion';
 import villaImage from '@assets/generated_images/luxury_villa_dinner_experience.png';
 
 export default function VillaPartners() {
@@ -118,11 +119,16 @@ export default function VillaPartners() {
                     transition={{ delay: 0.6, duration: 0.5 }}
                     viewport={{ once: true }}
                   >
-                    <Button
-                      size="lg"
-                      onClick={handleWhatsAppClick}
-                      className="w-full bg-primary hover:bg-primary text-primary-foreground px-6 py-6 text-base font-semibold hover-elevate active-elevate-2"
-                      data-testid="button-villa-partners-whatsapp"
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <Button
+                        size="sm"
+                        onClick={handleWhatsAppClick}
+                        className="w-full bg-primary hover:bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold hover-elevate active-elevate-2"
+                        data-testid="button-villa-partners-whatsapp"
                     >
                       <MessageCircle className="w-5 h-5 mr-2" />
                       Partner With myCHEF Today

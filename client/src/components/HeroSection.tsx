@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
@@ -97,27 +98,39 @@ export default function HeroSection() {
         </div>
 
         <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-2 sm:px-0">
-          <Button
-            size="lg"
-            onClick={handleWhatsAppClick}
-            className="bg-white hover:bg-white text-foreground px-5 sm:px-8 py-3 sm:py-6 text-sm sm:text-lg font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white w-full sm:w-auto min-h-12"
-            data-testid="button-hero-whatsapp-cta"
+          <motion.div
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
-            <span className="hidden sm:inline">Chat on WhatsApp Now</span>
-            <span className="sm:hidden">WhatsApp</span>
-          </Button>
+            <Button
+              size="sm"
+              onClick={handleWhatsAppClick}
+              className="bg-white hover:bg-white text-foreground px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-2xl border-2 border-white w-full sm:w-auto"
+              data-testid="button-hero-whatsapp-cta"
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">WhatsApp Now</span>
+              <span className="sm:hidden">WhatsApp</span>
+            </Button>
+          </motion.div>
           
-          <Button
-            size="lg"
-            onClick={handleQuoteClick}
-            className="bg-primary/90 hover:bg-primary text-primary-foreground px-5 sm:px-8 py-3 sm:py-6 text-sm sm:text-lg font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary w-full sm:w-auto min-h-12"
-            data-testid="button-hero-quote-cta"
+          <motion.div
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <FileText className="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
-            <span className="hidden sm:inline">Get Free Quote</span>
-            <span className="sm:hidden">Get Quote</span>
-          </Button>
+            <Button
+              size="sm"
+              onClick={handleQuoteClick}
+              className="bg-primary/90 hover:bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold hover-elevate active-elevate-2 shadow-xl border border-primary w-full sm:w-auto"
+              data-testid="button-hero-quote-cta"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">Get Quote</span>
+              <span className="sm:hidden">Quote</span>
+            </Button>
+          </motion.div>
         </div>
 
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-white text-sm">

@@ -2,6 +2,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Flame, Music, Wine, Utensils, Zap, BookOpen, Phone, Mail, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
 import bbqImage from '@assets/generated_images/professional_barbecue_grill_setup.png';
 import djImage from '@assets/generated_images/dj_sound_system_party.png';
 import wineImage from '@assets/generated_images/wine_tasting_experience.png';
@@ -141,15 +142,22 @@ export default function PartyAddons() {
                 <p className="text-xs md:text-sm text-foreground/65 mb-6 leading-relaxed">
                   One-day experience or month-long service? We've got you covered either way!
                 </p>
-                <Button
-                  size="lg"
-                  onClick={handleWhatsAppClick}
-                  className="bg-primary hover:bg-primary text-primary-foreground px-6 py-3 text-base font-semibold hover-elevate active-elevate-2 w-full"
-                  data-testid="button-addons-whatsapp"
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="w-full"
                 >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Chat with Siti on WhatsApp
-                </Button>
+                  <Button
+                    size="sm"
+                    onClick={handleWhatsAppClick}
+                    className="bg-primary hover:bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold hover-elevate active-elevate-2 w-full"
+                    data-testid="button-addons-whatsapp"
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Chat with Siti
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </CardContent>

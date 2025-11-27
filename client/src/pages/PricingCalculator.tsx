@@ -299,6 +299,15 @@ We'll confirm availability and send payment details.`;
                   </p>
                 </div>
 
+                {/* Action Options */}
+                <div className="bg-primary/5 p-3 rounded-lg mb-4 text-xs text-foreground/70">
+                  <p className="font-semibold text-foreground mb-2">What would you like to do?</p>
+                  <ul className="space-y-1">
+                    <li>📋 <span className="font-semibold">Copy Quote</span> - Share with friends or colleagues</li>
+                    <li>💬 <span className="font-semibold">Send WhatsApp</span> - Book directly or ask questions</li>
+                  </ul>
+                </div>
+
                 {/* Copy & Send */}
                 <button
                   onClick={handleCopy}

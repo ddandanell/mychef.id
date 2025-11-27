@@ -13,9 +13,19 @@ export default function PricingPopup() {
   useEffect(() => {
     if (!isHomePage) return;
 
+    const lastShownTime = localStorage.getItem('pricingPopupLastShown');
+    const now = Date.now();
+    const MIN_INTERVAL = 2 * 60 * 1000; // 2 minutes in milliseconds
+
+    // Check if we should show the popup
+    const shouldShow = !lastShownTime || (now - parseInt(lastShownTime)) >= MIN_INTERVAL;
+
+    if (!shouldShow) return;
+
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 10000); // 10 seconds
+      localStorage.setItem('pricingPopupLastShown', now.toString());
+    }, 10000); // Show after 10 seconds
 
     return () => clearTimeout(timer);
   }, [isHomePage, location]);

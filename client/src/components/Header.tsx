@@ -14,7 +14,7 @@ export default function Header() {
           
           <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-primary/5 rounded-lg border border-primary/10">
             <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5, 6].map((star) => (
+              {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
                   className="w-4 h-4 fill-yellow-400 text-yellow-400"
@@ -22,8 +22,11 @@ export default function Header() {
                 />
               ))}
             </div>
-            <span className="text-xs sm:text-sm font-medium text-foreground/80" data-testid="text-header-stars">
-              Our guests have been talking...
+            <span className="text-xs sm:text-sm font-semibold text-foreground/90" data-testid="text-header-rating">
+              4.9/5
+            </span>
+            <span className="text-xs sm:text-sm font-medium text-foreground/70" data-testid="text-header-reviews">
+              • 50+ Reviews
             </span>
           </div>
           

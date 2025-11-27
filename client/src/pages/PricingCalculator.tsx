@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { 
   MessageCircle, ArrowLeft, Calendar, Users, Clock, 
   Sun, Utensils, Moon, ShoppingCart, ChefHat,
-  TrendingDown, Info, Calculator, Sparkles, Leaf, Shield
+  TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2
 } from 'lucide-react';
 
 const CURRENCIES = [
@@ -15,6 +15,79 @@ const CURRENCIES = [
   { code: 'EUR', symbol: '€', rate: 0.000060 },
   { code: 'AUD', symbol: 'A$', rate: 0.000098 },
   { code: 'SGD', symbol: 'S$', rate: 0.000084 },
+];
+
+const MASTER_CHEFS = [
+  {
+    id: 1,
+    name: 'Chef Marco',
+    country: 'Italy',
+    flag: '🇮🇹',
+    specialties: ['Italian Cuisine', 'Pasta Making', 'Fine Dining']
+  },
+  {
+    id: 2,
+    name: 'Chef Siti',
+    country: 'Indonesia',
+    flag: '🇮🇩',
+    specialties: ['Indonesian Cuisine', 'Traditional Flavors', 'Balinese Dishes']
+  },
+  {
+    id: 3,
+    name: 'Chef Sophie',
+    country: 'France',
+    flag: '🇫🇷',
+    specialties: ['French Cuisine', 'Pastry', 'Fine Dining Techniques']
+  },
+  {
+    id: 4,
+    name: 'Chef Hassan',
+    country: 'Japan',
+    flag: '🇯🇵',
+    specialties: ['Japanese Cuisine', 'Sushi', 'Precision Knife Work']
+  },
+  {
+    id: 5,
+    name: 'Chef Carlos',
+    country: 'Spain',
+    flag: '🇪🇸',
+    specialties: ['Spanish Cuisine', 'Paella', 'Mediterranean Flavors']
+  },
+  {
+    id: 6,
+    name: 'Chef Akiko',
+    country: 'Thailand',
+    flag: '🇹🇭',
+    specialties: ['Thai Cuisine', 'Spice Balancing', 'Street Food']
+  },
+  {
+    id: 7,
+    name: 'Chef Raj',
+    country: 'India',
+    flag: '🇮🇳',
+    specialties: ['Indian Cuisine', 'Tandoori Cooking', 'Spice Blending']
+  },
+  {
+    id: 8,
+    name: 'Chef Maria',
+    country: 'Mexico',
+    flag: '🇲🇽',
+    specialties: ['Mexican Cuisine', 'Traditional Recipes', 'Authentic Flavors']
+  },
+  {
+    id: 9,
+    name: 'Chef Pierre',
+    country: 'Belgium',
+    flag: '🇧🇪',
+    specialties: ['Belgian Cuisine', 'Chocolate', 'European Fusion']
+  },
+  {
+    id: 10,
+    name: 'Chef Yuki',
+    country: 'Korea',
+    flag: '🇰🇷',
+    specialties: ['Korean Cuisine', 'BBQ Mastery', 'Fermentation']
+  }
 ];
 
 function getNumDaysFromDates(startDateStr: string, endDateStr: string): number {
@@ -107,6 +180,7 @@ export default function PricingCalculator() {
   const [dinner, setDinner] = useState(true);
   const [currency, setCurrency] = useState('IDR');
   const [showRules, setShowRules] = useState(false);
+  const [selectedChef, setSelectedChef] = useState(MASTER_CHEFS[0]);
 
   const result = useMemo(() => {
     return calculateBooking(startDate, endDate, guestCount, breakfast, lunch, dinner);
@@ -180,6 +254,52 @@ export default function PricingCalculator() {
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div className="lg:col-span-3 space-y-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 }}
+              >
+                <Card className="border-primary/20">
+                  <CardContent className="p-4 md:p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <ChefHat className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold">Select Your Master Chef</h3>
+                    </div>
+                    <div className="space-y-2 max-h-64 overflow-y-auto">
+                      {MASTER_CHEFS.map((chef) => (
+                        <motion.button
+                          key={chef.id}
+                          onClick={() => setSelectedChef(chef)}
+                          className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
+                            selectedChef.id === chef.id
+                              ? 'border-primary bg-primary/10'
+                              : 'border-primary/20 hover:border-primary/40'
+                          }`}
+                          data-testid={`button-chef-${chef.id}`}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold flex items-center gap-2">
+                                <span className="text-lg">{chef.flag}</span>
+                                {chef.name} from {chef.country}
+                              </p>
+                              <p className="text-xs text-foreground/60 mt-1 line-clamp-1">
+                                {chef.specialties.join(' • ')}
+                              </p>
+                            </div>
+                            {selectedChef.id === chef.id && (
+                              <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 ml-2" />
+                            )}
+                          </div>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -518,7 +638,31 @@ export default function PricingCalculator() {
                           </div>
                         </div>
 
-                        <div className="space-y-2 pt-2">
+                        <div className="space-y-4 pt-2 border-t border-primary/10">
+                          <div className="bg-emerald-50 dark:bg-emerald-950/30 p-4 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                            <h4 className="text-sm font-bold text-emerald-900 dark:text-emerald-100 mb-3">ROI Comparison</h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="flex justify-between items-center">
+                                <span className="text-emerald-800 dark:text-emerald-200">Dining Out Cost</span>
+                                <span className="font-bold text-emerald-900 dark:text-emerald-100">
+                                  {formatPrice(1500000 * guestCount)} (Rp 1.5M × {guestCount} {guestCount === 1 ? 'person' : 'people'})
+                                </span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-emerald-800 dark:text-emerald-200">Private Chef Cost</span>
+                                <span className="font-bold text-emerald-900 dark:text-emerald-100">
+                                  {formatPrice(result.totalCost)}
+                                </span>
+                              </div>
+                              <div className="border-t border-emerald-200 dark:border-emerald-800 pt-2 mt-2 flex justify-between items-center">
+                                <span className="font-semibold text-emerald-900 dark:text-emerald-100">You Save</span>
+                                <span className="font-bold text-lg text-emerald-900 dark:text-emerald-100">
+                                  {formatPrice(Math.max(0, (1500000 * guestCount) - result.totalCost))}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
                           <motion.div
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
@@ -529,7 +673,7 @@ export default function PricingCalculator() {
                               data-testid="button-book-whatsapp"
                             >
                               <MessageCircle className="w-4 h-4 mr-2" />
-                              Book via WhatsApp
+                              Book {selectedChef.name} via WhatsApp
                             </Button>
                           </motion.div>
                           <p className="text-[10px] text-center text-foreground/50">

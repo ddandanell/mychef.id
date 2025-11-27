@@ -221,10 +221,11 @@ Alternative if you prefer:
 
       {/* Hero Background with Chef Image */}
       <div
-        className="absolute inset-0 h-96 md:h-[500px] bg-cover bg-center opacity-15 pointer-events-none"
+        className="absolute inset-0 h-96 md:h-[500px] bg-cover opacity-15 pointer-events-none"
         style={{
           backgroundImage: `url(${kitchenChefImage})`,
           backgroundAttachment: 'fixed',
+          backgroundPosition: '50% 20%',
         }}
       />
 

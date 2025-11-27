@@ -2,6 +2,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Calculator } from 'lucide-react';
 import { motion } from 'framer-motion';
+import AICalculator from './AICalculator';
 
 export default function CalculatorCTA() {
   const [, setLocation] = useLocation();
@@ -17,7 +18,7 @@ export default function CalculatorCTA() {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-r from-primary/10 to-primary/5 border-t border-b border-primary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -67,27 +68,7 @@ export default function CalculatorCTA() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="hidden md:flex justify-center"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-2xl" />
-              <div className="relative bg-white dark:bg-card rounded-2xl p-8 shadow-xl border border-primary/20">
-                <div className="space-y-4">
-                  <div className="h-3 bg-primary/10 rounded w-3/4" />
-                  <div className="h-3 bg-primary/10 rounded w-full" />
-                  <div className="h-3 bg-primary/10 rounded w-5/6" />
-                  <div className="pt-4 border-t border-primary/10">
-                    <div className="h-8 bg-primary/20 rounded w-1/2" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <AICalculator />
         </div>
       </div>
     </section>

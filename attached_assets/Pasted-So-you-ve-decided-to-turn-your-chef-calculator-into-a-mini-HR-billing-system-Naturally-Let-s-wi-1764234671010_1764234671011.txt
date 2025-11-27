@@ -1,0 +1,257 @@
+So you’ve decided to turn your chef calculator into a mini HR + billing system. Naturally.
+
+Let’s wire your new rules into the system:
+	•	Shopping hours: 2 hours per started week of booking (same as before)
+	•	Pricing tier is now based on total chef hours, not just days:
+	•	> 140 hours → Monthly rate (250,000)
+	•	> 24 hours → Weekly rate (350,000)
+	•	≤ 24 hours → Normal / daily rate (800,000)
+	•	Once they hit weekly or monthly, all hours are billed at that lower rate.
+
+I’ll update the logic and give you a clear block of rules you can show to clients or staff.
+
+⸻
+
+1. Final logic structure (with your new thresholds)
+
+We keep all your previous logic:
+
+A. Inputs
+	•	numDays or (startDate, endDate)
+	•	guestCount
+	•	morning (true/false)
+	•	midday (true/false)
+	•	night (true/false)
+
+B. Hours per day
+
+Same as before:
+	•	If night is selected → 8 hours
+	•	Else if morning + midday → 5 hours
+	•	Else if exactly 1 of the 3 is selected → 3 hours
+	•	Else → 0
+
+function getDailyServiceHours({ morning, midday, night }) {
+  const count = [morning, midday, night].filter(Boolean).length;
+
+  if (night) {
+    return 8;
+  } else if (morning && midday) {
+    return 5;
+  } else if (count === 1) {
+    return 3;
+  } else {
+    return 0;
+  }
+}
+
+C. Shopping hours (2h per started week)
+	•	Minimum 2 hours, even for 1 day
+	•	Every started 7-day block adds 2 hours
+
+const shoppingBlocks = Math.ceil(numDays / 7);
+const shoppingHours  = shoppingBlocks * 2;
+
+D. Total chef hours
+
+const serviceHours   = dailyServiceHours * numDays;
+const totalChefHours = serviceHours + shoppingHours;
+
+
+⸻
+
+2. New pricing tier logic (by total hours)
+
+Your new rule:
+	•	If total hours > 140 → monthly pricing (250k/hr)
+	•	Else if total hours > 24 → weekly pricing (350k/hr)
+	•	Else → normal daily pricing (800k/hr)
+
+We make a helper:
+
+function getChefRateByHours(totalHours) {
+  if (totalHours > 140) {
+    return { hourly: 250000, tier: "monthly" };
+  } else if (totalHours > 24) {
+    return { hourly: 350000, tier: "weekly" };
+  } else {
+    return { hourly: 800000, tier: "daily" };
+  }
+}
+
+Important:
+The tier applies to all hours, not just the hours above the threshold.
+
+⸻
+
+3. Helper rule (unchanged, just included in final result)
+	•	If guestCount > 10 → you add a helper
+	•	Helper hours = same as chef hours (you can later change this to 50% if you want)
+
+const helperHourly = 400000;
+let helperHours = 0;
+
+if (guestCount > 10) {
+  helperHours = totalChefHours;  // or totalChefHours * 0.5 if you change your mind
+}
+
+
+⸻
+
+4. Full updated calculator function
+
+Here’s the complete JS-style function with your new hourly thresholds and all the old rules combined.
+
+function getNumDaysFromDates(startDateStr, endDateStr) {
+  const start = new Date(startDateStr); // "2025-03-01"
+  const end   = new Date(endDateStr);   // "2025-03-10"
+
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+  const diffMs = end - start;
+
+  // inclusive: 1–1 = 1 day
+  return Math.max(1, Math.ceil(diffMs / MS_PER_DAY) + 1);
+}
+
+function getDailyServiceHours({ morning, midday, night }) {
+  const count = [morning, midday, night].filter(Boolean).length;
+
+  if (night) {
+    // Any option that includes dinner is treated as a full day
+    return 8;
+  } else if (morning && midday) {
+    return 5;
+  } else if (count === 1) {
+    return 3;
+  } else {
+    return 0;
+  }
+}
+
+function getChefRateByHours(totalHours) {
+  // New rule:
+  // > 140 hours → monthly tier (250k)
+  // > 24 hours  → weekly tier (350k)
+  // else        → normal (800k)
+  if (totalHours > 140) {
+    return { hourly: 250000, tier: "monthly" };
+  } else if (totalHours > 24) {
+    return { hourly: 350000, tier: "weekly" };
+  } else {
+    return { hourly: 800000, tier: "daily" };
+  }
+}
+
+function calculateBooking(params) {
+  let {
+    numDays,
+    startDate,  // optional "YYYY-MM-DD"
+    endDate,    // optional "YYYY-MM-DD"
+    guestCount,
+    morning,
+    midday,
+    night,
+  } = params;
+
+  // 1) Derive numDays from dates if needed
+  if (!numDays && startDate && endDate) {
+    numDays = getNumDaysFromDates(startDate, endDate);
+  }
+
+  if (!numDays || numDays <= 0) {
+    throw new Error("numDays must be at least 1");
+  }
+
+  // 2) Service hours per day
+  const dailyServiceHours = getDailyServiceHours({ morning, midday, night });
+
+  // 3) Service + shopping hours
+  const serviceHours   = dailyServiceHours * numDays;
+  const shoppingBlocks = Math.ceil(numDays / 7); // 1 block per started week
+  const shoppingHours  = shoppingBlocks * 2;     // 2h per block
+  const totalChefHours = serviceHours + shoppingHours;
+
+  // 4) Chef rate based on total hours (new rule)
+  const { hourly: chefHourly, tier: pricingTier } = getChefRateByHours(totalChefHours);
+
+  // 5) Helper logic
+  const helperHourly = 400000;
+  let helperHours = 0;
+
+  if (guestCount > 10) {
+    helperHours = totalChefHours; // same hours as chef
+  }
+
+  // 6) Costs
+  const chefCost   = totalChefHours * chefHourly;
+  const helperCost = helperHours     * helperHourly;
+  const totalCost  = chefCost + helperCost;
+
+  return {
+    // Inputs / basics
+    numDays,
+    guestCount,
+
+    // Hours breakdown
+    dailyServiceHours,
+    serviceHours,
+    shoppingBlocks,
+    shoppingHours,
+    totalChefHours,
+    helperHours,
+
+    // Pricing tier
+    pricingTier,     // "daily" | "weekly" | "monthly"
+    chefHourly,
+    helperHourly,
+
+    // Money
+    chefCost,
+    helperCost,
+    totalCost,
+  };
+}
+
+That’s your “brain” for the calculator.
+
+⸻
+
+5. Text rules you can show next to the calculator
+
+You wanted something users can read so they aren’t totally lost. Here’s a simple explanation block you can put on the page:
+
+How pricing works
+	1.	Chef & helper rates
+	•	Chef base hourly rate:
+	•	800,000 IDR / hour (normal)
+	•	350,000 IDR / hour (weekly rate)
+	•	250,000 IDR / hour (monthly rate)
+	•	Helper hourly rate: 400,000 IDR / hour
+	•	A helper is added automatically when there are more than 10 guests.
+	2.	Hours per day
+	•	1 meal (morning or midday or night): 3 hours
+	•	Morning + midday: 5 hours
+	•	Any option that includes dinner/night: 8 hours total for the day
+	3.	Shopping time
+	•	The chef always spends 2 hours on shopping the first time.
+	•	For longer stays, the chef spends 2 shopping hours per started week (every 7 days).
+	•	Shopping time is billed at the same hourly rate as normal working time.
+	4.	Weekly & monthly discounts (based on total hours)
+	•	The system adds up:
+	•	All cooking/serving hours, plus
+	•	All shopping hours.
+	•	If total hours are:
+	•	25 to 140 hours → weekly rate: 350,000 IDR / hour
+	•	More than 140 hours → monthly rate: 250,000 IDR / hour
+	•	24 hours or less → normal rate: 800,000 IDR / hour
+	•	Once a weekly or monthly tier is reached, all hours in that booking use the lower rate.
+
+Put that next to the calculator or in a tooltip/FAQ.
+
+You now have:
+	•	A clear hour-based pricing system
+	•	Automatic switch between daily / weekly / monthly
+	•	Shopping hours & helper handled
+	•	Machine logic and human explanation in sync
+
+So yes, your “little calculator” is now basically a billing rules engine.

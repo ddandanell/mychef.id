@@ -12,6 +12,7 @@ import JoinOurTeam from "@/pages/JoinOurTeam";
 import ContactConfirm from "@/pages/ContactConfirm";
 import QuoteFunnel from "@/pages/QuoteFunnel";
 import AdminQuotes from "@/pages/AdminQuotes";
+import PricingCalculator from "@/pages/PricingCalculator";
 import NotFound from "@/pages/not-found";
 
 // Lazy load all city pages
@@ -94,6 +95,7 @@ function Router() {
       <Route path="/join-our-team" component={JoinOurTeam} />
       <Route path="/contact/confirm" component={ContactConfirm} />
       <Route path="/quote" component={QuoteFunnel} />
+      <Route path="/calculator" component={PricingCalculator} />
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

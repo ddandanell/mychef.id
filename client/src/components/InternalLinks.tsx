@@ -1,6 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
-import { MapPin, Utensils, ChefHat, Heart, PartyPopper, Users, Briefcase, Church, Calendar, Cake } from 'lucide-react';
+import { MapPin, Utensils, ChefHat, Heart, PartyPopper, Users, Briefcase, Church, Calendar, Cake, Award, Sparkles } from 'lucide-react';
+
+const KEYWORD_PAGES = [
+  { name: 'Best Private Chef Indonesia', slug: 'best-private-chef-indonesia', icon: Award },
+  { name: 'Private Chef for Events', slug: 'private-chef-for-events', icon: PartyPopper },
+  { name: 'Luxury Chef Indonesia', slug: 'luxury-chef-indonesia', icon: Sparkles },
+  { name: 'Wedding Catering Indonesia', slug: 'wedding-catering-indonesia', icon: Church },
+  { name: 'Private Dining Indonesia', slug: 'private-dining-indonesia', icon: Heart },
+  { name: 'Healthy Meal Delivery Indonesia', slug: 'healthy-meal-delivery-indonesia', icon: Calendar },
+  { name: 'Private Chef Booking Indonesia', slug: 'private-chef-booking-indonesia', icon: ChefHat },
+  { name: 'Chef for Hire Indonesia', slug: 'chef-for-hire-indonesia', icon: Users },
+];
 
 const ALL_CITIES = [
   { name: 'Jakarta', slug: 'jakarta', region: 'Java' },
@@ -59,6 +70,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
   }, {} as Record<string, typeof ALL_CITIES>);
 
   const filteredServices = ALL_SERVICES.filter(service => service.slug !== currentSlug);
+  const filteredKeywords = KEYWORD_PAGES.filter(page => page.slug !== currentSlug);
 
   return (
     <section className="py-16 lg:py-24 bg-card">
@@ -93,6 +105,34 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
                     <IconComponent className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-sm font-medium group-hover:text-primary transition-colors truncate">
                       {service.name}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Keyword Landing Pages for SEO */}
+        {variant === 'full' && (
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6">
+              <Award className="w-5 h-5 text-primary" />
+              <h3 className="text-xl font-semibold">{t('internalLinks.popularSearches', 'Popular Searches')}</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {filteredKeywords.map((page) => {
+                const IconComponent = page.icon;
+                return (
+                  <Link
+                    key={page.slug}
+                    href={`/${page.slug}`}
+                    className="flex items-center gap-2 p-3 rounded-lg bg-background border hover:border-primary hover:bg-primary/5 transition-all group"
+                    data-testid={`link-keyword-${page.slug}`}
+                  >
+                    <IconComponent className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="text-sm font-medium group-hover:text-primary transition-colors truncate">
+                      {page.name}
                     </span>
                   </Link>
                 );

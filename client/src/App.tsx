@@ -53,6 +53,16 @@ const WeddingCelebrationsPage = lazy(() => import("@/pages/services/WeddingCeleb
 const CookingClassesPage = lazy(() => import("@/pages/services/CookingClassesPage"));
 const WeeklyMealPrepPage = lazy(() => import("@/pages/services/WeeklyMealPrepPage"));
 
+// Lazy load all keyword SEO landing pages
+const BestPrivateChefIndonesiaPage = lazy(() => import("@/pages/keywords/BestPrivateChefIndonesiaPage"));
+const PrivateChefForEventsPage = lazy(() => import("@/pages/keywords/PrivateChefForEventsPage"));
+const LuxuryChefIndonesiaPage = lazy(() => import("@/pages/keywords/LuxuryChefIndonesiaPage"));
+const WeddingCateringIndonesiaPage = lazy(() => import("@/pages/keywords/WeddingCateringIndonesiaPage"));
+const PrivateDiningIndonesiaPage = lazy(() => import("@/pages/keywords/PrivateDiningIndonesiaPage"));
+const HealthyMealDeliveryIndonesiaPage = lazy(() => import("@/pages/keywords/HealthyMealDeliveryIndonesiaPage"));
+const PrivateChefBookingIndonesiaPage = lazy(() => import("@/pages/keywords/PrivateChefBookingIndonesiaPage"));
+const ChefForHireIndonesiaPage = lazy(() => import("@/pages/keywords/ChefForHireIndonesiaPage"));
+
 function Router() {
   useEffect(() => {
     // Disable automatic scroll-to-top on route changes
@@ -102,6 +112,15 @@ function Router() {
       <Route path="/services/wedding-celebrations" component={WeddingCelebrationsPage} />
       <Route path="/services/cooking-classes" component={CookingClassesPage} />
       <Route path="/services/weekly-meal-prep" component={WeeklyMealPrepPage} />
+      {/* Keyword SEO Landing Pages */}
+      <Route path="/best-private-chef-indonesia" component={BestPrivateChefIndonesiaPage} />
+      <Route path="/private-chef-for-events" component={PrivateChefForEventsPage} />
+      <Route path="/luxury-chef-indonesia" component={LuxuryChefIndonesiaPage} />
+      <Route path="/wedding-catering-indonesia" component={WeddingCateringIndonesiaPage} />
+      <Route path="/private-dining-indonesia" component={PrivateDiningIndonesiaPage} />
+      <Route path="/healthy-meal-delivery-indonesia" component={HealthyMealDeliveryIndonesiaPage} />
+      <Route path="/private-chef-booking-indonesia" component={PrivateChefBookingIndonesiaPage} />
+      <Route path="/chef-for-hire-indonesia" component={ChefForHireIndonesiaPage} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/payment-terms" component={PaymentTerms} />

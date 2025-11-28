@@ -67,98 +67,98 @@ export default function Footer() {
     <footer className="bg-gradient-to-b from-card via-card to-primary/5 border-t border-primary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Service Area & Stars Section at Top */}
-        <div className="py-8 lg:py-12 border-b border-primary/10">
-          <div className="flex flex-col items-center gap-6">
+        <div className="py-6 sm:py-8 lg:py-12 border-b border-primary/10">
+          <div className="flex flex-col items-center gap-4 sm:gap-6">
             {/* South Bali Premium Badge */}
-            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-                <MapPin className="w-4 h-4" />
-                South Bali Premium Service Area
-                <Sparkles className="w-4 h-4" />
+            <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-primary">
+                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span>South Bali Premium Service Area</span>
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
             
             {/* Stars Section */}
-            <div className="flex flex-col items-center gap-3">
-              <div className="flex items-center gap-2 justify-center">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-1.5 sm:gap-2 justify-center">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
-                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                    className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"
                     data-testid={`icon-footer-star-${star}`}
                   />
                 ))}
-                <span className="text-yellow-600 font-bold ml-1">4.9/5</span>
+                <span className="text-yellow-600 font-bold ml-1 text-sm sm:text-base">4.9/5</span>
               </div>
-              <span className="text-sm sm:text-base font-semibold text-foreground text-center" data-testid="text-footer-stars">
+              <span className="text-xs sm:text-sm font-semibold text-foreground text-center" data-testid="text-footer-stars">
                 Trusted by 1000+ families • 13+ Years of Excellence
               </span>
             </div>
           </div>
         </div>
 
-        <div className="py-12 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 mb-12">
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4" data-testid="link-footer-logo">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <ChefHat className="w-6 h-6 text-primary" />
+        <div className="py-8 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          <div className="col-span-2 lg:col-span-2">
+            <Link href="/" className="inline-flex items-center gap-2 mb-3 sm:mb-4" data-testid="link-footer-logo">
+              <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
+                <ChefHat className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-bold">myCHEF</h3>
-                <p className="text-xs text-primary font-semibold">Indonesia</p>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold">myCHEF</h3>
+                <p className="text-[10px] sm:text-xs text-primary font-semibold">Indonesia</p>
               </div>
             </Link>
-            <p className="text-sm text-foreground/70 leading-relaxed mb-6">
+            <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-4 sm:mb-6">
               Premium private chef service for South Bali. Professional, transparent, & trusted by families worldwide.
             </p>
-            <div className="space-y-2 text-xs text-foreground/60 mb-6">
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-primary flex-shrink-0" />
+            <div className="space-y-1.5 sm:space-y-2 text-[10px] sm:text-xs text-foreground/60 mb-4 sm:mb-6">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                 <span>Background Checked Chefs</span>
               </div>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary flex-shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                 <span>13+ Years Experience</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                 <span>100% Transparent Pricing</span>
               </div>
             </div>
-            <div className="flex gap-4 items-center mb-6">
+            <div className="flex gap-2 sm:gap-4 items-center flex-wrap mb-4 sm:mb-6">
               <button
                 onClick={handleWhatsAppClick}
-                className="hover-elevate active-elevate-2 p-2 rounded-full"
+                className="hover-elevate active-elevate-2 p-1.5 sm:p-2 rounded-full"
                 data-testid="link-footer-whatsapp"
                 aria-label="WhatsApp"
               >
-                <SiWhatsapp className="w-5 h-5" />
+                <SiWhatsapp className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <a
                 href="https://www.instagram.com/mychefindonesia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-elevate active-elevate-2 p-2 rounded-full"
+                className="hover-elevate active-elevate-2 p-1.5 sm:p-2 rounded-full"
                 data-testid="link-footer-instagram"
                 aria-label="Instagram"
               >
-                <SiInstagram className="w-5 h-5" />
+                <SiInstagram className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
                 href="https://www.facebook.com/mychefindonesia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-elevate active-elevate-2 p-2 rounded-full"
+                className="hover-elevate active-elevate-2 p-1.5 sm:p-2 rounded-full"
                 data-testid="link-footer-facebook"
                 aria-label="Facebook"
               >
-                <SiFacebook className="w-5 h-5" />
+                <SiFacebook className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <LanguageSelector />
             </div>
 
-            <div className="space-y-3 text-sm">
+            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <button
                 onClick={handleWhatsAppClick}
                 className="flex items-center gap-2 text-foreground/70 hover:text-primary text-left"
@@ -186,11 +186,11 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wide text-foreground/60">
+          <div className="hidden lg:block">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
               {t('footer.services', 'Our Services')}
             </h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {SERVICE_LINKS.map((service) => (
                 <li key={service.slug}>
                   <Link
@@ -205,11 +205,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wide text-foreground/60">
+          <div className="hidden lg:block">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
               {t('footer.premiumAreas', 'Premium Areas')}
             </h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['Premium Destinations'].map((city) => (
                 <li key={city.slug}>
                   <Link
@@ -224,11 +224,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wide text-foreground/60">
+          <div className="hidden lg:block">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
               {t('footer.southBali', 'South Bali')}
             </h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['South Bali'].map((city) => (
                 <li key={city.slug}>
                   <Link
@@ -242,10 +242,10 @@ export default function Footer() {
               ))}
             </ul>
 
-            <h4 className="font-semibold mb-3 mt-6 text-sm uppercase tracking-wide text-foreground/60">
+            <h4 className="font-semibold mb-2 sm:mb-3 mt-4 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
               {t('footer.bukitPeninsula', 'Bukit Peninsula')}
             </h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['Bukit Peninsula'].map((city) => (
                 <li key={city.slug}>
                   <Link
@@ -260,11 +260,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wide text-foreground/60">
+          <div className="hidden lg:block">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
               {t('footer.moreAreas', 'More Areas')}
             </h4>
-            <ul className="space-y-2 text-sm text-foreground/70">
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {[...CITY_LINKS['Central & West'], ...CITY_LINKS['East & North']].map((city) => (
                 <li key={city.slug}>
                   <Link

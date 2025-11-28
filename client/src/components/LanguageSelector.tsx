@@ -1,7 +1,6 @@
 import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useId } from 'react';
-import { motion } from 'framer-motion';
 
 const FlagGB = ({ uid }: { uid: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-5 h-3.5 sm:w-6 sm:h-4 rounded-sm overflow-hidden">
@@ -61,11 +60,9 @@ export default function LanguageSelector() {
   return (
     <div className="flex items-center gap-1 sm:gap-2">
       {LANGUAGES.map((language, index) => (
-        <motion.button
+        <button
           key={language.code}
           onClick={() => handleLanguageChange(language.code)}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
           className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all hover-elevate active-elevate-2 border font-semibold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 min-h-[36px] sm:min-h-[40px] ${
             currentLanguage.code === language.code 
               ? 'bg-primary text-primary-foreground border-primary shadow-md' 
@@ -82,7 +79,7 @@ export default function LanguageSelector() {
               <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-2" />
             )}
           </div>
-        </motion.button>
+        </button>
       ))}
     </div>
   );

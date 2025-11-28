@@ -1,10 +1,10 @@
 import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useId } from 'react';
-import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const FlagGB = ({ uid }: { uid: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-6 h-4">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-5 h-3.5 sm:w-6 sm:h-4 rounded-sm overflow-hidden">
     <defs>
       <clipPath id={`s-${uid}`}><path d="M0,0 v30 h60 v-30 z"/></clipPath>
       <clipPath id={`t-${uid}`}><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
@@ -20,7 +20,7 @@ const FlagGB = ({ uid }: { uid: string }) => (
 );
 
 const FlagID = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-6 h-4">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-5 h-3.5 sm:w-6 sm:h-4 rounded-sm overflow-hidden">
     <rect width="3" height="1" fill="#CE1126"/>
     <rect width="3" height="1" y="1" fill="#fff"/>
   </svg>
@@ -59,28 +59,30 @@ export default function LanguageSelector() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1 sm:gap-2">
       {LANGUAGES.map((language, index) => (
-        <button
+        <motion.button
           key={language.code}
           onClick={() => handleLanguageChange(language.code)}
-          className={`px-3 py-2 rounded-lg transition-all hover-elevate active-elevate-2 border font-semibold text-sm flex items-center gap-2 ${
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all hover-elevate active-elevate-2 border font-semibold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 min-h-[36px] sm:min-h-[40px] ${
             currentLanguage.code === language.code 
-              ? 'bg-primary text-primary-foreground border-primary shadow-lg' 
-              : 'border-muted hover:border-primary/50 text-foreground hover:bg-foreground/5'
+              ? 'bg-primary text-primary-foreground border-primary shadow-md' 
+              : 'border-muted hover:border-primary/50 text-foreground bg-white/50'
           }`}
           title={language.name}
           data-testid={`button-language-${language.code}`}
           aria-label={`Switch to ${language.name}`}
         >
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             {renderFlag(language.flagType, index)}
             <span className="hidden sm:inline">{language.code.toUpperCase()}</span>
             {currentLanguage.code === language.code && (
-              <Check className="w-4 h-4 stroke-2" />
+              <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-2" />
             )}
           </div>
-        </button>
+        </motion.button>
       ))}
     </div>
   );

@@ -1,10 +1,10 @@
 # myCHEF Indonesia - Landing Website
 
 ## Overview
-This project is a single-page landing website for myCHEF Indonesia, a premium private chef booking service in Bali. The website, `mychef.id`, aims to provide a seamless booking experience for clients seeking in-villa dining, emphasizing transparency, professionalism, and high-quality service. Established in 2012, the business has delivered over 1000 personalized culinary experiences for various occasions.
+This project is a single-page landing website for myCHEF Indonesia, a premium private chef booking service in Bali and Jakarta. The website, `mychef.id`, aims to provide a seamless booking experience for clients seeking in-villa dining, emphasizing transparency, professionalism, and high-quality service. Established in 2012, the business has delivered over 1000 personalized culinary experiences for various occasions.
 
 ## User Preferences
-- **Location Focus:** Bali ONLY (no Jakarta, Java, or international references)
+- **Location Focus:** Primary focus on Bali with SEO expansion to Jakarta for catering services
 - **Time Format:** 24-hour format everywhere (09:00 - 22:00 WIB, no AM/PM)
 - **WhatsApp CTAs:** Every button opens with section-specific pre-filled messages
 - **Mobile-First:** 100% mobile-optimized design
@@ -34,14 +34,15 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Ingredient Shopping, Sample Menus, Complete Party Solutions, FAQ, Booking Tips, Footer.
 - **Additional Pages:** Privacy Policy, Terms of Service, Payment Terms, `Join Our Team` recruitment page, and Admin panel at `/admin/quotes`.
 - **Multi-Language Support:** `react-i18next` integration for English (en) and Indonesian (id) with automatic detection and manual selector. Language can be changed from the header or footer on any page.
-- **City Landing Pages:** SEO-optimized landing pages for 25 major Bali areas (e.g., `/seminyak`, `/kuta`) with dynamic content.
+- **City Landing Pages:** SEO-optimized landing pages for 25 major Bali areas (e.g., `/seminyak`, `/kuta`) with dynamic content, plus Jakarta landing page (`/jakarta`) targeting "catering jakarta" keyword (3,600 monthly searches).
 - **Service Landing Pages:** Professional SEO-optimized service pages for 8 key services (e.g., `/services/villa-parties`), each with 1000+ word content.
+- **SEO Strategy:** High-volume keyword targeting including "catering jakarta" (3,600 searches), "private chef bali" (170 searches), "private chef jakarta" (90 searches), "private chef indonesia" (10 searches). Comprehensive structured data (JSON-LD) for LocalBusiness and Service schemas.
 
 ### System Design Choices
 - **Messaging:** Emphasis on "perfect match" chef selection, villa/home dining, background-checked chefs, transparent pricing, and professional service with cleanup.
 - **Ingredient Shopping:** Chef arrives 2 hours early to plan menu, receive cash, and shop at local markets for quality control and transparency.
 - **Payment & Cancellation:** 50% deposit on booking, 50% day before event, tiered refund policy.
-- **Service Area:** Strictly Bali.
+- **Service Area:** Bali (primary) and Jakarta (SEO expansion for catering services).
 - **Recruitment:** Careers page accepts all nationalities, minimum 1 year experience, no salary examples.
 
 ### Tech Stack

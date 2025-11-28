@@ -41,6 +41,7 @@ const PadangBaiPage = lazy(() => import("@/pages/PadangBaiPage"));
 const BukitPage = lazy(() => import("@/pages/BukitPage"));
 const UngasanPage = lazy(() => import("@/pages/UngasanPage"));
 const PecatuPage = lazy(() => import("@/pages/PecatuPage"));
+const JakartaPage = lazy(() => import("@/pages/JakartaPage"));
 
 // Lazy load all service pages
 const VillaPartiesPage = lazy(() => import("@/pages/services/VillaPartiesPage"));
@@ -67,6 +68,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/jakarta" component={JakartaPage} />
       <Route path="/seminyak" component={SeminyakPage} />
       <Route path="/canggu" component={CangguPage} />
       <Route path="/ubud" component={UbudPage} />

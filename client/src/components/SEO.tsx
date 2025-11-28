@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface SEOProps {
   title: string;
@@ -19,11 +19,11 @@ export default function SEO({
   keywords = 'private chef Bali, personal chef Indonesia, chef at home Bali, villa chef Seminyak, private dining Bali, cook for hire Bali, Airbnb chef Bali',
   structuredData,
 }: SEOProps) {
+  const structuredDataIdRef = useRef(`seo-structured-data-${Math.random().toString(36).substr(2, 9)}`);
+  
   useEffect(() => {
-    // Update title
     document.title = title;
 
-    // Update or create meta tags
     const updateMetaTag = (name: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let element = document.querySelector(`meta[${attribute}="${name}"]`);
@@ -37,11 +37,9 @@ export default function SEO({
       element.setAttribute('content', content);
     };
 
-    // Basic meta tags
     updateMetaTag('description', description);
     updateMetaTag('keywords', keywords);
 
-    // Open Graph tags
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:type', ogType, true);
@@ -50,13 +48,11 @@ export default function SEO({
     updateMetaTag('og:site_name', 'myCHEF Indonesia', true);
     updateMetaTag('og:locale', 'en_ID', true);
 
-    // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', ogImage);
 
-    // Update canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
@@ -65,22 +61,28 @@ export default function SEO({
     }
     canonicalLink.setAttribute('href', canonical);
 
-    // Handle structured data (JSON-LD)
-    const STRUCTURED_DATA_ID = 'seo-structured-data';
-    let structuredDataScript = document.getElementById(STRUCTURED_DATA_ID) as HTMLScriptElement | null;
+    const currentScriptId = structuredDataIdRef.current;
+    let existingScript = document.getElementById(currentScriptId) as HTMLScriptElement | null;
     
     if (structuredData) {
-      if (!structuredDataScript) {
-        structuredDataScript = document.createElement('script') as HTMLScriptElement;
-        structuredDataScript.id = STRUCTURED_DATA_ID;
-        structuredDataScript.type = 'application/ld+json';
-        document.head.appendChild(structuredDataScript);
+      if (!existingScript) {
+        existingScript = document.createElement('script') as HTMLScriptElement;
+        existingScript.id = currentScriptId;
+        existingScript.setAttribute('data-seo-structured-data', 'true');
+        existingScript.type = 'application/ld+json';
+        document.head.appendChild(existingScript);
       }
-      structuredDataScript.textContent = JSON.stringify(structuredData);
-    } else if (structuredDataScript) {
-      // Remove structured data if none provided
-      structuredDataScript.remove();
+      existingScript.textContent = JSON.stringify(structuredData);
+    } else if (existingScript) {
+      existingScript.remove();
     }
+
+    return () => {
+      const scriptToRemove = document.getElementById(currentScriptId);
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
   }, [title, description, canonical, ogImage, ogType, keywords, structuredData]);
 
   return null;

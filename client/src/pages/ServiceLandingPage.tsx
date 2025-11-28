@@ -63,10 +63,11 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
       "telephone": "+62-822-3756-5997",
       "email": "indonesia@mychef.id"
     },
-    "areaServed": {
-      "@type": "State",
-      "name": "Bali"
-    },
+    "areaServed": [
+      { "@type": "State", "name": "Bali" },
+      { "@type": "City", "name": "Jakarta" },
+      { "@type": "Country", "name": "Indonesia" }
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -79,11 +80,11 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
   return (
     <div className="min-h-screen">
       <SEO 
-        title={`${service.name} | Private Chef Services | myCHEF Indonesia`}
-        description={service.metaDescription}
+        title={`${service.name} Bali & Jakarta | Best ${service.name} Indonesia | myCHEF`}
+        description={`${service.metaDescription} Professional private chef Indonesia for ${service.name.toLowerCase()} in Bali & Jakarta. Trusted catering since 2012. From Rp 800,000/hour.`}
         canonical={`https://mychef.id/services/${service.slug}`}
         ogType="website"
-        keywords={`${service.name.toLowerCase()} Bali, private chef ${service.name.toLowerCase()}, ${service.slug} catering, Bali villa ${service.name.toLowerCase()}`}
+        keywords={`${service.name.toLowerCase()} bali, ${service.name.toLowerCase()} jakarta, ${service.name.toLowerCase()} indonesia, private chef ${service.name.toLowerCase()}, ${service.slug} catering, catering ${service.slug} indonesia, best ${service.name.toLowerCase()} bali, villa ${service.name.toLowerCase()}, private chef indonesia, catering jakarta`}
         structuredData={structuredData}
       />
       <Header />

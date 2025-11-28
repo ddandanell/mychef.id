@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { MapPin, Utensils, ChefHat, Heart, PartyPopper, Users, Briefcase, Church, Calendar, Cake } from 'lucide-react';
 
 const ALL_CITIES = [
+  { name: 'Jakarta', slug: 'jakarta', region: 'Java' },
   { name: 'Seminyak', slug: 'seminyak', region: 'Premium Destinations' },
   { name: 'Canggu', slug: 'canggu', region: 'Premium Destinations' },
   { name: 'Ubud', slug: 'ubud', region: 'Premium Destinations' },
@@ -41,7 +42,7 @@ const ALL_SERVICES = [
   { name: 'Weekly Meal Prep', slug: 'weekly-meal-prep', icon: Calendar },
 ];
 
-const REGIONS = ['Premium Destinations', 'South Bali', 'Bukit Peninsula', 'Central & West Bali', 'East & North Bali'];
+const REGIONS = ['Java', 'Premium Destinations', 'South Bali', 'Bukit Peninsula', 'Central & West Bali', 'East & North Bali'];
 
 interface InternalLinksProps {
   currentSlug?: string;
@@ -68,7 +69,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
               {t('internalLinks.exploreMore', 'Explore More myCHEF Services')}
             </h2>
             <p className="text-foreground/70 max-w-2xl mx-auto">
-              {t('internalLinks.subtitle', 'Discover private chef experiences across all of Bali')}
+              {t('internalLinks.subtitle', 'Discover private chef and catering services across Indonesia')}
             </p>
           </div>
         )}
@@ -104,7 +105,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
           <div>
             <div className="flex items-center gap-2 mb-6">
               <MapPin className="w-5 h-5 text-primary" />
-              <h3 className="text-xl font-semibold">{t('internalLinks.servingBali', 'Serving All of Bali')}</h3>
+              <h3 className="text-xl font-semibold">{t('internalLinks.servingBali', 'Serving Indonesia')}</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
               {REGIONS.map((region) => {
@@ -138,7 +139,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
 
         <div className="mt-12 pt-8 border-t text-center">
           <p className="text-sm text-foreground/60 mb-4">
-            {t('internalLinks.cantFind', "Can't find your area? We serve all of Bali!")}
+            {t('internalLinks.cantFind', "Can't find your area? We serve all of Bali and Jakarta!")}
           </p>
           <Link
             href="/"

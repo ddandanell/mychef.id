@@ -127,11 +127,11 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
   return (
     <div className="min-h-screen">
       <SEO 
-        title={`${city.tagline} | myCHEF Indonesia`}
-        description={`${city.description} Professional background-checked private chefs serving ${city.name} since 2012. Book on WhatsApp +62 822-3756-5997.`}
+        title={`Private Chef ${city.name} | ${city.tagline} | Best Private Chef Bali | myCHEF Indonesia`}
+        description={`Book the best private chef in ${city.name}, Bali. ${city.description} Professional background-checked chefs for villa dining, parties, weddings & events. Private chef Indonesia since 2012. From Rp 800,000/hour.`}
         canonical={`https://mychef.id/${city.slug}`}
         ogType="website"
-        keywords={`private chef ${city.name}, personal chef ${city.name}, chef at home ${city.name}, villa chef ${city.name}, private dining ${city.name}, ${city.name} chef services, ${city.areas.join(', ')}`}
+        keywords={`private chef ${city.name}, private chef bali, private chef indonesia, best private chef ${city.name}, villa chef ${city.name}, personal chef ${city.name}, chef for hire ${city.name}, private dining ${city.name}, ${city.name} chef services, ${city.name} catering, wedding catering ${city.name}, ${city.areas.join(', ')}`}
         structuredData={structuredData}
       />
       <Header />

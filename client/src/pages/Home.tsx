@@ -37,11 +37,51 @@ export default function Home() {
       <MotivationalPopup />
       <PricingPopup />
       <SEO 
-        title="Private Chef Bali | Professional In-Villa Dining Services | myCHEF Indonesia"
-        description="Experience culinary excellence with myCHEF Indonesia's private chef services in Bali. Expert chefs, personalized menus, and premium ingredients delivered to your villa. Serving Seminyak, Ubud, Canggu & more since 2012. From Rp 800,000/hour."
+        title="Private Chef Bali & Jakarta | Best Private Chef Indonesia | Catering Jakarta | myCHEF"
+        description="Indonesia's #1 private chef service. Book the best private chef in Bali, Jakarta & Indonesia for villa parties, weddings, corporate events. Premium catering Jakarta. Luxury chef Indonesia since 2012. Private dining & healthy meal delivery. From Rp 800,000/hour."
         canonical="https://mychef.id"
         ogType="website"
-        keywords="private chef Bali, personal chef Bali, villa chef, in-home dining Bali, professional chef services, gourmet meals Bali, private dining Seminyak, chef hire Ubud, Canggu chef services, restaurant-quality home dining, background-checked chefs"
+        keywords="private chef bali, private chef jakarta, private chef indonesia, catering jakarta, best private chef indonesia, luxury chef indonesia, private chef for events, wedding catering indonesia, private dining indonesia, healthy meal delivery indonesia, private chef booking indonesia, chef for hire indonesia, villa chef bali, personal chef jakarta"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://mychef.id",
+          "name": "myCHEF Indonesia",
+          "alternateName": ["myCHEF Bali", "myCHEF Jakarta", "Private Chef Indonesia"],
+          "description": "Indonesia's premier private chef booking service offering luxury in-villa dining, corporate catering, wedding celebrations, and healthy meal delivery across Bali and Jakarta since 2012.",
+          "url": "https://mychef.id",
+          "logo": "https://mychef.id/logo.png",
+          "image": "https://mychef.id/og-image.jpg",
+          "telephone": "+62-822-3756-5997",
+          "email": "indonesia@mychef.id",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bali",
+            "addressCountry": "ID"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Bali" },
+            { "@type": "City", "name": "Jakarta" },
+            { "@type": "Country", "name": "Indonesia" }
+          ],
+          "priceRange": "Rp 800,000 - Rp 1,200,000+",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "bestRating": "5",
+            "ratingCount": "500"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Private Chef Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Chef Bali" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Catering Jakarta" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Catering Indonesia" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Events" }}
+            ]
+          }
+        }}
       />
       <Header />
       <HeroSection />

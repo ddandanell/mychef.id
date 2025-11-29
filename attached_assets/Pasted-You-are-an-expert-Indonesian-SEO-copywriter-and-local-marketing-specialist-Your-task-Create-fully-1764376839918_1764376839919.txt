@@ -1,0 +1,123 @@
+You are an expert Indonesian SEO copywriter and local marketing specialist.
+
+Your task:
+Create fully SEO-optimized landing pages in **Bahasa Indonesia** for a private chef service in different high-end areas of Jakarta.
+
+You will receive a list of city/area names, and for **each** area you must generate a complete landing page that looks like a dedicated local page for that area.
+
+Important global rules:
+- Language: **Bahasa Indonesia only**.
+- Service: private chef at home, villa, apartemen, rumah mewah, dll.
+- Main SEO focus keyword: **"private chef {CityName}"**.
+- Secondary keywords (mix naturally): 
+  - chef profesional
+  - jasa koki pribadi
+  - private dining di rumah
+  - chef private untuk acara
+  - layanan koki panggilan
+  - catering kecil eksklusif
+- Do **NOT** mention Bali at all on these pages.
+- The page must feel like the service is based **inside that area**, not as a “Bali service yang datang dari luar kota”.
+- Use the same kind of structure as a modern service landing page:
+  - Hero section
+  - Benefit section
+  - How it works
+  - Menu / food examples
+  - Testimonials / ulasan
+  - FAQ
+  - Strong CTA sections
+- Assume images will be reused from the main site. You can **refer** to images (e.g. "Foto chef sedang memasak di dapur modern") but do not generate URLs.
+
+For EACH city/area, produce:
+
+1. **SEO meta data**
+   - Meta title (max ±60 characters) with "private chef {CityName}" and one benefit.
+   - Meta description (max ±155 characters) with clear value and CTA.
+   - URL slug suggestion (e.g. `/private-chef-{cityname}`).
+
+2. **Heading structure**
+   - H1: main page title with "Private Chef {CityName}" in natural Indonesian.
+   - H2/H3 sections as needed (jangan berlebihan, tapi jelas dan rapi).
+
+3. **Hero section**
+   - Short, strong intro in Bahasa Indonesia.
+   - 2–3 bullet points with main benefits.
+   - CTA line that invites them to chat/booking (WhatsApp style, but no number).
+
+4. **Local positioning**
+   - 1–2 paragraphs tentang **kenapa layanan ini cocok untuk {CityName}**:
+     - Sebutkan tipe area: kawasan elit, apartemen mewah, area keluarga, expat, dsb.
+     - Berikan 2–3 contoh situasi nyata: dinner keluarga, ulang tahun, arisan, business dinner di rumah.
+   - TONE: profesional tapi hangat, bukan terlalu formal.
+
+5. **Kenapa pakai private chef (benefit section)**
+   - Jelaskan manfaat pakai private chef dibanding makan di restoran:
+     - privasi
+     - hemat waktu
+     - bisa custom menu
+     - kualitas restoran di rumah sendiri
+   - Gunakan bullet points.
+
+6. **Cara kerja (step-by-step)**
+   Buat 3–5 langkah sederhana, misalnya:
+   1. Hubungi kami dan pilih tanggal & jumlah tamu
+   2. Pilih gaya makanan / menu (Indonesia, Western, dll.)
+   3. Chef datang ke rumah / apartemen di {CityName}
+   4. Semua disiapkan, dimasak, dan dibereskan
+   5. Anda hanya fokus menikmati acara
+
+7. **Menu & contoh hidangan**
+   - 2–3 contoh paket atau gaya menu (Indonesia, Western, Asian fusion, BBQ, dll.)
+   - Fokus pada suasana mewah/nyaman, bukan harga.
+   - Gunakan deskripsi yang menggugah selera, tapi tetap singkat.
+
+8. **Testimoni / ulasan (fiktif tapi realistis)**
+   - Tulis 2–3 ulasan singkat dari “pelanggan” di {CityName}.
+   - Format: nama depan + tipe acara (misalnya: “Rina – Dinner keluarga di apartemen PIK”).
+   - Fokus pada:
+     - rasa makanan
+     - profesionalitas chef
+     - kemudahan proses
+
+9. **FAQ (Pertanyaan yang sering ditanyakan)**
+   Buat 4–6 FAQ relevan, misalnya:
+   - Berapa minimum tamu?
+   - Apakah bahan makanan disiapkan oleh chef?
+   - Apakah bisa custom menu (diet, halal, vegetarian, dll.)?
+   - Area mana saja di {CityName} yang dilayani?
+   - Berapa lama biasanya durasi layanan?
+
+10. **Call to Action (penutup)**
+    - Satu paragraf singkat yang mengundang mereka untuk:
+      - kirim pesan
+      - cek ketersediaan tanggal
+      - konsultasi menu
+    - Gunakan kalimat ajakan yang kuat, ramah, dan jelas.
+
+Tone & style:
+- Bahasa Indonesia yang mudah dimengerti, bukan bahasa terlalu baku.
+- Gunakan “Anda” untuk menyapa.
+- Terdengar profesional, terpercaya, dan sedikit premium (bukan murahan, bukan terlalu kaku).
+
+Now, generate a separate full landing page (following all the rules above) in Bahasa Indonesia for EACH of these areas:
+
+Menteng, Kebayoran Baru, Pondok Indah, Senayan, SCBD Sudirman, Kemang, Pantai Indah Kapuk, Kelapa Gading, Kuningan, Puri Indah.
+
+Output format:
+- Clearly separate each city/area with a heading like:
+  `===== {CityName} =====`
+- Under each, include: meta title, meta description, slug, then the full page content with H1, H2, H3 etc.
+
+
+Her liste over bye områder i der ska lave en side til og kun fokus spå det områder;
+
+	Menteng (Jakarta Pusat)
+	2.	Kebayoran Baru (Jakarta Selatan)  
+	3.	Pondok Indah (Jakarta Selatan) – “Jakartas Beverly Hills”.  
+	4.	Senayan  
+	5.	SCBD / Sudirman Central Business District (luksuslejligheder + kontorer)  
+	6.	Kemang (Jakarta Selatan) – meget expats, caféer, villaer.  
+	7.	Pantai Indah Kapuk / PIK (Jakarta Utara) – gated communities, kinesisk-indonesisk overklasse.  
+	8.	Kelapa Gading (Jakarta Utara) – familieområde, dyrt, mange skoler og malls.  
+	9.	Kuningan – business + high-end lejligheder.  
+	10.	Puri Indah / Puri Kembangan (Jakarta Barat) – voksende middel/overklasse-område. 

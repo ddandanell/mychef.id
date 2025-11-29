@@ -43,8 +43,8 @@ const UngasanPage = lazy(() => import("@/pages/UngasanPage"));
 const PecatuPage = lazy(() => import("@/pages/PecatuPage"));
 const JakartaPage = lazy(() => import("@/pages/JakartaPage"));
 
-// Lazy load Jakarta area pages
-const JakartaAreaLandingPage = lazy(() => import("@/pages/JakartaAreaLandingPage"));
+// Import Jakarta area landing page (direct import needed for props)
+import JakartaAreaLandingPage from "@/pages/JakartaAreaLandingPage";
 import { JAKARTA_AREA_DATA } from "@shared/jakartaAreaData";
 
 // Lazy load all service pages

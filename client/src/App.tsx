@@ -43,6 +43,10 @@ const UngasanPage = lazy(() => import("@/pages/UngasanPage"));
 const PecatuPage = lazy(() => import("@/pages/PecatuPage"));
 const JakartaPage = lazy(() => import("@/pages/JakartaPage"));
 
+// Lazy load Jakarta area pages
+const JakartaAreaLandingPage = lazy(() => import("@/pages/JakartaAreaLandingPage"));
+import { JAKARTA_AREA_DATA } from "@shared/jakartaAreaData";
+
 // Lazy load all service pages
 const VillaPartiesPage = lazy(() => import("@/pages/services/VillaPartiesPage"));
 const RomanticDinnersPage = lazy(() => import("@/pages/services/RomanticDinnersPage"));
@@ -79,6 +83,37 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/jakarta" component={JakartaPage} />
+      {/* Jakarta Area Landing Pages (Bahasa Indonesia) */}
+      <Route path="/private-chef-menteng">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['menteng']} />}
+      </Route>
+      <Route path="/private-chef-kebayoran-baru">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['kebayoran-baru']} />}
+      </Route>
+      <Route path="/private-chef-pondok-indah">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['pondok-indah']} />}
+      </Route>
+      <Route path="/private-chef-senayan">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['senayan']} />}
+      </Route>
+      <Route path="/private-chef-scbd">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['scbd']} />}
+      </Route>
+      <Route path="/private-chef-kemang">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['kemang']} />}
+      </Route>
+      <Route path="/private-chef-pantai-indah-kapuk">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['pantai-indah-kapuk']} />}
+      </Route>
+      <Route path="/private-chef-kelapa-gading">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['kelapa-gading']} />}
+      </Route>
+      <Route path="/private-chef-kuningan">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['kuningan']} />}
+      </Route>
+      <Route path="/private-chef-puri-indah">
+        {() => <JakartaAreaLandingPage area={JAKARTA_AREA_DATA['puri-indah']} />}
+      </Route>
       <Route path="/seminyak" component={SeminyakPage} />
       <Route path="/canggu" component={CangguPage} />
       <Route path="/ubud" component={UbudPage} />

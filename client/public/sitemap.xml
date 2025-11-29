@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://mychef.id</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,15 +15,23 @@
   <!-- Quote Funnel -->
   <url>
     <loc>https://mychef.id/quote</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Pricing Calculator -->
+  <url>
+    <loc>https://mychef.id/calculator</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Join Our Team - Careers Page -->
   <url>
     <loc>https://mychef.id/join-our-team</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -31,7 +39,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://mychef.id/privacy-policy</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -39,7 +47,7 @@
   <!-- Terms of Service -->
   <url>
     <loc>https://mychef.id/terms-of-service</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -47,7 +55,7 @@
   <!-- Payment Terms -->
   <url>
     <loc>https://mychef.id/payment-terms</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -58,56 +66,56 @@
 
   <url>
     <loc>https://mychef.id/services/villa-parties</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/romantic-dinners</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/birthday-celebrations</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/family-reunions</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/corporate-events</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/wedding-celebrations</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/cooking-classes</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/services/weekly-meal-prep</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -118,110 +126,121 @@
 
   <url>
     <loc>https://mychef.id/best-private-chef-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/private-chef-for-events</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/luxury-chef-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/wedding-catering-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/private-dining-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/healthy-meal-delivery-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/private-chef-booking-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/chef-for-hire-indonesia</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- ============================================ -->
-  <!-- CITY LANDING PAGES (25 pages) -->
+  <!-- JAKARTA LANDING PAGE (High-volume keyword) -->
+  <!-- ============================================ -->
+
+  <url>
+    <loc>https://mychef.id/jakarta</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ============================================ -->
+  <!-- BALI CITY LANDING PAGES (25 pages) -->
   <!-- Premium Destinations -->
   <!-- ============================================ -->
 
   <url>
     <loc>https://mychef.id/seminyak</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/canggu</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/ubud</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/sanur</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/nusa-dua</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/uluwatu</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/jimbaran</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -230,42 +249,42 @@
 
   <url>
     <loc>https://mychef.id/kuta</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/legian</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/kerobokan</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/petitenget</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/berawa</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/pererenan</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -274,21 +293,21 @@
 
   <url>
     <loc>https://mychef.id/bukit</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/ungasan</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/pecatu</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -297,35 +316,35 @@
 
   <url>
     <loc>https://mychef.id/tanah-lot</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/tabanan</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/denpasar</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/gianyar</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/tegallalang</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -334,28 +353,28 @@
 
   <url>
     <loc>https://mychef.id/amed</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/lovina</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/candidasa</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://mychef.id/padang-bai</loc>
-    <lastmod>2025-11-26</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

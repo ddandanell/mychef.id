@@ -4,9 +4,14 @@ export interface CityData {
   tagline: string;
   description: string;
   heroDescription: string;
+  heroTitle?: string;
   areas: string[];
   popularVenues: string[];
   localInsights: string;
+  extendedContent?: {
+    mainHeading: string;
+    paragraphs: string[];
+  };
   coordinates: {
     "@type": "GeoCoordinates";
     "latitude": string;
@@ -394,12 +399,25 @@ export const CITY_DATA: Record<string, CityData> = {
   kuta: {
     name: 'Kuta',
     slug: 'kuta',
-    tagline: 'Private Chef Services in Kuta - Beach Resort Dining',
-    description: 'Book professional private chefs for in-villa dining in Kuta. Background-checked chefs deliver personalized culinary experiences in your beach resort accommodation.',
+    tagline: 'Private Chef Kuta: Your Key to Gourmet Experiences',
+    description: 'Experience luxury and convenience with a private chef Kuta service in Bali. Turn your villa into top dining, tailored to your palate. Background-checked professional chefs deliver personalized culinary experiences.',
     heroDescription: 'Experience delicious home dining in your Kuta villa with expert private chefs serving authentic cuisines',
+    heroTitle: 'Private Chef Kuta: Your Key to Gourmet Experiences',
     areas: ['Kuta Beach', 'Tuban', 'Kartika Plaza', 'Legian Street', 'Discovery Mall area'],
     popularVenues: ['Hard Rock Hotel Bali', 'Sheraton Bali Kuta Resort', 'The Anvaya Beach Resort', 'Discovery Kartika Plaza', 'Holiday Inn Express'],
     localInsights: 'Kuta is Bali\'s iconic beach destination known for its famous surf break, vibrant nightlife, and convenient location near the airport. Our chefs specialize in crowd-pleasing international cuisine, fresh seafood, Indonesian favorites, and casual beach-style dining perfect for groups and families.',
+    extendedContent: {
+      mainHeading: 'Turn Your Bali Villa Into Bali\'s Best Restaurant',
+      paragraphs: [
+        'There is no more intimate restaurant than your own home in Bali. Whether you\'re staying in a luxury villa, celebrating with family, or hosting friends, bring the magic of fine dining to your table with a private chef service, featuring talented chefs who create menus tailored to your cravings.',
+        'Hiring a personal chef brings unparalleled convenience and luxury to any occasion. Whether you\'re planning a romantic dinner for two or a lively gathering with friends and family, a personal chef can customize every detail to suit your unique preferences, ensuring an unforgettable dining experience in the comfort of your own space. With a focus on personalized service, each meal becomes a bespoke culinary creation, tailored to impress even the most discerning palate.',
+        'Opting for a professional chef not only elevates your dining experience but ensures every aspect is crafted to perfection. These culinary masters possess extensive knowledge and training, blending local Indonesian flavors with international techniques to create stunning dishes that delight and satisfy every guest. Their professionalism is evident not just in the food but in their commitment to providing a seamless, memorable experience in your Kuta villa.',
+        'Successful event preparation can significantly impact the outcome, especially when it involves culinary experiences like hiring a personal chef. Thoughtful planning ensures that every aspect of the dining experience, from menu selection to presentation, aligns with the event\'s theme and guest preferences. Engaging a chef for a wellness retreat, dinner party, or special celebration requires a focus on fresh, quality ingredients and accommodating dietary restrictions, which starts well before the event itself.',
+        'Hiring a professional chef not only adds an air of sophistication to your event but also ensures that the culinary aspects are handled by someone with extensive training and experience. A professional chef brings a deep understanding of flavors, presentation, and kitchen management, making them indispensable for events that require top-tier culinary execution. They can create custom menus that surpass guests\' expectations, transforming any gathering into a gourmet experience that leaves lasting memories.',
+        'From intimate anniversary dinners to large family reunions, our private chef Kuta service adapts to every occasion. Our chefs arrive early to plan and shop for the freshest ingredients at local markets, ensuring your meal features the best Bali has to offer. Every dish is prepared with precision and passion, bringing restaurant-quality dining directly to your villa\'s table.',
+        'Experience the ultimate in Bali hospitality with a private chef who understands both international cuisine and local culinary traditions. Whether you crave authentic Indonesian satay and nasi goreng, fresh grilled seafood, Mediterranean delights, or Asian fusion creations, our Kuta chefs deliver exceptional flavors tailored to your taste. Complete with beautiful presentation, attentive service, and full kitchen cleanup, your private dining experience in Kuta will exceed every expectation.'
+      ]
+    },
     coordinates: {
       "@type": "GeoCoordinates",
       "latitude": "-8.718206",

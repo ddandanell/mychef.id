@@ -163,7 +163,7 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           </div>
           
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6" data-testid="text-hero-headline">
-            {t('cityPages.privateChefServices')}<br />{t('cityPages.in')} {city.name}
+            {city.heroTitle || <>{t('cityPages.privateChefServices')}<br />{t('cityPages.in')} {city.name}</>}
           </h1>
           
           <p className="text-xl lg:text-2xl text-white/95 mb-8 max-w-3xl mx-auto">
@@ -224,6 +224,46 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
       </section>
 
       <ExperienceOverview />
+
+      {/* Extended Content Section - SEO Optimized */}
+      {city.extendedContent && (
+        <section className="py-16 lg:py-24 bg-card">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8 sm:mb-12">
+              {city.extendedContent.mainHeading}
+            </h2>
+            <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+              {city.extendedContent.paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-base sm:text-lg leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 sm:mt-12 px-4 sm:px-0">
+              <Button
+                size="lg"
+                onClick={handleQuoteClick}
+                variant="outline"
+                className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                data-testid="button-extended-content-quote"
+              >
+                <FileText className="w-6 h-6 mr-2" />
+                {t('cta.getQuote')}
+              </Button>
+              <Button
+                size="lg"
+                onClick={handleWhatsAppClick}
+                className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                data-testid="button-extended-content-whatsapp"
+              >
+                <MessageCircle className="w-6 h-6 mr-2" />
+                {t('cta.whatsapp')}
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
+
       <ChefGallery />
 
       {/* Areas Served */}

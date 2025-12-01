@@ -1,3 +1,94 @@
+interface ExtendedContentBasic {
+  mainHeading: string;
+  paragraphs: string[];
+}
+
+interface ExtendedContentRich {
+  mainHeading: string;
+  introParagraphs?: string[];
+  paragraphs?: string[];
+  whyChooseSection?: {
+    title: string;
+    intro: string;
+    benefits: Array<{ title: string; description: string }>;
+  };
+  benefitsSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  customizeSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  diverseCuisinesSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  chefsSection?: {
+    title: string;
+    intro: string;
+    paragraphs: string[];
+    specializations: string[];
+  };
+  occasionsSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  villaServicesSection?: {
+    title: string;
+    intro: string;
+    paragraphs: string[];
+    services: Array<{ title: string; description: string }>;
+  };
+  bookingSection?: {
+    title: string;
+    intro: string;
+    steps: Array<{ step: number; title: string; description: string }>;
+  };
+  luxuryDiningSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  customMenusSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  localIngredientsSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  mealPlanSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  elevateVacationSection?: {
+    title: string;
+    paragraphs: string[];
+  };
+  pricingSection?: {
+    title: string;
+    intro: string;
+    categories: Array<{ title: string; items: string[] }>;
+  };
+  safetySection?: {
+    title: string;
+    intro: string;
+    guarantees: Array<{ title: string; description: string }>;
+  };
+  testimonialsSection?: {
+    title: string;
+    testimonials: Array<{ name: string; quote: string; event: string }>;
+  };
+  sampleMenuSection?: {
+    title: string;
+    intro: string;
+    menus: Array<{
+      name: string;
+      courses: Array<{ category: string; items: string[] }>;
+    }>;
+  };
+}
+
 export interface CityData {
   name: string;
   slug: string;
@@ -8,10 +99,7 @@ export interface CityData {
   areas: string[];
   popularVenues: string[];
   localInsights: string;
-  extendedContent?: {
-    mainHeading: string;
-    paragraphs: string[];
-  };
+  extendedContent?: ExtendedContentBasic | ExtendedContentRich;
   coordinates: {
     "@type": "GeoCoordinates";
     "latitude": string;
@@ -186,37 +274,234 @@ export const CITY_DATA: Record<string, CityData> = {
   sanur: {
     name: 'Sanur',
     slug: 'sanur',
-    tagline: 'Private Chef Services in Sanur - Beachside Villa Dining',
-    description: 'Book professional private chefs for in-villa dining in Sanur. Background-checked chefs deliver personalized culinary experiences in your beachside villa.',
-    heroDescription: 'Enjoy relaxed, family-friendly dining in your Sanur villa with professional private chefs',
-    areas: ['Sanur Beach', 'Sindhu', 'Semawang', 'Mertasari', 'Bypass Ngurah Rai'],
-    popularVenues: ['Hyatt Regency Bali', 'Maya Sanur', 'Prama Sanur Beach', 'Mercure Resort Sanur', 'Family villas along the beach'],
-    localInsights: 'Sanur is Bali\'s tranquil beachside village known for calm waters and family-friendly atmosphere. Our chefs specialize in family-style dining, fresh seafood, Indonesian classics, and kid-friendly menus perfect for multi-generational gatherings.',
+    tagline: 'Private Chef Services Sanur: The Ultimate Private Villa Experience',
+    description: 'Hire a private chef in Sanur. 4.9★ rated, 100+ verified chefs. Fresh local ingredients, full cleanup. Book via WhatsApp now.',
+    heroDescription: 'Discover the best private chef services in Sanur. Personalized menus, top-notch local ingredients, and full villa support for any occasion.',
+    heroTitle: 'Private Chef Services Sanur: The Ultimate Private Villa Experience',
+    areas: ['Sanur Beach', 'Sindhu', 'Semawang', 'Mertasari', 'Bypass Ngurah Rai', 'Ketewel'],
+    popularVenues: ['Hyatt Regency Bali', 'Maya Sanur', 'Prama Sanur Beach', 'Mercure Resort Sanur', 'Villa Seriska', 'Family villas along the beach'],
+    localInsights: 'Sanur offers peaceful beaches, a relaxed vibe, and family-friendly surroundings. What sets your stay apart is the ability to enjoy professionally prepared dishes right in your villa. Our private chef services present a range of benefits including tailored menus, fresh local ingredients, complete villa service, family-friendly options, and both international and Indonesian cuisine.',
     coordinates: {
       "@type": "GeoCoordinates",
       "latitude": "-8.692857",
       "longitude": "115.262778"
     },
+    extendedContent: {
+      mainHeading: 'Discover the Best Private Chef Services in Sanur',
+      introParagraphs: [
+        'Imagine your private villa in Sanur as a high-end restaurant where every meal sparks joy through fresh flavors and attentive service. With our private chef services Sanur, hosting a family reunion, commemorating an important milestone, or simply enjoying a relaxing holiday becomes truly special. Our services are designed to bring exceptional in-villa dining to your fingertips.',
+        'Sanur private chef services merge luxury, convenience, and culinary skill to deliver restaurant-quality dining within your villa. With personalized menus, top-notch local ingredients, and full villa support, you can celebrate any occasion or simply enhance your stay without leaving your home. Enjoy a dining experience that turns each meal into a unique celebration of Sanur\'s hospitality and culinary expertise.'
+      ],
+      whyChooseSection: {
+        title: 'Why Choose Private Chef Services Sanur?',
+        intro: 'Sanur offers peaceful beaches, a relaxed vibe, and family-friendly surroundings. What sets your stay apart is the ability to enjoy professionally prepared dishes right in your villa. Our private chef services present a range of benefits:',
+        benefits: [
+          { title: 'Tailored Menus', description: 'Each menu is designed to match your tastes, dietary needs, and event theme.' },
+          { title: 'Fresh, Local Ingredients', description: 'Chefs choose the finest produce, seafood, and meats from local markets.' },
+          { title: 'Complete Villa Service', description: 'Every element from the setup to the cleanup is efficiently managed.' },
+          { title: 'Family-Friendly Options', description: 'Menus crafted for children and those with specific allergies ensure everyone is satisfied.' },
+          { title: 'International & Indonesian Cuisine', description: 'A wide selection of Balinese, Asian, Western, and fusion dishes awaits you.' }
+        ]
+      },
+      benefitsSection: {
+        title: 'Benefits of Hiring a Private Chef in Sanur',
+        paragraphs: [
+          'Hiring a private chef in Sanur Ketewel offers many advantages beyond gourmet meals. With a skilled chef on call, you can relax during your vacation as every detail of your dining is handled professionally. A private chef plans the menu, sources fresh ingredients, cooks, serves, and cleans up—leaving you free to enjoy quality time with family and friends.',
+          'Each dish is customized to match your tastes and dietary needs, introducing comfort and sophistication that goes beyond ordinary restaurant dining. Whether you prefer traditional Balinese flavors, international fusion, or health-conscious preparations, your private chef adapts every course to your preferences.'
+        ]
+      },
+      customizeSection: {
+        title: 'Customize Your Culinary Experience',
+        paragraphs: [
+          'A major benefit of private chef services in Sanur is the ability to tailor your meals exactly as you wish. Right from the start, you can share your favorite recipes, dietary restrictions, and any special requests with your personal chef.',
+          'Whether planning a romantic dinner for two, a themed family gathering, or a health-conscious menu, the chef prepares each dish with careful attention to ingredients, portion sizes, and presentation. This level of personalization results in a dining experience perfectly matched to your vision.'
+        ]
+      },
+      diverseCuisinesSection: {
+        title: 'Explore Diverse Cuisines with a Private Chef',
+        paragraphs: [
+          'Sanur\'s chefs bring a wide variety of flavors directly to your villa. If you crave traditional Balinese dishes, fresh Thai flavors, elegant French cuisine, or creative fusion menus, your chef can craft offerings that take your palate on an international tour.',
+          'This diversity suits groups with varied tastes, ensuring each guest enjoys a meal crafted to their liking. Chefs trained in both local and international styles make every meal in your villa a celebration of global culinary artistry.'
+        ]
+      },
+      chefsSection: {
+        title: 'Meet Sanur\'s Top Private Chefs',
+        intro: 'Our network of more than 100 experienced chefs comes from Bali\'s finest kitchens and international restaurants. Each chef is chosen for culinary talent, professionalism, and a passion for great food. When you book our private chef services Sanur, you receive an outstanding meal prepared by experts who understand service and taste.',
+        paragraphs: [
+          'Sanur is home to some of Bali\'s most talented chefs, each with years of domestic and international experience. The chefs are chosen for their creativity, skill, and commitment to quality dining experiences.',
+          'Whether you prefer the rich flavors of Balinese cuisine, modern fusion dishes, or international classics, our chefs are dedicated to exceeding your expectations with every aspect of service. Their focus on detail and personalized approach ensures that every meal resonates with your unique preferences.'
+        ],
+        specializations: [
+          'Indonesian & Balinese feasts',
+          'Seafood BBQ style meals',
+          'Japanese omakase dining',
+          'Italian pasta and risotto nights',
+          'French fine dining classics',
+          'Vegan, vegetarian, and wellness menus',
+          'Gluten-free and allergy-conscious options'
+        ]
+      },
+      occasionsSection: {
+        title: 'Perfect for Special Occasions',
+        paragraphs: [
+          'Private chef services in Sanur are ideal for both everyday luxuries and significant celebrations. Whether it is an intimate anniversary, a milestone birthday, a family reunion, or a destination wedding, our team creates menus designed with elegance and care.',
+          'Enjoy restaurant-quality dining without leaving your villa, as every element—from the menu and table decor to the service—is managed professionally. This approach lets you concentrate on your guests and the special moments while we handle the culinary details.'
+        ]
+      },
+      villaServicesSection: {
+        title: 'Private Villa Services in Sanur: More Than Just a Meal',
+        intro: 'Our services extend far beyond cooking. We create a complete restaurant experience inside your villa, including:',
+        paragraphs: [
+          'Our private villa services Sanur aim to make your stay feel like a five-star experience. Beyond the exceptional meals prepared by top chefs, we offer additional services including experienced waitstaff, talented bartenders, and event coordinators.',
+          'From the moment you book your villa service—whether in a traditional setting or in a luxurious villa seriska—you can expect every detail, from setup to a pleasant cleanup, to be planned with precision. Whether hosting an elegant dinner party or a casual family gathering, our team ensures a seamless experience.'
+        ],
+        services: [
+          { title: 'Menu Planning', description: 'Work with the chef to develop the ideal meal.' },
+          { title: 'Ingredient Shopping', description: 'Our chefs can shop for the best ingredients or use those provided by you.' },
+          { title: 'Table Setting & Decor', description: 'Elegant tableware, candles, and fresh flowers create a memorable ambiance.' },
+          { title: 'Professional Waitstaff', description: 'Servers, bartenders, and sommeliers add a layer of quality to your event.' },
+          { title: 'Cleanup', description: 'Relax as the team ensures your villa remains pristine after your event.' }
+        ]
+      },
+      bookingSection: {
+        title: 'How to Book Private Chef Services Sanur',
+        intro: 'The process of booking your private chef in Sanur is transparent and efficient:',
+        steps: [
+          { step: 1, title: 'Contact Us', description: 'Provide your event details, cuisine preferences, and villa location via WhatsApp or our website.' },
+          { step: 2, title: 'Receive Proposals', description: 'Get customized menu proposals and clear pricing for the service.' },
+          { step: 3, title: 'Confirm Booking', description: 'Secure your date with a 50% deposit via online payment or cash.' },
+          { step: 4, title: 'Enjoy the Experience', description: 'On the day of the event, your chef arrives early, takes care of everything, and makes sure you have an uninterrupted dining experience.' }
+        ]
+      },
+      luxuryDiningSection: {
+        title: 'Creating a Luxurious Villa Dining Experience',
+        paragraphs: [
+          'Transform your villa into an exclusive dining venue with our curated experiences. Our chefs combine superior cooking skills with a keen sense for presentation and hospitality.',
+          'Thoughtfully arranged table settings, ambient lighting, personalized menu cards, and carefully chosen wine pairings all contribute to a refined atmosphere. Whether you select a romantic candlelit dinner or a festive family banquet, every detail is crafted to match your vision. Enjoy the comfort and privacy of your villa while dining like royalty.'
+        ]
+      },
+      customMenusSection: {
+        title: 'Enhance Villa Stays with Customized Menus',
+        paragraphs: [
+          'A key feature of our service is the option to create menus that reflect your personal tastes and dietary needs. Our chefs work closely with you to understand your favorite flavors, special ingredients, and presentation style.',
+          'Whether you envision a health-conscious menu, an extravagant seafood feast, or a child-friendly spread, every meal is designed to delight all guests. These personalized menus add a distinctive touch to your villa stay, ensuring that your dining experience is unique and memorable.'
+        ]
+      },
+      localIngredientsSection: {
+        title: 'Sourcing Local Ingredients for Fresh Meals',
+        paragraphs: [
+          'Quality starts with the best ingredients. Our chefs select fresh, local produce, seafood, and meats from reliable markets in Sanur. Whether you are enjoying just-caught seafood, organic vegetables, or tropical fruits, every dish features ingredients chosen for quality and taste.',
+          'By supporting local suppliers, our chefs bring authentic Balinese flavors into your villa while contributing to the local community. The result is a meal that is vivid, flavorful, and deeply connected to Sanur\'s culinary heritage.'
+        ]
+      },
+      mealPlanSection: {
+        title: 'Designing the Perfect Meal Plan',
+        paragraphs: [
+          'Our private chef services extend to planning meals for the duration of your stay. Whether your schedule calls for daily breakfasts, poolside lunches, or multi-course dinners, our chefs design plans that balance nutrition and indulgence.',
+          'Meal plans can be adapted for special dietary needs, children\'s tastes, or thematic events, ensuring that every food service is a highlight of your holiday. With flexible scheduling and a responsive approach, every meal is guaranteed to be a well-orchestrated experience.'
+        ]
+      },
+      elevateVacationSection: {
+        title: 'Elevate Your Sanur Vacation with Chef Services',
+        paragraphs: [
+          'Choosing a private chef in Sanur helps you enjoy a luxurious Bali vacation with personalized dining options and in-villa convenience. Experience the ease of professional hospitality combined with the artistry of innovative recipes prepared in your own villa.',
+          'Whether your trip is about relaxation, family celebrations, or new culinary adventures, our chefs and villa staff work together to create a memorable experience. Relish every moment, flavor, and memory as your villa transforms into the best restaurant in Sanur.'
+        ]
+      },
+      pricingSection: {
+        title: 'Transparent Pricing for Private Chef Services Sanur',
+        intro: 'We offer honest and clear pricing without hidden fees. Our pricing covers all aspects of the service, ensuring you receive excellent value:',
+        categories: [
+          {
+            title: 'Chef Service Fees',
+            items: [
+              'Minimum booking of 3-4 hours for most meals',
+              'All necessary equipment and tableware are included',
+              'Full cleanup provided after service',
+              'Outstanding presentation and artistic plating'
+            ]
+          },
+          {
+            title: 'Ingredient Shopping',
+            items: [
+              'Our chef will arrive early to plan and shop together',
+              'Optional premium sourcing available with a 15-20% fee added',
+              'You may also choose to supply your own ingredients'
+            ]
+          },
+          {
+            title: 'Additional Villa Staff',
+            items: [
+              'Professional waiters to ensure smooth service',
+              'Expert bartenders for excellent cocktail and wine service',
+              'Sommeliers to provide a curated wine pairings experience'
+            ]
+          }
+        ]
+      },
+      safetySection: {
+        title: 'Your Safety & Satisfaction: Our Promise',
+        intro: 'With our private chef services in Sanur, your well-being and satisfaction come first:',
+        guarantees: [
+          { title: 'Verified Chefs', description: 'Every chef is background checked and comes with professional references.' },
+          { title: 'Certified Professionals', description: 'Chefs have a minimum of 5 years\' experience and hold necessary food safety certifications.' },
+          { title: 'Health & Hygiene', description: 'Strict health protocols and regular certifications maintain high standards.' },
+          { title: 'Secure Payments', description: 'Enjoy safe online payment methods and official invoices.' },
+          { title: 'Insurance', description: 'Full liability coverage is provided for peace of mind.' },
+          { title: 'Trusted Villa Partners', description: 'We work with more than 50 luxury villas in Bali, including exclusive villa seriska properties.' },
+          { title: 'Satisfaction Guarantee', description: 'If our service does not meet your expectations, we will resolve the issue or offer a full refund.' }
+        ]
+      },
+      testimonialsSection: {
+        title: 'Real Stories: Guests Who Loved Our Private Chef Services Sanur',
+        testimonials: [
+          { name: 'Sarah & Michael', quote: 'Our villa host recommended myCHEF for our 10th anniversary. The chef prepared a delightful dinner, and the kids enjoyed every bite!', event: 'Anniversary Dinner' },
+          { name: 'Budi & Dewi', quote: 'For our family reunion in Sanur, the food was exceptional and the service made us feel truly cared for.', event: 'Family Reunion' },
+          { name: 'Daniel & Amy', quote: 'I requested a wellness menu for my yoga retreat. The chef\'s creativity and detail made the event a success.', event: 'Yoga Retreat' },
+          { name: 'Rizki Putra', quote: 'Our engagement dinner was a masterpiece thanks to the private chef services in Sanur. Every dish was crafted with care.', event: 'Engagement Dinner' },
+          { name: 'Priya Sharma', quote: 'The chef not only met our dietary needs but also held a fun cooking class for the kids. This was the best villa experience ever!', event: 'Family Vacation' }
+        ]
+      },
+      sampleMenuSection: {
+        title: 'Sample Menus & Transparent Pricing',
+        intro: 'Review our popular menu options, all of which can be adjusted to your tastes and dietary needs.',
+        menus: [
+          {
+            name: 'Indonesian Rijsttafel Feast',
+            courses: [
+              { category: 'Welcome', items: ['Es kelapa muda (fresh coconut water)'] },
+              { category: 'Appetizers', items: ['Mini satay (chicken, beef)', 'Gado-gado', 'Perkedel jagung'] },
+              { category: 'Main Dishes', items: ['Rendang sapi', 'Ayam betutu', 'Ikan bakar sambal matah', 'Sayur urap', 'Tempe goreng', 'Tahu isi', 'Nasi putih', 'Nasi kuning'] },
+              { category: 'Sambals', items: ['Sambal matah', 'Sambal terasi', 'Sambal kecap'] }
+            ]
+          }
+        ]
+      }
+    },
     faqItems: [
       {
         question: 'Do you serve all areas of Sanur?',
-        answer: 'Yes! We serve all Sanur areas including Sanur Beach, Sindhu, Semawang, Mertasari, and along Bypass Ngurah Rai. Our chefs know every beachfront villa, family resort, and neighborhood. We reach most locations within 10-20 minutes.'
+        answer: 'Yes! We serve all Sanur areas including Sanur Beach, Sindhu, Semawang, Mertasari, Ketewel, and along Bypass Ngurah Rai. Our chefs know every beachfront villa, family resort, and neighborhood. We reach most locations within 10-20 minutes.'
       },
       {
         question: 'What cuisines are most popular in Sanur?',
-        answer: 'Sanur is all about family-friendly comfort food! Clients love fresh seafood (grilled fish, prawns), Indonesian classics (nasi goreng, mie goreng, satay), Italian favorites (pasta, pizza), Western comfort food (burgers, chicken), and kid-friendly options. Crowd-pleasing food for all ages!'
+        answer: 'Sanur offers incredible variety! Clients love traditional Balinese dishes, fresh Thai flavors, elegant French cuisine, Japanese omakase, Italian pasta nights, seafood BBQs, and creative fusion menus. We also specialize in vegan, vegetarian, wellness menus, and gluten-free options.'
       },
       {
         question: 'Are your chefs experienced with families and children?',
         answer: 'Absolutely! Sanur is Bali\'s family destination. Our chefs excel at creating kid-friendly menus, accommodating picky eaters, managing food allergies, and serving multi-generational gatherings (grandparents to toddlers). We make mealtime fun and stress-free for everyone!'
       },
       {
-        question: 'Can you provide early breakfast service in Sanur?',
-        answer: 'Yes! Sanur families love early starts for beach walks and temple visits. We offer breakfast service from 6:00 AM - pancakes, eggs, fresh fruit, smoothies, Indonesian breakfast, or continental spreads. Perfect for families with young children or early risers!'
+        question: 'How do I book a private chef in Sanur?',
+        answer: 'Booking is simple! Contact us via WhatsApp or our website with your event details, cuisine preferences, and villa location. We\'ll send customized menu proposals and clear pricing. Confirm with a 50% deposit, and your chef arrives early on the day to handle everything from cooking to cleanup.'
+      },
+      {
+        question: 'What\'s included in the private chef service?',
+        answer: 'Our complete service includes menu planning, ingredient shopping at local markets, professional cooking, elegant table setup, full service, and thorough cleanup. Optional additions include waitstaff, bartenders, and sommeliers for special events.'
       },
       {
         question: 'Do you work with Sanur\'s family resorts and villas?',
-        answer: 'Yes! We regularly serve Hyatt Regency Bali, Maya Sanur, Prama, Mercure, and hundreds of family villas along the beach. We\'re familiar with resort villa kitchens, security procedures, and family-focused service standards. Multi-generational groups are our specialty!'
+        answer: 'Yes! We regularly serve Hyatt Regency Bali, Maya Sanur, Prama, Mercure, Villa Seriska, and hundreds of family villas along the beach. We\'re familiar with resort villa kitchens, security procedures, and family-focused service standards.'
       },
       {
         question: 'Can you accommodate large family gatherings in Sanur?',
@@ -228,11 +513,11 @@ export const CITY_DATA: Record<string, CityData> = {
       },
       {
         question: 'Can you source fresh seafood in Sanur?',
-        answer: 'Yes! Sanur has excellent morning fish markets and beachfront seafood suppliers. Our chefs select the freshest catches - snapper, prawns, squid, grouper, and seasonal fish. Sanur\'s calm bay waters mean abundant fresh seafood perfect for grilling or steaming!'
+        answer: 'Yes! Our chefs select fresh, local produce, seafood, and meats from reliable markets in Sanur. Whether you\'re enjoying just-caught seafood, organic vegetables, or tropical fruits, every dish features ingredients chosen for quality and authentic Balinese flavors.'
       },
       {
-        question: 'Do you cater to elderly guests and special dietary needs in Sanur?',
-        answer: 'Absolutely! Sanur attracts many retirees and multi-gen families. Our chefs are experienced with soft foods, low-sodium diets, diabetic-friendly meals, heart-healthy options, and easy-to-digest cuisine. We accommodate medical dietary restrictions with care and respect.'
+        question: 'What safety and quality guarantees do you offer?',
+        answer: 'Every chef is background checked with 5+ years experience and food safety certifications. We provide secure payments, official invoices, full liability insurance, and a satisfaction guarantee - if our service doesn\'t meet expectations, we\'ll resolve the issue or offer a full refund.'
       }
     ]
   },

@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ShoppingCart, ChefHat, Users } from 'lucide-react';
+import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ShoppingCart, ChefHat, Users, Shield } from 'lucide-react';
 import { useLocation } from 'wouter';
 import TrustBadges from '@/components/TrustBadges';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
@@ -227,41 +227,446 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
 
       {/* Extended Content Section - SEO Optimized */}
       {city.extendedContent && (
-        <section className="py-16 lg:py-24 bg-card">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8 sm:mb-12">
-              {city.extendedContent.mainHeading}
-            </h2>
-            <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
-              {city.extendedContent.paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-base sm:text-lg leading-relaxed">
-                  {paragraph}
+        <>
+          {/* Main Intro Section */}
+          <section className="py-16 lg:py-24 bg-card">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8 sm:mb-12">
+                {city.extendedContent.mainHeading}
+              </h2>
+              <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                {'introParagraphs' in city.extendedContent && city.extendedContent.introParagraphs?.map((paragraph, index) => (
+                  <p key={index} className="text-base sm:text-lg leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+                {'paragraphs' in city.extendedContent && city.extendedContent.paragraphs?.map((paragraph, index) => (
+                  <p key={index} className="text-base sm:text-lg leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 sm:mt-12 px-4 sm:px-0">
+                <Button
+                  size="lg"
+                  onClick={handleQuoteClick}
+                  variant="outline"
+                  className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                  data-testid="button-extended-content-quote"
+                >
+                  <FileText className="w-6 h-6 mr-2" />
+                  {t('cta.getQuote')}
+                </Button>
+                <Button
+                  size="lg"
+                  onClick={handleWhatsAppClick}
+                  className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                  data-testid="button-extended-content-whatsapp"
+                >
+                  <MessageCircle className="w-6 h-6 mr-2" />
+                  {t('cta.whatsapp')}
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Why Choose Section */}
+          {'whyChooseSection' in city.extendedContent && city.extendedContent.whyChooseSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.whyChooseSection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-12">
+                  {city.extendedContent.whyChooseSection.intro}
                 </p>
-              ))}
-            </div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 sm:mt-12 px-4 sm:px-0">
-              <Button
-                size="lg"
-                onClick={handleQuoteClick}
-                variant="outline"
-                className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
-                data-testid="button-extended-content-quote"
-              >
-                <FileText className="w-6 h-6 mr-2" />
-                {t('cta.getQuote')}
-              </Button>
-              <Button
-                size="lg"
-                onClick={handleWhatsAppClick}
-                className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
-                data-testid="button-extended-content-whatsapp"
-              >
-                <MessageCircle className="w-6 h-6 mr-2" />
-                {t('cta.whatsapp')}
-              </Button>
-            </div>
-          </div>
-        </section>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {city.extendedContent.whyChooseSection.benefits.map((benefit, index) => (
+                    <Card key={index} className="hover-elevate">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3 mb-3">
+                          <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                          <h3 className="text-lg font-semibold">{benefit.title}</h3>
+                        </div>
+                        <p className="text-foreground/70 text-sm leading-relaxed pl-9">{benefit.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Benefits Section */}
+          {'benefitsSection' in city.extendedContent && city.extendedContent.benefitsSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.benefitsSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.benefitsSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Customize Section */}
+          {'customizeSection' in city.extendedContent && city.extendedContent.customizeSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.customizeSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.customizeSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Diverse Cuisines Section */}
+          {'diverseCuisinesSection' in city.extendedContent && city.extendedContent.diverseCuisinesSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.diverseCuisinesSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.diverseCuisinesSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Chefs Section */}
+          {'chefsSection' in city.extendedContent && city.extendedContent.chefsSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                  <div>
+                    <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6">
+                      {city.extendedContent.chefsSection.title}
+                    </h2>
+                    <p className="text-lg text-foreground/80 mb-6 leading-relaxed">
+                      {city.extendedContent.chefsSection.intro}
+                    </p>
+                    {city.extendedContent.chefsSection.paragraphs.map((paragraph, index) => (
+                      <p key={index} className="text-foreground/70 mb-4 leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4">Chef Specializations</h3>
+                    <div className="space-y-3">
+                      {city.extendedContent.chefsSection.specializations.map((spec, index) => (
+                        <div key={index} className="flex items-center gap-3 bg-card p-3 rounded-lg">
+                          <ChefHat className="w-5 h-5 text-primary flex-shrink-0" />
+                          <span className="text-foreground/80">{spec}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Occasions Section */}
+          {'occasionsSection' in city.extendedContent && city.extendedContent.occasionsSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.occasionsSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.occasionsSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Villa Services Section */}
+          {'villaServicesSection' in city.extendedContent && city.extendedContent.villaServicesSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.villaServicesSection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-8">
+                  {city.extendedContent.villaServicesSection.intro}
+                </p>
+                <div className="max-w-4xl mx-auto mb-12">
+                  {city.extendedContent.villaServicesSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-foreground/80 mb-4 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {city.extendedContent.villaServicesSection.services.map((service, index) => (
+                    <Card key={index} className="hover-elevate">
+                      <CardContent className="p-6">
+                        <h3 className="text-lg font-semibold mb-2">{service.title}</h3>
+                        <p className="text-foreground/70 text-sm">{service.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Booking Section */}
+          {'bookingSection' in city.extendedContent && city.extendedContent.bookingSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.bookingSection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-12">
+                  {city.extendedContent.bookingSection.intro}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {city.extendedContent.bookingSection.steps.map((step, index) => (
+                    <div key={index} className="text-center">
+                      <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                        {step.step}
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                      <p className="text-sm text-foreground/70">{step.description}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 px-4 sm:px-0">
+                  <Button
+                    size="lg"
+                    onClick={handleWhatsAppClick}
+                    className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                    data-testid="button-booking-section-whatsapp"
+                  >
+                    <MessageCircle className="w-6 h-6 mr-2" />
+                    {t('cta.whatsapp')}
+                  </Button>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Luxury Dining Section */}
+          {'luxuryDiningSection' in city.extendedContent && city.extendedContent.luxuryDiningSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.luxuryDiningSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.luxuryDiningSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Local Ingredients Section */}
+          {'localIngredientsSection' in city.extendedContent && city.extendedContent.localIngredientsSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-8">
+                  {city.extendedContent.localIngredientsSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6">
+                  {city.extendedContent.localIngredientsSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Pricing Section */}
+          {'pricingSection' in city.extendedContent && city.extendedContent.pricingSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.pricingSection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-12">
+                  {city.extendedContent.pricingSection.intro}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {city.extendedContent.pricingSection.categories.map((category, index) => (
+                    <Card key={index} className="hover-elevate">
+                      <CardContent className="p-6">
+                        <h3 className="text-lg font-semibold mb-4">{category.title}</h3>
+                        <ul className="space-y-3">
+                          {category.items.map((item, itemIndex) => (
+                            <li key={itemIndex} className="flex items-start gap-2 text-sm text-foreground/70">
+                              <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Safety Section */}
+          {'safetySection' in city.extendedContent && city.extendedContent.safetySection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.safetySection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-12">
+                  {city.extendedContent.safetySection.intro}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {city.extendedContent.safetySection.guarantees.map((guarantee, index) => (
+                    <Card key={index} className="hover-elevate border-l-4 border-l-primary">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-3">
+                          <Shield className="w-6 h-6 text-primary flex-shrink-0" />
+                          <div>
+                            <h3 className="font-semibold mb-1">{guarantee.title}</h3>
+                            <p className="text-sm text-foreground/70">{guarantee.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Testimonials Section */}
+          {'testimonialsSection' in city.extendedContent && city.extendedContent.testimonialsSection && (
+            <section className="py-16 lg:py-24 bg-background">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-12">
+                  {city.extendedContent.testimonialsSection.title}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {city.extendedContent.testimonialsSection.testimonials.map((testimonial, index) => (
+                    <Card key={index} className="hover-elevate">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-1 mb-4">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                          ))}
+                        </div>
+                        <p className="text-foreground/80 mb-4 italic text-sm leading-relaxed">"{testimonial.quote}"</p>
+                        <div className="border-t pt-4">
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-foreground/60">{testimonial.event}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Sample Menu Section */}
+          {'sampleMenuSection' in city.extendedContent && city.extendedContent.sampleMenuSection && (
+            <section className="py-16 lg:py-24 bg-card">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-4">
+                  {city.extendedContent.sampleMenuSection.title}
+                </h2>
+                <p className="text-center text-foreground/70 text-lg max-w-3xl mx-auto mb-12">
+                  {city.extendedContent.sampleMenuSection.intro}
+                </p>
+                {city.extendedContent.sampleMenuSection.menus.map((menu, menuIndex) => (
+                  <Card key={menuIndex} className="mb-6">
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-semibold mb-6 text-center">{menu.name}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {menu.courses.map((course, courseIndex) => (
+                          <div key={courseIndex}>
+                            <h4 className="font-semibold text-primary mb-2">{course.category}</h4>
+                            <ul className="space-y-1">
+                              {course.items.map((item, itemIndex) => (
+                                <li key={itemIndex} className="text-sm text-foreground/70">{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Elevate Vacation Section */}
+          {'elevateVacationSection' in city.extendedContent && city.extendedContent.elevateVacationSection && (
+            <section className="py-16 lg:py-24 bg-primary/5">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold mb-8">
+                  {city.extendedContent.elevateVacationSection.title}
+                </h2>
+                <div className="prose prose-lg max-w-none text-foreground/80 space-y-6 mb-10">
+                  {city.extendedContent.elevateVacationSection.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-base sm:text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Button
+                    size="lg"
+                    onClick={handleQuoteClick}
+                    variant="outline"
+                    className="w-full sm:w-auto px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                    data-testid="button-elevate-quote"
+                  >
+                    <FileText className="w-6 h-6 mr-2" />
+                    {t('cta.getQuote')}
+                  </Button>
+                  <Button
+                    size="lg"
+                    onClick={handleWhatsAppClick}
+                    className="w-full sm:w-auto bg-primary hover:bg-primary text-primary-foreground px-8 py-6 text-lg font-semibold hover-elevate active-elevate-2"
+                    data-testid="button-elevate-whatsapp"
+                  >
+                    <MessageCircle className="w-6 h-6 mr-2" />
+                    {t('cta.whatsapp')}
+                  </Button>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
 
       <ChefGallery />

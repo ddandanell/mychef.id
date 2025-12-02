@@ -1,14 +1,12 @@
 import { SiWhatsapp } from 'react-icons/si';
 import { useLocation } from 'wouter';
 import { motion } from 'framer-motion';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function WhatsAppButton() {
   const [, setLocation] = useLocation();
-  const { getLocalizedPath } = useLocalizedPath();
   
   const handleClick = () => {
-    setLocation(getLocalizedPath('/contact/confirm?source=floatingButton'));
+    setLocation('/contact/confirm?source=floatingButton');
   };
 
   return (

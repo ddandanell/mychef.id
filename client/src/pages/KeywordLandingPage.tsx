@@ -20,7 +20,6 @@ import DishGallery from '@/components/DishGallery';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import PricingSection from '@/components/PricingSection';
 import InternalLinks from '@/components/InternalLinks';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import type { KeywordData } from '@shared/keywordData';
 
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
@@ -38,7 +37,6 @@ export default function KeywordLandingPage({ data }: KeywordLandingPageProps) {
   const [, setLocation] = useLocation();
   const { t } = useTranslation();
   const [currentImage, setCurrentImage] = useState(0);
-  const { getLocalizedPath } = useLocalizedPath();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,7 +47,7 @@ export default function KeywordLandingPage({ data }: KeywordLandingPageProps) {
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(data.ctaWhatsAppMessage);
-    setLocation(getLocalizedPath(`/contact/confirm?source=keyword-${data.slug}&message=${message}`));
+    setLocation(`/contact/confirm?source=keyword-${data.slug}&message=${message}`);
   };
 
   return (

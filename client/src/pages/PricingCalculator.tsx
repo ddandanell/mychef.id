@@ -9,8 +9,6 @@ import {
   TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2,
   ShoppingBag, Flame, Wine, Zap, Copy, Send, HelpCircle, X, Star
 } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const CURRENCIES = [
   { code: 'IDR', symbol: 'Rp', rate: 1 },
@@ -337,8 +335,6 @@ function calculateBooking(
 
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
-  const { getLocalizedPath } = useLocalizedPath();
-  const { language } = useLanguage();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [guestCount, setGuestCount] = useState(4);

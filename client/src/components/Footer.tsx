@@ -1,10 +1,7 @@
 import { Mail, Phone, MapPin, CreditCard, Banknote, ChefHat, Star, ArrowRight, Clock, Sparkles, Shield, TrendingUp } from 'lucide-react';
 import { SiInstagram, SiFacebook, SiWhatsapp, SiAirbnb } from 'react-icons/si';
 import { useLocation, Link } from 'wouter';
-import { useTranslation } from 'react-i18next';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
-import LanguageSelector from './LanguageSelector';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const CITY_LINKS = {
   'Premium Destinations': [
@@ -57,12 +54,10 @@ const SERVICE_LINKS = [
 
 export default function Footer() {
   const [, setLocation] = useLocation();
-  const { t } = useTranslation();
-  const { getLocalizedPath } = useLocalizedPath();
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
-    setLocation(getLocalizedPath('/contact/confirm?source=footer'));
+    setLocation('/contact/confirm?source=footer');
   };
 
   return (
@@ -99,7 +94,7 @@ export default function Footer() {
         <div className="py-8 sm:py-12 lg:py-16">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="col-span-2 lg:col-span-2">
-            <Link href={getLocalizedPath('/')} className="inline-flex items-center gap-2 mb-3 sm:mb-4" data-testid="link-footer-logo">
+            <Link href="/" className="inline-flex items-center gap-2 mb-3 sm:mb-4" data-testid="link-footer-logo">
               <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
                 <ChefHat className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
@@ -154,7 +149,6 @@ export default function Footer() {
               >
                 <SiFacebook className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
-              <LanguageSelector />
             </div>
 
             <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
@@ -179,21 +173,21 @@ export default function Footer() {
                 <span>Jl. Sunset Road No. 88<br />Seminyak, Bali 80361</span>
               </div>
               <p className="text-foreground/60">
-                {t('footer.businessHours', 'Business Hours')}:<br />
-                09:00 - 22:00 WIB ({t('footer.daily', 'Daily')})
+                Business Hours:<br />
+                09:00 - 22:00 WIB (Daily)
               </p>
             </div>
           </div>
 
           <div className="hidden lg:block">
             <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
-              {t('footer.services', 'Our Services')}
+              Our Services
             </h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {SERVICE_LINKS.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={getLocalizedPath(`/services/${service.slug}`)}
+                    href={`/services/${service.slug}`}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-service-${service.slug}`}
                   >
@@ -206,13 +200,13 @@ export default function Footer() {
 
           <div className="hidden lg:block">
             <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
-              {t('footer.premiumAreas', 'Premium Areas')}
+              Premium Areas
             </h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['Premium Destinations'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={getLocalizedPath(`/${city.slug}`)}
+                    href={`/${city.slug}`}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -225,13 +219,13 @@ export default function Footer() {
 
           <div className="hidden lg:block">
             <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
-              {t('footer.southBali', 'South Bali')}
+              South Bali
             </h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['South Bali'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={getLocalizedPath(`/${city.slug}`)}
+                    href={`/${city.slug}`}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -242,13 +236,13 @@ export default function Footer() {
             </ul>
 
             <h4 className="font-semibold mb-2 sm:mb-3 mt-4 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
-              {t('footer.bukitPeninsula', 'Bukit Peninsula')}
+              Bukit Peninsula
             </h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {CITY_LINKS['Bukit Peninsula'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={getLocalizedPath(`/${city.slug}`)}
+                    href={`/${city.slug}`}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -261,13 +255,13 @@ export default function Footer() {
 
           <div className="hidden lg:block">
             <h4 className="font-semibold mb-3 sm:mb-4 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
-              {t('footer.moreAreas', 'More Areas')}
+              More Areas
             </h4>
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
               {[...CITY_LINKS['Central & West'], ...CITY_LINKS['East & North']].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={getLocalizedPath(`/${city.slug}`)}
+                    href={`/${city.slug}`}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -282,7 +276,7 @@ export default function Footer() {
         <div className="border-t pt-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <h4 className="font-semibold mb-3 text-sm">{t('footer.paymentMethods', 'Payment Methods')}</h4>
+              <h4 className="font-semibold mb-3 text-sm">Payment Methods</h4>
               <div className="flex flex-wrap gap-4 text-sm text-foreground/70">
                 <div className="flex items-center gap-2">
                   <CreditCard className="w-4 h-4 flex-shrink-0" />
@@ -295,16 +289,16 @@ export default function Footer() {
               </div>
             </div>
             <div className="md:text-right">
-              <h4 className="font-semibold mb-3 text-sm">{t('footer.quickLinks', 'Quick Links')}</h4>
+              <h4 className="font-semibold mb-3 text-sm">Quick Links</h4>
               <div className="flex flex-wrap gap-4 lg:gap-6 text-sm text-foreground/70 md:justify-end">
-                <Link href={getLocalizedPath('/quote')} className="hover:text-primary transition-colors" data-testid="link-footer-quote">
-                  {t('footer.getQuote', 'Get Quote')}
+                <Link href="/quote" className="hover:text-primary transition-colors" data-testid="link-footer-quote">
+                  Get Quote
                 </Link>
-                <Link href={getLocalizedPath('/calculator')} className="hover:text-primary transition-colors" data-testid="link-footer-calculator">
+                <Link href="/calculator" className="hover:text-primary transition-colors" data-testid="link-footer-calculator">
                   Price Calculator
                 </Link>
-                <Link href={getLocalizedPath('/join-our-team')} className="hover:text-primary transition-colors" data-testid="link-footer-careers">
-                  {t('footer.careers', 'Careers')}
+                <Link href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-careers">
+                  Careers
                 </Link>
               </div>
             </div>
@@ -312,17 +306,17 @@ export default function Footer() {
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-foreground/60 pt-6 border-t">
             <p data-testid="text-footer-copyright">
-              © {currentYear} myCHEF Indonesia. {t('footer.allRightsReserved', 'All rights reserved.')}
+              © {currentYear} myCHEF Indonesia. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-4 lg:gap-6 justify-center md:justify-end">
-              <Link href={getLocalizedPath('/privacy-policy')} className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
-                {t('footer.privacyPolicy', 'Privacy Policy')}
+              <Link href="/privacy-policy" className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
+                Privacy Policy
               </Link>
-              <Link href={getLocalizedPath('/terms-of-service')} className="hover:text-primary transition-colors" data-testid="link-footer-terms">
-                {t('footer.termsOfService', 'Terms of Service')}
+              <Link href="/terms-of-service" className="hover:text-primary transition-colors" data-testid="link-footer-terms">
+                Terms of Service
               </Link>
-              <Link href={getLocalizedPath('/payment-terms')} className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
-                {t('footer.paymentTerms', 'Payment Terms')}
+              <Link href="/payment-terms" className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
+                Payment Terms
               </Link>
             </div>
           </div>

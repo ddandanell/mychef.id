@@ -7,30 +7,23 @@ import { Card } from '@/components/ui/card';
 import { SiWhatsapp } from 'react-icons/si';
 import { CheckCircle2, ArrowLeft, Loader2 } from 'lucide-react';
 import { getWhatsAppURL, getWhatsAppCTA } from '@/lib/whatsappCTA';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ContactConfirm() {
   const [, setLocation] = useLocation();
-  const { getLocalizedPath } = useLocalizedPath();
-  const { language } = useLanguage();
   const [countdown, setCountdown] = useState(2);
   const [whatsappURL, setWhatsappURL] = useState('');
   const [ctaLabel, setCtaLabel] = useState('');
 
   useEffect(() => {
-    // Get source from URL query parameters
     const params = new URLSearchParams(window.location.search);
     const source = params.get('source') || 'default';
     
-    // Get the appropriate WhatsApp URL and CTA details
     const url = getWhatsAppURL(source);
     const cta = getWhatsAppCTA(source);
     
     setWhatsappURL(url);
     setCtaLabel(cta.label || 'General Inquiry');
 
-    // Send custom GA event for conversion tracking
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'contact_initiation', {
         event_category: 'Contact',
@@ -39,7 +32,6 @@ export default function ContactConfirm() {
       });
     }
 
-    // Countdown timer
     const countdownInterval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -50,13 +42,10 @@ export default function ContactConfirm() {
       });
     }, 1000);
 
-    // Auto-redirect after 2 seconds
     const redirectTimer = setTimeout(() => {
-      // Use location.href for auto-redirect to avoid popup blockers
       window.location.href = url;
     }, 2000);
 
-    // Cleanup timers on unmount
     return () => {
       clearInterval(countdownInterval);
       clearTimeout(redirectTimer);
@@ -64,12 +53,11 @@ export default function ContactConfirm() {
   }, [setLocation]);
 
   const handleContinueNow = () => {
-    // Manual click can use _blank since it's a direct user gesture
     window.open(whatsappURL, '_blank');
   };
 
   const handleGoBack = () => {
-    setLocation(getLocalizedPath('/'));
+    setLocation('/');
   };
 
   return (

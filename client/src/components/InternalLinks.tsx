@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
 import { MapPin, Utensils, ChefHat, Heart, PartyPopper, Users, Briefcase, Church, Calendar, Cake, Award, Sparkles } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const KEYWORD_PAGES = [
   { name: 'Best Private Chef Indonesia', slug: 'best-private-chef-indonesia', icon: Award },
@@ -64,7 +63,6 @@ interface InternalLinksProps {
 
 export default function InternalLinks({ currentSlug, variant = 'full', showHeading = true }: InternalLinksProps) {
   const { t } = useTranslation();
-  const { getLocalizedPath } = useLocalizedPath();
   
   const citiesByRegion = REGIONS.reduce((acc, region) => {
     acc[region] = ALL_CITIES.filter(city => city.region === region && city.slug !== currentSlug);
@@ -100,7 +98,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
                 return (
                   <Link
                     key={service.slug}
-                    href={getLocalizedPath(`/services/${service.slug}`)}
+                    href={`/services/${service.slug}`}
                     className="flex items-center gap-2 p-3 rounded-lg bg-background border hover:border-primary hover:bg-primary/5 transition-all group"
                     data-testid={`link-service-${service.slug}`}
                   >
@@ -127,7 +125,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
                 return (
                   <Link
                     key={page.slug}
-                    href={getLocalizedPath(`/${page.slug}`)}
+                    href={`/${page.slug}`}
                     className="flex items-center gap-2 p-3 rounded-lg bg-background border hover:border-primary hover:bg-primary/5 transition-all group"
                     data-testid={`link-keyword-${page.slug}`}
                   >
@@ -162,7 +160,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
                       {regionCities.map((city) => (
                         <li key={city.slug}>
                           <Link
-                            href={getLocalizedPath(`/${city.slug}`)}
+                            href={`/${city.slug}`}
                             className="text-sm text-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-1 group"
                             data-testid={`link-city-${city.slug}`}
                           >
@@ -183,7 +181,7 @@ export default function InternalLinks({ currentSlug, variant = 'full', showHeadi
             {t('internalLinks.cantFind', "Can't find your area? We serve all of Bali and Jakarta!")}
           </p>
           <Link
-            href={getLocalizedPath('/')}
+            href="/"
             className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
             data-testid="link-back-home"
           >

@@ -5,29 +5,22 @@ import { Card, CardContent } from '@/components/ui/card';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PaymentTerms() {
-  const { getLocalizedPath } = useLocalizedPath();
-  const { language } = useLanguage();
-
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title={language === 'id' ? "Ketentuan Pembayaran & Pemesanan | myCHEF Indonesia" : "Payment & Booking Terms | myCHEF Indonesia"}
-        description={language === 'id'
-          ? "Pahami jadwal pembayaran, kebijakan pemesanan, ketentuan pembatalan, dan kebijakan pengembalian dana untuk layanan private chef di Bali."
-          : "Understand our payment schedules, booking policies, cancellation terms, and refund policies for private chef services in Bali."}
+        title="Payment & Booking Terms | myCHEF Indonesia"
+        description="Understand our payment schedules, booking policies, cancellation terms, and refund policies for private chef services in Bali."
         canonical="https://mychef.id/payment-terms"
         ogType="article"
       />
       <Header />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pt-24 lg:pb-16">
-        <Link href={getLocalizedPath('/')}>
+        <Link href="/">
           <Button variant="ghost" className="mb-8 hover-elevate" data-testid="button-back-home">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
+            Back to Home
           </Button>
         </Link>
 
@@ -311,10 +304,10 @@ export default function PaymentTerms() {
           </Card>
 
           <div className="text-center pt-8">
-            <Link href={getLocalizedPath('/')}>
+            <Link href="/">
               <Button size="lg" className="hover-elevate active-elevate-2" data-testid="button-return-home">
                 <ArrowLeft className="w-5 h-5 mr-2" />
-                {language === 'id' ? 'Kembali ke Beranda' : 'Return to Homepage'}
+                Return to Homepage
               </Button>
             </Link>
           </div>

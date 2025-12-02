@@ -7,7 +7,6 @@ import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ChefHat, Clock, Ut
 import TrustBadges from '@/components/TrustBadges';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import {
   Accordion,
   AccordionContent,
@@ -42,7 +41,6 @@ const ICON_MAP: Record<string, typeof ChefHat> = {
 
 function JakartaAreaLandingPage({ area }: JakartaAreaLandingPageProps) {
   const [, setLocation] = useLocation();
-  const { getLocalizedPath } = useLocalizedPath();
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(area.ctaWhatsAppMessage);
@@ -50,7 +48,7 @@ function JakartaAreaLandingPage({ area }: JakartaAreaLandingPageProps) {
   };
 
   const handleQuoteClick = () => {
-    setLocation(getLocalizedPath(`/contact/confirm?source=jakarta-${area.slug}`));
+    setLocation(`/contact/confirm?source=jakarta-${area.slug}`);
   };
 
   return (

@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, MapPin, FileText } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const BALI_LOCATIONS = [
   { name: 'Seminyak', slug: 'seminyak' },
@@ -24,14 +23,13 @@ const BALI_LOCATIONS = [
 
 export default function LocationsSection() {
   const [, setLocation] = useLocation();
-  const { getLocalizedPath } = useLocalizedPath();
   
   const handleWhatsAppClick = () => {
-    setLocation(getLocalizedPath('/contact/confirm?source=locations'));
+    setLocation('/contact/confirm?source=locations');
   };
 
   const handleQuoteClick = () => {
-    setLocation(getLocalizedPath('/contact/confirm?source=locations'));
+    setLocation('/contact/confirm?source=locations');
   };
 
   return (
@@ -55,7 +53,7 @@ export default function LocationsSection() {
             {BALI_LOCATIONS.map((location, index) => (
               <Link 
                 key={index}
-                href={getLocalizedPath(`/${location.slug}`)}
+                href={`/${location.slug}`}
                 className="text-center py-3 px-4 rounded-lg bg-background hover-elevate transition-all cursor-pointer"
                 data-testid={`link-location-${location.slug}`}
               >

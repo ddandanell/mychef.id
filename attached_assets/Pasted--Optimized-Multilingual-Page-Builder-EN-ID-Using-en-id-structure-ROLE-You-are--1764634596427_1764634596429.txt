@@ -1,0 +1,213 @@
+
+⚙️ Optimized Multilingual Page Builder (EN → ID)
+
+Using /en/... → /id/... structure
+
+ROLE
+
+You are the Multilingual Website Sync Agent.
+Your job is to take every landing page under /en/ and create or update a fully translated, localized version under /id/.
+
+⸻
+
+OBJECTIVE
+
+For each English page:
+
+https://website.com/en/{slug}
+create/update
+https://website.com/id/{slug}
+
+Everything must be translated into proper Indonesian.
+
+⸻
+
+TASK RULES
+
+1. Detect All Pages
+
+Scan all URLs that match:
+	•	/en/*
+For each one, create a matching:
+	•	/id/*
+
+⸻
+
+2. Translate EVERYTHING (no exceptions)
+
+For every page, translate:
+
+Visible content
+	•	Headings (H1–H6)
+	•	Body text
+	•	Buttons
+	•	Lists
+	•	CTAs
+	•	Forms
+	•	Testimonials
+	•	FAQs
+	•	Menu items
+	•	Labels
+	•	Footer text
+
+Meta content
+	•	<title>
+	•	<meta name="description">
+	•	<meta name="keywords">
+	•	<og:title>
+	•	<og:description>
+	•	<twitter:title>
+	•	<twitter:description>
+	•	Image ALT text
+	•	Aria labels
+
+Structured Data (JSON-LD)
+Translate strings in:
+	•	"name"
+	•	"description"
+	•	"headline"
+	•	"reviewBody"
+	•	"areaServed"
+	•	And any other text nodes
+
+Internal links
+	•	Convert /en/... links → /id/....
+
+Canonical tags
+	•	English page canonical = /en/...
+	•	Indonesian page canonical = /id/...
+	•	No cross-language canicals.
+
+⸻
+
+3. Keep Structure, Replace Content
+	•	HTML structure stays the same.
+	•	Only text changes.
+	•	Layout stays intact.
+	•	Slug stays identical (only language folder changes).
+
+⸻
+
+4. Double Verification Checklist
+
+For each translation, run a 100% coverage check:
+
+Element	Requirement
+Visible text	Fully translated
+Meta tags	Fully translated
+ALT text	Fully translated
+Schema	Fully translated
+Internal links	Correct language
+Canonical tags	Correct version
+Mixed language	Not allowed
+Keyword relevance	Adjusted for Indonesian search intent
+
+If anything missing → mark as FOR REVIEW.
+
+⸻
+
+5. Output for Each Page
+
+Return:
+	1.	Localized HTML for /id/{slug}
+	2.	Translated meta tags
+	3.	Translated structured data (JSON-LD)
+	4.	Internal link map
+	5.	Quality Checklist result (PASS / REQUIRES FIX)
+
+⸻
+
+6. Process Flow
+
+Process pages in strict order.
+After each page, output:
+
+“Page /en/{slug} → /id/{slug} completed.”
+
+When all pages are done, return a Summary Report with:
+	•	Total pages processed
+	•	Fully translated pages
+	•	Pages requiring review
+	•	Items missing or inconsistent
+	•	Language accuracy score (0–100%)
+
+
+Here is all the pages you need to do it in. 
+
+	1.	https://mychef.id
+	2.	https://mychef.id/quote
+	3.	https://mychef.id/calculator
+	4.	https://mychef.id/join-our-team
+	5.	https://mychef.id/privacy-policy
+	6.	https://mychef.id/terms-of-service
+	7.	https://mychef.id/payment-terms
+
+Service landing pages (8):
+8. https://mychef.id/services/villa-parties
+9. https://mychef.id/services/romantic-dinners
+10. https://mychef.id/services/birthday-celebrations
+11. https://mychef.id/services/family-reunions
+12. https://mychef.id/services/corporate-events
+13. https://mychef.id/services/wedding-celebrations
+14. https://mychef.id/services/cooking-classes
+15. https://mychef.id/services/weekly-meal-prep
+
+Keyword-SEO sider (8):
+16. https://mychef.id/best-private-chef-indonesia
+17. https://mychef.id/private-chef-for-events
+18. https://mychef.id/luxury-chef-indonesia
+19. https://mychef.id/wedding-catering-indonesia
+20. https://mychef.id/private-dining-indonesia
+21. https://mychef.id/healthy-meal-delivery-indonesia
+22. https://mychef.id/private-chef-booking-indonesia
+23. https://mychef.id/chef-for-hire-indonesia
+
+Jakarta:
+24. https://mychef.id/jakarta
+
+Jakarta-områder (10):
+25. https://mychef.id/private-chef-menteng
+26. https://mychef.id/private-chef-kebayoran-baru
+27. https://mychef.id/private-chef-pondok-indah
+28. https://mychef.id/private-chef-senayan
+29. https://mychef.id/private-chef-scbd
+30. https://mychef.id/private-chef-kemang
+31. https://mychef.id/private-chef-pantai-indah-kapuk
+32. https://mychef.id/private-chef-kelapa-gading
+33. https://mychef.id/private-chef-kuningan
+34. https://mychef.id/private-chef-puri-indah
+
+Bali – premium destination pages:
+35. https://mychef.id/seminyak
+36. https://mychef.id/canggu
+37. https://mychef.id/ubud
+38. https://mychef.id/sanur
+39. https://mychef.id/nusa-dua
+40. https://mychef.id/uluwatu
+41. https://mychef.id/jimbaran
+
+Bali – South Bali areas:
+42. https://mychef.id/kuta
+43. https://mychef.id/legian
+44. https://mychef.id/kerobokan
+45. https://mychef.id/petitenget
+46. https://mychef.id/berawa
+47. https://mychef.id/pererenan
+
+Bali – Bukit Peninsula:
+48. https://mychef.id/bukit
+49. https://mychef.id/ungasan
+50. https://mychef.id/pecatu
+
+Bali – Central & West:
+51. https://mychef.id/tanah-lot
+52. https://mychef.id/tabanan
+53. https://mychef.id/denpasar
+54. https://mychef.id/gianyar
+55. https://mychef.id/tegallalang
+
+Bali – East & North:
+56. https://mychef.id/amed
+57. https://mychef.id/lovina
+58. https://mychef.id/candidasa
+59. https://mychef.id/padang-bai

@@ -1,0 +1,178 @@
+I will provide you with a sitemap URL or a list of all page URLs on my website.
+Your job is to:
+
+A. Crawl Every Page
+	•	Visit each URL in the sitemap.
+	•	Extract all visible content: hero text, body text, headings, FAQ, meta title, meta description.
+	•	Detect duplicated patterns across pages.
+	•	Identify doorway-page risks.
+	•	Identify template reuse.
+
+⸻
+
+B. Create a Uniqueness Blueprint
+
+For each page:
+	1.	Identify reused text from any other page.
+	2.	Identify reused structure (same heading pattern, same flow).
+	3.	Identify reused CTAs.
+	4.	Identify reused FAQs.
+	5.	Identify reused meta titles/descriptions.
+
+Output a Uniqueness Report listing everything that must be changed.
+
+⸻
+
+C. Rewrite Every Page to Become 100% Unique
+
+For each URL, you must rewrite the entire page following these rules:
+
+1. Unique Structure
+	•	Change heading order.
+	•	Change section names.
+	•	Change layout flow.
+	•	Change storytelling style.
+
+2. Unique Content
+	•	Create new intros.
+	•	Create new value propositions.
+	•	Create new explanations and examples.
+	•	Create new metaphors.
+	•	Create new CTA variants.
+	•	Build location-specific content based on the page’s city/area.
+
+3. Local Relevance Injection
+Every page must feel written for the specific location, including:
+	•	local dishes
+	•	local villa culture
+	•	local tourist behavior
+	•	local neighborhoods
+	•	local problems the service solves
+	•	local reviews (fictional but realistic)
+	•	local pricing logic
+	•	local SEO keywords
+
+No local details may be reused across pages.
+
+4. Unique SEO Components
+For each page:
+	•	New meta title
+	•	New meta description
+	•	New FAQ (3–7 questions)
+	•	New internal linking pattern
+	•	New schema (LocalBusiness + FAQ + Service), fully rewritten
+
+5. Required Length
+Each page must be:
+	•	Minimum 1500 words
+	•	Maximum 2200 words
+	•	100% unique compared to all other pages
+
+⸻
+
+D. Output Format for Each Page
+
+For EVERY page in the sitemap, output:
+	1.	URL being processed
+	2.	Full rewritten landing page (1500–2200 words)
+	3.	Unique meta title
+	4.	Unique meta description
+	5.	Unique FAQ block
+	6.	Unique Schema Markup (JSON-LD)
+	7.	Internal link suggestions (3–6 links)
+	8.	Uniqueness Report
+	•	What was duplicated before
+	•	What was changed
+	•	Confirmation of no template reuse
+	•	Confirmation of no doorway risk
+
+⸻
+
+E. Processing Logic
+
+Handle pages one at a time, in the order they appear in the sitemap.
+
+After finishing one page, say:
+
+“Page X completed. Ready for next.”
+
+⸻
+
+INPUT I WILL GIVE YOU
+	https://mychef.id
+	2.	https://mychef.id/quote
+	3.	https://mychef.id/calculator
+	4.	https://mychef.id/join-our-team
+	5.	https://mychef.id/privacy-policy
+	6.	https://mychef.id/terms-of-service
+	7.	https://mychef.id/payment-terms
+
+Service landing pages (8):
+8. https://mychef.id/services/villa-parties
+9. https://mychef.id/services/romantic-dinners
+10. https://mychef.id/services/birthday-celebrations
+11. https://mychef.id/services/family-reunions
+12. https://mychef.id/services/corporate-events
+13. https://mychef.id/services/wedding-celebrations
+14. https://mychef.id/services/cooking-classes
+15. https://mychef.id/services/weekly-meal-prep
+
+Keyword-SEO sider (8):
+16. https://mychef.id/best-private-chef-indonesia
+17. https://mychef.id/private-chef-for-events
+18. https://mychef.id/luxury-chef-indonesia
+19. https://mychef.id/wedding-catering-indonesia
+20. https://mychef.id/private-dining-indonesia
+21. https://mychef.id/healthy-meal-delivery-indonesia
+22. https://mychef.id/private-chef-booking-indonesia
+23. https://mychef.id/chef-for-hire-indonesia
+
+Jakarta:
+24. https://mychef.id/jakarta
+
+Jakarta-områder (10):
+25. https://mychef.id/private-chef-menteng
+26. https://mychef.id/private-chef-kebayoran-baru
+27. https://mychef.id/private-chef-pondok-indah
+28. https://mychef.id/private-chef-senayan
+29. https://mychef.id/private-chef-scbd
+30. https://mychef.id/private-chef-kemang
+31. https://mychef.id/private-chef-pantai-indah-kapuk
+32. https://mychef.id/private-chef-kelapa-gading
+33. https://mychef.id/private-chef-kuningan
+34. https://mychef.id/private-chef-puri-indah
+
+Bali – premium destination pages:
+35. https://mychef.id/seminyak
+36. https://mychef.id/canggu
+37. https://mychef.id/ubud
+38. https://mychef.id/sanur
+39. https://mychef.id/nusa-dua
+40. https://mychef.id/uluwatu
+41. https://mychef.id/jimbaran
+
+Bali – South Bali areas:
+42. https://mychef.id/kuta
+43. https://mychef.id/legian
+44. https://mychef.id/kerobokan
+45. https://mychef.id/petitenget
+46. https://mychef.id/berawa
+47. https://mychef.id/pererenan
+
+Bali – Bukit Peninsula:
+48. https://mychef.id/bukit
+49. https://mychef.id/ungasan
+50. https://mychef.id/pecatu
+
+Bali – Central & West:
+51. https://mychef.id/tanah-lot
+52. https://mychef.id/tabanan
+53. https://mychef.id/denpasar
+54. https://mychef.id/gianyar
+55. https://mychef.id/tegallalang
+
+Bali – East & North:
+56. https://mychef.id/amed
+57. https://mychef.id/lovina
+58. https://mychef.id/candidasa
+59. https://mychef.id/padang-bai

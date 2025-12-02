@@ -275,10 +275,10 @@ export default function TermsOfService() {
         </div>
 
         <div className="mt-12 pt-8 border-t">
-          <Link href="/">
+          <Link href={getLocalizedPath('/')}>
             <Button variant="outline" className="hover-elevate" data-testid="button-back-home-bottom">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Return to Home
+              {language === 'id' ? 'Kembali ke Beranda' : 'Return to Home'}
             </Button>
           </Link>
         </div>

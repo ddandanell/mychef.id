@@ -9,6 +9,8 @@ import {
   TrendingDown, Info, Calculator, Sparkles, Leaf, Shield, CheckCircle2,
   ShoppingBag, Flame, Wine, Zap, Copy, Send, HelpCircle, X, Star
 } from 'lucide-react';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const CURRENCIES = [
   { code: 'IDR', symbol: 'Rp', rate: 1 },
@@ -335,6 +337,8 @@ function calculateBooking(
 
 export default function PricingCalculator() {
   const [, setLocation] = useLocation();
+  const { getLocalizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [guestCount, setGuestCount] = useState(4);
@@ -381,7 +385,7 @@ export default function PricingCalculator() {
   };
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=calculator');
+    setLocation(getLocalizedPath('/contact/confirm?source=calculator'));
   };
 
   const handleCopyQuote = () => {
@@ -409,7 +413,7 @@ Pricing Tier: ${result.tierLabel}
   const handleSendQuote = () => {
     if (!result) return;
     const quoteMessage = `Hello, I'm interested in booking ${selectedChef.name} from ${selectedChef.country}.\n\nQuote Details:\nDuration: ${result.numDays} days\nGuests: ${result.guestCount}\nTotal Hours: ${result.totalChefHours}h\nTotal Cost: ${formatPrice(result.totalCost)}\n\nPlease confirm availability.`;
-    setLocation('/contact/confirm?source=calculator&quote=' + encodeURIComponent(quoteMessage));
+    setLocation(getLocalizedPath('/contact/confirm?source=calculator&quote=' + encodeURIComponent(quoteMessage)));
   };
 
   const getMealDescription = () => {
@@ -460,13 +464,13 @@ Pricing Tier: ${result.tierLabel}
       <div className="py-6 md:py-8 px-3 md:px-4 pb-24">
         <div className="max-w-4xl mx-auto">
           <motion.button
-            onClick={() => setLocation('/')}
+            onClick={() => setLocation(getLocalizedPath('/'))}
             className="mb-6 flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors text-sm"
             data-testid="button-back-home"
             whileHover={{ x: -3 }}
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
           </motion.button>
 
           <motion.div 

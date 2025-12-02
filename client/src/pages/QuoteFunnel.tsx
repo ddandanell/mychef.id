@@ -15,6 +15,8 @@ import { useToast } from '@/hooks/use-toast';
 import { UN_RECOGNIZED_COUNTRIES } from '@shared/countries';
 import { useLocation } from 'wouter';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type ServiceType = 'single' | 'multiple' | 'fulltime' | null;
 type OccasionType = 'birthday' | 'family-reunion' | 'bachelor-bachelorette' | 'friends-gathering' | 'romantic-night' | 'corporate' | 'foodie-adventure' | 'other' | null;
@@ -273,6 +275,8 @@ export default function QuoteFunnel() {
   
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+  const { getLocalizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
 
   // Track quote funnel step progression in Google Analytics
   useEffect(() => {
@@ -408,7 +412,7 @@ export default function QuoteFunnel() {
       });
       
       setTimeout(() => {
-        setLocation('/');
+        setLocation(getLocalizedPath('/'));
       }, 2000);
     },
     onError: (error: any) => {
@@ -540,7 +544,7 @@ export default function QuoteFunnel() {
         setCurrentStep(currentStep - 1);
       }
     } else {
-      setLocation('/');
+      setLocation(getLocalizedPath('/'));
     }
   };
 
@@ -578,13 +582,13 @@ export default function QuoteFunnel() {
               data-testid="button-exit"
             >
               <Home className="w-4 h-4" />
-              <span className="hidden sm:inline">Back to Homepage</span>
-              <span className="sm:hidden">Back</span>
+              <span className="hidden sm:inline">{language === 'id' ? 'Kembali ke Beranda' : 'Back to Homepage'}</span>
+              <span className="sm:hidden">{language === 'id' ? 'Kembali' : 'Back'}</span>
             </Button>
             
             {currentStep > 1 && (
               <div className="text-sm text-muted-foreground font-medium">
-                Step {currentStep} of {getTotalSteps()}
+                {language === 'id' ? `Langkah ${currentStep} dari ${getTotalSteps()}` : `Step ${currentStep} of ${getTotalSteps()}`}
               </div>
             )}
 
@@ -593,12 +597,12 @@ export default function QuoteFunnel() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setLocation('/contact/confirm?source=quoteFunnel')}
+                onClick={() => setLocation(getLocalizedPath('/contact/confirm?source=quoteFunnel'))}
                 className="gap-2"
                 data-testid="button-help"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span className="hidden sm:inline">Need Help?</span>
+                <span className="hidden sm:inline">{language === 'id' ? 'Butuh Bantuan?' : 'Need Help?'}</span>
               </Button>
             </div>
           </div>

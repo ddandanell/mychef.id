@@ -10,6 +10,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import InternalLinks from '@/components/InternalLinks';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import type { ServiceData } from '@shared/serviceData';
 
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
@@ -37,6 +38,7 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
   const [, setLocation] = useLocation();
   const { t } = useTranslation();
   const [currentImage, setCurrentImage] = useState(0);
+  const { getLocalizedPath } = useLocalizedPath();
   const IconComponent = iconMap[service.icon] || ChefHat;
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function ServiceLandingPage({ service }: ServiceLandingPageProps)
   }, []);
 
   const handleWhatsAppClick = () => {
-    setLocation(`/contact/confirm?source=service-${service.slug}`);
+    setLocation(getLocalizedPath(`/contact/confirm?source=service-${service.slug}`));
   };
 
   const structuredData = {

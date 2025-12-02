@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
@@ -21,6 +21,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import type { CityData } from '@shared/cityData';
+import { CITY_TRANSLATIONS_ID } from '@shared/translations/cityDataId';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import heroImage1 from '@assets/generated_images/Chef_preparing_satay_villa_kitchen_633e507a.png';
 import heroImage2 from '@assets/generated_images/Beachside_dining_sunset_Seminyak_c50d5157.png';
 import heroImage3 from '@assets/generated_images/Family_gathering_Ubud_home_e8a96e97.png';
@@ -31,10 +33,35 @@ interface CityLandingPageProps {
   city: CityData;
 }
 
-export default function CityLandingPage({ city }: CityLandingPageProps) {
+export default function CityLandingPage({ city: baseCityData }: CityLandingPageProps) {
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const [currentImage, setCurrentImage] = useState(0);
+  const { language, getLocalizedPath } = useLocalizedPath();
+
+  const city = useMemo(() => {
+    if (language === 'id') {
+      const idTranslation = CITY_TRANSLATIONS_ID[baseCityData.slug];
+      if (idTranslation) {
+        return {
+          ...baseCityData,
+          tagline: idTranslation.tagline,
+          description: idTranslation.description,
+          heroDescription: idTranslation.heroDescription,
+          heroTitle: idTranslation.heroTitle || baseCityData.heroTitle,
+          localInsights: idTranslation.localInsights,
+          extendedContent: idTranslation.extendedContent ? {
+            ...baseCityData.extendedContent,
+            mainHeading: idTranslation.extendedContent.mainHeading,
+            introParagraphs: idTranslation.extendedContent.introParagraphs,
+            paragraphs: idTranslation.extendedContent.paragraphs,
+          } : baseCityData.extendedContent,
+          faqItems: idTranslation.faqItems.length > 0 ? idTranslation.faqItems : baseCityData.faqItems,
+        } as CityData;
+      }
+    }
+    return baseCityData;
+  }, [baseCityData, language]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,11 +71,11 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
   }, []);
 
   const handleWhatsAppClick = () => {
-    setLocation(`/contact/confirm?source=city-${city.slug}`);
+    setLocation(getLocalizedPath(`/contact/confirm?source=city-${city.slug}`));
   };
 
   const handleQuoteClick = () => {
-    setLocation(`/contact/confirm?source=city-${city.slug}`);
+    setLocation(getLocalizedPath(`/contact/confirm?source=city-${city.slug}`));
   };
 
   // Generate city-specific structured data

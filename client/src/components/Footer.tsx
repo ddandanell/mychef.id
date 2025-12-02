@@ -4,6 +4,7 @@ import { useLocation, Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
 import LanguageSelector from './LanguageSelector';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const CITY_LINKS = {
   'Premium Destinations': [
@@ -57,19 +58,18 @@ const SERVICE_LINKS = [
 export default function Footer() {
   const [, setLocation] = useLocation();
   const { t } = useTranslation();
+  const { getLocalizedPath } = useLocalizedPath();
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=footer');
+    setLocation(getLocalizedPath('/contact/confirm?source=footer'));
   };
 
   return (
     <footer className="bg-gradient-to-b from-card via-card to-primary/5 border-t border-primary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Service Area & Stars Section at Top */}
         <div className="py-6 sm:py-8 lg:py-12 border-b border-primary/10">
           <div className="flex flex-col items-center gap-4 sm:gap-6">
-            {/* South Bali Premium Badge */}
             <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20">
               <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-primary">
                 <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -78,7 +78,6 @@ export default function Footer() {
               </div>
             </div>
             
-            {/* Stars Section */}
             <div className="flex flex-col items-center gap-2 sm:gap-3">
               <div className="flex items-center gap-1.5 sm:gap-2 justify-center">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -100,7 +99,7 @@ export default function Footer() {
         <div className="py-8 sm:py-12 lg:py-16">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 mb-3 sm:mb-4" data-testid="link-footer-logo">
+            <Link href={getLocalizedPath('/')} className="inline-flex items-center gap-2 mb-3 sm:mb-4" data-testid="link-footer-logo">
               <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
                 <ChefHat className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
@@ -194,7 +193,7 @@ export default function Footer() {
               {SERVICE_LINKS.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={getLocalizedPath(`/services/${service.slug}`)}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-service-${service.slug}`}
                   >
@@ -213,7 +212,7 @@ export default function Footer() {
               {CITY_LINKS['Premium Destinations'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/${city.slug}`}
+                    href={getLocalizedPath(`/${city.slug}`)}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -232,7 +231,7 @@ export default function Footer() {
               {CITY_LINKS['South Bali'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/${city.slug}`}
+                    href={getLocalizedPath(`/${city.slug}`)}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -249,7 +248,7 @@ export default function Footer() {
               {CITY_LINKS['Bukit Peninsula'].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/${city.slug}`}
+                    href={getLocalizedPath(`/${city.slug}`)}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -268,7 +267,7 @@ export default function Footer() {
               {[...CITY_LINKS['Central & West'], ...CITY_LINKS['East & North']].map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/${city.slug}`}
+                    href={getLocalizedPath(`/${city.slug}`)}
                     className="hover:text-primary transition-colors"
                     data-testid={`link-footer-${city.slug}`}
                   >
@@ -298,13 +297,13 @@ export default function Footer() {
             <div className="md:text-right">
               <h4 className="font-semibold mb-3 text-sm">{t('footer.quickLinks', 'Quick Links')}</h4>
               <div className="flex flex-wrap gap-4 lg:gap-6 text-sm text-foreground/70 md:justify-end">
-                <Link href="/quote" className="hover:text-primary transition-colors" data-testid="link-footer-quote">
+                <Link href={getLocalizedPath('/quote')} className="hover:text-primary transition-colors" data-testid="link-footer-quote">
                   {t('footer.getQuote', 'Get Quote')}
                 </Link>
-                <Link href="/calculator" className="hover:text-primary transition-colors" data-testid="link-footer-calculator">
+                <Link href={getLocalizedPath('/calculator')} className="hover:text-primary transition-colors" data-testid="link-footer-calculator">
                   Price Calculator
                 </Link>
-                <Link href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-careers">
+                <Link href={getLocalizedPath('/join-our-team')} className="hover:text-primary transition-colors" data-testid="link-footer-careers">
                   {t('footer.careers', 'Careers')}
                 </Link>
               </div>
@@ -316,13 +315,13 @@ export default function Footer() {
               © {currentYear} myCHEF Indonesia. {t('footer.allRightsReserved', 'All rights reserved.')}
             </p>
             <div className="flex flex-wrap gap-4 lg:gap-6 justify-center md:justify-end">
-              <Link href="/privacy-policy" className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
+              <Link href={getLocalizedPath('/privacy-policy')} className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
                 {t('footer.privacyPolicy', 'Privacy Policy')}
               </Link>
-              <Link href="/terms-of-service" className="hover:text-primary transition-colors" data-testid="link-footer-terms">
+              <Link href={getLocalizedPath('/terms-of-service')} className="hover:text-primary transition-colors" data-testid="link-footer-terms">
                 {t('footer.termsOfService', 'Terms of Service')}
               </Link>
-              <Link href="/payment-terms" className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
+              <Link href={getLocalizedPath('/payment-terms')} className="hover:text-primary transition-colors" data-testid="link-footer-payment-terms">
                 {t('footer.paymentTerms', 'Payment Terms')}
               </Link>
             </div>

@@ -613,31 +613,6 @@ export const CITY_DATA: Record<string, CityData> = {
       }
     ]
   },
-        question: 'What\'s included in the private chef service?',
-        answer: 'Our complete service includes menu planning, ingredient shopping at local markets, professional cooking, elegant table setup, full service, and thorough cleanup. Optional additions include waitstaff, bartenders, and sommeliers for special events.'
-      },
-      {
-        question: 'Do you work with Sanur\'s family resorts and villas?',
-        answer: 'Yes! We regularly serve Hyatt Regency Bali, Maya Sanur, Prama, Mercure, Villa Seriska, and hundreds of family villas along the beach. We\'re familiar with resort villa kitchens, security procedures, and family-focused service standards.'
-      },
-      {
-        question: 'Can you accommodate large family gatherings in Sanur?',
-        answer: 'Absolutely! Sanur is popular for family reunions and celebrations. We regularly serve 10-25+ family members with mixed ages. We provide family-style platters, diverse menu options (something for everyone), and can accommodate multiple dietary needs simultaneously.'
-      },
-      {
-        question: 'What\'s the pace and atmosphere for Sanur dining?',
-        answer: 'Sanur is relaxed and unhurried - perfect for leisurely family meals! Unlike Seminyak\'s party scene, Sanur clients prefer calm, early dinners (6-8 PM), extended breakfast service, and beach picnic lunches. We match the peaceful, family-oriented vibe.'
-      },
-      {
-        question: 'Can you source fresh seafood in Sanur?',
-        answer: 'Yes! Our chefs select fresh, local produce, seafood, and meats from reliable markets in Sanur. Whether you\'re enjoying just-caught seafood, organic vegetables, or tropical fruits, every dish features ingredients chosen for quality and authentic Balinese flavors.'
-      },
-      {
-        question: 'What safety and quality guarantees do you offer?',
-        answer: 'Every chef is background checked with 5+ years experience and food safety certifications. We provide secure payments, official invoices, full liability insurance, and a satisfaction guarantee - if our service doesn\'t meet expectations, we\'ll resolve the issue or offer a full refund.'
-      }
-    ]
-  },
   nusadua: {
     name: 'Nusa Dua',
     slug: 'nusa-dua',

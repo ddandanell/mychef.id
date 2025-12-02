@@ -1,6 +1,8 @@
 import { Check } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useId } from 'react';
+import { useLocation } from 'wouter';
+import { useTranslation } from 'react-i18next';
+import { isValidLanguage } from '@/lib/routes';
 
 const FlagGB = ({ uid }: { uid: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-5 h-3.5 sm:w-6 sm:h-4 rounded-sm overflow-hidden">
@@ -25,25 +27,40 @@ const FlagID = () => (
   </svg>
 );
 
-const LANGUAGES = [
+type SupportedLanguage = 'en' | 'id';
+
+const LANGUAGES: { code: SupportedLanguage; name: string; flagType: 'gb' | 'id' }[] = [
   { 
     code: 'en', 
     name: 'English',
-    flagType: 'gb' as const
+    flagType: 'gb'
   },
   { 
     code: 'id', 
     name: 'Bahasa Indonesia',
-    flagType: 'id' as const
+    flagType: 'id'
   }
 ];
 
 export default function LanguageSelector() {
   const { i18n } = useTranslation();
+  const [location, setLocation] = useLocation();
   const uid = useId();
 
-  const langCode = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0];
-  const currentLanguage = LANGUAGES.find(lang => lang.code === langCode) || LANGUAGES[0];
+  const getCurrentLanguage = (): SupportedLanguage => {
+    const pathParts = location.split('/').filter(Boolean);
+    if (pathParts[0] === 'en' || pathParts[0] === 'id') {
+      return pathParts[0];
+    }
+    const storedLang = localStorage.getItem('i18nextLng');
+    if (storedLang === 'en' || storedLang === 'id') {
+      return storedLang;
+    }
+    return 'en';
+  };
+
+  const currentLangCode = getCurrentLanguage();
+  const currentLanguage = LANGUAGES.find(lang => lang.code === currentLangCode) || LANGUAGES[0];
 
   const renderFlag = (flagType: 'gb' | 'id', index: number) => {
     if (flagType === 'gb') {
@@ -52,9 +69,19 @@ export default function LanguageSelector() {
     return <FlagID />;
   };
 
-  const handleLanguageChange = (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
-    localStorage.setItem('i18nextLng', languageCode);
+  const handleLanguageChange = (newLang: SupportedLanguage) => {
+    const pathParts = location.split('/').filter(Boolean);
+    let pathWithoutLang = location;
+    
+    if (pathParts.length > 0 && isValidLanguage(pathParts[0])) {
+      pathWithoutLang = '/' + pathParts.slice(1).join('/');
+    }
+    
+    const newPath = `/${newLang}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+    
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('i18nextLng', newLang);
+    setLocation(newPath);
   };
 
   return (

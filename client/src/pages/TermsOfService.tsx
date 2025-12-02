@@ -3,22 +3,29 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function TermsOfService() {
+  const { getLocalizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Terms of Service | myCHEF Indonesia"
-        description="Read the terms and conditions for booking private chef services in Bali with myCHEF Indonesia. Understand our policies, payment terms, and service agreements."
+        title={language === 'id' ? "Syarat dan Ketentuan | myCHEF Indonesia" : "Terms of Service | myCHEF Indonesia"}
+        description={language === 'id'
+          ? "Baca syarat dan ketentuan untuk memesan layanan private chef di Bali dengan myCHEF Indonesia. Pahami kebijakan, ketentuan pembayaran, dan perjanjian layanan kami."
+          : "Read the terms and conditions for booking private chef services in Bali with myCHEF Indonesia. Understand our policies, payment terms, and service agreements."}
         canonical="https://mychef.id/terms-of-service"
         ogType="article"
       />
       <Header />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pt-24 lg:pb-16">
-        <Link href="/">
+        <Link href={getLocalizedPath('/')}>
           <Button variant="ghost" className="mb-8 hover-elevate" data-testid="button-back-home">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
           </Button>
         </Link>
 

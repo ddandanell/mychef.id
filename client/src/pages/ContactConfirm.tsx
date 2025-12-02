@@ -7,9 +7,13 @@ import { Card } from '@/components/ui/card';
 import { SiWhatsapp } from 'react-icons/si';
 import { CheckCircle2, ArrowLeft, Loader2 } from 'lucide-react';
 import { getWhatsAppURL, getWhatsAppCTA } from '@/lib/whatsappCTA';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ContactConfirm() {
   const [, setLocation] = useLocation();
+  const { getLocalizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
   const [countdown, setCountdown] = useState(2);
   const [whatsappURL, setWhatsappURL] = useState('');
   const [ctaLabel, setCtaLabel] = useState('');
@@ -65,7 +69,7 @@ export default function ContactConfirm() {
   };
 
   const handleGoBack = () => {
-    setLocation('/');
+    setLocation(getLocalizedPath('/'));
   };
 
   return (

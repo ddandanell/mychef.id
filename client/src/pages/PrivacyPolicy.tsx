@@ -3,22 +3,29 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PrivacyPolicy() {
+  const { getLocalizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Privacy Policy | myCHEF Indonesia"
-        description="Learn how myCHEF Indonesia protects your privacy and handles your personal information when booking private chef services in Bali."
+        title={language === 'id' ? "Kebijakan Privasi | myCHEF Indonesia" : "Privacy Policy | myCHEF Indonesia"}
+        description={language === 'id' 
+          ? "Pelajari bagaimana myCHEF Indonesia melindungi privasi Anda dan menangani informasi pribadi Anda saat memesan layanan private chef di Bali."
+          : "Learn how myCHEF Indonesia protects your privacy and handles your personal information when booking private chef services in Bali."}
         canonical="https://mychef.id/privacy-policy"
         ogType="article"
       />
       <Header />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pt-24 lg:pb-16">
-        <Link href="/">
+        <Link href={getLocalizedPath('/')}>
           <Button variant="ghost" className="mb-8 hover-elevate" data-testid="button-back-home">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
           </Button>
         </Link>
 

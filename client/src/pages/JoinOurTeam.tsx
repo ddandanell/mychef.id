@@ -26,6 +26,8 @@ import {
 import { ChefHat, Users, Wine, Sparkles, Globe2, CheckCircle, MessageCircle, Mail, MapPin, DollarSign, TrendingUp, Award } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { WHATSAPP_NUMBER } from '@/lib/whatsappCTA';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 import heroImage from '@assets/generated_images/Professional_hospitality_team_photo_ae49b5f5.png';
 
 type RoleType = 'chef' | 'bartender' | 'server' | 'event' | 'multiple' | '';

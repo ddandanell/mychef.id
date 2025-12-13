@@ -381,7 +381,7 @@ export default function PricingCalculator() {
   };
 
   const handleWhatsAppClick = () => {
-    setLocation(getLocalizedPath('/contact/confirm?source=calculator'));
+    setLocation('/contact/confirm?source=calculator');
   };
 
   const handleCopyQuote = () => {
@@ -409,7 +409,7 @@ Pricing Tier: ${result.tierLabel}
   const handleSendQuote = () => {
     if (!result) return;
     const quoteMessage = `Hello, I'm interested in booking ${selectedChef.name} from ${selectedChef.country}.\n\nQuote Details:\nDuration: ${result.numDays} days\nGuests: ${result.guestCount}\nTotal Hours: ${result.totalChefHours}h\nTotal Cost: ${formatPrice(result.totalCost)}\n\nPlease confirm availability.`;
-    setLocation(getLocalizedPath('/contact/confirm?source=calculator&quote=' + encodeURIComponent(quoteMessage)));
+    setLocation('/contact/confirm?source=calculator&quote=' + encodeURIComponent(quoteMessage));
   };
 
   const getMealDescription = () => {
@@ -460,13 +460,13 @@ Pricing Tier: ${result.tierLabel}
       <div className="py-6 md:py-8 px-3 md:px-4 pb-24">
         <div className="max-w-4xl mx-auto">
           <motion.button
-            onClick={() => setLocation(getLocalizedPath('/'))}
+            onClick={() => setLocation('/')}
             className="mb-6 flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors text-sm"
             data-testid="button-back-home"
             whileHover={{ x: -3 }}
           >
             <ArrowLeft className="w-4 h-4" />
-            {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
+            Back to Home
           </motion.button>
 
           <motion.div 

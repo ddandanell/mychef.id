@@ -13,6 +13,7 @@ import ContactConfirm from "@/pages/ContactConfirm";
 import QuoteFunnel from "@/pages/QuoteFunnel";
 import AdminQuotes from "@/pages/AdminQuotes";
 import PricingCalculator from "@/pages/PricingCalculator";
+import CalculationModel2 from "@/pages/CalculationModel2";
 import NotFound from "@/pages/not-found";
 
 const SeminyakPage = lazy(() => import("@/pages/SeminyakPage"));
@@ -152,6 +153,7 @@ function Router() {
       <Route path="/contact/confirm" component={ContactConfirm} />
       <Route path="/quote" component={QuoteFunnel} />
       <Route path="/calculator" component={PricingCalculator} />
+      <Route path="/calculator2" component={CalculationModel2} />
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

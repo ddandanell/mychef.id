@@ -1,0 +1,820 @@
+# 🎯 Purpose and Overall Concept
+
+I need to build an interactive, user-friendly price calculator for my website [mychef.id](http://mychef.id), which makes it quick, easy, and transparent for customers to:
+
+- Calculate accurate prices for their chef visits
+- Understand exactly what they're paying for
+- Customize their experience according to their wishes
+- Book directly without delays or uncertainty
+
+**Key Principles:**
+
+- **Full Transparency**: The customer should always know what the price includes
+- **Flexibility**: Ability to customize for each individual guest
+- **Simplicity**: Easy to navigate, even though there are many options
+- **Precision**: Correct prices based on number of people, courses, ingredient quality, and chef's time
+
+---
+
+# 📱 Step-by-Step Walkthrough of the Price Calculator
+
+## **STEP 001 – Welcome Screen**
+
+### What the User Sees:
+
+A warm, inviting landing page with:
+
+- **Headline**: "Calculate your perfect chef experience"
+- **Subheadline**: "Get an accurate price estimate in under 2 minutes"
+- **Hero image**: Beautiful photo of a MyChef cook preparing food in a modern kitchen
+- **Call-to-action button**: "Start your price calculation →"
+
+### Purpose:
+
+To welcome and explain the value:
+
+> *"With MyChef you get a professional chef to your villa. Our price calculator gives you an accurate price estimate immediately, so you know exactly what to expect – no surprises, only transparency and quality."*
+> 
+
+### Technical Details:
+
+- Responsive design that works on mobile, tablet, and desktop
+- Animated "scroll down" indicator
+- Progress bar at the top: "Step 1 of 6"
+- Option to switch language (Danish/English/Indonesian)
+
+### What Happens When the User Clicks "Start":
+
+They are taken directly to Step 002 with a smooth transition animation.
+
+---
+
+## **STEP 002 – When and Time**
+
+### What the User Sees:
+
+A clean, focused form with three main sections:
+
+### **Section A: Choose Date**
+
+- **Calendar widget** (visual icon)
+- Clickable date calendar where previous dates are deactivated (gray)
+- Dates within the next 7 days marked with orange "Urgent icon" and text: *"Note: Bookings within 7 days may have limited chef availability"*
+- Selected date is clearly highlighted
+
+**Example:**
+
+- User clicks: December 28, 2025
+- System shows: "Saturday, December 28, 2025"
+
+### **Section B: When Should the Food Be Ready?**
+
+- **Dropdown menu** or **Time selector**
+- Options in 30-minute intervals from 17:00 to 22:00
+- Explanation below: *"This is the time when you and your guests will eat the first course. The chef automatically arrives in good time to prepare everything."*
+
+**Example:**
+
+- User selects: 19:00
+- System calculates: "The chef arrives at approximately 17:30 to prepare" (shown discreetly below)
+
+### **Section C: How Many Guests?**
+
+**For Adults:**
+
+- **Number input** with +/- buttons
+- Default: 2 adults
+- Minimum: 1, Maximum: 20
+- Label: "Number of adults (11+ years)"
+
+**For Children:**
+
+- **Number input** with +/- buttons
+- Default: 0 children
+- Minimum: 0, Maximum: 10
+- Label: "Number of children (5-10 years)"
+- Info icon with tooltip: *"Children 0-4 years: Free | Children 5-10 years: Half price | Children 11+ years: Adult price"*
+
+**For Toddlers:**
+
+- **Number input** with +/- buttons
+- Default: 0
+- Label: "Number of toddlers (0-4 years) - FREE"
+
+### Visual Feedback:
+
+When the user enters numbers, a small **guest icon visualization** is shown:
+
+- 5 adults = 5 human figures
+- 2 children = 2 smaller figures
+
+### Validation Rules:
+
+- At least 1 adult must be selected
+- If total number of guests > 15: Show warning *"For large groups we recommend contacting us directly for the best experience"*
+
+### Call-to-Action:
+
+**"Next: Tell us about your event →"** button (only active when date, time, and at least 1 adult is selected)
+
+---
+
+## **STEP 003 – About the Event**
+
+### What the User Sees:
+
+A page that focuses on understanding the context and enhancing the experience.
+
+### **Section A: What Type of Event?**
+
+- **Options** (radio buttons with icons):
+    - 🎂 **Birthday** - "Celebrate a special day"
+    - 💍 **Anniversary/Engagement** - "Romantic evening for two or more"
+    - 👨‍👩‍👧‍👦 **Family Gathering** - "Cozy time with those you love"
+    - 💼 **Corporate Event** - "Impress colleagues or clients"
+    - 🌴 **Villa Vacation Experience** - "Make your vacation extra special"
+    - 🍽️ **Just Good Food** - "No special occasion – just delicious food"
+
+**Purpose**: This helps the chef customize the presentation and atmosphere.
+
+### **Section B: Extra Wishes** (Optional)
+
+**Alcohol Pairing:**
+
+- ☑️ Checkbox: "Yes, help us with wine or beer pairing"
+- Dropdown when selected:
+    - **Wine pairing** (light/medium/premium) - *"We recommend and purchase wine that matches your courses"*
+    - **Beer pairing** - *"Local or imported beers"*
+    - **Mixed** - *"A combination based on each course"*
+- Info icon: *"Alcohol prices are added on top of the food budget – we purchase at cost price + 10% service fee"*
+
+**Atmosphere Setting:**
+
+- ☑️ Checkbox: "Yes, we would like help with atmosphere"
+- When selected, shows:
+    - ☑️ Candles and table decorations
+    - ☑️ Music recommendations
+    - ☑️ Flower arrangements
+- Info: *"These elements can be purchased separately with the chef as coordinator. Prices are estimated separately."*
+
+### **Section C: Dietary Restrictions or Allergies?**
+
+- **Free text field** (textarea)
+- Placeholder: *"E.g.: 'One guest is vegetarian', 'Nut allergy', 'No pork', etc."*
+- Explanation: *"The chef will take full account of this and adapt the menu."*
+
+### Call-to-Action:
+
+**"Next: Choose your cuisine →"** button
+
+---
+
+## **STEP 004 – What Kind of Food (Type of Chef)**
+
+### What the User Sees:
+
+A visually appealing page with **large cards** for each food type.
+
+### **Headline:**
+
+*"Which cuisine speaks to you?"*
+
+### **Options** (large, clickable cards with images):
+
+**1. 🇮🇩 Indonesian / Balinese Cuisine**
+
+- **Image**: Beautiful nasi goreng or rendang
+- **Description**: *"Experience the authentic flavors of Indonesia – from spicy curries to fresh satay skewers. Our local chefs master traditional recipes."*
+- **Popular Dishes**: Rendang, Nasi Goreng, Sate Lilit, Gado-Gado
+- **Icon**: ⭐ "Most popular"
+
+**2. 🍝 Western / European Cuisine**
+
+- **Image**: Elegant pasta or steak
+- **Description**: *"Classic European dishes prepared by chefs trained in French, Italian, or Nordic cooking."*
+- **Popular Dishes**: Pasta Carbonara, Grilled Steak, Risotto, Salmon Fillet
+- **Icon**: 🔥 "Premium experience"
+
+**3. 🍣 Asian Fusion**
+
+- **Image**: Sushi or wok dish
+- **Description**: *"A modern blend of Thai, Japanese, and Chinese inspiration – fresh, colorful, and full of flavor."*
+- **Popular Dishes**: Sushi, Pad Thai, Dim Sum, Peking Duck
+
+**4. 🌮 Other / Special Request**
+
+- **Description**: *"Do you have a specific type of food in mind? Mexican, Middle Eastern, or something completely different? Contact us!"*
+- **Note**: When selecting this, a request is sent for manual follow-up
+
+### Technical:
+
+- Only **one choice** can be selected (radio button functionality)
+- When a card is selected, it gets a **green checkmark** and border
+- Price is not directly affected here, but it determines which dishes are shown later
+
+### Call-to-Action:
+
+**"Next: How many courses? →"**
+
+---
+
+## **STEP 005 – The Courses and Budget**
+
+### What the User Sees:
+
+A page that explains the connection between number of courses, quality, and price.
+
+### **Headline:**
+
+*"How many courses do you want?"*
+
+### **Explanation (at the top):**
+
+> *"The more courses, the longer the chef needs to be with you, and the more food is included. We offer 3, 4, or 5 courses. The price increases both due to ingredients and the chef's time."*
+> 
+
+---
+
+### **Options (large cards):**
+
+### **Option 1: 3 Courses** 💚
+
+- **Structure**: Appetizer → Main Course → Dessert
+- **Chef time**: Approx. 3 hours (incl. preparation + cleanup)
+- **Recommendation**: *"Perfect for a relaxed evening with the family"*
+- **Price indicator**: Rp [base price] per adult *(calculated dynamically)*
+- **Icon**: ⚡ "Fastest"
+
+### **Option 2: 4 Courses** 🧡
+
+- **Structure**: Appetizer → Soup/Light Course → Main Course → Dessert
+- **Chef time**: Approx. 4 hours
+- **Recommendation**: *"The classic experience – balance between variety and time"*
+- **Price indicator**: Rp [mid-price] per adult
+- **Icon**: ⭐ "Most popular"
+
+### **Option 3: 5 Courses** ❤️
+
+- **Structure**: Amuse-bouche → Appetizer → Intermediate Course → Main Course → Dessert
+- **Chef time**: Approx. 5-6 hours
+- **Recommendation**: *"The full restaurant experience at home – for special occasions"*
+- **Price indicator**: Rp [premium-price] per adult
+- **Icon**: 💎 "Premium"
+
+---
+
+### **Ingredient Quality Level** (shown after course selection):
+
+*"Now you need to choose the quality of ingredients:"*
+
+**Three levels (Radio buttons with detailed description):**
+
+### **🥉 Standard Ingredients**
+
+- **Description**: *"Fresh, local ingredients of good quality. Perfect balance between price and taste."*
+- **Examples**: Local chicken, local vegetables, standard oil
+- **Price tag**: Rp 250,000 per adult *(for 3 courses - adjust according to selection)*
+
+### **🥈 Premium Ingredients**
+
+- **Description**: *"Selected ingredients – import options, better meat quality, special spices."*
+- **Examples**: Imported beef, premium fish, special cheeses, extra virgin olive oil
+- **Price tag**: Rp 375,000 per adult *(for 3 courses)*
+
+### **🥇 Luxury Ingredients**
+
+- **Description**: *"The best of the best – Wagyu, lobster, truffle, imported specialties."*
+- **Examples**: Wagyu beef, fresh lobster, truffle oil, imported delicacies
+- **Price tag**: Rp 550,000 per adult *(for 3 courses)*
+
+---
+
+### **Price System - Explanation (Info box):**
+
+<aside>
+💡
+
+**How Your Price Is Calculated:**
+
+**Basic Formula:**
+
+- **Ingredients**: [Selected level] × [Number of adults] + ([Selected level] × 0.5 × [Number of children 5-10 years])
+- **Chef's Time**: [Hourly rate] × [Number of hours based on courses]
+- **Shopping time**: Standard 2 hours for consultation + shopping (included)
+
+**Example:**
+
+- 5 adults + 2 children (5-10 years)
+- 4 courses
+- Premium ingredients
+
+**Calculation:**
+
+- Ingredients: (375,000 × 5) + (375,000 × 0.5 × 2) = 1,875,000 + 375,000 = Rp 2,250,000
+- Chef time: 4 hours × Rp 200,000/hour = Rp 800,000
+- Consultation/shopping: Included
+- **Total**: Rp 3,050,000
+
+*Children 0-4 years: FREE (no cost)*
+
+</aside>
+
+### **Visual:**
+
+- Real-time price update while user selects
+- Breakdown visible in sidebar: "Your current calculation"
+
+### Call-to-Action:
+
+**"Next: Choose your dishes →"**
+
+---
+
+## **STEP 006 – Menu Display and Personalization**
+
+This is the most complex and interactive step.
+
+### **Headline:**
+
+*"Customize each guest's menu"*
+
+### **Overview at Top:**
+
+**Guest Overview (clickable):**
+
+- **Visual display**:
+    - "👤 Adult 1" | "👤 Adult 2" | ... | "👤 Adult 5"
+    - "👶 Child 1" | "👶 Child 2"
+
+**Functionality:**
+
+- Click on each guest to expand their menu
+- Give each person a name (optional): "Guest 1" → "Peter", "Child 1" → "Emma"
+
+---
+
+### **For Each Adult:**
+
+### **Adult Menu Interface (when expanded):**
+
+**Top Bar:**
+
+- "👤 Adult 1 - [Name field]"
+- Dropdown: "Special needs?" → Vegetarian / Vegan / Gluten-free / No pork / Other
+
+---
+
+**Menu Structure** (depending on selected number of courses - we use 5 courses as example):
+
+### **COURSE 1: SMALL BITES (APPETIZERS)**
+
+**Default Choice:** Krupuk + Sambal Flight *(shown as default)*
+
+**Click "Change Dish" to see all 5 options:**
+
+**Dropdown/Modal with 5 options:**
+
+1. **Krupuk + Sambal Flight**
+    - 📷 Image
+    - 🌱 Vegetarian | 🌶️ Medium Spicy
+    - *"Crispy krupuk with 3 different sambals"*
+2. **Sate Lilit**
+    - 📷 Image
+    - 🍗 Chicken/Fish | 🌶️ Mild
+    - *"Balinese skewers of minced fish or chicken with coconut and spices"*
+3. **Tempe Mendoan**
+    - 📷 Image
+    - 🌱 Vegetarian/Vegan | 🌶️ Mild
+    - *"Thin, crispy tempeh slices with spiced batter"*
+4. **Perkedel Jagung**
+    - 📷 Image
+    - 🌱 Vegetarian | 🌶️ Mild
+    - *"Fried corn fritters"*
+5. **Bakwan Sayur**
+    - 📷 Image
+    - 🌱 Vegetarian/Vegan | 🌶️ Mild
+    - *"Vegetable fritters with carrots and cabbage"*
+
+**Each option shows:**
+
+- Photo of the dish
+- Diet icons (vegetarian/vegan/gluten-free/etc.)
+- Spice level (mild/medium/hot)
+- Brief description
+
+---
+
+### **COURSE 2: APPETIZERS**
+
+**Default Choice:** Gado-Gado
+
+**5 options:**
+
+1. **Gado-Gado** - Vegetable salad with peanut dressing (🌱 Vegetarian)
+2. **Soto Ayam** - Aromatic chicken soup with glass noodles (🍗)
+3. **Pempek Palembang** - Fish cakes with sweet-sour sauce (🐟)
+4. **Tuna Sambal Matah** - Seared tuna with raw Balinese sambal (🐟🌶️)
+5. **Lumpia Semarang** - Crispy spring rolls with bamboo shoots (🌱 can be made vegetarian)
+
+---
+
+### **COURSE 3: SOUPS & LIGHT DISHES**
+
+**Default Choice:** Sayur Asem
+
+**5 options:**
+
+1. **Rawon** - Dark beef soup with kluwak (🥩)
+2. **Sayur Asem** - Sour tamarind vegetable soup (🌱 Vegan)
+3. **Pepes Ikan** - Steamed fish in banana leaves with spices (🐟)
+4. **Opor Tahu** - Tofu in creamy coconut milk curry (🌱 Vegan option)
+5. **Urap Sayur** - Steamed vegetables with spiced coconut (🌱 Vegan)
+
+---
+
+### **COURSE 4: RICE & NOODLES**
+
+**Default Choice:** Nasi Goreng Spesial
+
+**5 options:**
+
+1. **Nasi Goreng Spesial** - Classic fried rice with egg and chicken (🍗)
+2. **Mie Goreng Jawa** - Javanese fried noodles (🌱 can be adapted)
+3. **Nasi Kuning** - Yellow rice with herbs and spices (🌱 Vegetarian)
+4. **Kwetiau Goreng** - Fried rice noodles Singapore style (🦐)
+5. **Nasi Uduk** - Coconut rice with spiced sides (🌱 Vegetarian)
+
+---
+
+### **COURSE 5: MAIN COURSES**
+
+**Default Choice:** Rendang Sapi
+
+**5 options:**
+
+1. **Rendang Sapi** - Slow-cooked beef in rich coconut-spice sauce (🥩🌶️🌶️)
+2. **Bebek Betutu** - Balinese spiced duck (🦆🌶️🌶️)
+3. **Ikan Bakar** - Grilled fish with sambal (🐟🌶️)
+4. **Ayam Taliwang** - Grilled chicken from Lombok with spicy sauce (🍗🌶️🌶️)
+5. **Pork Belly Babi Kecap** - Pork belly in sweet soy sauce (🐷)
+
+---
+
+### **COURSE 6: VEGETARIAN MAIN COURSES** *(alternative to Course 5 for vegetarians)*
+
+**5 options:**
+
+1. **Tahu Telur** - Tofu omelet with peanut dressing (🌱)
+2. **Cap Cay** - Wok-fried mixed vegetables (🌱 Vegan)
+3. **Sayur Lodeh** - Vegetables in coconut milk curry (🌱 Vegan)
+4. **Terong Balado** - Eggplant in chili-tomato sauce (🌱 Vegan 🌶️)
+5. **Gudeg** - Javanese young jackfruit in coconut sugar (🌱 Vegetarian)
+
+---
+
+### **COURSE 7: SIDES & ACCOMPANIMENTS**
+
+**Default Choice:** Sambal Trio
+
+**5 options:**
+
+1. **Sambal Trio** - 3 different sambals (Matah, Oelek, Bajak) (🌱 Vegan 🌶️🌶️)
+2. **Acar** - Pickled vegetables (🌱 Vegan)
+3. **Kerupuk Udang** - Shrimp crackers (🦐)
+4. **Emping** - Melinjo nut chips (🌱 Vegan)
+5. **Lalapan** - Fresh raw vegetables with sambal terasi (🌱🌶️)
+
+---
+
+### **COURSE 8: DESSERTS**
+
+**Default Choice:** Dadar Gulung
+
+**5 options:**
+
+1. **Dadar Gulung** - Pandan pancakes with coconut-palm sugar filling (🌱 Vegetarian)
+2. **Klepon** - Green rice balls with palm sugar and coconut (🌱 Vegan)
+3. **Es Campur** - Mixed ice dessert with fruit and jelly (🌱 Vegetarian)
+4. **Pisang Goreng** - Fried bananas (🌱 Vegan)
+5. **Bubur Injin** - Black rice pudding with coconut milk (🌱 Vegan)
+
+---
+
+### **For Each Child (5-10 years):**
+
+Children only have **3 courses**: Appetizer → Main Course → Dessert
+
+### **Children's Menu Interface:**
+
+**Top Bar:**
+
+- "👶 Child 1 - [Name field]"
+
+---
+
+### **CHILDREN - COURSE 1: SMALL BITES / APPETIZER**
+
+**8 options** (child-friendly):
+
+1. **Mini Perkedel** - Small potato cakes with mild spices (🌱)
+2. **Chicken Nuggets with Sweet Chili Sauce** - Homemade, crispy pieces (🍗)
+3. **Vegetable Fritters** - Light fritters with carrot and corn (🌱)
+4. **Mini Sate** - Small chicken skewers with mild peanut dressing (🍗)
+5. **Steamed Dumplings** - Simple dumplings with chicken or vegetables (🍗/🌱)
+6. **Mini Lumpia** - Small crispy spring rolls (🌱)
+7. **Cheese Sticks** - Breaded cheese sticks with tomato dip (🧀)
+8. **Fruit Skewers** - Fresh fruits on sticks (🍓🌱 Vegan)
+
+---
+
+### **CHILDREN - COURSE 2: MAIN COURSE**
+
+**8 options:**
+
+1. **Nasi Goreng Mild** - Fried rice with egg and chicken without hot spices (🍗)
+2. **Mie Goreng Simple** - Fried noodles with vegetables (🌱)
+3. **Mini Indonesian Burger** - Small burger with mildly spiced meat (🍔)
+4. **Chicken Teriyaki** - Sweet marinated chicken with rice (🍗)
+5. **Pasta Bolognese Mild** - Pasta with tomato meat sauce without hot spices (🍝)
+6. **Omelet Rice (Omurice)** - Omelet with fried rice inside (🥚)
+7. **Fish Cakes** - Mild fish cakes with mashed potatoes (🐟)
+8. **Mini Pizza** - Small pizzas with choice of toppings (🍕)
+
+---
+
+### **CHILDREN - COURSE 3: DESSERT**
+
+**8 options:**
+
+1. **Pisang Goreng** - Fried bananas with honey (🍌🌱)
+2. **Klepon** - Sweet green rice balls with coconut (🌱)
+3. **Pancakes with Nutella** - Thin pancakes with chocolate cream (🥞)
+4. **Fruit Salad with Honey** - Fresh mixed fruit (🍓🌱 Vegan)
+5. **Mini Dadar Gulung** - Small green pancakes with sweet filling (🌱)
+6. **Ice Cream with Fruit** - Simple vanilla ice cream with fresh berries (🍦)
+7. **Chocolate Mousse** - Light chocolate mousse (🍫)
+8. **Rice Pudding** - Creamy rice pudding with cinnamon (🌱)
+
+---
+
+### **Functionality:**
+
+**Bulk Actions:**
+
+- "Copy menu to all adults" button (so you don't have to choose the same 8 times)
+- "Copy to all children" button
+
+**Sidebar (always visible):**
+
+- Overview of who has chosen what
+- Names of people + their choices in compact format
+- Ability to jump between people
+
+**Validation:**
+
+- System checks that everyone has chosen all courses before proceeding
+- Red marking if something is missing
+
+---
+
+### **After Menu Selection:**
+
+### **FINAL SECTION: Villa & Contact Information**
+
+**Headline:**
+
+*"Almost done! Now we just need to know where we're going."*
+
+**Form Fields:**
+
+**1. Villa/Location Information:**
+
+- **Villa name** (text field): *"E.g. Villa Sunset, Canggu"*
+- **Full address** (text field): *"Incl. area, landmarks, street and number"*
+- **Google Maps link** (optional): *"Share a link for exact location"*
+- **Kitchen type** (dropdown):
+    - Modern kitchen with all facilities
+    - Basic kitchen (gas stove, basic equipment)
+    - Limited kitchen (may require brought equipment)
+
+**2. Contact Person:**
+
+- **Full name** (text field)
+- **Email** (text field)
+- **Phone** (text field) with country code
+- **WhatsApp number** (checkbox + text field): "Same as phone?"
+- **Preferred contact method** (dropdown): Email / WhatsApp / Phone
+
+**3. Special Notes** (optional):
+
+- **Free text field**: *"Anything the chef should know? Parking, access code, special wishes, etc."*
+
+---
+
+### **PRICE OVERVIEW (Final Breakdown):**
+
+<aside>
+💰
+
+**Your Total Price:**
+
+**Guests:**
+
+- 5 adults × Rp 375,000 = Rp 1,875,000
+- 2 children (5-10 years) × Rp 187,500 = Rp 375,000
+- 0 toddlers (0-4 years) = Rp 0
+
+**Chef Service:**
+
+- 4 hours preparation = Rp 800,000
+- 2 hours consultation + shopping = Included
+- Cleanup = Included
+
+**Extra Services:**
+
+- Wine pairing (optional) = Rp 300,000 *(estimate, adjusted according to actual purchases)*
+
+---
+
+**SUBTOTAL: Rp 3,350,000**
+
+**Deposit (50%): Rp 1,675,000**
+
+*Pay now to confirm booking*
+
+**Remaining Balance: Rp 1,675,000**
+
+*Pay to the chef after the event*
+
+---
+
+**✅ Included in the Price:**
+
+- All ingredients (premium level)
+- Professional chef for 4 hours
+- Consultation and menu customization
+- Purchase of all raw materials
+- Preparation of all 4 courses
+- Serving and presentation
+- Cleanup and dishwashing
+
+**📝 Not Included:**
+
+- Alcohol (can be purchased separately)
+- Decoration materials
+- Transport to extremely remote locations (can be added)
+</aside>
+
+---
+
+### **PAYMENT & BOOKING:**
+
+**Payment Buttons:**
+
+**Primary CTA:**
+
+> **"Confirm Booking & Pay 50% Deposit (Rp 1,675,000) →"**
+> 
+
+**Payment Methods:**
+
+- 💳 Credit card (Stripe/Xendit)
+- 🏦 Bank transfer
+- 📱 GoPay / OVO / Dana
+
+**Secondary Info:**
+
+- *"You will receive a confirmation email within 24 hours"*
+- *"The chef will contact you 48 hours before to confirm all details"*
+- *"Cancellation policy: Full refund up to 7 days before. 50% refund 3-7 days before. No refund within 3 days."*
+
+---
+
+### **Feedback Loop:**
+
+- "Save and continue later" button (email link sent)
+- "Share with other guests" button (copy link)
+- "Print/Download as PDF" button
+
+---
+
+# ✅ **Technical Requirements & Validation**
+
+## **Price System - Details:**
+
+### **Ingredient Prices (per adult):**
+
+- **3 courses:**
+    - Standard: Rp 250,000
+    - Premium: Rp 375,000
+    - Luxury: Rp 550,000
+- **4 courses:**
+    - Standard: Rp 325,000
+    - Premium: Rp 475,000
+    - Luxury: Rp 700,000
+- **5 courses:**
+    - Standard: Rp 400,000
+    - Premium: Rp 600,000
+    - Luxury: Rp 900,000
+
+### **Children's Prices:**
+
+- **0-4 years**: Free (no calculation)
+- **5-10 years**: 50% of adult price
+- **11+ years**: Full adult price
+
+### **Chef Hourly Rates:**
+
+- Standard hourly rate: Rp 200,000/hour
+- **3 courses**: 3 hours = Rp 600,000
+- **4 courses**: 4 hours = Rp 800,000
+- **5 courses**: 5-6 hours = Rp 1,000,000
+
+### **Standard Included:**
+
+- 2 hours consultation + shopping (no extra cost)
+- Basic transport (within 20km radius)
+- Cleanup and dishwashing
+
+---
+
+## **Technical Implementation:**
+
+### **Frontend:**
+
+- React/Next.js for interactivity
+- Responsive design (mobile-first)
+- Real-time price updating
+- Progress bar at top
+- Smooth transitions between steps
+
+### **Backend:**
+
+- API endpoints for:
+    - Price calculation
+    - Menu retrieval (dynamic based on food type)
+    - Booking storage
+    - Payment processing (Stripe/Xendit integration)
+    - Email notifications
+
+### **Database:**
+
+- Save bookings with all details
+- Menu options dynamic (easy to update)
+- Chef availability tracking
+
+### **UX Improvements:**
+
+- Auto-save functionality
+- "Jump back" navigation
+- Tooltips for complex choices
+- Visual feedback for all actions
+- Mobile-optimized touch interface
+
+---
+
+# 📊 **Success Metrics:**
+
+**What the System Should Achieve:**
+
+- **Conversion Rate**: 30%+ of started calculations lead to booking
+- **Completion Time**: Under 5 minutes average
+- **Bounce Rate**: Under 20% on steps 1-3
+- **Clarity**: 90%+ users understand the price before payment
+
+**A/B Test Opportunities:**
+
+- Order of steps
+- Price visibility (show early vs. late)
+- Menu selection (bulk vs. individual)
+- CTA button text and colors
+
+---
+
+# 🎨 **Design & Branding:**
+
+**Tone of Voice:**
+
+- Warm, inviting, professional
+- Transparent about prices
+- Focus on experience, not just food
+
+**Colors:**
+
+- Primary: Warm orange (#FF6B35)
+- Secondary: Deep green (#2D6E4F)
+- Accent: Gold (#F4B942)
+- Neutral: Light blue/white background
+
+**Typography:**
+
+- Headers: Bold, modern sans-serif
+- Body: Easily readable, open line-height
+- Prices: Clearly marked, larger
+
+**Imagery:**
+
+- High-quality food photography
+- Real chefs in action
+- Happy customers
+- Authentic villa settings

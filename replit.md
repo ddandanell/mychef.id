@@ -32,7 +32,7 @@ This project is a single-page landing website for myCHEF Indonesia, a premium pr
     - **Performance Optimization:** Lazy loading for most images, async decoding, eager loading for hero images, optimized font loading, and GPU acceleration.
     - **Quote Funnel:** Streamlined multi-step form at `/quote` with three flows: Single Event (8 steps), Recurring Service (7 steps), and Full-Time/Part-Time Chef (9-10 steps), including features like pre-meeting options and grocery handling.
 - **Key Sections:** Hero, Experience Overview, How It Works, Why Choose, Trust & Safety Badges, Testimonial Carousel, Chef Profiles, Locations, Occasions Grid, Transparent Pricing, Ingredient Shopping, Sample Menus, Complete Party Solutions, FAQ, Booking Tips, Footer.
-- **Additional Pages:** Privacy Policy, Terms of Service, Payment Terms, `Join Our Team` recruitment page, and Admin panel at `/admin/quotes`.
+- **Additional Pages:** Privacy Policy, Terms of Service, Payment Terms, `Join Our Team` recruitment page, Admin panel at `/admin/quotes`, Price Calculator at `/calculator2` (6-step wizard), and Recommended Services at `/recommended-services` (SEO partner links).
 - **URL Structure:** All pages use clean, simplified URLs without language prefixes (e.g., /quote, /seminyak, /jakarta). Site content is English-only.
 - **City Landing Pages:** SEO-optimized landing pages for 25 major Bali areas (e.g., `/seminyak`, `/kuta`) with dynamic content, plus Jakarta landing page (`/jakarta`) targeting "catering jakarta" keyword (3,600 monthly searches).
 - **Service Landing Pages:** Professional SEO-optimized service pages for 8 key services (e.g., `/services/villa-parties`), each with 1000+ word content.

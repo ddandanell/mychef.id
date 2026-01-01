@@ -14,6 +14,7 @@ import QuoteFunnel from "@/pages/QuoteFunnel";
 import AdminQuotes from "@/pages/AdminQuotes";
 import PricingCalculator from "@/pages/PricingCalculator";
 import CalculationModel2 from "@/pages/CalculationModel2";
+import RecommendedServices from "@/pages/RecommendedServices";
 import NotFound from "@/pages/not-found";
 
 const SeminyakPage = lazy(() => import("@/pages/SeminyakPage"));
@@ -154,6 +155,7 @@ function Router() {
       <Route path="/quote" component={QuoteFunnel} />
       <Route path="/calculator" component={PricingCalculator} />
       <Route path="/calculator2" component={CalculationModel2} />
+      <Route path="/recommended-services" component={RecommendedServices} />
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

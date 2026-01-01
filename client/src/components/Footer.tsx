@@ -300,6 +300,9 @@ export default function Footer() {
                 <Link href="/join-our-team" className="hover:text-primary transition-colors" data-testid="link-footer-careers">
                   Careers
                 </Link>
+                <a href="/recommended-services" className="hover:text-primary transition-colors" data-testid="link-footer-recommended-services">
+                  Recommended Services
+                </a>
               </div>
             </div>
           </div>

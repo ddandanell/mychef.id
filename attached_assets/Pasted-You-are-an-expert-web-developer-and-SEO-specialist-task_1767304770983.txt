@@ -1,0 +1,51 @@
+You are an expert web developer and SEO specialist tasked with creating a natural, value-adding internal linking structure across a network of seven complementary Bali-based service websites owned by the same entity.
+
+The websites are:
+1. https://homemassageubud.com/          (In-villa massage in Ubud)
+2. https://www.homemassagekuta.com/     (In-villa massage in Kuta)
+3. https://privatetutoringbali.com/     (Private tutoring and homeschooling in Bali)
+4. https://mychef.id/                   (Private chef services in Bali)
+5. https://bali-tech-education.com/     (Tech education and coding classes in Bali)
+6. https://balipoolservice.com/         (Pool maintenance and cleaning in Bali)
+7. https://aquapurebali.com/            (Water purification and filtration services in Bali)
+
+All sites share a common audience: villa owners, expat families, and residents seeking premium home-based services in Bali.
+
+Your task is to create a dedicated "Recommended Services" page on EVERY site that cross-links to the other six sites in a natural, user-friendly way, positioning the network as a complete ecosystem of trusted villa lifestyle services.
+
+Specific requirements:
+
+1. Create a new page on each site with the URL slug /recommended-services (or /partners if that fits the site's structure better).
+
+2. Title the page: "Recommended Services for Your Bali Villa Lifestyle" or "Complementary Services We Recommend".
+
+3. Structure the page as a clean, responsive grid or card layout with:
+   - A short introductory paragraph explaining the value: "To help you create the perfect Bali living experience, we recommend these trusted complementary services for wellness, education, dining, and villa maintenance."
+   - One card/section for each of the other six services, containing:
+     • Service name as heading
+     • 2–3 sentence natural description highlighting how it complements the current site's offering
+     • A prominent CTA button or linked text with keyword-rich anchor text (e.g., "In-Villa Massage in Ubud", "Private Chef Services in Bali", "Professional Pool Maintenance in Bali")
+     • The link must be a standard <a href="..."> dofollow link (no rel="nofollow", no JavaScript onclick navigation, no target="_blank" unless it matches site style)
+
+4. Example card descriptions (adapt tone and keywords to match each site's voice):
+   - On massage sites: Mention tutoring for families, private chefs for post-massage dining, pool/water services for villa upkeep.
+   - On tutoring site: Highlight massage for parent relaxation, private chefs for family meals, tech education as complementary learning.
+   - On pool/water sites: Emphasize wellness (massage), family needs (tutoring/chef), and modern villa tech (tech education).
+
+5. Make the page visually appealing, mobile-responsive, and consistent with each site's existing design system (use existing CSS classes for cards, buttons, etc.).
+
+6. Add a link to this new page ONLY in the footer of each site:
+   - Place it in an existing footer section such as "Resources", "Useful Links", or "About" (create a small new section called "Recommended Services" if no suitable section exists).
+   - Use simple text link: "Recommended Services" or "Complementary Bali Services" linking to the new page.
+   - Do NOT add the page to the main navigation menu, header, sidebar, or homepage (no teasers or promotional banners).
+
+7. Ensure all cross-links are:
+   - Dofollow (no rel="nofollow")
+   - Pure HTML <a> tags (fully crawlable by Google, no JavaScript routing that prevents crawling)
+   - Open in the same tab (unless site convention is otherwise)
+
+8. Do not create any additional sitewide or reciprocal links outside this dedicated page and its single footer entry.
+
+9. Preserve all existing content and functionality. Only add new files/pages and the minimal footer link as needed.
+
+Implement these changes across ALL seven websites in a professional, consistent, and SEO-optimized manner that prioritizes genuine user value while passing link equity naturally.

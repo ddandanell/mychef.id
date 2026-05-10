@@ -149,6 +149,8 @@ function servicePage(s: ServiceDef): PageConfig {
     `${s.name} with a background-checked private chef across Bali. From Rp 800,000/hr, 3-hour minimum, all equipment + cleanup included. WhatsApp booking.`,
     155
   );
+  // Cooking classes are a learning experience — Course schema beats generic Service
+  const isCookingClass = s.slug === 'services/cooking-classes';
   return {
     slug: s.slug,
     title,
@@ -156,7 +158,21 @@ function servicePage(s: ServiceDef): PageConfig {
     changefreq: 'monthly',
     priority: 0.7,
     schema: [
-      {
+      isCookingClass ? {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        '@id': `${url}#course`,
+        name: 'Private Chef Cooking Class in Bali',
+        description: 'Hands-on cooking class delivered by a myCHEF private chef in your villa kitchen. Choose Mediterranean, Balinese, Asian fusion, or vegan technique. Small-group friendly.',
+        provider: { '@type': 'Organization', '@id': `${ORIGIN}/#organization` },
+        educationalLevel: 'Beginner to intermediate',
+        teaches: ['Mediterranean cooking technique', 'Traditional Balinese cooking (rijsttafel, sambal, betutu)', 'Asian fusion technique', 'Plant-based cooking', 'Knife skills + plating'],
+        hasCourseInstance: {
+          '@type': 'CourseInstance',
+          courseMode: 'Onsite',
+          location: { '@type': 'Place', name: 'Your Bali villa or home', address: { '@type': 'PostalAddress', addressRegion: 'Bali', addressCountry: 'ID' } },
+        },
+      } : {
         '@context': 'https://schema.org',
         '@type': 'Service',
         '@id': `${url}#service`,
@@ -437,6 +453,10 @@ const HOMEPAGE: PageConfig = {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       '@id': 'https://mychef.id/#faqs',
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        xpath: ["/html/head/title", "//*[@data-prerender='page']"],
+      },
       mainEntity: HOMEPAGE_FAQS.map(({ q, a }) => ({
         '@type': 'Question',
         name: q,

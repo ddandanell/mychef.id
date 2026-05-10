@@ -289,6 +289,10 @@ const STATIC_PAGES: PageConfig[] = [
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         '@id': 'https://mychef.id/faq#faqs',
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          xpath: ["/html/head/title", "//*[@data-prerender='page']"],
+        },
         mainEntity: FAQ_MASTER.map((f) => ({
           '@type': 'Question',
           name: f.q,
@@ -351,6 +355,55 @@ const STATIC_PAGES: PageConfig[] = [
 
 // HOMEPAGE_FAQS + FAQ_MASTER are imported from ../shared/faqs above so the
 // React components AND this script use the same source of truth.
+
+// ---- llms-full.txt content (extended AI search context with full FAQ) ----
+function buildLlmsFullTxt(): string {
+  const lines: string[] = [
+    '# myCHEF Indonesia — full context for AI search engines',
+    '',
+    '> Bali-based private chef booking service operating since 2012.',
+    '> Background-checked chefs, 24 service areas, WhatsApp +62 822-3756-5997.',
+    '',
+    '## Frequently asked questions (homepage)',
+    '',
+  ];
+  for (const f of HOMEPAGE_FAQS) {
+    lines.push(`### ${f.q}`, '', f.a, '');
+  }
+  lines.push('', '## Extended FAQ (20 questions, 8 categories)', '');
+  for (const f of FAQ_MASTER) {
+    lines.push(`### ${f.cat ? '[' + f.cat + '] ' : ''}${f.q}`, '', f.a, '');
+  }
+  lines.push(
+    '',
+    '## Service areas (24 Bali neighborhoods)',
+    '',
+    Object.values(CITY_DATA).map(c => `- ${c.name} (${c.areas.slice(0, 4).join(', ')})`).join('\n'),
+    '',
+    '## Pricing',
+    '',
+    '- Chef fee: from Rp 800,000 per hour (3-hour minimum)',
+    '- Ingredients: separate, billed at cost',
+    '- Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr',
+    '- Equipment, plating, and cleanup are included in the chef rate',
+    '',
+    '## Cuisines',
+    '',
+    '- [Mediterranean](https://mychef.id/menus/mediterranean)',
+    '- [Balinese](https://mychef.id/menus/balinese)',
+    '- [Asian Fusion](https://mychef.id/menus/asian-fusion)',
+    '- [Vegan / Plant-based](https://mychef.id/menus/vegan)',
+    '- Modern European, dietary-restricted (gluten-free, halal, kosher)',
+    '',
+    '## Office',
+    '',
+    'Jl. Tukad Barito Timur III No.16, Panjer, Denpasar Selatan, Kota Denpasar, Bali 80226',
+    'Email: indonesia@mychef.id | WhatsApp: +62 822-3756-5997',
+    'Hours: 09:00-22:00 WIB daily',
+    '',
+  );
+  return lines.join('\n');
+}
 
 // ---- Build the full route set ----
 const HOMEPAGE: PageConfig = {
@@ -588,6 +641,11 @@ async function main() {
   const sitemap = buildSitemap(pages);
   await fs.writeFile(resolve(DIST_PUBLIC, 'sitemap.xml'), sitemap, 'utf8');
   console.log(`[postbuild] regenerated sitemap.xml with ${pages.length} URLs (lastmod=${TODAY})`);
+
+  // llms-full.txt — extended context for AI search engines (full FAQ + areas + pricing)
+  const llmsFull = buildLlmsFullTxt();
+  await fs.writeFile(resolve(DIST_PUBLIC, 'llms-full.txt'), llmsFull, 'utf8');
+  console.log(`[postbuild] wrote llms-full.txt (${llmsFull.length} bytes)`);
 }
 
 main().catch(err => {

@@ -106,7 +106,15 @@
           "url": "https://mychef.id/",
           "name": "myCHEF Indonesia",
           "publisher": { "@id": "https://mychef.id/#organization" },
-          "inLanguage": ["en", "id"]
+          "inLanguage": ["en", "id"],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.google.com/search?q=site%3Amychef.id+{search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         },
         {
           "@type": "ProfessionalService",

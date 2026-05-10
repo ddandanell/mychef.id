@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertQuoteSubmissionSchema } from "@shared/schema";
+import { insertQuoteSubmissionSchema } from "../shared/schema";
 import fs from "fs";
 import path from "path";
 

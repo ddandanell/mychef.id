@@ -67,6 +67,7 @@ const ChefForHireIndonesiaPage = lazy(() => import("@/pages/keywords/ChefForHire
 const AboutPage = lazy(() => import("@/pages/AboutPage"));
 const MenusPage = lazy(() => import("@/pages/MenusPage"));
 const MenusMediterraneanPage = lazy(() => import("@/pages/MenusMediterraneanPage"));
+const VillaPartnersHubPage = lazy(() => import("@/pages/VillaPartnersHubPage"));
 
 function Router() {
   const [location] = useLocation();
@@ -162,6 +163,7 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/menus" component={MenusPage} />
       <Route path="/menus/mediterranean" component={MenusMediterraneanPage} />
+      <Route path="/villa-partners" component={VillaPartnersHubPage} />
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

@@ -2,12 +2,31 @@
 
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /contact/confirm
 
-# Sitemap location
+# Sitemap
 Sitemap: https://mychef.id/sitemap.xml
 
-# Crawl-delay (optional, adjust if needed)
-Crawl-delay: 1
+# AI / LLM crawler context — markdown summary of the site for AI search engines
+# (Used by ChatGPT browsing, Perplexity, Bing AI, Google AI Overviews when fetching context)
+# Spec: https://llmstxt.org/
 
-# Disallow admin or private paths
-Disallow: /admin/
+# AI crawler controls — allow all, but they should prefer /llms.txt for context
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /

@@ -208,6 +208,18 @@ function keywordPage(k: KeywordDef): PageConfig {
 // ---- Static pages ----
 const STATIC_PAGES: PageConfig[] = [
   {
+    slug: 'jakarta',
+    title: 'Private Chef in Jakarta — In-Villa Dining & Catering | myCHEF',
+    description: 'Background-checked private chefs in Jakarta: Menteng, Kebayoran Baru, SCBD, Senayan, Pondok Indah, Kemang. From Rp 800k/hr, 3-hour minimum. WhatsApp booking.',
+    changefreq: 'weekly', priority: 0.85,
+  },
+  {
+    slug: 'villa-partners',
+    title: 'Villa Manager Chef Partnership in Bali — myCHEF Indonesia',
+    description: 'myCHEF supplies background-checked private chefs to Bali villas, villa-rental agencies, and concierge teams. On-call coverage, liability insurance, 13+ year track record.',
+    changefreq: 'monthly', priority: 0.7,
+  },
+  {
     slug: 'about',
     title: 'About myCHEF Indonesia — Private Chef Service in Bali Since 2012',
     description: 'myCHEF is Bali\'s longest-running private chef booking service. Background-checked chefs, 13+ years in Bali hospitality, 24 service areas. Office in Denpasar.',
@@ -326,6 +338,18 @@ function transformHtml(template: string, page: PageConfig): string {
     /<meta property="og:image" content="[^"]*"\s*\/?>/i,
     `<meta property="og:image" content="${attr(ogImage)}" />`
   );
+
+  // robots — upgrade index,follow → include max-image-preview:large + max-snippet:-1 (better SERP visuals)
+  html = html.replace(
+    /<meta name="robots" content="[^"]*"\s*\/?>/i,
+    `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`
+  );
+
+  // hreflang — self-reference for English + x-default; Indonesian /id/ routes will be added when wired
+  const hreflangBlock = `    <link rel="alternate" hreflang="en" href="${attr(url)}" />\n    <link rel="alternate" hreflang="x-default" href="${attr(url)}" />`;
+  if (!html.includes('hreflang=')) {
+    html = html.replace('<link rel="canonical"', `${hreflangBlock}\n    <link rel="canonical"`);
+  }
 
   // twitter
   html = html.replace(

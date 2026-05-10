@@ -90,6 +90,23 @@ function cityPage(city: CityData): PageConfig {
           },
         },
       },
+      // Place schema with sub-area listing — explicit entity definition for local SEO + AI search.
+      // Lists the actual neighborhoods served within this city so Google + AI can map mychef.id to
+      // each sub-area as a service location.
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Place',
+        '@id': `${url}#place`,
+        name: `${city.name}, Bali`,
+        description: `${city.name} is a Bali neighborhood served by myCHEF Indonesia. Sub-areas covered: ${city.areas.join(', ')}.`,
+        geo: city.coordinates,
+        containedInPlace: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
+        amenityFeature: city.areas.slice(0, 12).map(area => ({
+          '@type': 'LocationFeatureSpecification',
+          name: `Private chef service in ${area}`,
+          value: true,
+        })),
+      },
       {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',

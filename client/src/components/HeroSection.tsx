@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Star, Users, ShieldCheck, Clock, FileText } from 'lucide-react';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 
 const TESTIMONIALS = [
   {
@@ -60,7 +61,7 @@ export default function HeroSection() {
 
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=hero');
+    openWhatsApp('hero');
   };
 
   const handleQuoteClick = () => {

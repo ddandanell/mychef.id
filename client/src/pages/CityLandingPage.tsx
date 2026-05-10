@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, FileText, MapPin, Star, CheckCircle2, ShoppingCart, ChefHat, Users, Shield } from 'lucide-react';
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import TrustBadges from '@/components/TrustBadges';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import SampleMenus from '@/components/SampleMenus';
@@ -44,85 +45,75 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
   }, []);
 
   const handleWhatsAppClick = () => {
-    setLocation(`/contact/confirm?source=city-${city.slug}`);
+    openWhatsApp('cityHero', { city: city.name });
   };
 
   const handleQuoteClick = () => {
     setLocation(`/contact/confirm?source=city-${city.slug}`);
   };
 
-  // Generate city-specific structured data
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `https://mychef.id/${city.slug}`,
-    "name": `myCHEF Indonesia - ${city.name}`,
-    "alternateName": `myCHEF ${city.name}`,
-    "description": `${city.description} Professional private chef booking service serving ${city.name}, Bali.`,
-    "url": `https://mychef.id/${city.slug}`,
-    "logo": "https://mychef.id/logo.png",
-    "image": "https://mychef.id/og-image.jpg",
-    "telephone": "+62-822-3756-5997",
-    "email": "indonesia@mychef.id",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": city.name,
-      "addressRegion": "Bali",
-      "addressCountry": "ID"
-    },
-    "geo": city.coordinates,
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "09:00",
-      "closes": "22:00"
-    },
-    "priceRange": "Rp 800,000 - Rp 1,200,000+",
-    "currenciesAccepted": "IDR",
-    "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-    "areaServed": {
-      "@type": "City",
-      "name": city.name,
-      "containedInPlace": {
-        "@type": "State",
-        "name": "Bali"
+  // City-specific structured data: Service offered in this city by the parent Organization.
+  // No aggregateRating (no verified review system yet).
+  // No street address (service-area business, no storefront).
+  // No openingHoursSpecification (we book chefs, we don't accept walk-ins).
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `https://mychef.id/${city.slug}/#service`,
+      "name": `Private Chef in ${city.name}, Bali`,
+      "serviceType": `Private chef and in-villa dining in ${city.name}, Bali`,
+      "description": `${city.description} Background-checked private chefs for villa dining, parties, weddings, and recurring household chef arrangements in ${city.name}.`,
+      "provider": { "@id": "https://mychef.id/#organization" },
+      "areaServed": {
+        "@type": "City",
+        "name": city.name,
+        "containedInPlace": { "@type": "AdministrativeArea", "name": "Bali, Indonesia" },
+        "geo": city.coordinates
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "IDR",
+        "price": "800000",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "800000",
+          "priceCurrency": "IDR",
+          "unitText": "HOUR",
+          "minPrice": "2400000",
+          "description": "From Rp 800,000 per hour, 3-hour minimum"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": `Private Chef Services in ${city.name}`,
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Private Villa Dinner in ${city.name}` }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Birthday & Anniversary Dinner in ${city.name}` }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Wedding Celebration Dining in ${city.name}` }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Weekly Meal Prep in ${city.name}` }}
+        ]
       }
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": "150"
-    },
-    "sameAs": [
-      "https://www.instagram.com/mychefindonesia/",
-      "https://www.facebook.com/mychefindonesia/"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": `Private Chef Services in ${city.name}`,
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Private Chef Service",
-            "description": `Professional private chef service for intimate dinners, family gatherings, and special events in ${city.name}, Bali`,
-            "areaServed": city.areas
-          }
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mychef.id/" },
+        { "@type": "ListItem", "position": 2, "name": "Bali", "item": "https://mychef.id/" },
+        { "@type": "ListItem", "position": 3, "name": city.name, "item": `https://mychef.id/${city.slug}` }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": city.faqItems.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+      }))
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen">

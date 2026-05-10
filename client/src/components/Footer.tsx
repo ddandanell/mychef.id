@@ -57,7 +57,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=footer');
+    openWhatsApp('footer');
   };
 
   return (

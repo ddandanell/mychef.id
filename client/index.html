@@ -6,157 +6,131 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      
-      // Check if user has already accepted cookies
+
+      // Default to denied — only enable analytics after explicit consent
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
+
       const cookieConsent = localStorage.getItem('cookieConsent');
-      
       if (cookieConsent === 'accepted') {
-        // User accepted cookies - enable Google Analytics
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
         gtag('js', new Date());
         gtag('config', 'G-W0PQH8ZKTF');
-      } else {
-        // User hasn't decided yet or declined - disable tracking
-        gtag('consent', 'default', {
-          'analytics_storage': 'denied'
-        });
       }
-      
-      // Function to enable analytics when user accepts
+
       window.enableGoogleAnalytics = function() {
-        gtag('consent', 'update', {
-          'analytics_storage': 'granted'
-        });
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
         gtag('js', new Date());
         gtag('config', 'G-W0PQH8ZKTF');
       };
     </script>
-    
+
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia</title>
-    <meta name="title" content="Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia" />
-    <meta name="description" content="Experience personalized fine dining in your villa with myCHEF Indonesia. Professional background-checked private chefs serving Bali since 2012. Perfect match chef selection. Book on WhatsApp +62 822-3756-5997." />
-    <meta name="keywords" content="private chef Bali, personal chef Indonesia, chef at home Bali, villa chef Seminyak, private dining Bali, cook for hire Bali, Airbnb chef Bali, private chef Canggu, private chef Ubud, chef services Indonesia, in-home dining Bali, luxury chef Bali, myCHEF Indonesia" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags (per-page values overridden at build time and at runtime by SEO component) -->
+    <title>Private Chef in Bali — In-Villa Dining Since 2012 | myCHEF</title>
+    <meta name="description" content="Book a background-checked private chef in your Bali villa. Mediterranean & international menus, 3-hour minimum, transparent pricing. WhatsApp booking." />
     <meta name="author" content="myCHEF Indonesia" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
-    
-    <!-- Geo Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <!-- Geo Tags (Bali region — no fixed storefront) -->
     <meta name="geo.region" content="ID-BA" />
     <meta name="geo.placename" content="Bali" />
-    <meta name="geo.position" content="-8.409518;115.188919" />
-    <meta name="ICBM" content="-8.409518, 115.188919" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mychef.id" />
-    
+
+    <!-- Canonical (overridden per page) -->
+    <link rel="canonical" href="https://mychef.id/" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mychef.id" />
-    <meta property="og:title" content="Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia" />
-    <meta property="og:description" content="Experience personalized fine dining in your villa with myCHEF Indonesia. Professional background-checked private chefs serving Bali since 2012. Perfect match chef selection. Book on WhatsApp +62 822-3756-5997." />
+    <meta property="og:url" content="https://mychef.id/" />
+    <meta property="og:title" content="Private Chef in Bali — In-Villa Dining Since 2012 | myCHEF" />
+    <meta property="og:description" content="Book a background-checked private chef in your Bali villa. Mediterranean & international menus, 3-hour minimum. WhatsApp booking." />
     <meta property="og:image" content="https://mychef.id/og-image.jpg" />
     <meta property="og:site_name" content="myCHEF Indonesia" />
     <meta property="og:locale" content="en_ID" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://mychef.id" />
-    <meta name="twitter:title" content="Hire a Private Chef at Home in Bali & Indonesia | myCHEF Indonesia" />
-    <meta name="twitter:description" content="Experience personalized fine dining in your villa with myCHEF Indonesia. Professional background-checked private chefs serving Bali since 2012. Perfect match chef selection. Book on WhatsApp +62 822-3756-5997." />
+    <meta name="twitter:url" content="https://mychef.id/" />
+    <meta name="twitter:title" content="Private Chef in Bali — In-Villa Dining Since 2012 | myCHEF" />
+    <meta name="twitter:description" content="Book a background-checked private chef in your Bali villa. Mediterranean & international menus. WhatsApp booking." />
     <meta name="twitter:image" content="https://mychef.id/og-image.jpg" />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
-    
-    <!-- Fonts with optimized loading -->
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- JSON-LD Structured Data -->
+
+    <!-- Site-wide structured data: Organization + WebSite + ProfessionalService.
+         No aggregateRating until verified review system is wired.
+         No street address — we are a service-area business.
+         Per-page Service / FAQPage schema is injected by the React SEO component and the postbuild step. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://mychef.id",
-      "name": "myCHEF Indonesia",
-      "alternateName": "myCHEF Bali",
-      "description": "Professional private chef booking service exclusively serving Bali. Experience personalized fine dining in your villa with certified chefs.",
-      "url": "https://mychef.id",
-      "logo": "https://mychef.id/logo.png",
-      "image": "https://mychef.id/og-image.jpg",
-      "telephone": "+62-822-3756-5997",
-      "email": "indonesia@mychef.id",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Jl. Sunset Road No. 88",
-        "addressLocality": "Seminyak",
-        "addressRegion": "Bali",
-        "postalCode": "80361",
-        "addressCountry": "ID"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-8.409518",
-        "longitude": "115.188919"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "09:00",
-        "closes": "22:00"
-      },
-      "priceRange": "Rp 800,000 - Rp 1,200,000+",
-      "currenciesAccepted": "IDR",
-      "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": "-8.409518",
-          "longitude": "115.188919"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://mychef.id/#organization",
+          "name": "myCHEF Indonesia",
+          "alternateName": ["myCHEF", "myCHEF Bali"],
+          "url": "https://mychef.id/",
+          "logo": { "@type": "ImageObject", "url": "https://mychef.id/logo.png" },
+          "foundingDate": "2012",
+          "description": "Bali-based private chef booking service operating since 2012. Background-checked chefs for villa dining, events, and recurring household chef arrangements.",
+          "telephone": "+62-822-3756-5997",
+          "email": "indonesia@mychef.id",
+          "areaServed": { "@type": "AdministrativeArea", "name": "Bali, Indonesia" },
+          "sameAs": [
+            "https://www.instagram.com/mychef.id",
+            "https://www.facebook.com/mychef.indonesia"
+          ]
         },
-        "geoRadius": "100000",
-        "description": "Bali"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "bestRating": "5",
-        "worstRating": "1",
-        "ratingCount": "150"
-      },
-      "sameAs": [
-        "https://www.instagram.com/mychef.id",
-        "https://www.facebook.com/mychef.indonesia"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Private Chef Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Private Chef Service",
-              "description": "Professional private chef service for intimate dinners, family gatherings, and special events in Bali"
-            }
-          }
-        ]
-      }
+        {
+          "@type": "WebSite",
+          "@id": "https://mychef.id/#website",
+          "url": "https://mychef.id/",
+          "name": "myCHEF Indonesia",
+          "publisher": { "@id": "https://mychef.id/#organization" },
+          "inLanguage": ["en", "id"]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://mychef.id/#service",
+          "name": "myCHEF Indonesia — Private Chef Booking",
+          "parentOrganization": { "@id": "https://mychef.id/#organization" },
+          "telephone": "+62-822-3756-5997",
+          "priceRange": "Rp 800,000 - Rp 1,200,000+ per hour",
+          "currenciesAccepted": "IDR",
+          "paymentAccepted": ["Cash", "Bank Transfer", "Credit Card"],
+          "serviceType": "Private chef and in-villa dining service",
+          "areaServed": [
+            { "@type": "City", "name": "Canggu" },
+            { "@type": "City", "name": "Seminyak" },
+            { "@type": "City", "name": "Ubud" },
+            { "@type": "City", "name": "Uluwatu" },
+            { "@type": "City", "name": "Nusa Dua" },
+            { "@type": "City", "name": "Sanur" },
+            { "@type": "City", "name": "Jimbaran" },
+            { "@type": "City", "name": "Kuta" },
+            { "@type": "City", "name": "Pererenan" },
+            { "@type": "City", "name": "Berawa" },
+            { "@type": "City", "name": "Petitenget" },
+            { "@type": "City", "name": "Kerobokan" },
+            { "@type": "City", "name": "Legian" },
+            { "@type": "City", "name": "Tabanan" },
+            { "@type": "City", "name": "Tegallalang" },
+            { "@type": "City", "name": "Gianyar" },
+            { "@type": "City", "name": "Denpasar" }
+          ]
+        }
+      ]
     }
     </script>
   </head>

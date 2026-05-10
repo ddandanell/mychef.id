@@ -44,41 +44,36 @@ export default function Home() {
         keywords="private chef bali, private chef jakarta, private chef indonesia, catering jakarta, best private chef indonesia, luxury chef indonesia, private chef for events, wedding catering indonesia, private dining indonesia, healthy meal delivery indonesia, private chef booking indonesia, chef for hire indonesia, villa chef bali, personal chef jakarta"
         structuredData={{
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "@id": "https://mychef.id",
-          "name": "myCHEF Indonesia",
-          "alternateName": ["myCHEF Bali", "myCHEF Jakarta", "Private Chef Indonesia"],
-          "description": "Indonesia's premier private chef booking service offering luxury in-villa dining, corporate catering, wedding celebrations, and healthy meal delivery across Bali and Jakarta since 2012.",
-          "url": "https://mychef.id",
-          "logo": "https://mychef.id/logo.png",
-          "image": "https://mychef.id/og-image.jpg",
-          "telephone": "+62-822-3756-5997",
-          "email": "indonesia@mychef.id",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Bali",
-            "addressCountry": "ID"
-          },
+          "@type": "Service",
+          "@id": "https://mychef.id/#home-service",
+          "serviceType": "Private chef booking and in-villa dining",
+          "provider": { "@id": "https://mychef.id/#organization" },
           "areaServed": [
-            { "@type": "City", "name": "Bali" },
-            { "@type": "City", "name": "Jakarta" },
-            { "@type": "Country", "name": "Indonesia" }
+            { "@type": "AdministrativeArea", "name": "Bali, Indonesia" }
           ],
-          "priceRange": "Rp 800,000 - Rp 1,200,000+",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "bestRating": "5",
-            "ratingCount": "500"
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "800000",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "800000",
+              "priceCurrency": "IDR",
+              "unitText": "HOUR",
+              "minPrice": "2400000",
+              "description": "From Rp 800,000 per hour, 3-hour minimum"
+            }
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
             "name": "Private Chef Services",
             "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Chef Bali" }},
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Catering Jakarta" }},
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Catering Indonesia" }},
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Events" }}
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Private Villa Dinner" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Birthday & Anniversary Dinner" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Celebration Dining" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Event Catering" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Weekly Meal Prep" }},
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-Time Household Chef" }}
             ]
           }
         }}

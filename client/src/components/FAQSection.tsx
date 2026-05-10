@@ -7,6 +7,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText } from 'lucide-react';
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 
 const FAQS = [
   {
@@ -95,7 +96,7 @@ export default function FAQSection() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=faq');
+    openWhatsApp('faq');
   };
 
   const handleQuoteClick = () => {

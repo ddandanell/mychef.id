@@ -1,10 +1,11 @@
 import { MessageCircle, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import sitiImage from '@assets/generated_images/balinese_woman_with_headset_in_kitchen.png';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 
 export default function SupportTeam() {
   const handleWhatsApp = () => {
-    window.location.href = '/contact/confirm?source=support';
+    openWhatsApp('support');
   };
 
   return (

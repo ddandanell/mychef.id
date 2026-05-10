@@ -1,4 +1,5 @@
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -51,7 +52,7 @@ export default function Testimonials() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=testimonials');
+    openWhatsApp('testimonials');
   };
 
   const handleQuoteClick = () => {

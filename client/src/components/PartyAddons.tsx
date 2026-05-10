@@ -1,4 +1,5 @@
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Flame, Music, Wine, Utensils, Zap, BookOpen, Phone, Mail, Clock } from 'lucide-react';
@@ -54,7 +55,7 @@ export default function PartyAddons() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=partyAddons');
+    openWhatsApp('partyAddons');
   };
 
   return (

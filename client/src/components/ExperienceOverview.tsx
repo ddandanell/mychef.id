@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText } from 'lucide-react';
 
@@ -117,7 +118,7 @@ export default function ExperienceOverview() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=experience');
+    openWhatsApp('experience');
   };
 
   const handleQuoteClick = () => {

@@ -1,4 +1,5 @@
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Building2, Users, Award } from 'lucide-react';
@@ -11,7 +12,7 @@ export default function VillaPartners() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=villaPartners');
+    openWhatsApp('villaPartners');
   };
 
   return (

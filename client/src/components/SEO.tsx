@@ -7,8 +7,31 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   keywords?: string;
-  structuredData?: object;
+  /**
+   * Per-page structured data (e.g. Service, FAQPage, BreadcrumbList).
+   * Site-wide Organization/WebSite/ProfessionalService is in client/index.html.
+   * Do NOT include aggregateRating here unless it comes from a verified review system.
+   * Do NOT include placeholder addresses — we are a service-area business.
+   */
+  structuredData?: object | object[];
   pathWithoutLang?: string;
+}
+
+const FORBIDDEN_KEYS = ['aggregateRating', 'review'] as const;
+
+function stripForbidden<T>(obj: T): T {
+  if (Array.isArray(obj)) {
+    return obj.map(stripForbidden) as unknown as T;
+  }
+  if (obj && typeof obj === 'object') {
+    const cleaned: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
+      if ((FORBIDDEN_KEYS as readonly string[]).includes(key)) continue;
+      cleaned[key] = stripForbidden(value);
+    }
+    return cleaned as unknown as T;
+  }
+  return obj;
 }
 
 export default function SEO({
@@ -17,45 +40,44 @@ export default function SEO({
   canonical,
   ogImage = 'https://mychef.id/og-image.jpg',
   ogType = 'website',
-  keywords = 'private chef Bali, personal chef Indonesia, chef at home Bali, villa chef Seminyak, private dining Bali, cook for hire Bali, Airbnb chef Bali',
+  keywords,
   structuredData,
 }: SEOProps) {
-  const structuredDataIdRef = useRef(`seo-structured-data-${Math.random().toString(36).substr(2, 9)}`);
-  
+  const structuredDataIdRef = useRef(`seo-page-jsonld-${Math.random().toString(36).slice(2, 11)}`);
+
   const baseUrl = 'https://mychef.id';
   const canonicalUrl = canonical || baseUrl;
-  
+
   useEffect(() => {
     document.title = title;
 
-    const updateMetaTag = (name: string, content: string, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        document.head.appendChild(element);
+    const setMeta = (name: string, content: string, isProperty = false) => {
+      const attr = isProperty ? 'property' : 'name';
+      let el = document.querySelector(`meta[${attr}="${name}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
       }
-      
-      element.setAttribute('content', content);
+      el.setAttribute('content', content);
     };
 
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
+    setMeta('description', description);
+    if (keywords) setMeta('keywords', keywords);
 
-    updateMetaTag('og:title', title, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:type', ogType, true);
-    updateMetaTag('og:url', canonicalUrl, true);
-    updateMetaTag('og:image', ogImage, true);
-    updateMetaTag('og:site_name', 'myCHEF Indonesia', true);
-    updateMetaTag('og:locale', 'en_ID', true);
+    setMeta('og:title', title, true);
+    setMeta('og:description', description, true);
+    setMeta('og:type', ogType, true);
+    setMeta('og:url', canonicalUrl, true);
+    setMeta('og:image', ogImage, true);
+    setMeta('og:site_name', 'myCHEF Indonesia', true);
+    setMeta('og:locale', 'en_ID', true);
 
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', title);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', ogImage);
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    setMeta('twitter:image', ogImage);
+    setMeta('twitter:url', canonicalUrl);
 
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
@@ -65,27 +87,26 @@ export default function SEO({
     }
     canonicalLink.setAttribute('href', canonicalUrl);
 
-    const currentScriptId = structuredDataIdRef.current;
-    let existingScript = document.getElementById(currentScriptId) as HTMLScriptElement | null;
-    
+    const scriptId = structuredDataIdRef.current;
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+
     if (structuredData) {
-      if (!existingScript) {
-        existingScript = document.createElement('script') as HTMLScriptElement;
-        existingScript.id = currentScriptId;
-        existingScript.setAttribute('data-seo-structured-data', 'true');
-        existingScript.type = 'application/ld+json';
-        document.head.appendChild(existingScript);
+      const cleaned = stripForbidden(structuredData);
+      if (!script) {
+        script = document.createElement('script');
+        script.id = scriptId;
+        script.type = 'application/ld+json';
+        script.setAttribute('data-seo-page', 'true');
+        document.head.appendChild(script);
       }
-      existingScript.textContent = JSON.stringify(structuredData);
-    } else if (existingScript) {
-      existingScript.remove();
+      script.textContent = JSON.stringify(cleaned);
+    } else if (script) {
+      script.remove();
     }
 
     return () => {
-      const scriptToRemove = document.getElementById(currentScriptId);
-      if (scriptToRemove) {
-        scriptToRemove.remove();
-      }
+      const toRemove = document.getElementById(scriptId);
+      if (toRemove) toRemove.remove();
     };
   }, [title, description, canonicalUrl, ogImage, ogType, keywords, structuredData]);
 

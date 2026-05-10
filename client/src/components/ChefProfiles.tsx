@@ -1,4 +1,5 @@
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +76,7 @@ export default function ChefProfiles() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=chefProfiles');
+    openWhatsApp('chefProfiles');
   };
 
   const handleQuoteClick = () => {

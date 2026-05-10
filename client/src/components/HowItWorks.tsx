@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
+import { openWhatsApp } from '@/lib/whatsappCTA';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, FileText, MessagesSquare, CheckCircle, Sparkles } from 'lucide-react';
 
@@ -40,7 +41,7 @@ export default function HowItWorks() {
   const [, setLocation] = useLocation();
   
   const handleWhatsAppClick = () => {
-    setLocation('/contact/confirm?source=howItWorks');
+    openWhatsApp('howItWorks');
   };
 
   const handleQuoteClick = () => {

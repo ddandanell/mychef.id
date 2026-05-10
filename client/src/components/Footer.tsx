@@ -270,6 +270,28 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            <h4 className="font-semibold mb-2 sm:mb-3 mt-4 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
+              Menus
+            </h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
+              <li><Link href="/menus" className="hover:text-primary transition-colors">All cuisines</Link></li>
+              <li><Link href="/menus/mediterranean" className="hover:text-primary transition-colors">Mediterranean</Link></li>
+              <li><Link href="/menus/balinese" className="hover:text-primary transition-colors">Balinese</Link></li>
+              <li><Link href="/menus/asian-fusion" className="hover:text-primary transition-colors">Asian Fusion</Link></li>
+              <li><Link href="/menus/vegan" className="hover:text-primary transition-colors">Vegan</Link></li>
+            </ul>
+
+            <h4 className="font-semibold mb-2 sm:mb-3 mt-4 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-wide text-foreground/60">
+              About myCHEF
+            </h4>
+            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-foreground/70">
+              <li><Link href="/about" className="hover:text-primary transition-colors">About us</Link></li>
+              <li><Link href="/chefs" className="hover:text-primary transition-colors">Our chefs</Link></li>
+              <li><Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
+              <li><Link href="/villa-partners" className="hover:text-primary transition-colors">Villa partners</Link></li>
+              <li><Link href="/quote" className="hover:text-primary transition-colors">Get a quote</Link></li>
+            </ul>
           </div>
         </div>
 

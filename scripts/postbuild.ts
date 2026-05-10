@@ -22,6 +22,7 @@ import { promises as fs } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { CITY_DATA, type CityData } from '../shared/cityData';
+import { HOMEPAGE_FAQS, FAQ_MASTER } from '../shared/faqs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST_PUBLIC = resolve(__dirname, '../dist/public');
@@ -283,6 +284,26 @@ const STATIC_PAGES: PageConfig[] = [
     title: 'Private Chef in Bali — Frequently Asked Questions | myCHEF Indonesia',
     description: '20 common questions about hiring a private chef in Bali: pricing, booking, cuisines, dietary restrictions, service area, trust & safety. Direct answers from myCHEF Indonesia.',
     changefreq: 'monthly', priority: 0.8,
+    schema: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': 'https://mychef.id/faq#faqs',
+        mainEntity: FAQ_MASTER.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mychef.id/' },
+          { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://mychef.id/faq' },
+        ],
+      },
+    ],
   },
   {
     slug: 'quote',
@@ -328,20 +349,8 @@ const STATIC_PAGES: PageConfig[] = [
   },
 ];
 
-// ---- Homepage FAQ Q&As (also injected by Home.tsx but duplicated here so AI crawlers
-//      that don't execute JS see them in pre-render HTML) ----
-const HOMEPAGE_FAQS: Array<{ q: string; a: string }> = [
-  { q: 'Who is the best private chef in Bali?', a: "myCHEF Indonesia has operated as a private chef booking service in Bali since 2012, with background-checked chefs covering Canggu, Seminyak, Ubud, Uluwatu, Nusa Dua, and 19 other neighborhoods. The 'best' chef depends on the cuisine you want and the size of the event — for a Mediterranean villa dinner, request a chef with EU restaurant experience; for a Balinese feast, request a chef trained in classic Balinese technique. Bookings are confirmed in under an hour via WhatsApp at +62 822-3756-5997." },
-  { q: 'How much does a private chef cost in Bali?', a: 'A private chef in Bali costs from Rp 800,000 per hour with a 3-hour minimum, plus ingredient cost. A typical 4-course dinner for 6 guests runs Rp 3.5M–4.5M total (chef fee + ingredients + cleanup). Additional staff (waiter, bartender, sommelier) are Rp 300,000–500,000 per hour. myCHEF includes equipment, presentation, and cleanup in the chef rate.' },
-  { q: 'Can I hire a private chef for one night in a Bali villa?', a: 'Yes. Most myCHEF bookings are single-night villa dinners for 4–20 guests. The chef arrives 2–3 hours before service, shops for ingredients en route, cooks in your villa kitchen, plates and serves, and cleans the kitchen before leaving. You only need to provide a kitchen with basic appliances and table settings.' },
-  { q: 'What cuisines can a private chef in Bali make?', a: 'myCHEF chefs specialize in Mediterranean, modern European, Asian fusion, traditional Balinese, vegan, and dietary-restricted menus (gluten-free, dairy-free, kosher, halal). Each chef profile shows their specializations. You can request a specific cuisine when booking.' },
-  { q: 'Is it safe to hire a private chef in your villa in Bali?', a: "Every myCHEF chef is background-checked, has verifiable hospitality experience, and is insured under myCHEF's commercial liability policy. The company has operated since 2012 and serves villa management companies, individual travelers, and recurring private clients across Bali." },
-  { q: 'How do I book a private chef in Bali?', a: 'The fastest way is WhatsApp at +62 822-3756-5997 — most bookings are confirmed within an hour. You can also use the quote form on mychef.id. Booking 2+ days in advance gives the widest chef + menu choice; same-day bookings are usually possible in Canggu, Seminyak, and Ubud subject to availability.' },
-  { q: 'Does myCHEF cover Canggu, Seminyak, Uluwatu, Ubud, and Nusa Dua?', a: 'Yes. myCHEF covers all major Bali neighborhoods: Canggu (including Berawa, Echo Beach, Batu Bolong, Pererenan), Seminyak, Petitenget, Kerobokan, Legian, Kuta, Jimbaran, Uluwatu, Nusa Dua, Pecatu, Ubud, Tegallalang, Sanur, Denpasar, Tabanan, Tanah Lot, Gianyar, Lovina, Amed, Candidasa, and Padang Bai.' },
-  { q: 'Can I hire a chef weekly or full-time for my Bali home?', a: 'Yes. myCHEF places chefs on weekly meal-prep contracts (1–3 sessions per week) and full-time household-chef arrangements for expat families and long-term renters. Weekly meal-prep starts at Rp 2.5M per session.' },
-  { q: 'Can a private chef cook a birthday or anniversary dinner in Bali?', a: "Yes — birthdays, anniversaries, proposals, and milestone dinners are myCHEF's most-booked event type. Add-ons include sommelier wine pairing, professional photography coordination, candle and flower setup, and surprise cake course." },
-  { q: "What's the difference between myCHEF and a Bali catering company?", a: 'Catering companies cook food off-site and deliver it to you. myCHEF sends a chef into your kitchen who shops, cooks, plates, and serves on the spot — the same model as a private restaurant in your home. Food is fresher and the experience is interactive (chef can describe dishes, take wine cues, and adapt the menu for picky eaters).' },
-];
+// HOMEPAGE_FAQS + FAQ_MASTER are imported from ../shared/faqs above so the
+// React components AND this script use the same source of truth.
 
 // ---- Build the full route set ----
 const HOMEPAGE: PageConfig = {

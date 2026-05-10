@@ -395,24 +395,112 @@ const STATIC_PAGES: PageConfig[] = [
     title: 'Mediterranean Private Chef Menu in Bali — Sample Menus | myCHEF',
     description: 'Sample Mediterranean menus from myCHEF private chefs in Bali. 3-course villa dinners, 5-course tasting menus, family-style sharing feasts. From Rp 4.2M for 6 guests.',
     changefreq: 'monthly', priority: 0.8,
+    bodyContent: `<h1>Mediterranean Private Chef Menu — Bali</h1>
+<p>Mediterranean cooking is the most-requested cuisine for myCHEF villa dinners in Bali — olive oil, charred vegetables, fresh seafood from Jimbaran, slow-cooked lamb, brown-butter pasta. These three sample menus are the starting points our chefs work from. Every menu is rebuilt for your guests, dietary needs, and what's freshest in the market that morning.</p>
+<h2>Three-Course Mediterranean Villa Dinner</h2>
+<p>Rp 4.2M for 6 guests, all-in (chef + ingredients).</p>
+<ul>
+  <li><strong>Starter:</strong> Burrata, heirloom tomatoes, basil oil, sourdough crisps</li>
+  <li><strong>Main:</strong> Slow-cooked lamb shoulder, saffron jus, charred fennel, smoked cauliflower</li>
+  <li><strong>Dessert:</strong> Coconut panna cotta, Tegallalang strawberries, basil sugar</li>
+</ul>
+<h2>Five-Course Mediterranean Tasting Menu</h2>
+<p>Rp 7.8M for 6 guests, all-in (chef + ingredients + sommelier add-on optional).</p>
+<ul>
+  <li><strong>Amuse-bouche:</strong> Olive tapenade on charred bread, Sicilian anchovy</li>
+  <li><strong>First:</strong> Burrata, peach, balsamic, basil</li>
+  <li><strong>Second:</strong> Hand-rolled cavatelli, brown butter, sage, brown crab</li>
+  <li><strong>Third:</strong> Wood-fired sea bass, salsa verde, charred lemon</li>
+  <li><strong>Dessert:</strong> Affogato with house-made vanilla gelato</li>
+</ul>
+<h2>Family-Style Mediterranean Sharing Feast</h2>
+<p>Rp 5.5M for 8-10 guests, all-in (chef + ingredients).</p>
+<ul>
+  <li><strong>Mezze:</strong> Hummus, tzatziki, baba ganoush, charred flatbread, olives, dolma</li>
+  <li><strong>Salad:</strong> Fattoush — heirloom tomato, cucumber, sumac, pomegranate, mint</li>
+  <li><strong>Mains (sharing):</strong> Whole roast lamb shoulder, saffron rice, roasted aubergine, slow-grilled vegetables</li>
+  <li><strong>Dessert:</strong> Baklava, honey ice cream, fresh figs</li>
+</ul>
+<p>WhatsApp +62 822-3756-5997 for a Mediterranean menu tailored to your event.</p>`,
   },
   {
     slug: 'menus/balinese',
     title: 'Balinese Private Chef Menu in Bali — Sample Menus | myCHEF',
     description: 'Sample traditional + modern Balinese menus from myCHEF private chefs. Rijsttafel sharing feasts, modern Balinese tasting menus. From Rp 4.8M for 6-8 guests.',
     changefreq: 'monthly', priority: 0.75,
+    bodyContent: `<h1>Balinese Private Chef Menu — Bali</h1>
+<p>Traditional Balinese cooking — base genep spice pastes, slow-roasted bebek betutu wrapped in banana leaf, sambal trio, lawar — prepared in your villa kitchen by chefs trained in classical Balinese technique. We can also do modern Balinese tasting menus that reframe traditional flavors as plated multi-course dining.</p>
+<h2>Traditional Balinese Rijsttafel — Sharing Feast</h2>
+<p>Rp 4.8M for 6-8 guests, all-in.</p>
+<ul>
+  <li><strong>Mezze:</strong> Lawar (vegetable + coconut salad), sambal matah, urap, tempeh manis, krupuk</li>
+  <li><strong>Mains:</strong> Bebek betutu (slow-roasted duck), ikan bakar (grilled fish), satay lilit, ayam pelalah, sayur urap</li>
+  <li><strong>Sides:</strong> Steamed rice, yellow rice, sambal trio (matah, terasi, hijau)</li>
+  <li><strong>Dessert:</strong> Dadar gulung (pandan crepes), klepon, tropical fruit selection</li>
+</ul>
+<h2>Modern Balinese Tasting Menu — 5 Courses</h2>
+<p>Rp 6.8M for 6 guests, all-in.</p>
+<ul>
+  <li><strong>Amuse-bouche:</strong> Sambal matah on coconut crisp, jicama, lime</li>
+  <li><strong>First:</strong> Lawar of green papaya, betel leaf, smoked candlenut</li>
+  <li><strong>Second:</strong> Sayur tabu broth, banana flower, kaffir lime, soft tofu</li>
+  <li><strong>Main:</strong> Bebek betutu — slow-roasted duck wrapped in banana leaf, base genep spice paste, yellow rice</li>
+  <li><strong>Dessert:</strong> Coconut + palm sugar custard, black rice, fresh mango</li>
+</ul>
+<p>WhatsApp +62 822-3756-5997 for a Balinese menu tailored to your event.</p>`,
   },
   {
     slug: 'menus/asian-fusion',
     title: 'Asian Fusion Private Chef Menu in Bali — Sample Menus | myCHEF',
     description: 'Sample Asian fusion menus from myCHEF private chefs in Bali. Pan-Asian tasting menus, family-style sharing. Modern Indonesian + Japanese + Thai + Korean.',
     changefreq: 'monthly', priority: 0.75,
+    bodyContent: `<h1>Asian Fusion Private Chef Menu — Bali</h1>
+<p>Modern Asian fusion — Japanese sashimi, Thai broths, Sichuan chili crisp, Korean fried chicken, hand-pulled noodles. Our chefs interpret pan-Asian flavors for villa dining without losing the essence of each cuisine.</p>
+<h2>Pan-Asian Tasting Menu — 5 Courses</h2>
+<p>Rp 5.8M for 6 guests, all-in (chef + ingredients).</p>
+<ul>
+  <li><strong>Amuse-bouche:</strong> Yellowtail sashimi, ponzu, jalapeño, micro shiso</li>
+  <li><strong>First:</strong> Tom yum cappuccino with prawn dumpling, lemongrass air</li>
+  <li><strong>Second:</strong> Hand-pulled biang biang noodles, brown butter, chili crisp, soft yolk</li>
+  <li><strong>Main:</strong> Miso-glazed black cod, charred bok choy, ginger jus, sesame foam</li>
+  <li><strong>Dessert:</strong> Pandan crème brûlée, coconut sorbet, palm sugar caramel</li>
+</ul>
+<h2>Family-Style Asian Fusion Sharing</h2>
+<p>Rp 5.2M for 8-10 guests, all-in.</p>
+<ul>
+  <li><strong>Sharing Cold:</strong> Tuna tataki, smashed cucumber, Sichuan chili oil, coriander</li>
+  <li><strong>Sharing Hot:</strong> Korean fried chicken, gochujang glaze, pickled daikon, sesame</li>
+  <li><strong>Mains:</strong> Whole roast duck (Peking-style), pancakes, hoisin, spring onion</li>
+  <li><strong>Sides:</strong> Garlic bok choy, jasmine rice, kimchi</li>
+  <li><strong>Dessert:</strong> Mango sticky rice, coconut cream, salted palm sugar</li>
+</ul>
+<p>WhatsApp +62 822-3756-5997 for an Asian fusion menu tailored to your event.</p>`,
   },
   {
     slug: 'menus/vegan',
     title: 'Vegan & Plant-Based Private Chef Menu in Bali | myCHEF',
     description: 'Sample vegan + plant-based menus from myCHEF private chefs in Bali. Tasting menus, Mediterranean sharing feasts. From Rp 4.6M for 8 guests.',
     changefreq: 'monthly', priority: 0.75,
+    bodyContent: `<h1>Vegan &amp; Plant-Based Private Chef Menu — Bali</h1>
+<p>Full-flavor plant-based menus that don't compromise. For vegan guests, mixed groups, wellness retreats, and yoga teacher trainings. We work with local Tegallalang and Tabanan organic farms for the freshest produce.</p>
+<h2>Plant-Based Tasting Menu — 5 Courses</h2>
+<p>Rp 5.4M for 6 guests, all-in (chef + ingredients).</p>
+<ul>
+  <li><strong>Amuse-bouche:</strong> Smoked beetroot tartare, capers, dill, sourdough crisp</li>
+  <li><strong>First:</strong> Charred cauliflower, romesco, hazelnut crumble, parsley oil</li>
+  <li><strong>Second:</strong> Hand-rolled cavatelli, brown-butter mushroom ragu, lemon zest</li>
+  <li><strong>Main:</strong> Wood-roasted celeriac steak, miso jus, charred greens, smoked salt</li>
+  <li><strong>Dessert:</strong> Coconut + dark chocolate ganache, raspberry coulis, cocoa nibs</li>
+</ul>
+<h2>Vegan Mediterranean Sharing Feast</h2>
+<p>Rp 4.6M for 8 guests, all-in.</p>
+<ul>
+  <li><strong>Mezze:</strong> Hummus, baba ganoush, muhammara, olives, dolma, charred flatbread</li>
+  <li><strong>Salad:</strong> Fattoush — heirloom tomato, cucumber, sumac, pomegranate, mint, sourdough</li>
+  <li><strong>Mains (sharing):</strong> Slow-roasted whole cauliflower, tahini, pomegranate. Stuffed peppers with farro + walnut. Roasted aubergine with smoked tomato</li>
+  <li><strong>Dessert:</strong> Vegan baklava, coconut ice cream, fresh figs</li>
+</ul>
+<p>WhatsApp +62 822-3756-5997 for a vegan menu tailored to your event.</p>`,
   },
   {
     slug: 'chefs',
@@ -575,6 +663,40 @@ const HOMEPAGE: PageConfig = {
   title: 'Private Chef in Bali — In-Villa Dining Since 2012 | myCHEF',
   description: 'Book a background-checked private chef in your Bali villa. Mediterranean & international menus, 3-hour minimum, transparent pricing. WhatsApp booking.',
   changefreq: 'weekly', priority: 1.0,
+  bodyContent: `<h1>Private Chef in Bali — In-Villa Dining Since 2012</h1>
+<p>Background-checked private chefs cook Mediterranean and international tasting menus in your villa. From Rp 800,000 per hour, 3-hour minimum. WhatsApp +62 822-3756-5997 — most bookings confirmed in under an hour.</p>
+<p>myCHEF is Bali's longest-running private chef booking service. Our chefs arrive at your villa, shop for ingredients, cook a custom menu in your kitchen, plate and serve, then clean up. Mediterranean, modern European, Asian fusion, Balinese, vegan and dietary-restricted menus. Serving Canggu, Seminyak, Uluwatu, Ubud, Nusa Dua, Sanur, Jimbaran, and 17 other Bali areas.</p>
+<h2>Why myCHEF</h2>
+<ul>
+  <li>Operating in Bali since 2012 — 13+ year track record</li>
+  <li>Every chef background-checked + food-safety certified</li>
+  <li>Commercial liability insurance on every booking</li>
+  <li>Transparent pricing: from Rp 800k/hour, 3-hour minimum</li>
+  <li>Equipment, plating, and cleanup all included in the chef rate</li>
+  <li>Average WhatsApp response under 10 minutes during operating hours</li>
+</ul>
+<h2>Pricing</h2>
+<p>Chef fee: from Rp 800,000 per hour, 3-hour minimum. Ingredients billed at cost. Add-on staff: waiter Rp 300,000/hr, bartender Rp 400,000/hr, sommelier Rp 500,000/hr.</p>
+<h2>Service area — 24 Bali neighborhoods</h2>
+<p>Canggu, Seminyak, Petitenget, Kerobokan, Legian, Kuta, Jimbaran, Uluwatu, Pecatu, Bukit, Ungasan, Nusa Dua, Sanur, Denpasar, Tabanan, Tanah Lot, Ubud, Tegallalang, Gianyar, Lovina, Amed, Candidasa, Padang Bai, plus Pererenan and Berawa.</p>
+<h2>Cuisines</h2>
+<p>Mediterranean, modern European, Asian fusion, traditional Balinese, vegan, and dietary-restricted menus (gluten-free, dairy-free, kosher, halal). Each chef profile shows their specializations.</p>
+<h2>Common occasions booked</h2>
+<ul>
+  <li>One-night villa dinners (most-booked event type)</li>
+  <li>Birthdays, anniversaries, proposals</li>
+  <li>Wedding rehearsal dinners and small ceremonies</li>
+  <li>Corporate offsite dinners and retreats</li>
+  <li>Recurring weekly meal-prep for expat families</li>
+  <li>Full-time household chef arrangements</li>
+</ul>
+<h2>Frequently asked questions</h2>
+${HOMEPAGE_FAQS.map(f => `<h3>${htmlEsc(f.q)}</h3><p>${htmlEsc(f.a)}</p>`).join('\n')}
+<h2>Contact myCHEF</h2>
+<p>WhatsApp: +62 822-3756-5997 (primary)<br>
+Email: indonesia@mychef.id<br>
+Hours: 09:00–22:00 WIB daily<br>
+Office: Jl. Tukad Barito Timur III No.16, Panjer, Denpasar Selatan, Kota Denpasar, Bali 80226</p>`,
   schema: [
     {
       '@context': 'https://schema.org',

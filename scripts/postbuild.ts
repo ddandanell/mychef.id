@@ -273,6 +273,18 @@ const STATIC_PAGES: PageConfig[] = [
     changefreq: 'monthly', priority: 0.75,
   },
   {
+    slug: 'chefs',
+    title: 'Our Private Chefs in Bali — Background-Checked & Certified | myCHEF',
+    description: 'Meet myCHEF\'s network of background-checked private chefs in Bali. Mediterranean, Balinese, Asian fusion, vegan, wedding catering specialists. Insured, food-safety certified.',
+    changefreq: 'monthly', priority: 0.75,
+  },
+  {
+    slug: 'faq',
+    title: 'Private Chef in Bali — Frequently Asked Questions | myCHEF Indonesia',
+    description: '20 common questions about hiring a private chef in Bali: pricing, booking, cuisines, dietary restrictions, service area, trust & safety. Direct answers from myCHEF Indonesia.',
+    changefreq: 'monthly', priority: 0.8,
+  },
+  {
     slug: 'quote',
     title: 'Get a Private Chef Quote in Bali — Custom Menu | myCHEF',
     description: 'Tell us about your event in Bali — we send a custom menu and price within 24 hours. Or WhatsApp us for an instant quote.',

@@ -489,6 +489,56 @@ function transformHtml(template: string, page: PageConfig): string {
     html = html.replace('</head>', `${blocks}\n  </head>`);
   }
 
+  // Inject performance hints: preload critical font weight + hero image
+  const perfHints = `    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />`;
+  if (!html.includes('rel="preload" as="style"')) {
+    html = html.replace('</head>', `${perfHints}\n  </head>`);
+  }
+
+  // Inject pre-render internal-link block right before </body> so non-JS crawlers
+  // (AI engines, simple bots, Lighthouse pre-render scoring) see internal navigation
+  // even before React mounts. Hidden visually with display:none — purely for crawlers.
+  // The visible Footer (React-rendered) handles human navigation.
+  const internalLinks = `    <div hidden aria-hidden="true" data-prerender="internal-links">
+      <nav>
+        <h2>Bali areas served by myCHEF</h2>
+        <ul>
+          ${Object.values(CITY_DATA).map(c => `<li><a href="/${c.slug}">Private chef in ${c.name}, Bali</a></li>`).join('\n          ')}
+        </ul>
+        <h2>Sample menus by cuisine</h2>
+        <ul>
+          <li><a href="/menus">All sample menus</a></li>
+          <li><a href="/menus/mediterranean">Mediterranean private chef menu</a></li>
+          <li><a href="/menus/balinese">Balinese private chef menu</a></li>
+          <li><a href="/menus/asian-fusion">Asian Fusion private chef menu</a></li>
+          <li><a href="/menus/vegan">Vegan private chef menu</a></li>
+        </ul>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/services/villa-parties">Villa parties</a></li>
+          <li><a href="/services/romantic-dinners">Romantic dinners</a></li>
+          <li><a href="/services/birthday-celebrations">Birthday celebrations</a></li>
+          <li><a href="/services/wedding-celebrations">Wedding celebrations</a></li>
+          <li><a href="/services/corporate-events">Corporate events</a></li>
+          <li><a href="/services/cooking-classes">Cooking classes</a></li>
+          <li><a href="/services/weekly-meal-prep">Weekly meal prep</a></li>
+        </ul>
+        <h2>About</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About myCHEF</a></li>
+          <li><a href="/chefs">Our chefs</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/villa-partners">Villa partner programme</a></li>
+          <li><a href="/quote">Get a custom quote</a></li>
+          <li><a href="/calculator">Pricing calculator</a></li>
+          <li><a href="/jakarta">Private chef Jakarta</a></li>
+        </ul>
+      </nav>
+    </div>`;
+  html = html.replace('</body>', `${internalLinks}\n  </body>`);
+
   return html;
 }
 

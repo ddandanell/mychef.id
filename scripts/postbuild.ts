@@ -37,6 +37,16 @@ interface PageConfig {
   schema?: object | object[];
   changefreq?: 'daily' | 'weekly' | 'monthly';
   priority?: number;
+  /** Per-page geo position meta tag (overrides site-wide). Format: "lat;lng". */
+  geoPosition?: string;
+  /** Pre-render body content injected as <noscript> + visible-when-JS-off block.
+   *  Indexed by Google + AI engines as page text without requiring JS execution. */
+  bodyContent?: string;
+}
+
+/** Escape HTML special chars for safe inline insertion. */
+function htmlEsc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ---- HTML escaping ----
@@ -56,12 +66,37 @@ function cityPage(city: CityData): PageConfig {
     `Book a background-checked private chef in ${city.name}, Bali. ${city.heroDescription} 3-hour minimum, equipment + cleanup included. WhatsApp booking.`,
     155
   );
+  // Visible-text pre-render body content. Indexed by Google + AI engines without JS.
+  // React mounts on top of #root and visually replaces this; SEO content stays in HTML.
+  const bodyContent = `<h1>Private Chef in ${htmlEsc(city.name)}, Bali</h1>
+<p><strong>${htmlEsc(city.tagline)}</strong></p>
+<p>${htmlEsc(city.description)}</p>
+<p>${htmlEsc(city.heroDescription)}</p>
+<h2>About ${htmlEsc(city.name)}</h2>
+<p>${htmlEsc(city.localInsights)}</p>
+<h2>Areas in ${htmlEsc(city.name)} myCHEF serves</h2>
+<ul>${city.areas.map(a => `<li>${htmlEsc(a)}</li>`).join('')}</ul>
+<h2>Popular venues in ${htmlEsc(city.name)}</h2>
+<ul>${city.popularVenues.map(v => `<li>${htmlEsc(v)}</li>`).join('')}</ul>
+<h2>How private chef booking works in ${htmlEsc(city.name)}</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 with your event date, guest count, and any cuisine or dietary preferences.</li>
+  <li>Receive chef profile + sample menu within an hour during operating hours.</li>
+  <li>Chef arrives 2–3 hours before service, shops, cooks, plates, serves, and cleans the kitchen.</li>
+  <li>You enjoy a private restaurant in your own villa — no transport, no reservation hunt, no cleanup.</li>
+</ol>
+<h2>Pricing in ${htmlEsc(city.name)}</h2>
+<p>From Rp 800,000 per hour, 3-hour minimum. Ingredients billed at cost. Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr.</p>
+<h2>Frequently asked questions — private chef in ${htmlEsc(city.name)}</h2>
+${city.faqItems.map(f => `<h3>${htmlEsc(f.question)}</h3><p>${htmlEsc(f.answer)}</p>`).join('\n')}`;
   return {
     slug: city.slug,
     title,
     description,
     changefreq: 'weekly',
     priority: 0.85,
+    geoPosition: `${city.coordinates.latitude};${city.coordinates.longitude}`,
+    bodyContent,
     schema: [
       {
         '@context': 'https://schema.org',
@@ -529,6 +564,22 @@ function transformHtml(template: string, page: PageConfig): string {
     `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`
   );
 
+  // Per-page geo:position (city pages) — overrides the site-wide ID-BA region tag with the
+  // exact coordinates so Google can place each city page on its local map graph.
+  if (page.geoPosition) {
+    if (/<meta name="geo\.position"/i.test(html)) {
+      html = html.replace(/<meta name="geo\.position"[^>]*\/?>/i, `<meta name="geo.position" content="${attr(page.geoPosition)}" />`);
+    } else {
+      html = html.replace('</head>', `    <meta name="geo.position" content="${attr(page.geoPosition)}" />\n  </head>`);
+    }
+    // ICBM is the older co-equivalent of geo.position; harmless to ship both
+    if (/<meta name="ICBM"/i.test(html)) {
+      html = html.replace(/<meta name="ICBM"[^>]*\/?>/i, `<meta name="ICBM" content="${attr(page.geoPosition.replace(';', ', '))}" />`);
+    } else {
+      html = html.replace('</head>', `    <meta name="ICBM" content="${attr(page.geoPosition.replace(';', ', '))}" />\n  </head>`);
+    }
+  }
+
   // hreflang — self-reference for English + x-default; Indonesian /id/ routes will be added when wired
   const hreflangBlock = `    <link rel="alternate" hreflang="en" href="${attr(url)}" />\n    <link rel="alternate" hreflang="x-default" href="${attr(url)}" />`;
   if (!html.includes('hreflang=')) {
@@ -583,7 +634,17 @@ function transformHtml(template: string, page: PageConfig): string {
           ${citySlugMatch.map(c => `<li><a href="/menus/${c}">${c.charAt(0).toUpperCase() + c.slice(1).replace('-', ' ')} private chef menu in ${cityName}</a></li>`).join('\n          ')}
         </ul>` : '';
 
-  const internalLinks = `    <div hidden aria-hidden="true" data-prerender="internal-links">
+  // Pre-render visible body content (indexed by crawlers + AI engines without JS).
+  // Wrapped in <noscript> so it only renders when JS is off — React mounts on top
+  // and replaces #root with the interactive UI when JS is on.
+  const bodyContentBlock = page.bodyContent ? `    <noscript>
+      <main data-prerender="body-content">
+        ${page.bodyContent}
+      </main>
+    </noscript>` : '';
+
+  const internalLinks = `${bodyContentBlock}
+    <div hidden aria-hidden="true" data-prerender="internal-links">
       <nav>
 ${semanticBlock}
         <h2>Bali areas served by myCHEF</h2>

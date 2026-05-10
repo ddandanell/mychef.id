@@ -38,6 +38,12 @@
     <!-- Geo Tags (Bali region — no fixed storefront) -->
     <meta name="geo.region" content="ID-BA" />
     <meta name="geo.placename" content="Bali" />
+    <meta name="geo.position" content="-8.409518;115.188919" />
+    <meta name="ICBM" content="-8.409518, 115.188919" />
+
+    <meta name="theme-color" content="#0a4a3c" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="apple-mobile-web-app-title" content="myCHEF" />
 
     <!-- Canonical (overridden per page) -->
     <link rel="canonical" href="https://mychef.id/" />
@@ -86,6 +92,29 @@
           "description": "Bali-based private chef booking service operating since 2012. Background-checked chefs for villa dining, events, and recurring household chef arrangements.",
           "telephone": "+62-822-3756-5997",
           "email": "indonesia@mychef.id",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+62-822-3756-5997",
+              "contactType": "Customer service",
+              "areaServed": "ID",
+              "availableLanguage": ["English", "Indonesian"],
+              "contactOption": "TollFree",
+              "hoursAvailable": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+                "opens": "09:00",
+                "closes": "22:00"
+              }
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+62-822-3756-5997",
+              "contactType": "Reservations",
+              "areaServed": "ID",
+              "availableLanguage": ["English", "Indonesian"]
+            }
+          ],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Jl. Tukad Barito Timur III No.16",

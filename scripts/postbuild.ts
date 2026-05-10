@@ -553,8 +553,19 @@ function transformHtml(template: string, page: PageConfig): string {
   // (AI engines, simple bots, Lighthouse pre-render scoring) see internal navigation
   // even before React mounts. Hidden visually with display:none — purely for crawlers.
   // The visible Footer (React-rendered) handles human navigation.
+
+  // Per-city semantic boost: if this is a city page, add a "Recommended cuisines for {city}"
+  // block with high-relevance internal links to specific menu pages (canggu→mediterranean+vegan, etc.)
+  const citySlugMatch = page.slug && CITY_TO_CUISINE[page.slug];
+  const cityName = citySlugMatch ? Object.values(CITY_DATA).find(c => c.slug === page.slug)?.name : null;
+  const semanticBlock = citySlugMatch && cityName ? `        <h2>Recommended cuisines for ${cityName}</h2>
+        <ul>
+          ${citySlugMatch.map(c => `<li><a href="/menus/${c}">${c.charAt(0).toUpperCase() + c.slice(1).replace('-', ' ')} private chef menu in ${cityName}</a></li>`).join('\n          ')}
+        </ul>` : '';
+
   const internalLinks = `    <div hidden aria-hidden="true" data-prerender="internal-links">
       <nav>
+${semanticBlock}
         <h2>Bali areas served by myCHEF</h2>
         <ul>
           ${Object.values(CITY_DATA).map(c => `<li><a href="/${c.slug}">Private chef in ${c.name}, Bali</a></li>`).join('\n          ')}
@@ -595,23 +606,77 @@ function transformHtml(template: string, page: PageConfig): string {
   return html;
 }
 
-// ---- Sitemap ----
+// ---- Sitemap (with image sitemap extension) ----
+const HOMEPAGE_IMAGES = [
+  { loc: `${ORIGIN}/og-image.jpg`, title: 'myCHEF Indonesia — Private chef in Bali villa', caption: 'Forbes-featured private chef plating a Mediterranean villa dinner in Bali' },
+  { loc: `${ORIGIN}/logo.png`, title: 'myCHEF Indonesia logo', caption: 'myCHEF Indonesia — Bali private chef booking service since 2012' },
+];
+const CITY_IMAGES = (cityName: string) => [
+  { loc: `${ORIGIN}/og-image.jpg`, title: `Private chef in ${cityName}, Bali`, caption: `myCHEF private chef preparing a villa dinner in ${cityName}, Bali` },
+];
+
 function buildSitemap(pages: PageConfig[]): string {
+  const cityNames = new Set(Object.values(CITY_DATA).map(c => c.slug));
   const entries = pages.map(p => {
     const loc = p.slug ? `${ORIGIN}/${p.slug}` : `${ORIGIN}/`;
+    let images: { loc: string; title: string; caption: string }[] = [];
+    if (!p.slug) {
+      images = HOMEPAGE_IMAGES;
+    } else if (cityNames.has(p.slug)) {
+      const city = Object.values(CITY_DATA).find(c => c.slug === p.slug);
+      if (city) images = CITY_IMAGES(city.name);
+    }
+    const imageBlock = images.map(img => `    <image:image>
+      <image:loc>${img.loc}</image:loc>
+      <image:title>${img.title}</image:title>
+      <image:caption>${img.caption}</image:caption>
+    </image:image>`).join('\n');
     return `  <url>
     <loc>${loc}</loc>
     <lastmod>${TODAY}</lastmod>
     <changefreq>${p.changefreq ?? 'monthly'}</changefreq>
-    <priority>${(p.priority ?? 0.5).toFixed(1)}</priority>
+    <priority>${(p.priority ?? 0.5).toFixed(1)}</priority>${imageBlock ? '\n' + imageBlock : ''}
   </url>`;
   });
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${entries.join('\n')}
 </urlset>
 `;
 }
+
+// ---- Per-city → menu semantic cross-links ----
+// Maps each city slug to the cuisine slug(s) most-requested in that area, based on
+// myCHEF's 13-year operational history. Used to add high-relevance internal links
+// in the pre-render HTML internal-link block for each city page.
+const CITY_TO_CUISINE: Record<string, string[]> = {
+  canggu: ['mediterranean', 'vegan'],         // wellness + beach club crowd
+  seminyak: ['mediterranean', 'asian-fusion'], // luxury restaurant scene
+  ubud: ['vegan', 'balinese'],                 // wellness + traditional
+  uluwatu: ['mediterranean', 'asian-fusion'],  // cliff villa fine dining
+  'nusa-dua': ['mediterranean'],                // resort dining
+  sanur: ['balinese', 'mediterranean'],         // family-friendly + traditional
+  jimbaran: ['asian-fusion', 'mediterranean'],  // beachfront seafood
+  kuta: ['asian-fusion', 'balinese'],           // value tourism
+  legian: ['asian-fusion'],
+  kerobokan: ['mediterranean', 'vegan'],
+  petitenget: ['mediterranean'],
+  berawa: ['mediterranean', 'vegan'],
+  pererenan: ['mediterranean', 'vegan'],
+  'tanah-lot': ['balinese'],
+  tabanan: ['balinese', 'vegan'],
+  denpasar: ['balinese', 'asian-fusion'],
+  gianyar: ['balinese'],
+  tegallalang: ['vegan', 'balinese'],
+  amed: ['asian-fusion'],
+  lovina: ['asian-fusion', 'balinese'],
+  candidasa: ['balinese'],
+  'padang-bai': ['balinese', 'asian-fusion'],
+  bukit: ['mediterranean'],
+  ungasan: ['mediterranean'],
+  pecatu: ['mediterranean'],
+};
 
 // ---- Run ----
 async function main() {

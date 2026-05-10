@@ -86,10 +86,11 @@ export default function HeroSection() {
         >
           <img
             src={image}
-            alt={`myCHEF Indonesia hero ${index + 1}`}
+            alt={index === 0 ? 'Forbes-featured private chef in Bali plating a Mediterranean villa dinner' : index === 1 ? 'Private chef preparing satay and grilled seafood in a Bali villa kitchen' : index === 2 ? 'Beachside private dining setup at sunset in Seminyak, Bali' : 'Family gathering with private chef in Ubud villa'}
             className="w-full h-full object-cover"
             loading={index === 0 ? 'eager' : 'lazy'}
             decoding="async"
+            fetchPriority={index === 0 ? 'high' : 'auto'}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>

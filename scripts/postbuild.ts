@@ -208,6 +208,24 @@ function keywordPage(k: KeywordDef): PageConfig {
 // ---- Static pages ----
 const STATIC_PAGES: PageConfig[] = [
   {
+    slug: 'about',
+    title: 'About myCHEF Indonesia — Private Chef Service in Bali Since 2012',
+    description: 'myCHEF is Bali\'s longest-running private chef booking service. Background-checked chefs, 13+ years in Bali hospitality, 24 service areas. Office in Denpasar.',
+    changefreq: 'monthly', priority: 0.85,
+  },
+  {
+    slug: 'menus',
+    title: 'Sample Menus — Private Chef in Bali | myCHEF Indonesia',
+    description: 'Sample menus from myCHEF private chefs in Bali: Mediterranean, Asian fusion, Balinese, modern European, vegan, dietary-restricted. Custom menus for every occasion.',
+    changefreq: 'monthly', priority: 0.8,
+  },
+  {
+    slug: 'menus/mediterranean',
+    title: 'Mediterranean Private Chef Menu in Bali — Sample Menus | myCHEF',
+    description: 'Sample Mediterranean menus from myCHEF private chefs in Bali. 3-course villa dinners, 5-course tasting menus, family-style sharing feasts. From Rp 4.2M for 6 guests.',
+    changefreq: 'monthly', priority: 0.8,
+  },
+  {
     slug: 'quote',
     title: 'Get a Private Chef Quote in Bali — Custom Menu | myCHEF',
     description: 'Tell us about your event in Bali — we send a custom menu and price within 24 hours. Or WhatsApp us for an instant quote.',

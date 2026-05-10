@@ -138,10 +138,11 @@ export default function CityLandingPage({ city }: CityLandingPageProps) {
           >
             <img
               src={image}
-              alt={`myCHEF ${city.name} hero ${index + 1}`}
+              alt={index === 0 ? `Private chef preparing satay in a ${city.name} villa kitchen, Bali` : index === 1 ? `Beachside private dining setup at sunset in ${city.name}, Bali` : `Family gathering with private chef in a ${city.name} villa, Bali`}
               className="w-full h-full object-cover"
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
+              fetchPriority={index === 0 ? 'high' : 'auto'}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
           </div>

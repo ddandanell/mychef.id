@@ -64,6 +64,9 @@ const PrivateDiningIndonesiaPage = lazy(() => import("@/pages/keywords/PrivateDi
 const HealthyMealDeliveryIndonesiaPage = lazy(() => import("@/pages/keywords/HealthyMealDeliveryIndonesiaPage"));
 const PrivateChefBookingIndonesiaPage = lazy(() => import("@/pages/keywords/PrivateChefBookingIndonesiaPage"));
 const ChefForHireIndonesiaPage = lazy(() => import("@/pages/keywords/ChefForHireIndonesiaPage"));
+const AboutPage = lazy(() => import("@/pages/AboutPage"));
+const MenusPage = lazy(() => import("@/pages/MenusPage"));
+const MenusMediterraneanPage = lazy(() => import("@/pages/MenusMediterraneanPage"));
 
 function Router() {
   const [location] = useLocation();
@@ -156,6 +159,9 @@ function Router() {
       <Route path="/calculator" component={PricingCalculator} />
       <Route path="/calculator2" component={CalculationModel2} />
       <Route path="/recommended-services" component={RecommendedServices} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/menus" component={MenusPage} />
+      <Route path="/menus/mediterranean" component={MenusMediterraneanPage} />
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

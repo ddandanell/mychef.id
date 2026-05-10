@@ -255,6 +255,24 @@ const STATIC_PAGES: PageConfig[] = [
     changefreq: 'monthly', priority: 0.8,
   },
   {
+    slug: 'menus/balinese',
+    title: 'Balinese Private Chef Menu in Bali — Sample Menus | myCHEF',
+    description: 'Sample traditional + modern Balinese menus from myCHEF private chefs. Rijsttafel sharing feasts, modern Balinese tasting menus. From Rp 4.8M for 6-8 guests.',
+    changefreq: 'monthly', priority: 0.75,
+  },
+  {
+    slug: 'menus/asian-fusion',
+    title: 'Asian Fusion Private Chef Menu in Bali — Sample Menus | myCHEF',
+    description: 'Sample Asian fusion menus from myCHEF private chefs in Bali. Pan-Asian tasting menus, family-style sharing. Modern Indonesian + Japanese + Thai + Korean.',
+    changefreq: 'monthly', priority: 0.75,
+  },
+  {
+    slug: 'menus/vegan',
+    title: 'Vegan & Plant-Based Private Chef Menu in Bali | myCHEF',
+    description: 'Sample vegan + plant-based menus from myCHEF private chefs in Bali. Tasting menus, Mediterranean sharing feasts. From Rp 4.6M for 8 guests.',
+    changefreq: 'monthly', priority: 0.75,
+  },
+  {
     slug: 'quote',
     title: 'Get a Private Chef Quote in Bali — Custom Menu | myCHEF',
     description: 'Tell us about your event in Bali — we send a custom menu and price within 24 hours. Or WhatsApp us for an instant quote.',

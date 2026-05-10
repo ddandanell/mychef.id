@@ -186,12 +186,42 @@ function servicePage(s: ServiceDef): PageConfig {
   );
   // Cooking classes are a learning experience — Course schema beats generic Service
   const isCookingClass = s.slug === 'services/cooking-classes';
+  const bodyContent = `<h1>${htmlEsc(s.name)} — Private Chef Service in Bali</h1>
+<p>myCHEF Indonesia provides ${htmlEsc(s.intent)} across all major Bali neighborhoods. Background-checked, food-safety certified chefs cook in your villa or event venue, plate and serve, and clean up after — the same model as a private restaurant in your own home.</p>
+<h2>Why book ${htmlEsc(s.name.toLowerCase())} with myCHEF</h2>
+<ul>
+  <li>13+ year operating history in Bali (since 2012)</li>
+  <li>Every chef background-checked + food-safety certified</li>
+  <li>Commercial liability insurance on every booking</li>
+  <li>Custom menu — Mediterranean, Asian fusion, Balinese, vegan, dietary-restricted</li>
+  <li>Equipment, plating, and cleanup all included</li>
+  <li>Average WhatsApp response under 10 minutes</li>
+</ul>
+<h2>What's included</h2>
+<ul>
+  <li>Chef labor (cooking, plating, presentation)</li>
+  <li>Kitchen cleanup after service</li>
+  <li>Standard cooking equipment + chef knives</li>
+  <li>Menu consultation before the event</li>
+  <li>Ingredient sourcing (billed at cost separately)</li>
+</ul>
+<h2>How it works</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 with date, area, guest count, and any cuisine preferences.</li>
+  <li>Receive chef profile + sample menu within an hour during operating hours.</li>
+  <li>Chef arrives 2–3 hours before service, shops, cooks, plates, and serves.</li>
+  <li>You enjoy the meal — chef cleans up before leaving.</li>
+</ol>
+<h2>Pricing for ${htmlEsc(s.name.toLowerCase())} in Bali</h2>
+<p>From Rp 800,000 per hour, 3-hour minimum. Ingredients billed at cost. Add-on staff: waiter Rp 300,000/hr, bartender Rp 400,000/hr, sommelier Rp 500,000/hr.</p>
+<p>WhatsApp +62 822-3756-5997 — most ${htmlEsc(s.name.toLowerCase())} bookings confirmed within an hour.</p>`;
   return {
     slug: s.slug,
     title,
     description,
     changefreq: 'monthly',
     priority: 0.7,
+    bodyContent,
     schema: [
       isCookingClass ? {
         '@context': 'https://schema.org',
@@ -281,24 +311,84 @@ const STATIC_PAGES: PageConfig[] = [
     title: 'Private Chef in Jakarta — In-Villa Dining & Catering | myCHEF',
     description: 'Background-checked private chefs in Jakarta: Menteng, Kebayoran Baru, SCBD, Senayan, Pondok Indah, Kemang. From Rp 800k/hr, 3-hour minimum. WhatsApp booking.',
     changefreq: 'weekly', priority: 0.85,
+    bodyContent: `<h1>Private Chef in Jakarta — In-Villa Dining &amp; Corporate Catering</h1>
+<p>myCHEF Indonesia supplies background-checked private chefs across Jakarta — for villa rentals, expat homes, corporate dinners, wedding rehearsals, and recurring household chef arrangements. Same model as our Bali operation: chef arrives, shops, cooks, plates, serves, cleans the kitchen.</p>
+<h2>Jakarta neighborhoods we cover</h2>
+<ul>
+  <li><a href="/private-chef-menteng">Menteng</a></li>
+  <li><a href="/private-chef-kebayoran-baru">Kebayoran Baru</a></li>
+  <li><a href="/private-chef-pondok-indah">Pondok Indah</a></li>
+  <li><a href="/private-chef-senayan">Senayan</a></li>
+  <li><a href="/private-chef-scbd">SCBD</a></li>
+  <li><a href="/private-chef-kemang">Kemang</a></li>
+  <li><a href="/private-chef-pantai-indah-kapuk">Pantai Indah Kapuk</a></li>
+  <li><a href="/private-chef-kelapa-gading">Kelapa Gading</a></li>
+  <li><a href="/private-chef-kuningan">Kuningan</a></li>
+  <li><a href="/private-chef-puri-indah">Puri Indah</a></li>
+</ul>
+<h2>Cuisines available in Jakarta</h2>
+<p>Mediterranean, modern European, Asian fusion, traditional Indonesian, vegan, and dietary-restricted menus (gluten-free, dairy-free, halal, kosher).</p>
+<h2>Pricing in Jakarta</h2>
+<p>From Rp 800,000 per hour, 3-hour minimum. Ingredients billed at cost. Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr.</p>
+<p>WhatsApp +62 822-3756-5997 — most Jakarta bookings confirmed within an hour during operating hours.</p>`,
   },
   {
     slug: 'villa-partners',
     title: 'Villa Manager Chef Partnership in Bali — myCHEF Indonesia',
     description: 'myCHEF supplies background-checked private chefs to Bali villas, villa-rental agencies, and concierge teams. On-call coverage, liability insurance, 13+ year track record.',
     changefreq: 'monthly', priority: 0.7,
+    bodyContent: `<h1>Villa Manager Chef Partnership in Bali</h1>
+<p>myCHEF supplies background-checked private chefs to villa-rental agencies, concierge teams, and villa managers across Bali on a recurring partnership basis. Your guests get a private chef in their villa within hours; you get a 13-year operator covering liability, food safety, and consistent service quality.</p>
+<h2>On-call coverage, 09:00–22:00 WIB</h2><p>Average WhatsApp response under 10 minutes. Most bookings confirmed within an hour, including same-day in Canggu, Seminyak, Ubud.</p>
+<h2>Background-checked + insured</h2><p>Every chef is identity-verified, criminal-checked, and food-safety certified. Commercial liability insurance covers every booking.</p>
+<h2>Single point of contact</h2><p>One account manager handles all bookings for your villa portfolio. One WhatsApp thread, one invoice schedule.</p>
+<h2>Consistent guest experience</h2><p>Standardised menu briefing, plating, and clean-up protocol across every chef.</p>
+<h2>Partnership models</h2>
+<ul>
+  <li><strong>Per-booking referral:</strong> standard chef rate, you take a referral commission.</li>
+  <li><strong>White-label chef supply:</strong> chefs operate under your villa brand.</li>
+  <li><strong>Resident chef placement:</strong> long-stay chef on-site weekly or full-time.</li>
+</ul>
+<h2>How to start</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 mentioning "villa partnership" + your portfolio size.</li>
+  <li>30-minute call: pricing, commission structure, chef briefing protocol.</li>
+  <li>Trial booking: one chef, one villa, one weekend.</li>
+  <li>Roll out across your portfolio with the partnership terms that fit your model.</li>
+</ol>`,
   },
   {
     slug: 'about',
     title: 'About myCHEF Indonesia — Private Chef Service in Bali Since 2012',
     description: 'myCHEF is Bali\'s longest-running private chef booking service. Background-checked chefs, 13+ years in Bali hospitality, 24 service areas. Office in Denpasar.',
     changefreq: 'monthly', priority: 0.85,
+    bodyContent: `<h1>About myCHEF Indonesia — Bali's Private Chef Service Since 2012</h1>
+<p>myCHEF Indonesia has been booking professional private chefs into Bali villas, family homes, and event venues for over 13 years. We started small in 2012 with a handful of chefs in Seminyak; today we serve 24 neighborhoods across Bali plus Jakarta, with a roster of background-checked chefs covering Mediterranean, modern European, Asian fusion, Balinese, vegan, and dietary-restricted menus.</p>
+<h2>Operating since 2012</h2>
+<p>13+ years of private dining in Bali villas. We have been booking chefs since the year most Bali villa-rental companies were founded.</p>
+<h2>Every chef is background-checked</h2>
+<p>Identity verified, criminal background checked, and food-safety certified before joining the roster. Every booking is covered by commercial liability insurance.</p>
+<h2>24 Bali neighborhoods covered</h2>
+<p>Canggu, Seminyak, Uluwatu, Ubud, Nusa Dua, Sanur, Jimbaran, Kuta, Pererenan, Berawa, Petitenget, Kerobokan, Legian, Pecatu, Bukit, Ungasan, Tabanan, Tanah Lot, Tegallalang, Gianyar, Denpasar, Lovina, Amed, Candidasa, Padang Bai.</p>
+<h2>Real chefs, real food</h2>
+<p>Our chefs are professional cooks with restaurant experience — many trained in Europe or at international hotel groups before joining myCHEF. They cook on the spot in your kitchen, not pre-made catering food.</p>
+<h2>Office</h2>
+<p>Jl. Tukad Barito Timur III No.16, Panjer, Denpasar Selatan, Kota Denpasar, Bali 80226.</p>
+<p>WhatsApp +62 822-3756-5997 · indonesia@mychef.id · 09:00–22:00 WIB daily.</p>`,
   },
   {
     slug: 'menus',
     title: 'Sample Menus — Private Chef in Bali | myCHEF Indonesia',
     description: 'Sample menus from myCHEF private chefs in Bali: Mediterranean, Asian fusion, Balinese, modern European, vegan, dietary-restricted. Custom menus for every occasion.',
     changefreq: 'monthly', priority: 0.8,
+    bodyContent: `<h1>Sample Menus by Cuisine — Private Chef in Bali</h1>
+<p>Browse sample menus our chefs cook regularly across Bali. Every booking is fully customised to your guests, dietary needs, occasion, and the produce that's freshest in the market that morning. Use these as starting points — your final menu will be unique to your event.</p>
+<h2>Mediterranean</h2><p>Olive oil, fresh seafood, charred vegetables, slow-cooked lamb. Perfect for Bali's coastal lifestyle and warm-evening villa dining.</p>
+<h2>Asian Fusion</h2><p>Modern interpretations of Indonesian, Thai, Japanese and Chinese flavors — designed to surprise and delight without losing the essence.</p>
+<h2>Traditional Balinese</h2><p>Authentic rijsttafel, satay, lawar, and bebek betutu prepared by chefs trained in classical Balinese technique.</p>
+<h2>Modern European</h2><p>Plated multi-course tasting menus in the style of contemporary European fine dining — French, Italian, Nordic.</p>
+<h2>Vegan & Plant-Based</h2><p>Full-flavor plant-based menus that don't compromise — for vegan guests, mixed groups, and wellness retreats.</p>
+<h2>Dietary Restricted</h2><p>Gluten-free, dairy-free, halal, kosher, low-carb, paleo. Tell us the restriction; the chef builds the menu.</p>`,
   },
   {
     slug: 'menus/mediterranean',
@@ -329,12 +419,35 @@ const STATIC_PAGES: PageConfig[] = [
     title: 'Our Private Chefs in Bali — Background-Checked & Certified | myCHEF',
     description: 'Meet myCHEF\'s network of background-checked private chefs in Bali. Mediterranean, Balinese, Asian fusion, vegan, wedding catering specialists. Insured, food-safety certified.',
     changefreq: 'monthly', priority: 0.75,
+    bodyContent: `<h1>Our Private Chefs in Bali</h1>
+<p>myCHEF's chef network covers the full spectrum of cuisines and event types across Bali. Every chef on the roster has been identity-verified, criminal-checked, and food-safety certified before their first booking. Many trained in European restaurants or international hotel groups before joining myCHEF.</p>
+<h2>Background-checked</h2><p>Every chef is identity-verified and criminal-record-checked. Many hold international hospitality references.</p>
+<h2>Food-safety certified</h2><p>HACCP-aware kitchen practice, allergen handling protocols, temperature control — all standard.</p>
+<h2>Insured & supported</h2><p>Commercial liability insurance covers every booking. Operations team on WhatsApp throughout your event.</p>
+<h2>Specializations on the roster</h2>
+<ul>
+  <li>Mediterranean & modern European</li>
+  <li>Traditional Balinese (rijsttafel, betutu, lawar)</li>
+  <li>Asian fusion (Japanese, Thai, Korean)</li>
+  <li>Vegan and plant-based</li>
+  <li>Wedding multi-course catering</li>
+  <li>Wood-fired and grill cooking</li>
+  <li>Pastry and dessert specialists</li>
+  <li>Sommelier-paired tasting menus</li>
+  <li>Private retreat and yoga-event cooking</li>
+  <li>Halal-certified menu design</li>
+  <li>Gluten-free and allergen-managed kitchens</li>
+  <li>Children-friendly menu adaptation</li>
+</ul>`,
   },
   {
     slug: 'faq',
     title: 'Private Chef in Bali — Frequently Asked Questions | myCHEF Indonesia',
     description: '20 common questions about hiring a private chef in Bali: pricing, booking, cuisines, dietary restrictions, service area, trust & safety. Direct answers from myCHEF Indonesia.',
     changefreq: 'monthly', priority: 0.8,
+    bodyContent: `<h1>Private Chef in Bali — Frequently Asked Questions</h1>
+<p>20 of the most common questions guests ask about hiring a private chef in Bali. Don't see your question? WhatsApp +62 822-3756-5997 — we respond in under 10 minutes during operating hours.</p>
+${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htmlEsc(f.a)}</p>`).join('\n')}`,
     schema: [
       {
         '@context': 'https://schema.org',

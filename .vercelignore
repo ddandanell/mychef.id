@@ -1,0 +1,11 @@
+.git
+.replit
+.local
+.config
+.agents
+attached_assets/*.unused
+node_modules
+dist
+*.tar.gz
+replit.md
+design_guidelines.md

@@ -4,3 +4,15 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Vercel
+.vercel
+
+# Environment files (commit only .env.example)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Replit-internal state
+.local

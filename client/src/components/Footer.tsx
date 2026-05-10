@@ -170,7 +170,7 @@ export default function Footer() {
               </a>
               <div className="flex items-start gap-2 text-foreground/60">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>Jl. Sunset Road No. 88<br />Seminyak, Bali 80361</span>
+                <span>Jl. Tukad Barito Timur III No.16<br />Panjer, Denpasar Selatan<br />Kota Denpasar, Bali 80226</span>
               </div>
               <p className="text-foreground/60">
                 Business Hours:<br />

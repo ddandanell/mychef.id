@@ -11,7 +11,7 @@
   },
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|.*\\.(?:png|jpg|jpeg|webp|svg|ico|xml|txt|json|js|css|map|woff2?|ttf|otf|mp4|webm)$).*)",
+      "source": "/((?!api/|assets/|.*\\.(?:html|png|jpg|jpeg|webp|svg|ico|xml|txt|json|js|css|map|woff2?|ttf|otf|mp4|webm)$).*)",
       "destination": "/index.html"
     }
   ],

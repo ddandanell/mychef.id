@@ -167,24 +167,66 @@ ${city.faqItems.map(f => `<h3>${htmlEsc(f.question)}</h3><p>${htmlEsc(f.answer)}
 }
 
 // ---- Service pages ----
-interface ServiceDef { slug: string; name: string; intent: string; }
+// Service titles rewritten 2026-05-13 based on SEOdata #815 evidence:
+// /services/* folder got 692 impressions, 0 CLICKS across 4 pages in 90 days.
+// Old titles "{Name} — Private Chef Service in Bali" are too generic for SERP.
+// New titles add concrete value props (sommelier / bartender / photographer / scale)
+// to make the click compelling.
+interface ServiceDef { slug: string; name: string; intent: string; clickMagnetTitle: string; clickMagnetDescription: string; }
 const SERVICES: ServiceDef[] = [
-  { slug: 'services/villa-parties',         name: 'Villa Parties',         intent: 'private chef for villa parties in Bali' },
-  { slug: 'services/romantic-dinners',      name: 'Romantic Dinners',      intent: 'romantic private dinner chef in Bali' },
-  { slug: 'services/birthday-celebrations', name: 'Birthday Celebrations', intent: 'private chef for birthday in Bali' },
-  { slug: 'services/family-reunions',       name: 'Family Reunions',       intent: 'private chef for family reunions in Bali' },
-  { slug: 'services/corporate-events',      name: 'Corporate Events',      intent: 'private chef for corporate events in Bali' },
-  { slug: 'services/wedding-celebrations',  name: 'Wedding Celebrations',  intent: 'wedding private chef in Bali' },
-  { slug: 'services/cooking-classes',       name: 'Cooking Classes',       intent: 'private chef cooking classes in Bali' },
-  { slug: 'services/weekly-meal-prep',      name: 'Weekly Meal Prep',      intent: 'weekly chef meal prep in Bali' },
+  {
+    slug: 'services/villa-parties', name: 'Villa Parties',
+    intent: 'private chef for villa parties in Bali',
+    clickMagnetTitle: 'Bali Villa Parties — Private Chef + Bartender + BBQ Setup | myCHEF',
+    clickMagnetDescription: 'Full villa party catering in Bali: private chef, bartender, BBQ grill, sound system, sushi bar or teppanyaki. 8-50 guests, all-in pricing. WhatsApp booking.',
+  },
+  {
+    slug: 'services/romantic-dinners', name: 'Romantic Dinners',
+    intent: 'romantic private dinner chef in Bali',
+    clickMagnetTitle: 'Romantic Dinner in a Bali Villa — Chef + Sommelier + Setup | myCHEF',
+    clickMagnetDescription: 'Private romantic dinner in your Bali villa or beachfront. Multi-course tasting menu, sommelier wine pairing, candle + flower setup. From Rp 4.5M for 2 guests.',
+  },
+  {
+    slug: 'services/birthday-celebrations', name: 'Birthday Celebrations',
+    intent: 'private chef for birthday in Bali',
+    clickMagnetTitle: 'Birthday Dinner in Bali — Private Chef + Cake + Photographer Coordination | myCHEF',
+    clickMagnetDescription: 'Birthday celebration in your Bali villa with a private chef. Custom multi-course menu, surprise cake course, photographer + decor coordination. 4-30 guests.',
+  },
+  {
+    slug: 'services/family-reunions', name: 'Family Reunions',
+    intent: 'private chef for family reunions in Bali',
+    clickMagnetTitle: 'Family Reunion in Bali — Multi-Generational Private Chef Dinner | myCHEF',
+    clickMagnetDescription: 'Family reunion dinners in Bali for 6-30 guests. Kid-friendly menu options + adult tasting menus at the same table. Indonesian, Mediterranean, dietary-restricted.',
+  },
+  {
+    slug: 'services/corporate-events', name: 'Corporate Events',
+    intent: 'corporate event catering in Bali',
+    clickMagnetTitle: 'Corporate Event Catering Bali — Private Chef Teams 8-100 Guests | myCHEF',
+    clickMagnetDescription: 'Corporate event catering in Bali: private chef teams, multi-course tasting menus, sommelier wine pairing. Welcome dinners, offsites, retreats. 8-100 guests.',
+  },
+  {
+    slug: 'services/wedding-celebrations', name: 'Wedding Celebrations',
+    intent: 'wedding private chef in Bali',
+    clickMagnetTitle: 'Wedding Dinner in Bali — Rehearsal + Reception Chef Catering | myCHEF',
+    clickMagnetDescription: 'Wedding catering in Bali: rehearsal dinner (8-30 guests) and intimate wedding reception. Multi-course tasting menus, sommelier + waiter teams, dietary handling.',
+  },
+  {
+    slug: 'services/cooking-classes', name: 'Cooking Classes',
+    intent: 'private chef cooking classes in Bali',
+    clickMagnetTitle: 'Cooking Class in Bali — Hands-On Private Chef in Your Villa | myCHEF',
+    clickMagnetDescription: 'Hands-on cooking class in your Bali villa with a private chef. Learn Mediterranean, Balinese, Asian fusion, or vegan technique. Small groups, market-fresh ingredients.',
+  },
+  {
+    slug: 'services/weekly-meal-prep', name: 'Weekly Meal Prep',
+    intent: 'weekly chef meal prep in Bali',
+    clickMagnetTitle: 'Weekly Meal Prep in Bali — Private Chef Visits Your Villa | myCHEF',
+    clickMagnetDescription: 'Weekly private chef meal prep in your Bali villa. 1-3 sessions per week, custom menu, dietary-restricted (vegan/gluten-free/halal). From Rp 2.5M per session.',
+  },
 ];
 function servicePage(s: ServiceDef): PageConfig {
   const url = `${ORIGIN}/${s.slug}`;
-  const title = `${s.name} — Private Chef Service in Bali | myCHEF`;
-  const description = clip(
-    `${s.name} with a background-checked private chef across Bali. From Rp 800,000/hr, 3-hour minimum, all equipment + cleanup included. WhatsApp booking.`,
-    155
-  );
+  const title = s.clickMagnetTitle;
+  const description = clip(s.clickMagnetDescription, 165);
   // Cooking classes are a learning experience — Course schema beats generic Service
   const isCookingClass = s.slug === 'services/cooking-classes';
   const bodyContent = `<h1>${htmlEsc(s.name)} — Private Chef Service in Bali</h1>

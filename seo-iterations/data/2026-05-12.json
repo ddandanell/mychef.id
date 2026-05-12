@@ -1,13 +1,13 @@
 {
   "meta": {
-    "fetched_at": "2026-05-12T22:01:07.782278Z",
+    "fetched_at": "2026-05-12T22:02:35.640841Z",
     "date_range": {
       "start": "2026-04-14",
       "end": "2026-05-12"
     },
     "site": "sc-domain:mychef.id",
     "errors": [
-      "ga4_property_id_not_numeric_must_be_digits_only"
+      "ga4_property_id_not_numeric: contains_slash_looks_like_url_or_path,contains_whitespace,contains_letters,length=2383"
     ]
   },
   "gsc": {

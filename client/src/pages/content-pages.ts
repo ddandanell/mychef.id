@@ -1,0 +1,323 @@
+/**
+ * Centralised data for ContentPage-driven landing pages.
+ * Each entry defines the props for one route.
+ * Imported by App.tsx (for routing) AND scripts/postbuild.ts (for pre-render SEO).
+ */
+
+import type { ContentPageProps } from './ContentPage';
+
+const baseSchema = (slug: string, title: string, description: string, breadcrumbName: string) => ([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `https://mychef.id/${slug}#webpage`,
+    url: `https://mychef.id/${slug}`,
+    name: title,
+    description,
+    isPartOf: { '@id': 'https://mychef.id/#website' },
+    about: { '@id': 'https://mychef.id/#organization' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mychef.id/' },
+      { '@type': 'ListItem', position: 2, name: breadcrumbName, item: `https://mychef.id/${slug}` },
+    ],
+  },
+]);
+
+export const CONTENT_PAGES: Record<string, ContentPageProps & { slug: string }> = {
+  retreats: {
+    slug: 'retreats',
+    canonical: 'https://mychef.id/retreats',
+    title: 'Private Chef for Retreats in Bali — Yoga, Wellness, Corporate | myCHEF',
+    description: 'Background-checked private chefs for yoga retreats, wellness retreats, and corporate offsites in Bali. Custom meal plans, dietary-restricted menus, on-site cooking for 8-50 guests.',
+    keywords: 'private chef retreat bali, yoga retreat chef, wellness retreat catering bali, corporate offsite bali, retreat chef indonesia, yoga teacher training catering',
+    h1: 'Private Chef for Retreats in Bali',
+    lead: "Background-checked private chefs for yoga retreats, wellness retreats, corporate offsites, and yoga teacher trainings across Bali. Custom meal plans, full dietary-restriction support (vegan, gluten-free, halal, kosher), and on-site cooking for groups of 8 to 50 guests.",
+    sections: [
+      { heading: 'Types of retreats we cater', bullets: [
+        'Yoga retreats — vegan / plant-based menus, kapha-vata-pitta balancing on request, kitchari + dosa breakfasts, juice cleanses',
+        'Wellness retreats — anti-inflammatory menus, no refined sugar, organic farm-to-table from Tegallalang and Tabanan',
+        'Yoga teacher trainings (YTT) — 10-30 days, 3 meals/day, recurring weekly menu plans with cost-controlled ingredient budgets',
+        'Corporate offsites — multi-course tasting dinners, breakfast buffets for 30+ pax, working lunches plated for productivity',
+        'Surf camps + adventure retreats — high-energy meals, protein-forward, easy on the kitchen between sessions',
+      ]},
+      { heading: 'What\'s included for retreat bookings', bullets: [
+        'Custom multi-day menu plan reviewed with retreat host before the program',
+        'Single chef or chef team (we scale to group size — 1 chef per 10-15 guests is standard)',
+        'Ingredient sourcing from organic farms across Bali; transparent cost pass-through',
+        'Kitchen setup + plating + serving + cleanup for every meal',
+        'Dietary restriction handling at the per-guest level (allergens, vegan, halal, kosher, low-carb, paleo)',
+        'Operations team available on WhatsApp throughout the retreat',
+      ]},
+      { heading: 'Pricing for retreat chef placements', body: "Pricing depends on duration, guest count, meal frequency, and venue location. Multi-day retreats (3+ days) typically range Rp 1.5M-3M per chef per day plus ingredients at cost. For 10-day YTT programs with 3 meals/day for 20 guests, expect Rp 350k-550k per guest per day all-in. WhatsApp +62 822-3756-5997 with your dates and program size for a custom quote." },
+      { heading: 'How retreat bookings work', steps: [
+        { title: 'Tell us the program', description: 'Dates, guest count, dietary restrictions, venue location, any specific cuisine direction (Mediterranean / vegan / Balinese / mixed).' },
+        { title: 'Menu draft + chef profile', description: 'We send a sample week of menus and the chef\'s background within 24 hours. You review and adjust before committing.' },
+        { title: 'Deposit + lock in', description: '50% deposit reserves the chef for your dates. Final balance + ingredient cost reconciliation due on the final day of the retreat.' },
+        { title: 'Run the retreat', description: 'Chef arrives the day before, sets up kitchen workflow with venue staff, cooks all meals on schedule. You focus on programming.' },
+      ]},
+      { heading: 'Retreat venues we know well', body: 'Most retreats book chefs into private villa compounds in Ubud, Canggu, Pererenan, and Uluwatu. We have working knowledge of villa kitchens at venues across Tegallalang, Ubud (Penestanan, Sayan), Canggu (Pererenan, Berawa, Echo Beach), and the Bukit peninsula. If your venue is new to us, the chef arrives a day early to test the kitchen workflow.' },
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — interested in a private chef for our retreat in Bali. Dates: [start]-[end], [N] guests, [yoga/wellness/corporate/YTT]. Can you send a sample menu plan?" },
+    ctaLabel: 'WhatsApp about a retreat',
+    secondaryCta: { label: 'Custom quote form', href: '/quote' },
+    structuredData: [
+      ...baseSchema('retreats', 'Private Chef for Retreats in Bali — Yoga, Wellness, Corporate | myCHEF', 'Background-checked private chefs for yoga retreats, wellness retreats, and corporate offsites in Bali.', 'Retreats'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': 'https://mychef.id/retreats#service',
+        name: 'Private Chef for Retreats — Bali',
+        serviceType: 'Multi-day private chef placement for retreats',
+        description: 'Recurring meal preparation for yoga, wellness, corporate, and YTT retreats across Bali. Single chef or chef team scaled to group size.',
+        provider: { '@id': 'https://mychef.id/#organization' },
+        areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
+        offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '1500000', description: 'From Rp 1.5M per chef per day plus ingredients at cost' },
+      },
+    ],
+  },
+
+  catering: {
+    slug: 'catering',
+    canonical: 'https://mychef.id/catering',
+    title: 'Best Catering in Bali — Private Chef at Home | myCHEF Indonesia',
+    description: 'Looking for the best catering in Bali? myCHEF puts a private chef in your villa kitchen — fresher than catering, fully custom, all-in pricing. From Rp 800k/hr. WhatsApp booking.',
+    keywords: 'best catering bali, catering bali villa, private catering bali, in-villa catering bali, bali wedding catering, bali event catering, alternative to catering bali',
+    h1: 'Catering in Bali — Why a Private Chef Beats Traditional Catering',
+    lead: 'Most people searching for "catering in Bali" actually want fresh, custom-cooked food in their villa — not pre-made trays delivered cold from a kitchen across town. myCHEF Indonesia is the alternative: a background-checked private chef cooks in your villa kitchen, plates and serves the food, and cleans up before leaving. Same final result as a private restaurant in your home, no industrial catering trays involved.',
+    sections: [
+      { heading: 'Private chef vs catering company — what\'s different', bullets: [
+        'Cooked on the spot in YOUR kitchen, not driven over in foil trays. Fresh, not warm-held.',
+        'Menu is built around your guests, dietary restrictions, and what\'s freshest in the market that morning.',
+        'Chef can adjust real-time — picky kid, surprise vegan friend, wine cue from the host? Handled.',
+        'Chef plates each course directly to your guests like a restaurant. No buffet table required.',
+        'Cleanup is included. Your kitchen comes back the way it was.',
+        'Pricing is per-hour + ingredients at cost — no markup on food, no minimum order trays.',
+      ]},
+      { heading: 'When traditional catering still makes sense', body: 'Catering wins on volume — for 100+ guests, a catering operation has the kitchen capacity that a single private chef can\'t match. For 4-20 guests, the private chef model wins on freshness, customisation, and total cost-per-guest (no catering minimums, no service charge markup). For 20-50 guests we run a chef team — same in-villa model, scaled up.' },
+      { heading: 'What myCHEF delivers in place of "catering"', bullets: [
+        'Single-night villa dinners for 4-20 guests (most common)',
+        'Wedding rehearsal dinners and small wedding ceremonies (up to 30 guests)',
+        'Birthday + anniversary + proposal dinners',
+        'Corporate offsite dinners + multi-day retreat catering',
+        'Recurring weekly meal-prep for expat families',
+        'Full-time household chef placement',
+      ]},
+      { heading: 'Pricing comparison', body: 'A traditional Bali catering company for 6 guests typically quotes Rp 750k-1.2M per guest (8-course tasting), or Rp 4.5M-7M total — with most of the budget going to service charges, transport, and packaging. myCHEF private chef for the same 6 guests: Rp 800k/hr × 4 hours (chef fee) + ingredients at cost = Rp 3.5M-4.5M total. Same quality food, lower price, fresher result.' },
+      { heading: 'Common cuisines we cater', body: 'Mediterranean, modern European, Asian fusion, traditional Balinese, vegan + plant-based, halal-certified, gluten-free, and any combination. See sample menus per cuisine.' },
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — comparing private chef vs traditional catering for our event in Bali. Date: [date], [N] guests, [area]. Can you send pricing?" },
+    ctaLabel: 'WhatsApp about catering',
+    secondaryCta: { label: 'See sample menus', href: '/menus' },
+    structuredData: [
+      ...baseSchema('catering', 'Best Catering in Bali — Private Chef at Home | myCHEF Indonesia', 'Looking for the best catering in Bali? myCHEF puts a private chef in your villa kitchen.', 'Catering'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': 'https://mychef.id/catering#service',
+        name: 'In-Villa Catering Alternative — Bali',
+        serviceType: 'Private chef catering for Bali villas and events',
+        provider: { '@id': 'https://mychef.id/#organization' },
+        areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
+        offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '800000', description: 'From Rp 800,000 per hour, 3-hour minimum + ingredients at cost' },
+      },
+    ],
+  },
+
+  'proposal-dinner': {
+    slug: 'proposal-dinner',
+    canonical: 'https://mychef.id/proposal-dinner',
+    title: 'Proposal Dinner in Bali — Private Chef + Sommelier | myCHEF Indonesia',
+    description: 'Plan a private proposal dinner in your Bali villa with myCHEF. Multi-course menu, sommelier wine pairing, candle + flower setup, photographer coordination. From Rp 6M for 2 guests.',
+    keywords: 'proposal dinner bali, marriage proposal bali, private proposal chef bali, surprise proposal dinner bali, propose at villa bali, romantic proposal dinner',
+    h1: 'Private Proposal Dinner in a Bali Villa',
+    lead: "Booking a private chef for your Bali proposal is the highest-stakes booking we do — the dinner only happens once, and every detail has to land. myCHEF has handled 100+ proposal dinners since 2012: villa terrace candle setups, multi-course tasting menus with sommelier-paired wines, ring-on-the-plate reveals coordinated with the photographer, surprise cake courses, and the discreet operations crew that keeps the surprise intact.",
+    sections: [
+      { heading: 'What a myCHEF proposal dinner includes', bullets: [
+        '5-course tasting menu built around their favorite cuisines and ingredients',
+        'Sommelier-paired wine flight (4 wines, one per course + amuse-bouche)',
+        'Villa terrace or beachfront setup: candles, fresh flowers, linens, ambient lighting',
+        'Coordinated playlist (your shared songs, first dance song, anniversary track)',
+        'Discreet coordination with your proposal photographer + ring delivery onto the plate',
+        'Surprise course: a custom proposal cake or shared dessert with the ring nested in',
+        'Operations team on WhatsApp throughout — silent until you need us',
+      ]},
+      { heading: 'How the proposal gets planned', steps: [
+        { title: 'Tell us the story', description: 'Their favorite cuisines, allergies, the venue, the proposal moment (sunset, after dessert, during cocktails), and what they\'d most enjoy.' },
+        { title: 'Menu + setup mock-up', description: 'We send a draft menu and a photo-realistic setup mock-up within 48 hours. You adjust until it\'s perfect.' },
+        { title: 'Photographer + florist coordination', description: 'If you\'re using your own photographer, we sync schedules. If you need recommendations, we have trusted partners.' },
+        { title: 'The night itself', description: 'Chef arrives 3-4 hours early. Setup is done before your arrival. Sommelier paces the wines to your conversation. The proposal moment is yours.' },
+      ]},
+      { heading: 'Pricing for proposal dinners', body: 'From Rp 6M for 2 guests, all-in. Includes 5-course tasting menu, sommelier with 4-wine flight, candle + flower setup, custom playlist coordination, photographer logistics, and the surprise cake course. Add-ons: live string player (Rp 2.5M-4M), additional florist (Rp 1.5M-3M), professional photographer (Rp 4M-8M depending on coverage).' },
+      { heading: 'Where proposals happen', body: 'Most myCHEF proposals are villa terrace dinners — Canggu rice-field views, Seminyak rooftops, Uluwatu cliff villas, Ubud jungle decks. We also do beachfront setups in Jimbaran, Nusa Dua, and Lovina. The villa kitchen needs basic equipment; everything else we bring.' },
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — planning a surprise proposal dinner in Bali. Date: [date], area: [Canggu/Seminyak/Ubud/Uluwatu/other], any specific cuisines or ideas: [...]. Need full discretion." },
+    ctaLabel: 'WhatsApp about a proposal',
+    secondaryCta: { label: 'See sample menus', href: '/menus' },
+    structuredData: [
+      ...baseSchema('proposal-dinner', 'Proposal Dinner in Bali — Private Chef + Sommelier | myCHEF Indonesia', 'Plan a private proposal dinner in your Bali villa with myCHEF.', 'Proposal Dinner'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': 'https://mychef.id/proposal-dinner#service',
+        name: 'Proposal Dinner in Bali',
+        serviceType: 'Private chef proposal dinner with sommelier + setup',
+        provider: { '@id': 'https://mychef.id/#organization' },
+        areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
+        offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '6000000', description: 'From Rp 6M for 2 guests all-in (5-course tasting + sommelier + setup)' },
+      },
+    ],
+  },
+
+  'honeymoon-chef': {
+    slug: 'honeymoon-chef',
+    canonical: 'https://mychef.id/honeymoon-chef',
+    title: 'Honeymoon Private Chef in Bali — Villa Dining for Two | myCHEF',
+    description: 'Hire a private chef for your Bali honeymoon. Romantic multi-course dinners, sommelier wine pairing, candle + flower villa setup. WhatsApp booking from Rp 4.5M for 2 guests.',
+    keywords: 'honeymoon chef bali, bali honeymoon private dinner, romantic chef bali, honeymoon villa dinner bali, honeymoon dinner ubud, honeymoon dinner seminyak',
+    h1: 'Honeymoon Private Chef in Bali',
+    lead: "myCHEF has been cooking honeymoon dinners in Bali villas since 2012. We know which villas have the best sunset views, which beaches do candle setups, and how to time a multi-course tasting menu so you actually relax instead of watching the kitchen. Most honeymoons book us for 1-3 dinners across their stay — a welcome dinner, a milestone dinner mid-trip, and a farewell dinner.",
+    sections: [
+      { heading: 'Common honeymoon dinner formats', bullets: [
+        'Welcome night — relaxed, generous, comforting after the flight. Family-style sharing or simple 3-course plated.',
+        'Milestone night — full 5-course tasting menu with sommelier-paired wines, candle setup, the big romantic moment of the trip.',
+        'Farewell dinner — sentimental, often outdoors with a sunset view. Lighter menu, focused on the moment.',
+        'Beach picnic lunch — chef sets up on the beach (Jimbaran, Lovina, Sanur) with chilled wine, platter food, lounge cushions.',
+      ]},
+      { heading: 'What\'s included for honeymoon bookings', bullets: [
+        'Custom multi-course menu — your favorite cuisines, food memories, and dietary needs',
+        'Candle + flower villa setup before you arrive at the table',
+        'Sommelier wine pairing (optional add-on, recommended for milestone nights)',
+        'Playlist coordination (your wedding songs, anniversary tracks, your specific vibe)',
+        'Chef stays through service then quietly cleans up — you don\'t deal with dishes',
+      ]},
+      { heading: 'Pricing for honeymoon dinners', body: 'From Rp 4.5M for 2 guests all-in (3-course plated dinner with chef + ingredients + cleanup). Upgrade to a 5-course tasting menu with sommelier and full setup for Rp 6M-8M. Multi-night honeymoon packages (3+ dinners across the trip) get a 10-15% repeat-guest discount.' },
+      { heading: 'Best honeymoon villa areas in Bali', body: 'Ubud (jungle and rice-field villas), Canggu (beach-adjacent with rice-field decks), Uluwatu (cliff villas with infinity pools), Seminyak (rooftop and pool villas with sunset views), Nusa Dua (resort villas with beach access). We work in all of them — most weeks we cook in 4-5 different villas across Bali.' },
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — booking a private chef for our Bali honeymoon. Dates: [start]-[end], staying in [area + villa name if known]. Looking at [N] dinners across the trip." },
+    ctaLabel: 'WhatsApp about a honeymoon dinner',
+    secondaryCta: { label: 'See sample menus', href: '/menus' },
+    structuredData: [
+      ...baseSchema('honeymoon-chef', 'Honeymoon Private Chef in Bali — Villa Dining for Two | myCHEF', 'Hire a private chef for your Bali honeymoon.', 'Honeymoon Chef'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': 'https://mychef.id/honeymoon-chef#service',
+        name: 'Honeymoon Private Chef in Bali',
+        serviceType: 'Romantic private chef dinner for honeymoon couples',
+        provider: { '@id': 'https://mychef.id/#organization' },
+        areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
+        offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '4500000', description: 'From Rp 4.5M for 2 guests all-in (3-course plated)' },
+      },
+    ],
+  },
+
+  'menus/modern-european': {
+    slug: 'menus/modern-european',
+    canonical: 'https://mychef.id/menus/modern-european',
+    title: 'Modern European Private Chef Menu in Bali — Sample Menus | myCHEF',
+    description: 'Sample modern European menus from myCHEF private chefs in Bali. French, Italian, Nordic-inspired tasting menus. Plated multi-course fine dining. From Rp 5.8M for 6 guests.',
+    keywords: 'modern european chef bali, french chef bali, italian chef bali, nordic chef bali, fine dining chef bali, tasting menu chef bali',
+    h1: 'Modern European Private Chef Menu — Bali',
+    lead: 'Plated multi-course tasting menus in the style of contemporary European fine dining — French technique, Italian precision, Nordic restraint. Our European-trained chefs reframe seasonal Bali ingredients through the lens of restaurants like Noma, Septime, and Osteria Francescana.',
+    sections: [
+      { heading: 'Sample Modern European Tasting Menu — 6 Courses', body: 'Rp 7.2M for 6 guests, all-in (chef + ingredients).', bullets: [
+        'Snacks — beetroot meringue with goat curd; smoked mackerel tartlet; truffle gougère',
+        'Cold — heirloom tomato consommé, basil oil, mascarpone',
+        'Pasta — hand-rolled cavatelli, Bali mushroom ragu, brown butter, Parmesan crust',
+        'Fish — wood-fired sea bass, beurre blanc, smoked salt, charred leek',
+        'Meat — slow-cooked lamb shoulder, demi-glace jus, parsnip purée, pickled shallot',
+        'Dessert — chocolate fondant with house-made vanilla gelato + olive oil drizzle',
+      ]},
+      { heading: 'Sample Italian Family-Style Sharing — 4 Courses', body: 'Rp 5.8M for 6-8 guests, all-in.', bullets: [
+        'Antipasti — bresaola, burrata, charred bread, olive oil tasting, marinated olives, grissini',
+        'Primi — hand-rolled tagliatelle al ragù di carne (4-hour beef ragu, brown butter, Parmesan)',
+        'Secondi (sharing) — slow-cooked porchetta, balsamic-glazed onions, rosemary potatoes, Tuscan beans',
+        'Dolci — tiramisu prepared tableside, espresso, soft amaretti',
+      ]},
+      { heading: 'When modern European wins for your villa dinner', body: 'Best for: milestone dinners (anniversary, proposal, honeymoon), corporate fine-dining offsites, guests who genuinely care about cuisine and want a "tasting menu in a restaurant" experience without leaving the villa. The chef pace is slower — courses arrive over 2.5-3 hours — so this format suits intimate dinners of 4-10 guests, not large group catering.' },
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — interested in a modern European tasting menu for our villa dinner in Bali. Date: [date], [N] guests, area: [area]." },
+    ctaLabel: 'WhatsApp for a modern European menu',
+    structuredData: [
+      ...baseSchema('menus/modern-european', 'Modern European Private Chef Menu in Bali — Sample Menus | myCHEF', 'Sample modern European menus from myCHEF private chefs in Bali.', 'Modern European'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Menu',
+        '@id': 'https://mychef.id/menus/modern-european#menu',
+        name: 'Modern European Sample Menu',
+        hasMenuSection: [
+          { '@type': 'MenuSection', name: '6-Course Modern European Tasting — Rp 7.2M for 6 guests', hasMenuItem: [
+            { '@type': 'MenuItem', name: 'Snacks', description: 'Beetroot meringue with goat curd; smoked mackerel tartlet; truffle gougère' },
+            { '@type': 'MenuItem', name: 'Cold', description: 'Heirloom tomato consommé, basil oil, mascarpone' },
+            { '@type': 'MenuItem', name: 'Pasta', description: 'Hand-rolled cavatelli, Bali mushroom ragu, brown butter, Parmesan crust' },
+            { '@type': 'MenuItem', name: 'Fish', description: 'Wood-fired sea bass, beurre blanc, smoked salt, charred leek' },
+            { '@type': 'MenuItem', name: 'Meat', description: 'Slow-cooked lamb shoulder, demi-glace jus, parsnip purée, pickled shallot' },
+            { '@type': 'MenuItem', name: 'Dessert', description: 'Chocolate fondant with house-made vanilla gelato' },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  'menus/halal': {
+    slug: 'menus/halal',
+    canonical: 'https://mychef.id/menus/halal',
+    title: 'Halal Private Chef Menu in Bali — Certified Menus | myCHEF Indonesia',
+    description: 'Halal-certified private chef menus in Bali. Modern Indonesian, Middle Eastern, Mediterranean halal options. All ingredients sourced from halal suppliers. From Rp 4.5M for 6 guests.',
+    keywords: 'halal chef bali, halal private chef bali, halal catering bali, halal villa dinner bali, halal menu bali, muslim friendly chef bali',
+    h1: 'Halal Private Chef Menu — Bali',
+    lead: "myCHEF designs halal-certified menus for Muslim guests in Bali. All proteins are sourced from MUI-certified halal suppliers (Bali is a Hindu-majority island so this needs intentional supply-chain work — we have the relationships). The chef confirms supplier sourcing on every booking, separates cookware between halal and non-halal kitchens when both are needed for mixed groups, and avoids alcohol in cooking where requested.",
+    sections: [
+      { heading: 'Sample Halal Multi-Course Menu', body: 'Rp 5.4M for 6 guests, all-in (chef + halal-certified ingredients).', bullets: [
+        'Starter — Mezze platter: hummus, baba ganoush, muhammara, charred flatbread, halal lamb kofta skewer',
+        'Soup — Harira: Moroccan tomato + lentil + slow-cooked halal lamb soup with cumin and coriander',
+        'Main — Slow-roasted halal lamb shoulder, saffron rice, charred eggplant, pomegranate-yoghurt sauce',
+        'Side — Fattoush salad with sumac, mint, pomegranate, fried sourdough',
+        'Dessert — Baklava with rosewater syrup, pistachios, and Bali honey ice cream',
+      ]},
+      { heading: 'Sample Indonesian Halal Sharing Feast', body: 'Rp 4.5M for 6-8 guests, all-in.', bullets: [
+        'Sharing cold — Gado-gado, urap, kerupuk',
+        'Sharing hot — Ayam goreng (halal chicken), ikan bakar (grilled fish), beef rendang, sayur asem',
+        'Sides — Nasi kuning, sambal trio (matah, terasi, hijau)',
+        'Dessert — Es campur, klepon, dadar gulung',
+      ]},
+      { heading: 'How we guarantee halal preparation', bullets: [
+        'All meat sourced from MUI-certified halal suppliers in Bali (we have a vetted list of 4 suppliers covering chicken, beef, lamb, fish)',
+        'For mixed groups (halal + non-halal guests), we run two kitchens or two sittings — never cross-contaminate',
+        'No alcohol in cooking unless explicitly requested; mock-tail menu available',
+        'Knife and cutting board separation maintained throughout service',
+        'Chef confirms each ingredient\'s halal status with the booking party before final menu lock',
+      ]},
+    ],
+    ctaSource: 'experience',
+    ctaPresetOpts: { message: "Hi myCHEF — need a halal-certified private chef menu in Bali. Date: [date], [N] guests, area: [area], dietary specifics: [...]." },
+    ctaLabel: 'WhatsApp for a halal menu',
+    structuredData: [
+      ...baseSchema('menus/halal', 'Halal Private Chef Menu in Bali — Certified Menus | myCHEF Indonesia', 'Halal-certified private chef menus in Bali.', 'Halal'),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Menu',
+        '@id': 'https://mychef.id/menus/halal#menu',
+        name: 'Halal Certified Sample Menu',
+        hasMenuSection: [
+          { '@type': 'MenuSection', name: 'Halal Multi-Course Menu — Rp 5.4M for 6 guests', hasMenuItem: [
+            { '@type': 'MenuItem', name: 'Starter', description: 'Mezze platter with halal lamb kofta' },
+            { '@type': 'MenuItem', name: 'Soup', description: 'Harira — Moroccan halal lamb soup' },
+            { '@type': 'MenuItem', name: 'Main', description: 'Slow-roasted halal lamb shoulder, saffron rice' },
+            { '@type': 'MenuItem', name: 'Side', description: 'Fattoush salad' },
+            { '@type': 'MenuItem', name: 'Dessert', description: 'Baklava with rosewater syrup, Bali honey ice cream' },
+          ]},
+        ],
+      },
+    ],
+  },
+};

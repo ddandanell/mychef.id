@@ -23,6 +23,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { CITY_DATA, type CityData } from '../shared/cityData';
 import { HOMEPAGE_FAQS, FAQ_MASTER } from '../shared/faqs';
+import { CONTENT_PAGES } from '../client/src/pages/content-pages';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST_PUBLIC = resolve(__dirname, '../dist/public');
@@ -743,6 +744,30 @@ Office: Jl. Tukad Barito Timur III No.16, Panjer, Denpasar Selatan, Kota Denpasa
   ],
 };
 
+function contentPageToConfig(cp: typeof CONTENT_PAGES[keyof typeof CONTENT_PAGES]): PageConfig {
+  // Build pre-render bodyContent from the structured ContentPageProps (same data the
+  // React component uses to render — single source of truth, no copy duplication).
+  const sections = cp.sections.map(s => {
+    let html = `<h2>${s.heading.replace(/</g, '&lt;')}</h2>`;
+    if (s.body && typeof s.body === 'string') html += `<p>${(s.body as string).replace(/</g, '&lt;')}</p>`;
+    if (s.bullets) html += `<ul>${s.bullets.map(b => `<li>${b.replace(/</g, '&lt;')}</li>`).join('')}</ul>`;
+    if (s.steps) html += `<ol>${s.steps.map(st => `<li><strong>${st.title.replace(/</g, '&lt;')}:</strong> ${st.description.replace(/</g, '&lt;')}</li>`).join('')}</ol>`;
+    return html;
+  }).join('\n');
+  const bodyContent = `<h1>${cp.h1.replace(/</g, '&lt;')}</h1>
+<p>${cp.lead.replace(/</g, '&lt;')}</p>
+${sections}`;
+  return {
+    slug: cp.slug,
+    title: cp.title,
+    description: cp.description,
+    schema: cp.structuredData as object | object[],
+    changefreq: 'monthly',
+    priority: 0.75,
+    bodyContent,
+  };
+}
+
 function allPages(): PageConfig[] {
   return [
     HOMEPAGE,
@@ -750,6 +775,7 @@ function allPages(): PageConfig[] {
     ...SERVICES.map(servicePage),
     ...KEYWORD_PAGES.map(keywordPage),
     ...STATIC_PAGES,
+    ...Object.values(CONTENT_PAGES).map(contentPageToConfig),
   ];
 }
 

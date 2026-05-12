@@ -73,6 +73,8 @@ const MenusAsianFusionPage = lazy(() => import("@/pages/MenusAsianFusionPage"));
 const MenusVeganPage = lazy(() => import("@/pages/MenusVeganPage"));
 const ChefsPage = lazy(() => import("@/pages/ChefsPage"));
 const FAQMasterPage = lazy(() => import("@/pages/FAQMasterPage"));
+const ContentPage = lazy(() => import("@/pages/ContentPage"));
+import { CONTENT_PAGES } from "@/pages/content-pages";
 
 function Router() {
   const [location] = useLocation();
@@ -174,6 +176,11 @@ function Router() {
       <Route path="/menus/vegan" component={MenusVeganPage} />
       <Route path="/chefs" component={ChefsPage} />
       <Route path="/faq" component={FAQMasterPage} />
+      {Object.values(CONTENT_PAGES).map((p) => (
+        <Route key={p.slug} path={`/${p.slug}`}>
+          {() => <ContentPage {...p} />}
+        </Route>
+      ))}
       <Route path="/admin/quotes" component={AdminQuotes} />
       <Route component={NotFound} />
     </Switch>

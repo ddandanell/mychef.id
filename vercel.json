@@ -4,6 +4,7 @@
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist/public",
   "installCommand": "npm install",
+  "ignoreCommand": "sh scripts/vercel-ignore.sh",
   "functions": {
     "api/[...path].ts": {
       "maxDuration": 30

@@ -1,0 +1,1417 @@
+{
+  "meta": {
+    "fetched_at": "2026-05-12T20:24:02.889703Z",
+    "date_range": {
+      "start": "2026-04-14",
+      "end": "2026-05-12"
+    },
+    "site": "sc-domain:mychef.id",
+    "errors": [
+      "ga4_property_id_not_numeric_must_be_digits_only"
+    ]
+  },
+  "gsc": {
+    "queries": [
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "private chef jakarta",
+        "clicks": 5,
+        "impressions": 59,
+        "ctr": 0.08475,
+        "position": 3.75
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "mychef",
+        "clicks": 2,
+        "impressions": 12,
+        "ctr": 0.16667,
+        "position": 4.17
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "private chef",
+        "clicks": 2,
+        "impressions": 17,
+        "ctr": 0.11765,
+        "position": 7.29
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "bali private chef",
+        "clicks": 1,
+        "impressions": 12,
+        "ctr": 0.08333,
+        "position": 12.92
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "canggu private chef",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "hiring a chef",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1.0,
+        "position": 4.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef canggu",
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.33333,
+        "position": 9.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "bali chef",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 19.71
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "bali private chef hire",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "birthday catering uluwatu",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0.0,
+        "position": 69.4
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "book a chef to cook in your home",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "catering chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 9.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 8.67
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef at home service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef available",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef bali",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 9.75
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef by me",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef contact",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef for hire",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 6.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef in indonesia",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 11.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef indonesia",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef jakarta",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef lunch",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef private",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 35.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chef service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 13.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chefs menu",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 36.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "chief near me",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "fine dining delivery",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "harga private chef",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 11.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "hire chef bali canggu",
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0.0,
+        "position": 32.17
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "hire private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 9.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "home chef",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 7.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "home cooking service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 13.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "home private chef",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 9.25
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "home service catering jakarta",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 4.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "in a villa",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 4.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "in house cook",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 19.25
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "local chef menu",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "meet your chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 9.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "my chef",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0.0,
+        "position": 6.8
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "my personal chef",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 7.67
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "my private chef",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "online cook service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "personal chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "personal chef bali",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "personal chef home",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "personal chef near me",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private catering bali",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0.0,
+        "position": 26.8
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private catering service",
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0.0,
+        "position": 44.83
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private catering service bali",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 33.75
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef",
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0.0,
+        "position": 15.2
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef bali",
+        "clicks": 0,
+        "impressions": 64,
+        "ctr": 0.0,
+        "position": 15.84
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef bali cost",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef bali seminyak",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef dinner home",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef for family",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef for hire",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef hire",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef hire bali",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 11.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef in bali",
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0.0,
+        "position": 11.75
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef jakarta",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 3.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef manager",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 9.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef seminyak",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private chef ubud",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 19.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "private home chef",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "restaurant where you cook your own food",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 28.0
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "the personal chef",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.5
+      },
+      {
+        "page": "https://mychef.id/",
+        "query": "who is the best private chef in bali",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.5
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "canggu private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 9.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "catering service in canggu",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 50.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "chefs",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 3.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "hire chef bali canggu",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 21.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "private chef bali",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 40.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "private chef canggu",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "query": "private chef services",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 11.0
+      },
+      {
+        "page": "https://mychef.id/denpasar",
+        "query": "who is the best private chef in bali",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 7.5
+      },
+      {
+        "page": "https://mychef.id/gianyar",
+        "query": "fried rice in the style of chef jim",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/gianyar",
+        "query": "vow renewal jimbaran",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 50.0
+      },
+      {
+        "page": "https://mychef.id/gianyar",
+        "query": "watermelon part 2 recipe stephen",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "jet catering bali denpasar",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 38.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "jet lag nusa dua",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 94.5
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "private chef",
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0.0,
+        "position": 16.11
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "private chef bali",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 71.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "private chef hire bali",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 40.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "private chef near me",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "private jet catering bali denpasar",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 62.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "restoran chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 93.0
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "query": "take a chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/legian",
+        "query": "sang ria grill bali legian",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 27.0
+      },
+      {
+        "page": "https://mychef.id/legian",
+        "query": "yes",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/lovina",
+        "query": "lovina",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/pecatu",
+        "query": "private dining uluwatu",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 68.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-kelapa-gading",
+        "query": "chef kitchen kelapa gading",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "chef private dinner",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 6.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "privat chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "private chef agencies",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 42.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "private chef artinya",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 8.67
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "private chef service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "sewa chef ke rumah",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "query": "ya",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 2.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-pantai-indah-kapuk",
+        "query": "chef's kitchen pik",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 18.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-pantai-indah-kapuk",
+        "query": "the secret service of the private home chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 11.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-puri-indah",
+        "query": "chef online booking",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-puri-indah",
+        "query": "harga private chef",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "chef in house",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "chef private",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "chef private dinner",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 35.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "chef service",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "gambar orang memasak",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 8.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "hire private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "local chef menu",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 75.75
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "mychef restaurant",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 3.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "personal chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "personal chef cost",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "personal chef near me",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "private chef adalah",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "private chef services",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 3.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "private dining chef",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 3.67
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "sewa chef ke rumah",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "the secret service of the private home chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 7.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "query": "ya",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 12.0
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "<private_person> birthday",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 8.5
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "birthday catering bali",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 39.0
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "birthday catering uluwatu",
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0.0,
+        "position": 53.33
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "chef private dinner",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 11.0
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "private catering bali",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 39.71
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "private catering service",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 34.0
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "private catering service bali",
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0.0,
+        "position": 65.83
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "query": "private chef bali",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 78.0
+      },
+      {
+        "page": "https://mychef.id/services/corporate-events",
+        "query": "best corporate offsite venues in indonesia great food service",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 5.0
+      },
+      {
+        "page": "https://mychef.id/services/corporate-events",
+        "query": "corporate event catering",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 19.0
+      },
+      {
+        "page": "https://mychef.id/services/corporate-events",
+        "query": "corporate event catering bali",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 23.0
+      },
+      {
+        "page": "https://mychef.id/services/corporate-events",
+        "query": "corporateevents",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "query": "birthday catering bali",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 68.75
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "query": "private catering bali",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 60.0
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "query": "private catering service bali",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0.0,
+        "position": 49.0
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "query": "villa catering",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 11.0
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "query": "villa catering bali",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 20.0
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "chef prepared meals near me",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 1.0
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "chef studio bali",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 100.0
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "local chef menu",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 44.0
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "private chef ubud",
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0.0,
+        "position": 7.15
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "ubud catering",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0.0,
+        "position": 16.0
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "query": "ubud private chef",
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0.0,
+        "position": 8.75
+      },
+      {
+        "page": "https://mychef.id/uluwatu",
+        "query": "private chef",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 2.0
+      },
+      {
+        "page": "https://mychef.id/uluwatu",
+        "query": "private chef uluwatu",
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0.0,
+        "position": 5.5
+      },
+      {
+        "page": "https://mychef.id/uluwatu",
+        "query": "private dining uluwatu",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 33.43
+      }
+    ],
+    "pages": [
+      {
+        "page": "https://mychef.id/private-chef-senayan",
+        "clicks": 23,
+        "impressions": 433,
+        "ctr": 0.05312,
+        "position": 5.66
+      },
+      {
+        "page": "https://mychef.id/",
+        "clicks": 17,
+        "impressions": 793,
+        "ctr": 0.02144,
+        "position": 9.92
+      },
+      {
+        "page": "https://mychef.id/canggu",
+        "clicks": 2,
+        "impressions": 103,
+        "ctr": 0.01942,
+        "position": 9.85
+      },
+      {
+        "page": "https://mychef.id/private-chef-kelapa-gading",
+        "clicks": 2,
+        "impressions": 50,
+        "ctr": 0.04,
+        "position": 7.22
+      },
+      {
+        "page": "https://mychef.id/ubud",
+        "clicks": 2,
+        "impressions": 205,
+        "ctr": 0.00976,
+        "position": 8.25
+      },
+      {
+        "page": "https://mychef.id/chef-for-hire-indonesia",
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14286,
+        "position": 4.14
+      },
+      {
+        "page": "https://mychef.id/gianyar",
+        "clicks": 1,
+        "impressions": 85,
+        "ctr": 0.01176,
+        "position": 13.76
+      },
+      {
+        "page": "https://mychef.id/kuta",
+        "clicks": 1,
+        "impressions": 92,
+        "ctr": 0.01087,
+        "position": 14.57
+      },
+      {
+        "page": "https://mychef.id/lovina",
+        "clicks": 1,
+        "impressions": 47,
+        "ctr": 0.02128,
+        "position": 7.19
+      },
+      {
+        "page": "https://mychef.id/sanur",
+        "clicks": 1,
+        "impressions": 34,
+        "ctr": 0.02941,
+        "position": 6.18
+      },
+      {
+        "page": "https://mychef.id/services/birthday-celebrations",
+        "clicks": 1,
+        "impressions": 115,
+        "ctr": 0.0087,
+        "position": 19.52
+      },
+      {
+        "page": "https://mychef.id/uluwatu",
+        "clicks": 1,
+        "impressions": 71,
+        "ctr": 0.01408,
+        "position": 9.34
+      },
+      {
+        "page": "https://mychef.id/amed",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 12.75
+      },
+      {
+        "page": "https://mychef.id/assets/Chef_preparing_satay_villa_kitchen_633e507a-CAgJpg6s.png",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "position": 26.0
+      },
+      {
+        "page": "https://mychef.id/berawa",
+        "clicks": 0,
+        "impressions": 16,
+        "ctr": 0.0,
+        "position": 6.75
+      },
+      {
+        "page": "https://mychef.id/denpasar",
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0.0,
+        "position": 6.32
+      },
+      {
+        "page": "https://mychef.id/legian",
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0.0,
+        "position": 11.27
+      },
+      {
+        "page": "https://mychef.id/padang-bai",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 6.86
+      },
+      {
+        "page": "https://mychef.id/pecatu",
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0.0,
+        "position": 33.71
+      },
+      {
+        "page": "https://mychef.id/pererenan",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 8.75
+      },
+      {
+        "page": "https://mychef.id/private-chef-kemang",
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0.0,
+        "position": 10.0
+      },
+      {
+        "page": "https://mychef.id/private-chef-menteng",
+        "clicks": 0,
+        "impressions": 42,
+        "ctr": 0.0,
+        "position": 6.5
+      },
+      {
+        "page": "https://mychef.id/private-chef-pantai-indah-kapuk",
+        "clicks": 0,
+        "impressions": 25,
+        "ctr": 0.0,
+        "position": 5.56
+      },
+      {
+        "page": "https://mychef.id/private-chef-puri-indah",
+        "clicks": 0,
+        "impressions": 38,
+        "ctr": 0.0,
+        "position": 6.84
+      },
+      {
+        "page": "https://mychef.id/private-dining-indonesia",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0.0,
+        "position": 8.75
+      },
+      {
+        "page": "https://mychef.id/quote",
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0.0,
+        "position": 5.2
+      },
+      {
+        "page": "https://mychef.id/services/corporate-events",
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0.0,
+        "position": 8.43
+      },
+      {
+        "page": "https://mychef.id/services/romantic-dinners",
+        "clicks": 0,
+        "impressions": 16,
+        "ctr": 0.0,
+        "position": 6.62
+      },
+      {
+        "page": "https://mychef.id/services/villa-parties",
+        "clicks": 0,
+        "impressions": 38,
+        "ctr": 0.0,
+        "position": 21.39
+      }
+    ]
+  },
+  "ga4": {
+    "pages": []
+  }
+}

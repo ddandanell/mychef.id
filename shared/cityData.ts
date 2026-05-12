@@ -109,6 +109,12 @@ export interface CityData {
     question: string;
     answer: string;
   }>;
+  // Optional SEO overrides for cities where the default generic
+  // "Private Chef in {City}, Bali — Villa Dining from Rp 800k/hr" title
+  // mismatches the actual search intent (e.g. Denpasar = medical / expat / residential, not villa).
+  // When present, overrides the default <title> and meta description in the pre-render.
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export const CITY_DATA: Record<string, CityData> = {
@@ -616,6 +622,10 @@ export const CITY_DATA: Record<string, CityData> = {
   nusadua: {
     name: 'Nusa Dua',
     slug: 'nusa-dua',
+    // SEO override: 1434 imp, pos 11, but only 0.9% CTR (site avg at pos 11 ≈ 2.5%+).
+    // Default "Villa Dining" title misses Nusa Dua's resort/conference audience.
+    seoTitle: 'Private Chef in Nusa Dua — In-Villa Resort Dining & Tasting Menus | myCHEF',
+    seoDescription: 'Private chef in Nusa Dua delivering 5-star tasting menus in your villa or resort suite. Multi-course wine pairing, dietary handling. Conference + family suites welcome.',
     tagline: 'Nusa Dua Private Chef: Five-Star Excellence Behind Private Gates',
     description: 'Where world leaders stay and fortune 500 executives unwind. Resort-caliber dining in your villa, with chefs trained in Michelin kitchens and discretion as standard practice.',
     heroDescription: 'The security gates close behind you. The outside world fades. Your villa becomes the most exclusive restaurant in the enclave.',
@@ -1881,6 +1891,11 @@ export const CITY_DATA: Record<string, CityData> = {
   denpasar: {
     name: 'Denpasar',
     slug: 'denpasar',
+    // SEO override: 954 imp, pos 9, but 0.1% CTR with the generic "villa dining" title.
+    // Denpasar search intent is residential (expats, medical tourists, embassy staff,
+    // long-term remote workers) — not villa-vacation tourists. Title reflects that.
+    seoTitle: 'Private Chef in Denpasar, Bali — Weekly Meal Prep + Family Dinners | myCHEF',
+    seoDescription: 'Private chef in Denpasar for expat families, long-term residents, and medical-stay visitors. Weekly meal prep, family dinners, Pasar Badung market sourcing. WhatsApp booking.',
     tagline: 'Denpasar Private Chef: Real Bali Behind the Tourist Facade',
     description: 'Scooters swarm the roundabouts. Markets overflow before dawn. Government offices bustle. This is working Bali — where residents actually live, and where authentic home cooking never adapted for tourists.',
     heroDescription: 'Pasar Badung stalls piled with morning produce. Street food masters working corner carts. Denpasar feeds Bali, and your chef sources from the same vendors who supply the island.',

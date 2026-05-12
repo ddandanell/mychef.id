@@ -62,9 +62,14 @@ function clip(s: string, n: number): string {
 // ---- City pages ----
 function cityPage(city: CityData): PageConfig {
   const url = `${ORIGIN}/${city.slug}`;
-  const title = `Private Chef in ${city.name}, Bali — Villa Dining from Rp 800k/hr | myCHEF`;
+  // Per-city SEO override falls through to generic template when not set.
+  // Used for cities where the default "Villa Dining from Rp 800k/hr" framing
+  // mismatches actual search intent (e.g. Denpasar's residential audience — SEOdata #815).
+  const title = city.seoTitle
+    || `Private Chef in ${city.name}, Bali — Villa Dining from Rp 800k/hr | myCHEF`;
   const description = clip(
-    `Book a background-checked private chef in ${city.name}, Bali. ${city.heroDescription} 3-hour minimum, equipment + cleanup included. WhatsApp booking.`,
+    city.seoDescription
+      || `Book a background-checked private chef in ${city.name}, Bali. ${city.heroDescription} 3-hour minimum, equipment + cleanup included. WhatsApp booking.`,
     155
   );
   // Visible-text pre-render body content. Indexed by Google + AI engines without JS.

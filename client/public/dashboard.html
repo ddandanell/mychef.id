@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>myCHEF — Live SEO + Conversion Dashboard</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    margin: 0;
+    background: #f7f7f5;
+    color: #222;
+    line-height: 1.5;
+  }
+  header {
+    background: #0a4a3c;
+    color: #fff;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header h1 { margin: 0; font-size: 1.4rem; font-weight: 600; }
+  header small { opacity: 0.8; }
+  main { max-width: 1280px; margin: 0 auto; padding: 1.5rem 2rem 4rem; }
+
+  .auth-card {
+    background: #fff; border: 1px solid #e5e5e0; border-radius: 12px;
+    padding: 2.5rem; margin: 3rem auto; max-width: 520px; text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .auth-card h2 { margin: 0 0 0.5rem; font-size: 1.4rem; }
+  .auth-card p { color: #555; margin: 0 0 1.5rem; }
+  button {
+    background: #0a4a3c; color: #fff; border: 0;
+    padding: 0.75rem 1.5rem; border-radius: 8px;
+    font-size: 1rem; cursor: pointer; font-weight: 500;
+  }
+  button:hover { background: #0d6353; }
+  button.secondary { background: transparent; color: #0a4a3c; border: 1px solid #0a4a3c; }
+  button:disabled { opacity: 0.5; cursor: wait; }
+
+  .controls {
+    display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .controls .pill {
+    padding: 0.4rem 0.9rem; border-radius: 999px; border: 1px solid #ccc;
+    background: #fff; cursor: pointer; font-size: 0.9rem; color: #444;
+  }
+  .controls .pill.active { background: #0a4a3c; color: #fff; border-color: #0a4a3c; }
+
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 1.5rem; }
+  .kpi {
+    background: #fff; border: 1px solid #e5e5e0; border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .kpi .label { color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .kpi .val { font-size: 2rem; font-weight: 700; color: #0a4a3c; line-height: 1.1; }
+  .kpi .delta { font-size: 0.85rem; color: #888; margin-top: 0.3rem; }
+  .kpi .delta.up { color: #137333; }
+  .kpi .delta.down { color: #c5221f; }
+
+  section { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  section h2 { margin: 0 0 1rem; font-size: 1.05rem; color: #333; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #f0f0eb; }
+  th { font-weight: 600; color: #555; background: #faf9f5; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr:hover { background: #fafaf7; }
+
+  .empty { color: #888; padding: 1.5rem; text-align: center; font-style: italic; }
+  .error { background: #fef2f2; color: #c5221f; padding: 1rem; border-radius: 8px; border: 1px solid #fecaca; margin: 1rem 0; }
+  .info { background: #eff6ff; color: #1e3a8a; padding: 1rem; border-radius: 8px; border: 1px solid #bfdbfe; margin: 1rem 0; }
+  code { background: #f0f0eb; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>myCHEF — Live Dashboard</h1>
+    <small id="last-updated">Sign in to load data</small>
+  </div>
+  <div id="header-actions"></div>
+</header>
+
+<main>
+  <div id="auth-section" class="auth-card">
+    <h2>Sign in to view live data</h2>
+    <p>Uses your Google account. Reads search performance from Google Search Console and conversion events from Google Analytics 4. Nothing is stored — refresh to revoke.</p>
+    <div id="setup-warning" style="display:none" class="error">
+      ⚠️ Dashboard not yet configured. The site owner needs to create an OAuth Client ID — see <code>~/claude/context/projects/google-seo-mychef/DASHBOARD_SETUP.md</code> for the 60-second setup.
+    </div>
+    <button id="signin-btn">Sign in with Google</button>
+    <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #888;">
+      Required scopes: read GSC, read GA4. No write access.
+    </p>
+  </div>
+
+  <div id="dashboard-section" style="display:none">
+    <div class="controls">
+      <span style="color:#666; margin-right: 0.5rem; font-size: 0.85rem;">Window:</span>
+      <button class="pill" data-window="2">Last 2 days</button>
+      <button class="pill active" data-window="7">Last 7 days</button>
+      <button class="pill" data-window="28">Last 28 days</button>
+      <button class="pill" data-window="90">Last 90 days</button>
+      <button id="refresh-btn" class="pill" style="margin-left:auto">↻ Refresh</button>
+    </div>
+
+    <div id="kpis" class="grid"></div>
+
+    <section>
+      <h2>WhatsApp clicks by source (where on the site they clicked)</h2>
+      <div id="wa-by-source"></div>
+    </section>
+
+    <section>
+      <h2>WhatsApp clicks by landing page</h2>
+      <div id="wa-by-page"></div>
+    </section>
+
+    <section>
+      <h2>Top Google search queries (impressions)</h2>
+      <div id="gsc-queries"></div>
+    </section>
+
+    <section>
+      <h2>Top landing pages from Google</h2>
+      <div id="gsc-pages"></div>
+    </section>
+
+    <section>
+      <h2>Site speed (Core Web Vitals from real users)</h2>
+      <div id="cwv"></div>
+    </section>
+  </div>
+
+  <div id="error-section"></div>
+</main>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+// ─── CONFIG ────────────────────────────────────────────────────────────────
+// Replace these once setup is complete (DASHBOARD_SETUP.md):
+//
+// 1. Create an OAuth 2.0 Client ID for "Web application" in Google Cloud:
+//    https://console.cloud.google.com/apis/credentials
+//    - Authorized JavaScript origins: https://mychef.id
+//    - Copy the Client ID and paste below
+//
+// 2. Find your GA4 property ID at https://analytics.google.com → Admin → Property settings
+//    (Looks like: 504769688)
+//
+// 3. Optionally adjust the GSC site URL format
+const CLIENT_ID = 'YOUR_OAUTH_CLIENT_ID.apps.googleusercontent.com';
+const GA4_PROPERTY_ID = '';  // e.g. '504769688' — get from Admin → Property Settings
+const GSC_SITE = 'sc-domain:mychef.id';  // domain property format
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+let tokenClient = null;
+let accessToken = null;
+let currentWindow = 7;
+
+// ─── BOOTSTRAP ─────────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  if (CLIENT_ID === 'YOUR_OAUTH_CLIENT_ID.apps.googleusercontent.com') {
+    document.getElementById('setup-warning').style.display = 'block';
+    document.getElementById('signin-btn').disabled = true;
+    return;
+  }
+
+  // Wait for Google Identity Services to load
+  const wait = setInterval(() => {
+    if (window.google && google.accounts && google.accounts.oauth2) {
+      clearInterval(wait);
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: 'https://www.googleapis.com/auth/webmasters.readonly https://www.googleapis.com/auth/analytics.readonly',
+        callback: (resp) => {
+          if (resp.error) {
+            showError('Sign-in error: ' + resp.error);
+            return;
+          }
+          accessToken = resp.access_token;
+          document.getElementById('auth-section').style.display = 'none';
+          document.getElementById('dashboard-section').style.display = 'block';
+          renderHeaderActions();
+          loadAll();
+        },
+      });
+    }
+  }, 100);
+
+  document.getElementById('signin-btn').addEventListener('click', () => {
+    tokenClient.requestAccessToken({ prompt: '' });
+  });
+
+  document.querySelectorAll('.pill[data-window]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pill[data-window]').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentWindow = parseInt(btn.dataset.window, 10);
+      loadAll();
+    });
+  });
+
+  document.getElementById('refresh-btn').addEventListener('click', loadAll);
+});
+
+function renderHeaderActions() {
+  document.getElementById('header-actions').innerHTML = `
+    <button class="secondary" onclick="signOut()">Sign out</button>
+  `;
+}
+
+function signOut() {
+  accessToken = null;
+  document.getElementById('auth-section').style.display = 'block';
+  document.getElementById('dashboard-section').style.display = 'none';
+  document.getElementById('header-actions').innerHTML = '';
+  document.getElementById('last-updated').textContent = 'Sign in to load data';
+}
+
+// ─── API HELPERS ───────────────────────────────────────────────────────────
+async function gFetch(url, body = null) {
+  const opts = {
+    method: body ? 'POST' : 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+  if (body) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(body);
+  }
+  const r = await fetch(url, opts);
+  if (!r.ok) {
+    const text = await r.text();
+    throw new Error(`HTTP ${r.status}: ${text.substring(0, 200)}`);
+  }
+  return r.json();
+}
+
+function dateRange(days) {
+  const end = new Date(Date.now() - 3 * 24 * 3600 * 1000);  // GSC has 2-3 day lag
+  const start = new Date(end.getTime() - (days - 1) * 24 * 3600 * 1000);
+  const fmt = (d) => d.toISOString().slice(0, 10);
+  return { startDate: fmt(start), endDate: fmt(end) };
+}
+
+// ─── DATA LOADERS ──────────────────────────────────────────────────────────
+async function loadAll() {
+  document.getElementById('error-section').innerHTML = '';
+  document.getElementById('last-updated').textContent = 'Loading…';
+
+  // Run all queries in parallel
+  const { startDate, endDate } = dateRange(currentWindow);
+  const tasks = await Promise.allSettled([
+    loadKPIs(startDate, endDate),
+    loadGscQueries(startDate, endDate),
+    loadGscPages(startDate, endDate),
+    loadGa4WhatsAppBySource(currentWindow),
+    loadGa4WhatsAppByPage(currentWindow),
+    loadCWV(),
+  ]);
+
+  const errs = tasks.filter((t) => t.status === 'rejected').map((t) => t.reason.message);
+  if (errs.length > 0) {
+    document.getElementById('error-section').innerHTML = errs
+      .map((e) => `<div class="error">${e}</div>`)
+      .join('');
+  }
+  document.getElementById('last-updated').textContent = `Loaded ${new Date().toLocaleString()} · window ${startDate} to ${endDate}`;
+}
+
+async function loadKPIs(startDate, endDate) {
+  // Composite KPIs from both sources
+  const [gscTotals, gaWaTotals] = await Promise.all([
+    gFetch(`https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(GSC_SITE)}/searchAnalytics/query`, {
+      startDate, endDate, dimensions: [], rowLimit: 1,
+    }).catch(() => ({ rows: [{ clicks: 0, impressions: 0, ctr: 0, position: 0 }] })),
+    GA4_PROPERTY_ID ? loadGa4Total(currentWindow) : Promise.resolve({ wa_clicks: 0 }),
+  ]);
+
+  const totals = (gscTotals.rows && gscTotals.rows[0]) || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  const cards = [
+    { label: 'Google clicks', val: totals.clicks || 0 },
+    { label: 'Google impressions', val: totals.impressions || 0 },
+    { label: 'Avg CTR', val: ((totals.ctr || 0) * 100).toFixed(2) + '%' },
+    { label: 'Avg position', val: (totals.position || 0).toFixed(1) },
+    { label: 'WhatsApp clicks (GA4)', val: gaWaTotals.wa_clicks || 0 },
+  ];
+  document.getElementById('kpis').innerHTML = cards
+    .map((c) => `<div class="kpi"><div class="label">${c.label}</div><div class="val">${c.val.toLocaleString ? c.val.toLocaleString() : c.val}</div></div>`)
+    .join('');
+}
+
+async function loadGa4Total(days) {
+  if (!GA4_PROPERTY_ID) return { wa_clicks: 0 };
+  const r = await gFetch(`https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`, {
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    metrics: [{ name: 'eventCount' }],
+    dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'whatsapp_click' } } },
+  });
+  const total = (r.rows && r.rows[0] && parseInt(r.rows[0].metricValues[0].value, 10)) || 0;
+  return { wa_clicks: total };
+}
+
+async function loadGa4WhatsAppBySource(days) {
+  if (!GA4_PROPERTY_ID) {
+    document.getElementById('wa-by-source').innerHTML = `<div class="info">Set GA4_PROPERTY_ID in dashboard.html to enable GA4 data.</div>`;
+    return;
+  }
+  const r = await gFetch(`https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`, {
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dimensions: [{ name: 'customEvent:source' }],
+    metrics: [{ name: 'eventCount' }, { name: 'eventValue' }],
+    dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'whatsapp_click' } } },
+    orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+    limit: 30,
+  });
+  renderTable('wa-by-source', r.rows || [], ['Source (button location)', 'Clicks', 'Est. value (Rp)']);
+}
+
+async function loadGa4WhatsAppByPage(days) {
+  if (!GA4_PROPERTY_ID) return;
+  const r = await gFetch(`https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`, {
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dimensions: [{ name: 'customEvent:page_path' }],
+    metrics: [{ name: 'eventCount' }],
+    dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'whatsapp_click' } } },
+    orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+    limit: 50,
+  });
+  renderTable('wa-by-page', r.rows || [], ['Page', 'WhatsApp clicks']);
+}
+
+async function loadGscQueries(startDate, endDate) {
+  const r = await gFetch(`https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(GSC_SITE)}/searchAnalytics/query`, {
+    startDate, endDate, dimensions: ['query'], rowLimit: 50,
+  });
+  renderGscTable('gsc-queries', r.rows || [], 'Query');
+}
+
+async function loadGscPages(startDate, endDate) {
+  const r = await gFetch(`https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(GSC_SITE)}/searchAnalytics/query`, {
+    startDate, endDate, dimensions: ['page'], rowLimit: 50,
+  });
+  renderGscTable('gsc-pages', r.rows || [], 'Page');
+}
+
+async function loadCWV() {
+  // Use PageSpeed Insights public API (no auth needed) for the homepage
+  try {
+    const r = await fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://mychef.id&strategy=mobile&category=performance');
+    const d = await r.json();
+    if (d.error) throw new Error(d.error.message);
+    const a = (d.lighthouseResult || {}).audits || {};
+    const items = [
+      ['LCP (largest contentful paint)', a['largest-contentful-paint']?.displayValue, a['largest-contentful-paint']?.score],
+      ['INP (interaction to next paint)', a['interaction-to-next-paint']?.displayValue || 'n/a', null],
+      ['CLS (cumulative layout shift)', a['cumulative-layout-shift']?.displayValue, a['cumulative-layout-shift']?.score],
+      ['FCP (first contentful paint)', a['first-contentful-paint']?.displayValue, a['first-contentful-paint']?.score],
+      ['Speed index', a['speed-index']?.displayValue, a['speed-index']?.score],
+      ['Server response time', a['server-response-time']?.displayValue, null],
+    ];
+    document.getElementById('cwv').innerHTML = `
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Value</th><th class="num">Score</th></tr></thead>
+        <tbody>${items.map(([n, v, s]) => `<tr><td>${n}</td><td class="num">${v || '—'}</td><td class="num">${s !== null && s !== undefined ? Math.round(s * 100) : '—'}</td></tr>`).join('')}</tbody>
+      </table>`;
+  } catch (e) {
+    document.getElementById('cwv').innerHTML = `<div class="info">PageSpeed Insights: ${e.message}. Quota likely exhausted today; resets midnight Pacific.</div>`;
+  }
+}
+
+// ─── RENDER HELPERS ────────────────────────────────────────────────────────
+function renderTable(elId, rows, headers) {
+  if (!rows || rows.length === 0) {
+    document.getElementById(elId).innerHTML = `<div class="empty">No data yet — events appear within 24h of first fire.</div>`;
+    return;
+  }
+  document.getElementById(elId).innerHTML = `
+    <table>
+      <thead><tr>${headers.map((h, i) => `<th${i > 0 ? ' class="num"' : ''}>${h}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map((r) => {
+        const dim = (r.dimensionValues && r.dimensionValues[0] && r.dimensionValues[0].value) || (r.keys && r.keys[0]) || '';
+        const m = (r.metricValues || []).map((mv) => parseInt(mv.value, 10) || 0);
+        return `<tr><td>${escape(dim)}</td>${m.map((v) => `<td class="num">${v.toLocaleString()}</td>`).join('')}</tr>`;
+      }).join('')}</tbody>
+    </table>`;
+}
+
+function renderGscTable(elId, rows, dimLabel) {
+  if (!rows || rows.length === 0) {
+    document.getElementById(elId).innerHTML = `<div class="empty">No data yet for this window.</div>`;
+    return;
+  }
+  document.getElementById(elId).innerHTML = `
+    <table>
+      <thead><tr><th>${dimLabel}</th><th class="num">Clicks</th><th class="num">Impressions</th><th class="num">CTR</th><th class="num">Position</th></tr></thead>
+      <tbody>${rows.map((r) => `
+        <tr>
+          <td>${escape((r.keys && r.keys[0]) || '')}</td>
+          <td class="num">${(r.clicks || 0).toLocaleString()}</td>
+          <td class="num">${(r.impressions || 0).toLocaleString()}</td>
+          <td class="num">${((r.ctr || 0) * 100).toFixed(2)}%</td>
+          <td class="num">${(r.position || 0).toFixed(1)}</td>
+        </tr>`).join('')}</tbody>
+    </table>`;
+}
+
+function escape(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function showError(msg) {
+  document.getElementById('error-section').innerHTML = `<div class="error">${escape(msg)}</div>`;
+}
+</script>
+</body>
+</html>

@@ -1,14 +1,12 @@
 {
   "meta": {
-    "fetched_at": "2026-05-12T22:02:35.640841Z",
+    "fetched_at": "2026-05-12T22:24:34.651477Z",
     "date_range": {
       "start": "2026-04-14",
       "end": "2026-05-12"
     },
     "site": "sc-domain:mychef.id",
-    "errors": [
-      "ga4_property_id_not_numeric: contains_slash_looks_like_url_or_path,contains_whitespace,contains_letters,length=2383"
-    ]
+    "errors": []
   },
   "gsc": {
     "queries": [
@@ -1412,6 +1410,55 @@
     ]
   },
   "ga4": {
-    "pages": []
+    "pages": [
+      {
+        "page": "/",
+        "page_views": 44,
+        "sessions": 36,
+        "engaged_sessions": 14,
+        "avg_session_duration_s": 98.53,
+        "conversions": 0
+      },
+      {
+        "page": "/contact/confirm",
+        "page_views": 8,
+        "sessions": 6,
+        "engaged_sessions": 6,
+        "avg_session_duration_s": 24.18,
+        "conversions": 40
+      },
+      {
+        "page": "/calculator",
+        "page_views": 2,
+        "sessions": 2,
+        "engaged_sessions": 2,
+        "avg_session_duration_s": 142.11,
+        "conversions": 0
+      },
+      {
+        "page": "/payment-terms",
+        "page_views": 2,
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "avg_session_duration_s": 33.45,
+        "conversions": 0
+      },
+      {
+        "page": "/chef-for-hire-indonesia",
+        "page_views": 1,
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "avg_session_duration_s": 50.15,
+        "conversions": 0
+      },
+      {
+        "page": "/dashboard.html",
+        "page_views": 1,
+        "sessions": 1,
+        "engaged_sessions": 0,
+        "avg_session_duration_s": 0.0,
+        "conversions": 0
+      }
+    ]
   }
 }

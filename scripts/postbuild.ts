@@ -194,8 +194,8 @@ const SERVICES: ServiceDef[] = [
   {
     slug: 'services/birthday-celebrations', name: 'Birthday Celebrations',
     intent: 'private chef for birthday in Bali',
-    clickMagnetTitle: 'Birthday Dinner in Bali — Private Chef + Cake + Photographer Coordination | myCHEF',
-    clickMagnetDescription: 'Birthday celebration in your Bali villa with a private chef. Custom multi-course menu, surprise cake course, photographer + decor coordination. 4-30 guests.',
+    clickMagnetTitle: 'Birthday Catering in Bali — Private Chef + Cake + Photographer | myCHEF',
+    clickMagnetDescription: 'Birthday catering in your Bali villa: private chef, custom multi-course menu, surprise cake course, photographer + decor coordination. 4-30 guests.',
   },
   {
     slug: 'services/family-reunions', name: 'Family Reunions',
@@ -689,6 +689,29 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
     title: 'Payment Terms | myCHEF Indonesia',
     description: 'Deposit, balance, refund, and cancellation terms for myCHEF private chef bookings in Bali.',
     changefreq: 'monthly', priority: 0.2,
+  },
+  // Jakarta neighborhood pages: pre-render gives Google a correct canonical + Indonesian-language title.
+  // Without this entry Vercel falls back to homepage index.html, which sets canonical to https://mychef.id/
+  // and signals these pages are duplicates of the homepage. Full rich content is served by the React SPA.
+  {
+    slug: 'private-chef-menteng',
+    title: 'Sewa Chef ke Rumah di Menteng Jakarta | Private Chef Profesional — myCHEF',
+    description: 'Sewa private chef ke rumah di Menteng Jakarta Pusat. Menu fine dining custom, harga dari Rp 800k/jam. Chef berpengalaman & terverifikasi. WhatsApp sekarang!',
+    changefreq: 'weekly', priority: 0.8,
+    bodyContent: `<h1>Sewa Chef ke Rumah di Menteng Jakarta</h1>
+<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Menteng, Jakarta Pusat. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — layanan lengkap mulai dari Rp 800.000/jam (minimum 3 jam).</p>
+<h2>Apa itu private chef (sewa chef ke rumah)?</h2>
+<p>Private chef adalah chef profesional yang Anda sewa untuk memasak langsung di dapur Anda. Berbeda dengan catering, private chef belanja bahan segar, memasak di tempat, menyajikan tiap hidangan langsung ke meja tamu, lalu membereskan dapur sebelum pulang.</p>
+<h2>Harga private chef di Menteng</h2>
+<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam.</p>
+<h2>Area yang dilayani di Menteng</h2>
+<p>Kami melayani seluruh kawasan Menteng tanpa biaya transportasi tambahan: Menteng Dalam, Menteng Atas, Menteng Tenggara, Gondangdia, Pegangsaan, Cikini, Kebon Sirih, dan sekitarnya.</p>
+<h2>Cara pesan</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
+  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00-22:00 WIB).</li>
+  <li>Chef tiba 2-3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+</ol>`,
   },
 ];
 

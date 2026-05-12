@@ -126,11 +126,70 @@ export function getWhatsAppURL(source: string = 'default', opts: BuildOptions = 
 }
 
 /**
+ * Estimated conversion value per WhatsApp click in IDR. Used by GA4 for
+ * value-per-visitor / value-per-source attribution. Tune up/down as your
+ * conversion-to-booking rate becomes known. Currently a conservative estimate
+ * (assumes ~5-8% of WhatsApp clicks convert to a booking averaging Rp 4M, so
+ * value per click ≈ Rp 250,000).
+ */
+const WA_CLICK_VALUE_IDR = 250000;
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  }
+}
+
+/**
+ * Fire GA4 events for a WhatsApp click. Fires TWO events:
+ *  1. whatsapp_click — custom event with rich metadata (source, preset, page, value)
+ *  2. generate_lead  — GA4 standard event (auto-treated as conversion in most setups)
+ *
+ * Safe to call before consent is granted: gtag queues to dataLayer either way.
+ * If consent is granted later, GA4 backfills via the queued events.
+ */
+function trackWhatsAppClick(source: string, opts: BuildOptions, url: string): void {
+  if (typeof window === 'undefined') return;
+  // Always push to dataLayer so it's visible to GTM, debugging, and post-consent backfill
+  const eventData = {
+    event_category: 'WhatsApp',
+    event_label: source,
+    source,
+    preset_message: opts.message ?? WHATSAPP_CTAS[source]?.message ?? '',
+    city: opts.city ?? '',
+    page_path: typeof location !== 'undefined' ? location.pathname : '',
+    page_url: typeof location !== 'undefined' ? location.href : '',
+    destination_url: url,
+    value: WA_CLICK_VALUE_IDR,
+    currency: 'IDR',
+  };
+  try {
+    if (typeof window.gtag === 'function') {
+      // 1. Custom event for granular tracking
+      window.gtag('event', 'whatsapp_click', eventData);
+      // 2. GA4 standard lead event — auto-treated as conversion / key event
+      window.gtag('event', 'generate_lead', { ...eventData, lead_source: 'whatsapp' });
+    } else {
+      // Fallback: push to dataLayer directly so a later GTM/gtag boot picks it up
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'whatsapp_click', ...eventData });
+      window.dataLayer.push({ event: 'generate_lead', ...eventData, lead_source: 'whatsapp' });
+    }
+  } catch {
+    // Never let analytics errors block the click action
+  }
+}
+
+/**
  * Open WhatsApp in a new tab. Safe in browser; no-op during SSR.
+ * Fires GA4 conversion events BEFORE opening the link so analytics fires
+ * even if the user dismisses the new tab.
  */
 export function openWhatsApp(source: string = 'default', opts: BuildOptions = {}): void {
   const url = getWhatsAppURL(source, opts);
   if (typeof window !== 'undefined') {
+    trackWhatsAppClick(source, opts, url);
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 }

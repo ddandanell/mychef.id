@@ -274,14 +274,53 @@ const KEYWORD_PAGES: KeywordDef[] = [
   { slug: 'private-chef-booking-indonesia',  title: 'Book a Private Chef in Indonesia — WhatsApp Booking | myCHEF', description: 'Book a background-checked private chef across Bali in under an hour via WhatsApp +62 822-3756-5997.' },
   { slug: 'chef-for-hire-indonesia',         title: 'Chef for Hire in Indonesia — Bali Private Chef | myCHEF', description: 'Hire a private chef in Bali for one night, weekly, or full-time household arrangements. WhatsApp booking.' },
 ];
+// Per-keyword body content map — maps keyword slug to a custom intro paragraph.
+// Used by keywordPage() to generate unique pre-render bodyContent for each keyword target.
+const KEYWORD_LEAD: Record<string, string> = {
+  'best-private-chef-indonesia': "Looking for the best private chef in Indonesia? myCHEF Indonesia has been Bali's longest-running private chef booking service since 2012, with background-checked chefs across 24 Bali neighborhoods plus Jakarta. We've cooked thousands of villa dinners — Mediterranean, Balinese, Asian fusion, vegan, and dietary-restricted menus. WhatsApp +62 822-3756-5997 — most bookings confirmed in under an hour.",
+  'private-chef-for-events': 'myCHEF places private chefs at events across Bali — villa parties, wedding rehearsal dinners, corporate offsites, milestone birthdays, retreat catering. Chef arrives at your venue, shops fresh, cooks on-site, plates and serves, cleans up. Equipment, plating, and cleanup all included in the chef rate.',
+  'luxury-chef-indonesia': 'Luxury private chef service in Indonesia — multi-course tasting menus delivered in your villa kitchen by chefs trained at international hotel groups and European restaurants. Sommelier wine pairing available, dedicated waiter and bartender add-ons, full menu customisation. The same restaurant-grade experience as a Michelin tasting menu, set in your own villa terrace overlooking Bali rice fields or beachfront.',
+  'wedding-catering-indonesia': 'myCHEF Indonesia handles wedding catering for intimate Bali weddings (8-50 guests). Chef teams scaled to event size, multi-course tasting menus or family-style sharing feasts, sommelier-paired wines, full waiter and bartender service. Years of experience with Bali villa kitchens, wedding planners, and the timing demands of ceremony + cocktail + reception sequences.',
+  'private-dining-indonesia': 'Private dining in Indonesia means a chef in your villa kitchen cooking a custom menu — not pre-made catering trays delivered cold. myCHEF chefs shop fresh, cook on-site, plate each course directly to your guests, and clean up before leaving. The interactive private-restaurant experience, in your home.',
+  'healthy-meal-delivery-indonesia': 'Looking for healthy meal delivery in Indonesia? myCHEF goes one better — a private chef cooks fresh in YOUR kitchen on a weekly meal-prep contract. Anti-inflammatory, low-sugar, organic-only, vegan, gluten-free, paleo, low-carb — all customisable. Better than meal delivery: nothing pre-cooked, nothing reheated, the chef adjusts to your taste.',
+  'private-chef-booking-indonesia': 'Book a private chef in Indonesia in under an hour. WhatsApp +62 822-3756-5997 with date, area, guest count, and any cuisine or dietary preferences. Receive a chef profile and sample menu within an hour during operating hours (09:00-22:00 WIB daily). Booking 2+ days in advance gives the widest chef + menu choice; same-day booking usually possible in Canggu, Seminyak, Ubud.',
+  'chef-for-hire-indonesia': 'Hire a chef in Indonesia for one night, weekly meal-prep, or full-time household chef placement. myCHEF handles the chef sourcing, background-check, food-safety certification, and ongoing operations support. You get a vetted professional chef without managing the recruitment, payroll, or HR overhead. From single-night villa dinners (Rp 800k/hr, 3-hour min) to long-term household chef contracts.',
+};
+
 function keywordPage(k: KeywordDef): PageConfig {
   const url = `${ORIGIN}/${k.slug}`;
+  const lead = KEYWORD_LEAD[k.slug] || k.description;
+  const bodyContent = `<h1>${htmlEsc(k.title.split('|')[0].trim())}</h1>
+<p>${htmlEsc(lead)}</p>
+<h2>Why myCHEF</h2>
+<ul>
+  <li>Operating in Bali since 2012 — 13+ year track record</li>
+  <li>Background-checked + food-safety certified chefs</li>
+  <li>Commercial liability insurance on every booking</li>
+  <li>Custom menus — Mediterranean, Asian fusion, Balinese, vegan, halal, dietary-restricted</li>
+  <li>Equipment, plating, and cleanup included in the chef rate</li>
+  <li>WhatsApp response under 10 minutes during operating hours</li>
+</ul>
+<h2>Pricing</h2>
+<p>From Rp 800,000 per hour (3-hour minimum) plus ingredients at cost. Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr. Equipment, plating, and cleanup are included.</p>
+<h2>Service area across Indonesia</h2>
+<p>All major Bali neighborhoods (Canggu, Seminyak, Ubud, Uluwatu, Nusa Dua, Sanur, Jimbaran, Kuta, plus 16 other areas) and central Jakarta (Menteng, Kebayoran Baru, SCBD, Senayan, Pondok Indah, Kemang, and 4 other areas).</p>
+<h2>How to book</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 with date, area, guest count, cuisine + dietary preferences.</li>
+  <li>Receive chef profile + sample menu within an hour.</li>
+  <li>50% deposit reserves the chef for your dates.</li>
+  <li>Chef arrives 2-3 hours before service, cooks, plates, serves, cleans up.</li>
+</ol>
+<h2>Common cuisines requested</h2>
+<p>Mediterranean (most-requested for villa dinners), traditional Balinese (rijsttafel + bebek betutu), Asian fusion (pan-Asian + Japanese sashimi), modern European tasting menus, vegan + plant-based, halal-certified, gluten-free, and any dietary-restricted combination.</p>`;
   return {
     slug: k.slug,
     title: k.title,
     description: clip(k.description, 155),
     changefreq: 'monthly',
     priority: 0.7,
+    bodyContent,
     schema: [
       {
         '@context': 'https://schema.org',

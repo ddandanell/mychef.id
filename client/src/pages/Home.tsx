@@ -36,12 +36,12 @@ export default function Home() {
       <SideAccents />
       <MotivationalPopup />
       <PricingPopup />
-      <SEO 
-        title="Private Chef Bali & Jakarta | Best Private Chef Indonesia | Catering Jakarta | myCHEF"
-        description="Indonesia's #1 private chef service. Book the best private chef in Bali, Jakarta & Indonesia for villa parties, weddings, corporate events. Premium catering Jakarta. Luxury chef Indonesia since 2012. Private dining & healthy meal delivery. From Rp 800,000/hour."
-        canonical="https://mychef.id"
+      <SEO
+        title="Private Chef in Bali — Restaurant Dining at Your Villa | myCHEF"
+        description="A chef in your villa, cooking the menu you choose. Restaurant-quality dining without the restaurant. Bali's longest-running private chef service since 2012. WhatsApp +62 822-3756-5997."
+        canonical="https://mychef.id/"
         ogType="website"
-        keywords="private chef bali, private chef jakarta, private chef indonesia, catering jakarta, best private chef indonesia, luxury chef indonesia, private chef for events, wedding catering indonesia, private dining indonesia, healthy meal delivery indonesia, private chef booking indonesia, chef for hire indonesia, villa chef bali, personal chef jakarta"
+        keywords="private chef bali, private chef in your villa, in-villa dining bali, private chef booking bali, mediterranean chef bali, mychef indonesia"
         structuredData={[
           {
             "@context": "https://schema.org",

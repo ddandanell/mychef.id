@@ -168,10 +168,9 @@ export default function HeroSection() {
         </div>
 
         <div className="mt-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3 max-w-2xl mx-auto">
-          <p className="text-white/90 text-xs sm:text-sm font-medium mb-1">
-            ✓ 100% Money-Back Guarantee if not satisfied • 10-minute response time • {t('hero.pricingInfo', 'From Rp 800,000/hour')}
+          <p className="text-white/90 text-xs sm:text-sm font-medium">
+            From Rp 800,000/hour · Trusted by 1000+ guests since 2012 · Bali-wide service · English-speaking team
           </p>
-          <p className="text-white/70 text-xs">Background-checked • Food-certified • 100% Insured • Trusted by 1000+ guests since 2012</p>
         </div>
       </div>
 

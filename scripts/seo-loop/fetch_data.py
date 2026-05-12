@@ -100,9 +100,9 @@ def fetch_gsc(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
                 "position": round(float(row.get("position", 0)), 2),
             })
     except HttpError as e:
-        errors.append(f"gsc_queries_failed: status={e.resp.status} reason={e._get_reason()}")
+        errors.append(_safe_error(f"gsc_queries_failed: status={e.resp.status} reason={e._get_reason()}"))
     except Exception as e:
-        errors.append(f"gsc_queries_failed: {type(e).__name__}: {e}")
+        errors.append(_safe_error(f"gsc_queries_failed: {type(e).__name__}: {e}"))
 
     # Per-page aggregate.
     try:
@@ -124,11 +124,27 @@ def fetch_gsc(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
                 "position": round(float(row.get("position", 0)), 2),
             })
     except HttpError as e:
-        errors.append(f"gsc_pages_failed: status={e.resp.status} reason={e._get_reason()}")
+        errors.append(_safe_error(f"gsc_pages_failed: status={e.resp.status} reason={e._get_reason()}"))
     except Exception as e:
-        errors.append(f"gsc_pages_failed: {type(e).__name__}: {e}")
+        errors.append(_safe_error(f"gsc_pages_failed: {type(e).__name__}: {e}"))
 
     return out, errors
+
+
+def _safe_error(msg: str) -> str:
+    """Strip any content that might trip GitHub secret-scanning. Errors should be
+    diagnostic categories, not echo back potentially-credential-shaped input.
+
+    We collapse anything that looks like a JSON blob, PEM block, long hex key,
+    or service-account email to a generic placeholder. The remaining message
+    still tells the next stage WHAT broke without leaking WHY-content."""
+    import re
+    msg = re.sub(r"-----BEGIN [A-Z ]+-----.*?-----END [A-Z ]+-----", "[PEM_REDACTED]", msg, flags=re.DOTALL)
+    msg = re.sub(r"\{[^{}]*\"private_key\"[^{}]*\}", "[SA_JSON_REDACTED]", msg, flags=re.DOTALL)
+    msg = re.sub(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.iam\.gserviceaccount\.com", "[SA_EMAIL_REDACTED]", msg)
+    msg = re.sub(r"\b[A-Fa-f0-9]{40,}\b", "[HEX_REDACTED]", msg)
+    # Cap length so a verbose stack trace can't sneak content past the regexes.
+    return msg[:300]
 
 
 def fetch_ga4(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
@@ -139,6 +155,9 @@ def fetch_ga4(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
     property_id = os.environ.get("GA4_PROPERTY_ID", "").strip()
     if not property_id:
         return out, ["ga4_property_id_missing"]
+    # Defence-in-depth: refuse non-numeric IDs without ever embedding the bad value.
+    if not property_id.isdigit():
+        return out, ["ga4_property_id_not_numeric_must_be_digits_only"]
 
     try:
         from google.analytics.data_v1beta import BetaAnalyticsDataClient
@@ -146,7 +165,7 @@ def fetch_ga4(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
             RunReportRequest, DateRange, Dimension, Metric,
         )
     except ImportError as e:
-        return out, [f"ga4_import_failed: {e}"]
+        return out, [_safe_error(f"ga4_import_failed: {e}")]
 
     try:
         client = BetaAnalyticsDataClient(credentials=creds)
@@ -174,7 +193,7 @@ def fetch_ga4(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
                 "conversions": int(float(row.metric_values[4].value or 0)),
             })
     except Exception as e:
-        errors.append(f"ga4_run_report_failed: {type(e).__name__}: {e}")
+        errors.append(_safe_error(f"ga4_run_report_failed: {type(e).__name__}: {e}"))
 
     return out, errors
 

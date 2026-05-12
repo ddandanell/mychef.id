@@ -58,7 +58,44 @@ A private chef cooks on the spot in your villa kitchen — food is fresher, the 
 - Pricing calculator: https://mychef.id/calculator
 - Quote form: https://mychef.id/quote
 - About: https://mychef.id/about
+- Our chefs: https://mychef.id/chefs
+- FAQ (20 questions): https://mychef.id/faq
+- Villa partner programme: https://mychef.id/villa-partners
+
+## City + sub-area pages (in-villa private chef per Bali neighborhood)
+
 - City pages: https://mychef.id/canggu, https://mychef.id/seminyak, https://mychef.id/ubud, https://mychef.id/uluwatu, https://mychef.id/nusa-dua, https://mychef.id/sanur, https://mychef.id/jimbaran, https://mychef.id/kuta, https://mychef.id/jakarta (and 15 other Bali areas)
-- Service pages: https://mychef.id/services/villa-parties, /services/romantic-dinners, /services/birthday-celebrations, /services/wedding-celebrations, /services/corporate-events, /services/cooking-classes, /services/weekly-meal-prep
-- Sample menus: https://mychef.id/menus/mediterranean (and other cuisines)
+- Canggu sub-areas: https://mychef.id/echo-beach-private-chef, https://mychef.id/batu-bolong-private-chef
+- Uluwatu sub-areas: https://mychef.id/bingin-private-chef
+- Ubud sub-areas: https://mychef.id/penestanan-private-chef
+
+## Service pages
+
+https://mychef.id/services/villa-parties, /services/romantic-dinners, /services/birthday-celebrations, /services/wedding-celebrations, /services/corporate-events, /services/cooking-classes, /services/weekly-meal-prep, /services/family-reunions
+
+## Specialty event pages
+
+- Retreats (yoga, wellness, corporate, YTT): https://mychef.id/retreats
+- Catering alternative positioning: https://mychef.id/catering
+- Proposal dinner: https://mychef.id/proposal-dinner
+- Honeymoon dinners: https://mychef.id/honeymoon-chef
+
+## Sample menus by cuisine
+
+- https://mychef.id/menus (index)
+- https://mychef.id/menus/mediterranean
+- https://mychef.id/menus/balinese
+- https://mychef.id/menus/asian-fusion
+- https://mychef.id/menus/vegan
+- https://mychef.id/menus/modern-european
+- https://mychef.id/menus/halal
+
+## Guides + reference
+
+- https://mychef.id/guide/private-chef-bali (complete 7-step booking guide)
+- https://mychef.id/guide/bali-cuisine-glossary (working glossary of Balinese cooking)
+
+## Sitemap + extended context
+
 - Sitemap: https://mychef.id/sitemap.xml
+- Extended AI context (full FAQs, all pricing, all areas): https://mychef.id/llms-full.txt

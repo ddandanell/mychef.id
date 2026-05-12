@@ -633,20 +633,42 @@ function buildLlmsFullTxt(): string {
     '',
     Object.values(CITY_DATA).map(c => `- ${c.name} (${c.areas.slice(0, 4).join(', ')})`).join('\n'),
     '',
+    '## Sub-area pages (specific Bali neighborhoods within cities)',
+    '',
+    '- Echo Beach, Canggu — https://mychef.id/echo-beach-private-chef',
+    '- Batu Bolong, Canggu — https://mychef.id/batu-bolong-private-chef',
+    '- Bingin, Uluwatu — https://mychef.id/bingin-private-chef',
+    '- Penestanan, Ubud — https://mychef.id/penestanan-private-chef',
+    '',
+    '## Specialty event pages',
+    '',
+    '- Retreat catering (yoga, wellness, corporate, YTT) — https://mychef.id/retreats',
+    '- Catering alternative positioning — https://mychef.id/catering',
+    '- Proposal dinner with sommelier + setup — https://mychef.id/proposal-dinner',
+    '- Honeymoon villa dinners — https://mychef.id/honeymoon-chef',
+    '- Villa partnership for villa managers — https://mychef.id/villa-partners',
+    '',
+    '## Guides',
+    '',
+    '- Complete booking guide — https://mychef.id/guide/private-chef-bali',
+    '- Bali / Indonesian cuisine glossary — https://mychef.id/guide/bali-cuisine-glossary',
+    '',
     '## Pricing',
     '',
     '- Chef fee: from Rp 800,000 per hour (3-hour minimum)',
     '- Ingredients: separate, billed at cost',
     '- Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr',
     '- Equipment, plating, and cleanup are included in the chef rate',
+    '- Specialty pricing: proposal dinner Rp 6M for 2 (5-course + sommelier), honeymoon dinner from Rp 4.5M for 2 (3-course)',
     '',
-    '## Cuisines',
+    '## Cuisines (sample menus published)',
     '',
-    '- [Mediterranean](https://mychef.id/menus/mediterranean)',
-    '- [Balinese](https://mychef.id/menus/balinese)',
-    '- [Asian Fusion](https://mychef.id/menus/asian-fusion)',
-    '- [Vegan / Plant-based](https://mychef.id/menus/vegan)',
-    '- Modern European, dietary-restricted (gluten-free, halal, kosher)',
+    '- [Mediterranean](https://mychef.id/menus/mediterranean) — 3-course Rp 4.2M, 5-course Rp 7.8M, family-style Rp 5.5M',
+    '- [Balinese](https://mychef.id/menus/balinese) — rijsttafel Rp 4.8M, modern tasting Rp 6.8M',
+    '- [Asian Fusion](https://mychef.id/menus/asian-fusion) — pan-Asian tasting Rp 5.8M, family sharing Rp 5.2M',
+    '- [Vegan / Plant-based](https://mychef.id/menus/vegan) — plant tasting Rp 5.4M, Mediterranean sharing Rp 4.6M',
+    '- [Modern European](https://mychef.id/menus/modern-european) — 6-course tasting Rp 7.2M, Italian sharing Rp 5.8M',
+    '- [Halal-certified](https://mychef.id/menus/halal) — multi-course Rp 5.4M, Indonesian sharing Rp 4.5M',
     '',
     '## Office',
     '',
@@ -1053,6 +1075,47 @@ async function main() {
   const llmsFull = buildLlmsFullTxt();
   await fs.writeFile(resolve(DIST_PUBLIC, 'llms-full.txt'), llmsFull, 'utf8');
   console.log(`[postbuild] wrote llms-full.txt (${llmsFull.length} bytes)`);
+
+  // sitemap.html — human-readable sitemap. Vercel serves this directly. Useful for users
+  // who want to see the site structure, and for accessibility / non-JS browsing.
+  const groups: Record<string, PageConfig[]> = {
+    'Home + key entry points': pages.filter(p => p.slug === '' || ['quote','calculator','about','chefs','faq','villa-partners','jakarta'].includes(p.slug)),
+    'Bali areas (24 cities + 4 sub-areas)': pages.filter(p => Object.values(CITY_DATA).some(c => c.slug === p.slug) || ['echo-beach-private-chef','batu-bolong-private-chef','bingin-private-chef','penestanan-private-chef','sayan-private-chef','padang-padang-private-chef','pererenan-private-chef','sanur-beach-private-chef'].includes(p.slug)),
+    'Specialty event pages': pages.filter(p => ['retreats','catering','proposal-dinner','honeymoon-chef'].includes(p.slug)),
+    'Service pages': pages.filter(p => p.slug.startsWith('services/')),
+    'Sample menus by cuisine': pages.filter(p => p.slug.startsWith('menus')),
+    'Guides': pages.filter(p => p.slug.startsWith('guide/')),
+    'Keyword landing pages': pages.filter(p => ['best-private-chef-indonesia','private-chef-for-events','luxury-chef-indonesia','wedding-catering-indonesia','private-dining-indonesia','healthy-meal-delivery-indonesia','private-chef-booking-indonesia','chef-for-hire-indonesia'].includes(p.slug)),
+    'Trust + legal': pages.filter(p => ['privacy-policy','terms-of-service','payment-terms','recommended-services','join-our-team'].includes(p.slug)),
+  };
+  const htmlSitemap = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sitemap — myCHEF Indonesia | Private Chef in Bali</title>
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mychef.id/sitemap.html">
+<meta name="description" content="Complete site map for myCHEF Indonesia — every page on the private chef booking service for Bali.">
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#222}
+h1{font-size:2rem;margin-bottom:0.5rem}
+h2{font-size:1.3rem;margin-top:2rem;color:#0a4a3c;border-bottom:2px solid #0a4a3c33;padding-bottom:0.3rem}
+ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.3rem}
+a{color:#0a4a3c;text-decoration:none}
+a:hover{text-decoration:underline}
+small{color:#666;display:block;margin-top:1.5rem}
+</style>
+</head>
+<body>
+<h1>Sitemap — myCHEF Indonesia</h1>
+<p>${pages.length} pages on this site. Private chef booking service for Bali, operating since 2012.</p>
+${Object.entries(groups).map(([name, list]) => list.length > 0 ? `<h2>${name}</h2>
+<ul>${list.map(p => `<li><a href="/${p.slug}">${p.title.replace(' | myCHEF Indonesia', '').replace(' | myCHEF', '').replace(/&/g, '&amp;')}</a></li>`).join('')}</ul>` : '').join('\n')}
+<small>This sitemap is for humans. The XML sitemap for search engines is at <a href="/sitemap.xml">/sitemap.xml</a>.</small>
+</body>
+</html>`;
+  await fs.writeFile(resolve(DIST_PUBLIC, 'sitemap.html'), htmlSitemap, 'utf8');
+  console.log(`[postbuild] wrote sitemap.html (${htmlSitemap.length} bytes, ${pages.length} pages)`);
 }
 
 main().catch(err => {

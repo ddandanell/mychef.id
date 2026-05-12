@@ -157,7 +157,21 @@ def fetch_ga4(creds, start_date: str, end_date: str) -> tuple[dict, list[str]]:
         return out, ["ga4_property_id_missing"]
     # Defence-in-depth: refuse non-numeric IDs without ever embedding the bad value.
     if not property_id.isdigit():
-        return out, ["ga4_property_id_not_numeric_must_be_digits_only"]
+        # Diagnose the common wrong-paste patterns so the human knows what to fix.
+        # We only report shape, never the value itself.
+        shape: list[str] = []
+        if property_id.lower().startswith("g-"):
+            shape.append("starts_with_G-_looks_like_measurement_id_not_property_id")
+        if "/" in property_id:
+            shape.append("contains_slash_looks_like_url_or_path")
+        if property_id.startswith("properties/"):
+            shape.append("starts_with_properties/_strip_that_prefix")
+        if " " in property_id:
+            shape.append("contains_whitespace")
+        if any(c.isalpha() for c in property_id):
+            shape.append("contains_letters")
+        shape.append(f"length={len(property_id)}")
+        return out, [f"ga4_property_id_not_numeric: {','.join(shape)}"]
 
     try:
         from google.analytics.data_v1beta import BetaAnalyticsDataClient

@@ -713,6 +713,89 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
   <li>Chef tiba 2-3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
 </ol>`,
   },
+  // Senayan — top Jakarta page (433 imp, pos 5.66, CTR 5.31%). HTTP 404 without pre-render;
+  // adding this entry fixes canonical + gives Google static HTML to read without JS.
+  {
+    slug: 'private-chef-senayan',
+    title: 'Sewa Chef ke Rumah di Senayan Jakarta | Private Chef Profesional — myCHEF',
+    description: 'Sewa private chef profesional di Senayan Jakarta Selatan. Fine dining custom di rumah Anda, harga mulai Rp 800k/jam, chef terverifikasi. Booking WhatsApp.',
+    changefreq: 'weekly', priority: 0.85,
+    bodyContent: `<h1>Sewa Chef ke Rumah di Senayan, Jakarta</h1>
+<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Senayan, Jakarta Selatan. Chef berpengalaman datang ke rumah atau apartemen Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — mulai Rp 800.000/jam (minimum 3 jam).</p>
+<h2>Private chef di Senayan — mengapa myCHEF?</h2>
+<p>Senayan adalah kawasan premium Jakarta dengan banyak penghuni ekspatriat dan profesional yang membutuhkan chef privat untuk makan malam eksklusif, acara kantor kecil, atau meal-prep mingguan. myCHEF telah beroperasi di Jakarta sejak 2012 dengan chef berlisensi dan terverifikasi.</p>
+<h2>Harga private chef di Senayan</h2>
+<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam.</p>
+<h2>Area yang dilayani</h2>
+<p>Senayan, SCBD, Sudirman, Kebayoran Baru, Gandaria, Blok M, Permata Hijau, dan sekitarnya — tanpa biaya transportasi tambahan.</p>
+<h2>Menu tersedia</h2>
+<p>Mediterranean, modern European, Asian fusion, masakan Indonesia tradisional, vegan, dan menu dietary-restricted (gluten-free, halal). Setiap menu dikustomisasi sesuai selera dan kebutuhan tamu.</p>
+<h2>Cara pesan</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
+  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00–22:00 WIB).</li>
+  <li>Chef tiba 2–3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+</ol>`,
+  },
+  // Kelapa Gading — 50 imp, pos 7.22, CTR 4% (2 clicks). No pre-render → 404 + noindex.
+  {
+    slug: 'private-chef-kelapa-gading',
+    title: 'Sewa Chef ke Rumah di Kelapa Gading Jakarta | Private Chef — myCHEF',
+    description: 'Layanan private chef profesional di Kelapa Gading Jakarta Utara. Menu fine dining custom, chef terverifikasi, mulai Rp 800k/jam. Booking via WhatsApp.',
+    changefreq: 'weekly', priority: 0.8,
+    bodyContent: `<h1>Sewa Chef ke Rumah di Kelapa Gading, Jakarta</h1>
+<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Kelapa Gading, Jakarta Utara. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — mulai Rp 800.000/jam (minimum 3 jam).</p>
+<h2>Harga private chef di Kelapa Gading</h2>
+<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam.</p>
+<h2>Area yang dilayani di Kelapa Gading</h2>
+<p>Kelapa Gading Barat, Kelapa Gading Timur, Pegangsaan Dua, Sunter, Tanjung Priok, dan sekitarnya — tanpa biaya transportasi tambahan.</p>
+<h2>Cara pesan</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
+  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00–22:00 WIB).</li>
+  <li>Chef tiba 2–3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+</ol>`,
+  },
+  // Puri Indah — 38 imp, pos 6.84, CTR 0%. Top query "harga private chef" at pos 7. No pre-render → 404.
+  {
+    slug: 'private-chef-puri-indah',
+    title: 'Harga Private Chef di Puri Indah Jakarta | Sewa Chef ke Rumah — myCHEF',
+    description: 'Harga private chef di Puri Indah Jakarta Barat mulai Rp 800k/jam. Chef profesional, menu fine dining custom, terverifikasi. Booking via WhatsApp sekarang.',
+    changefreq: 'weekly', priority: 0.8,
+    bodyContent: `<h1>Private Chef di Puri Indah, Jakarta Barat</h1>
+<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Puri Indah, Jakarta Barat. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — mulai Rp 800.000/jam (minimum 3 jam).</p>
+<h2>Harga private chef di Puri Indah</h2>
+<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam. Tidak ada biaya transportasi tambahan untuk kawasan Puri Indah dan sekitarnya.</p>
+<h2>Area yang dilayani di Jakarta Barat</h2>
+<p>Puri Indah, Puri Kencana, Kembangan, Kebon Jeruk, Duri Kepa, Meruya, Srengseng, dan sekitarnya.</p>
+<h2>Apa itu private chef?</h2>
+<p>Private chef adalah chef profesional yang datang ke dapur Anda, belanja bahan segar, memasak menu pilihan, menyajikan langsung ke meja tamu, lalu membereskan dapur sebelum pulang. Berbeda dengan catering: semua dimasak segar di tempat, bukan diantar dalam wadah.</p>
+<h2>Cara pesan</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
+  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00–22:00 WIB).</li>
+  <li>Chef tiba 2–3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+</ol>`,
+  },
+  // Pantai Indah Kapuk — 25 imp, pos 5.56, CTR 0%. Near top of page 1 but no pre-render → 404.
+  {
+    slug: 'private-chef-pantai-indah-kapuk',
+    title: 'Sewa Private Chef di PIK (Pantai Indah Kapuk) Jakarta | myCHEF',
+    description: 'Private chef profesional di Pantai Indah Kapuk (PIK) Jakarta Utara. Menu fine dining custom, chef terverifikasi & berpengalaman, mulai Rp 800k/jam. WhatsApp.',
+    changefreq: 'weekly', priority: 0.8,
+    bodyContent: `<h1>Sewa Private Chef di PIK (Pantai Indah Kapuk), Jakarta</h1>
+<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Pantai Indah Kapuk (PIK), Jakarta Utara. Chef berpengalaman datang ke rumah atau villa Anda di PIK, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — mulai Rp 800.000/jam (minimum 3 jam).</p>
+<h2>Harga private chef di PIK</h2>
+<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam.</p>
+<h2>Area yang dilayani di PIK dan sekitarnya</h2>
+<p>Pantai Indah Kapuk (PIK), PIK 2, Kamal Muara, Penjaringan, Pluit, Muara Baru, dan sekitarnya — tanpa biaya transportasi tambahan.</p>
+<h2>Cara pesan</h2>
+<ol>
+  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
+  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00–22:00 WIB).</li>
+  <li>Chef tiba 2–3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+</ol>`,
+  },
 ];
 
 // HOMEPAGE_FAQS + FAQ_MASTER are imported from ../shared/faqs above so the

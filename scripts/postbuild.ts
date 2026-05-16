@@ -693,6 +693,7 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
   // Jakarta neighborhood pages: pre-render gives Google a correct canonical + Indonesian-language title.
   // Without this entry Vercel falls back to homepage index.html, which sets canonical to https://mychef.id/
   // and signals these pages are duplicates of the homepage. Full rich content is served by the React SPA.
+  // Pages covered: Menteng, Senayan, Kelapa Gading, Puri Indah, Pantai Indah Kapuk.
   {
     slug: 'private-chef-menteng',
     title: 'Sewa Chef ke Rumah di Menteng Jakarta | Private Chef Profesional — myCHEF',

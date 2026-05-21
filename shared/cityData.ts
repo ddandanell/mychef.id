@@ -1992,6 +1992,8 @@ export const CITY_DATA: Record<string, CityData> = {
   gianyar: {
     name: 'Gianyar',
     slug: 'gianyar',
+    seoTitle: 'Private Chef in Gianyar, Bali — Babi Guling & Ceremonial Menus | myCHEF',
+    seoDescription: 'Private chef in Gianyar: authentic babi guling, ceremonial Balinese feasts, market-fresh traditional cooking. Background-checked. WhatsApp.',
     tagline: 'Gianyar Private Chef: Where Art and Appetite Intersect',
     description: 'Woodcarvers perfect their craft in Mas. Dancers rehearse temple ceremonies. Painters capture rice field light. Gianyar preserves Balinese culture — and its food traditions run equally deep.',
     heroDescription: 'The babi guling capital. The ceremonial feast masters. Where food is art and art is life. Gianyar feeds both appetite and spirit.',

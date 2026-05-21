@@ -877,12 +877,12 @@ function buildLlmsFullTxt(): string {
 const HOMEPAGE: PageConfig = {
   slug: '',
   title: 'Private Chef in Bali — In-Villa Dining Since 2012 | myCHEF',
-  description: 'Book a background-checked private chef in your Bali villa. Mediterranean & international menus, 3-hour minimum, transparent pricing. WhatsApp booking.',
+  description: 'Hire a background-checked private chef in your Bali villa. From Rp 800k/hr — Mediterranean, Balinese & vegan menus. Book in under 1 hour via WhatsApp.',
   changefreq: 'weekly', priority: 1.0,
   bodyContent: `<h1>Private Chef in Bali — In-Villa Dining Since 2012</h1>
 <p>Background-checked private chefs cook Mediterranean and international tasting menus in your villa. From Rp 800,000 per hour, 3-hour minimum. WhatsApp +62 822-3756-5997 — most bookings confirmed in under an hour.</p>
 <p>myCHEF is Bali's longest-running private chef booking service. Our chefs arrive at your villa, shop for ingredients, cook a custom menu in your kitchen, plate and serve, then clean up. Mediterranean, modern European, Asian fusion, Balinese, vegan and dietary-restricted menus. Serving Canggu, Seminyak, Uluwatu, Ubud, Nusa Dua, Sanur, Jimbaran, and 17 other Bali areas.</p>
-<h2>Why myCHEF</h2>
+<h2>Why myCHEF for Private Chef Bali</h2>
 <ul>
   <li>Operating in Bali since 2012 — 13+ year track record</li>
   <li>Every chef background-checked + food-safety certified</li>

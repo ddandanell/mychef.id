@@ -174,6 +174,7 @@ ${city.faqItems.map(f => `<h3>${htmlEsc(f.question)}</h3><p>${htmlEsc(f.answer)}
 // ---- Service pages ----
 // Service titles rewritten 2026-05-13 based on SEOdata #815 evidence:
 // /services/* folder got 692 impressions, 0 CLICKS across 4 pages in 90 days.
+// Last homepage desc + H2 update: 2026-05-21 (SEO iteration).
 // Old titles "{Name} — Private Chef Service in Bali" are too generic for SERP.
 // New titles add concrete value props (sommelier / bartender / photographer / scale)
 // to make the click compelling.

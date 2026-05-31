@@ -121,6 +121,8 @@ export const CITY_DATA: Record<string, CityData> = {
   seminyak: {
     name: 'Seminyak',
     slug: 'seminyak',
+    seoTitle: 'Private Chef in Seminyak, Bali — Villa Pool Dinners & Pre-Club Feasts | myCHEF',
+    seoDescription: 'Private chef for Seminyak villas: sunset pool dinners, romantic feasts, pre-club multi-course menus. Jimbaran seafood sourced daily. From Rp 800k/hr.',
     tagline: 'Seminyak Private Chef: Gourmet Dining at Your Luxury Villa',
     description: 'Transform your Seminyak villa into an exclusive restaurant. Award-worthy chefs craft bespoke menus using Jimbaran seafood and imported delicacies. Sunset cocktails to midnight feasts.',
     heroDescription: 'Where Bali\'s most glamorous neighborhood meets culinary artistry. Your villa becomes the stage for unforgettable gastronomic theater.',
@@ -1011,6 +1013,8 @@ export const CITY_DATA: Record<string, CityData> = {
   kuta: {
     name: 'Kuta',
     slug: 'kuta',
+    seoTitle: 'Private Chef in Kuta, Bali — Arrival Dinners, Surf Groups & Farewell Feasts | myCHEF',
+    seoDescription: 'Private chef in Kuta for first-night arrival dinners, surf-trip feasts, and farewell celebrations. Same-day available. From Rp 800k/hr, WhatsApp booking.',
     tagline: 'Kuta Private Chef: Where Every Bali Adventure Begins',
     description: 'Ten minutes from the airport, your Bali story starts here. Surfboards lean against walls, jet lag fades over excellent food, and tomorrow\'s adventure plans take shape over dinner in your accommodation.',
     heroDescription: 'First night in Bali after a long flight. Last night before heading home. The reunions, the farewells, the surf celebrations. Kuta hosts the bookends of every great Bali trip.',
@@ -2264,6 +2268,8 @@ export const CITY_DATA: Record<string, CityData> = {
   lovina: {
     name: 'Lovina',
     slug: 'lovina',
+    seoTitle: 'Private Chef in Lovina, Bali — North Coast & Dolphin Bay Villas | myCHEF',
+    seoDescription: 'Private chef in Lovina, north Bali: fresh bay seafood, wellness menus, unhurried multi-course dinners. Background-checked. From Rp 800k/hr, WhatsApp.',
     tagline: 'Lovina Private Chef: North Bali\'s Unhurried Coast',
     description: 'The Bali Sea lies flat as glass. Dolphins break the surface at dawn. The pace here hasn\'t accelerated for tourism. Lovina offers what south Bali surrendered: genuine coastal tranquility.',
     heroDescription: 'Black sand beaches curve along a calm sea. No wave crowds, no beach clubs, no hustle. Lovina moves at village speed. Your private dinner matches this unhurried rhythm.',

@@ -375,8 +375,8 @@ export const CITY_DATA: Record<string, CityData> = {
   ubud: {
     name: 'Ubud',
     slug: 'ubud',
-    seoTitle: 'Private Chef Ubud, Bali — Jungle Villa Dining & Wellness Menus | myCHEF',
-    seoDescription: 'Private chef in Ubud\'s jungle villas. Organic farm-to-table menus, Balinese ceremony cuisine, wellness retreat catering. Background-checked. WhatsApp.',
+    seoTitle: 'Private Chef Ubud, Bali — Hire in 1 Hour for Jungle Villas & Retreats | myCHEF',
+    seoDescription: 'Book a vetted private chef for your Ubud villa: organic farm-to-table, Balinese ceremony cooking, wellness retreat menus. Background-checked. WhatsApp booking in 1 hour.',
     tagline: 'Ubud Private Chef: Sacred Flavors in the Cultural Heart of Bali',
     description: 'Where ancient rice terraces inspire timeless cuisine. Farm-to-table dining amid jungle canopy, temple ceremonies, and artistic traditions. Nourish body and soul together.',
     heroDescription: 'Dining as spiritual practice. Your jungle villa becomes a sanctuary where locally-grown ingredients transform into meals that honor Balinese heritage.',

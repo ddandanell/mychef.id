@@ -691,14 +691,16 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
     description: 'Deposit, balance, refund, and cancellation terms for myCHEF private chef bookings in Bali.',
     changefreq: 'monthly', priority: 0.2,
   },
-  // Jakarta neighborhood pages: pre-render gives Google a correct canonical + Indonesian-language title.
+  // Jakarta neighborhood pages: pre-render gives Google a correct canonical + targeted title/description.
   // Without this entry Vercel falls back to homepage index.html, which sets canonical to https://mychef.id/
   // and signals these pages are duplicates of the homepage. Full rich content is served by the React SPA.
   // Pages covered: Menteng, Senayan, Kelapa Gading, Puri Indah, Pantai Indah Kapuk.
+  // Menteng title updated 2026-06-01: switched from Indonesian to English — GSC shows 80%+ English queries
+  // ("private chef", "fine dining private chef", "private chef dinner") dominate vs. Indonesian queries.
   {
     slug: 'private-chef-menteng',
-    title: 'Sewa Chef ke Rumah di Menteng Jakarta | Private Chef Profesional — myCHEF',
-    description: 'Sewa private chef ke rumah di Menteng Jakarta Pusat. Menu fine dining custom, harga dari Rp 800k/jam. Chef berpengalaman & terverifikasi. WhatsApp sekarang!',
+    title: 'Private Chef in Menteng, Jakarta — Fine Dining & Weekly Meal Prep | myCHEF',
+    description: 'Hire a vetted private chef in Menteng, Jakarta Pusat. Embassy entertaining, diplomatic residences, fine dining menus, weekly meal prep. Background-checked. WhatsApp booking.',
     changefreq: 'weekly', priority: 0.8,
     bodyContent: `<h1>Sewa Chef ke Rumah di Menteng Jakarta</h1>
 <p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Menteng, Jakarta Pusat. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — layanan lengkap mulai dari Rp 800.000/jam (minimum 3 jam).</p>
@@ -1148,7 +1150,7 @@ ${semanticBlock}
         </ul>
         <h2>About</h2>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Private Chef in Bali — myCHEF</a></li>
           <li><a href="/about">About myCHEF</a></li>
           <li><a href="/chefs">Our chefs</a></li>
           <li><a href="/faq">FAQ</a></li>

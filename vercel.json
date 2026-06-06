@@ -10,6 +10,28 @@
       "maxDuration": 30
     }
   },
+  "redirects": [
+    {
+      "source": "/journal/private-chef-cost-bali",
+      "destination": "/private-chef-cost-bali",
+      "permanent": true
+    },
+    {
+      "source": "/journal/bali-private-chef-cost-guide-2026",
+      "destination": "/blog/private-chef-bali-cost-breakdown-2026",
+      "permanent": true
+    },
+    {
+      "source": "/journal/yoga-retreat-meal-planning-bali",
+      "destination": "/blog/yoga-retreat-chef-bali-meal-planning",
+      "permanent": true
+    },
+    {
+      "source": "/journal/bali-catering-vs-restaurant",
+      "destination": "/why-mychef",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/|assets/|.*\\.(?:html|png|jpg|jpeg|webp|svg|ico|xml|txt|json|js|css|map|woff2?|ttf|otf|mp4|webm)$).*)",

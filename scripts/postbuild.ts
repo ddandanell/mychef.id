@@ -702,7 +702,7 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
     title: 'Private Chef in Menteng, Jakarta — Fine Dining & Weekly Meal Prep | myCHEF',
     description: 'Hire a vetted private chef in Menteng, Jakarta Pusat. Embassy entertaining, diplomatic residences, fine dining menus, weekly meal prep. Background-checked. WhatsApp booking.',
     changefreq: 'weekly', priority: 0.8,
-    bodyContent: `<h1>Sewa Chef ke Rumah di Menteng Jakarta</h1>
+    bodyContent: `<h1>Private Chef in Menteng, Jakarta</h1>
 <p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Menteng, Jakarta Pusat. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — layanan lengkap mulai dari Rp 800.000/jam (minimum 3 jam).</p>
 <h2>Apa itu private chef (sewa chef ke rumah)?</h2>
 <p>Private chef adalah chef profesional yang Anda sewa untuk memasak langsung di dapur Anda. Berbeda dengan catering, private chef belanja bahan segar, memasak di tempat, menyajikan tiap hidangan langsung ke meja tamu, lalu membereskan dapur sebelum pulang.</p>

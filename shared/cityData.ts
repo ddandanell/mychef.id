@@ -1136,6 +1136,8 @@ export const CITY_DATA: Record<string, CityData> = {
   legian: {
     name: 'Legian',
     slug: 'legian',
+    seoTitle: 'Private Chef in Legian, Bali — Double Six Sunset Dinners & Beach Villas | myCHEF',
+    seoDescription: 'Private chef for Legian villas near Double Six beach: sunset-timed pool dinners, group farewell feasts, beach party catering. Between Kuta & Seminyak. Background-checked. From Rp 800k/hr, WhatsApp.',
     tagline: 'Legian Private Chef: The Sweet Spot Between Chaos and Calm',
     description: 'Neither as hectic as Kuta nor as curated as Seminyak. Legian occupies the comfortable middle — close enough to everything, quiet enough to breathe, and perfectly suited for genuinely good dining.',
     heroDescription: 'Sunset colors the sky behind Double Six beach. The day\'s energy settles. Dinner arrives in your villa, casual enough for sandy feet yet sophisticated enough to celebrate.',

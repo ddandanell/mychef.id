@@ -703,18 +703,20 @@ ${FAQ_MASTER.map(f => `<h2>${htmlEsc(f.cat || '')}: ${htmlEsc(f.q)}</h2><p>${htm
     description: 'Hire a vetted private chef in Menteng, Jakarta Pusat. Embassy entertaining, diplomatic residences, fine dining menus, weekly meal prep. Background-checked. WhatsApp booking.',
     changefreq: 'weekly', priority: 0.8,
     bodyContent: `<h1>Private Chef in Menteng, Jakarta</h1>
-<p>myCHEF Indonesia menyediakan layanan private chef profesional di kawasan Menteng, Jakarta Pusat. Chef berpengalaman datang ke rumah Anda, memasak menu fine dining custom, menyajikan hidangan, dan membereskan dapur — layanan lengkap mulai dari Rp 800.000/jam (minimum 3 jam).</p>
-<h2>Apa itu private chef (sewa chef ke rumah)?</h2>
-<p>Private chef adalah chef profesional yang Anda sewa untuk memasak langsung di dapur Anda. Berbeda dengan catering, private chef belanja bahan segar, memasak di tempat, menyajikan tiap hidangan langsung ke meja tamu, lalu membereskan dapur sebelum pulang.</p>
-<h2>Harga private chef di Menteng</h2>
-<p>Mulai Rp 800.000 per jam, minimum 3 jam. Bahan-bahan ditagih terpisah sesuai harga pasar. Staf tambahan: pelayan Rp 300.000/jam, bartender Rp 400.000/jam, sommelier Rp 500.000/jam.</p>
-<h2>Area yang dilayani di Menteng</h2>
-<p>Kami melayani seluruh kawasan Menteng tanpa biaya transportasi tambahan: Menteng Dalam, Menteng Atas, Menteng Tenggara, Gondangdia, Pegangsaan, Cikini, Kebon Sirih, dan sekitarnya.</p>
-<h2>Cara pesan</h2>
+<p>myCHEF Indonesia provides professional private chef services in Menteng, Jakarta Pusat. An experienced chef arrives at your home, cooks a custom fine dining menu, serves each course, and cleans the kitchen before leaving — from Rp 800,000/hour (3-hour minimum).</p>
+<h2>What is a private chef?</h2>
+<p>A private chef is a professional cook you hire to cook directly in your kitchen. Unlike traditional catering, the chef shops for fresh ingredients, cooks on-site, plates each course directly to your guests, and cleans up before leaving. Restaurant quality in your own home.</p>
+<h2>Pricing in Menteng</h2>
+<p>From Rp 800,000 per hour, 3-hour minimum. Ingredients billed at cost (market price). Add-on staff: waiter Rp 300,000/hr, bartender Rp 400,000/hr, sommelier Rp 500,000/hr.</p>
+<h2>Areas served in Menteng</h2>
+<p>We serve all of Menteng at no extra transport cost: Menteng Dalam, Menteng Atas, Menteng Tenggara, Gondangdia, Pegangsaan, Cikini, Kebon Sirih, and surrounding neighborhoods. Jakarta Pusat coverage also includes Gambir, Tanah Abang, and Senen.</p>
+<h2>Popular occasions in Menteng</h2>
+<p>Embassy entertaining, diplomatic residence dinners, expat family meal prep, corporate client dinners, and milestone celebrations. Menteng's international community and diplomatic district make English-language fine dining menus the most-requested format.</p>
+<h2>How to book</h2>
 <ol>
-  <li>WhatsApp +62 822-3756-5997 dengan tanggal acara, jumlah tamu, dan preferensi menu.</li>
-  <li>Terima profil chef + contoh menu dalam waktu satu jam (jam operasional 09:00-22:00 WIB).</li>
-  <li>Chef tiba 2-3 jam sebelum serving time, belanja bahan, memasak, menyajikan, dan membereskan dapur.</li>
+  <li>WhatsApp +62 822-3756-5997 with your event date, guest count, and menu preferences.</li>
+  <li>Receive a chef profile + sample menu within an hour (operating hours 09:00-22:00 WIB).</li>
+  <li>Chef arrives 2-3 hours before service, shops for ingredients, cooks, serves, and cleans the kitchen.</li>
 </ol>`,
   },
   // Senayan — top Jakarta page (433 imp, pos 5.66, CTR 5.31%). HTTP 404 without pre-render;

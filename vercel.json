@@ -11,26 +11,53 @@
     }
   },
   "redirects": [
-    {
-      "source": "/journal/private-chef-cost-bali",
-      "destination": "/private-chef-cost-bali",
-      "permanent": true
-    },
-    {
-      "source": "/journal/bali-private-chef-cost-guide-2026",
-      "destination": "/blog/private-chef-bali-cost-breakdown-2026",
-      "permanent": true
-    },
-    {
-      "source": "/journal/yoga-retreat-meal-planning-bali",
-      "destination": "/blog/yoga-retreat-chef-bali-meal-planning",
-      "permanent": true
-    },
-    {
-      "source": "/journal/bali-catering-vs-restaurant",
-      "destination": "/why-mychef",
-      "permanent": true
-    }
+    { "source": "/journal/private-chef-cost-bali", "destination": "/private-chef-cost-bali", "permanent": true },
+    { "source": "/journal/bali-private-chef-cost-guide-2026", "destination": "/blog/private-chef-bali-cost-breakdown-2026", "permanent": true },
+    { "source": "/journal/yoga-retreat-meal-planning-bali", "destination": "/blog/yoga-retreat-chef-bali-meal-planning", "permanent": true },
+    { "source": "/journal/bali-catering-vs-restaurant", "destination": "/why-mychef", "permanent": true },
+    { "source": "/events/corporate-events", "destination": "/services/corporate-events", "permanent": true },
+    { "source": "/events/weddings", "destination": "/services/wedding-celebrations", "permanent": true },
+    { "source": "/events/birthdays", "destination": "/services/birthday-celebrations", "permanent": true },
+    { "source": "/events/villa-parties", "destination": "/services/villa-parties", "permanent": true },
+    { "source": "/events/retreats", "destination": "/retreats", "permanent": true },
+    { "source": "/events/anniversaries", "destination": "/events", "permanent": true },
+    { "source": "/events/baby-showers", "destination": "/events", "permanent": true },
+    { "source": "/fine-dining/romantic-dinner", "destination": "/services/romantic-dinners", "permanent": true },
+    { "source": "/fine-dining/tasting-menu", "destination": "/fine-dining", "permanent": true },
+    { "source": "/fine-dining/private-chef-bali", "destination": "/fine-dining", "permanent": true },
+    { "source": "/fine-dining/chefs-table", "destination": "/fine-dining", "permanent": true },
+    { "source": "/fine-dining/menus", "destination": "/menus", "permanent": true },
+    { "source": "/fine-dining/our-chefs", "destination": "/chefs", "permanent": true },
+    { "source": "/in-villa-service/butlers", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/in-villa-service/waiters", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/in-villa-service/sommelier", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/in-villa-service/bartenders", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/in-villa-service/mixology", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/in-villa-service/host-hostess", "destination": "/in-villa-service", "permanent": true },
+    { "source": "/catering/bbq-catering", "destination": "/catering", "permanent": true },
+    { "source": "/catering/buffet", "destination": "/catering", "permanent": true },
+    { "source": "/catering/babi-guling", "destination": "/catering", "permanent": true },
+    { "source": "/catering/plated-catering", "destination": "/catering", "permanent": true },
+    { "source": "/catering/corporate-catering", "destination": "/catering", "permanent": true },
+    { "source": "/catering/drop-off-catering", "destination": "/catering", "permanent": true },
+    { "source": "/catering/floating-breakfast", "destination": "/catering", "permanent": true },
+    { "source": "/catering/retreat-catering", "destination": "/retreats", "permanent": true },
+    { "source": "/catering/grazing-tables", "destination": "/catering", "permanent": true },
+    { "source": "/catering/villa-catering", "destination": "/catering", "permanent": true },
+    { "source": "/staffing/private-chef-placement", "destination": "/staffing", "permanent": true },
+    { "source": "/staffing/household-staff", "destination": "/staffing", "permanent": true },
+    { "source": "/staffing/for-villa-managers", "destination": "/villa-partners", "permanent": true },
+    { "source": "/staffing/for-hotels-restaurants", "destination": "/villa-partners", "permanent": true },
+    { "source": "/staffing/villa-staff", "destination": "/staffing", "permanent": true },
+    { "source": "/staffing/live-in-chef", "destination": "/staffing", "permanent": true },
+    { "source": "/locations/seminyak", "destination": "/seminyak", "permanent": true },
+    { "source": "/locations/canggu", "destination": "/canggu", "permanent": true },
+    { "source": "/locations/ubud", "destination": "/ubud", "permanent": true },
+    { "source": "/locations/uluwatu", "destination": "/uluwatu", "permanent": true },
+    { "source": "/locations/nusa-dua", "destination": "/nusa-dua", "permanent": true },
+    { "source": "/locations/sanur", "destination": "/sanur", "permanent": true },
+    { "source": "/locations/bukit", "destination": "/bukit", "permanent": true },
+    { "source": "/locations/pererenan", "destination": "/pererenan", "permanent": true }
   ],
   "rewrites": [
     {

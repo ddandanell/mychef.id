@@ -86,7 +86,7 @@ const FAQS = [
   {
     cat: 'Comparison',
     q: "What's the difference between myCHEF and a Bali catering company?",
-    a: 'Catering companies cook food off-site and deliver it to you. myCHEF sends a chef into your kitchen who shops, cooks, plates, and serves on the spot — the same model as a private restaurant in your home. Food is fresher and the experience is interactive (chef can describe dishes, take wine cues, and adapt the menu for picky eaters).',
+    a: 'Catering companies cook food off-site and deliver it to you. myCHEF is an event catering and party dinner service company — we send chef teams to your villa who cook, plate, serve, and clean on-site. Same convenience as catering, but food is fresher because it\'s made in your kitchen. Best for groups of 8+. We require at least 2 days notice for event catering bookings.',
   },
   {
     cat: 'Special events',

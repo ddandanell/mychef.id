@@ -213,6 +213,32 @@ export const CONTENT_PAGES: Record<string, ContentPageProps & { slug: string }> 
         areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
         offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '4500000', description: 'From Rp 4.5M for 2 guests all-in (5-course tasting + sommelier)' },
       },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How much does private chef fine dining cost in a Bali villa?',
+            acceptedAnswer: { '@type': 'Answer', text: 'From Rp 4,500,000 for 2 guests all-in — includes a 5-course tasting menu, sommelier wine pairing, villa setup, and full cleanup. Larger groups are priced per additional guest. Chef fee, ingredients, and service are bundled into the package price.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'What does a myCHEF fine dining experience include?',
+            acceptedAnswer: { '@type': 'Answer', text: 'A multi-course tasting menu (5-7 courses), sommelier wine pairing, full villa setup, and cleanup. Menu options include Mediterranean, modern European, Asian fusion, and Balinese. The chef shops fresh that morning and cooks entirely in your villa kitchen.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'How far in advance should I book fine dining in my Bali villa?',
+            acceptedAnswer: { '@type': 'Answer', text: 'At least 2 days in advance; 3-5 days recommended for tasting menus. Peak season dates (July-August, December-January) and weekend evenings fill faster. Same-day bookings are possible but depend on chef availability — WhatsApp us to check.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'Can the chef accommodate dietary restrictions for a tasting menu?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Yes — vegan, gluten-free, dairy-free, halal, nut-free, and shellfish-free menus are all available. Tell us your restrictions during booking, not on the night. For mixed groups (e.g. one vegan among 6 guests), we build a parallel plate matching the same course timing and plating quality.' },
+          },
+        ],
+      },
     ],
   },
 
@@ -266,6 +292,32 @@ export const CONTENT_PAGES: Record<string, ContentPageProps & { slug: string }> 
         areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
         offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '800000', description: 'From Rp 800k/hr per chef plus ingredients at cost' },
       },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How much does event catering cost in Bali?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Chef fee from Rp 800,000 per hour per chef, 3-hour minimum. Ingredients billed at cost. Multi-chef teams required for events above 20 guests. Add-on staff: waiter Rp 300k/hr, bartender Rp 400k/hr, sommelier Rp 500k/hr. Retreat catering (multi-day): from Rp 1.5M-3M per chef per day plus ingredients.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'What is the minimum number of guests for event catering in Bali?',
+            acceptedAnswer: { '@type': 'Answer', text: 'We normally require a minimum of 8 guests for event catering. For smaller groups (2-7 guests), our private chef fine dining service at /fine-dining is a better fit — same quality, designed for intimate tables.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'How much notice do I need to book a private chef for my Bali event?',
+            acceptedAnswer: { '@type': 'Answer', text: 'At least 2 days in advance. For weddings, large corporate events, or multi-day retreats, we recommend booking 2-4 weeks ahead. Weekend and peak-season dates fill faster. Last-minute bookings (under 48 hours) depend on chef team availability — WhatsApp us to check.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'Does myCHEF supply service staff for events?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Yes — we can add uniformed waiters (Rp 300k/hr), bartenders (Rp 400k/hr), sommeliers (Rp 500k/hr), and butlers to any event booking. Staff arrive pre-briefed on your event format and guest requirements. See /in-villa-service for full details.' },
+          },
+        ],
+      },
     ],
   },
 
@@ -315,6 +367,32 @@ export const CONTENT_PAGES: Record<string, ContentPageProps & { slug: string }> 
         provider: { '@id': 'https://mychef.id/#organization' },
         areaServed: { '@type': 'AdministrativeArea', name: 'Bali, Indonesia' },
         offers: { '@type': 'Offer', priceCurrency: 'IDR', price: '300000', description: 'From Rp 300k/hr for waiters (3-hour minimum)' },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How much does it cost to hire a villa waiter in Bali?',
+            acceptedAnswer: { '@type': 'Answer', text: 'From Rp 300,000 per hour per waiter, 3-hour minimum. Bartenders from Rp 400k/hr, sommeliers from Rp 500k/hr, butlers from Rp 400k/hr. A typical dinner for 8-12 guests requires 2 waiters minimum.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'What service staff can myCHEF provide for my villa?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Waiters, butlers, bartenders, mixologists, sommeliers, and host/hostesses. All staff are background-checked, uniformed, and briefed on your event format and any specific guest requirements before they arrive.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'How far in advance should I book villa service staff in Bali?',
+            acceptedAnswer: { '@type': 'Answer', text: 'At least 2 days in advance; earlier is better for weekend and peak-season dates. Same-day staff requests are possible depending on availability — WhatsApp us and we will confirm within the hour.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is service staff included in private chef bookings?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Service staff (waiters, butlers, bartenders, sommeliers) are available as add-ons to any chef booking but are not included by default. They are quoted separately and can be added at any point before the event date.' },
+          },
+        ],
       },
     ],
   },

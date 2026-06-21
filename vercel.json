@@ -57,7 +57,14 @@
     { "source": "/locations/nusa-dua", "destination": "/nusa-dua", "permanent": true },
     { "source": "/locations/sanur", "destination": "/sanur", "permanent": true },
     { "source": "/locations/bukit", "destination": "/bukit", "permanent": true },
-    { "source": "/locations/pererenan", "destination": "/pererenan", "permanent": true }
+    { "source": "/locations/pererenan", "destination": "/pererenan", "permanent": true },
+    { "source": "/live-in-chef-bali/", "destination": "/staffing", "permanent": true },
+    { "source": "/live-in-chef-bali", "destination": "/staffing", "permanent": true },
+    { "source": "/chef-placement-bali/", "destination": "/staffing", "permanent": true },
+    { "source": "/chef-placement-bali", "destination": "/staffing", "permanent": true },
+    { "source": "/retreat-catering-bali/", "destination": "/retreats", "permanent": true },
+    { "source": "/retreat-catering-bali", "destination": "/retreats", "permanent": true },
+    { "source": "/villa-chef", "destination": "/fine-dining", "permanent": true }
   ],
   "rewrites": [
     {
